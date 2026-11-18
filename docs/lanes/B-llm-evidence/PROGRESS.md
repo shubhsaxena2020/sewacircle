@@ -103,3 +103,5 @@ Pending.
 ---
 HEAD NOTICE 2026-11-19 00:10: provider down since about 23:30; remaining Lane B items (extract_roles, draft_cards, badges, extraction eval) REASSIGNED TO THE HEAD. Do not write more files.
 CARD BLOCKED: reassigned to head (provider outage)
+
+HEAD ORDER: LANE CANCELLED. STOP NOW. Do not edit any more files. Write CARD BLOCKED: lane cancelled by head as the last line of PROGRESS.md and end your turn.

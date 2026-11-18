@@ -41,7 +41,7 @@ export default function App() {
     setExtraction(e)
     setRoles(e.roles.map((r, i) => ({
       id: `role-${String(i + 1).padStart(2, '0')}`, role: r.role, count: r.count, required_skills: r.required_skills, min_level: 1,
-      priority: 'must', needs_experienced: false, evidence_span: r.evidence_span, confidence: r.confidence,
+      priority: 'must', needs_experienced: false, evidence_span: r.evidence_span, confidence: r.confidence, unresolved: r.unresolved ?? false,
     })))
     setBoth(null); setRoster(null); setStep(2)
   }
@@ -71,6 +71,7 @@ export default function App() {
         <span className="banner" role="status">{t('synthetic')}</span>
         <Btn small variant="secondary" onClick={() => setLang(lang === 'en' ? 'hi' : 'en')} aria-label="language">{lang === 'en' ? 'हिन्दी' : 'English'}</Btn>
         <label className="row" style={{ gap: 6 }}><input type="checkbox" checked={demo} onChange={(e) => setDemo(e.target.checked)} />{t('demoMode')}</label>
+        <Btn small variant="secondary" onClick={() => { api.reset().then(() => location.reload()).catch(() => undefined) }}>{t('resetDemo')}</Btn>
       </header>
       <div className="shell">
         <nav className="steps" aria-label="steps">

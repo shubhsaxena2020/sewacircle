@@ -8,12 +8,12 @@ export interface Volunteer {
   district: string; block: string; lat: number; lon: number
   skills: Record<string, number>; self_declared_skills: string[]; languages: string[]
   available_slots: string[]; has_vehicle: boolean; past_drives: number
-  times_picked_last_90d: number; guardian_consent: boolean | null; synthetic: boolean
+  times_picked_last_90d: number; guardian_consent: boolean | null; opted_in_task_ids?: string[]; synthetic: boolean
 }
 export interface RoleSpec {
   id: string; role: string; count: number; required_skills: string[]; min_level: number
   priority: 'must' | 'should'; needs_experienced: boolean; evidence_span: string
-  confidence: 'high' | 'medium' | 'low'
+  confidence: 'high' | 'medium' | 'low'; safety_critical?: boolean; unresolved?: boolean
 }
 export interface TaskSpec {
   id: string; title: string; brief_text: string; language: Language; slot: string
@@ -22,7 +22,7 @@ export interface TaskSpec {
 }
 export interface ExtractedRole {
   role: string; count: number; required_skills: string[]; evidence_span: string
-  confidence: 'high' | 'medium' | 'low'; reason: string
+  confidence: 'high' | 'medium' | 'low'; reason: string; unresolved?: boolean
 }
 export interface ExtractionResult {
   roles: ExtractedRole[]; needs_decision: string[]; language_detected: Language
@@ -30,7 +30,11 @@ export interface ExtractionResult {
 }
 export interface RosterOptions {
   fairness: boolean; resilience: boolean; mentor_pairing: boolean
-  forced_in: string[]; forced_out: string[]; time_limit_s: number; seed: number
+  forced_in: string[]; forced_out: string[]; opted_in_only: boolean; time_limit_s: number; seed: number
+}
+export interface RecruitRequest {
+  role_id: string; role: string; needed: number; skills: string[]; min_level: number
+  checked_skill_required: boolean; slot: string; area: string; max_travel_km: number; reason: string
 }
 export interface Assignment {
   role_id: string; slot_index: number; volunteer_id: string; volunteer_name: string
@@ -44,7 +48,8 @@ export interface RosterMetrics {
 }
 export interface RosterResult {
   task_id: string; method: Method; assignments: Assignment[]; standby: StandbyPick[]
-  unfilled_role_ids: string[]; metrics: RosterMetrics; explanations: string[]; synthetic: boolean
+  unfilled_role_ids: string[]; metrics: RosterMetrics; explanations: string[]
+  recruit_requests?: RecruitRequest[]; ready?: boolean | null; synthetic: boolean
 }
 export interface RosterBoth { cp_sat: RosterResult; nearest_skill: RosterResult }
 export interface Counterfactual {

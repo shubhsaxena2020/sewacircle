@@ -2,7 +2,13 @@ export type Lang = 'en' | 'hi'
 
 const S = {
   appName: { en: 'SewaCircle', hi: 'सेवासर्कल' },
-  tagline: { en: 'Fair crew planner for youth volunteering', hi: 'युवा स्वयंसेवा के लिए निष्पक्ष टीम योजनाकार' },
+  tagline: { en: 'Ready Crew · Willing volunteers are here. Can this drive run?', hi: 'रेडी क्रू · स्वयंसेवक तैयार हैं। क्या यह अभियान चल सकता है?' },
+  ready: { en: 'READY', hi: 'तैयार' }, notReadyV: { en: 'NOT READY', hi: 'तैयार नहीं' },
+  readyExplain: { en: 'Every essential role is filled and any one person can drop out without leaving a gap.', hi: 'हर ज़रूरी भूमिका भरी है और कोई एक व्यक्ति न आए तो भी काम नहीं रुकेगा।' },
+  notReadyExplain: { en: 'Do these actions before running the drive:', hi: 'अभियान चलाने से पहले ये कदम उठाएँ:' },
+  recruit: { en: 'Recruit', hi: 'भर्ती करें' }, checkedOnly: { en: 'host-checked skill only', hi: 'केवल जाँचा हुआ कौशल' },
+  optInOnly: { en: 'Only volunteers who chose this drive', hi: 'केवल वे स्वयंसेवक जिन्होंने यह अभियान चुना' },
+  copyRequest: { en: 'Copy request', hi: 'अनुरोध कॉपी करें' }, resetDemo: { en: 'Reset demo', hi: 'डेमो रीसेट' },
   synthetic: { en: 'Synthetic data', hi: 'काल्पनिक (सिंथेटिक) डेटा' },
   mock: { en: 'MOCK DATA - not real results', hi: 'नकली डेटा - असली नतीजे नहीं' },
   demoMode: { en: 'Projector mode', hi: 'प्रोजेक्टर मोड' },

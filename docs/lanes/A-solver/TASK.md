@@ -1,3 +1,5 @@
+HEAD ORDER: LANE CANCELLED. STOP NOW. Do not edit any more files. Write CARD BLOCKED: lane cancelled by head as the last line of PROGRESS.md and end your turn.
+
 # Lane A - solver, synthetic data, evaluation (profile res-s2)
 
 OWNED (write): backend/app/solver/** (api.py keeps its signatures; add modules freely), backend/app/data/synth.py, backend/eval/harness.py and backend/eval/*.py (not backend/eval/extraction/), backend/tests/solver/**, backend/tests/eval/**, docs/lanes/A-solver/**. READ-ONLY: backend/app/schemas.py, taxonomy.py, main.py (head owns; if a schema change is needed, write the request to docs/lanes/A-solver/SCHEMA_REQUESTS.md, do not edit). Read docs/COMMON.md first. Research from Lane C will appear in docs/research/ (R1-optimization.md, R4-up-realism.md, up_districts.json, R6-eval-responsible-ai.md): READ them when they exist (check before each batch) and follow their recommendations or record in PROGRESS.md why not.

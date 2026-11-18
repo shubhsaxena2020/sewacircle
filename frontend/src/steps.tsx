@@ -119,7 +119,7 @@ export function RosterStep(p: {
           <h2>{p.task.title}</h2>
           <div className="row">
             <span className="label">{t('options')}</span>
-            {([['fairness', 'optFair'], ['resilience', 'optRes'], ['mentor_pairing', 'optMentor']] as const).map(([k, lab]) => (
+            {([['opted_in_only', 'optInOnly'], ['fairness', 'optFair'], ['resilience', 'optRes'], ['mentor_pairing', 'optMentor']] as const).map(([k, lab]) => (
               <label key={k} className="row" style={{ gap: 6 }}>
                 <input type="checkbox" checked={p.options[k]} onChange={(e) => p.setOptions({ ...p.options, [k]: e.target.checked })} />{t(lab)}
               </label>
@@ -128,6 +128,7 @@ export function RosterStep(p: {
           </div>
         </div>
       </div>
+      <ReadyPanel roster={cp} />
       {dropout && (
         <div className={`callout ${dropout.uncovered_role_ids.length ? 'bad' : 'good'} heal`} role="status">
           <strong>{dropout.uncovered_role_ids.length ? t('notHealed') : t('healed')}.</strong>{' '}
@@ -220,6 +221,39 @@ export function RosterStep(p: {
           </div>
         </aside>
       )}
+    </div>
+  )
+}
+
+/* ---------------- Ready Crew verdict ---------------- */
+function ReadyPanel({ roster }: { roster: RosterResult }) {
+  const t = useT()
+  const reqs = roster.recruit_requests ?? []
+  if (roster.ready == null) return null
+  if (roster.ready) {
+    return (
+      <div className="callout good" role="status" style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+        <span style={{ fontSize: '1.6em', fontWeight: 600 }}>✓ {t('ready')}</span><span>{t('readyExplain')}</span>
+      </div>
+    )
+  }
+  const text = (r: NonNullable<RosterResult['recruit_requests']>[number]) =>
+    `${t('recruit')} ${r.needed} × ${r.role}${r.skills.length ? ` (${r.skills.join(' / ')}${r.checked_skill_required ? `, ${t('checkedOnly')}` : ''})` : ''} · ${r.slot.replace('_', ' ')} · ${r.area} · ≤ ${r.max_travel_km.toFixed(0)} km`
+  return (
+    <div className="panel" role="alert" style={{ borderColor: 'var(--coral)', borderWidth: 2 }}>
+      <div className="row" style={{ gap: 16 }}>
+        <span style={{ fontSize: '1.6em', fontWeight: 600, color: 'var(--coral)' }}>! {t('notReadyV')}</span>
+        <span className="muted">{t('notReadyExplain')}</span>
+      </div>
+      <ol style={{ margin: '12px 0 0', paddingLeft: 20 }}>
+        {reqs.map((r, i) => (
+          <li key={i} style={{ marginBottom: 10 }}>
+            <strong>{text(r)}</strong>
+            <div className="muted">{r.reason}</div>
+            <Btn small variant="secondary" onClick={() => navigator.clipboard?.writeText(text(r) + ' — ' + r.reason)}>{t('copyRequest')}</Btn>
+          </li>
+        ))}
+      </ol>
     </div>
   )
 }

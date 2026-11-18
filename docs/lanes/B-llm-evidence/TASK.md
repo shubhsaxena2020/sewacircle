@@ -1,3 +1,5 @@
+HEAD ORDER: LANE CANCELLED. STOP NOW. Do not edit any more files. Write CARD BLOCKED: lane cancelled by head as the last line of PROGRESS.md and end your turn.
+
 # Lane B - LLM extraction, redaction, evidence cards, rules, ledger, credential export (profile res-s3)
 
 OWNED (write): backend/app/llm/extract.py, backend/app/llm/prompts.py, backend/app/llm/redact.py (new), backend/app/evidence/** , backend/tests/llm/**, backend/tests/evidence/**, backend/eval/extraction/** (new), docs/lanes/B-llm-evidence/**. READ-ONLY: backend/app/llm/client.py (head owns), schemas.py, taxonomy.py, main.py. If you need a schema change write docs/lanes/B-llm-evidence/SCHEMA_REQUESTS.md. Read docs/COMMON.md first. Lane C research lands in docs/research/ (R2-nlp-hindi.md, R3-credentials-privacy.md, R6-eval-responsible-ai.md): READ them when they exist (check before each batch) and follow or record why not.

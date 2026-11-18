@@ -30,7 +30,7 @@ async function call<T>(method: string, path: string, body?: unknown): Promise<T>
 }
 
 export const defaultOptions: RosterOptions = {
-  fairness: true, resilience: true, mentor_pairing: true, forced_in: [], forced_out: [], time_limit_s: 10, seed: 7,
+  fairness: true, resilience: true, mentor_pairing: true, forced_in: [], forced_out: [], opted_in_only: true, time_limit_s: 10, seed: 7,
 }
 
 export const api = {
@@ -53,4 +53,5 @@ export const api = {
   verify: () => call<LedgerVerification>('GET', '/ledger/verify'),
   credential: (id: string) => call<Record<string, unknown>>('GET', `/export/credential/${id}`),
   evalReport: () => call<EvalReport>('GET', '/eval'),
+  reset: () => call<{ ok: boolean }>('POST', '/demo/reset'),
 }
