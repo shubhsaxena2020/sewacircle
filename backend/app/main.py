@@ -138,6 +138,7 @@ def _geo_tree_payload() -> tuple[bytes, str]:
 
 @app.get("/api/geo/tree")
 def geo_tree(request: Request) -> Any:
+    """Return geo tree for UP districts with RFC 9110 compliant ETag handling."""
     body, etag = _geo_tree_payload()
     if_none_match = request.headers.get("if-none-match")
     if if_none_match:
