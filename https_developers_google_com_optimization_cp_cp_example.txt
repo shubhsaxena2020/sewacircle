@@ -1,0 +1,551 @@
+# Solving a CP Problem
+
+- This page demonstrates how to find an optimal solution to a Constraint Programming (CP) problem using the CP-SAT solver.
+- The example problem involves maximizing a linear objective function with three integer variables subject to three linear constraints.
+- To ensure computational efficiency, constraints with non-integer coefficients must be transformed into equivalent constraints with integer coefficients before solving.
+- The provided code examples in Python, C++, Java, and C# guide through the process of defining the model, variables, constraints, objective function, and invoking the solver.
+- The CP-SAT solver finds the optimal solution for the given problem, maximizing the objective function to a value of 35 with specific values for the variables (x=7, y=3, z=5).
+
+The previous section showed how to find all solutions to a CP problem. Next, we'll show how to find an optimal solution. As an example, we'll solve the following optimization problem.
+
+- **Maximize 2*x* + 2*y* + 3*z* subject to the following constraints:** | *x* + 7⁄2 *y* + 3⁄2 *z* | ≤ | 25 |
+|---|---|---|
+| 3*x* - 5*y* + 7*z* | ≤ | 45 |
+| 5*x* + 2*y* - 6*z* | ≤ | 37 |
+| *x*, *y*, *z* | ≥ | 0 |
+| *x*, *y*, *z* integers | | |
+In order to increase computational speed, the CP-SAT solver works over the integers. This means all constraints and the objective must have integer coefficients. In the above example, the first constraint doesn't meet this condition. To solve the problem, you must first transform the constraint by multiplying it by a sufficiently large integer to convert all the coefficients to integers. This is shown in the Constraints section below.
+
+## Solution using the CP-SAT solver
+
+The following sections present a Python program that solves the problem using the CP-SAT solver.
+
+### Import the libraries
+
+The following code imports the required library.
+
+### Python
+
+```
+from ortools.sat.python import cp_model
+```
+
+### C++
+
+```
+#include <stdint.h>
+#include <stdlib.h>
+
+#include <algorithm>
+
+#include "absl/base/log_severity.h"
+#include "absl/log/globals.h"
+#include "ortools/base/init_google.h"
+#include "ortools/base/logging.h"
+#include "ortools/sat/cp_model.h"
+#include "ortools/sat/cp_model.pb.h"
+#include "ortools/sat/cp_model_solver.h"
+#include "ortools/util/sorted_interval_list.h"
+```
+
+### Java
+
+```
+import static java.util.Arrays.stream;
+
+import com.google.ortools.Loader;
+import com.google.ortools.sat.CpModel;
+import com.google.ortools.sat.CpSolver;
+import com.google.ortools.sat.CpSolverStatus;
+import com.google.ortools.sat.IntVar;
+import com.google.ortools.sat.LinearExpr;
+```
+
+### C#
+
+```
+using System;
+using System.Linq;
+using Google.OrTools.Sat;
+```
+
+### Declare the model
+
+The following code declares the model for the problem.
+
+### Python
+
+```
+model = cp_model.CpModel()
+```
+
+### C++
+
+```
+CpModelBuilder cp_model;
+```
+
+### Java
+
+```
+CpModel model = new CpModel();
+```
+
+### C#
+
+```
+CpModel model = new CpModel();
+```
+
+### Create the variables
+
+The following code creates the variables for the problem.
+
+### Python
+
+```
+var_upper_bound = max(50, 45, 37)
+x = model.new_int_var(0, var_upper_bound, "x")
+y = model.new_int_var(0, var_upper_bound, "y")
+z = model.new_int_var(0, var_upper_bound, "z")
+```
+
+### C++
+
+```
+int64_t var_upper_bound = std::max({50, 45, 37});
+const Domain domain(0, var_upper_bound);
+const IntVar x = cp_model.NewIntVar(domain).WithName("x");
+const IntVar y = cp_model.NewIntVar(domain).WithName("y");
+const IntVar z = cp_model.NewIntVar(domain).WithName("z");
+```
+
+### Java
+
+```
+int varUpperBound = stream(new int[] {50, 45, 37}).max().getAsInt();
+
+IntVar x = model.newIntVar(0, varUpperBound, "x");
+IntVar y = model.newIntVar(0, varUpperBound, "y");
+IntVar z = model.newIntVar(0, varUpperBound, "z");
+```
+
+### C#
+
+```
+int varUpperBound = new int[] { 50, 45, 37 }.Max();
+
+IntVar x = model.NewIntVar(0, varUpperBound, "x");
+IntVar y = model.NewIntVar(0, varUpperBound, "y");
+IntVar z = model.NewIntVar(0, varUpperBound, "z");
+```
+
+### Define the constraints
+
+Since the first constraint,
+
+| *x* + 7⁄2 *y* + 3⁄2 *z* | ≤ | 25 |
+|---|---|---|
+has non-integer coefficients, you must first multiply the entire constraint by a sufficiently large integer to convert the coefficients to integers. In this case , you can multiply by 2, which results in the new constraint
+
+| 2*x* + 7*y* + 3*z* | ≤ | 50 |
+|---|---|---|
+This doesn't change the problem, since the original constraint has exactly the same solutions as the transformed constraint.
+
+The following code defines the three linear constraints for the problem:
+
+### Python
+
+```
+model.add(2 * x + 7 * y + 3 * z <= 50)
+model.add(3 * x - 5 * y + 7 * z <= 45)
+model.add(5 * x + 2 * y - 6 * z <= 37)
+```
+
+### C++
+
+```
+cp_model.AddLessOrEqual(2 * x + 7 * y + 3 * z, 50);
+cp_model.AddLessOrEqual(3 * x - 5 * y + 7 * z, 45);
+cp_model.AddLessOrEqual(5 * x + 2 * y - 6 * z, 37);
+```
+
+### Java
+
+```
+model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {2, 7, 3}), 50);
+model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {3, -5, 7}), 45);
+model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {5, 2, -6}), 37);
+```
+
+### C#
+
+```
+model.Add(2 * x + 7 * y + 3 * z <= 50);
+model.Add(3 * x - 5 * y + 7 * z <= 45);
+model.Add(5 * x + 2 * y - 6 * z <= 37);
+```
+
+### Define the objective function
+
+The following code defines the objective function for the problem and declares it to be a maximization problem:
+
+### Python
+
+```
+model.maximize(2 * x + 2 * y + 3 * z)
+```
+
+### C++
+
+```
+cp_model.Maximize(2 * x + 2 * y + 3 * z);
+```
+
+### Java
+
+```
+model.maximize(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {2, 2, 3}));
+```
+
+### C#
+
+```
+model.Maximize(2 * x + 2 * y + 3 * z);
+```
+
+### Call the solver
+
+The following code calls the solver.
+
+### Python
+
+```
+solver = cp_model.CpSolver()
+status = solver.solve(model)
+```
+
+### C++
+
+```
+const CpSolverResponse response = Solve(cp_model.Build());
+```
+
+### Java
+
+```
+CpSolver solver = new CpSolver();
+CpSolverStatus status = solver.solve(model);
+```
+
+### C#
+
+```
+CpSolver solver = new CpSolver();
+CpSolverStatus status = solver.Solve(model);
+```
+
+### Display the solution
+
+The following code displays the results.
+
+### Python
+
+```
+if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+    print(f"Maximum of objective function: {solver.objective_value}\n")
+    print(f"x = {solver.value(x)}")
+    print(f"y = {solver.value(y)}")
+    print(f"z = {solver.value(z)}")
+else:
+    print("No solution found.")
+```
+
+### C++
+
+```
+if (response.status() == CpSolverStatus::OPTIMAL ||
+    response.status() == CpSolverStatus::FEASIBLE) {
+  // Get the value of x in the solution.
+  LOG(INFO) << "Maximum of objective function: "
+            << response.objective_value();
+  LOG(INFO) << "x = " << SolutionIntegerValue(response, x);
+  LOG(INFO) << "y = " << SolutionIntegerValue(response, y);
+  LOG(INFO) << "z = " << SolutionIntegerValue(response, z);
+} else {
+  LOG(INFO) << "No solution found.";
+}
+```
+
+### Java
+
+```
+if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
+  System.out.printf("Maximum of objective function: %f%n", solver.objectiveValue());
+  System.out.println("x = " + solver.value(x));
+  System.out.println("y = " + solver.value(y));
+  System.out.println("z = " + solver.value(z));
+} else {
+  System.out.println("No solution found.");
+}
+```
+
+### C#
+
+```
+if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
+{
+    Console.WriteLine($"Maximum of objective function: {solver.ObjectiveValue}");
+    Console.WriteLine("x = " + solver.Value(x));
+    Console.WriteLine("y = " + solver.Value(y));
+    Console.WriteLine("z = " + solver.Value(z));
+}
+else
+{
+    Console.WriteLine("No solution found.");
+}
+```
+
+The output is shown below:
+
+```
+Maximum of objective function: 35
+
+x value:  7
+y value:  3
+z value:  5
+```
+
+### The entire program
+
+The entire program is shown below.
+
+### Python
+
+```
+"""Simple solve."""
+from ortools.sat.python import cp_model
+
+
+
+def main() -> None:
+    """Minimal CP-SAT example to showcase calling the solver."""
+    # Creates the model.
+    model = cp_model.CpModel()
+
+    # Creates the variables.
+    var_upper_bound = max(50, 45, 37)
+    x = model.new_int_var(0, var_upper_bound, "x")
+    y = model.new_int_var(0, var_upper_bound, "y")
+    z = model.new_int_var(0, var_upper_bound, "z")
+
+    # Creates the constraints.
+    model.add(2 * x + 7 * y + 3 * z <= 50)
+    model.add(3 * x - 5 * y + 7 * z <= 45)
+    model.add(5 * x + 2 * y - 6 * z <= 37)
+
+    model.maximize(2 * x + 2 * y + 3 * z)
+
+    # Creates a solver and solves the model.
+    solver = cp_model.CpSolver()
+    status = solver.solve(model)
+
+    if status == cp_model.OPTIMAL or status == cp_model.FEASIBLE:
+        print(f"Maximum of objective function: {solver.objective_value}\n")
+        print(f"x = {solver.value(x)}")
+        print(f"y = {solver.value(y)}")
+        print(f"z = {solver.value(z)}")
+    else:
+        print("No solution found.")
+
+    # Statistics.
+    print("\nStatistics")
+    print(f"  status   : {solver.status_name(status)}")
+    print(f"  conflicts: {solver.num_conflicts}")
+    print(f"  branches : {solver.num_branches}")
+    print(f"  wall time: {solver.wall_time} s")
+
+
+if __name__ == "__main__":
+    main()
+```
+
+### C++
+
+```
+#include <stdint.h>
+#include <stdlib.h>
+
+#include <algorithm>
+
+#include "absl/base/log_severity.h"
+#include "absl/log/globals.h"
+#include "ortools/base/init_google.h"
+#include "ortools/base/logging.h"
+#include "ortools/sat/cp_model.h"
+#include "ortools/sat/cp_model.pb.h"
+#include "ortools/sat/cp_model_solver.h"
+#include "ortools/util/sorted_interval_list.h"
+
+namespace operations_research {
+namespace sat {
+
+void CpSatExample() {
+  CpModelBuilder cp_model;
+
+  int64_t var_upper_bound = std::max({50, 45, 37});
+  const Domain domain(0, var_upper_bound);
+  const IntVar x = cp_model.NewIntVar(domain).WithName("x");
+  const IntVar y = cp_model.NewIntVar(domain).WithName("y");
+  const IntVar z = cp_model.NewIntVar(domain).WithName("z");
+
+  cp_model.AddLessOrEqual(2 * x + 7 * y + 3 * z, 50);
+  cp_model.AddLessOrEqual(3 * x - 5 * y + 7 * z, 45);
+  cp_model.AddLessOrEqual(5 * x + 2 * y - 6 * z, 37);
+
+  cp_model.Maximize(2 * x + 2 * y + 3 * z);
+
+  // Solving part.
+  const CpSolverResponse response = Solve(cp_model.Build());
+
+  if (response.status() == CpSolverStatus::OPTIMAL ||
+      response.status() == CpSolverStatus::FEASIBLE) {
+    // Get the value of x in the solution.
+    LOG(INFO) << "Maximum of objective function: "
+              << response.objective_value();
+    LOG(INFO) << "x = " << SolutionIntegerValue(response, x);
+    LOG(INFO) << "y = " << SolutionIntegerValue(response, y);
+    LOG(INFO) << "z = " << SolutionIntegerValue(response, z);
+  } else {
+    LOG(INFO) << "No solution found.";
+  }
+
+  // Statistics.
+  LOG(INFO) << "Statistics";
+  LOG(INFO) << CpSolverResponseStats(response);
+}
+
+}  // namespace sat
+}  // namespace operations_research
+
+int main(int argc, char* argv[]) {
+  InitGoogle(argv[0], &argc, &argv, true);
+  absl::SetStderrThreshold(absl::LogSeverityAtLeast::kInfo);
+  operations_research::sat::CpSatExample();
+  return EXIT_SUCCESS;
+}
+```
+
+### Java
+
+```
+package com.google.ortools.sat.samples;
+import static java.util.Arrays.stream;
+
+import com.google.ortools.Loader;
+import com.google.ortools.sat.CpModel;
+import com.google.ortools.sat.CpSolver;
+import com.google.ortools.sat.CpSolverStatus;
+import com.google.ortools.sat.IntVar;
+import com.google.ortools.sat.LinearExpr;
+
+/** Minimal CP-SAT example to showcase calling the solver. */
+public final class CpSatExample {
+  public static void main(String[] args) {
+    Loader.loadNativeLibraries();
+    // Create the model.
+    CpModel model = new CpModel();
+
+    // Create the variables.
+    int varUpperBound = stream(new int[] {50, 45, 37}).max().getAsInt();
+
+    IntVar x = model.newIntVar(0, varUpperBound, "x");
+    IntVar y = model.newIntVar(0, varUpperBound, "y");
+    IntVar z = model.newIntVar(0, varUpperBound, "z");
+
+    // Create the constraints.
+    model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {2, 7, 3}), 50);
+    model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {3, -5, 7}), 45);
+    model.addLessOrEqual(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {5, 2, -6}), 37);
+
+    model.maximize(LinearExpr.weightedSum(new IntVar[] {x, y, z}, new long[] {2, 2, 3}));
+
+    // Create a solver and solve the model.
+    CpSolver solver = new CpSolver();
+    CpSolverStatus status = solver.solve(model);
+
+    if (status == CpSolverStatus.OPTIMAL || status == CpSolverStatus.FEASIBLE) {
+      System.out.printf("Maximum of objective function: %f%n", solver.objectiveValue());
+      System.out.println("x = " + solver.value(x));
+      System.out.println("y = " + solver.value(y));
+      System.out.println("z = " + solver.value(z));
+    } else {
+      System.out.println("No solution found.");
+    }
+
+    // Statistics.
+    System.out.println("Statistics");
+    System.out.printf("  conflicts: %d%n", solver.numConflicts());
+    System.out.printf("  branches : %d%n", solver.numBranches());
+    System.out.printf("  wall time: %f s%n", solver.wallTime());
+  }
+
+  private CpSatExample() {}
+}
+```
+
+### C#
+
+```
+using System;
+using System.Linq;
+using Google.OrTools.Sat;
+
+public class CpSatExample
+{
+    static void Main()
+    {
+        // Creates the model.
+        CpModel model = new CpModel();
+
+        // Creates the variables.
+        int varUpperBound = new int[] { 50, 45, 37 }.Max();
+
+        IntVar x = model.NewIntVar(0, varUpperBound, "x");
+        IntVar y = model.NewIntVar(0, varUpperBound, "y");
+        IntVar z = model.NewIntVar(0, varUpperBound, "z");
+
+        // Creates the constraints.
+        model.Add(2 * x + 7 * y + 3 * z <= 50);
+        model.Add(3 * x - 5 * y + 7 * z <= 45);
+        model.Add(5 * x + 2 * y - 6 * z <= 37);
+
+        model.Maximize(2 * x + 2 * y + 3 * z);
+
+        // Creates a solver and solves the model.
+        CpSolver solver = new CpSolver();
+        CpSolverStatus status = solver.Solve(model);
+
+        if (status == CpSolverStatus.Optimal || status == CpSolverStatus.Feasible)
+        {
+            Console.WriteLine($"Maximum of objective function: {solver.ObjectiveValue}");
+            Console.WriteLine("x = " + solver.Value(x));
+            Console.WriteLine("y = " + solver.Value(y));
+            Console.WriteLine("z = " + solver.Value(z));
+        }
+        else
+        {
+            Console.WriteLine("No solution found.");
+        }
+
+        Console.WriteLine("Statistics");
+        Console.WriteLine($"  conflicts: {solver.NumConflicts()}");
+        Console.WriteLine($"  branches : {solver.NumBranches()}");
+        Console.WriteLine($"  wall time: {solver.WallTime()}s");
+    }
+}
+```
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2024-08-28 UTC.

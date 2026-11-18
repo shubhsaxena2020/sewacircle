@@ -1,0 +1,39 @@
+# Constraint Optimization
+
+- Constraint Programming (CP) helps find feasible solutions within a large set of possibilities by applying constraints to a problem.
+- CP focuses on finding solutions that satisfy all constraints, rather than optimizing for a specific objective.
+- Employee scheduling, where numerous possible shift combinations exist, is an example of a problem effectively addressed using CP.
+- Google provides tools like the CP-SAT solver and the original CP solver to tackle constraint programming problems.
+- CP is widely used in various fields, with dedicated research and applications in planning and scheduling.
+
+**Constraint optimization**, or [**constraint programming**](https://en.wikipedia.org/wiki/Constraint_programming) (CP), is the name given to identifying feasible solutions out of a very large set of candidates, where the problem can be modeled in terms of arbitrary constraints. CP problems arise in many scientific and engineering disciplines. (The word "programming" is a bit of a misnomer, similar to how "computer" once meant "a person who computes". Here, "programming" refers to the arrangement of a plan , rather than programming in a computer language.)
+
+CP is based on *feasibility* (finding a feasible solution) rather than optimization (finding an optimal solution) and focuses on the constraints and variables rather than the objective function. In fact, a CP problem may not even have an objective function — the goal may be to narrow down a very large set of possible solutions to a more manageable subset by adding constraints to the problem.
+
+An example of a problem that is well-suited for CP is **employee scheduling**. The problem arises when companies that operate continuously — such as factories — need to create weekly schedules for their employees. Here's a very simplified example: a company runs three 8-hour shifts per day and assigns three of its four employees to different shifts each day, while giving the fourth the day off. Even in such a small case, the number of possible schedules is huge: each day, there are `4! = 4 * 3 * 2 * 1 = 24` possible employee assignments, so the number of possible weekly schedules is 247, which is over 4.5 billion. Usually there will be other constraints that reduce the number of feasible solutions — for example, that each employee works at least a minimum number of days per week. The CP method keeps track of which solutions remain feasible when you add new constraints, which makes it a powerful tool for solving large, real-world scheduling problems.
+
+CP has a widespread and very active community around the world with dedicated scientific journals, conferences, and an arsenal of different solving techniques . CP has been successfully applied in planning, scheduling, and numerous other domains with heterogeneous constraints.
+
+## Tools
+
+Google provides few ways to solve CP problems:
+
+- [CP-SAT solver](https://developers.google.com/optimization/cp/cp_solver): A **constraint programming** solver that uses SAT (satisfiability) methods.
+- [Original CP solver](https://developers.google.com/optimization/routing/original_cp_solver): A **constraint programming** solver used in the routing library.
+
+If your problem can be modeled with a linear objective and linear constraints, then you have a [linear programming](https://developers.google.com/optimization/lp) problem and should consider [MPSolver](https://developers.google.com/optimization/lp/mpsolver). (However, routing problems are typically best solved with our [vehicle routing library](https://developers.google.com/optimization/routing) even if they can be represented with a linear model.)
+
+## Examples
+
+The [next section](https://developers.google.com/optimization/cp/cp_solver) describes the CP-SAT solver, the primary OR-Tools solver for constraint programming. (SAT stands for **satisfiability**: the solver uses techniques for solving SAT problems along with CP methods.)
+
+Here are some examples of scheduling problems that are well-suited for the CP-SAT solver:
+
+- [Employee Scheduling](https://developers.google.com/optimization/scheduling/employee_scheduling)
+- [The Job shop problem](https://developers.google.com/optimization/scheduling/job_shop)
+
+Two classic CP problems are the [N-queens problem](https://developers.google.com/optimization/cp/queens) and [cryptarithmetic puzzles](https://developers.google.com/optimization/puzzles/cryptarithmetic).
+
+Except as otherwise noted, the content of this page is licensed under the [Creative Commons Attribution 4.0 License](https://creativecommons.org/licenses/by/4.0/), and code samples are licensed under the [Apache 2.0 License](https://www.apache.org/licenses/LICENSE-2.0). For details, see the [Google Developers Site Policies](https://developers.google.com/site-policies). Java is a registered trademark of Oracle and/or its affiliates.
+
+Last updated 2026-03-18 UTC.
