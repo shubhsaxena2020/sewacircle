@@ -1,0 +1,247 @@
+"""THE CONTRACT. Shared pydantic models for every lane. Do not change a field name or type without the head's approval;
+adding OPTIONAL fields (with defaults) is allowed only via the head."""
+from __future__ import annotations
+
+from datetime import datetime
+from typing import Literal, Optional
+
+from pydantic import BaseModel, Field, field_validator
+
+from .taxonomy import SKILLS
+
+Gender = Literal["F", "M", "X", "undisclosed"]
+Language = Literal["hi", "en", "hinglish"]
+Method = Literal["cp_sat", "nearest_skill", "random_feasible", "manual_greedy"]
+CardStatus = Literal["draft", "flagged", "confirmed", "corrected", "rejected"]
+
+
+class Volunteer(BaseModel):
+    """SYNTHETIC volunteer opt-in card. Never real people."""
+    id: str
+    display_name: str
+    age: int = Field(ge=15, le=70)
+    gender: Gender = "undisclosed"
+    district: str
+    block: str
+    lat: float
+    lon: float
+    skills: dict[str, int] = Field(default_factory=dict, description="skill id -> level 1..3 (1 basic, 3 expert)")
+    self_declared_skills: list[str] = Field(default_factory=list, description="skills not yet host-confirmed")
+    languages: list[str] = Field(default_factory=list)
+    available_slots: list[str] = Field(default_factory=list)
+    has_vehicle: bool = False
+    past_drives: int = 0
+    times_picked_last_90d: int = 0
+    guardian_consent: Optional[bool] = None  # required True if age < 18
+    synthetic: bool = True
+
+    @field_validator("skills")
+    @classmethod
+    def _skills_valid(cls, v: dict[str, int]) -> dict[str, int]:
+        for k, lvl in v.items():
+            if k not in SKILLS:
+                raise ValueError(f"unknown skill {k}")
+            if lvl not in (1, 2, 3):
+                raise ValueError("skill level must be 1..3")
+        return v
+
+    @property
+    def is_minor(self) -> bool:
+        return self.age < 18
+
+    @property
+    def is_novice(self) -> bool:
+        return self.past_drives < 3
+
+    @property
+    def can_mentor(self) -> bool:
+        return self.past_drives >= 5
+
+
+class RoleSpec(BaseModel):
+    id: str
+    role: str
+    count: int = Field(ge=1, le=10)
+    required_skills: list[str] = Field(default_factory=list, description="any-of; taxonomy ids")
+    min_level: int = Field(default=1, ge=1, le=3)
+    priority: Literal["must", "should"] = "must"
+    needs_experienced: bool = False
+    evidence_span: str = ""
+    confidence: Literal["high", "medium", "low"] = "high"
+
+
+class TaskSpec(BaseModel):
+    id: str
+    title: str
+    brief_text: str = ""
+    language: Language = "en"
+    slot: str = "sat_morning"
+    district: str
+    block: str
+    lat: float
+    lon: float
+    team_size: Optional[int] = None
+    max_travel_km: float = 15.0
+    allow_minors: bool = True
+    roles: list[RoleSpec] = Field(default_factory=list)
+    synthetic: bool = True
+
+
+# ---------------- extraction (LLM) ----------------
+class ExtractedRole(BaseModel):
+    role: str
+    count: int = Field(ge=1, le=10)
+    required_skills: list[str]
+    evidence_span: str = ""
+    confidence: Literal["high", "medium", "low"] = "medium"
+    reason: str = ""
+
+
+class ExtractionResult(BaseModel):
+    roles: list[ExtractedRole]
+    needs_decision: list[str] = Field(default_factory=list)
+    language_detected: Language = "en"
+    model: str = ""
+    cached: bool = False
+    redactions: int = 0
+    notes: list[str] = Field(default_factory=list)
+
+
+# ---------------- roster (solver) ----------------
+class RosterOptions(BaseModel):
+    fairness: bool = True          # U2 rotation fairness
+    resilience: bool = True        # U1 standby / dropout resilience
+    mentor_pairing: bool = True    # U2 novice-mentor pairing
+    forced_in: list[str] = Field(default_factory=list)   # volunteer ids that must be included
+    forced_out: list[str] = Field(default_factory=list)  # volunteer ids excluded
+    time_limit_s: float = 10.0
+    seed: int = 7
+
+
+class Assignment(BaseModel):
+    role_id: str
+    slot_index: int = 0
+    volunteer_id: str
+    volunteer_name: str
+    score: float = 0.0
+    distance_km: float = 0.0
+    reasons: list[str] = Field(default_factory=list)
+    flags: list[str] = Field(default_factory=list)  # e.g. "self_declared_skill", "novice", "minor_guardian_consent"
+
+
+class StandbyPick(BaseModel):
+    volunteer_id: str
+    volunteer_name: str
+    covers_role_ids: list[str]
+    reason: str = ""
+
+
+class RosterMetrics(BaseModel):
+    role_coverage: float            # filled qualified slots / required slots (must-roles weighted equally)
+    slots_filled: int
+    slots_required: int
+    robustness: float               # share of single-dropout scenarios leaving all must roles covered (0..1)
+    repeat_pick_share: float        # share of assigned volunteers with times_picked_last_90d >= 3
+    exposure_gini: float            # Gini of times_picked_last_90d among assigned (lower = fairer)
+    district_spread: int            # distinct districts/blocks among assigned
+    novices: int = 0
+    mentor_pairs: int = 0
+    solve_ms: int = 0
+    solver_status: str = ""
+
+
+class RosterResult(BaseModel):
+    task_id: str
+    method: Method
+    assignments: list[Assignment]
+    standby: list[StandbyPick] = Field(default_factory=list)
+    unfilled_role_ids: list[str] = Field(default_factory=list)
+    metrics: RosterMetrics
+    explanations: list[str] = Field(default_factory=list)
+    synthetic: bool = True
+
+
+class Counterfactual(BaseModel):
+    """U3: answer to 'why not volunteer X?' by re-solving with X forced in."""
+    volunteer_id: str
+    volunteer_name: str
+    feasible: bool
+    narrative: str
+    delta_role_coverage: float = 0.0
+    delta_robustness: float = 0.0
+    displaced_volunteer_ids: list[str] = Field(default_factory=list)
+    blocking_reasons: list[str] = Field(default_factory=list)
+
+
+class DropoutResult(BaseModel):
+    """U1: simulate one volunteer dropping out of the approved roster."""
+    task_id: str
+    dropped_volunteer_id: str
+    healed_with_standby: bool
+    replacement_volunteer_id: Optional[str] = None
+    uncovered_role_ids: list[str] = Field(default_factory=list)
+    roster_after: RosterResult
+
+
+# ---------------- evidence ledger ----------------
+class Flag(BaseModel):
+    code: str
+    severity: Literal["info", "warn", "block"]
+    message: str
+
+
+class ContributionCard(BaseModel):
+    id: str
+    task_id: str
+    volunteer_id: str
+    role: str
+    claimed_hours: float
+    recorded_hours: Optional[float] = None   # from the attendance sheet
+    summary: str = ""
+    evidence_refs: list[str] = Field(default_factory=list)
+    status: CardStatus = "draft"
+    flags: list[Flag] = Field(default_factory=list)
+    drafted_by: Literal["ai", "human"] = "ai"
+    confirmed_by: Optional[str] = None
+    created_at: datetime = Field(default_factory=datetime.utcnow)
+    synthetic: bool = True
+
+
+class LedgerEntry(BaseModel):
+    index: int
+    ts: datetime
+    action: Literal["draft", "flag", "confirm", "correct", "reject", "export"]
+    card_id: str
+    actor: str
+    payload_hash: str
+    prev_hash: str
+    entry_hash: str
+
+
+class LedgerVerification(BaseModel):
+    ok: bool
+    entries: int
+    first_bad_index: Optional[int] = None
+    note: str = "Hash chain shows edits, not truth; truth comes from host confirmation."
+
+
+# ---------------- evaluation ----------------
+class EvalRow(BaseModel):
+    task_id: str
+    method: Method
+    role_coverage: float
+    robustness: float
+    repeat_pick_share: float
+    exposure_gini: float
+    solve_ms: int
+
+
+class EvalReport(BaseModel):
+    n_tasks: int
+    n_volunteers: int
+    rows: list[EvalRow]
+    summary: dict[str, dict[str, float]]  # method -> metric -> mean
+    ci95: dict[str, dict[str, list[float]]] = Field(default_factory=dict)  # method -> metric -> [lo, hi] (bootstrap)
+    misses: list[str] = Field(default_factory=list)   # honest list of tasks where we did not beat the baseline
+    generated_by: str = ""
+    synthetic: bool = True
