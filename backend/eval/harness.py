@@ -96,7 +96,7 @@ def _print(rep: EvalReport) -> None:
     for m, vals in rep.summary.items():
         cells = "".join(f"{vals[k]:>8.3f} [{rep.ci95[m][k][0]:>7.3f},{rep.ci95[m][k][1]:>7.3f}]   " for k in METRICS)
         print(f"{m:<26}{cells}")
-    print("\nper task (cov / robustness / repeat / gini):")
+    print("\nper task (cov / robustness / repeat / gini / ready):")
     for t in sorted({r.task_id for r in rep.rows}):
         cells = "  ".join(f"{r.method[:6]} {r.role_coverage:.2f}/{r.robustness:.2f}/{r.repeat_pick_share:.2f}/{r.exposure_gini:.2f}/{r.ready:.0f}"
                           for r in rep.rows if r.task_id == t)
