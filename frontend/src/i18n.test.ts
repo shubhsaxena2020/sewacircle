@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { copy, formatNumber, formatPercent, tr } from './i18n'
+import { copy, formatNumber, formatPercent, formatSlot, tr } from './i18n'
 
 describe('translation coverage',()=>{
   it('provides nonempty English and Hindi for every key',()=>{
@@ -18,5 +18,9 @@ describe('number formatting',()=>{
     expect(formatNumber(123456,'hi')).toBe('१,२३,४५६')
     expect(formatPercent(.7,'en')).toBe('70%')
     expect(formatPercent(.7,'hi')).toBe('७०%')
+  })
+  it('labels task slots naturally in both languages',()=>{
+    expect(formatSlot('sat_morning','en')).toBe('Saturday morning')
+    expect(formatSlot('sat_morning','hi')).toBe('शनिवार सुबह')
   })
 })

@@ -1,0 +1,9 @@
+# Backend request: localized display text
+
+The front end keeps API ids, numbers, source phrases, and user-entered notes unchanged. Hindi interface labels are translated locally, but the API currently returns task titles, role names, skill names, roster explanations, card summaries and flags, evaluation misses, and ledger actions only in English. Rendering those as natural Hindi requires localized data from the API; a client-side word replacement would change meaning in safety and evidence explanations.
+
+Add an optional `lang=en|hi` query parameter to `GET /api/tasks`, `GET /api/volunteers`, `GET /api/evidence/cards`, `GET /api/ledger`, and `GET /api/eval`, and an optional `lang` field to the request bodies of `POST /api/extract-roles`, `POST /api/roster`, `POST /api/roster/dropout`, `POST /api/roster/why-not`, and `POST /api/evidence/draft`. Default to `en` for existing clients.
+
+Return the same existing schema plus a `display` object for generated or catalogue text. For tasks, include `title`, `district`, `block`, `slot`, and each role's `role` and skill labels. For roster results, include each assignment's `reasons`, each standby `reason`, and each recruit request's `role`, `skills`, `area`, `slot`, and `reason`. For why-not and dropout, include narratives and blocking reasons. For cards, include `role`, `summary`, and each flag `message`. For evaluation, include translated `misses`; for ledger entries, translate `action`. The English originals and machine ids must remain available and numerics must be identical in both languages.
+
+Keep organiser-authored briefs and host notes in their original language, and keep `evidence_span` as an exact quote. The UI can label these as source text. Please add contract tests proving that a Hindi response preserves ids, decisions, numbers, source quotes, and flag severity while displaying natural Hindi explanations.

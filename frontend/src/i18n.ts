@@ -25,8 +25,19 @@ export const copy = {
   methodTitle: ['How a crew is decided', 'टीम कैसे तय होती है'], methodSub: ['This prototype turns a text brief into a decision that an organiser can inspect and change.', 'यह नमूना लिखे हुए विवरण को ऐसे निर्णय में बदलता है जिसे आयोजक जाँच और बदल सके।'], metricDefinitions: ['Metric definitions', 'माप की परिभाषाएँ'], definitionCoverage: ['Filled qualified essential slots ÷ all essential slots.', 'योग्य व्यक्ति से भरे अनिवार्य स्थान ÷ सभी अनिवार्य स्थान।'], definitionRobustness: ['Share of assigned-person dropouts after which the remaining crew and unique standby pool can still cover every essential slot.', 'चुने गए किसी एक व्यक्ति के न आने के बाद बची टीम और अलग वैकल्पिक सदस्यों से सभी अनिवार्य स्थान भर सकने का अनुपात।'], definitionRepeat: ['Share of assigned people picked at least three times in the previous 90 days.', 'चुने गए लोगों में पिछले 90 दिनों में कम से कम तीन बार चुने गए लोगों का अनुपात।'], definitionGini: ['Gini of recent picks across the task-eligible pool after this assignment; lower means more even exposure.', 'इस चयन के बाद योग्य लोगों के हालिया चयन का गिनी; कम मान का मतलब अवसरों का अधिक समान बँटवारा।'], sources: ['Sources and documents', 'स्रोत और दस्तावेज़'],
   loading: ['Loading…', 'लोड हो रहा है…'], retry: ['Retry', 'फिर कोशिश करें'], error: ['Request failed', 'अनुरोध विफल'], close: ['Close', 'बंद करें'],
   redactions: ['personal details hidden', 'निजी विवरण छिपाए गए'], districtPoint: ['District point', 'ज़िला बिंदु'], mappedLayer: ['UP / synthetic layer', 'उत्तर प्रदेश / काल्पनिक परत'], roleCaption: ['Role coverage', 'भूमिका कवरेज'], standbyCaption: ['Standby in place', 'वैकल्पिक सदस्य तैयार'], docPrd: ['Product requirements', 'उत्पाद आवश्यकताएँ'], docReport: ['Project report', 'परियोजना रिपोर्ट'], docEval: ['Evaluation results', 'मूल्यांकन परिणाम'], docLocal: ['Local model results', 'स्थानीय मॉडल परिणाम'], docCompare: ['MY Bharat comparison', 'माय भारत तुलना'], docDistrict: ['District coordinate dataset', 'ज़िला निर्देशांक डेटा'], 
+  skip: ['Skip to content', 'मुख्य सामग्री पर जाएँ'], mainNav: ['Main navigation', 'मुख्य नेविगेशन'],
+  sectionContext: ['Context', 'संदर्भ'], sectionProcess: ['Process', 'प्रक्रिया'], sectionSafety: ['Safety', 'सुरक्षा'], sectionMeasured: ['Measured', 'मापा गया'], sectionReview: ['Human review', 'मानवीय जाँच'], sectionLimits: ['Limits', 'सीमाएँ'],
+  evidenceArt: ['Abstract cards and linked evidence blocks', 'योगदान कार्ड और जुड़े हुए प्रमाण के ब्लॉक का चित्र'],
+  confidenceHigh: ['High', 'उच्च'], confidenceMedium: ['Medium', 'मध्यम'], confidenceLow: ['Low', 'कम'],
+  km: ['km', 'किमी'], coordinateCaveat: ['Points are approximate district locators from the cited dataset, not surveyed centres or legal boundaries.', 'ये बिंदु स्रोत डेटा से लिए गए ज़िलों के अनुमानित स्थान हैं; ये नापे गए केंद्र या कानूनी सीमाएँ नहीं हैं।'],
 } as const satisfies Record<string, readonly [string, string]>
 export type Key = keyof typeof copy
 export const tr = (lang: Lang, key: Key) => copy[key][lang === 'hi' ? 1 : 0]
+export const formatSlot = (slot: string, lang: Lang) => ({
+  sat_morning: lang === 'hi' ? 'शनिवार सुबह' : 'Saturday morning',
+  sat_afternoon: lang === 'hi' ? 'शनिवार दोपहर' : 'Saturday afternoon',
+  sun_morning: lang === 'hi' ? 'रविवार सुबह' : 'Sunday morning',
+  sun_afternoon: lang === 'hi' ? 'रविवार दोपहर' : 'Sunday afternoon',
+} as Record<string, string>)[slot] ?? slot.replaceAll('_', ' ')
 export const formatNumber = (value: number, lang: Lang, digits = 0) => new Intl.NumberFormat(lang === 'hi' ? 'hi-IN-u-nu-deva' : 'en-IN', { maximumFractionDigits: digits, minimumFractionDigits: digits }).format(value)
 export const formatPercent = (value: number, lang: Lang) => `${formatNumber(value * 100, lang)}%`
