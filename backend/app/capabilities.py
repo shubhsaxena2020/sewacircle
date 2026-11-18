@@ -54,7 +54,8 @@ CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
     "organiser": {
         "screens": ("roster", "evidence", "ledger", "evaluation", "drive_summary", "capabilities"),
         "actions": ("read_roster", "read_cards", "read_ledger", "read_eval", "read_drive_summary", "draft_cards",
-                    "confirm_card", "correct_card", "reject_card", "request_revision", "export_credential"),
+                    "confirm_card", "correct_card", "reject_card", "request_revision", "export_credential",
+                    "reset_demo"),
     },
     "host": {
         "screens": ("evidence", "ledger", "evaluation", "drive_summary", "capabilities"),
@@ -72,6 +73,7 @@ CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
 }
 
 #: Actions that write something; these are the ones the API enforces on X-Demo-Role.
+#: ``reset_demo`` is included because the reset archives the card store and the ledger.
 MUTATING_ACTIONS: tuple[str, ...] = (
     "draft_cards",
     "confirm_card",
@@ -79,6 +81,7 @@ MUTATING_ACTIONS: tuple[str, ...] = (
     "reject_card",
     "request_revision",
     "export_credential",
+    "reset_demo",
 )
 
 

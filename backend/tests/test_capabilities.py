@@ -25,6 +25,7 @@ MUTATING_ROUTES = {
     "reject_card": ("post", "/api/evidence/{card}/reject"),
     "request_revision": ("post", "/api/evidence/{card}/request_revision"),
     "export_credential": ("get", "/api/export/credential/{card}"),
+    "reset_demo": ("post", "/api/demo/reset"),
 }
 
 
@@ -85,6 +86,8 @@ def test_unknown_role_is_422_and_names_the_choices(client):
 
 def test_matrix_invariants():
     """The product story, asserted: host confirms, viewer only reads, organiser runs everything."""
+    assert set(capabilities.MUTATING_ACTIONS) == set(MUTATING_ROUTES), \
+        "every mutating action in the matrix must have an enforcement test here"
     for action in capabilities.MUTATING_ACTIONS:
         assert capabilities.may("organiser", action) is True
         assert capabilities.may("viewer", action) is False
@@ -92,6 +95,7 @@ def test_matrix_invariants():
     assert capabilities.may("host", "confirm_card") is True
     assert capabilities.may("host", "request_revision") is True
     assert capabilities.may("host", "draft_cards") is False          # drafting is the organiser/system step
+    assert capabilities.may("host", "reset_demo") is False           # only the organiser may wipe the demo
     assert capabilities.may("viewer", "read_eval") is True
     assert capabilities.may("viewer", "read_cards") is False
     for role, entry in capabilities.CAPABILITIES.items():
@@ -141,6 +145,17 @@ def test_host_may_export_a_confirmed_card(client):
     r = client.get(f"/api/export/credential/{card['id']}", headers={"X-Demo-Role": "host"})
     assert r.status_code == 200, r.text
     assert r.json()["credentialSubject"]["achievement"]["name"]
+
+
+def test_only_the_organiser_may_reset_the_demo(client):
+    """The destructive route is inside the same matrix as the evidence routes."""
+    _draft(client)
+    for role in ("host", "viewer", "volunteer"):
+        r = client.post("/api/demo/reset", headers={"X-Demo-Role": role})
+        assert r.status_code == 403, role
+        assert "not authentication" in r.json()["detail"]
+    assert client.get("/api/evidence/cards").json()                   # nothing was archived or wiped
+    assert client.post("/api/demo/reset").status_code == 200          # default organiser keeps working
 
 
 def test_unknown_header_role_is_403_and_says_why(client):

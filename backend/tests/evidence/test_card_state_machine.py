@@ -152,6 +152,50 @@ def test_revision_requested_refuses_any_host_action_but_redraft(client, action):
     assert "revision_requested" in r.json()["detail"]
 
 
+def test_revision_requested_card_is_superseded_when_the_volunteer_leaves_the_draft(client):
+    """No card may be stranded in revision_requested once the roster no longer includes that volunteer."""
+    card = _draft(client)[0]
+    assert client.post(f"/api/evidence/{card['id']}/request_revision",
+                       json={"reason": "wrong role"}).status_code == 200
+
+    r = client.post("/api/evidence/draft", json={
+        "task": TASK, "host_notes": "Sunita worked 4 hours.",
+        "attendance_rows": [{"volunteer_id": "v-069", "task_id": "task-01", "hours": 4}],
+        "assignments": [{"role_id": "role-01", "volunteer_id": "v-069", "volunteer_name": "Sunita K."}],
+    })
+    assert r.status_code == 200, r.text
+    cards = client.get("/api/evidence/cards").json()
+    assert [c["volunteer_id"] for c in cards] == ["v-069"]
+    assert all(c["status"] != "revision_requested" for c in cards)
+
+
+def test_legacy_journal_line_without_a_reason_still_verifies(client, tmp_path):
+    """Backward compatibility: entries written before the reason field existed stay valid."""
+    card = _draft(client)[0]
+    journal = tmp_path / "ledger.jsonl"
+    lines = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines() if line.strip()]
+    for record in lines:
+        record.pop("reason", None)                                  # exactly the pre-feature journal shape
+    journal.write_text("\n".join(json.dumps(r, sort_keys=True) for r in lines) + "\n", encoding="utf-8")
+    assert client.get("/api/ledger/verify").json()["ok"] is True
+    assert client.get("/api/ledger").json()[-1]["reason"] == ""     # loaded as empty, not invented
+
+
+def test_clearing_a_reason_breaks_the_chain(client, tmp_path):
+    """The reason is hashed: deleting it is tampering, not cleanup."""
+    card = _draft(client)[0]
+    assert client.post(f"/api/evidence/{card['id']}/request_revision",
+                       json={"reason": "hours are wrong"}).status_code == 200
+    journal = tmp_path / "ledger.jsonl"
+    lines = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines() if line.strip()]
+    lines[-1]["reason"] = ""
+    journal.write_text("\n".join(json.dumps(r, sort_keys=True) for r in lines) + "\n", encoding="utf-8")
+
+    result = client.get("/api/ledger/verify").json()
+    assert result["ok"] is False
+    assert result["first_bad_index"] == len(lines) - 1
+
+
 def test_unknown_card_is_404_not_409(client):
     r = client.post("/api/evidence/card-does-not-exist/request_revision", json={"reason": "x"})
     assert r.status_code == 404

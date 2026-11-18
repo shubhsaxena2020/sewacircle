@@ -61,6 +61,12 @@ def test_terminal_states_have_no_outgoing_edge():
         assert transitions.is_terminal(state) is True
 
 
+def test_a_state_with_no_outgoing_edge_is_declared_terminal():
+    """The converse of the test above: 'terminal' means exactly 'no edge leaves here'."""
+    exhausted = {state for state in transitions.CARD_STATES if transitions.allowed_actions(state) == ()}
+    assert exhausted == set(transitions.TERMINAL_STATES)
+
+
 def test_revision_requested_has_exactly_one_back_edge():
     assert transitions.allowed_actions("revision_requested") == ("redraft",)
     assert transitions.next_state("revision_requested", "redraft") == "draft"

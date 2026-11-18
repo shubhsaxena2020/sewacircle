@@ -266,7 +266,10 @@ def make_roster(req: RosterReq) -> Any:
                            random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
                            manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
         # Remembered in memory only, so the public share route can show the verdict it was given here.
-        roster_ready()[req.task.id] = result.cp_sat.ready
+        # Only ids this server knows are stored: a client cannot grow the dict without bound or make a share
+        # link advertise a verdict for a drive that does not exist.
+        if any(t.id == req.task.id for t in tasks()):
+            roster_ready()[req.task.id] = result.cp_sat.ready
         return result
     return _guard(run)
 
@@ -311,14 +314,16 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
 
     Revision back-edge: a card the host sent back with request_revision is re-drafted. It passes through the state
     machine's revision_requested -> draft edge (see evidence/transitions.py), the stale reason is cleared, and the
-    ledger records a 'draft' entry whose reason names the revision request."""
+    ledger records a 'draft' entry whose reason names the revision request. A revision_requested card whose
+    volunteer is no longer in the new draft is superseded like an undecided draft card (removed, history kept),
+    so no card can be stranded in a state with no outgoing edge."""
     def run() -> list[ContributionCard]:
         store = cards()
         out: list[ContributionCard] = []
         drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
         new_ids = {c.id for c in drafted}
         for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
-                      and x.status in ("draft", "flagged")]:
+                      and x.status in ("draft", "flagged", "revision_requested")]:
             del store[stale.id]
         for c in drafted:
             existing = store.get(c.id)
@@ -341,8 +346,9 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
 
 
 @app.post("/api/demo/reset")
-def demo_reset() -> dict:
-    """Start a clean demo: archive the current card store and ledger (renamed with a timestamp, never deleted)."""
+def demo_reset(demo_role: str = Depends(_require_demo("reset_demo"))) -> dict:
+    """Start a clean demo: archive the current card store and ledger (renamed with a timestamp, never deleted).
+    Destructive, so the capability matrix allows it for the organiser demo role only."""
     import time
     stamp = time.strftime("%Y%m%d-%H%M%S")
     DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -353,6 +359,7 @@ def demo_reset() -> dict:
             archived.append(p.name)
     S.cards = None
     S.ledger = None
+    S.roster_ready = None
     return {"ok": True, "archived": archived}
 
 
