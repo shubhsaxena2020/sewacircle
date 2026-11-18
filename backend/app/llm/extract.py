@@ -1,5 +1,6 @@
 """LLM layer: role extraction and contribution-card drafting. Every model call goes through llm.client.complete_json
-(record/replay cache) and every input is PII-redacted first. Names are NOT detected by the redactor (see redact.py)."""
+(record/replay cache) and every input is PII-redacted first; rostered people are replaced by ids and other Indian names
+from a gazetteer are masked (see names.py for the limits: Latin script only)."""
 from __future__ import annotations
 
 import re
@@ -10,6 +11,7 @@ from ..taxonomy import SKILLS
 from . import client
 from .client import LLMError
 from .prompts import DRAFT_SYSTEM, EXTRACT_FEWSHOT, EXTRACT_SYSTEM
+from .names import mask_names, pseudonymise
 from .redact import redact as _redact
 
 _DEVANAGARI_DIGITS = str.maketrans("०१२३४५६७८९", "0123456789")
@@ -36,6 +38,8 @@ def _user_prompt(text: str) -> str:
 
 def extract_roles(brief_text: str, language_hint: str | None = None) -> ExtractionResult:
     clean, n = redact(brief_text)
+    clean, k = mask_names(clean)   # person names never reach the model
+    n += k
     if not clean.strip():
         return ExtractionResult(roles=[], needs_decision=["The task description is empty."], language_detected="en", model="none", redactions=n)
     data, meta = client.complete_json("extract", EXTRACT_SYSTEM, _user_prompt(clean), max_tokens=3000)
@@ -113,15 +117,18 @@ def _fallback_cards(task: TaskSpec, notes: str, rows: dict[str, AttendanceRow], 
 
 def draft_cards(task: TaskSpec, host_notes: str, attendance_rows: list[AttendanceRow], assignments: list[Assignment]) -> list[ContributionCard]:
     rows = {r.volunteer_id: r for r in attendance_rows if r.task_id == task.id}
-    clean, _ = redact(host_notes)
+    pii_clean, _ = redact(host_notes)
+    names = {a.volunteer_id: a.volunteer_name for a in assignments}
+    pseudo, _ = pseudonymise(pii_clean, {name: vid for vid, name in names.items()})   # rostered people -> [v-xxx]
+    clean, _ = mask_names(pseudo)                                                      # anyone else -> [NAME]
     role_name = {r.id: r.role for r in task.roles}
-    roster_list = "\n".join(f"- {a.volunteer_id}: {a.volunteer_name} ({role_name.get(a.role_id, a.role_id)})" for a in assignments)
+    roster_list = "\n".join(f"- {a.volunteer_id} ({role_name.get(a.role_id, a.role_id)})" for a in assignments)  # ids only, no names
     try:
         data, _meta = client.complete_json("draft", DRAFT_SYSTEM, f"ROSTER:\n{roster_list}\n\nHOST NOTES:\n{clean}", max_tokens=3000)
         raw_cards = data.get("cards", []) if isinstance(data, dict) else []
         drafted_by = "ai"
     except LLMError:
-        raw_cards, drafted_by = _fallback_cards(task, clean, rows, assignments), "human"
+        raw_cards, drafted_by = _fallback_cards(task, pii_clean, rows, assignments), "human"  # local parser, no model call
     valid_ids = {a.volunteer_id for a in assignments}
     cards: dict[str, ContributionCard] = {}
     for c in raw_cards:
@@ -137,7 +144,8 @@ def draft_cards(task: TaskSpec, host_notes: str, attendance_rows: list[Attendanc
         ev = str(c.get("evidence", "")).strip()
         cards[cid] = ContributionCard(
             id=cid, task_id=task.id, volunteer_id=vid, role=role, claimed_hours=hours,
-            recorded_hours=rows[vid].hours if vid in rows else None, summary=str(c.get("summary", ""))[:300],
+            recorded_hours=rows[vid].hours if vid in rows else None,
+            summary=re.sub(r"\[(v-\d+)\]", lambda m: names.get(m.group(1), m.group(0)), str(c.get("summary", "")))[:300],
             evidence_refs=([f"host_note:{task.id}:{vid}:{_hash(ev)}"] if ev else []) + ([f"attendance:{task.id}:{vid}"] if vid in rows else []),
             status="draft", drafted_by=drafted_by)  # type: ignore[arg-type]
     for a in assignments:   # every rostered volunteer gets a card even if the notes skip them

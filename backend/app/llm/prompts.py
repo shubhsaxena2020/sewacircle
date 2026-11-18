@@ -57,6 +57,7 @@ a human host will confirm, correct or reject every card. Output ONLY one minifie
 
 Rules:
 1. One card per volunteer mentioned in the notes or listed on the roster. Use ONLY volunteer ids from the roster list given.
+   People in the notes appear as id tokens like [v-008] (names were removed for privacy); other people appear as [NAME].
 2. claimed_hours = the hours the NOTES attribute to that person. If the notes give no hours for them, use 0 and say so in the summary.
 3. Never invent work the notes do not mention. Never call anything verified or confirmed.
 4. evidence must be copied verbatim from the notes ("" if the person is not mentioned).
