@@ -175,11 +175,19 @@ class DraftReq(BaseModel):
 
 @app.post("/api/evidence/draft", response_model=list[ContributionCard])
 def draft(req: DraftReq) -> Any:
-    """Idempotent: card ids are deterministic; a card already decided by the host is never overwritten by a re-draft."""
+    """Idempotent: card ids are deterministic; a card already decided by the host is never overwritten by a re-draft.
+    Undecided draft/flagged cards of the same task that are not part of the new draft (for example after a dropout
+    moved someone to another role) are superseded: removed from the card store so they cannot trigger false
+    duplicate-evidence flags. Their earlier 'draft' entries stay in the ledger history. Host-decided cards are kept."""
     def run() -> list[ContributionCard]:
         store = cards()
         out: list[ContributionCard] = []
-        for c in llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments):
+        drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
+        new_ids = {c.id for c in drafted}
+        for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
+                      and x.status in ("draft", "flagged")]:
+            del store[stale.id]
+        for c in drafted:
             existing = store.get(c.id)
             if existing is not None and existing.status not in ("draft", "flagged"):
                 out.append(existing)
@@ -192,6 +200,22 @@ def draft(req: DraftReq) -> Any:
         _save_cards()
         return out
     return _guard(run)
+
+
+@app.post("/api/demo/reset")
+def demo_reset() -> dict:
+    """Start a clean demo: archive the current card store and ledger (renamed with a timestamp, never deleted)."""
+    import time
+    stamp = time.strftime("%Y%m%d-%H%M%S")
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    archived = []
+    for p in DATA_DIR.glob("*"):
+        if p.is_file() and not p.name.startswith("archive-"):
+            p.rename(p.with_name(f"archive-{stamp}-{p.name}"))
+            archived.append(p.name)
+    S.cards = None
+    S.ledger = None
+    return {"ok": True, "archived": archived}
 
 
 @app.get("/api/evidence/cards", response_model=list[ContributionCard])
