@@ -25,3 +25,14 @@
   BACKEND-PATTERNS.md.
 - Note 2: read_roster is listed but /api/roster, /dropout, /why-not are not gated. Gate them with the same dependency
   (organiser only) so the matrix is honest, or drop read_roster from host's absent list explicitly in the docs.
+
+## Hindi display text (Hermes, feat(i18n)) - accepted with 2 follow-ups
+- Good: Hindi built from the same structured facts as the English (no sentence translation), unknown labels left unchanged
+  rather than machine-translated, LLM text explicitly out of scope, place names not transliterated; RecruitRequest.kind added so
+  the Hindi template is chosen from data, not by parsing English. Natural Hindi for skills/titles/slots. Suite 839 passed.
+- Follow-up 1 (honesty): the Hindi pick reason is a fixed "chosen for <role>; N km away, <slot> available" line, while the English
+  carries the solver's specific reasons (skill level, not picked in 90 days, newcomer, mentor pairing...). The Hindi view thus
+  drops the fairness/newcomer reasons that are the product's point. Render each English reason from its structured cause in Hindi
+  too (the reasons are produced in solver/cp_sat.py; expose a reason code + params alongside the text).
+- Follow-up 2: the Hindi standby template drops the volunteer's name ("if this person cannot come" -> no name); fine, but then the
+  English should not show a name either, or both should. Keep the two languages equivalent in information.
