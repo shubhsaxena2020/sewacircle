@@ -102,16 +102,19 @@ def _card_id(task_id: str, volunteer_id: str, role: str) -> str:
 
 
 def _fallback_cards(task: TaskSpec, notes: str, rows: dict[str, AttendanceRow], assignments: list[Assignment]) -> list[dict]:
-    """Deterministic parser used when the LLM is unavailable: '<name> ... <n> hours'."""
+    """Deterministic parser used when the LLM is unavailable: '<name> ... <n> hours' within ONE sentence, so hours
+    written about someone else in a one-line note are not attributed to this person."""
     out = []
     role_name = {r.id: r.role for r in task.roles}
+    sentences = [s.strip() for s in re.split(r"(?<=[a-z0-9\)][.!?;])\s+|(?<=।)\s*|\n+", notes) if s.strip()]
     for a in assignments:
         first = a.volunteer_name.split()[0]
-        m = re.search(rf"{re.escape(first)}[^\n]*?(\d+(?:\.\d+)?)\s*(?:hours|hrs|h|घंटे)", notes, re.I)
-        line = next((ln for ln in notes.splitlines() if first.lower() in ln.lower()), "")
+        own = [s for s in sentences if re.search(rf"\b{re.escape(first)}\b", s, re.I)]
+        m = next((m for s in own if (m := re.search(r"(\d+(?:\.\d+)?)\s*(?:hours|hrs|h\b|घंटे)", s, re.I))), None)
+        name = a.volunteer_name.rstrip(".")
         out.append({"volunteer_id": a.volunteer_id, "role": role_name.get(a.role_id, a.role_id),
-                    "claimed_hours": float(m.group(1)) if m else 0.0, "evidence": line.strip(),
-                    "summary": (f"Host notes mention {a.volunteer_name}." if line else f"{a.volunteer_name} is not mentioned in the host notes.")})
+                    "claimed_hours": float(m.group(1)) if m else 0.0, "evidence": " ".join(own)[:300],
+                    "summary": (f"Host notes mention {name}." if own else f"{name} is not mentioned in the host notes.")})
     return out
 
 

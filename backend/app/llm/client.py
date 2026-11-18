@@ -1,8 +1,10 @@
 """LLM provider interface with record/replay cache. OWNED BY HEAD. Lane B builds extraction/drafting on top of complete_json().
 
 Modes (env SEWA_LLM_MODE): record (default: cache hit else live call then store), live (always call), replay (cache only, error on miss).
-Default model: Claude Sonnet 5.5 via 9Router (OpenAI-compatible). DeepSeek via Nilabh is a reasoning model and returns empty
-content at low max_tokens, so it is NOT used by the app.
+Default model: Claude Sonnet 5.5 via 9Router (OpenAI-compatible). If it errors (e.g. account rate limit), each model in
+SEWA_LLM_FALLBACK_MODELS (comma list, default DeepSeek v4.1 Flash via Nilabh) is tried in order before giving up.
+DeepSeek is a reasoning model: it returns empty content at low max_tokens, but works at the 3000 used here
+(extraction eval recall 0.983; live drafting verified 2026-11-19). meta["model"] always names the model that answered.
 """
 from __future__ import annotations
 
@@ -28,6 +30,7 @@ def _cfg() -> dict[str, str]:
         "base": os.environ.get("SEWA_LLM_BASE_URL", "http://127.0.0.1:20128/v1"),
         "key": os.environ.get("SEWA_LLM_API_KEY") or os.environ.get("NINEROUTER_API_KEY", ""),
         "model": os.environ.get("SEWA_LLM_MODEL", "cc/claude-sonnet-5-5"),
+        "fallbacks": os.environ.get("SEWA_LLM_FALLBACK_MODELS", "nilabh/Deepseek-v4.1-Flash"),
         "mode": os.environ.get("SEWA_LLM_MODE", "record"),
     }
 
@@ -62,30 +65,35 @@ def complete_json(purpose: str, system: str, user: str, max_tokens: int = 3000, 
     """Return (parsed_json, meta). meta: {cached, model, ms, purpose}."""
     c = _cfg()
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
-    k = _key(c["model"], system, user, max_tokens)
-    path = CACHE_DIR / f"{purpose}-{k[:24]}.json"
-    if c["mode"] in ("record", "replay") and path.exists():
-        d = json.loads(path.read_text(encoding="utf-8"))
-        return d["json"], {"cached": True, "model": d.get("model", c["model"]), "ms": 0, "purpose": purpose}
+    models = list(dict.fromkeys([c["model"], *[m.strip() for m in c["fallbacks"].split(",") if m.strip()]]))
+    paths = {m: CACHE_DIR / f"{purpose}-{_key(m, system, user, max_tokens)[:24]}.json" for m in models}
+    if c["mode"] in ("record", "replay"):
+        for m in models:
+            if paths[m].exists():
+                d = json.loads(paths[m].read_text(encoding="utf-8"))
+                return d["json"], {"cached": True, "model": d.get("model", m), "ms": 0, "purpose": purpose}
     if c["mode"] == "replay":
         raise LLMError(f"replay mode: cache miss for {purpose}")
-    body = {
-        "model": c["model"], "stream": False, "max_tokens": max_tokens, "temperature": 0,
-        "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
-    }
-    last: Exception | None = None
-    for attempt in range(retries + 1):
-        t0 = time.time()
-        try:
-            r = httpx.post(f"{c['base']}/chat/completions", json=body, timeout=120,
-                           headers={"Authorization": f"Bearer {c['key']}"})
-            r.raise_for_status()
-            content = r.json()["choices"][0]["message"].get("content")
-            parsed = extract_json(content)
-            ms = int((time.time() - t0) * 1000)
-            path.write_text(json.dumps({"json": parsed, "model": c["model"], "purpose": purpose}, ensure_ascii=False), encoding="utf-8")
-            return parsed, {"cached": False, "model": c["model"], "ms": ms, "purpose": purpose}
-        except Exception as e:  # noqa: BLE001
-            last = e
-            time.sleep(1.5 * (attempt + 1))
-    raise LLMError(f"LLM call failed after {retries + 1} attempts: {last}")
+    errors: list[str] = []
+    for model in models:
+        body = {
+            "model": model, "stream": False, "max_tokens": max_tokens, "temperature": 0,
+            "messages": [{"role": "system", "content": system}, {"role": "user", "content": user}],
+        }
+        last: Exception | None = None
+        for attempt in range(retries + 1):
+            t0 = time.time()
+            try:
+                r = httpx.post(f"{c['base']}/chat/completions", json=body, timeout=120,
+                               headers={"Authorization": f"Bearer {c['key']}"})
+                r.raise_for_status()
+                content = r.json()["choices"][0]["message"].get("content")
+                parsed = extract_json(content)
+                ms = int((time.time() - t0) * 1000)
+                paths[model].write_text(json.dumps({"json": parsed, "model": model, "purpose": purpose}, ensure_ascii=False), encoding="utf-8")
+                return parsed, {"cached": False, "model": model, "ms": ms, "purpose": purpose}
+            except Exception as e:  # noqa: BLE001
+                last = e
+                time.sleep(1.5 * (attempt + 1))
+        errors.append(f"{model}: {last}")
+    raise LLMError(f"LLM call failed on every model ({retries + 1} attempts each): " + " | ".join(errors))

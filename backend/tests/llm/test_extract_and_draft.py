@@ -130,3 +130,38 @@ def test_card_role_comes_from_roster_not_model_text(monkeypatch):
         {"volunteer_id": "v-002", "role": "Chief Executive Volunteer", "claimed_hours": 5, "summary": "x", "evidence": "Om 5 hours"}]}))
     cards = {c.volunteer_id: c for c in extract.draft_cards(TASK, "Om 5 hours", ROWS, ASSIGN)}
     assert cards["v-002"].role == "Photos"
+
+
+def test_fallback_does_not_borrow_hours_from_another_sentence(monkeypatch):
+    def down(*a, **k):
+        raise LLMError("down")
+    monkeypatch.setattr(extract.client, "complete_json", down)
+    cards = extract.draft_cards(TASK, "Asha led the first aid desk all morning. Om did photos, about 4 hours.", ROWS, ASSIGN)
+    by = {c.volunteer_id: c for c in cards}
+    assert by["v-001"].claimed_hours == 0 and by["v-002"].claimed_hours == 4   # old line-based parser gave Asha 4
+    assert ".." not in by["v-001"].summary
+
+
+def test_client_falls_back_to_next_model_and_reports_it(monkeypatch, tmp_path):
+    import httpx
+    from app.llm import client
+    monkeypatch.setattr(client, "CACHE_DIR", tmp_path)
+    monkeypatch.setattr(client.time, "sleep", lambda s: None)
+    monkeypatch.setenv("SEWA_LLM_MODE", "live")
+    monkeypatch.setenv("SEWA_LLM_MODEL", "primary/model")
+    monkeypatch.setenv("SEWA_LLM_FALLBACK_MODELS", "backup/model")
+    calls = []
+
+    def post(url, json, timeout, headers):
+        calls.append(json["model"])
+        req = httpx.Request("POST", url)
+        if json["model"] == "primary/model":
+            return httpx.Response(503, request=req, json={"error": "rate limit"})
+        return httpx.Response(200, request=req, json={"choices": [{"message": {"content": '{"ok": 1}'}}]})
+    monkeypatch.setattr(client.httpx, "post", post)
+    data, meta = client.complete_json("t", "sys", "user", retries=1)
+    assert data == {"ok": 1} and meta["model"] == "backup/model"
+    assert calls == ["primary/model", "primary/model", "backup/model"]
+    monkeypatch.setenv("SEWA_LLM_FALLBACK_MODELS", "")
+    with pytest.raises(LLMError, match="primary/model"):
+        client.complete_json("t2", "sys", "user", retries=0)
