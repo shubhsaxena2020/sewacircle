@@ -25,8 +25,10 @@ One dict, ``CAPABILITIES``: role -> {"screens": [...], "actions": [...]}. The
 default role is ``organiser``, which keeps every existing client working
 unchanged (it is the only role that may run the whole flow).
 
-* ``organiser`` - runs the district side: plans rosters, drafts cards, makes and
-  revisits every decision, exports credentials, reads the ledger and evaluation.
+* ``organiser`` - runs the district side: plans rosters (and the why-not and
+  dropout repair tools), drafts cards, makes and revisits every decision,
+  exports credentials, mints the read-only share link, resets the demo, and
+  reads the ledger and evaluation.
 * ``host`` - the person who was on site: may confirm, correct, reject, ask for a
   revision and export the record, but does not run the roster planner and does
   not draft cards (the drafting step belongs to the organiser/system).
@@ -53,9 +55,9 @@ DEMO_NOTICE = ("Demo role switch only - the X-Demo-Role header is chosen by the 
 CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
     "organiser": {
         "screens": ("roster", "evidence", "ledger", "evaluation", "drive_summary", "capabilities"),
-        "actions": ("read_roster", "read_cards", "read_ledger", "read_eval", "read_drive_summary", "draft_cards",
+        "actions": ("run_roster", "read_cards", "read_ledger", "read_eval", "read_drive_summary", "draft_cards",
                     "confirm_card", "correct_card", "reject_card", "request_revision", "export_credential",
-                    "reset_demo"),
+                    "share_drive", "reset_demo"),
     },
     "host": {
         "screens": ("evidence", "ledger", "evaluation", "drive_summary", "capabilities"),
@@ -73,14 +75,17 @@ CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
 }
 
 #: Actions that write something; these are the ones the API enforces on X-Demo-Role.
-#: ``reset_demo`` is included because the reset archives the card store and the ledger.
+#: ``reset_demo`` is included because it archives the card store and the ledger;
+#: ``run_roster`` and ``share_drive`` because they write the in-memory plan snapshot.
 MUTATING_ACTIONS: tuple[str, ...] = (
+    "run_roster",
     "draft_cards",
     "confirm_card",
     "correct_card",
     "reject_card",
     "request_revision",
     "export_credential",
+    "share_drive",
     "reset_demo",
 )
 

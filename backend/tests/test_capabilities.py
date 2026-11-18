@@ -19,13 +19,29 @@ TASK = {"id": "task-01", "title": "Camp", "slot": "sat_morning", "district": "Lu
         "roles": [{"id": "role-01", "role": "First aid", "count": 1, "required_skills": ["first_aid"]}]}
 
 MUTATING_ROUTES = {
+    "run_roster": ("post", "/api/roster"),
     "draft_cards": ("post", "/api/evidence/draft"),
     "confirm_card": ("post", "/api/evidence/{card}/confirm"),
     "correct_card": ("post", "/api/evidence/{card}/correct"),
     "reject_card": ("post", "/api/evidence/{card}/reject"),
     "request_revision": ("post", "/api/evidence/{card}/request_revision"),
     "export_credential": ("get", "/api/export/credential/{card}"),
+    "share_drive": ("post", "/api/drive/share"),
     "reset_demo": ("post", "/api/demo/reset"),
+}
+
+BODIES = {
+    "run_roster": {"task": TASK},
+    "draft_cards": {"task": TASK, "host_notes": "Imran worked 5 hours.",
+                    "attendance_rows": [{"volunteer_id": "v-068", "task_id": "task-01", "hours": 5}],
+                    "assignments": [{"role_id": "role-01", "volunteer_id": "v-068", "volunteer_name": "Imran B."}]},
+    "confirm_card": {},
+    "correct_card": {"claimed_hours": 4},
+    "reject_card": {},
+    "request_revision": {"reason": "why"},
+    "export_credential": None,
+    "share_drive": {"task_id": "task-01"},
+    "reset_demo": {},
 }
 
 
@@ -117,10 +133,11 @@ def test_no_header_keeps_the_old_behaviour(client):
 def test_read_only_roles_are_403_on_every_mutating_route(client, role, action):
     card = _draft(client).json()[0]                                  # organiser drafts without a header
     method, path = MUTATING_ROUTES[action]
-    body = {"reason": "why", "claimed_hours": 4}
+    body = BODIES[action]
     call = getattr(client, method)
-    r = call(path.format(card=card["id"]), json=body, headers={"X-Demo-Role": role}) if method == "post" \
-        else call(path.format(card=card["id"]), headers={"X-Demo-Role": role})
+    url = path.format(card=card["id"])
+    r = call(url, headers={"X-Demo-Role": role}) if body is None \
+        else call(url, json=body, headers={"X-Demo-Role": role})
     assert r.status_code == 403, r.text
     assert role in r.json()["detail"] and "not authentication" in r.json()["detail"]
     assert client.get("/api/evidence/cards").json()[0]["status"] == "draft"   # nothing moved

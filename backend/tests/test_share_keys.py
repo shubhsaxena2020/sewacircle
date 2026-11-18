@@ -32,7 +32,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(main, "DATA_DIR", tmp_path)
     monkeypatch.setattr(main, "CARDS_PATH", tmp_path / "cards.json")
     monkeypatch.setattr(main.S, "tasks", [_task("task-01"), _task("task-02", "Plantation drive")])
-    monkeypatch.setattr(main.S, "roster_ready", {})
+    monkeypatch.setattr(main.S, "share_snapshots", {})
     share.reset_secret()
     yield TestClient(main.app)
     share.reset_secret()
@@ -81,8 +81,10 @@ def test_public_summary_shape(client):
         {"role": "Poster team", "count": 1, "required_skills": ["graphic_design"], "safety_critical": False},
     ]
     assert body["ready"] is None                                    # no roster computed in this process yet
+    assert body["computed_at"] is None
     assert body["synthetic"] is True and "synthetic" in body["notice"]
-    assert set(body) == {"title", "district", "block", "slot", "roles", "ready", "notice", "synthetic"}
+    assert set(body) == {"title", "district", "block", "slot", "roles", "ready", "computed_at", "notice",
+                         "synthetic"}
 
 
 def test_summary_contains_no_volunteer_id_or_name(client):
@@ -120,10 +122,35 @@ def test_ready_verdict_only_appears_after_a_roster_was_computed(client):
     key = share.share_key_for("task-01")
     assert client.get(f"/api/drive/{key}").json()["ready"] is None
 
-    r = client.post("/api/roster", json={"task": _task("task-01").model_dump(mode="json")})
+    edited = _task("task-01", "Clean-up drive (roles edited by the organiser)")
+    r = client.post("/api/roster", json={"task": edited.model_dump(mode="json")})
     assert r.status_code == 200, r.text
-    ready = client.get(f"/api/drive/{key}").json()["ready"]
-    assert isinstance(ready, bool)
+    body = client.get(f"/api/drive/{key}").json()
+    assert isinstance(body["ready"], bool)
+    assert body["computed_at"]                                  # a viewer can see how fresh the verdict is
+    assert body["title"] == edited.title                        # the plan that was solved, not the seed task
+    assert body["roles"][0]["count"] == 2
+
+
+def test_organiser_mints_a_share_key_that_resolves_to_the_drive(client):
+    r = client.post("/api/drive/share", json={"task_id": "task-01"})
+    assert r.status_code == 200, r.text
+    body = r.json()
+    assert body["share_key"] == share.share_key_for("task-01")
+    assert body["path"] == f"/api/drive/{body['share_key']}"
+    assert client.get(body["path"]).status_code == 200
+
+
+def test_unknown_task_cannot_be_minted(client):
+    assert client.post("/api/drive/share", json={"task_id": "task-99"}).status_code == 404
+
+
+def test_share_keys_are_role_restricted(client):
+    """Minting is an organiser action; a read-only demo role cannot hand out links."""
+    for role in ("host", "volunteer", "viewer"):
+        r = client.post("/api/drive/share", json={"task_id": "task-01"}, headers={"X-Demo-Role": role})
+        assert r.status_code == 403, role
+        assert "not authentication" in r.json()["detail"]
 
 
 def test_secret_is_read_from_env_or_generated_in_memory(client, monkeypatch):

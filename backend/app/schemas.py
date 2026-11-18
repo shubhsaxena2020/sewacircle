@@ -154,8 +154,10 @@ class DriveShareSummary(BaseModel):
 
     Deliberately has no volunteer id, name, contact field or task id: the key is
     the only handle the holder gets, and the summary is safe to paste into a
-    WhatsApp group. ``ready`` is None until a roster for this drive was computed
-    in this server process.
+    WhatsApp group. When a roster for this drive was computed in this server
+    process, the summary is the snapshot of what was actually planned (title,
+    roles, ready verdict, ``computed_at``); otherwise it is built from the known
+    task with ``ready=None`` and no timestamp.
     """
     title: str
     district: str
@@ -163,8 +165,16 @@ class DriveShareSummary(BaseModel):
     slot: str
     roles: list[SharedRoleCount] = Field(default_factory=list)
     ready: Optional[bool] = None
+    computed_at: Optional[datetime] = None
     notice: str = "Public read-only summary of one synthetic drive. No volunteer is named or identified."
     synthetic: bool = True
+
+
+class ShareLink(BaseModel):
+    """What an organiser gets back when minting a public link for one drive."""
+    share_key: str
+    path: str
+    note: str = "Read-only public summary. Anyone holding this key can open it; it names no volunteer."
 
 
 # ---------------- extraction (LLM) ----------------

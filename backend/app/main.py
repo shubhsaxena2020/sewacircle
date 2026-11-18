@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Optional
 
@@ -20,7 +21,7 @@ from .llm import extract as llm_extract
 from .llm.client import LLMError
 from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard, Counterfactual, DropoutResult,
                       DriveShareSummary, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions,
-                      RosterResult, SharedRoleCount, TaskSpec, Volunteer)
+                      RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
 from . import capabilities, share
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
@@ -70,7 +71,7 @@ class _State:
     tasks: list[TaskSpec] | None = None
     cards: dict[str, ContributionCard] | None = None
     ledger: Optional[ledger_mod.Ledger] = None
-    roster_ready: dict[str, Optional[bool]] | None = None
+    share_snapshots: dict[str, DriveShareSummary] | None = None
 
 
 S = _State()
@@ -90,11 +91,15 @@ def tasks() -> list[TaskSpec]:
     return S.tasks
 
 
-def roster_ready() -> dict[str, Optional[bool]]:
-    """Ready verdict per task id, for rosters computed in THIS process (never persisted)."""
-    if S.roster_ready is None:
-        S.roster_ready = {}
-    return S.roster_ready
+def share_snapshots() -> dict[str, DriveShareSummary]:
+    """What was actually planned per task id, for rosters computed in THIS process (never persisted).
+
+    Kept so the public share route shows the plan the organiser really solved (possibly with edited
+    roles), not the server's synthetic task with a verdict from a different plan.
+    """
+    if S.share_snapshots is None:
+        S.share_snapshots = {}
+    return S.share_snapshots
 
 
 def ledger() -> ledger_mod.Ledger:
@@ -204,6 +209,25 @@ def list_tasks() -> Any:
     return _guard(tasks)
 
 
+class ShareReq(BaseModel):
+    task_id: str
+
+
+@app.post("/api/drive/share", response_model=ShareLink)
+def create_share(req: ShareReq, demo_role: str = Depends(_require_demo("share_drive"))) -> Any:
+    """Mint the opaque public link for one drive (organiser demo role only).
+
+    Without this route a share key could never be obtained, so the read-only summary would be
+    unreachable. The task must be one this server knows; the response carries only the key and the
+    path a client can hand out. A demo role switch, not authentication - see app/capabilities.py.
+    """
+    task = next((t for t in tasks() if t.id == req.task_id), None)
+    if task is None:
+        raise HTTPException(404, "task not found")
+    key = share.share_key_for(task.id)
+    return ShareLink(share_key=key, path=f"/api/drive/{key}")
+
+
 @app.get("/api/drive/{share_key}", response_model=DriveShareSummary)
 def drive_summary(share_key: str) -> Any:
     """Public, read-only summary of one drive, addressed by an opaque share key - never by a task id.
@@ -213,14 +237,17 @@ def drive_summary(share_key: str) -> Any:
     at first use and kept in memory for this process only, so nothing is written to disk, no secret is
     committed, and a restart invalidates every link the server handed out. Because a key cannot be
     computed without the secret, sequential task ids are useless on this route: anything that is not a
-    key derived from this secret is 404, and the task id is never echoed back. The body is built from
-    the task spec plus the in-memory ready verdict, so it contains no volunteer name, id or contact.
+    key derived from this secret is 404, and the task id is never echoed back. The body contains no
+    volunteer name, id or contact.
     """
     def run() -> DriveShareSummary:
         known = tasks()
         task_id = share.task_id_for_share_key(share_key, [t.id for t in known])
         if task_id is None:
             raise HTTPException(404, "unknown share link")
+        snapshot = share_snapshots().get(task_id)
+        if snapshot is not None:
+            return snapshot                       # exactly what was planned, including any edited roles
         task = next(t for t in known if t.id == task_id)
         return DriveShareSummary(
             title=task.title,
@@ -229,7 +256,7 @@ def drive_summary(share_key: str) -> Any:
             slot=task.slot,
             roles=[SharedRoleCount(role=r.role, count=r.count, required_skills=list(r.required_skills),
                                    safety_critical=r.safety_critical) for r in task.roles],
-            ready=roster_ready().get(task.id),
+            ready=None,                           # no roster for this drive in this process yet
         )
     return _guard(run)
 
@@ -257,7 +284,7 @@ class RosterAll(BaseModel):
 
 
 @app.post("/api/roster", response_model=RosterAll)
-def make_roster(req: RosterReq) -> Any:
+def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
     def run() -> RosterAll:
         v = volunteers()
         o = req.options  # every method gets the same candidate pool (opt-in filter included)
@@ -265,11 +292,17 @@ def make_roster(req: RosterReq) -> Any:
                            nearest_skill=solver.baseline_nearest_skill(req.task, v, o),
                            random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
                            manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
-        # Remembered in memory only, so the public share route can show the verdict it was given here.
-        # Only ids this server knows are stored: a client cannot grow the dict without bound or make a share
-        # link advertise a verdict for a drive that does not exist.
+        # Snapshot of what was solved, in memory only, so a public share link shows the same plan the
+        # organiser saw (title and roles may have been edited). Only ids this server knows are stored:
+        # a client cannot grow the dict without bound or advertise a verdict for a drive that does not exist.
         if any(t.id == req.task.id for t in tasks()):
-            roster_ready()[req.task.id] = result.cp_sat.ready
+            share_snapshots()[req.task.id] = DriveShareSummary(
+                title=req.task.title, district=req.task.district, block=req.task.block, slot=req.task.slot,
+                roles=[SharedRoleCount(role=r.role, count=r.count, required_skills=list(r.required_skills),
+                                       safety_critical=r.safety_critical) for r in req.task.roles],
+                ready=result.cp_sat.ready,
+                computed_at=datetime.now(timezone.utc),
+            )
         return result
     return _guard(run)
 
@@ -282,7 +315,7 @@ class WhyNotReq(BaseModel):
 
 
 @app.post("/api/roster/why-not", response_model=Counterfactual)
-def why_not(req: WhyNotReq) -> Any:
+def why_not(req: WhyNotReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
     return _guard(lambda: solver.why_not(req.task, volunteers(), req.roster, req.volunteer_id, req.options))
 
 
@@ -294,7 +327,7 @@ class DropoutReq(BaseModel):
 
 
 @app.post("/api/roster/dropout", response_model=DropoutResult)
-def dropout(req: DropoutReq) -> Any:
+def dropout(req: DropoutReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
     return _guard(lambda: solver.simulate_dropout(req.task, volunteers(), req.roster, req.dropped_volunteer_id, req.options))
 
 
@@ -359,7 +392,7 @@ def demo_reset(demo_role: str = Depends(_require_demo("reset_demo"))) -> dict:
             archived.append(p.name)
     S.cards = None
     S.ledger = None
-    S.roster_ready = None
+    S.share_snapshots = None
     return {"ok": True, "archived": archived}
 
 

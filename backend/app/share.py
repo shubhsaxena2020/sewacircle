@@ -106,6 +106,7 @@ def task_id_for_share_key(share_key: str, task_ids: Iterable[str]) -> Optional[s
     secret = server_secret()
     found: Optional[str] = None
     for task_id in task_ids:
-        if hmac.compare_digest(share_key_for(task_id), share_key):
+        candidate = base64.b32encode(_digest(secret, task_id)).decode("ascii")[:KEY_LENGTH]
+        if hmac.compare_digest(candidate, share_key):
             found = task_id
     return found
