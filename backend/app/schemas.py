@@ -361,6 +361,16 @@ class LedgerVerification(BaseModel):
     note: str = "Hash chain shows edits, not truth; truth comes from host confirmation."
 
 
+# ---------------- capability menu (demo roles, not authentication) ----------------
+class CapabilitySet(BaseModel):
+    """What one DEMO role may open and do. demo_only is always True: the caller picks its own role."""
+    role: str
+    screens: list[str] = Field(default_factory=list)
+    actions: list[str] = Field(default_factory=list)
+    demo_only: bool = True
+    note: str = ""
+
+
 # ---------------- evaluation ----------------
 class EvalRow(BaseModel):
     task_id: str

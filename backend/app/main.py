@@ -9,7 +9,7 @@ from typing import Any, Callable, Optional
 
 import functools
 import hashlib
-from fastapi import FastAPI, HTTPException, Request, Response
+from fastapi import Depends, FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -18,10 +18,10 @@ from pydantic import BaseModel, Field
 from .evidence import badges, ledger as ledger_mod, rules, transitions
 from .llm import extract as llm_extract
 from .llm.client import LLMError
-from .schemas import (Assignment, AttendanceRow, ContributionCard, Counterfactual, DropoutResult, DriveShareSummary,
-                      EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions, RosterResult,
-                      SharedRoleCount, TaskSpec, Volunteer)
-from . import share
+from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard, Counterfactual, DropoutResult,
+                      DriveShareSummary, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions,
+                      RosterResult, SharedRoleCount, TaskSpec, Volunteer)
+from . import capabilities, share
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
@@ -44,6 +44,25 @@ def _guard(fn: Callable[[], Any]) -> Any:
         return fn()
     except NotImplementedError:
         raise HTTPException(status_code=501, detail="lane module not implemented yet")
+
+
+def _demo_role(request: Request) -> str:
+    """Read the demo role from X-Demo-Role (default organiser); a demo switch, NOT authentication."""
+    try:
+        return capabilities.normalise_role(request.headers.get(capabilities.ROLE_HEADER))
+    except capabilities.UnknownRole as exc:
+        raise HTTPException(403, f"{exc}. This is a demo role switch, not authentication.") from exc
+
+
+def _require_demo(action: str) -> Callable[[Request], str]:
+    """FastAPI dependency: 403 unless the caller's demo role lists ``action``."""
+    def dependency(request: Request) -> str:
+        role = _demo_role(request)
+        if not capabilities.may(role, action):
+            raise HTTPException(403, f"the demo role {role!r} may not {action}. "
+                                     "This is a demo role switch, not authentication.")
+        return role
+    return dependency
 
 
 class _State:
@@ -110,6 +129,23 @@ def health() -> dict:
 @app.get("/api/meta")
 def meta() -> dict:
     return {"disclaimer": DISCLAIMER, "skills": SKILLS}
+
+
+@app.get("/api/capabilities", response_model=CapabilitySet)
+def get_capabilities(role: str = capabilities.DEFAULT_ROLE) -> Any:
+    """The screens and actions one DEMO role may use.
+
+    THIS IS A DEMO ROLE SWITCH, NOT AUTHENTICATION. The role is chosen by the caller - this query parameter,
+    or the X-Demo-Role header on the mutating routes - and both default to ``organiser`` so existing clients
+    keep working. It exists to make the intended division of labour visible and testable (a host confirms
+    contribution cards, a viewer only reads the evaluation), and the same matrix is enforced server-side on
+    the mutating evidence routes, so the menu and the API cannot disagree. Put a real authenticated identity
+    in front of this before it protects anything.
+    """
+    try:
+        return CapabilitySet(**capabilities.capabilities_for(role))
+    except capabilities.UnknownRole as exc:
+        raise HTTPException(422, str(exc)) from exc
 
 
 @functools.lru_cache(maxsize=1)
@@ -267,7 +303,7 @@ class DraftReq(BaseModel):
 
 
 @app.post("/api/evidence/draft", response_model=list[ContributionCard])
-def draft(req: DraftReq) -> Any:
+def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards"))) -> Any:
     """Idempotent: card ids are deterministic; a card already decided by the host is never overwritten by a re-draft.
     Undecided draft/flagged cards of the same task that are not part of the new draft (for example after a dropout
     moved someone to another role) are superseded: removed from the card store so they cannot trigger false
@@ -361,22 +397,26 @@ def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
 
 
 @app.post("/api/evidence/{card_id}/confirm", response_model=ContributionCard)
-def confirm(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
+def confirm(card_id: str, req: DecisionReq = DecisionReq(),
+            demo_role: str = Depends(_require_demo("confirm_card"))) -> Any:
     return _guard(lambda: _decide(card_id, "confirm", req))
 
 
 @app.post("/api/evidence/{card_id}/correct", response_model=ContributionCard)
-def correct(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
+def correct(card_id: str, req: DecisionReq = DecisionReq(),
+            demo_role: str = Depends(_require_demo("correct_card"))) -> Any:
     return _guard(lambda: _decide(card_id, "correct", req))
 
 
 @app.post("/api/evidence/{card_id}/reject", response_model=ContributionCard)
-def reject(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
+def reject(card_id: str, req: DecisionReq = DecisionReq(),
+           demo_role: str = Depends(_require_demo("reject_card"))) -> Any:
     return _guard(lambda: _decide(card_id, "reject", req))
 
 
 @app.post("/api/evidence/{card_id}/request_revision", response_model=ContributionCard)
-def request_revision(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
+def request_revision(card_id: str, req: DecisionReq = DecisionReq(),
+                     demo_role: str = Depends(_require_demo("request_revision"))) -> Any:
     """Host back-edge: send an undecided card back for another draft instead of rejecting it."""
     return _guard(lambda: _decide(card_id, "request_revision", req))
 
@@ -392,7 +432,7 @@ def verify_ledger() -> Any:
 
 
 @app.get("/api/export/credential/{card_id}")
-def export_credential(card_id: str) -> Any:
+def export_credential(card_id: str, demo_role: str = Depends(_require_demo("export_credential"))) -> Any:
     def run() -> dict:
         c = cards().get(card_id)
         if c is None or c.status not in ("confirmed", "corrected"):
