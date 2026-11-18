@@ -41,6 +41,10 @@ Design / canonical serialization
 
       prev_hash | ts | action | card_id | actor | payload_hash
 
+  A non-empty ``reason`` (the actor's stated justification, required by the API
+  for ``request_revision``) is appended as a seventh escaped field, so the
+  reason is inside the hash. Entries without a reason have no seventh field,
+  which keeps journals written before the field existed verifiable unchanged.
   The fields are escaped (backslash -> ``\\\\``, pipe -> ``\\|``), joined with
   a single ASCII ``|``, encoded as UTF-8 and hashed with SHA-256 to produce
   ``entry_hash``. ``ts`` is the timezone-aware ISO-8601 timestamp string that
@@ -105,10 +109,17 @@ def _escape(value: str) -> str:
 
 
 def canonical_chain_line(prev_hash: str, ts: str, action: str, card_id: str,
-                         actor: str, payload_hash: str) -> str:
-    """Return the deterministic pipe-joined UTF-8 string that gets hashed."""
-    return "|".join((prev_hash, ts, _escape(action), _escape(card_id),
+                         actor: str, payload_hash: str, reason: str = "") -> str:
+    """Return the deterministic pipe-joined UTF-8 string that gets hashed.
+
+    When ``reason`` is non-empty it is appended as a seventh field (escaped like
+    the others), so the host's stated reason is inside the hash and cannot be
+    rewritten without breaking ``verify()``. An empty reason is omitted, which
+    keeps journals written before this field existed verifiable byte for byte.
+    """
+    line = "|".join((prev_hash, ts, _escape(action), _escape(card_id),
                      _escape(actor), payload_hash))
+    return line + "|" + _escape(reason) if reason else line
 
 
 def _sha256(text: str) -> str:
@@ -124,7 +135,7 @@ def _payload_hash(card: ContributionCard) -> str:
 def _entry_hash(entry: LedgerEntry) -> str:
     return _sha256(canonical_chain_line(
         entry.prev_hash, entry.ts.isoformat(), entry.action, entry.card_id,
-        entry.actor, entry.payload_hash,
+        entry.actor, entry.payload_hash, entry.reason,
     ))
 
 
@@ -161,6 +172,7 @@ class Ledger:
                         action=data["action"],
                         card_id=str(data["card_id"]),
                         actor=str(data["actor"]),
+                        reason=str(data.get("reason", "")),
                         payload_hash=str(data["payload_hash"]),
                         prev_hash=str(data["prev_hash"]),
                         entry_hash=str(data["entry_hash"]),
@@ -176,6 +188,7 @@ class Ledger:
             "action": entry.action,
             "card_id": entry.card_id,
             "actor": entry.actor,
+            "reason": entry.reason,
             "payload_hash": entry.payload_hash,
             "prev_hash": entry.prev_hash,
             "entry_hash": entry.entry_hash,
@@ -207,8 +220,15 @@ class Ledger:
         return int(data["count"]), str(data["head_hash"])
 
     # ---------- public API ----------
-    def append(self, action: str, card: ContributionCard, actor: str) -> LedgerEntry:
-        """Append one immutable entry; returns it. The card is never modified."""
+    def append(self, action: str, card: ContributionCard, actor: str,
+               reason: str = "") -> LedgerEntry:
+        """Append one immutable entry; returns it. The card is never modified.
+
+        ``reason`` is the actor's stated justification (required by the API for
+        ``request_revision``). When non-empty it is folded into ``entry_hash``
+        as a seventh canonical field, so a reason cannot be edited or removed
+        later without breaking :meth:`verify`.
+        """
         with self._lock:
             current = self._load_entries()
             index = len(current)
@@ -222,10 +242,11 @@ class Ledger:
                 action=action,  # type: ignore[arg-type]
                 card_id=card.id,
                 actor=actor,
+                reason=reason or "",
                 payload_hash=payload,
                 prev_hash=prev_hash,
                 entry_hash=_sha256(canonical_chain_line(
-                    prev_hash, ts_text, action, card.id, actor, payload,
+                    prev_hash, ts_text, action, card.id, actor, payload, reason or "",
                 )),
             )
             self._write_entry(entry)

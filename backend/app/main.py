@@ -15,7 +15,7 @@ from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
-from .evidence import badges, ledger as ledger_mod, rules
+from .evidence import badges, ledger as ledger_mod, rules, transitions
 from .llm import extract as llm_extract
 from .llm.client import LLMError
 from .schemas import (Assignment, AttendanceRow, ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult,
@@ -114,17 +114,18 @@ def get_geo_tree() -> dict[str, Any]:
             "lon": d["lon"],
             "source_record_id": d["source_record_id"],
             "blocks": BLOCKS.get(d["name"], []),
+            "blocks_available": d["name"] in BLOCKS,
         }
         for d in data["districts"]
     ]
     return {
         "state": "Uttar Pradesh",
         "source_url": source_url,
+        "coordinate_caveat": data.get("coordinate_caveat", ""),
+        "retrieved_date": data.get("retrieved_date", ""),
+        "blocks_note": "Blocks are listed only for the 4 districts used by the synthetic demo data.",
         "districts": districts,
     }
-
-
-build_geo_tree = get_geo_tree
 
 
 @functools.lru_cache(maxsize=1)
@@ -136,17 +137,13 @@ def _geo_tree_payload() -> tuple[bytes, str]:
 
 
 @app.get("/api/geo/tree")
-def geo_tree(request: Request = None) -> Any:
-    if request is None:
-        return get_geo_tree()
+def geo_tree(request: Request) -> Any:
     body, etag = _geo_tree_payload()
     if_none_match = request.headers.get("if-none-match")
-    if if_none_match and (
-        if_none_match == etag
-        or if_none_match.strip('"') == etag.strip('"')
-        or if_none_match == f"W/{etag}"
-    ):
-        return Response(status_code=304, headers={"ETag": etag})
+    if if_none_match:
+        tags = [tag.strip() for tag in if_none_match.split(",")]
+        if any(t == "*" or t == etag or t == f"W/{etag}" for t in tags):
+            return Response(status_code=304, headers={"ETag": etag})
     return Response(content=body, media_type="application/json", headers={"ETag": etag})
 
 
@@ -230,7 +227,11 @@ def draft(req: DraftReq) -> Any:
     """Idempotent: card ids are deterministic; a card already decided by the host is never overwritten by a re-draft.
     Undecided draft/flagged cards of the same task that are not part of the new draft (for example after a dropout
     moved someone to another role) are superseded: removed from the card store so they cannot trigger false
-    duplicate-evidence flags. Their earlier 'draft' entries stay in the ledger history. Host-decided cards are kept."""
+    duplicate-evidence flags. Their earlier 'draft' entries stay in the ledger history. Host-decided cards are kept.
+
+    Revision back-edge: a card the host sent back with request_revision is re-drafted. It passes through the state
+    machine's revision_requested -> draft edge (see evidence/transitions.py), the stale reason is cleared, and the
+    ledger records a 'draft' entry whose reason names the revision request."""
     def run() -> list[ContributionCard]:
         store = cards()
         out: list[ContributionCard] = []
@@ -241,13 +242,18 @@ def draft(req: DraftReq) -> Any:
             del store[stale.id]
         for c in drafted:
             existing = store.get(c.id)
-            if existing is not None and existing.status not in ("draft", "flagged"):
+            if existing is not None and existing.status not in ("draft", "flagged", "revision_requested"):
                 out.append(existing)
                 continue
+            redrafted = existing is not None and existing.status == "revision_requested"
+            if redrafted:
+                transitions.next_state(existing.status, "redraft")   # asserts the table allows the move
             c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
             c.status = "flagged" if any(f.severity in ("warn", "block") for f in c.flags) else "draft"
+            c.revision_reason = None
             store[c.id] = c
-            ledger().append("flag" if c.status == "flagged" else "draft", c, "system")
+            ledger().append("flag" if c.status == "flagged" else "draft", c, "system",
+                            "re-drafted after a host revision request" if redrafted else "")
             out.append(c)
         _save_cards()
         return out
@@ -278,42 +284,57 @@ def list_cards() -> Any:
 class DecisionReq(BaseModel):
     actor: str = "host"                      # demo label, not an authenticated identity
     claimed_hours: Optional[float] = Field(default=None, ge=0, le=24)  # required for correct
+    reason: Optional[str] = Field(default=None, max_length=500)        # required for request_revision
 
 
-_ALLOWED_FROM = {"draft", "flagged"}
+def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
+    """Move one card along its state machine; the target state comes from the table, never from here.
 
-
-def _decide(card_id: str, action: str, status: str, req: DecisionReq) -> ContributionCard:
+    Illegal moves are HTTP 409 with the legal actions named. ``request_revision`` needs a non-blank
+    reason, which is stored on the card and folded into the ledger entry's hash.
+    """
     c = cards().get(card_id)
     if c is None:
         raise HTTPException(404, "card not found")
-    if c.status not in _ALLOWED_FROM:
-        raise HTTPException(409, f"card is already {c.status}; decisions are final in this prototype")
+    try:
+        status = transitions.next_state(c.status, action)
+    except transitions.IllegalTransition as exc:
+        raise HTTPException(409, str(exc)) from exc
+    reason = (req.reason or "").strip()
+    if action == "request_revision" and not reason:
+        raise HTTPException(422, "reason is required to request a revision")
     if action == "correct":
         if req.claimed_hours is None:
             raise HTTPException(422, "claimed_hours is required to correct a card")
         c.claimed_hours = req.claimed_hours
     c.status = status  # type: ignore[assignment]
+    c.revision_reason = reason if action == "request_revision" else None
     if status in ("confirmed", "corrected"):
         c.confirmed_by = req.actor
-    ledger().append(action, c, req.actor)
+    ledger().append(action, c, req.actor, reason)
     _save_cards()
     return c
 
 
 @app.post("/api/evidence/{card_id}/confirm", response_model=ContributionCard)
 def confirm(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
-    return _guard(lambda: _decide(card_id, "confirm", "confirmed", req))
+    return _guard(lambda: _decide(card_id, "confirm", req))
 
 
 @app.post("/api/evidence/{card_id}/correct", response_model=ContributionCard)
 def correct(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
-    return _guard(lambda: _decide(card_id, "correct", "corrected", req))
+    return _guard(lambda: _decide(card_id, "correct", req))
 
 
 @app.post("/api/evidence/{card_id}/reject", response_model=ContributionCard)
 def reject(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
-    return _guard(lambda: _decide(card_id, "reject", "rejected", req))
+    return _guard(lambda: _decide(card_id, "reject", req))
+
+
+@app.post("/api/evidence/{card_id}/request_revision", response_model=ContributionCard)
+def request_revision(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
+    """Host back-edge: send an undecided card back for another draft instead of rejecting it."""
+    return _guard(lambda: _decide(card_id, "request_revision", req))
 
 
 @app.get("/api/ledger", response_model=list[LedgerEntry])

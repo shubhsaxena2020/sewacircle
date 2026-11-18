@@ -12,7 +12,7 @@ from .taxonomy import SAFETY_CRITICAL_SKILLS, SKILLS, SLOTS
 Gender = Literal["F", "M", "X", "undisclosed"]
 Language = Literal["hi", "en", "hinglish"]
 Method = Literal["cp_sat", "nearest_skill", "random_feasible", "manual_greedy"]
-CardStatus = Literal["draft", "flagged", "confirmed", "corrected", "rejected"]
+CardStatus = Literal["draft", "flagged", "revision_requested", "confirmed", "corrected", "rejected"]
 
 
 class Volunteer(BaseModel):
@@ -310,6 +310,7 @@ class ContributionCard(BaseModel):
     flags: list[Flag] = Field(default_factory=list)
     drafted_by: Literal["ai", "human"] = "ai"
     confirmed_by: Optional[str] = None
+    revision_reason: Optional[str] = None   # set by request_revision, cleared by the next re-draft
     created_at: datetime = Field(default_factory=datetime.utcnow)
     synthetic: bool = True
 
@@ -317,9 +318,10 @@ class ContributionCard(BaseModel):
 class LedgerEntry(BaseModel):
     index: int
     ts: datetime
-    action: Literal["draft", "flag", "confirm", "correct", "reject", "export"]
+    action: Literal["draft", "flag", "confirm", "correct", "reject", "request_revision", "export"]
     card_id: str
     actor: str
+    reason: str = ""   # why the actor moved the card; hashed when non-empty
     payload_hash: str
     prev_hash: str
     entry_hash: str
