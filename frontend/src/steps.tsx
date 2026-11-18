@@ -374,7 +374,7 @@ export function EvalStep() {
   const [busy, setBusy] = useState(false)
   const [err, setErr] = useState<unknown>(null)
   async function run() { setBusy(true); setErr(null); try { setRep(await api.evalReport()) } catch (e) { setErr(e) } finally { setBusy(false) } }
-  const metrics = ['role_coverage', 'robustness', 'repeat_pick_share', 'exposure_gini'] as const
+  const metrics = ['ready', 'role_coverage', 'robustness', 'repeat_pick_share', 'exposure_gini'] as const
   return (
     <div className="panel stack">
       <div className="row between"><h2>{t('step6')}</h2><Btn onClick={run} disabled={busy}>{busy ? t('building') : t('runEval')}</Btn></div>

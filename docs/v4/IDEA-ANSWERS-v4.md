@@ -6,7 +6,7 @@ counts are Unicode code points after NFC, printed by the script that wrote this 
 
 ### Q1. How does your solution address the use case? (461 characters)
 
-MY Bharat lets young people find drives and show interest; an organiser then approves names one by one. SewaCircle Ready Crew covers the next step. It turns a Hindi or English task brief into roles, builds a crew from youth who opted in, and answers one question: can this drive run? READY, or NOT READY plus an exact recruit request (1 host-checked first-aider, Saturday morning, within 15 km). After the drive, a host confirms who did what against attendance.
+MY Bharat lets young people find drives and show interest; an organiser then approves names one by one. SewaCircle Ready Crew covers the next step. It turns a Hindi or English task brief into roles, builds a crew from youth who opted in, and answers one question: can this drive run? READY, or NOT READY plus an exact recruit request (1 host-checked first-aider, Saturday morning, within 30 km). After the drive, a host confirms who did what against attendance.
 
 ### Q2. What makes your solution unique? Call out two features. (425 characters)
 

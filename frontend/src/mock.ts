@@ -89,10 +89,10 @@ export const mockEval: EvalReport = {
   n_tasks: 10, n_volunteers: 40, synthetic: true, generated_by: 'MOCK FIXTURE - not a real run', misses: ['mock: example miss on t7'],
   rows: [],
   summary: {
-    cp_sat: { role_coverage: 0.97, robustness: 0.9, repeat_pick_share: 0.15, exposure_gini: 0.3 },
-    nearest_skill: { role_coverage: 0.7, robustness: 0.05, repeat_pick_share: 0.45, exposure_gini: 0.5 },
-    manual_greedy: { role_coverage: 0.85, robustness: 0.4, repeat_pick_share: 0.4, exposure_gini: 0.45 },
-    random_feasible: { role_coverage: 0.6, robustness: 0.1, repeat_pick_share: 0.3, exposure_gini: 0.4 },
+    cp_sat: { ready: 0.7, role_coverage: 0.97, robustness: 0.9, repeat_pick_share: 0.15, exposure_gini: 0.3 },
+    nearest_skill: { ready: 0.1, role_coverage: 0.7, robustness: 0.05, repeat_pick_share: 0.45, exposure_gini: 0.5 },
+    manual_greedy: { ready: 0.6, role_coverage: 0.85, robustness: 0.4, repeat_pick_share: 0.4, exposure_gini: 0.45 },
+    random_feasible: { ready: 0.1, role_coverage: 0.6, robustness: 0.1, repeat_pick_share: 0.3, exposure_gini: 0.4 },
   },
   ci95: {},
 }

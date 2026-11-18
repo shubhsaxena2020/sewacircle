@@ -74,7 +74,7 @@ export interface LedgerEntry {
 export interface LedgerVerification { ok: boolean; entries: number; first_bad_index: number | null; note: string }
 export interface EvalRow {
   task_id: string; method: Method; role_coverage: number; robustness: number
-  repeat_pick_share: number; exposure_gini: number; solve_ms: number
+  repeat_pick_share: number; exposure_gini: number; solve_ms: number; ready?: number
 }
 export interface EvalReport {
   n_tasks: number; n_volunteers: number; rows: EvalRow[]
