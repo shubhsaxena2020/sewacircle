@@ -11,3 +11,4 @@ frontend/dist/
 logs/
 backend/data/state/
 backend/data/state*/
+kaggle/*/output/

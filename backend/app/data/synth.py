@@ -88,8 +88,19 @@ def make_volunteers(n: int = 80, seed: int = 7) -> list[Volunteer]:
             guardian_consent=(None if age >= 18 else rng.random() < 0.6), synthetic=True,
         ))
     _scarce(vols, rng)
-    _ensure_feasible(vols, make_tasks(seed), rng)
+    tasks = make_tasks(seed)
+    _ensure_feasible(vols, tasks, rng)
+    _opt_in(vols, tasks, rng)
     return vols
+
+
+def _opt_in(vols: list[Volunteer], tasks: list[TaskSpec], rng: random.Random) -> None:
+    """Ready Crew: each volunteer chooses some drives (INFERENCE: about 60% of nearby available people express interest)."""
+    from ..solver.metrics import distance_km
+    for task in tasks:
+        for v in vols:
+            if task.slot in v.available_slots and distance_km(task, v) <= task.max_travel_km and rng.random() < 0.6:
+                v.opted_in_task_ids.append(task.id)
 
 
 SCARCE_TASKS = {"task-04", "task-05"}  # deliberately left short of eligible people to test honest 'unfilled' reporting

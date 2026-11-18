@@ -206,16 +206,28 @@ def test_minors_blocked_by_consent_and_task_flag():
 
 
 def test_self_declared_skill_allowed_but_flagged():
-    """A volunteer whose only claim is a self-declared first_aid skill at min_level 2 qualifies
-    (no level is stored for declarations) and the Assignment carries the self_declared_skill flag.
+    """For an ordinary (non safety-critical) role, a volunteer whose only claim is a self-declared skill at
+    min_level 2 qualifies (no level is stored for declarations) and the Assignment carries the flag.
+    Updated 2026-11-19: first aid is now safety-critical, so this uses teaching (see the safety test below).
     """
-    role = RoleSpec(id="r1", role="First aid", count=1, required_skills=["first_aid"], min_level=2)
+    role = RoleSpec(id="r1", role="Teaching", count=1, required_skills=["teaching_literacy"], min_level=2)
     task = T([role])
-    volunteer = V("declared", declared=("first_aid",), past=3)
+    volunteer = V("declared", declared=("teaching_literacy",), past=3)
     assert is_eligible(volunteer, role, task)
     for roster in _all_methods(task, [volunteer]).values():
         assert [a.volunteer_id for a in roster.assignments] == ["declared"]
         assert "self_declared_skill" in roster.assignments[0].flags
+
+
+def test_safety_critical_role_never_accepts_self_declared_skill():
+    """Devil's-advocate finding (docs/v3): a self-declared first-aider must never fill a first-aid role."""
+    role = RoleSpec(id="r1", role="First aid", count=1, required_skills=["first_aid"])
+    assert role.safety_critical is True                      # set automatically from the skill
+    task = T([role])
+    volunteer = V("declared", declared=("first_aid",), past=3)
+    assert not is_eligible(volunteer, role, task)
+    for roster in _all_methods(task, [volunteer]).values():
+        assert roster.assignments == [] and roster.unfilled_role_ids == ["r1"]
 
 
 def test_unfilled_roles_are_reported_honestly():

@@ -11,10 +11,12 @@ Eligibility (the SAME predicate used by metrics and by the honest baselines)
 ``is_eligible(volunteer, role, task)`` is True iff ALL of the following hold:
   1. availability: task.slot is in volunteer.available_slots;
   2. travel: haversine_km(volunteer, task) <= task.max_travel_km (+1e-9);
+  0. a role marked unresolved (AI could not map it to known skills) accepts nobody until an organiser decides;
   3. qualification: if role.required_skills is empty there is no skill constraint; otherwise
      at least one required skill must be present in volunteer.skills at level >= role.min_level,
      OR be listed in volunteer.self_declared_skills. No level is stored for self-declared skills,
-     so they are treated as qualifying at any min_level and the caller must FLAG them
+     so they are treated as qualifying at any min_level and the caller must FLAG them. For a role marked
+     safety_critical (e.g. first aid, disaster response) self-declared skills NEVER qualify: only host-checked levels count
      (Assignment.flags += 'self_declared_skill');
   4. safety: if volunteer.is_minor (age < 18), task.allow_minors must be True AND
      volunteer.guardian_consent must be exactly True.
@@ -94,9 +96,11 @@ def is_eligible(volunteer: Volunteer, role: RoleSpec, task: TaskSpec) -> bool:
         return False
     if distance_km(task, volunteer) > task.max_travel_km + TRAVEL_EPS_KM:
         return False
+    if role.unresolved:          # the AI could not map this role; an organiser must decide before anyone is assigned
+        return False
     if role.required_skills:
         confirmed = any(volunteer.skills.get(s, 0) >= role.min_level for s in role.required_skills)
-        declared = any(s in volunteer.self_declared_skills for s in role.required_skills)
+        declared = (not role.safety_critical) and any(s in volunteer.self_declared_skills for s in role.required_skills)
         if not (confirmed or declared):
             return False
     if volunteer.is_minor and not (task.allow_minors and volunteer.guardian_consent is True):

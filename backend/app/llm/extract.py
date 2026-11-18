@@ -49,8 +49,12 @@ def extract_roles(brief_text: str, language_hint: str | None = None) -> Extracti
             continue
         skills = [s for s in raw.get("required_skills", []) if s in SKILLS]
         dropped = [s for s in raw.get("required_skills", []) if s not in SKILLS]
+        unresolved = bool(dropped) and not skills
         if dropped:
             notes.append(f"Dropped unknown skills {dropped} for role '{raw.get('role')}'.")
+        if unresolved:   # never let an unmapped requirement silently become 'open to anyone'
+            needs.append(f"'{raw.get('role')}' needs a skill we do not track ({', '.join(map(str, dropped))}). "
+                         "Pick a skill or mark the role open before planning.")
         try:
             count = int(str(raw.get("count", 1)).translate(_DEVANAGARI_DIGITS))
         except ValueError:
@@ -62,7 +66,8 @@ def extract_roles(brief_text: str, language_hint: str | None = None) -> Extracti
             notes.append(f"Evidence for '{raw.get('role')}' was not found verbatim in the text; confidence lowered.")
             conf = "low"
         roles.append(ExtractedRole(role=str(raw["role"])[:80], count=count, required_skills=skills, evidence_span=span[:200],
-                                   confidence=conf, reason=str(raw.get("reason", ""))[:200]))
+                                   confidence="low" if unresolved else conf, reason=str(raw.get("reason", ""))[:200],
+                                   unresolved=unresolved))
         if conf == "low":
             needs.append(f"Please check the role '{raw['role']}' (the AI was not sure).")
     lang = data.get("language_detected") if data.get("language_detected") in ("hi", "en", "hinglish") else None
@@ -73,7 +78,7 @@ def extract_roles(brief_text: str, language_hint: str | None = None) -> Extracti
 
 def to_role_specs(extraction: ExtractionResult) -> list[RoleSpec]:
     return [RoleSpec(id=f"role-{i + 1:02d}", role=r.role, count=r.count, required_skills=r.required_skills,
-                     evidence_span=r.evidence_span, confidence=r.confidence)
+                     evidence_span=r.evidence_span, confidence=r.confidence, unresolved=r.unresolved)
             for i, r in enumerate(extraction.roles)]
 
 
@@ -123,7 +128,7 @@ def draft_cards(task: TaskSpec, host_notes: str, attendance_rows: list[Attendanc
         vid = str(c.get("volunteer_id", ""))
         if vid not in valid_ids:
             continue
-        role = str(c.get("role") or next((role_name.get(a.role_id, a.role_id) for a in assignments if a.volunteer_id == vid), "Volunteer"))
+        role = next((role_name.get(a.role_id, a.role_id) for a in assignments if a.volunteer_id == vid), "Volunteer")  # roster, not model text
         try:
             hours = max(0.0, min(24.0, float(c.get("claimed_hours", 0) or 0)))
         except (TypeError, ValueError):

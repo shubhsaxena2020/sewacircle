@@ -32,11 +32,12 @@ for model_id in MODELS:
 
     def local_complete_json(purpose, system, user, max_tokens=3000, retries=2):
         msgs = [{"role": "system", "content": system}, {"role": "user", "content": user}]
-        ids = tok.apply_chat_template(msgs, add_generation_prompt=True, return_tensors="pt").to(model.device)
+        prompt = tok.apply_chat_template(msgs, add_generation_prompt=True, tokenize=False)   # plain string: version-proof
+        enc = tok(prompt, return_tensors="pt").to(model.device)
         s = time.time()
         with torch.no_grad():
-            out = model.generate(ids, max_new_tokens=900, do_sample=False)
-        text = tok.decode(out[0][ids.shape[1]:], skip_special_tokens=True)
+            out = model.generate(**enc, max_new_tokens=900, do_sample=False)
+        text = tok.decode(out[0][enc["input_ids"].shape[1]:], skip_special_tokens=True)
         return extract_json(text), {"cached": False, "model": model_id, "ms": int((time.time() - s) * 1000), "purpose": purpose}
 
     extract.client.complete_json = local_complete_json      # only the model call changes
@@ -48,7 +49,10 @@ for model_id in MODELS:
             pred = [{"skills": x.required_skills, "count": x.count} for x in r.roles]
             err = ""
         except Exception as e:  # every failure is counted
-            pred, err = [], f"{type(e).__name__}: {str(e)[:100]}"
+            import traceback
+            pred, err = [], f"{type(e).__name__}: {e!r}"[:300]
+            if b is briefs[0]:
+                traceback.print_exc()
         sc = score(b["gold"], pred)
         sc.update(id=b["id"], lang=b["lang"], secs=round(time.time() - s, 1), error=err)
         rows.append(sc)

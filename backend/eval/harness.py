@@ -17,7 +17,7 @@ from importlib.metadata import version
 from app.schemas import EvalReport, EvalRow, RosterOptions, TaskSpec, Volunteer
 from app.solver import api
 
-METRICS = ("role_coverage", "robustness", "repeat_pick_share", "exposure_gini")
+METRICS = ("role_coverage", "robustness", "repeat_pick_share", "exposure_gini", "ready")
 LOWER_IS_BETTER = {"repeat_pick_share", "exposure_gini"}
 RF_SEEDS = list(range(1, 21))
 BOOT_N, BOOT_SEED = 1000, 7
@@ -30,10 +30,13 @@ def _rows_for_task(task: TaskSpec, vols: list[Volunteer]) -> list[EvalRow]:
                            ("manual_greedy", api.baseline_manual_greedy(task, vols))):
         m = roster.metrics
         out.append(EvalRow(task_id=task.id, method=method, role_coverage=m.role_coverage, robustness=m.robustness,  # type: ignore[arg-type]
-                           repeat_pick_share=m.repeat_pick_share, exposure_gini=m.exposure_gini, solve_ms=m.solve_ms))
-    rf = [api.baseline_random_feasible(task, vols, s).metrics for s in RF_SEEDS]
+                           repeat_pick_share=m.repeat_pick_share, exposure_gini=m.exposure_gini, solve_ms=m.solve_ms,
+                           ready=1.0 if roster.ready else 0.0))
+    rfr = [api.baseline_random_feasible(task, vols, s) for s in RF_SEEDS]
+    rf = [r.metrics for r in rfr]
     out.append(EvalRow(task_id=task.id, method="random_feasible",
-                       **{k: statistics.fmean(getattr(m, k) for m in rf) for k in METRICS},
+                       **{k: statistics.fmean(getattr(m, k) for m in rf) for k in METRICS if k != "ready"},
+                       ready=statistics.fmean(1.0 if r.ready else 0.0 for r in rfr),
                        solve_ms=int(statistics.fmean(m.solve_ms for m in rf))))
     return out
 
@@ -95,7 +98,7 @@ def _print(rep: EvalReport) -> None:
         print(f"{m:<26}{cells}")
     print("\nper task (cov / robustness / repeat / gini):")
     for t in sorted({r.task_id for r in rep.rows}):
-        cells = "  ".join(f"{r.method[:6]} {r.role_coverage:.2f}/{r.robustness:.2f}/{r.repeat_pick_share:.2f}/{r.exposure_gini:.2f}"
+        cells = "  ".join(f"{r.method[:6]} {r.role_coverage:.2f}/{r.robustness:.2f}/{r.repeat_pick_share:.2f}/{r.exposure_gini:.2f}/{r.ready:.0f}"
                           for r in rep.rows if r.task_id == t)
         print(f"  {t}  {cells}")
     print(f"\nMISSES ({len(rep.misses)}):")

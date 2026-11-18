@@ -149,3 +149,42 @@ def test_deterministic_same_seed():
     b = api.build_roster(T[0], V, RosterOptions(seed=3))
     assert [(x.role_id, x.volunteer_id) for x in a.assignments] == [(x.role_id, x.volunteer_id) for x in b.assignments]
     assert [s.volunteer_id for s in a.standby] == [s.volunteer_id for s in b.standby]
+
+
+# ---------------- Ready Crew (2026-11-19) ----------------
+def test_ready_crew_with_standby_is_ready():
+    role = RoleSpec(id="role-01", role="First aid", count=1, required_skills=["first_aid"])
+    r = api.build_roster(_task([role]), [_v(1, skills={"first_aid": 3}), _v(2, skills={"first_aid": 2})])
+    assert r.ready is True and r.recruit_requests == []
+
+
+def test_single_point_of_failure_gives_exact_recruit_request():
+    role = RoleSpec(id="role-01", role="First aid", count=1, required_skills=["first_aid"])
+    r = api.build_roster(_task([role]), [_v(1, skills={"first_aid": 3})])
+    assert r.ready is False and len(r.recruit_requests) == 1
+    req = r.recruit_requests[0]
+    assert (req.role_id, req.needed, req.skills, req.checked_skill_required, req.slot) == ("role-01", 1, ["first_aid"], True, "sat_morning")
+    assert "Single point of failure" in req.reason
+
+
+def test_unfilled_role_gives_recruit_request_with_count():
+    role = RoleSpec(id="role-01", role="Coach", count=3, required_skills=["sports_coaching"])
+    r = api.build_roster(_task([role]), [_v(1, skills={"sports_coaching": 2})])
+    assert r.ready is False
+    assert [(q.role_id, q.needed) for q in r.recruit_requests] == [("role-01", 2)]
+
+
+def test_unresolved_role_assigns_nobody_and_asks_organiser():
+    role = RoleSpec(id="role-01", role="Snake handler", count=1, required_skills=[], unresolved=True)
+    r = api.build_roster(_task([role]), [_v(i) for i in range(1, 5)])
+    assert r.assignments == [] and r.ready is False
+    assert "could not match" in r.recruit_requests[0].reason
+
+
+def test_opted_in_only_restricts_every_method_to_volunteers_who_chose_the_drive():
+    role = RoleSpec(id="role-01", role="Helper", count=1, required_skills=[])
+    vols = [_v(1, opted_in_task_ids=["task-x"]), _v(2), _v(3)]
+    opts = RosterOptions(opted_in_only=True)
+    for r in (api.build_roster(_task([role]), vols, opts), api.baseline_nearest_skill(_task([role]), vols, opts),
+              api.baseline_manual_greedy(_task([role]), vols, opts)):
+        assert {a.volunteer_id for a in r.assignments} <= {"v-001"}

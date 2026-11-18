@@ -112,3 +112,21 @@ def test_distinct_note_lines_do_not_trigger_duplicate_evidence(monkeypatch):
     for c in cards:
         assert "duplicate_evidence_ref" not in [f.code for f in check_card(c, cards, ROWS)]
 
+
+
+def test_unknown_skill_role_becomes_unresolved_not_open(monkeypatch):
+    """Devil's-advocate finding: an unmapped requirement must not silently become 'anyone can do it'."""
+    monkeypatch.setattr(extract.client, "complete_json", _fake({"roles": [
+        {"role": "Snake handler", "count": 1, "required_skills": ["snake_handling"], "evidence_span": "", "confidence": "high"}],
+        "needs_decision": []}))
+    r = extract.extract_roles("Need a snake handler for the camp.")
+    assert r.roles[0].unresolved and r.roles[0].confidence == "low"
+    assert extract.to_role_specs(r)[0].unresolved is True
+    assert any("Snake handler" in q for q in r.needs_decision)
+
+
+def test_card_role_comes_from_roster_not_model_text(monkeypatch):
+    monkeypatch.setattr(extract.client, "complete_json", _fake({"cards": [
+        {"volunteer_id": "v-002", "role": "Chief Executive Volunteer", "claimed_hours": 5, "summary": "x", "evidence": "Om 5 hours"}]}))
+    cards = {c.volunteer_id: c for c in extract.draft_cards(TASK, "Om 5 hours", ROWS, ASSIGN)}
+    assert cards["v-002"].role == "Photos"

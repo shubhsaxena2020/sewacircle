@@ -27,6 +27,9 @@ SKILLS: dict[str, str] = {
     "fundraising_outreach": "Fundraising and partner outreach",
 }
 
+# Roles needing any of these skills are safety-critical: only host-checked skills qualify (never self-declared).
+SAFETY_CRITICAL_SKILLS = {"first_aid", "disaster_response", "driving_transport"}
+
 SLOTS = [f"{d}_{p}" for d in ("mon", "tue", "wed", "thu", "fri", "sat", "sun") for p in ("morning", "afternoon", "evening")]
 
 DISCLAIMER = "SYNTHETIC DATA - illustrative, no real people"

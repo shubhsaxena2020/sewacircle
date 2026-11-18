@@ -5,9 +5,9 @@ from __future__ import annotations
 from datetime import datetime
 from typing import Literal, Optional
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, model_validator
 
-from .taxonomy import SKILLS, SLOTS
+from .taxonomy import SAFETY_CRITICAL_SKILLS, SKILLS, SLOTS
 
 Gender = Literal["F", "M", "X", "undisclosed"]
 Language = Literal["hi", "en", "hinglish"]
@@ -33,6 +33,7 @@ class Volunteer(BaseModel):
     past_drives: int = 0
     times_picked_last_90d: int = 0
     guardian_consent: Optional[bool] = None  # required True if age < 18
+    opted_in_task_ids: list[str] = Field(default_factory=list, description="Ready Crew: drives this volunteer chose to join")
     synthetic: bool = True
 
     @field_validator("skills")
@@ -97,6 +98,8 @@ class RoleSpec(BaseModel):
     needs_experienced: bool = False
     evidence_span: str = ""
     confidence: Literal["high", "medium", "low"] = "high"
+    safety_critical: bool = False   # self-declared skills never qualify; only host-checked skill levels count
+    unresolved: bool = False        # AI could not map the role to known skills: nobody is assigned until an organiser decides
 
     @field_validator("required_skills")
     @classmethod
@@ -104,7 +107,13 @@ class RoleSpec(BaseModel):
         bad = [s for s in v if s not in SKILLS]
         if bad:
             raise ValueError(f"unknown skills {bad}")
-        return v  # empty list = open to any volunteer (explicit semantics)
+        return v  # empty list = open to any volunteer, unless unresolved=True
+
+    @model_validator(mode="after")
+    def _auto_safety_critical(self) -> "RoleSpec":
+        if set(self.required_skills) & SAFETY_CRITICAL_SKILLS:
+            self.safety_critical = True   # cannot be switched off for first aid, disaster response, driving
+        return self
 
 
 class TaskSpec(BaseModel):
@@ -133,6 +142,7 @@ class TaskSpec(BaseModel):
 
 # ---------------- extraction (LLM) ----------------
 class ExtractedRole(BaseModel):
+    unresolved: bool = False
     role: str
     count: int = Field(ge=1, le=10)
     required_skills: list[str]
@@ -166,6 +176,7 @@ class RosterOptions(BaseModel):
     mentor_pairing: bool = True    # U2 novice-mentor pairing
     forced_in: list[str] = Field(default_factory=list)   # volunteer ids that must be included
     forced_out: list[str] = Field(default_factory=list)  # volunteer ids excluded
+    opted_in_only: bool = False    # Ready Crew: plan only with volunteers who chose this drive
     time_limit_s: float = 10.0
     seed: int = 7
 
@@ -217,6 +228,20 @@ class RosterMetrics(BaseModel):
     solver_status: str = ""
 
 
+class RecruitRequest(BaseModel):
+    """Ready Crew repair action: what exactly to recruit to make the crew ready."""
+    role_id: str
+    role: str
+    needed: int
+    skills: list[str]
+    min_level: int = 1
+    checked_skill_required: bool = False
+    slot: str
+    area: str
+    max_travel_km: float
+    reason: str
+
+
 class RosterResult(BaseModel):
     task_id: str
     method: Method
@@ -226,6 +251,8 @@ class RosterResult(BaseModel):
     unfilled_slots: list[SlotRef] = Field(default_factory=list)  # exact unfilled (role_id, slot_index) pairs; assignments are unique per pair
     metrics: RosterMetrics
     explanations: list[str] = Field(default_factory=list)
+    recruit_requests: list[RecruitRequest] = Field(default_factory=list)
+    ready: Optional[bool] = None    # True only if every must slot is filled AND any single dropout leaves them coverable
     synthetic: bool = True
 
 
@@ -314,6 +341,7 @@ class EvalRow(BaseModel):
     repeat_pick_share: float
     exposure_gini: float
     solve_ms: int
+    ready: float = 0.0   # 1.0 if the roster is READY (all must slots filled and single-dropout safe), else 0.0
 
 
 class EvalReport(BaseModel):

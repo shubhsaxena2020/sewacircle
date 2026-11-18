@@ -135,10 +135,11 @@ class RosterAll(BaseModel):
 def make_roster(req: RosterReq) -> Any:
     def run() -> RosterAll:
         v = volunteers()
-        return RosterAll(cp_sat=solver.build_roster(req.task, v, req.options),
-                         nearest_skill=solver.baseline_nearest_skill(req.task, v),
-                         random_feasible=solver.baseline_random_feasible(req.task, v, req.options.seed),
-                         manual_greedy=solver.baseline_manual_greedy(req.task, v))
+        o = req.options  # every method gets the same candidate pool (opt-in filter included)
+        return RosterAll(cp_sat=solver.build_roster(req.task, v, o),
+                         nearest_skill=solver.baseline_nearest_skill(req.task, v, o),
+                         random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
+                         manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
     return _guard(run)
 
 

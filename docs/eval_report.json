@@ -9,7 +9,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.6074380165289257,
-   "solve_ms": 33
+   "solve_ms": 31,
+   "ready": 1.0
   },
   {
    "task_id": "task-01",
@@ -18,7 +19,8 @@
    "robustness": 0.16666666666666666,
    "repeat_pick_share": 0.16666666666666666,
    "exposure_gini": 0.6680440771349863,
-   "solve_ms": 1
+   "solve_ms": 1,
+   "ready": 0.0
   },
   {
    "task_id": "task-01",
@@ -27,16 +29,18 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.3333333333333333,
    "exposure_gini": 0.6735537190082646,
-   "solve_ms": 3
+   "solve_ms": 1,
+   "ready": 1.0
   },
   {
    "task_id": "task-01",
    "method": "random_feasible",
    "role_coverage": 1.0,
    "robustness": 0.7833333333333333,
-   "repeat_pick_share": 0.08333333333333333,
-   "exposure_gini": 0.6241046831955923,
-   "solve_ms": 0
+   "repeat_pick_share": 0.10833333333333332,
+   "exposure_gini": 0.6311294765840221,
+   "solve_ms": 0,
+   "ready": 0.5
   },
   {
    "task_id": "task-02",
@@ -45,7 +49,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.16666666666666666,
    "exposure_gini": 0.42222222222222205,
-   "solve_ms": 8
+   "solve_ms": 13,
+   "ready": 1.0
   },
   {
    "task_id": "task-02",
@@ -54,7 +59,8 @@
    "robustness": 0.16666666666666666,
    "repeat_pick_share": 0.16666666666666666,
    "exposure_gini": 0.5222222222222221,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-02",
@@ -63,7 +69,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.16666666666666666,
    "exposure_gini": 0.5555555555555554,
-   "solve_ms": 0
+   "solve_ms": 1,
+   "ready": 1.0
   },
   {
    "task_id": "task-02",
@@ -72,7 +79,8 @@
    "robustness": 0.25,
    "repeat_pick_share": 0.14166666666666666,
    "exposure_gini": 0.4966666666666666,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.1
   },
   {
    "task_id": "task-03",
@@ -81,7 +89,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.75,
    "exposure_gini": 0.17307692307692313,
-   "solve_ms": 6
+   "solve_ms": 6,
+   "ready": 1.0
   },
   {
    "task_id": "task-03",
@@ -90,7 +99,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.75,
    "exposure_gini": 0.17307692307692313,
-   "solve_ms": 1
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-03",
@@ -99,7 +109,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.75,
    "exposure_gini": 0.17307692307692313,
-   "solve_ms": 1
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-03",
@@ -108,7 +119,8 @@
    "robustness": 0.9,
    "repeat_pick_share": 0.7416666666666667,
    "exposure_gini": 0.17476923076923082,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.9
   },
   {
    "task_id": "task-04",
@@ -117,7 +129,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5,
-   "solve_ms": 2
+   "solve_ms": 2,
+   "ready": 0.0
   },
   {
    "task_id": "task-04",
@@ -126,7 +139,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-04",
@@ -135,7 +149,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-04",
@@ -144,7 +159,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-05",
@@ -153,7 +169,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.6,
    "exposure_gini": 0.3697478991596639,
-   "solve_ms": 3
+   "solve_ms": 5,
+   "ready": 0.0
   },
   {
    "task_id": "task-05",
@@ -162,7 +179,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.8,
    "exposure_gini": 0.37815126050420167,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-05",
@@ -171,16 +189,18 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.8,
    "exposure_gini": 0.37815126050420167,
-   "solve_ms": 0
+   "solve_ms": 1,
+   "ready": 0.0
   },
   {
    "task_id": "task-05",
    "method": "random_feasible",
-   "role_coverage": 0.7416666666666667,
+   "role_coverage": 0.8333333333333334,
    "robustness": 0.0,
-   "repeat_pick_share": 0.645,
-   "exposure_gini": 0.3724344283167813,
-   "solve_ms": 0
+   "repeat_pick_share": 0.6799999999999999,
+   "exposure_gini": 0.3680672268907563,
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-06",
@@ -189,7 +209,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.25,
    "exposure_gini": 0.5538461538461537,
-   "solve_ms": 7
+   "solve_ms": 9,
+   "ready": 1.0
   },
   {
    "task_id": "task-06",
@@ -198,7 +219,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.75,
    "exposure_gini": 0.6076923076923075,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-06",
@@ -207,7 +229,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.75,
    "exposure_gini": 0.6076923076923075,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-06",
@@ -216,7 +239,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.4375,
    "exposure_gini": 0.5838461538461537,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-07",
@@ -224,8 +248,9 @@
    "role_coverage": 1.0,
    "robustness": 0.6,
    "repeat_pick_share": 0.2,
-   "exposure_gini": 0.5125,
-   "solve_ms": 4
+   "exposure_gini": 0.48484848484848486,
+   "solve_ms": 5,
+   "ready": 0.0
   },
   {
    "task_id": "task-07",
@@ -233,8 +258,9 @@
    "role_coverage": 1.0,
    "robustness": 0.2,
    "repeat_pick_share": 0.4,
-   "exposure_gini": 0.5249999999999999,
-   "solve_ms": 0
+   "exposure_gini": 0.5252525252525253,
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-07",
@@ -242,17 +268,19 @@
    "role_coverage": 1.0,
    "robustness": 0.6,
    "repeat_pick_share": 0.4,
-   "exposure_gini": 0.5249999999999999,
-   "solve_ms": 0
+   "exposure_gini": 0.5252525252525253,
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-07",
    "method": "random_feasible",
-   "role_coverage": 0.9625,
-   "robustness": 0.26,
-   "repeat_pick_share": 0.3225,
-   "exposure_gini": 0.5182894736842105,
-   "solve_ms": 0
+   "role_coverage": 0.975,
+   "robustness": 0.25,
+   "repeat_pick_share": 0.31500000000000006,
+   "exposure_gini": 0.5074074074074073,
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-08",
@@ -261,7 +289,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5071428571428571,
-   "solve_ms": 22
+   "solve_ms": 16,
+   "ready": 1.0
   },
   {
    "task_id": "task-08",
@@ -270,7 +299,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.5842857142857143,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-08",
@@ -279,7 +309,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.4,
    "exposure_gini": 0.5871428571428572,
-   "solve_ms": 2
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-08",
@@ -288,7 +319,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.11000000000000001,
    "exposure_gini": 0.5488571428571428,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-09",
@@ -297,7 +329,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.3333333333333333,
    "exposure_gini": 0.4222222222222223,
-   "solve_ms": 6
+   "solve_ms": 6,
+   "ready": 1.0
   },
   {
    "task_id": "task-09",
@@ -306,7 +339,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.6666666666666666,
    "exposure_gini": 0.4444444444444444,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-09",
@@ -315,7 +349,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.6666666666666666,
    "exposure_gini": 0.4444444444444444,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-09",
@@ -324,7 +359,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.4833333333333333,
    "exposure_gini": 0.41222222222222227,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-10",
@@ -333,7 +369,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.6363636363636362,
-   "solve_ms": 17
+   "solve_ms": 9,
+   "ready": 1.0
   },
   {
    "task_id": "task-10",
@@ -342,7 +379,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.3333333333333333,
    "exposure_gini": 0.6414141414141414,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   },
   {
    "task_id": "task-10",
@@ -351,7 +389,8 @@
    "robustness": 1.0,
    "repeat_pick_share": 0.0,
    "exposure_gini": 0.6363636363636362,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 1.0
   },
   {
    "task_id": "task-10",
@@ -360,7 +399,8 @@
    "robustness": 0.0,
    "repeat_pick_share": 0.05,
    "exposure_gini": 0.6376262626262625,
-   "solve_ms": 0
+   "solve_ms": 0,
+   "ready": 0.0
   }
  ],
  "summary": {
@@ -368,43 +408,50 @@
    "role_coverage": 0.9167,
    "robustness": 0.76,
    "repeat_pick_share": 0.23,
-   "exposure_gini": 0.4705
+   "exposure_gini": 0.4677,
+   "ready": 0.7
   },
   "nearest_skill": {
    "role_coverage": 0.9167,
    "robustness": 0.1533,
    "repeat_pick_share": 0.4033,
-   "exposure_gini": 0.5044
+   "exposure_gini": 0.5045,
+   "ready": 0.1
   },
   "manual_greedy": {
    "role_coverage": 0.9167,
    "robustness": 0.76,
    "repeat_pick_share": 0.4267,
-   "exposure_gini": 0.5081
+   "exposure_gini": 0.5081,
+   "ready": 0.7
   },
   "random_feasible": {
-   "role_coverage": 0.9037,
-   "robustness": 0.2193,
-   "repeat_pick_share": 0.3015,
-   "exposure_gini": 0.4869
+   "role_coverage": 0.9142,
+   "robustness": 0.2183,
+   "repeat_pick_share": 0.3067,
+   "exposure_gini": 0.4861,
+   "ready": 0.15
   },
   "delta_vs_nearest_skill": {
    "role_coverage": 0.0,
    "robustness": 0.6067,
    "repeat_pick_share": -0.1733,
-   "exposure_gini": -0.034
+   "exposure_gini": -0.0368,
+   "ready": 0.6
   },
   "delta_vs_manual_greedy": {
    "role_coverage": 0.0,
    "robustness": 0.0,
    "repeat_pick_share": -0.1967,
-   "exposure_gini": -0.0376
+   "exposure_gini": -0.0404,
+   "ready": 0.0
   },
   "delta_vs_random_feasible": {
-   "role_coverage": 0.0129,
-   "robustness": 0.5407,
-   "repeat_pick_share": -0.0715,
-   "exposure_gini": -0.0164
+   "role_coverage": 0.0025,
+   "robustness": 0.5417,
+   "repeat_pick_share": -0.0768,
+   "exposure_gini": -0.0184,
+   "ready": 0.55
   }
  },
  "ci95": {
@@ -422,8 +469,12 @@
     0.41
    ],
    "exposure_gini": [
-    0.3807,
-    0.5476
+    0.3764,
+    0.5463
+   ],
+   "ready": [
+    0.4,
+    0.9
    ]
   },
   "nearest_skill": {
@@ -440,8 +491,12 @@
     0.5933
    ],
    "exposure_gini": [
-    0.4028,
-    0.5874
+    0.4029,
+    0.5875
+   ],
+   "ready": [
+    0.0,
+    0.3
    ]
   },
   "manual_greedy": {
@@ -460,24 +515,32 @@
    "exposure_gini": [
     0.4062,
     0.5906
+   ],
+   "ready": [
+    0.4,
+    0.9
    ]
   },
   "random_feasible": {
    "role_coverage": [
-    0.7483,
-    0.9963
+    0.7667,
+    0.9975
    ],
    "robustness": [
-    0.026,
-    0.4387
+    0.025,
+    0.4383
    ],
    "repeat_pick_share": [
-    0.1455,
-    0.4738
+    0.1503,
+    0.4816
    ],
    "exposure_gini": [
-    0.3903,
-    0.5653
+    0.3894,
+    0.5655
+   ],
+   "ready": [
+    0.01,
+    0.36
    ]
   },
   "delta_vs_nearest_skill": {
@@ -494,8 +557,12 @@
     -0.07
    ],
    "exposure_gini": [
-    -0.0593,
-    -0.0155
+    -0.0615,
+    -0.0174
+   ],
+   "ready": [
+    0.3,
+    0.9
    ]
   },
   "delta_vs_manual_greedy": {
@@ -512,26 +579,34 @@
     -0.0933
    ],
    "exposure_gini": [
-    -0.0694,
-    -0.0152
+    -0.0711,
+    -0.0173
+   ],
+   "ready": [
+    0.0,
+    0.0
    ]
   },
   "delta_vs_random_feasible": {
    "role_coverage": [
     0.0,
-    0.0312
+    0.0075
    ],
    "robustness": [
     0.2817,
-    0.809
+    0.81
    ],
    "repeat_pick_share": [
-    -0.1126,
-    -0.0297
+    -0.1151,
+    -0.0361
    ],
    "exposure_gini": [
-    -0.0345,
-    -0.0037
+    -0.0361,
+    -0.0046
+   ],
+   "ready": [
+    0.28,
+    0.84
    ]
   }
  },
@@ -539,6 +614,7 @@
   "task-02: cp_sat repeat_pick_share 0.17 worse than random_feasible 0.14",
   "task-03: cp_sat repeat_pick_share 0.75 worse than random_feasible 0.74",
   "task-04: cp_sat could not fill every must slot (coverage 0.33); no eligible people",
+  "task-05: cp_sat exposure_gini 0.37 worse than random_feasible 0.37",
   "task-05: cp_sat could not fill every must slot (coverage 0.83); no eligible people",
   "task-07: cp_sat dropout robustness only 0.60 (too few eligible standby people)",
   "task-09: cp_sat exposure_gini 0.42 worse than random_feasible 0.41"
