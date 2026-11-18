@@ -14,8 +14,8 @@ from ..taxonomy import SKILLS
 from .metrics import _rescue_matches, _slot_list
 
 
-def _request(task: TaskSpec, role: RoleSpec, needed: int, reason: str) -> RecruitRequest:
-    return RecruitRequest(role_id=role.id, role=role.role, needed=needed, skills=list(role.required_skills),
+def _request(task: TaskSpec, role: RoleSpec, needed: int, reason: str, kind: str) -> RecruitRequest:
+    return RecruitRequest(kind=kind, role_id=role.id, role=role.role, needed=needed, skills=list(role.required_skills),
                           min_level=role.min_level, checked_skill_required=role.safety_critical, slot=task.slot,
                           area=f"{task.block}, {task.district}", max_travel_km=task.max_travel_km, reason=reason)
 
@@ -28,7 +28,8 @@ def annotate(task: TaskSpec, volunteers: list[Volunteer], roster: RosterResult) 
     for r in task.roles:
         if r.unresolved:
             requests.append(_request(task, r, r.count, "The AI could not match this role to known skills. Choose the skills "
-                                                        "(or mark it open to anyone) before anyone is assigned."))
+                                                        "(or mark it open to anyone) before anyone is assigned.",
+                                     "unresolved"))
 
     unfilled: dict[str, int] = {}
     for s in roster.unfilled_slots:
@@ -39,7 +40,8 @@ def annotate(task: TaskSpec, volunteers: list[Volunteer], roster: RosterResult) 
         skill_txt = " or ".join(SKILLS[s].lower() for s in role.required_skills) or "no special skill"
         checked = " (host-checked, self-declared does not count)" if role.safety_critical else ""
         requests.append(_request(task, role, n, f"No eligible volunteer for {n} slot(s): needs {skill_txt}{checked}, "
-                                                f"free {task.slot.replace('_', ' ')}, within {task.max_travel_km:.0f} km."))
+                                                f"free {task.slot.replace('_', ' ')}, within {task.max_travel_km:.0f} km.",
+                                 "unfilled"))
 
     must_slots = _slot_list(task.roles, must_only=True)
     assigned = list(dict.fromkeys(a.volunteer_id for a in roster.assignments if a.volunteer_id in by_id))
@@ -55,7 +57,8 @@ def annotate(task: TaskSpec, volunteers: list[Volunteer], roster: RosterResult) 
     for rid, names in fragile_roles.items():
         role = roles[rid]
         requests.append(_request(task, role, 1, f"Single point of failure: if {', '.join(names)} cannot come, nobody "
-                                                f"qualified can step in as {role.role}. Recruit one standby."))
+                                                f"qualified can step in as {role.role}. Recruit one standby.",
+                                 "standby"))
 
     roster.recruit_requests = requests
     roster.ready = (not unfilled) and (not fragile_roles) and not any(r.unresolved for r in task.roles) and bool(must_slots)

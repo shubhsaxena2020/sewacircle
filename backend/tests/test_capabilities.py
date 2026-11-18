@@ -19,7 +19,7 @@ TASK = {"id": "task-01", "title": "Camp", "slot": "sat_morning", "district": "Lu
         "roles": [{"id": "role-01", "role": "First aid", "count": 1, "required_skills": ["first_aid"]}]}
 
 MUTATING_ROUTES = {
-    "run_roster": ("post", "/api/roster"),
+    "read_roster": ("post", "/api/roster"),
     "draft_cards": ("post", "/api/evidence/draft"),
     "confirm_card": ("post", "/api/evidence/{card}/confirm"),
     "correct_card": ("post", "/api/evidence/{card}/correct"),
@@ -31,7 +31,7 @@ MUTATING_ROUTES = {
 }
 
 BODIES = {
-    "run_roster": {"task": TASK},
+    "read_roster": {"task": TASK},
     "draft_cards": {"task": TASK, "host_notes": "Imran worked 5 hours.",
                     "attendance_rows": [{"volunteer_id": "v-068", "task_id": "task-01", "hours": 5}],
                     "assignments": [{"role_id": "role-01", "volunteer_id": "v-068", "volunteer_name": "Imran B."}]},

@@ -15,6 +15,54 @@ Method = Literal["cp_sat", "nearest_skill", "random_feasible", "manual_greedy"]
 CardStatus = Literal["draft", "flagged", "revision_requested", "confirmed", "corrected", "rejected"]
 
 
+# ---------------- localized display text (Hindi/English) ----------------
+class SkillLabel(BaseModel):
+    id: str
+    label: str
+
+
+class RoleDisplay(BaseModel):
+    role_id: str
+    role: str          # role name in the requested language
+    count: int
+    required_skills: list[SkillLabel] = Field(default_factory=list)
+
+
+class TaskDisplay(BaseModel):
+    """Localized copy of a task's display text. Ids, counts and decisions are unchanged."""
+    lang: Literal["en", "hi"]
+    title: str
+    slot: str
+    roles: list[RoleDisplay] = Field(default_factory=list)
+
+
+class RecruitDisplay(BaseModel):
+    role_id: str
+    role: str
+    needed: int
+    text: str
+
+
+class AssignmentDisplay(BaseModel):
+    volunteer_id: str
+    role_id: str
+    text: str
+
+
+class RosterDisplay(BaseModel):
+    """Localized rendering of a roster's verdict, explanations and repair asks.
+
+    ``ready`` is copied from the roster, never re-decided; ``recruit[].needed`` and the numbers inside
+    every sentence come from the same structured fields, so English and Hindi cannot disagree.
+    """
+    lang: Literal["en", "hi"]
+    ready: Optional[bool] = None
+    verdict: str = ""
+    explanations: list[str] = Field(default_factory=list)
+    recruit: list[RecruitDisplay] = Field(default_factory=list)
+    assignments: list[AssignmentDisplay] = Field(default_factory=list)
+
+
 class Volunteer(BaseModel):
     """SYNTHETIC volunteer opt-in card. Never real people."""
     id: str
@@ -130,6 +178,7 @@ class TaskSpec(BaseModel):
     max_travel_km: float = 15.0
     allow_minors: bool = True
     roles: list[RoleSpec] = Field(default_factory=list)
+    display: Optional[TaskDisplay] = None   # localized text for GET /api/tasks; canonical fields stay as written
     synthetic: bool = True
 
     @field_validator("slot")
@@ -267,6 +316,7 @@ class RosterMetrics(BaseModel):
 
 class RecruitRequest(BaseModel):
     """Ready Crew repair action: what exactly to recruit to make the crew ready."""
+    kind: Literal["unresolved", "unfilled", "standby"] = "unfilled"   # which template produced `reason`
     role_id: str
     role: str
     needed: int
@@ -289,6 +339,7 @@ class RosterResult(BaseModel):
     metrics: RosterMetrics
     explanations: list[str] = Field(default_factory=list)
     recruit_requests: list[RecruitRequest] = Field(default_factory=list)
+    display: Optional[RosterDisplay] = None   # localized verdict/explanations for POST /api/roster
     ready: Optional[bool] = None    # True only if every must slot is filled AND any single dropout leaves them coverable
     synthetic: bool = True
 

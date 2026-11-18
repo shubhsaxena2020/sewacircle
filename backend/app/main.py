@@ -6,7 +6,7 @@ import json
 import os
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Callable, Optional
+from typing import Any, Callable, Literal, Optional
 
 import functools
 import hashlib
@@ -22,7 +22,7 @@ from .llm.client import LLMError
 from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard, Counterfactual, DropoutResult,
                       DriveShareSummary, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions,
                       RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
-from . import capabilities, share
+from . import capabilities, i18n, share
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
@@ -205,8 +205,16 @@ def list_volunteers() -> Any:
 
 
 @app.get("/api/tasks", response_model=list[TaskSpec])
-def list_tasks() -> Any:
-    return _guard(tasks)
+def list_tasks(lang: Literal["en", "hi"] = "en") -> Any:
+    """Tasks plus a localized `display` block (title, slot, role names, skill labels).
+
+    The canonical fields are never translated: ids, counts and the task text stay exactly as stored, so
+    a client can compare or re-post them. `display` is the same facts in the requested language. An
+    unknown title or role name is returned unchanged rather than machine-translated.
+    """
+    def run() -> list[TaskSpec]:
+        return [t.model_copy(update={"display": i18n.task_display(t, lang)}) for t in tasks()]
+    return _guard(run)
 
 
 class ShareReq(BaseModel):
@@ -274,6 +282,7 @@ def extract_roles(req: ExtractReq) -> Any:
 class RosterReq(BaseModel):
     task: TaskSpec
     options: RosterOptions = Field(default_factory=RosterOptions)
+    lang: Literal["en", "hi"] = "en"    # display language only; the plan and its numbers are identical
 
 
 class RosterAll(BaseModel):
@@ -284,7 +293,7 @@ class RosterAll(BaseModel):
 
 
 @app.post("/api/roster", response_model=RosterAll)
-def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
+def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("read_roster"))) -> Any:
     def run() -> RosterAll:
         v = volunteers()
         o = req.options  # every method gets the same candidate pool (opt-in filter included)
@@ -292,6 +301,9 @@ def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("run_rost
                            nearest_skill=solver.baseline_nearest_skill(req.task, v, o),
                            random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
                            manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
+        # Localized text per method: the same ids, counts and verdict, in the requested language.
+        for roster in (result.cp_sat, result.nearest_skill, result.random_feasible, result.manual_greedy):
+            roster.display = i18n.roster_display(req.task, roster, req.lang)
         # Snapshot of what was solved, in memory only, so a public share link shows the same plan the
         # organiser saw (title and roles may have been edited). Only ids this server knows are stored:
         # a client cannot grow the dict without bound or advertise a verdict for a drive that does not exist.
@@ -315,7 +327,7 @@ class WhyNotReq(BaseModel):
 
 
 @app.post("/api/roster/why-not", response_model=Counterfactual)
-def why_not(req: WhyNotReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
+def why_not(req: WhyNotReq, demo_role: str = Depends(_require_demo("read_roster"))) -> Any:
     return _guard(lambda: solver.why_not(req.task, volunteers(), req.roster, req.volunteer_id, req.options))
 
 
@@ -327,7 +339,7 @@ class DropoutReq(BaseModel):
 
 
 @app.post("/api/roster/dropout", response_model=DropoutResult)
-def dropout(req: DropoutReq, demo_role: str = Depends(_require_demo("run_roster"))) -> Any:
+def dropout(req: DropoutReq, demo_role: str = Depends(_require_demo("read_roster"))) -> Any:
     return _guard(lambda: solver.simulate_dropout(req.task, volunteers(), req.roster, req.dropped_volunteer_id, req.options))
 
 

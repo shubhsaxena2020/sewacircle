@@ -55,7 +55,7 @@ DEMO_NOTICE = ("Demo role switch only - the X-Demo-Role header is chosen by the 
 CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
     "organiser": {
         "screens": ("roster", "evidence", "ledger", "evaluation", "drive_summary", "capabilities"),
-        "actions": ("run_roster", "read_cards", "read_ledger", "read_eval", "read_drive_summary", "draft_cards",
+        "actions": ("read_roster", "read_cards", "read_ledger", "read_eval", "read_drive_summary", "draft_cards",
                     "confirm_card", "correct_card", "reject_card", "request_revision", "export_credential",
                     "share_drive", "reset_demo"),
     },
@@ -76,9 +76,9 @@ CAPABILITIES: dict[str, dict[str, tuple[str, ...]]] = {
 
 #: Actions that write something; these are the ones the API enforces on X-Demo-Role.
 #: ``reset_demo`` is included because it archives the card store and the ledger;
-#: ``run_roster`` and ``share_drive`` because they write the in-memory plan snapshot.
+#: ``read_roster`` and ``share_drive`` because they write the in-memory plan snapshot.
 MUTATING_ACTIONS: tuple[str, ...] = (
-    "run_roster",
+    "read_roster",
     "draft_cards",
     "confirm_card",
     "correct_card",
