@@ -37,7 +37,8 @@ SewaCircle **Ready Crew** answers one organiser question - "willing volunteers a
 | Name protection (roster ids + gazetteer masking) | done |
 | Tests | 690 passing (`pytest -q` in backend/) |
 | Strategy reviews by Codex gpt-6-sol (v2) and devil's-advocate (v3) | done (docs/v2/, docs/v3/) |
-| Local open-model extraction on Kaggle GPU (Qwen2.5 3B/7B, 4-bit) | running; results TBD |
+| Local open-model extraction on Kaggle GPU (Qwen2.5 3B/7B, 4-bit, 1x T4) | done (docs/LOCAL_MODEL_RESULTS.md) |
+| LLM resilience: fallback model chain, offline parser fixed | done |
 
 ## 5. Results (real command output only)
 Roster evaluation (`python -m eval.harness`, full output in docs/EVAL_RESULTS.md), 10 synthetic tasks, 80 synthetic volunteers:
@@ -50,10 +51,11 @@ Ready: SewaCircle 7/10, careful organiser 7/10, random 1.5/10, nearest-skill 1/1
 
 Extraction (`python -m eval.extraction.run`), 30 author-written synthetic briefs (12 Hindi, 10 English, 8 Hinglish):
 Claude Sonnet 5.5: role recall 1.00, precision 1.00, exact counts 1.00, 0 failures. DeepSeek v4.1 Flash: recall 0.983 (missed one role in en-07), exact counts 1.00.
+Same briefs, same code path, one free Kaggle T4 GPU, 4-bit: Qwen2.5-7B recall 0.932, precision 0.917, exact counts 1.00, 0 failures, 10.7 s median (Hindi recall 0.87); Qwen2.5-3B recall 0.695 (not good enough). Full table: docs/LOCAL_MODEL_RESULTS.md.
 **Caveat:** the briefs were written by the same team that wrote the prompt and state counts explicitly, so this is an easy test; a harder, independently written set is needed before claiming extraction accuracy.
 
 ## 6. Limitations (stated up front)
 Synthetic data; proxy metrics only, no field-impact claim; name masking is Latin-script only and misses names outside the 61k list; Hindi/Awadhi extraction accuracy is measured on a small labelled set; the hash chain shows edits not truth; credential export is unsigned and not issued by any authority; no integration with any government system; rules about reusing pre-built code at the event are unconfirmed (ADR-001); novelty relative to MY Bharat is unverified beyond the pages we read.
 
 ## 7. Next steps
-Record the Kaggle GPU result; MY Bharat public-pages feature comparison; final idea answers (Ready Crew) and zip; record the demo; team lead: team details, age-eligibility question to organisers, submit the form by 20 Nov; plan the 8 to 9 Dec build from the spec.
+MY Bharat public-pages feature comparison; final idea answers (Ready Crew) and zip; record the demo; team lead: team details, age-eligibility question to organisers, submit the form by 20 Nov; plan the 8 to 9 Dec build from the spec.

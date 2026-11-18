@@ -1,0 +1,736 @@
+{
+ "Qwen/Qwen2.5-3B-Instruct": {
+  "load_secs": 44.1,
+  "all": {
+   "briefs": 30,
+   "role_recall": 0.695,
+   "role_precision": 0.774,
+   "count_exact": 0.902,
+   "failures": 1,
+   "median_secs": 12.6
+  },
+  "hi": {
+   "briefs": 12,
+   "role_recall": 0.652,
+   "role_precision": 0.682,
+   "count_exact": 0.867,
+   "failures": 0,
+   "median_secs": 15.8
+  },
+  "en": {
+   "briefs": 10,
+   "role_recall": 0.8,
+   "role_precision": 0.889,
+   "count_exact": 0.938,
+   "failures": 1,
+   "median_secs": 11.0
+  },
+  "hinglish": {
+   "briefs": 8,
+   "role_recall": 0.625,
+   "role_precision": 0.769,
+   "count_exact": 0.9,
+   "failures": 0,
+   "median_secs": 12.3
+  },
+  "rows": [
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-01",
+    "lang": "hi",
+    "secs": 17.7,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-02",
+    "lang": "hi",
+    "secs": 13.6,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-03",
+    "lang": "hi",
+    "secs": 23.3,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 1,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hi-04",
+    "lang": "hi",
+    "secs": 16.7,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-05",
+    "lang": "hi",
+    "secs": 15.4,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-06",
+    "lang": "hi",
+    "secs": 15.8,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "hi-07",
+    "lang": "hi",
+    "secs": 20.1,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 1,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hi-08",
+    "lang": "hi",
+    "secs": 11.9,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-09",
+    "lang": "hi",
+    "secs": 15.1,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-10",
+    "lang": "hi",
+    "secs": 9.4,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 0,
+    "id": "hi-11",
+    "lang": "hi",
+    "secs": 19.5,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 2,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hi-12",
+    "lang": "hi",
+    "secs": 13.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-01",
+    "lang": "en",
+    "secs": 11.5,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-02",
+    "lang": "en",
+    "secs": 10.2,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "en-03",
+    "lang": "en",
+    "secs": 10.0,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "en-04",
+    "lang": "en",
+    "secs": 11.0,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 0,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "en-05",
+    "lang": "en",
+    "secs": 11.2,
+    "error": "LLMError: LLMError('unparseable JSON: \\'{\"roles\":[{\"role\":\"Digital support (tech_digital_support)\",\"count\":2,\"required_skills\":[\"tech_digital_support\"],\"evidenc\\'')"
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "en-06",
+    "lang": "en",
+    "secs": 13.4,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "en-07",
+    "lang": "en",
+    "secs": 16.8,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "en-08",
+    "lang": "en",
+    "secs": 6.2,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-09",
+    "lang": "en",
+    "secs": 10.3,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "en-10",
+    "lang": "en",
+    "secs": 6.4,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-01",
+    "lang": "hinglish",
+    "secs": 11.5,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-02",
+    "lang": "hinglish",
+    "secs": 13.5,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-03",
+    "lang": "hinglish",
+    "secs": 12.3,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hg-04",
+    "lang": "hinglish",
+    "secs": 7.9,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hg-05",
+    "lang": "hinglish",
+    "secs": 12.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hg-06",
+    "lang": "hinglish",
+    "secs": 12.8,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 1,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hg-07",
+    "lang": "hinglish",
+    "secs": 8.5,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hg-08",
+    "lang": "hinglish",
+    "secs": 8.1,
+    "error": ""
+   }
+  ]
+ },
+ "Qwen/Qwen2.5-7B-Instruct": {
+  "load_secs": 112.8,
+  "all": {
+   "briefs": 30,
+   "role_recall": 0.932,
+   "role_precision": 0.917,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 10.7
+  },
+  "hi": {
+   "briefs": 12,
+   "role_recall": 0.87,
+   "role_precision": 0.87,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 13.0
+  },
+  "en": {
+   "briefs": 10,
+   "role_recall": 0.95,
+   "role_precision": 0.95,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 9.8
+  },
+  "hinglish": {
+   "briefs": 8,
+   "role_recall": 1.0,
+   "role_precision": 0.941,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 10.7
+  },
+  "rows": [
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-01",
+    "lang": "hi",
+    "secs": 13.8,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 0,
+    "count_within1": 0,
+    "count_exact": 0,
+    "id": "hi-02",
+    "lang": "hi",
+    "secs": 12.7,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "hi-03",
+    "lang": "hi",
+    "secs": 18.0,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-04",
+    "lang": "hi",
+    "secs": 15.5,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-05",
+    "lang": "hi",
+    "secs": 9.2,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-06",
+    "lang": "hi",
+    "secs": 12.0,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "hi-07",
+    "lang": "hi",
+    "secs": 15.5,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-08",
+    "lang": "hi",
+    "secs": 14.1,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-09",
+    "lang": "hi",
+    "secs": 13.0,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-10",
+    "lang": "hi",
+    "secs": 8.3,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hi-11",
+    "lang": "hi",
+    "secs": 12.7,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hi-12",
+    "lang": "hi",
+    "secs": 7.0,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-01",
+    "lang": "en",
+    "secs": 10.4,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-02",
+    "lang": "en",
+    "secs": 9.2,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-03",
+    "lang": "en",
+    "secs": 9.8,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-04",
+    "lang": "en",
+    "secs": 14.3,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-05",
+    "lang": "en",
+    "secs": 9.5,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "en-06",
+    "lang": "en",
+    "secs": 11.8,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-07",
+    "lang": "en",
+    "secs": 15.2,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "en-08",
+    "lang": "en",
+    "secs": 7.1,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "en-09",
+    "lang": "en",
+    "secs": 9.7,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 1,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "en-10",
+    "lang": "en",
+    "secs": 7.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-01",
+    "lang": "hinglish",
+    "secs": 9.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-02",
+    "lang": "hinglish",
+    "secs": 10.7,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-03",
+    "lang": "hinglish",
+    "secs": 11.3,
+    "error": ""
+   },
+   {
+    "gold": 1,
+    "pred": 2,
+    "matched": 1,
+    "count_within1": 1,
+    "count_exact": 1,
+    "id": "hg-04",
+    "lang": "hinglish",
+    "secs": 9.4,
+    "error": ""
+   },
+   {
+    "gold": 3,
+    "pred": 3,
+    "matched": 3,
+    "count_within1": 3,
+    "count_exact": 3,
+    "id": "hg-05",
+    "lang": "hinglish",
+    "secs": 12.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-06",
+    "lang": "hinglish",
+    "secs": 10.7,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-07",
+    "lang": "hinglish",
+    "secs": 10.6,
+    "error": ""
+   },
+   {
+    "gold": 2,
+    "pred": 2,
+    "matched": 2,
+    "count_within1": 2,
+    "count_exact": 2,
+    "id": "hg-08",
+    "lang": "hinglish",
+    "secs": 10.2,
+    "error": ""
+   }
+  ]
+ }
+}
