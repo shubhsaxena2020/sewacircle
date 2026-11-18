@@ -53,7 +53,7 @@ h2 { font-size: 1.6em; } h3 { font-size: 1.25em; }
 .btn:hover:not(:disabled) { background: #0d1218; }
 .btn.secondary { background: var(--canvas); color: var(--ink); border-color: var(--hairline); }
 .btn.secondary:hover:not(:disabled) { border-color: var(--ink); background: var(--canvas); }
-.btn.small { padding: 6px 12px; min-height: 36px; border-radius: var(--r-sm); font-size: 0.9em; }
+.btn.small { white-space: nowrap; padding: 6px 12px; min-height: 36px; border-radius: var(--r-sm); font-size: 0.9em; }
 .btn:disabled { opacity: 0.5; cursor: not-allowed; }
 
 textarea, input[type='text'], input[type='number'], select { width: 100%; border: 1px solid var(--hairline); border-radius: var(--r-sm); padding: 10px 12px; min-height: 44px; background: var(--canvas); }

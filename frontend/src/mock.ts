@@ -4,12 +4,12 @@ import type {
 } from './types'
 
 const roles = [
-  ['r1', 'Team lead', ['team_leadership', 'event_coordination']],
-  ['r2', 'Local-language liaison', ['dialect_awadhi', 'community_mobilisation']],
-  ['r3', 'First-aid support', ['first_aid']],
-  ['r4', 'Logistics and supplies', ['logistics_supplies', 'driving_transport']],
-  ['r5', 'Hygiene educator', ['hygiene_promotion', 'health_education']],
-  ['r6', 'Documentation', ['documentation_reporting', 'photography_video']],
+  ['role-01', 'Team lead', ['team_leadership', 'event_coordination']],
+  ['role-02', 'Local-language liaison', ['dialect_awadhi', 'community_mobilisation']],
+  ['role-03', 'First-aid support', ['first_aid']],
+  ['role-04', 'Logistics and supplies', ['logistics_supplies', 'driving_transport']],
+  ['role-05', 'Hygiene educator', ['hygiene_promotion', 'health_education']],
+  ['role-06', 'Documentation', ['documentation_reporting', 'photography_video']],
 ] as const
 
 export const mockTask: TaskSpec = {
@@ -18,7 +18,7 @@ export const mockTask: TaskSpec = {
   allow_minors: true, synthetic: true,
   roles: roles.map(([id, role, skills]) => ({
     id, role, count: 1, required_skills: [...skills], min_level: 1, priority: 'must' as const,
-    needs_experienced: id === 'r3', evidence_span: '', confidence: 'high' as const,
+    needs_experienced: id === 'role-03', evidence_span: '', confidence: 'high' as const,
   })),
 }
 
@@ -31,15 +31,15 @@ export const mockVolunteers: Volunteer[] = names.map((n, i) => ({
 }))
 
 const reasonsFor: Record<string, string[]> = {
-  r1: ['Led 6 past drives', 'Free Saturday morning', '6 km away'],
-  r2: ['Awadhi speaker (self-declared)', 'Lives in the block', 'Has not been picked in 90 days'],
-  r3: ['First-aid certificate (self-declared, host to confirm)', 'Needs an experienced person: mentors the novice'],
-  r4: ['Owns a vehicle', '9 km away', 'Morning only: matches the slot'],
-  r5: ['Health-science student', 'Guardian consent on file', 'Novice paired with an experienced mentor'],
-  r6: ['Design and photography skills', 'Photography needs site approval'],
+  'role-01': ['Led 6 past drives', 'Free Saturday morning', '6 km away'],
+  'role-02': ['Awadhi speaker (self-declared)', 'Lives in the block', 'Has not been picked in 90 days'],
+  'role-03': ['First-aid certificate (self-declared, host to confirm)', 'Needs an experienced person: mentors the novice'],
+  'role-04': ['Owns a vehicle', '9 km away', 'Morning only: matches the slot'],
+  'role-05': ['Health-science student', 'Guardian consent on file', 'Novice paired with an experienced mentor'],
+  'role-06': ['Design and photography skills', 'Photography needs site approval'],
 }
 const assigned: Assignment[] = [
-  ['r1', 'v1'], ['r2', 'v2'], ['r3', 'v3'], ['r4', 'v4'], ['r5', 'v5'], ['r6', 'v6'],
+  ['role-01', 'v1'], ['role-02', 'v2'], ['role-03', 'v3'], ['role-04', 'v4'], ['role-05', 'v5'], ['role-06', 'v6'],
 ].map(([role_id, vid], i) => ({
   role_id, slot_index: 0, volunteer_id: vid, volunteer_name: names[Number(vid.slice(1)) - 1], score: 0.8 - i * 0.03,
   distance_km: [6, 3, 9, 9, 4, 12][i], reasons: reasonsFor[role_id],
@@ -50,15 +50,15 @@ const base = { task_id: 't1', synthetic: true, explanations: [] as string[], unf
 export const mockCp: RosterResult = {
   ...base, method: 'cp_sat', assignments: assigned,
   standby: [
-    { volunteer_id: 'v7', volunteer_name: 'Volunteer G', covers_role_ids: ['r1', 'r4'], reason: 'Covers team lead or logistics if either drops out' },
-    { volunteer_id: 'v8', volunteer_name: 'Volunteer H', covers_role_ids: ['r2', 'r6'], reason: 'Awadhi speaker and documentation backup' },
+    { volunteer_id: 'v7', volunteer_name: 'Volunteer G', covers_role_ids: ['role-01', 'role-04'], reason: 'Covers team lead or logistics if either drops out' },
+    { volunteer_id: 'v8', volunteer_name: 'Volunteer H', covers_role_ids: ['role-02', 'role-06'], reason: 'Awadhi speaker and documentation backup' },
   ],
   metrics: { role_coverage: 1, slots_filled: 6, slots_required: 6, robustness: 1, repeat_pick_share: 0.17, exposure_gini: 0.31,
     district_spread: 1, novices: 1, mentor_pairs: 1, solve_ms: 420, solver_status: 'OPTIMAL' },
 }
 export const mockBase: RosterResult = {
-  ...base, method: 'nearest_skill', unfilled_role_ids: ['r3', 'r6'],
-  assignments: assigned.filter((a) => !['r3', 'r6'].includes(a.role_id)).map((a) => ({ ...a, reasons: ['Nearest volunteer with a matching skill'], flags: [] })),
+  ...base, method: 'nearest_skill', unfilled_role_ids: ['role-03', 'role-06'],
+  assignments: assigned.filter((a) => !['role-03', 'role-06'].includes(a.role_id)).map((a) => ({ ...a, reasons: ['Nearest volunteer with a matching skill'], flags: [] })),
   standby: [],
   metrics: { role_coverage: 0.67, slots_filled: 4, slots_required: 6, robustness: 0, repeat_pick_share: 0.5, exposure_gini: 0.52,
     district_spread: 1, novices: 0, mentor_pairs: 0, solve_ms: 3, solver_status: 'n/a' },

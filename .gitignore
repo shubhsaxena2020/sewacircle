@@ -7,3 +7,6 @@ logs/
 backend/data/llm_cache/
 frontend/dist/
 .serena/
+.playwright-mcp/
+logs/
+backend/data/state/
