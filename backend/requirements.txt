@@ -1,0 +1,8 @@
+fastapi==0.164.0
+httpx==0.28.1
+numpy==2.5.5
+ortools==9.15.6755
+protobuf==6.33.6
+pydantic==2.14.3
+pytest==9.2.0
+uvicorn==0.54.0
