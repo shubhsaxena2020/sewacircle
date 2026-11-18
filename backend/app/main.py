@@ -18,8 +18,10 @@ from pydantic import BaseModel, Field
 from .evidence import badges, ledger as ledger_mod, rules, transitions
 from .llm import extract as llm_extract
 from .llm.client import LLMError
-from .schemas import (Assignment, AttendanceRow, ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult,
-                      LedgerEntry, LedgerVerification, RosterOptions, RosterResult, TaskSpec, Volunteer)
+from .schemas import (Assignment, AttendanceRow, ContributionCard, Counterfactual, DropoutResult, DriveShareSummary,
+                      EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions, RosterResult,
+                      SharedRoleCount, TaskSpec, Volunteer)
+from . import share
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
@@ -49,6 +51,7 @@ class _State:
     tasks: list[TaskSpec] | None = None
     cards: dict[str, ContributionCard] | None = None
     ledger: Optional[ledger_mod.Ledger] = None
+    roster_ready: dict[str, Optional[bool]] | None = None
 
 
 S = _State()
@@ -66,6 +69,13 @@ def tasks() -> list[TaskSpec]:
         from .data import synth
         S.tasks = synth.make_tasks()
     return S.tasks
+
+
+def roster_ready() -> dict[str, Optional[bool]]:
+    """Ready verdict per task id, for rosters computed in THIS process (never persisted)."""
+    if S.roster_ready is None:
+        S.roster_ready = {}
+    return S.roster_ready
 
 
 def ledger() -> ledger_mod.Ledger:
@@ -158,6 +168,36 @@ def list_tasks() -> Any:
     return _guard(tasks)
 
 
+@app.get("/api/drive/{share_key}", response_model=DriveShareSummary)
+def drive_summary(share_key: str) -> Any:
+    """Public, read-only summary of one drive, addressed by an opaque share key - never by a task id.
+
+    ``share_key`` is the first 16 base32 characters of HMAC-SHA256(secret, task id). The secret is
+    ``SEWA_SHARE_SECRET`` when that environment variable is set; otherwise a random value is generated
+    at first use and kept in memory for this process only, so nothing is written to disk, no secret is
+    committed, and a restart invalidates every link the server handed out. Because a key cannot be
+    computed without the secret, sequential task ids are useless on this route: anything that is not a
+    key derived from this secret is 404, and the task id is never echoed back. The body is built from
+    the task spec plus the in-memory ready verdict, so it contains no volunteer name, id or contact.
+    """
+    def run() -> DriveShareSummary:
+        known = tasks()
+        task_id = share.task_id_for_share_key(share_key, [t.id for t in known])
+        if task_id is None:
+            raise HTTPException(404, "unknown share link")
+        task = next(t for t in known if t.id == task_id)
+        return DriveShareSummary(
+            title=task.title,
+            district=task.district,
+            block=task.block,
+            slot=task.slot,
+            roles=[SharedRoleCount(role=r.role, count=r.count, required_skills=list(r.required_skills),
+                                   safety_critical=r.safety_critical) for r in task.roles],
+            ready=roster_ready().get(task.id),
+        )
+    return _guard(run)
+
+
 class ExtractReq(BaseModel):
     brief_text: str
     language_hint: Optional[str] = None
@@ -185,10 +225,13 @@ def make_roster(req: RosterReq) -> Any:
     def run() -> RosterAll:
         v = volunteers()
         o = req.options  # every method gets the same candidate pool (opt-in filter included)
-        return RosterAll(cp_sat=solver.build_roster(req.task, v, o),
-                         nearest_skill=solver.baseline_nearest_skill(req.task, v, o),
-                         random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
-                         manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
+        result = RosterAll(cp_sat=solver.build_roster(req.task, v, o),
+                           nearest_skill=solver.baseline_nearest_skill(req.task, v, o),
+                           random_feasible=solver.baseline_random_feasible(req.task, v, o.seed, o),
+                           manual_greedy=solver.baseline_manual_greedy(req.task, v, o))
+        # Remembered in memory only, so the public share route can show the verdict it was given here.
+        roster_ready()[req.task.id] = result.cp_sat.ready
+        return result
     return _guard(run)
 
 

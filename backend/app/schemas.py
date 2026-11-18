@@ -140,6 +140,33 @@ class TaskSpec(BaseModel):
         return v
 
 
+# ---------------- public drive summary (opaque share keys) ----------------
+class SharedRoleCount(BaseModel):
+    """One role in a public summary: what the drive needs, never who fills it."""
+    role: str
+    count: int
+    required_skills: list[str] = Field(default_factory=list)
+    safety_critical: bool = False
+
+
+class DriveShareSummary(BaseModel):
+    """Public, read-only view of ONE drive reached through an opaque share key.
+
+    Deliberately has no volunteer id, name, contact field or task id: the key is
+    the only handle the holder gets, and the summary is safe to paste into a
+    WhatsApp group. ``ready`` is None until a roster for this drive was computed
+    in this server process.
+    """
+    title: str
+    district: str
+    block: str
+    slot: str
+    roles: list[SharedRoleCount] = Field(default_factory=list)
+    ready: Optional[bool] = None
+    notice: str = "Public read-only summary of one synthetic drive. No volunteer is named or identified."
+    synthetic: bool = True
+
+
 # ---------------- extraction (LLM) ----------------
 class ExtractedRole(BaseModel):
     unresolved: bool = False
