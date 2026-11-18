@@ -4,7 +4,7 @@ import type {
 } from './types'
 import { mockHandler } from './mock'
 
-export const MOCK = new URLSearchParams(location.search).has('mock')
+export const MOCK = ['true','1'].includes(import.meta.env.VITE_MOCK ?? '') || new URLSearchParams(location.search).has('mock')
 
 export class ApiError extends Error {
   status: number

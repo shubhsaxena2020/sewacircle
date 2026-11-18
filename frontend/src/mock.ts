@@ -13,7 +13,7 @@ const roles = [
 ] as const
 
 export const mockTask: TaskSpec = {
-  id: 't1', title: 'Water and hygiene camp (mock)', brief_text: '', language: 'hi', slot: 'sat_morning',
+  id: 't1', title: 'Water and hygiene camp (mock)', brief_text: 'शनिवार सुबह गाँव में पानी और स्वच्छता शिविर है। टीम लीडर, स्थानीय भाषा में बात करने वाला, प्राथमिक उपचार, सामान और दस्तावेज़ीकरण के लिए स्वयंसेवक चाहिए।', language: 'hi', slot: 'sat_morning',
   district: 'Kanpur Dehat', block: 'Bilhaur', lat: 26.85, lon: 80.07, team_size: 6, max_travel_km: 15,
   allow_minors: true, synthetic: true,
   roles: roles.map(([id, role, skills]) => ({
@@ -25,15 +25,15 @@ export const mockTask: TaskSpec = {
 const names = ['Volunteer A', 'Volunteer B', 'Volunteer C', 'Volunteer D', 'Volunteer E', 'Volunteer F', 'Volunteer G', 'Volunteer H']
 export const mockVolunteers: Volunteer[] = names.map((n, i) => ({
   id: `v${i + 1}`, display_name: n, age: [21, 19, 22, 20, 17, 23, 24, 19][i], gender: ['M', 'F', 'F', 'M', 'F', 'M', 'F', 'M'][i],
-  district: 'Kanpur Dehat', block: 'Bilhaur', lat: 26.8, lon: 80.1, skills: {}, self_declared_skills: [],
+  district: 'Kanpur Dehat', block: 'Bilhaur', lat: 26.8, lon: 80.1, skills: (i === 2 || i === 7 ? { first_aid: 2 } : {}) as Record<string, number>, self_declared_skills: [],
   languages: ['hi'], available_slots: ['sat_morning'], has_vehicle: i === 3, past_drives: [6, 2, 4, 1, 0, 3, 7, 2][i],
-  times_picked_last_90d: [4, 0, 1, 0, 0, 2, 5, 1][i], guardian_consent: i === 4 ? true : null, synthetic: true,
+  times_picked_last_90d: [4, 0, 1, 0, 0, 2, 5, 1][i], guardian_consent: i === 4 ? true : null, opted_in_task_ids: ['t1'], synthetic: true,
 }))
 
 const reasonsFor: Record<string, string[]> = {
   'role-01': ['Led 6 past drives', 'Free Saturday morning', '6 km away'],
   'role-02': ['Awadhi speaker (self-declared)', 'Lives in the block', 'Has not been picked in 90 days'],
-  'role-03': ['First-aid certificate (self-declared, host to confirm)', 'Needs an experienced person: mentors the novice'],
+  'role-03': ['First-aid skill checked by host', 'Needs an experienced person: mentors the novice'],
   'role-04': ['Owns a vehicle', '9 km away', 'Morning only: matches the slot'],
   'role-05': ['Health-science student', 'Guardian consent on file', 'Novice paired with an experienced mentor'],
   'role-06': ['Design and photography skills', 'Photography needs site approval'],
@@ -43,15 +43,15 @@ const assigned: Assignment[] = [
 ].map(([role_id, vid], i) => ({
   role_id, slot_index: 0, volunteer_id: vid, volunteer_name: names[Number(vid.slice(1)) - 1], score: 0.8 - i * 0.03,
   distance_km: [6, 3, 9, 9, 4, 12][i], reasons: reasonsFor[role_id],
-  flags: [i === 1 || i === 2 ? 'self_declared_skill' : '', i === 4 ? 'novice' : '', i === 4 ? 'minor_guardian_consent' : ''].filter(Boolean),
+  flags: [i === 1 ? 'self_declared_skill' : '', i === 4 ? 'novice' : '', i === 4 ? 'minor_guardian_consent' : ''].filter(Boolean),
 }))
 
 const base = { task_id: 't1', synthetic: true, explanations: [] as string[], unfilled_role_ids: [] as string[] }
 export const mockCp: RosterResult = {
   ...base, method: 'cp_sat', assignments: assigned,
   standby: [
-    { volunteer_id: 'v7', volunteer_name: 'Volunteer G', covers_role_ids: ['role-01', 'role-04'], reason: 'Covers team lead or logistics if either drops out' },
-    { volunteer_id: 'v8', volunteer_name: 'Volunteer H', covers_role_ids: ['role-02', 'role-06'], reason: 'Awadhi speaker and documentation backup' },
+    { volunteer_id: 'v7', volunteer_name: 'Volunteer G', covers_role_ids: ['role-01', 'role-04', 'role-05'], reason: 'Covers lead, logistics or hygiene if needed' },
+    { volunteer_id: 'v8', volunteer_name: 'Volunteer H', covers_role_ids: ['role-02', 'role-03', 'role-06'], reason: 'Covers liaison, host-checked first aid or documentation' },
   ],
   metrics: { role_coverage: 1, slots_filled: 6, slots_required: 6, robustness: 1, repeat_pick_share: 0.17, exposure_gini: 0.31,
     district_spread: 1, novices: 1, mentor_pairs: 1, solve_ms: 420, solver_status: 'OPTIMAL' },
@@ -106,7 +106,7 @@ export async function mockHandler(method: string, path: string, body: unknown): 
   if (path === '/tasks') return [mockTask]
   if (path === '/volunteers') return mockVolunteers
   if (path === '/extract-roles') return delay(mockExtraction, 900)
-  if (path === '/roster') return delay<RosterBoth>({ cp_sat: mockCp, nearest_skill: mockBase }, 700)
+  if (path === '/roster') return delay<RosterBoth>({ cp_sat: { ...mockCp, ready: true }, nearest_skill: { ...mockBase, ready: false }, manual_greedy: { ...mockCp, method: 'manual_greedy', ready: true }, random_feasible: { ...mockBase, method: 'random_feasible', ready: false } }, 700)
   if (path === '/roster/why-not') {
     const v = mockVolunteers.find((x) => x.id === b.volunteer_id)
     return delay({ volunteer_id: b.volunteer_id, volunteer_name: v?.display_name ?? '', feasible: true, delta_role_coverage: 0, delta_robustness: -0.17,

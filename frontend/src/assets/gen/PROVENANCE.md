@@ -1,0 +1,8 @@
+# Generated illustration provenance
+
+Generated on 2026-11-19 with OpenAI image generation for this SewaCircle front end. Both are original illustrations. The generated PNGs were converted to WebP for delivery; the unmodified PNG originals remain in the local generation output, outside this repository. Neither contains stock imagery or government marks.
+
+| File | Prompt |
+|---|---|
+| `crew.webp` | Create an original editorial illustration for a civic volunteer crew planning product. Wide landscape composition, richly layered paper-cut and subtle risograph texture. Abstract hands arranging small rounded volunteer tokens into a precise grid of role slots, with one deliberately empty slot and a second backup token behind a filled slot. Warm chalk background, deep midnight indigo, muted copper, signal teal. No photorealism, no faces, no flags, no government symbols, no logos, no letters or text. Sophisticated contemporary Indian editorial sensibility without cultural clichés. High contrast, clean negative space for cropping. |
+| `evidence.webp` | Original editorial risograph illustration for a youth volunteering operations website. A close-up abstract sequence of three layered paper cards: a handwritten host note represented only by abstract lines, a structured contribution card with a bold check mark, and linked ledger blocks connected by a thin cord. One small caution marker on the middle card. Palette midnight indigo, warm chalk, muted copper and signal teal; tactile paper grain and dimensional cut edges. No people, no readable text, no letters, no logos, no government imagery or flags. Horizontal composition, sophisticated contemporary product illustration. |
