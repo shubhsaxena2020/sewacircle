@@ -1,0 +1,38 @@
+# Reuse, reverse engineering and Kaggle — decision memo
+
+19 Nov 2026. FACT/INFERENCE/OPINION labels distinguish evidence from a practical recommendation. This is a product/legal risk analysis, not a legal opinion. No competitor code or data was copied for these documents.
+
+## The proposed 1:1 copy
+
+**OPINION: reject it.** A one-to-one clone of MY Bharat would duplicate the incumbent, hide the team's actual contribution and undermine the [judges' novelty-of-approach criterion](https://www.inmobi.com/ai-kaushal). **FACT:** India's [Copyright Office manual](https://copyright.gov.in/Documents/Manuals/LITERARY_MANUAL.pdf) treats computer programs as protected literary works and warns that adapting protected work for publication needs a licence/consent. The [Copyright Act text](https://copyright.gov.in/Documents/Copyright_Act_1957.pdf) has limited interoperability/study exceptions; they do not grant a general right to republish a cloned portal. **FACT:** [MY Bharat terms](https://mybharat.gov.in/pages/terms_of_use) explicitly prohibit reverse engineering/decompilation, automated retrieval, mirroring and harvesting users; they distinguish accurately attributed public material from third-party content and say API clients need an undertaking. A public URL is not a source-code licence. Do not scrape profiles, reuse assets, impersonate the portal or call private APIs. **NOT FOUND:** the [hackathon page](https://www.inmobi.com/ai-kaushal) says build/refine in 24 hours but does not explicitly rule on prepared code. Ask organisers; disclose any allowed prior work.
+
+## Legitimate reusable building blocks
+
+Verify the **specific version/commit and dependency notices** when packaging. Licences allow use subject to their terms; event rules are a separate gate.
+
+| Project and opened licence/source | Use here | Boundary |
+|---|---|---|
+| [Google OR-Tools](https://github.com/google/or-tools/blob/stable/LICENSE) — Apache-2.0 | CP-SAT qualified role allocation and counterfactuals; already used in repo. | Retain licence/NOTICE; explain the team's own objective and constraints. |
+| [FastAPI](https://github.com/fastapi/fastapi/blob/master/LICENSE) — MIT | Typed local API; already in repo. | Keep copyright/licence notice. |
+| [React](https://github.com/react/react/blob/main/LICENSE) — MIT and [Vite](https://github.com/vitejs/vite/blob/main/packages/vite/LICENSE.md?plain=1) — MIT | Small accessible demo UI; already in repo. | Check bundled dependency notices; do not clone a proprietary design. |
+| [CiviCRM/CiviVolunteer](https://civicrm.org/extensions/civivolunteer) — core [AGPL-3.0 plus licensing exception](https://civicrm.org/about/license); extension [source](https://github.com/civicrm/org.civicrm.volunteer) includes AGPL files | Study documented roles, shifts, manual assignment and hours; a potential **future** integration experiment. | Heavy PHP CRM and copyleft obligations make a 24-hour transplant a poor fit. Check extension-specific licence before incorporating any code; do not paste modules into this app casually. |
+
+**Reuse hierarchy:** first use upstream packages as dependencies; second use public specifications and documented UX patterns with independent implementation; third consider an OSS component only after checking its licence, version, fit and attribution. The current SewaCircle repo is pre-event team work; whether it is usable on-site requires the organiser's answer. No unlicensed UI clone, copied source map or bundled competitor assets.
+
+## What to study and how
+
+| Public product | Permitted research question from opened public material | What it already does |
+|---|---|---|
+| [MY Bharat about](https://mybharat.gov.in/about_mybharat) + [PIB dashboard/volunteer facts](https://www.pib.gov.in/PressReleseDetailm.aspx?PRID=2222299&lang=1&reg=6) | What task/role fields and official exchange format would a programme owner need? Ask owner; do not automate the portal. | Volunteering, credentials, attendance/monitoring, internal dashboard; [WhatsApp](https://www.pib.gov.in/PressReleasePage.aspx?PRID=2140066&lang=2&reg=3) is already live. |
+| [NSS manual](https://nss.gov.in/assets/admin/uploads/homepage/manualNss2006.pdf) and [NYKS SOP](https://nyks.nic.in/AnnualActionPlanGuidliness202223/SOPofIVEP.pdf) | Which officer actually assigns roles, records hours and corrects the record? | NSS already instructs grouping by aptitude/skill and work diaries; NYKS keeps district volunteer skills/interests. |
+| [iVolunteer](https://www.ivolunteer.in/how-iVolunteer-supports-volunteers?layoutViewMode=desktop) | How do volunteers state interest, time, distance, skills and form a team? Where is failure recovery explained? | Team creation, dashboard, attendance and downloadable history. |
+| [GivePulse](https://support.givepulse.com/hc/en-us/articles/47799991915539-Configure-Mobile-App-Settings-for-Events-Admins) and [Better Impact](https://support.betterimpact.com/en/articles/18325829-comprehensive-guide-to-scheduling) | How are hours, approved qualification, overlapping shifts and admin review displayed? | Hours verification/geofencing and mature schedule controls. |
+| [CiviVolunteer](https://civicrm.org/extensions/civivolunteer) | Does an OSS host already offer role/shift assignment and hour reports? | Yes; that is the standard to exceed for the specific counterfactual decision. |
+
+**REA toolkit:** the local `C:\Users\shubh\Projects\rea\README.md` documents evidence-backed inspection of websites, JS apps, binaries and captures. Use it on **SewaCircle's own app** or an OSS demo with licence/authority, to map UI states, API boundaries and missed failure paths; record observed behaviour and unknowns. For public third-party web apps, first check terms and scope, use only observation expressly allowed and avoid login bypass, private APIs, data extraction, source recovery or asset reuse. In particular, **do not point REA at MY Bharat** because its opened terms prohibit reverse engineering and automated retrieval. REA's capability is not permission. A manual feature matrix from published docs is sufficient for the idea submission.
+
+## Kaggle: concrete use and stop rule
+
+**FACT:** [Kaggle's GPU guidance](https://www.kaggle.com/docs/efficient-gpu-usage) describes a weekly GPU quota around 30 hours, varying with demand, and says ordinary pandas/scikit-learn workflows do not gain from GPU. The user reports 30 h/week. **OPINION:** the chosen MVP needs **zero GPU hours**. OR-Tools CP-SAT and the small harness run locally; the 19 Nov local harness completed in about 2.6 s wall time for the command, so Kaggle does not fix the main credibility gap.
+
+Useful pre-event Kaggle **CPU** notebook: generate a declared grid of pool sizes (20/80/500), shortage rates and dropout cases; pin seed/version; run the three same-eligibility methods; save raw rows, worst cases, runtime distribution and notebook commit. This tests scale sensitivity, **not** UP performance. Better use of preparation time: independently authored, consent-safe language cases and a real organiser workflow study. Optional **GPU** experiment only if voice is justified after the core works: choose a publicly licensed Hindi/Hinglish audio set or freshly consented adult samples, compare two speech-to-text models on word error rate **and downstream role/count error**, log hardware/time and retain a manual text fallback. No small fine-tune without enough licensed labelled audio, a held-out set and a measured benefit. Never upload real youth notes, contact data or government records to Kaggle. Do not depend on a notebook, GPU quota or internet for the finals demo.
