@@ -9,10 +9,12 @@ is auto-rejected. All example volunteer/task data in this lane is SYNTHETIC.
 Rule catalogue (code | severity | deterministic definition)
 ------------------------------------------------------------
 hours_exceed_recorded | warn
-    A matching attendance row supplies a numeric recorded_hours and
-    claimed_hours > recorded_hours + 0.01. The 0.01 epsilon tolerates rounding.
-    If several rows match, the largest recorded value is used (a conservative
-    choice that avoids flagging split attendance records).
+    AttendanceRow.hours is the RECORDED hours from the attendance sheet,
+    NEVER the volunteer's claim. If claimed_hours > row.hours + 0.01 this
+    rule flags the gap; the 0.01 epsilon tolerates rounding. If several rows
+    match, the largest row.hours is used (a conservative choice that avoids
+    flagging split attendance records). card.recorded_hours is never used as
+    the comparison source: only attendance rows are.
 no_attendance_record | warn
     No attendance row is attributable to (volunteer_id, task_id).
 implausible_hours | block
@@ -25,14 +27,20 @@ identical_summary_text | warn
     non-empty and identical to the normalized summary of another card in the
     batch. Catches copy-paste claims.
 overlapping_tasks | warn
-    From attendance rows with parseable check_in/check_out (HH:MM or ISO
-    datetime), the same volunteer has strictly overlapping time windows on two
-    DIFFERENT task ids, one of which is this card's task. Windows are compared
-    only when both dates are known and equal, or both are time-only; inverted /
-    zero-length / unparseable windows are skipped rather than false-flagged.
+    From AttendanceRow.check_in / check_out (ISO-8601 strings, with an
+    optional offset), the same volunteer has strictly overlapping windows on
+    two DIFFERENT task ids, one of which is this card's task. Timezone rule:
+    naive values are interpreted as UTC and offset-aware values are converted
+    to UTC, then both are stored as (date ordinal, minute-of-day) in that
+    common UTC-ish clock - so 09:00+05:30 and 03:30Z denote the same instant.
+    Windows are compared only when both dates are equal after UTC
+    normalisation, or both are time-only; inverted / zero-length / unparseable
+    windows are skipped rather than false-flagged.
 minor_without_guardian_consent | block
-    Any matching row or card context says age < 18 (or is_minor is true) and no
-    source says guardian_consent is exactly True.
+    A matching AttendanceRow with age < 18 and guardian_consent is not exactly
+    True. Legacy card/row context (age / is_minor) is consulted only when no
+    matching typed row supplies an age; it never overrides a typed row's
+    guardian_consent.
 self_declared_skill_unconfirmed | info
     A matching row or the card context carries self_declared_skills, or a flag
     labelled self_declared_skill. Informational: self-declaration is normal,
@@ -49,11 +57,13 @@ missing_evidence_ref | warn (10th rule, chosen by this implementation)
     small, low-risk activities may legitimately have no saved artifact and
     because hosts can still confirm the card manually.
 
-Matching of attendance rows is intentionally tolerant: keys are looked up
-case-insensitively with punctuation/spacing collapsed, aliases are accepted
-(e.g. volunteerId / vid, taskId / tid, hours / recorded_hours), ids are compared
-as stripped, casefolded strings, and rows missing a task id still match on a
-volunteer id. Rows with neither id are ignored.
+Matching of attendance rows is intentionally tolerant: the public signature is
+typed (list[AttendanceRow]) and tests use real AttendanceRow objects, but odd
+legacy dict-like rows are still read defensively via model_validate where
+possible and otherwise via case-insensitive, punctuation-collapsed alias
+lookups (e.g. Volunteer ID / volunteerId, hours / recorded_hours). Ids are
+compared as stripped, casefolded strings, and rows missing a task id still
+match on a volunteer id. Rows with neither id are ignored.
 """
 from __future__ import annotations
 
@@ -63,7 +73,7 @@ from collections import Counter
 from datetime import datetime, timezone
 from typing import Any
 
-from ..schemas import ContributionCard, Flag
+from ..schemas import AttendanceRow, ContributionCard, Flag
 
 HOURS_EPSILON = 0.01
 MAX_DAILY_HOURS = 12.0
@@ -152,10 +162,33 @@ def _as_number(value: Any) -> float | None:
     return number if math.isfinite(number) else None
 
 
+def _row_source(row: Any) -> Any:
+    """Accept a typed AttendanceRow; defensively validate odd legacy mappings.
+
+    A dict that validates as an AttendanceRow is normalised (e.g. a numeric
+    string in `hours` becomes a float). An odd legacy dict that cannot be
+    validated - missing fields, unusual key spellings - is returned unchanged
+    so the alias lookups in `_get` can still read it. Never mutates the input.
+    """
+    if isinstance(row, AttendanceRow):
+        return row
+    if isinstance(row, dict):
+        try:
+            return AttendanceRow.model_validate(row)
+        except ValueError:
+            return row
+    return row
+
+
+def _recorded_hours(row: Any) -> float | None:
+    """RECORDED hours from the attendance sheet (AttendanceRow.hours)."""
+    if isinstance(row, AttendanceRow):
+        return _as_number(row.hours)
+    return _as_number(_get(row, _HOURS_KEYS))
+
+
 def _row_matches(row: Any, card: ContributionCard) -> bool:
     """Tolerant (volunteer_id, task_id) attribution for one attendance row."""
-    if not isinstance(row, dict):
-        return False
     row_volunteer = _as_id(_get(row, _VOLUNTEER_KEYS))
     row_task = _as_id(_get(row, _TASK_KEYS))
     if row_volunteer is None and row_task is None:
@@ -216,19 +249,38 @@ def _flag_texts(value: Any) -> list[str]:
     return [str(value)]
 
 
+def _nonempty(value: Any) -> bool:
+    """True for a present, non-blank field (used for optional context keys)."""
+    if value is None or isinstance(value, bool) or value is _MISSING:
+        return False
+    if isinstance(value, (list, tuple, set, dict, str)):
+        return len(value) > 0 if not isinstance(value, str) else bool(value.strip())
+    return True
+
+
 def _has_self_declared(value: Any) -> bool:
     tokens = {_norm_key(token) for token in _SELF_DECLARED_TOKENS}
     return any(_norm_key(text) in tokens for text in _flag_texts(value))
 
 
 def _parse_time(value: Any) -> tuple[int | None, float] | None:
-    """Return (day ordinal or None, minutes from midnight) for HH:MM or ISO."""
+    """Return (day ordinal or None, minutes from midnight) for HH:MM or ISO.
+
+    Timezone rule: naive values are interpreted as UTC; offset-aware values
+    are converted with astimezone(UTC) and stripped of tzinfo. Both therefore
+    share one naive UTC-ish clock (e.g. 09:00+05:30 -> 03:30Z -> 210 minutes),
+    so offsets are compared correctly rather than as wall-clock strings.
+    """
     if value is None or isinstance(value, bool):
         return None
     if isinstance(value, datetime):
         moment = value
     elif hasattr(value, "hour") and hasattr(value, "minute"):  # datetime.time
-        return (None, value.hour * 60 + value.minute + getattr(value, "second", 0) / 60)
+        if getattr(value, "tzinfo", None) is not None:
+            moment = datetime.combine(datetime(2000, 1, 1).date(),
+                                      value.replace(tzinfo=None)).replace(tzinfo=value.tzinfo)
+        else:
+            return (None, value.hour * 60 + value.minute + getattr(value, "second", 0) / 60)
     else:
         text = str(value).strip()
         if not text:
@@ -276,13 +328,17 @@ def _windows_overlap(left: tuple[int | None, float, float], right: tuple[int | N
 
 def _overlapping_other_tasks(card: ContributionCard, rows: list[Any]) -> list[str]:
     by_task: dict[tuple[str, str], list[tuple[int | None, float, float]]] = {}
+    task_display: dict[str, str] = {}
     for row in rows:
-        if not isinstance(row, dict):
-            continue
         volunteer = _as_id(_get(row, _VOLUNTEER_KEYS))
-        task = _as_id(_get(row, _TASK_KEYS))
+        raw_task = _get(row, _TASK_KEYS)
+        task = _as_id(raw_task)
         if volunteer is None or task is None:
             continue
+        if isinstance(raw_task, str) and raw_task.strip():
+            task_display.setdefault(task, raw_task.strip())
+        else:
+            task_display.setdefault(task, task)
         window = _window(row)
         if window is not None:
             by_task.setdefault((volunteer, task), []).append(window)
@@ -299,10 +355,10 @@ def _overlapping_other_tasks(card: ContributionCard, rows: list[Any]) -> list[st
                 continue
             if any(_windows_overlap(a, b) for a in windows for b in other_windows):
                 others.add(other_task)
-    return sorted(others)
+    return sorted(task_display.get(task, task) for task in others)
 
 
-def _ages_and_consent(card: ContributionCard, matching_rows: list[dict]) -> tuple[list[float], list[Any]]:
+def _ages_and_consent(card: ContributionCard, matching_rows: list[Any]) -> tuple[list[float], list[Any]]:
     ages: list[float] = []
     consents: list[Any] = []
     for source in list(matching_rows) + [card]:
@@ -317,16 +373,28 @@ def _ages_and_consent(card: ContributionCard, matching_rows: list[dict]) -> tupl
     return ages, consents
 
 
-def _minor_without_consent(card: ContributionCard, matching_rows: list[dict]) -> bool:
+def _minor_without_consent(card: ContributionCard, matching_rows: list[Any]) -> bool:
+    """Typed first: row.age < 18 and row.guardian_consent is not True.
+
+    If any matching typed AttendanceRow supplies an age, only typed rows
+    decide this rule - a recorded guardian consent of True on that row is
+    authoritative. Old-style card/row context (age, is_minor, guardian_consent)
+    is a fallback for legacy callers that still pass dict-like rows.
+    """
+    typed = [row for row in matching_rows if isinstance(row, AttendanceRow)]
+    if any(row.age is not None for row in typed):
+        return any(row.age is not None and row.age < 18 and row.guardian_consent is not True
+                   for row in typed)
     ages, consents = _ages_and_consent(card, matching_rows)
     if not any(age < 18 for age in ages):
         return False
     return not any(consent is True for consent in consents)
 
 
-def _self_declared(card: ContributionCard, matching_rows: list[dict]) -> bool:
+def _self_declared(card: ContributionCard, matching_rows: list[Any]) -> bool:
     for source in list(matching_rows) + [card]:
-        if _has_self_declared(_get(source, _SELF_DECLARED_KEYS)):
+        raw = _get(source, _SELF_DECLARED_KEYS, _MISSING)
+        if _nonempty(raw) or _has_self_declared(raw):
             return True
         if _has_self_declared(_get(source, _FLAGS_KEYS)):
             return True
@@ -337,20 +405,21 @@ def _self_declared(card: ContributionCard, matching_rows: list[dict]) -> bool:
 
 
 def check_card(card: ContributionCard, all_cards: list[ContributionCard],
-               attendance_rows: list[dict]) -> list[Flag]:
+               attendance_rows: list[AttendanceRow]) -> list[Flag]:
     """Deterministically flag anomalies on one SYNTHETIC contribution card.
 
     Returns a fresh list of Flags in a fixed rule order. Inputs are read-only:
-    the card's status and flags are never modified.
+    the card's status and flags are never modified. `attendance_rows` are typed
+    AttendanceRow objects: their `hours` is RECORDED time, never the claim.
     """
     flags: list[Flag] = []
-    rows = [row for row in (attendance_rows or []) if isinstance(row, dict)]
+    rows = [_row_source(row) for row in (attendance_rows or [])]
     matching = [row for row in rows if _row_matches(row, card)]
     pool = _pool(card, all_cards)
 
     # 1. hours_exceed_recorded
     recorded = [number for row in matching
-                if (number := _as_number(_get(row, _HOURS_KEYS))) is not None]
+                if (number := _recorded_hours(row)) is not None]
     claimed = _as_number(card.claimed_hours)
     if recorded and claimed is not None and claimed > max(recorded) + HOURS_EPSILON:
         flags.append(Flag(

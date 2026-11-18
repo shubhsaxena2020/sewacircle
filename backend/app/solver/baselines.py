@@ -18,9 +18,9 @@ import random
 import time
 from typing import Iterable
 
-from ..schemas import (Assignment, Method, RosterMetrics, RosterOptions, RosterResult, RoleSpec,
+from ..schemas import (Assignment, Method, SlotRef, RosterMetrics, RosterOptions, RosterResult, RoleSpec,
                        StandbyPick, TaskSpec, Volunteer)
-from .metrics import best_skill_level, compute_metrics, distance_km, is_eligible
+from .metrics import best_skill_level, compute_metrics, distance_km, is_eligible, unfilled_slots
 
 
 def _forced_sets(task: TaskSpec, options: RosterOptions | None) -> tuple[list[str], set[str]]:
@@ -111,7 +111,7 @@ def _apply_forced_in(task: TaskSpec, volunteers: list[Volunteer], assignments: l
             old.volunteer_id = v.id
             old.volunteer_name = v.display_name
             old.distance_km = round(distance_km(task, v), 3)
-            old.reasons = _reasons(v, r, task, how, 0.0) + [
+            old.reasons = _reasons(v, r, task, how) + [
                 "Included because the organiser forced this volunteer in "
                 f"(replaced {replaced_name} on {r.role})."
             ]
@@ -127,9 +127,8 @@ def _apply_forced_in(task: TaskSpec, volunteers: list[Volunteer], assignments: l
 def _finish(task: TaskSpec, volunteers: list[Volunteer], method: Method,
             assignments: list[Assignment], standby: list[StandbyPick], explanations: list[str],
             started: float) -> RosterResult:
-    filled = {(a.role_id, a.slot_index) for a in assignments
-              if any(r.id == a.role_id and 0 <= a.slot_index < r.count for r in task.roles)}
-    unfilled = [r.id for r in task.roles if any((r.id, i) not in filled for i in range(r.count))]
+    open_slots = unfilled_slots(task, volunteers, assignments)  # A1: exact must slots left open
+    unfilled = list(dict.fromkeys(rid for rid, _ in open_slots))
     if unfilled:
         explanations.append("Unfilled role slots: " + ", ".join(unfilled) +
                              ". No eligible, unassigned volunteer was available; reported honestly.")
@@ -139,6 +138,7 @@ def _finish(task: TaskSpec, volunteers: list[Volunteer], method: Method,
         assignments=assignments,
         standby=standby,
         unfilled_role_ids=unfilled,
+        unfilled_slots=[SlotRef(role_id=r, slot_index=i) for r, i in open_slots],
         metrics=RosterMetrics(role_coverage=0.0, slots_filled=0, slots_required=0,
                               robustness=0.0, repeat_pick_share=0.0, exposure_gini=0.0,
                               district_spread=0),

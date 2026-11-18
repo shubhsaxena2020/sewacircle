@@ -1,0 +1,548 @@
+{
+ "n_tasks": 10,
+ "n_volunteers": 80,
+ "rows": [
+  {
+   "task_id": "task-01",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.6074380165289257,
+   "solve_ms": 33
+  },
+  {
+   "task_id": "task-01",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.16666666666666666,
+   "repeat_pick_share": 0.16666666666666666,
+   "exposure_gini": 0.6680440771349863,
+   "solve_ms": 1
+  },
+  {
+   "task_id": "task-01",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.3333333333333333,
+   "exposure_gini": 0.6735537190082646,
+   "solve_ms": 3
+  },
+  {
+   "task_id": "task-01",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.7833333333333333,
+   "repeat_pick_share": 0.08333333333333333,
+   "exposure_gini": 0.6241046831955923,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-02",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.16666666666666666,
+   "exposure_gini": 0.42222222222222205,
+   "solve_ms": 8
+  },
+  {
+   "task_id": "task-02",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.16666666666666666,
+   "repeat_pick_share": 0.16666666666666666,
+   "exposure_gini": 0.5222222222222221,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-02",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.16666666666666666,
+   "exposure_gini": 0.5555555555555554,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-02",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.25,
+   "repeat_pick_share": 0.14166666666666666,
+   "exposure_gini": 0.4966666666666666,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-03",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.75,
+   "exposure_gini": 0.17307692307692313,
+   "solve_ms": 6
+  },
+  {
+   "task_id": "task-03",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.75,
+   "exposure_gini": 0.17307692307692313,
+   "solve_ms": 1
+  },
+  {
+   "task_id": "task-03",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.75,
+   "exposure_gini": 0.17307692307692313,
+   "solve_ms": 1
+  },
+  {
+   "task_id": "task-03",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.9,
+   "repeat_pick_share": 0.7416666666666667,
+   "exposure_gini": 0.17476923076923082,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-04",
+   "method": "cp_sat",
+   "role_coverage": 0.3333333333333333,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5,
+   "solve_ms": 2
+  },
+  {
+   "task_id": "task-04",
+   "method": "nearest_skill",
+   "role_coverage": 0.3333333333333333,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-04",
+   "method": "manual_greedy",
+   "role_coverage": 0.3333333333333333,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-04",
+   "method": "random_feasible",
+   "role_coverage": 0.3333333333333333,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-05",
+   "method": "cp_sat",
+   "role_coverage": 0.8333333333333334,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.6,
+   "exposure_gini": 0.3697478991596639,
+   "solve_ms": 3
+  },
+  {
+   "task_id": "task-05",
+   "method": "nearest_skill",
+   "role_coverage": 0.8333333333333334,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.8,
+   "exposure_gini": 0.37815126050420167,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-05",
+   "method": "manual_greedy",
+   "role_coverage": 0.8333333333333334,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.8,
+   "exposure_gini": 0.37815126050420167,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-05",
+   "method": "random_feasible",
+   "role_coverage": 0.7416666666666667,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.645,
+   "exposure_gini": 0.3724344283167813,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-06",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.25,
+   "exposure_gini": 0.5538461538461537,
+   "solve_ms": 7
+  },
+  {
+   "task_id": "task-06",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.75,
+   "exposure_gini": 0.6076923076923075,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-06",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.75,
+   "exposure_gini": 0.6076923076923075,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-06",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.4375,
+   "exposure_gini": 0.5838461538461537,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-07",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 0.6,
+   "repeat_pick_share": 0.2,
+   "exposure_gini": 0.5125,
+   "solve_ms": 4
+  },
+  {
+   "task_id": "task-07",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.2,
+   "repeat_pick_share": 0.4,
+   "exposure_gini": 0.5249999999999999,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-07",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 0.6,
+   "repeat_pick_share": 0.4,
+   "exposure_gini": 0.5249999999999999,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-07",
+   "method": "random_feasible",
+   "role_coverage": 0.9625,
+   "robustness": 0.26,
+   "repeat_pick_share": 0.3225,
+   "exposure_gini": 0.5182894736842105,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-08",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5071428571428571,
+   "solve_ms": 22
+  },
+  {
+   "task_id": "task-08",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.5842857142857143,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-08",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.4,
+   "exposure_gini": 0.5871428571428572,
+   "solve_ms": 2
+  },
+  {
+   "task_id": "task-08",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.11000000000000001,
+   "exposure_gini": 0.5488571428571428,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-09",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.3333333333333333,
+   "exposure_gini": 0.4222222222222223,
+   "solve_ms": 6
+  },
+  {
+   "task_id": "task-09",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.6666666666666666,
+   "exposure_gini": 0.4444444444444444,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-09",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.6666666666666666,
+   "exposure_gini": 0.4444444444444444,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-09",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.4833333333333333,
+   "exposure_gini": 0.41222222222222227,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-10",
+   "method": "cp_sat",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.6363636363636362,
+   "solve_ms": 17
+  },
+  {
+   "task_id": "task-10",
+   "method": "nearest_skill",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.3333333333333333,
+   "exposure_gini": 0.6414141414141414,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-10",
+   "method": "manual_greedy",
+   "role_coverage": 1.0,
+   "robustness": 1.0,
+   "repeat_pick_share": 0.0,
+   "exposure_gini": 0.6363636363636362,
+   "solve_ms": 0
+  },
+  {
+   "task_id": "task-10",
+   "method": "random_feasible",
+   "role_coverage": 1.0,
+   "robustness": 0.0,
+   "repeat_pick_share": 0.05,
+   "exposure_gini": 0.6376262626262625,
+   "solve_ms": 0
+  }
+ ],
+ "summary": {
+  "cp_sat": {
+   "role_coverage": 0.9167,
+   "robustness": 0.76,
+   "repeat_pick_share": 0.23,
+   "exposure_gini": 0.4705
+  },
+  "nearest_skill": {
+   "role_coverage": 0.9167,
+   "robustness": 0.1533,
+   "repeat_pick_share": 0.4033,
+   "exposure_gini": 0.5044
+  },
+  "manual_greedy": {
+   "role_coverage": 0.9167,
+   "robustness": 0.76,
+   "repeat_pick_share": 0.4267,
+   "exposure_gini": 0.5081
+  },
+  "random_feasible": {
+   "role_coverage": 0.9037,
+   "robustness": 0.2193,
+   "repeat_pick_share": 0.3015,
+   "exposure_gini": 0.4869
+  },
+  "delta_vs_nearest_skill": {
+   "role_coverage": 0.0,
+   "robustness": 0.6067,
+   "repeat_pick_share": -0.1733,
+   "exposure_gini": -0.034
+  },
+  "delta_vs_manual_greedy": {
+   "role_coverage": 0.0,
+   "robustness": 0.0,
+   "repeat_pick_share": -0.1967,
+   "exposure_gini": -0.0376
+  },
+  "delta_vs_random_feasible": {
+   "role_coverage": 0.0129,
+   "robustness": 0.5407,
+   "repeat_pick_share": -0.0715,
+   "exposure_gini": -0.0164
+  }
+ },
+ "ci95": {
+  "cp_sat": {
+   "role_coverage": [
+    0.7667,
+    1.0
+   ],
+   "robustness": [
+    0.5,
+    0.96
+   ],
+   "repeat_pick_share": [
+    0.0833,
+    0.41
+   ],
+   "exposure_gini": [
+    0.3807,
+    0.5476
+   ]
+  },
+  "nearest_skill": {
+   "role_coverage": [
+    0.7667,
+    1.0
+   ],
+   "robustness": [
+    0.0167,
+    0.37
+   ],
+   "repeat_pick_share": [
+    0.215,
+    0.5933
+   ],
+   "exposure_gini": [
+    0.4028,
+    0.5874
+   ]
+  },
+  "manual_greedy": {
+   "role_coverage": [
+    0.7667,
+    1.0
+   ],
+   "robustness": [
+    0.5,
+    0.96
+   ],
+   "repeat_pick_share": [
+    0.2483,
+    0.61
+   ],
+   "exposure_gini": [
+    0.4062,
+    0.5906
+   ]
+  },
+  "random_feasible": {
+   "role_coverage": [
+    0.7483,
+    0.9963
+   ],
+   "robustness": [
+    0.026,
+    0.4387
+   ],
+   "repeat_pick_share": [
+    0.1455,
+    0.4738
+   ],
+   "exposure_gini": [
+    0.3903,
+    0.5653
+   ]
+  },
+  "delta_vs_nearest_skill": {
+   "role_coverage": [
+    0.0,
+    0.0
+   ],
+   "robustness": [
+    0.3233,
+    0.8667
+   ],
+   "repeat_pick_share": [
+    -0.2733,
+    -0.07
+   ],
+   "exposure_gini": [
+    -0.0593,
+    -0.0155
+   ]
+  },
+  "delta_vs_manual_greedy": {
+   "role_coverage": [
+    0.0,
+    0.0
+   ],
+   "robustness": [
+    0.0,
+    0.0
+   ],
+   "repeat_pick_share": [
+    -0.31,
+    -0.0933
+   ],
+   "exposure_gini": [
+    -0.0694,
+    -0.0152
+   ]
+  },
+  "delta_vs_random_feasible": {
+   "role_coverage": [
+    0.0,
+    0.0312
+   ],
+   "robustness": [
+    0.2817,
+    0.809
+   ],
+   "repeat_pick_share": [
+    -0.1126,
+    -0.0297
+   ],
+   "exposure_gini": [
+    -0.0345,
+    -0.0037
+   ]
+  }
+ },
+ "misses": [
+  "task-02: cp_sat repeat_pick_share 0.17 worse than random_feasible 0.14",
+  "task-03: cp_sat repeat_pick_share 0.75 worse than random_feasible 0.74",
+  "task-04: cp_sat could not fill every must slot (coverage 0.33); no eligible people",
+  "task-05: cp_sat could not fill every must slot (coverage 0.83); no eligible people",
+  "task-07: cp_sat dropout robustness only 0.60 (too few eligible standby people)",
+  "task-09: cp_sat exposure_gini 0.42 worse than random_feasible 0.41"
+ ],
+ "generated_by": "synthetic data seed 7 (80 volunteers, 10 tasks); ortools 9.15.6755; CP-SAT 1 worker, seed 7, sequential tiers; random_feasible mean of 20 seeds; paired task bootstrap n=1000 seed 7",
+ "synthetic": true
+}

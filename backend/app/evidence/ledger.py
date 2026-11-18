@@ -1,6 +1,39 @@
 """LANE B: append-only, hash-chained audit ledger for contribution cards.
 
+Threat model (honest claims)
+----------------------------
 A hash chain shows edits, not truth; truth comes from host confirmation.
+
+* DETECTED from the journal alone: an edited entry (its hash no longer
+  recomputes), a reordered entry (its index or ``prev_hash`` link breaks),
+  and an interior deletion (the link across the gap breaks). ``verify()``
+  reports the first such index in ``first_bad_index``.
+* TAIL TRUNCATION IS DETECTABLE ONLY AGAINST A SEPARATELY KEPT HEAD HASH.
+  Deleting the last journal line leaves a shorter but perfectly
+  self-consistent chain. The ``.head`` sidecar catches the naive case where
+  only the journal is truncated; an attacker who rewrites BOTH the journal
+  and the sidecar is invisible to a plain ``verify()``. Call
+  ``Ledger.head_hash()`` and keep that value OUTSIDE both files (an external
+  anchor), then pass it as ``trusted_head`` to ``verify()``. This is the same
+  design analogy as an externally witnessed RFC 6962 Merkle-tree root
+  (discussed in docs/research/R3-credentials-privacy.md): an anchor shows
+  that a particular byte string was the head at that time, not that the
+  real-world event it describes actually happened.
+* ``verify(trusted_head=...)`` semantics: when ``trusted_head`` is supplied
+  and differs from the current chain head (the last journal entry's
+  ``entry_hash``, or ``GENESIS_HASH`` for an empty journal), verification
+  fails with ``ok=False`` and ``first_bad_index`` set to the number of
+  stored entries -- the point just past the end of the current journal --
+  with a note naming possible tail truncation or chain replacement. A
+  matching ``trusted_head`` agrees with the journal and normal chain checks
+  apply. ``trusted_head=None`` (the default) keeps the legacy behaviour of
+  checking the chain and the sidecar only.
+* No anchor is cryptographic proof of truth: anyone who can rewrite the
+  whole store can recompute a consistent chain AND a new head. An anchor
+  detects rollback/replacement relative to a value kept elsewhere; it does
+  not validate the content of a card. Nothing here auto-rejects, changes,
+  or validates card content -- the chain is an integrity record only and
+  the host's confirmation is the source of truth.
 
 Design / canonical serialization
 --------------------------------
@@ -23,19 +56,22 @@ Design / canonical serialization
   Each append opens/writes/closes the journal handle (no long-lived handle).
 * A sidecar file at ``path + ".head"`` stores ``{"count": N,
   "head_hash": "..."}`` and is updated atomically (temp file + ``os.replace``)
-  on every append. A pure hash chain cannot see removal of its last entry;
-  the sidecar count/head makes tail deletion detectable.
+  on every append. It is an aid, not an external anchor: it helps detect
+  tail deletion only while the sidecar itself is untouched.
 * With ``path=None`` a real temp file is created with ``tempfile.mkstemp`` and
   kept for the lifetime of this object (the file descriptor is closed
   immediately).
 
-Limitations
------------
-An adversary who can rewrite both the journal and the sidecar can recompute a
-consistent chain, so verification detects accidental damage and unilateral
-edits, not a fully coordinated forgery. Nothing here auto-rejects, changes,
-or validates the *content* of a card; the chain is an integrity record only,
-and the host's confirmation is the source of truth.
+Crash safety / concurrency
+--------------------------
+Every append is serialized under one ``threading.RLock``. It writes the
+journal line, ``flush()`` and ``os.fsync()`` on the journal file, THEN
+atomically rewrites the sidecar via a temp file with its own ``flush()`` and
+``os.fsync()`` before ``os.replace``. A crash cannot leave a journal entry
+without its matching sidecar state, and concurrent appends cannot interleave
+their writes. Directory-level fsync after the rename is not performed (it is
+not portable to this prototype's Windows host); that is a residual, documented
+limitation for power-loss recovery.
 """
 from __future__ import annotations
 
@@ -149,6 +185,7 @@ class Ledger:
         with open(self.path, "a", encoding="utf-8") as handle:
             handle.write(line)
             handle.flush()
+            os.fsync(handle.fileno())
 
     def _write_head(self, count: int, head_hash: str) -> None:
         tmp_path = self.head_path + ".tmp"
@@ -158,6 +195,7 @@ class Ledger:
         with open(tmp_path, "w", encoding="utf-8") as handle:
             handle.write(payload)
             handle.flush()
+            os.fsync(handle.fileno())
         os.replace(tmp_path, self.head_path)
 
     def _read_head(self) -> tuple[int, str] | None:
@@ -195,13 +233,35 @@ class Ledger:
             self._entries = current + [entry]
             return entry
 
+    def head_hash(self) -> str:
+        """Return the current chain head hash, for keeping as an external anchor.
+
+        This is the ``entry_hash`` of the last entry in the journal, or
+        ``GENESIS_HASH`` when the journal is empty. Copy the value somewhere
+        OUTSIDE the journal and its ``.head`` sidecar: a plain ``verify()``
+        cannot detect a coordinated truncation of both files, but
+        ``verify(trusted_head=<this value>)`` can.
+        """
+        with self._lock:
+            stored = self._load_entries()
+            return stored[-1].entry_hash if stored else GENESIS_HASH
+
     def entries(self) -> list[LedgerEntry]:
         """Return a snapshot of the journal, read fresh from disk under lock."""
         with self._lock:
             return list(self._load_entries())
 
-    def verify(self) -> LedgerVerification:
-        """Recompute the chain and cross-check the sidecar head metadata."""
+    def verify(self, trusted_head: str | None = None) -> LedgerVerification:
+        """Recompute the chain, cross-check the sidecar and (optionally) an anchor.
+
+        ``trusted_head`` is a head hash previously captured with
+        ``head_hash()`` and stored separately from the journal and sidecar.
+        If it is supplied and differs from the current chain head,
+        verification fails with ``ok=False`` and ``first_bad_index`` set to
+        the number of stored entries (the point just past the end), with a
+        note naming possible tail truncation or chain replacement. A
+        matching anchor agrees with the journal. ``None`` skips this check.
+        """
         with self._lock:
             first_bad: int | None = None
             notes: list[str] = []
@@ -261,6 +321,18 @@ class Ledger:
                     notes.append("Sidecar head_hash is non-genesis for an empty journal.")
                     if first_bad is None:
                         first_bad = 0
+
+            # External head anchor: the ONLY check that catches a coordinated
+            # truncation/replacement of BOTH the journal and the sidecar.
+            current_head = stored[-1].entry_hash if stored else GENESIS_HASH
+            if trusted_head is not None and trusted_head != current_head:
+                notes.append(
+                    "Trusted head hash does not match the current chain head "
+                    f"(expected {trusted_head}, found {current_head}): possible "
+                    "tail truncation or replacement of the chain."
+                )
+                # The trusted head describes the state just past the current end.
+                first_bad = len(stored)
 
             ok = first_bad is None and not notes
             note = _GOOD_NOTE if ok else " ".join(notes) + " " + _GOOD_NOTE

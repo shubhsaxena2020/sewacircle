@@ -11,6 +11,7 @@ import os
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime, timezone
 
+from app.evidence import ledger as ledger_module
 from app.evidence.ledger import GENESIS_HASH, Ledger
 from app.schemas import ContributionCard, Flag
 
@@ -214,3 +215,131 @@ def test_temp_path_journal_survives_for_object_lifetime():
         for p in (ledger.path, ledger.head_path):
             if os.path.exists(p):
                 os.unlink(p)
+
+
+# ---------------- A1 item 10: head anchor + crash-safe appends ----------------
+
+def test_head_hash_equals_last_entry_hash_and_changes_after_append(tmp_path):
+    path = str(tmp_path / "journal.jsonl")
+    ledger = Ledger(path)
+    assert ledger.head_hash() == GENESIS_HASH  # empty chain
+
+    first = ledger.append("draft", _card("card-head-1"), "host")
+    assert ledger.head_hash() == first.entry_hash
+    assert ledger.head_hash() == Ledger(path).head_hash()  # survives reopen
+
+    second = ledger.append("confirm", _card("card-head-2"), "host")
+    assert ledger.head_hash() == second.entry_hash
+    assert ledger.head_hash() != first.entry_hash
+    assert ledger.head_hash() == _lines(path)[-1]["entry_hash"]
+    assert ledger.verify().ok is True
+
+
+def test_verify_with_correct_trusted_head_is_ok(tmp_path):
+    ledger = Ledger(str(tmp_path / "journal.jsonl"))
+    for i in range(3):
+        ledger.append("draft", _card(f"card-anchor-{i}"), "host")
+    trusted = ledger.head_hash()
+
+    result = Ledger(ledger.path).verify(trusted_head=trusted)
+    assert result.ok is True
+    assert result.entries == 3
+    assert result.first_bad_index is None
+
+
+def test_verify_with_stale_trusted_head_fails_at_point_past_end(tmp_path):
+    path = str(tmp_path / "journal.jsonl")
+    ledger = Ledger(path)
+    ledger.append("draft", _card("card-old-1"), "host")
+    stale = ledger.head_hash()  # anchor captured after the second append
+    ledger.append("draft", _card("card-old-2"), "host")
+    ledger.append("confirm", _card("card-old-3"), "host")
+
+    result = Ledger(path).verify(trusted_head=stale)
+    assert result.ok is False
+    assert result.entries == 3
+    assert result.first_bad_index == 3  # number of stored entries
+    lowered = result.note.lower()
+    assert "trusted head" in lowered
+    assert "truncat" in lowered or "replac" in lowered
+
+
+def test_verify_with_wrong_trusted_head_fails_at_point_past_end(tmp_path):
+    ledger = Ledger(str(tmp_path / "journal.jsonl"))
+    ledger.append("draft", _card("card-wrong-anchor"), "host")
+
+    result = ledger.verify(trusted_head=GENESIS_HASH)  # never the real head
+    assert result.ok is False
+    assert result.first_bad_index == 1
+
+
+def test_coordinated_tail_truncation_invisible_to_plain_verify_but_caught_by_trusted_head(tmp_path):
+    path = str(tmp_path / "journal.jsonl")
+    ledger = Ledger(path)
+    for i in range(3):
+        ledger.append("draft", _card(f"card-tail-{i}"), "host")
+    trusted = ledger.head_hash()  # ANCHOR KEPT OUTSIDE BOTH FILES
+
+    records = _lines(path)
+    del records[-1]  # truncate the tail of the journal
+    _write_lines(path, records)
+    # Adversary also rewrites the sidecar to match the truncated chain.
+    with open(path + ".head", "w", encoding="utf-8") as handle:
+        handle.write(json.dumps({"count": len(records),
+                                 "head_hash": records[-1]["entry_hash"]},
+                                sort_keys=True, separators=(",", ":")))
+
+    plain = Ledger(path).verify()
+    assert plain.ok is True  # coordinated truncation is invisible without an anchor
+    assert plain.entries == 2
+
+    anchored = Ledger(path).verify(trusted_head=trusted)
+    assert anchored.ok is False
+    assert anchored.entries == 2
+    assert anchored.first_bad_index == 2  # just past the end of the 2 stored entries
+    assert "trusted head" in anchored.note.lower()
+    assert "truncat" in anchored.note.lower() or "replac" in anchored.note.lower()
+
+
+def test_append_fsyncs_journal_and_sidecar_for_every_append(monkeypatch, tmp_path):
+    """The real os.fsync is called after each journal write and sidecar write."""
+    real_fsync = os.fsync
+    path = str(tmp_path / "journal.jsonl")
+    observed: list[tuple[int, bool]] = []
+
+    def recording_fsync(fd: int) -> None:
+        lines = 0
+        if os.path.exists(path):
+            with open(path, "r", encoding="utf-8") as journal:
+                lines = sum(1 for _ in journal)
+        observed.append((lines, os.path.exists(path + ".head.tmp")))
+        real_fsync(fd)  # actually flush; do not fake the call
+
+    monkeypatch.setattr(ledger_module.os, "fsync", recording_fsync)
+    ledger = Ledger(path)
+
+    ledger.append("draft", _card("card-fsync-1"), "host")
+    assert len(observed) == 2
+    # First fsync is the journal line; second is the sidecar temp file.
+    assert observed[0] == (1, False)
+    assert observed[1] == (1, True)
+
+    ledger.append("confirm", _card("card-fsync-2"), "host")
+    assert len(observed) == 4
+    assert observed[2] == (2, False)
+    assert observed[3] == (2, True)
+    assert os.path.exists(path + ".head")
+    result = Ledger(path).verify()
+    assert result.ok is True
+    assert result.entries == 2
+
+
+def test_module_docstring_states_honest_threat_model():
+    doc = (ledger_module.__doc__ or "").lower()
+    assert "shows edits, not truth" in doc
+    assert "reorder" in doc
+    assert "interior deletion" in doc
+    assert "tail truncation" in doc
+    assert "separately kept head hash" in doc
+    assert "rfc 6962" in doc
+    assert "fsync" in doc

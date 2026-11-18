@@ -19,6 +19,9 @@ from app.taxonomy import SKILLS, SLOTS
 
 SYNTHETIC_LABEL = "SYNTHETIC DATA - illustrative, no real people"
 
+# Property-test sweep size. Tests use >= 200 distinct seeds (TASK.md batch 1/7).
+VALID_SEED_COUNT = 250
+
 # Synthetic district anchors (lat, lon) inside Uttar Pradesh-like bounds.
 # Test scaffolding only; NOT a source of real administrative geography.
 DISTRICT_ANCHORS: dict[str, tuple[float, float]] = {
@@ -232,14 +235,19 @@ def make_random_task(
             skills_for_roles.append(_required_skills_choice(rng, scarce_skills))
     lvl = min_level if min_level is not None else rng.choice([1, 1, 2, 3])
 
-    skills_per_role = [list(dict.fromkeys([s, rng.choice(SKILL_IDS)])) for s in skills_for_roles]
+    # Every role has at least one taxonomy skill; the forced-scarce role gets
+    # exactly one so adversarial tests can make it provably unfillable.
+    skills_per_role = [
+        [s] if (force_scarce and i == 0) else list(dict.fromkeys([s, rng.choice(SKILL_IDS)]))
+        for i, s in enumerate(skills_for_roles)
+    ]
     roles = [
         RoleSpec(
             id=f"r{i}",
             role=f"synthetic_role_{i}",
             count=rng.randint(1, 2),
             required_skills=skills_per_role[i],
-            min_level=lvl if rng.random() < 0.6 else rng.randint(1, 3),
+            min_level=lvl if min_level is not None else rng.randint(1, 3),
             priority="must" if rng.random() < 0.8 else "should",
             needs_experienced=rng.random() < 0.3,
             evidence_span="",
@@ -288,17 +296,20 @@ def make_random_case(
     seed: int,
     *,
     n_volunteers: int | None = None,
+    volunteer_kwargs: dict[str, Any] | None = None,
     **task_kwargs: Any,
 ) -> tuple[TaskSpec, list[Volunteer], RosterOptions]:
     """Convenience: (task, volunteers, options) with the task slot guaranteed present.
 
-    The volunteers' available_slots are patched (deterministically, using the seed)
-    to include the task slot, so a random case is not trivially infeasible for
-    availability alone. Adversarial knobs from make_random_task still apply.
+    `task_kwargs` are forwarded to make_random_task; `volunteer_kwargs` are
+    forwarded to make_random_volunteers (use this for scarcity/consent knobs).
+    The volunteers' available_slots are patched (deterministically, using the
+    seed) to include the task slot, so a random case is not trivially infeasible
+    for availability alone. Adversarial knobs still apply.
     """
     task, options = make_random_task(seed, **task_kwargs)
     n = n_volunteers if n_volunteers is not None else 12 + seed % 25
-    people = make_random_volunteers(n, seed + 1)
+    people = make_random_volunteers(n, seed + 1, **(volunteer_kwargs or {}))
     for person in people:
         if task.slot not in person.available_slots:
             person.available_slots = sorted(person.available_slots + [task.slot])
@@ -367,8 +378,8 @@ def validate_case(task: TaskSpec, volunteers: list[Volunteer],
         if any(s not in SKILLS for s in role.required_skills):
             problems.append(f"role {role.id} has non-taxonomy skill")
     for v in volunteers:
-        if v.is_minor and v.guardian_consent is not True:
-            problems.append(f"minor {v.id} lacks guardian consent")
+        # A minor WITHOUT consent is valid input data: the solver must exclude
+        # that person (hard constraint), but the instance itself is consistent.
         if any(s not in SKILLS for s in v.skills):
             problems.append(f"volunteer {v.id} has non-taxonomy skill")
         if any(s not in SKILLS for s in v.self_declared_skills):

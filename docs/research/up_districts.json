@@ -1,0 +1,152 @@
+{
+  "dataset_name": "SewaCircle R4 - Uttar Pradesh district reference points for SYNTHETIC test data",
+  "synthetic_data_label": "SYNTHETIC TEST DATA SUPPORT FILE: district names and coordinates are real geography from the cited public dataset; every volunteer, task, event and allocation built on top of them is invented. No real people, no real minors, no real volunteer records.",
+  "coordinate_source_name": "Open Admin Data - India Administrative Divisions (all-district.json), geo.lat / geo.lon fields, WGS84 decimal degrees; repository metadata says CC-BY-4.0 and last updated 2026-08-20",
+  "coordinate_source_url": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+  "coordinate_source_repo_url": "https://github.com/open-admin-data/india-administrative-divisions",
+  "coordinate_caveat": "The source publishes one representative WGS84 point per district; it does not document the point as a polygon centroid. Treat these as APPROXIMATE district locator/centroid points suitable for coarse distance bucketing in a synthetic demo, NOT surveyed centres or legal boundaries. Values below are copied verbatim from the source; no coordinates were computed or guessed.",
+  "source_record_id_field": "source_record_id is the id of that district in the opened source file, so each row has a per-district citation.",
+  "retrieved_date": "2026-11-18",
+  "districts": [
+    {
+      "name": "Lucknow",
+      "lat": 26.843,
+      "lon": 80.907,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D003"
+    },
+    {
+      "name": "Kanpur Dehat",
+      "lat": 26.437,
+      "lon": 79.862,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D004"
+    },
+    {
+      "name": "Kanpur Nagar",
+      "lat": 26.298,
+      "lon": 80.325,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D001"
+    },
+    {
+      "name": "Varanasi",
+      "lat": 25.388,
+      "lon": 82.891,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D019"
+    },
+    {
+      "name": "Gorakhpur",
+      "lat": 26.68,
+      "lon": 83.366,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D026"
+    },
+    {
+      "name": "Agra",
+      "lat": 27.083,
+      "lon": 78.01,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D011"
+    },
+    {
+      "name": "Meerut",
+      "lat": 29.021,
+      "lon": 77.787,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D010"
+    },
+    {
+      "name": "Allahabad",
+      "lat": 25.342,
+      "lon": 82.021,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D048"
+    },
+    {
+      "name": "Azamgarh",
+      "lat": 26.003,
+      "lon": 83.077,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D060"
+    },
+    {
+      "name": "Ballia",
+      "lat": 25.904,
+      "lon": 84.033,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D062"
+    },
+    {
+      "name": "Basti",
+      "lat": 26.794,
+      "lon": 82.637,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D056"
+    },
+    {
+      "name": "Bareilly",
+      "lat": 28.44,
+      "lon": 79.422,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D012"
+    },
+    {
+      "name": "Gonda",
+      "lat": 27.08,
+      "lon": 81.988,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D054"
+    },
+    {
+      "name": "Jhansi",
+      "lat": 25.587,
+      "lon": 79.149,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D020"
+    },
+    {
+      "name": "Mirzapur",
+      "lat": 25.021,
+      "lon": 82.627,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D066"
+    },
+    {
+      "name": "Saharanpur",
+      "lat": 29.897,
+      "lon": 77.486,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D002"
+    },
+    {
+      "name": "Sonbhadra",
+      "lat": 24.385,
+      "lon": 83.061,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D067"
+    },
+    {
+      "name": "Sultanpur",
+      "lat": 26.274,
+      "lon": 82.02,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D005"
+    },
+    {
+      "name": "Unnao",
+      "lat": 26.636,
+      "lon": 80.51,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D039"
+    },
+    {
+      "name": "Gautam Buddha Nagar",
+      "lat": 28.508,
+      "lon": 77.533,
+      "source": "https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json",
+      "source_record_id": "IN19D009"
+    }
+  ]
+}

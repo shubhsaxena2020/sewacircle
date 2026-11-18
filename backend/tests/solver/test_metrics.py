@@ -68,11 +68,13 @@ def test_perfect_coverage_fairness_and_partial_robustness():
     roster = R(task, [A("r1", 0, "va"), A("r1", 1, "vb"), A("r2", 0, "vc")])
 
     m = compute_metrics(task, volunteers, roster)
-    assert (m.slots_filled, m.slots_required) == (3, 3)
-    assert m.role_coverage == 1.0
+    # A1: coverage counts MUST slots only (r1 x2); r2 is 'should' and is reported in should_coverage.
+    assert (m.slots_filled, m.slots_required) == (2, 2)
+    assert m.role_coverage == 1.0 and m.should_coverage == 1.0
     assert m.robustness == pytest.approx(1 / 3, abs=1e-12)
     assert m.repeat_pick_share == pytest.approx(1 / 3, abs=1e-12)
-    assert m.exposure_gini == pytest.approx(8 / 15, abs=1e-12)
+    # A1: Gini over the eligible pool (va, vb, vc all eligible) with +1 for this pick: [5,1,2] -> 1/3
+    assert m.exposure_gini == pytest.approx(1 / 3, abs=1e-12)
     assert m.district_spread == 2
     assert m.novices == 1
     assert m.mentor_pairs == 1
@@ -164,7 +166,8 @@ def test_gini_extremes():
 
     skewed = [V("v0", times=0), V("v1", times=0), V("v2", times=0), V("v3", times=9)]
     m = compute_metrics(task, skewed, R(task, assignments))
-    assert m.exposure_gini == pytest.approx(0.75, abs=1e-12)
+    # A1: eligible pool with +1 for this pick -> [1,1,1,10]: 2*(1+2+3+40)/(4*13) - 5/4 = 27/52
+    assert m.exposure_gini == pytest.approx(27 / 52, abs=1e-12)
     assert m.repeat_pick_share == 0.25
 
     zero = [V(f"v{i}", times=0) for i in range(4)]
@@ -195,4 +198,6 @@ def test_district_spread_novices_and_mentor_pairs():
     assert m.novices == 2
     assert m.mentor_pairs == 1
     assert m.robustness == 0.5
-    assert (m.slots_filled, m.slots_required, m.role_coverage) == (4, 4, 1.0)
+    # A1: MUST slots only (r1 x2); r2 x2 is 'should' -> should_coverage
+    assert (m.slots_filled, m.slots_required, m.role_coverage) == (2, 2, 1.0)
+    assert m.should_coverage == 1.0

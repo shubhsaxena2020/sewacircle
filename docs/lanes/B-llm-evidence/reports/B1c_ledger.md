@@ -47,13 +47,13 @@ The event loop scope for asynchronous fixtures will default to the fixture scope
 
 =================================== ERRORS ====================================
 ___________________ ERROR collecting tests/test_contract.py ___________________
-..\ .venv\Lib\site-packages\_pytest\python.py:528: in importtestmodule
+..\.venv\Lib\site-packages\_pytest\python.py:528: in importtestmodule
     mod = import_path(
-..\ .venv\Lib\site-packages\_pytest\pathlib.py:640: in import_path
+..\.venv\Lib\site-packages\_pytest\pathlib.py:640: in import_path
     importlib.import_module(module_name)
 C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
     return _bootstrap._gcd_import(name[level:], package, level)
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 <frozen importlib._bootstrap>:1395: in _gcd_import
     ???
 <frozen importlib._bootstrap>:1360: in _find_and_load
@@ -62,7 +62,7 @@ C:\Program Files\Python313\Lib\importlib\__init__.py:88: in import_module
     ???
 <frozen importlib._bootstrap>:935: in _load_unlocked
     ???
-..\ .venv\Lib\site-packages\_pytest\assertion\rewrite.py:185: in exec_module
+..\.venv\Lib\site-packages\_pytest\assertion\rewrite.py:185: in exec_module
     exec(co, module.__dict__)
 tests\test_contract.py:5: in <module>
     from app.main import app
@@ -75,12 +75,12 @@ E       _PHONE_BODY = r"(?:\(?[6-9]\d{2}\)?[\s\-]?\d{3}[\s\-]?\d{4}|[6-9]\d{9})"
 E       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 E   SyntaxError: invalid syntax. Maybe you meant '==' or ':=' instead of '='?
 ============================== warnings summary ===============================
-..\ .venv\Lib\site-packages\fastapi\testclient.py:1
+..\.venv\Lib\site-packages\fastapi\testclient.py:1
   C:\Users\shubh\Projects\sewacircle\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
     from starlette.testclient import TestClient as TestClient  # noqa
 
 -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
-=========================== short test summary info ============================
+=========================== short test summary info ===========================
 ERROR tests/test_contract.py
 !!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
 1 warning, 1 error in 0.99s
@@ -103,11 +103,10 @@ cd C:/Users/shubh/Projects/sewacircle/backend && C:/Users/shubh/Projects/sewacir
 Complete raw output (exit code 1):
 
 ```
-C:\Users\shubh\Projects\sewacircle\.venv\Lib\site-packages\pytest_asyncio\plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
+C:C:\Users\shubh\Projects\sewacircle\.venv\Lib\site-packages\pytest_asyncio\plugin.py:306: PytestDeprecationWarning: The configuration option "asyncio_default_fixture_loop_scope" is unset.
 The event loop scope for asynchronous fixtures will default to the fixture scope. Future versions of pytest-asyncio will default the loop scope for asynchronous fixtures to "function" scope. Set the default fixture loop scope explicitly in order to avoid unexpected behavior in the future. Valid fixture loop scopes are: "function", "class", "module", "package", "session". Set it to "fixture-scope" to keep the current behavior.
 
   warnings.warn(PytestDeprecationWarning(_DEFAULT_FIXTURE_LOOP_SCOPE_UNSET))
-
 ........................FF..                                             [100%]
 ================================== FAILURES ===================================
 _______________ test_unimplemented_is_501_not_500[/api/ledger] ________________
@@ -137,7 +136,7 @@ E        +      where get = <starlette.testclient.TestClient object at 0x000001F
 
 tests\test_contract.py:36: AssertionError
 ============================== warnings summary ===============================
-..\ .venv\Lib\site-packages\fastapi\testclient.py:1
+..\.venv\Lib\site-packages\fastapi\testclient.py:1
   C:\Users\shubh\Projects\sewacircle\.venv\Lib\site-packages\fastapi\testclient.py:1: StarletteDeprecationWarning: Using `httpx` with `starlette.testclient` is deprecated; install `httpx2` instead.
     from starlette.testclient import TestClient as TestClient  # noqa
 
@@ -145,8 +144,7 @@ tests\test_contract.py:36: AssertionError
 =========================== short test summary info ===========================
 FAILED tests/test_contract.py::test_unimplemented_is_501_not_500[/api/ledger]
 FAILED tests/test_contract.py::test_unimplemented_is_501_not_500[/api/ledger/verify]
-2 failed, 26 passed, 1 warning in 3.07s
-```
+2 failed, 26 passed, 1 warning in 3.07s``
 
 Test count: the retry printed `2 failed, 26 passed, 1 warning in 3.07s`; the
 focused ledger run printed `11 passed in 1.87s`.

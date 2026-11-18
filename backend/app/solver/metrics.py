@@ -28,8 +28,8 @@ Metric definitions (computed from task + the full volunteer list + the returned 
   name a known role, a valid index, a known volunteer and pass is_eligible. Duplicates of the
   same slot count once; an assignment of one volunteer to two slots is counted in both slots
   by this descriptive metric (the one-role-per-volunteer hard constraint is the solver's job).
-* slots_required = number of all slots. role_coverage = slots_filled / slots_required
-  (1.0 if there are no slots; coverage is never > 1).
+* HEAD AMENDMENT A1: role_coverage, slots_filled and slots_required count MUST slots only;
+  should_coverage reports 'should' slots separately (None if there are none). 1.0 if no must slots.
 * robustness: for EACH distinct assigned volunteer v, form the rescue pool = all assigned
   volunteers except v, UNION roster.standby volunteers (unknown ids and duplicate ids ignored).
   The scenario passes iff EVERY must slot can be matched to a DISTINCT pool volunteer who is
@@ -39,8 +39,9 @@ Metric definitions (computed from task + the full volunteer list + the returned 
   slots exist, 1.0 if there are no must slots (vacuously covered).
 * repeat_pick_share = share of DISTINCT assigned volunteers with times_picked_last_90d >= 3
   (0.0 if nobody is assigned).
-* exposure_gini = Gini inequality coefficient of times_picked_last_90d across DISTINCT
-  assigned volunteers: sort x ascending, then
+* exposure_gini (HEAD AMENDMENT A1) = Gini of times_picked_last_90d over the task-ELIGIBLE
+  candidate pool (eligible for at least one role), where selected people get +1 for this pick,
+  so a planner cannot look fair just by picking only newcomers. Formula: sort x ascending, then
   G = 2 * sum((i+1) * x[i]) / (n * sum(x)) - (n+1)/n, i zero-based.
   0.0 if n == 0 or sum(x) == 0 (nobody exposed / nobody recently picked = perfectly fair).
   Lower is fairer; the maximum for n volunteers is (n-1)/n.
@@ -189,7 +190,9 @@ def compute_metrics(task: TaskSpec, volunteers: list[Volunteer], roster: RosterR
 
     repeat_pick_share = (sum(1 for v in assigned if v.times_picked_last_90d >= 3) / n_assigned
                          if n_assigned else 0.0)
-    exposure_gini = _gini([v.times_picked_last_90d for v in assigned])
+    # A1: Gini over the task-ELIGIBLE candidate pool (eligible for at least one role); selected people get +1.
+    eligible_pool = [v for v in volunteers if any(is_eligible(v, r, task) for r in task.roles)]
+    exposure_gini = _gini([v.times_picked_last_90d + (1 if v.id in seen_ids else 0) for v in eligible_pool])
     district_spread = len({(v.district, v.block) for v in assigned})
     novices = sum(1 for v in assigned if v.is_novice)
 
@@ -205,10 +208,15 @@ def compute_metrics(task: TaskSpec, volunteers: list[Volunteer], roster: RosterR
             paired_novices |= role_novices
     mentor_pairs = len(paired_novices)
 
+    must_set = set(must_slots)
+    should_slots = [s for s in all_slots if s not in must_set]
+    must_filled = len(filled_slots & must_set)
+    should_filled = len(filled_slots - must_set)
     return RosterMetrics(
-        role_coverage=(len(filled_slots) / len(all_slots) if all_slots else 1.0),
-        slots_filled=len(filled_slots),
-        slots_required=len(all_slots),
+        role_coverage=(must_filled / len(must_slots) if must_slots else 1.0),
+        slots_filled=must_filled,
+        slots_required=len(must_slots),
+        should_coverage=(should_filled / len(should_slots) if should_slots else None),
         robustness=robustness,
         repeat_pick_share=repeat_pick_share,
         exposure_gini=exposure_gini,
@@ -220,5 +228,15 @@ def compute_metrics(task: TaskSpec, volunteers: list[Volunteer], roster: RosterR
 
 __all__ = [
     "EARTH_RADIUS_KM", "TRAVEL_EPS_KM", "haversine_km", "distance_km", "best_skill_level",
-    "is_eligible", "compute_metrics",
+    "is_eligible", "compute_metrics", "unfilled_slots",
 ]
+
+
+def unfilled_slots(task: TaskSpec, volunteers: list[Volunteer], assignments: list[Assignment]) -> list[tuple[str, int]]:
+    """MUST slots not filled by an eligible assignment, in role order (A1: report exact (role_id, slot_index))."""
+    by_id = {v.id: v for v in volunteers}
+    roles_by_id = {r.id: r for r in task.roles}
+    filled = {(a.role_id, a.slot_index) for a in assignments
+              if a.role_id in roles_by_id and a.volunteer_id in by_id
+              and is_eligible(by_id[a.volunteer_id], roles_by_id[a.role_id], task)}
+    return [s for s in _slot_list(task.roles, must_only=True) if s not in filled]

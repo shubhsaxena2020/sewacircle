@@ -64,6 +64,11 @@ def _comparable(roster):
     return roster.metrics.model_copy(update={"solve_ms": 0})
 
 
+def _metric_only(metrics):
+    """Strip caller-owned timing/status fields before checking the shared metric values."""
+    return metrics.model_copy(update={"solve_ms": 0, "solver_status": ""})
+
+
 def test_baselines_deterministic_and_use_shared_metrics():
     """Two runs with the same seed/options must give identical assignments, standbys, reasons
     and metrics (except solve_ms, which is wall-clock). All metrics must equal a fresh call to
@@ -78,7 +83,7 @@ def test_baselines_deterministic_and_use_shared_metrics():
         assert first.standby == second.standby
         assert first.unfilled_role_ids == second.unfilled_role_ids
         assert _comparable(first) == _comparable(second)
-        assert compute_metrics(task, volunteers, first).model_copy(update={"solve_ms": 0}) == _comparable(first)
+        assert _metric_only(compute_metrics(task, volunteers, first)) == _metric_only(first.metrics)
         assert all(a.reasons and a.volunteer_name for a in first.assignments)
 
 
@@ -114,18 +119,18 @@ def test_nearest_skill_ignores_experience_and_distance_is_real():
 
 
 def test_manual_greedy_experience_first_and_one_backup_per_role():
-    """Role order r1,r2,r3; most experienced eligible volunteer:
-    r1 candidates far(9 drives), extra_aid(7), near(1) -> far; r2 teach; r3 logistics.
-    Next-best unused backup for r1: extra_aid (7) rather than near (1); r2 and r3 have no
-    unused eligible volunteer, so exactly ONE standby is produced, covering r1 only.
+    """Role order r1 (TWO slots), r2, r3; most experienced eligible volunteer per slot:
+    r1 candidates far(9 drives), extra_aid(7), near(1) -> far then extra_aid; r2 teach;
+    r3 logistics. Next-best unused backup for r1: near (1); r2 and r3 have no unused eligible
+    volunteer, so exactly ONE standby is produced, covering r1 only.
     """
     task, volunteers = T(ROLES), vols()
     roster = manual_greedy(task, volunteers)
     assert [(a.role_id, a.volunteer_id) for a in roster.assignments] == [
-        ("r1", "far"), ("r2", "teach"), ("r3", "logistics")]
+        ("r1", "far"), ("r1", "extra_aid"), ("r2", "teach"), ("r3", "logistics")]
     assert len(roster.standby) == 1
     s = roster.standby[0]
-    assert s.volunteer_id == "extra_aid" and s.covers_role_ids == ["r1"]
+    assert s.volunteer_id == "near" and s.covers_role_ids == ["r1"]
     assert s.volunteer_id not in {a.volunteer_id for a in roster.assignments}
     assert is_eligible(next(v for v in volunteers if v.id == s.volunteer_id),
                        ROLES[0], task)
@@ -177,19 +182,27 @@ def test_all_baselines_respect_every_hard_constraint_and_forced_ids():
 
 
 def test_minors_blocked_by_consent_and_task_flag():
-    """A consenting 16-year-old at 0.05 degrees (~5.56 km) is nearest and CAN be assigned when
-    allow_minors=True; with allow_minors=False the same volunteer is excluded and the adult at
-    0.2 degrees (~22.24 km) is chosen. A 16-year-old without consent is never eligible.
+    """A consenting 16-year-old at 0.05 degrees (~5.56 km) can be assigned when allow_minors=True;
+    with allow_minors=False the adult at 0.2 degrees (~22.24 km) is the only eligible first-aider.
+    A 16-year-old without consent is never eligible. nearest/manual deterministically take the
+    closer/more experienced consenting minor; the seeded random draw may pick either eligible
+    person (seed=5 picks 'near'), which is still constraint-respecting.
     """
     role = RoleSpec(id="r1", role="First aid", count=1, required_skills=["first_aid"], min_level=2)
     pool = [V("near", skills={"first_aid": 3}, past=1, lon=0.2),
             V("minor_consent", skills={"first_aid": 3}, past=10, age=16, consent=True, lon=0.05),
             V("minor_no_consent", skills={"first_aid": 3}, past=10, age=16, consent=False, lon=0.01)]
-    for method in (nearest_skill, manual_greedy, lambda t, v: random_feasible(t, v, seed=5)):
-        assert method(T([role], allow_minors=True), pool).assignments[0].volunteer_id == "minor_consent"
-        assert method(T([role], allow_minors=False), pool).assignments[0].volunteer_id == "near"
-        assert all(a.volunteer_id != "minor_no_consent"
-                   for a in method(T([role]), pool).assignments)
+    methods = [("nearest", nearest_skill), ("manual", manual_greedy),
+               ("random", lambda t, v: random_feasible(t, v, seed=5))]
+    for name, method in methods:
+        allowed = method(T([role], allow_minors=True), pool)
+        blocked = method(T([role], allow_minors=False), pool)
+        assert blocked.assignments[0].volunteer_id == "near", name
+        chosen = allowed.assignments[0].volunteer_id
+        assert chosen in ({"near"} if name == "random" else {"minor_consent"}), name
+        assert "minor_no_consent" not in {a.volunteer_id for a in allowed.assignments + blocked.assignments}
+        assert is_eligible(next(v for v in pool if v.id == "minor_consent"), role,
+                           T([role], allow_minors=True))
 
 
 def test_self_declared_skill_allowed_but_flagged():
@@ -214,7 +227,8 @@ def test_unfilled_roles_are_reported_honestly():
                       required_skills=["first_aid"], min_level=3, priority="must"),
              RoleSpec(id="r2", role="Teaching", count=1,
                       required_skills=["teaching_literacy"], min_level=1)]
-    task, volunteers = T(roles), vols()
+    task = T(roles)
+    volunteers = [V("aide", skills={"first_aid": 2}), V("teach", skills={"teaching_literacy": 2})]
     for name, roster in _all_methods(task, volunteers).items():
         assert roster.unfilled_role_ids == ["r1"], name
         assert (roster.metrics.slots_filled, roster.metrics.slots_required) == (1, 2), name
@@ -230,7 +244,7 @@ def test_no_slot_placeholder_metric_leaks():
     """
     task, volunteers = T(ROLES), vols()
     for roster in _all_methods(task, volunteers).values():
-        assert roster.metrics.slots_required == 4  # r1 count 2 + r2 + r3
+        assert roster.metrics.slots_required == 3  # A1: MUST slots only: r1 x2 + r2 (r3 is should)
         assert isinstance(roster.metrics.solve_ms, int) and roster.metrics.solve_ms >= 0
         assert roster.metrics.solver_status in {"baseline_complete", "baseline_partial"}
         assert isinstance(roster.metrics, RosterMetrics)
