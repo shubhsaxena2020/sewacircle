@@ -1,6 +1,6 @@
 # SewaCircle - Project Report
 
-Living document. Last updated: 2026-11-18 night (checkpoint 0). Rule: **a number appears here only if a command printed it**; everything else is marked TBD. All data is synthetic. Not affiliated with InMobi, the UP Government, MY Bharat or IIIT Lucknow.
+Living document. Last updated: 2026-11-19 00:30 (checkpoint 1). Rule: **a number appears here only if a command printed it**; everything else is marked TBD. All data is synthetic. Not affiliated with InMobi, the UP Government, MY Bharat or IIIT Lucknow.
 
 ## 1. Summary
 SewaCircle is an organiser-side crew planner for youth volunteering, built as an idea-stage prototype for AI Kaushal 2026 UC16. It extracts roles from Hindi/English task briefs, builds a role-covered, fair and dropout-resilient roster with CP-SAT and a reason per pick, and turns host notes into reviewable contribution records with deterministic flags and a hash-chained log.
@@ -20,18 +20,31 @@ SewaCircle is an organiser-side crew planner for youth volunteering, built as an
 | Nilabh/DeepSeek throughput is about 110 tokens/s single-stream and about 70 tokens/s per stream with 6 concurrent requests (about 420 combined) | timed requests |
 | Contract skeleton: 10 contract tests pass | `pytest -q` in `backend/` |
 
-## 4. Progress by component (checkpoint 0)
+## 4. Progress by component (checkpoint 1, 2026-11-19 00:30)
 | Component | State |
 |---|---|
-| Contract (schemas, taxonomy, API, LLM client, tests) | done, tests green |
-| Solver, baselines, metrics, synthetic data, eval harness (Lane A) | in progress |
-| Extraction, redaction, evidence drafting, rules, ledger, credential export (Lane B) | in progress |
-| Research R1 to R6 (Lane C) | in progress |
-| Frontend (head) | not started |
-| Demo video and zip v2 | not started |
+| Contract (schemas, taxonomy, API, LLM client) | done; amended per Codex contract review (docs/AMENDMENT-A1.md) |
+| Solver: CP-SAT tiered roster, standby resilience (U1), fairness + mentor pairing (U2), why-not (U3), dropout heal | done (head; Lane A lost to a provider outage 23:37-00:14) |
+| Baselines and shared metrics | done (Lane A), adapted to A1 definitions |
+| Synthetic data from verified UP districts and blocks | done (head, from Lane C R4) |
+| LLM extraction with PII redaction, evidence drafting with fallback | done (head); redaction, rules and ledger by Lane B |
+| Unsigned OB3-shaped credential export | done (head, from Lane C R3) |
+| Frontend (6 steps, Hindi/English) | done, live end-to-end verified in a browser (docs/screens/) |
+| Tests | 673 passing (`pytest -q` in backend/) |
+| Strategy review by Codex gpt-6-sol | in progress (docs/v2/) |
 
-## 5. Results
-TBD. This section is filled only from `python -m eval.harness` and `python -m eval.extraction.run` output: role coverage, robustness, repeat-pick share, exposure Gini versus nearest-skill, random-feasible and manual-greedy with 95% bootstrap intervals; extraction recall/precision by language; rule-flag results on planted anomalies; solve times; and the list of misses.
+## 5. Results (real command output only)
+Roster evaluation (`python -m eval.harness`, full output in docs/EVAL_RESULTS.md), 10 synthetic tasks, 80 synthetic volunteers:
+| vs baseline | role coverage | dropout robustness | repeat-pick share | exposure Gini |
+|---|---|---|---|---|
+| nearest-skill | +0.00 | +0.61 [0.32, 0.87] | -0.17 [-0.27, -0.07] | -0.03 |
+| careful manual organiser | +0.00 | +0.00 | -0.20 [-0.31, -0.09] | -0.04 |
+| random feasible (20 seeds) | +0.01 | +0.54 [0.28, 0.81] | -0.07 [-0.11, -0.03] | -0.02 |
+Six misses are listed by the harness itself (two scarce tasks no method can fill; one task with only 0.60 robustness; three small fairness losses to random).
+
+Extraction (`python -m eval.extraction.run`), 30 author-written synthetic briefs (12 Hindi, 10 English, 8 Hinglish):
+Claude Sonnet 5.5: role recall 1.00, precision 1.00, exact counts 1.00, 0 failures. DeepSeek v4.1 Flash: recall 0.983 (missed one role in en-07), exact counts 1.00.
+**Caveat:** the briefs were written by the same team that wrote the prompt and state counts explicitly, so this is an easy test; a harder, independently written set is needed before claiming extraction accuracy.
 
 ## 6. Limitations (stated up front)
 Synthetic data; proxy metrics only, no field-impact claim; names are not detected by the redactor; Hindi/Awadhi extraction accuracy is measured on a small labelled set; the hash chain shows edits not truth; credential export is unsigned and not issued by any authority; no integration with any government system; rules about reusing pre-built code at the event are unconfirmed (ADR-001); novelty relative to MY Bharat is unverified beyond the pages we read.

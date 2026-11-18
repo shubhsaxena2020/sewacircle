@@ -1,0 +1,908 @@
+{
+ "summary": {
+  "model": "cc/claude-sonnet-5-5",
+  "all": {
+   "briefs": 30,
+   "role_recall": 1.0,
+   "role_precision": 1.0,
+   "count_within1": 1.0,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 0.0
+  },
+  "hi": {
+   "briefs": 12,
+   "role_recall": 1.0,
+   "role_precision": 1.0,
+   "count_within1": 1.0,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 0.0
+  },
+  "en": {
+   "briefs": 10,
+   "role_recall": 1.0,
+   "role_precision": 1.0,
+   "count_within1": 1.0,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 0.0
+  },
+  "hinglish": {
+   "briefs": 8,
+   "role_recall": 1.0,
+   "role_precision": 1.0,
+   "count_within1": 1.0,
+   "count_exact": 1.0,
+   "failures": 0,
+   "median_secs": 0.0
+  }
+ },
+ "rows": [
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-01",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 2,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "documentation_reporting"
+     ],
+     "count": 1,
+     "role": "Registration and attendance keeper",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-02",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tree_plantation"
+     ],
+     "count": 3,
+     "role": "Plantation helper",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "photography_video"
+     ],
+     "count": 1,
+     "role": "Photographer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 3,
+   "pred": 3,
+   "matched": 3,
+   "count_within1": 3,
+   "count_exact": 3,
+   "id": "hi-03",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "food_distribution"
+     ],
+     "count": 4,
+     "role": "Food distribution volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "driving_transport"
+     ],
+     "count": 1,
+     "role": "Driver",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "disaster_response"
+     ],
+     "count": 1,
+     "role": "Disaster relief support",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-04",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "teaching_literacy"
+     ],
+     "count": 2,
+     "role": "Teacher",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "dialect_awadhi"
+     ],
+     "count": 1,
+     "role": "Local-language liaison (Awadhi)",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "hi-05",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tech_digital_support"
+     ],
+     "count": 2,
+     "role": "Digital literacy trainer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-06",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [],
+     "count": 5,
+     "role": "Cleaning volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "team_leadership"
+     ],
+     "count": 1,
+     "role": "Team lead",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 3,
+   "pred": 3,
+   "matched": 3,
+   "count_within1": 3,
+   "count_exact": 3,
+   "id": "hi-07",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "sports_coaching"
+     ],
+     "count": 2,
+     "role": "Sports coach",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 1,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "event_coordination"
+     ],
+     "count": 1,
+     "role": "Event coordinator",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-08",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "community_mobilisation",
+      "health_education"
+     ],
+     "count": 3,
+     "role": "Door-to-door outreach volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "graphic_design"
+     ],
+     "count": 1,
+     "role": "Poster designer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-09",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "dialect_bhojpuri"
+     ],
+     "count": 2,
+     "role": "Local-language liaison (Bhojpuri)",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "health_education"
+     ],
+     "count": 1,
+     "role": "Health educator",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "hi-10",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "counselling_support"
+     ],
+     "count": 1,
+     "role": "Counsellor",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hi-11",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "hygiene_promotion",
+      "health_education"
+     ],
+     "count": 2,
+     "role": "Hygiene educator",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "logistics_supplies"
+     ],
+     "count": 1,
+     "role": "Logistics and supplies coordinator",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "hi-12",
+   "lang": "hi",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "fundraising_outreach"
+     ],
+     "count": 2,
+     "role": "Fundraising and partner outreach volunteer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-01",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 2,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "documentation_reporting",
+      "tech_digital_support"
+     ],
+     "count": 1,
+     "role": "Donor registration desk",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-02",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "teaching_literacy"
+     ],
+     "count": 3,
+     "role": "Adult literacy teacher",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "documentation_reporting"
+     ],
+     "count": 1,
+     "role": "Attendance keeper",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-03",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "food_distribution"
+     ],
+     "count": 4,
+     "role": "Cooking and serving volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "driving_transport",
+      "logistics_supplies"
+     ],
+     "count": 1,
+     "role": "Supply driver",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-04",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tree_plantation"
+     ],
+     "count": 6,
+     "role": "Planting team volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "photography_video"
+     ],
+     "count": 1,
+     "role": "Photographer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-05",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tech_digital_support"
+     ],
+     "count": 2,
+     "role": "Digital support volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "urdu_fluent"
+     ],
+     "count": 1,
+     "role": "Local-language liaison (Urdu)",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 3,
+   "pred": 3,
+   "matched": 3,
+   "count_within1": 3,
+   "count_exact": 3,
+   "id": "en-06",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "sports_coaching"
+     ],
+     "count": 2,
+     "role": "Football coach",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 1,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "event_coordination"
+     ],
+     "count": 1,
+     "role": "Event coordinator",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 3,
+   "pred": 3,
+   "matched": 3,
+   "count_within1": 3,
+   "count_exact": 3,
+   "id": "en-07",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "team_leadership",
+      "disaster_response"
+     ],
+     "count": 1,
+     "role": "Team lead",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "food_distribution",
+      "logistics_supplies"
+     ],
+     "count": 3,
+     "role": "Relief distribution volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "dialect_bhojpuri"
+     ],
+     "count": 1,
+     "role": "Local-language liaison (Bhojpuri)",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "en-08",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "graphic_design"
+     ],
+     "count": 2,
+     "role": "Graphic designer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "en-09",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "health_education",
+      "hygiene_promotion"
+     ],
+     "count": 1,
+     "role": "Health educator",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "counselling_support"
+     ],
+     "count": 1,
+     "role": "Counsellor",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "en-10",
+   "lang": "en",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [],
+     "count": 8,
+     "role": "Clean-up volunteer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-01",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 2,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "documentation_reporting"
+     ],
+     "count": 1,
+     "role": "Registration desk volunteer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-02",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tree_plantation"
+     ],
+     "count": 3,
+     "role": "Plantation volunteer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "driving_transport"
+     ],
+     "count": 1,
+     "role": "Sapling transport driver",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-03",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "teaching_literacy"
+     ],
+     "count": 2,
+     "role": "Teacher",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "dialect_awadhi"
+     ],
+     "count": 1,
+     "role": "Local-language liaison (Awadhi)",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 1,
+   "pred": 1,
+   "matched": 1,
+   "count_within1": 1,
+   "count_exact": 1,
+   "id": "hg-04",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "food_distribution"
+     ],
+     "count": 4,
+     "role": "Ration distribution volunteer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 3,
+   "pred": 3,
+   "matched": 3,
+   "count_within1": 3,
+   "count_exact": 3,
+   "id": "hg-05",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "sports_coaching"
+     ],
+     "count": 2,
+     "role": "Cricket coach",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "first_aid"
+     ],
+     "count": 1,
+     "role": "First-aid support",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "photography_video"
+     ],
+     "count": 1,
+     "role": "Photographer",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-06",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "dialect_bhojpuri"
+     ],
+     "count": 2,
+     "role": "Local-language liaison (Bhojpuri)",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "graphic_design"
+     ],
+     "count": 1,
+     "role": "Poster maker",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-07",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "tech_digital_support",
+      "teaching_literacy"
+     ],
+     "count": 3,
+     "role": "Digital literacy trainer",
+     "confidence": "high"
+    },
+    {
+     "skills": [
+      "team_leadership",
+      "event_coordination"
+     ],
+     "count": 1,
+     "role": "Team lead",
+     "confidence": "high"
+    }
+   ]
+  },
+  {
+   "gold": 2,
+   "pred": 2,
+   "matched": 2,
+   "count_within1": 2,
+   "count_exact": 2,
+   "id": "hg-08",
+   "lang": "hinglish",
+   "secs": 0.0,
+   "error": "",
+   "predicted_roles": [
+    {
+     "skills": [
+      "counselling_support"
+     ],
+     "count": 1,
+     "role": "Counsellor",
+     "confidence": "high"
+    },
+    {
+     "skills": [],
+     "count": 2,
+     "role": "Companion volunteer for elderly",
+     "confidence": "high"
+    }
+   ]
+  }
+ ]
+}

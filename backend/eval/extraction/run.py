@@ -61,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
         except Exception as e:  # noqa: BLE001 - every failure is counted, never hidden
             pred, err = [], f"{type(e).__name__}: {str(e)[:120]}"
         s = score(b["gold"], pred)
-        s.update(id=b["id"], lang=b["lang"], secs=round(time.time() - t0, 1), error=err, pred=pred)
+        s.update(id=b["id"], lang=b["lang"], secs=round(time.time() - t0, 1), error=err, predicted_roles=pred)
         rows.append(s)
         print(f"{b['id']:<6} matched {s['matched']}/{s['gold']} gold, {s['pred']} predicted, counts+-1 {s['count_within1']}, {s['secs']}s {err}")
 
