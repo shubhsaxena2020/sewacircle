@@ -16,3 +16,12 @@
    synthetic task with ready=null.
 3. task_id_for_share_key: `secret = server_secret()` is unused. Remove.
 4. Add computed_at to the summary so a viewer can see how fresh the verdict is.
+
+## Capabilities (Hermes, aa20bf1) - accepted, 2 notes
+- Good: one CAPABILITIES dict drives both GET /api/capabilities and a FastAPI dependency on every mutating evidence route,
+  so menu and API cannot drift; "demo role switch, not authentication" stated in module, route and every 403 message;
+  default organiser keeps old clients working. Suite 813 passed at review time.
+- Note 1: unknown role is 403 on mutating routes (header) but 422 on GET /api/capabilities (query). Acceptable, but say so in
+  BACKEND-PATTERNS.md.
+- Note 2: read_roster is listed but /api/roster, /dropout, /why-not are not gated. Gate them with the same dependency
+  (organiser only) so the matrix is honest, or drop read_roster from host's absent list explicitly in the docs.
