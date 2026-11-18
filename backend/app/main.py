@@ -7,7 +7,9 @@ import os
 from pathlib import Path
 from typing import Any, Callable, Optional
 
-from fastapi import FastAPI, HTTPException, Request
+import functools
+import hashlib
+from fastapi import FastAPI, HTTPException, Request, Response
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.staticfiles import StaticFiles
@@ -23,6 +25,7 @@ from .taxonomy import DISCLAIMER, SKILLS
 
 DATA_DIR = Path(os.environ.get("SEWA_DATA_DIR", Path(__file__).resolve().parents[1] / "data" / "state"))
 CARDS_PATH = DATA_DIR / "cards.json"
+_DISTRICTS_JSON = Path(__file__).resolve().parents[2] / "docs" / "research" / "up_districts.json"
 
 app = FastAPI(title="SewaCircle", version="0.1.0-idea-stage-prototype")
 _origins = [o.strip() for o in os.environ.get("SEWA_CORS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8000,http://127.0.0.1:8000").split(",") if o.strip()]
@@ -97,6 +100,54 @@ def health() -> dict:
 @app.get("/api/meta")
 def meta() -> dict:
     return {"disclaimer": DISCLAIMER, "skills": SKILLS}
+
+
+@functools.lru_cache(maxsize=1)
+def get_geo_tree() -> dict[str, Any]:
+    from .data.synth import BLOCKS
+    data = json.loads(_DISTRICTS_JSON.read_text(encoding="utf-8"))
+    source_url = data.get("coordinate_source_url") or data.get("source_url", "")
+    districts = [
+        {
+            "name": d["name"],
+            "lat": d["lat"],
+            "lon": d["lon"],
+            "source_record_id": d["source_record_id"],
+            "blocks": BLOCKS.get(d["name"], []),
+        }
+        for d in data["districts"]
+    ]
+    return {
+        "state": "Uttar Pradesh",
+        "source_url": source_url,
+        "districts": districts,
+    }
+
+
+build_geo_tree = get_geo_tree
+
+
+@functools.lru_cache(maxsize=1)
+def _geo_tree_payload() -> tuple[bytes, str]:
+    tree = get_geo_tree()
+    body = json.dumps(tree, ensure_ascii=False).encode("utf-8")
+    etag = f'"{hashlib.sha256(body).hexdigest()}"'
+    return body, etag
+
+
+@app.get("/api/geo/tree")
+def geo_tree(request: Request = None) -> Any:
+    if request is None:
+        return get_geo_tree()
+    body, etag = _geo_tree_payload()
+    if_none_match = request.headers.get("if-none-match")
+    if if_none_match and (
+        if_none_match == etag
+        or if_none_match.strip('"') == etag.strip('"')
+        or if_none_match == f"W/{etag}"
+    ):
+        return Response(status_code=304, headers={"ETag": etag})
+    return Response(content=body, media_type="application/json", headers={"ETag": etag})
 
 
 @app.get("/api/volunteers", response_model=list[Volunteer])
