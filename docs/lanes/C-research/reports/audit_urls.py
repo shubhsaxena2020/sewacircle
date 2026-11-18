@@ -25,16 +25,20 @@ REQUIRED = [
 ]
 
 
-def strip_fences(text: str) -> str:
-    """Return text with fenced code blocks removed (for heading detection)."""
-    out, in_fence = [], False
-    for line in text.splitlines():
+def strip_fences(text: str) -> list[tuple[int, str]]:
+    """Return (raw_lineno, line) pairs with fenced code blocks removed.
+
+    Line numbers stay TRUE to the file on disk so findings can be cited.
+    """
+    out: list[tuple[int, str]] = []
+    in_fence = False
+    for i, line in enumerate(text.splitlines(), start=1):
         if line.lstrip().startswith("```"):
             in_fence = not in_fence
             continue
         if not in_fence:
-            out.append(line)
-    return "\n".join(out)
+            out.append((i, line))
+    return out
 
 
 def main() -> int:
@@ -56,7 +60,6 @@ def main() -> int:
 
     for f in files:
         text = f.read_text(encoding="utf-8", errors="replace")
-        bare = strip_fences(text)
 
         urls = [u.rstrip(".,;:") for u in URL_RE.findall(text)]
         seen: dict[str, int] = {}
@@ -65,14 +68,14 @@ def main() -> int:
         dupes = {u: c for u, c in seen.items() if c > 1}
         bad = [u for u in urls if not VALID_RE.match(u)]
 
-        # heading order check (fence-aware, exact-line match)
-        lines = bare.splitlines()
+        # heading order check (fence-aware, exact-line match, raw line numbers)
+        pairs = strip_fences(text)
         found_order: list[str] = []
         positions: dict[str, list[int]] = {s: [] for s in REQUIRED}
-        for i, line in enumerate(lines, start=1):
+        for lineno, line in pairs:
             s = line.strip()
             if s in REQUIRED:
-                positions[s].append(i)
+                positions[s].append(lineno)
                 if s not in found_order:
                     found_order.append(s)
         for s in REQUIRED:

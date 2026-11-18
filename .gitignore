@@ -10,3 +10,4 @@ frontend/dist/
 .playwright-mcp/
 logs/
 backend/data/state/
+backend/data/state*/

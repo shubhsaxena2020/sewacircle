@@ -245,7 +245,9 @@ export function EvidenceStep(p: { task: TaskSpec; roster: RosterResult; roleName
   async function decide(id: string, action: 'confirm' | 'correct' | 'reject') {
     setErr(null)
     try {
-      const c = await api.decide(id, action, action === 'correct' ? fix[id] : undefined)
+      const card = cards.find((x) => x.id === id)
+      const shown = fix[id] ?? card?.recorded_hours ?? card?.claimed_hours
+      const c = await api.decide(id, action, action === 'correct' ? shown : undefined)
       setCards((cs) => cs.map((x) => (x.id === id ? c : x))); p.onChanged()
     } catch (e) { setErr(e) }
   }

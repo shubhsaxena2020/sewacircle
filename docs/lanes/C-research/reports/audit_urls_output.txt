@@ -1,0 +1,245 @@
+root: C:\Users\shubh\Projects\sewacircle\docs\research
+files: 6
+
+file                          URLs  uniq  dupes  malformed  sections
+--------------------------------------------------------------------
+R1-optimization.md              24    13     10          0  OK 4/4 in order
+R2-nlp-hindi.md                 37    19     18          0  OK 4/4 in order
+R3-credentials-privacy.md       67    31     23          0  OK 4/4 in order
+R4-up-realism.md                51    23     23          0  OK 4/4 in order
+R5-demo-ux.md                   61    29     22          0  OK 4/4 in order
+R6-eval-responsible-ai.md       31    16     15          0  OK 4/4 in order
+
+TOTALS: urls=271 duplicate_urls=111 malformed=0
+
+SECTION HEADINGS (line numbers):
+  R1-optimization.md: Findings @L1 | Recommendation for our build @L255 | Risks @L267 | Sources @L279
+  R2-nlp-hindi.md: Findings @L1 | Recommendation for our build @L82 | Risks @L159 | Sources @L171
+  R3-credentials-privacy.md: Findings @L3 | Recommendation for our build @L58 | Risks @L120 | Sources @L131
+  R4-up-realism.md: Findings @L1 | Recommendation for our build @L21 | Risks @L59 | Sources @L69
+  R5-demo-ux.md: Findings @L5 | Recommendation for our build @L44 | Risks @L111 | Sources @L121
+  R6-eval-responsible-ai.md: Findings @L5 | Recommendation for our build @L46 | Risks @L177 | Sources @L190
+
+PROBLEMS (222):
+  - R1-optimization.md: DUPLICATE URL x2: https://ami.uni-eszterhazy.hu/uploads/papers/finalpdf/AMI_63_from1to17.pdf
+  -     first at L11: **F5 — FACT.** A peer-reviewed team-formation study models team construction as a constraint satisfaction problem with skill, gender and tra
+  - R1-optimization.md: DUPLICATE URL x2: https://ar5iv.labs.arxiv.org/html/1801.07544
+  -     first at L19: **F9 — FACT.** Generalized Gini Index (GGI) is used as a fairness aggregation in combinatorial optimisation (allocation, knapsack, matching,
+  - R1-optimization.md: DUPLICATE URL x2: https://arxiv.org/html/1805.01299v1
+  -     first at L15: **F7 — FACT.** In bipartite matching literature, a graph is called *robust* if it still admits a perfect matching after removal of any singl
+  - R1-optimization.md: DUPLICATE URL x2: https://developers.google.com/optimization/cp/
+  -     first at L3: **F1 — FACT.** OR-Tools CP-SAT is designed for integer programming and all constraints must be integer-valued (non-integer terms need scalin
+  - R1-optimization.md: DUPLICATE URL x2: https://developers.google.com/optimization/cp/channeling
+  -     first at L7: **F3 — FACT.** Channeling/implication with Boolean variables is the documented OR-Tools pattern for "if this is true, then that must hold" c
+  - R1-optimization.md: DUPLICATE URL x2: https://developers.google.com/optimization/cp/cp_solver
+  -     first at L3: **F1 — FACT.** OR-Tools CP-SAT is designed for integer programming and all constraints must be integer-valued (non-integer terms need scalin
+  - R1-optimization.md: DUPLICATE URL x3: https://developers.google.com/optimization/cp/cp_tasks
+  -     first at L9: **F4 — FACT.** Google documents explicit time/solution limits on the solver so a run terminates predictably. Opened: [Setting solver limits]
+  - R1-optimization.md: DUPLICATE URL x2: https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.IPEC.2021.19
+  -     first at L17: **F8 — FACT.** The recoverable robust assignment problem asks for two perfect matchings whose overlap is at least `k` edges under two cost f
+  - R1-optimization.md: DUPLICATE URL x2: https://ijcai.org/proceedings/2021/564
+  -     first at L13: **F6 — FACT.** For counterfactual explanations of declarative optimisation, the IJCAI paper states that for objective functions that are a s
+  - R1-optimization.md: DUPLICATE URL x2: https://pmc.ncbi.nlm.nih.gov/articles/PMC6010947/
+  -     first at L21: **F10 — FACT.** Mentor–mentee allocation is studied as two-sided matching, where *stability* (no participant prefers a different partner to 
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://aclanthology.org/2023.jeptalnrecital-long.3/
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://aclanthology.org/2025.findings-emnlp.422/
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://aclanthology.org/2026.chipsal-1.3.pdf
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://aclanthology.org/2026.dravidianlangtech-1.2.pdf
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://ai.google.dev/gemini-api/docs/structured-output?lang=rest
+  -     first at L5: **(a) Structured-output patterns — FACT.** OpenAI's structured-output guide states that Structured Outputs constrain *completed, non-refusal
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://aistudio.google.com/docs/structured-output
+  -     first at L5: **(a) Structured-output patterns — FACT.** OpenAI's structured-output guide states that Structured Outputs constrain *completed, non-refusal
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://arxiv.org/html/2501.13912v1
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://arxiv.org/html/2502.06884
+  -     first at L9: **(c) Abstention — FACT.** Conformal prediction gives distribution-free, model-agnostic coverage: for target error α, a threshold is taken f
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://developers.openai.com/api/docs/guides/structured-outputs
+  -     first at L5: **(a) Structured-output patterns — FACT.** OpenAI's structured-output guide states that Structured Outputs constrain *completed, non-refusal
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://developers.openai.com/api/docs/guides/structured-outputs.md
+  -     first at L5: **(a) Structured-output patterns — FACT.** OpenAI's structured-output guide states that Structured Outputs constrain *completed, non-refusal
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://en.wikipedia.org/wiki/Verhoeff_algorithm
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://uidai.gov.in/en/aadhaar-online-services
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://uidai.gov.in/en/about-aadhaar
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://www.dot.gov.in/static/uploads/2026/05/9ed5f19dbf38307edc38a54377d82cd5.pdf
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://www.incometaxindia.gov.in/documents/d/guest/1-permanent-account-number-pan-pdf
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://www.incometaxindia.gov.in/en/pan
+  -     first at L13: **(e) Indian PII patterns — FACT.** UIDAI states an Aadhaar number is a 12-digit random number issued to residents (https://uidai.gov.in/en/
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://www.unicode.org/Public/18.0.0/charts/nameslist/0900/
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R2-nlp-hindi.md: DUPLICATE URL x2: https://www.unicode.org/Public/UCD/latest/charts/PDF/U0900.pdf
+  -     first at L7: **(b) Reliability and failure modes — FACT.** Unicode 18.0's Devanagari block assigns `U+0966 .. U+096F` as DEVANAGARI DIGIT ZERO .. NINE, d
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://egazette.gov.in/WriteReadData/2023/248045.pdf
+  -     first at L25: **FACT — DPDP Act 2023, s.9 and definitions (official text opened: https://www.meity.gov.in/static/uploads/2025/02/07b7d737f483714eacde37d1a
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://egazette.gov.in/WriteReadData/2025/267647.pdf
+  -     first at L29: **FACT — Commencement timing matters.** The official commencement notification G.S.R. 843(E), Gazette 13 November 2025 (opened https://egaze
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/
+  -     first at L21: **FACT — MY Bharat's own description of credentials and activity records.** The official About page (opened https://mybharat.gov.in/pages/ab
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/faqs
+  -     first at L23: **NOT FOUND (MY Bharat).** On the five official MY Bharat pages opened (homepage, About, Privacy Policy https://mybharat.gov.in/policy, FAQs
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/pages/about_mybharat
+  -     first at L21: **FACT — MY Bharat's own description of credentials and activity records.** The official About page (opened https://mybharat.gov.in/pages/ab
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/pages/brics_2026
+  -     first at L21: **FACT — MY Bharat's own description of credentials and activity records.** The official About page (opened https://mybharat.gov.in/pages/ab
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/pages/terms_of_use
+  -     first at L23: **NOT FOUND (MY Bharat).** On the five official MY Bharat pages opened (homepage, About, Privacy Policy https://mybharat.gov.in/policy, FAQs
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://mybharat.gov.in/policy
+  -     first at L23: **NOT FOUND (MY Bharat).** On the five official MY Bharat pages opened (homepage, About, Privacy Policy https://mybharat.gov.in/policy, FAQs
+  - R3-credentials-privacy.md: DUPLICATE URL x5: https://purl.imsglobal.org/spec/ob/v3p0/context-3.0.3.json
+  -     first at L7: **FACT — Exact `AchievementCredential` fields and multiplicities (OB 3.0 §B.1.2, opened URL above).** Required/optional in square brackets i
+  - R3-credentials-privacy.md: DUPLICATE URL x3: https://purl.imsglobal.org/spec/ob/v3p0/extensions.json
+  -     first at L15: **FACT — Context files resolve (opened 2026-11-18).** `https://www.w3.org/ns/credentials/v2` → HTTP 200, `application/ld+json`, 10131 bytes,
+  - R3-credentials-privacy.md: DUPLICATE URL x4: https://purl.imsglobal.org/spec/ob/v3p0/schema/json/ob_v3p0_achievementcredential_schema.json
+  -     first at L9: **FACT — OB 3.0 normative JSON Schema required list (spec §E.2.1.2).** `"required": ["@context", "id", "type", "credentialSubject", "issuer"
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://purl.imsglobal.org/spec/ob/vocab.html
+  -     first at L5: **FACT — Open Badges 3.0 is the primary 1EdTech credential spec and is explicitly aligned to W3C VC Data Model v2.0.** The opened specificat
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.imsglobal.org/spec/ob/v3p0/
+  -     first at L5: **FACT — Open Badges 3.0 is the primary 1EdTech credential spec and is explicitly aligned to W3C VC Data Model v2.0.** The opened specificat
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.imsglobal.org/spec/ob/v3p0/main/
+  -     first at L5: **FACT — Open Badges 3.0 is the primary 1EdTech credential spec and is explicitly aligned to W3C VC Data Model v2.0.** The opened specificat
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.meity.gov.in/static/uploads/2025/02/07b7d737f483714eacde37d1a259a6c8.pdf
+  -     first at L25: **FACT — DPDP Act 2023, s.9 and definitions (official text opened: https://www.meity.gov.in/static/uploads/2025/02/07b7d737f483714eacde37d1a
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf
+  -     first at L27: **FACT — DPDP Rules 2025 (official PDF opened: https://www.meity.gov.in/static/uploads/2025/11/53450e6e5dc0bfa85ebd78686cadad39.pdf , G.S.R.
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.meity.gov.in/static/uploads/2025/11/c56ceae6c383460ca69577428d36828b.pdf
+  -     first at L29: **FACT — Commencement timing matters.** The official commencement notification G.S.R. 843(E), Gazette 13 November 2025 (opened https://egaze
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.meity.gov.in/static/uploads/2025/12/3c7ebbae0e5456f493f486e6845df86b.pdf
+  -     first at L29: **FACT — Commencement timing matters.** The official commencement notification G.S.R. 843(E), Gazette 13 November 2025 (opened https://egaze
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.rfc-editor.org/rfc/rfc6962.html
+  -     first at L31: **FACT — What an append-only Merkle log is stated to prove.** RFC 6962 (IETF, June 2013, opened https://www.rfc-editor.org/rfc/rfc6962.html)
+  - R3-credentials-privacy.md: DUPLICATE URL x4: https://www.w3.org/2018/credentials/v1
+  -     first at L15: **FACT — Context files resolve (opened 2026-11-18).** `https://www.w3.org/ns/credentials/v2` → HTTP 200, `application/ld+json`, 10131 bytes,
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.w3.org/TR/vc-data-model-1.1/
+  -     first at L19: **FACT — W3C VC Data Model v1.1 (W3C Recommendation 03 March 2022, opened https://www.w3.org/TR/vc-data-model-1.1/).** The spec carries a St
+  - R3-credentials-privacy.md: DUPLICATE URL x2: https://www.w3.org/TR/vc-data-model-2.0/
+  -     first at L17: **FACT — W3C VC Data Model v2.0 (W3C Recommendation 15 May 2025, opened https://www.w3.org/TR/vc-data-model-2.0/).** §4.2 property list: `@c
+  - R3-credentials-privacy.md: DUPLICATE URL x7: https://www.w3.org/ns/credentials/v2
+  -     first at L7: **FACT — Exact `AchievementCredential` fields and multiplicities (OB 3.0 §B.1.2, opened URL above).** Required/optional in square brackets i
+  - R4-up-realism.md: DUPLICATE URL x2: https://censusindia.gov.in/nada/index.php/catalog/10224
+  -     first at L15: **Language mix (FACT + INFERENCE).** Census 2011 Table C-16 for Uttar Pradesh documents mother-tongue categories including Hindi, Awadhi, Bh
+  - R4-up-realism.md: DUPLICATE URL x2: https://en.wikipedia.org/wiki/Languages_of_Uttar_Pradesh
+  -     first at L15: **Language mix (FACT + INFERENCE).** Census 2011 Table C-16 for Uttar Pradesh documents mother-tongue categories including Hindi, Awadhi, Bh
+  - R4-up-realism.md: DUPLICATE URL x3: https://en.wikipedia.org/wiki/Uttar_Pradesh
+  -     first at L3: **District reference points (FACT).** `docs/research/up_districts.json` contains exactly 20 real Uttar Pradesh district names with one WGS84
+  - R4-up-realism.md: DUPLICATE URL x2: https://github.com/open-admin-data/india-administrative-divisions
+  -     first at L3: **District reference points (FACT).** `docs/research/up_districts.json` contains exactly 20 real Uttar Pradesh district names with one WGS84
+  - R4-up-realism.md: DUPLICATE URL x2: https://gorakhpur.nic.in/blocks/
+  -     first at L9: - Gorakhpur: the district page states 7 tehsils, 19 blocks, 191 Nyay Panchayats and 1354 Gram Sabhas, and maps tehsils to blocks, e.g. Sadar
+  - R4-up-realism.md: DUPLICATE URL x2: https://gorakhpur.nic.in/subdivisions-blocks/
+  -     first at L9: - Gorakhpur: the district page states 7 tehsils, 19 blocks, 191 Nyay Panchayats and 1354 Gram Sabhas, and maps tehsils to blocks, e.g. Sadar
+  - R4-up-realism.md: DUPLICATE URL x2: https://kanpurdehat.nic.in/organisation-chart/
+  -     first at L6: - Kanpur Dehat: the district site states 6 tehsils and 10 development blocks (https://kanpurdehat.nic.in/organisation-chart/ ). Tehsils: Akb
+  - R4-up-realism.md: DUPLICATE URL x2: https://kanpurdehat.nic.in/subdivision-blocks/
+  -     first at L6: - Kanpur Dehat: the district site states 6 tehsils and 10 development blocks (https://kanpurdehat.nic.in/organisation-chart/ ). Tehsils: Akb
+  - R4-up-realism.md: DUPLICATE URL x2: https://kanpurdehat.nic.in/tehsil/
+  -     first at L6: - Kanpur Dehat: the district site states 6 tehsils and 10 development blocks (https://kanpurdehat.nic.in/organisation-chart/ ). Tehsils: Akb
+  - R4-up-realism.md: DUPLICATE URL x2: https://lucknow.nic.in/details-of-officers-posted-in-district-development-block/
+  -     first at L7: - Lucknow: the Chief Development Officer's page lists 8 development blocks with BDOs — BKT, Chinhat, Gosaiganj, Kakori, Mall, Malihabad, Moh
+  - R4-up-realism.md: DUPLICATE URL x2: https://lucknow.nic.in/hi/%E0%A4%A4%E0%A4%B9%E0%A4%B8%E0%A5%80%E0%A4%B2-%E0%A4%95%E0%A4%BE-%E0%A4%A8%E0%A4%BE%E0%A4%AE/
+  -     first at L7: - Lucknow: the Chief Development Officer's page lists 8 development blocks with BDOs — BKT, Chinhat, Gosaiganj, Kakori, Mall, Malihabad, Moh
+  - R4-up-realism.md: DUPLICATE URL x3: https://mybharat.gov.in/elp/listing/158448
+  -     first at L17: **Real community-drive kinds (FACT).** A MY Bharat district campaign in Pilibhit lists cleanliness and sanitation drives, shramdaan, environ
+  - R4-up-realism.md: DUPLICATE URL x2: https://mybharat.gov.in/vo/pages/event_detail?event_name=Disaster&key=115214641240
+  -     first at L17: **Real community-drive kinds (FACT).** A MY Bharat district campaign in Pilibhit lists cleanliness and sanitation drives, shramdaan, environ
+  - R4-up-realism.md: DUPLICATE URL x3: https://mybharat.gov.in/vo/pages/event_detail?event_name=Seva-Sankalp-Abhiyan-aewam-Seva-Pakhwara&key=510216192510
+  -     first at L11: **Youth-organisation structure (FACT).** The Ministry of Youth Affairs and Sports Annual Report 2013-14 (https://yas.nic.in/sites/default/fi
+  - R4-up-realism.md: DUPLICATE URL x2: https://mybharat.gov.in/ypp/youth-public-profile/
+  -     first at L19: **Skill categories observed on official youth platforms (FACT).** MY Bharat public youth profiles expose user-entered skill strings and area
+  - R4-up-realism.md: DUPLICATE URL x2: https://mybharat.gov.in/ypp/youth-public-profile/details/rajat48360
+  -     first at L19: **Skill categories observed on official youth platforms (FACT).** MY Bharat public youth profiles expose user-entered skill strings and area
+  - R4-up-realism.md: DUPLICATE URL x3: https://negd.gov.in/wp-content/uploads/2026/10/PR_Ep-51_NSS_V1.pdf
+  -     first at L13: **Volunteer age band (FACT).** MY Bharat is described by Digital India as a one-stop portal for people aged 15 to 29, available in 15 Indian
+  - R4-up-realism.md: DUPLICATE URL x2: https://raw.githubusercontent.com/open-admin-data/india-administrative-divisions/master/data/all-district.json
+  -     first at L3: **District reference points (FACT).** `docs/research/up_districts.json` contains exactly 20 real Uttar Pradesh district names with one WGS84
+  - R4-up-realism.md: DUPLICATE URL x2: https://varanasi.nic.in/administrative-setup/
+  -     first at L8: - Varanasi: the district administration page states 3 sub-divisions and 8 development blocks (https://varanasi.nic.in/administrative-setup/ 
+  - R4-up-realism.md: DUPLICATE URL x2: https://varanasi.nic.in/deo-portal/
+  -     first at L8: - Varanasi: the district administration page states 3 sub-divisions and 8 development blocks (https://varanasi.nic.in/administrative-setup/ 
+  - R4-up-realism.md: DUPLICATE URL x2: https://varanasi.nic.in/hi/%E0%A4%B6%E0%A4%BF%E0%A4%95%E0%A5%8D%E0%A4%B7%E0%A4%BE/
+  -     first at L8: - Varanasi: the district administration page states 3 sub-divisions and 8 development blocks (https://varanasi.nic.in/administrative-setup/ 
+  - R4-up-realism.md: DUPLICATE URL x2: https://www.digitalindia.gov.in/initiative/my-bharat/
+  -     first at L13: **Volunteer age band (FACT).** MY Bharat is described by Digital India as a one-stop portal for people aged 15 to 29, available in 15 Indian
+  - R4-up-realism.md: DUPLICATE URL x3: https://yas.nic.in/sites/default/files/Annual%20Report13-14.pdf
+  -     first at L11: **Youth-organisation structure (FACT).** The Ministry of Youth Affairs and Sports Annual Report 2013-14 (https://yas.nic.in/sites/default/fi
+  - R5-demo-ux.md: DUPLICATE URL x2: https://blog.google/innovation-and-ai/technology/developers-tools/meet-the-students-that-are-changing-the-world-through-technology/
+  -     first at L13: - **FACT — Google's 2024 Solution Challenge winners were presented at a live Demo Day of 10 teams with three top prizes and one People's Cho
+  - R5-demo-ux.md: DUPLICATE URL x2: https://claude.com/resources/articles/meet-the-winners-of-our-built-with-opus-4-6-claude-code-hackathon
+  -     first at L11: - **FACT — Anthropic's winner page shows domain experts, not just engineers, winning with working tools.** The Opus 4.6 winners included a p
+  - R5-demo-ux.md: DUPLICATE URL x2: https://developers.google.com/community/dsc-solution-challenge/faq
+  -     first at L16: - **NOT RE-VERIFIED, therefore NOT USED:** the inherited claim that Google's Solution Challenge FAQ scores "Impact 25 pts + Technology 25 pt
+  - R5-demo-ux.md: DUPLICATE URL x2: https://developers.openai.com/blog/build-week-winners
+  -     first at L10: - **FACT — OpenAI's own winner page states the judging axes and builder profile.** "Judges evaluated each project on technical implementatio
+  - R5-demo-ux.md: DUPLICATE URL x3: https://ffmpeg.org/ffmpeg-codecs.html
+  -     first at L41: - **FACT — FFmpeg's libvpx wrapper documents `b` (target bitrate in bits/s), `crf`, `deadline` (`good` recommended as a speed/quality trade-
+  - R5-demo-ux.md: DUPLICATE URL x2: https://guidelines.india.gov.in/accessibility-guidelines-and-attributes/
+  -     first at L28: - **FACT — GIGW 3.0 requires text contrast of at least 4.5:1 (3:1 for large text), text resizable to 200% without loss of content or functio
+  - R5-demo-ux.md: DUPLICATE URL x3: https://guidelines.india.gov.in/guidelines/
+  -     first at L28: - **FACT — GIGW 3.0 requires text contrast of at least 4.5:1 (3:1 for large text), text resizable to 200% without loss of content or functio
+  - R5-demo-ux.md: DUPLICATE URL x2: https://microsoft.github.io/AI_Agents_Hackathon/winners/
+  -     first at L12: - **FACT — Microsoft states its 2025 AI Agents Hackathon judging criteria and scale.** "over 18,000 developers registered and 570 project su
+  - R5-demo-ux.md: DUPLICATE URL x4: https://playwright.dev/docs/api/class-browser
+  -     first at L38: - **FACT — Video size defaults to the viewport scaled to fit 800x800; with no explicit viewport the size is 800x450. `fps` defaults to 25 an
+  - R5-demo-ux.md: DUPLICATE URL x4: https://playwright.dev/docs/api/class-testoptions
+  -     first at L37: - **FACT — Playwright Test video is configured with `use.video`; current docs list modes `off`, `on`, `on-first-retry`, `on-all-retries`, `r
+  - R5-demo-ux.md: DUPLICATE URL x3: https://playwright.dev/docs/test-cli
+  -     first at L40: - **FACT — The current CLI documentation lists `--output <dir>` ("Folder for output artifacts (default: test-results)") and `--workers <work
+  - R5-demo-ux.md: DUPLICATE URL x4: https://playwright.dev/docs/videos
+  -     first at L37: - **FACT — Playwright Test video is configured with `use.video`; current docs list modes `off`, `on`, `on-first-retry`, `on-all-retries`, `r
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.indiatoday.in/education-today/news/story/meet-the-winners-of-indias-largest-genai-buildathon-at-india-ai-impact-summit-2026-2870537-2026-02-19
+  -     first at L9: - **FACT — Working prototypes, not slideware, were the format at the OpenAI Academy × NxtWave Buildathon at India AI Impact Summit 2026.** T
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.nngroup.com/articles/progressive-disclosure/
+  -     first at L22: - **FACT — Progressive disclosure explicitly means showing only a few important options initially and offering specialised options on reques
+  - R5-demo-ux.md: DUPLICATE URL x3: https://www.nngroup.com/articles/usability-heuristics-complex-applications/
+  -     first at L20: - **FACT — System status is a first-order requirement in complex applications; progress plus steps/time remaining reduce uncertainty and bui
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.nngroup.com/articles/visibility-system-status/
+  -     first at L20: - **FACT — System status is a first-order requirement in complex applications; progress plus steps/time remaining reduce uncertainty and bui
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.sih.gov.in/sih2025/sih2025-grand-finale-result
+  -     first at L14: - **FACT — SIH 2025 official results name real winners and prize amounts.** The official grand-finale result table lists SIH25001, team CORE
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.w3.org/International/ilreq/devanagari/
+  -     first at L30: - **FACT — W3C's Devanagari layout requirements note that danda/double-danda should not wrap to a new line, the double danda should use its 
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.w3.org/International/style/article-2022.css
+  -     first at L31: - **FACT — The W3C Internationalization site's own stylesheet sets `font-size: 18px` for `:root[lang=hi] body` versus `16px` for Latin-langu
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.w3.org/TR/WCAG22/
+  -     first at L27: - **FACT — WCAG 2.2 is a W3C Recommendation dated 12 December 2024; it extends WCAG 2.1, and conformance to 2.2 also conforms to 2.0 and 2.1
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.w3.org/WAI/WCAG2/supplemental/patterns/o1p07-icons-used/
+  -     first at L32: - **FACT — WAI's cognitive accessibility patterns advise familiar icons beside key content (one meaning per icon, avoid clutter) and literal
+  - R5-demo-ux.md: DUPLICATE URL x2: https://www.w3.org/WAI/WCAG2/supplemental/patterns/o3p04-literal-language/
+  -     first at L32: - **FACT — WAI's cognitive accessibility patterns advise familiar icons beside key content (one meaning per icon, avoid clutter) and literal
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://airc.nist.gov/airmf-resources/airmf/3-sec-characteristics/
+  -     first at L28: **F4 — FACT (external).** NIST AI RMF 1.0 (released 2023-01-26; the NIST page says a revision is in progress as of access) names seven trust
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://airc.nist.gov/airmf-resources/airmf/5-sec-core/
+  -     first at L28: **F4 — FACT (external).** NIST AI RMF 1.0 (released 2023-01-26; the NIST page says a revision is in progress as of access) names seven trust
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://ar5iv.labs.arxiv.org/html/1810.03993
+  -     first at L32: **F6 — FACT (external).** The Model Cards paper (FAT* 2019) recommends short reports with benchmarked evaluation disaggregated by relevant c
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://arxiv.org/abs/1803.09010
+  -     first at L42: **F11 — FACT (external).** *Datasheets for Datasets* proposes documenting a dataset's motivation, composition, collection process and recomm
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://dl.acm.org/journal/tsas/reproducibility
+  -     first at L188: 10. **Source access limits.** The NIST Dataplot bootstrap page opened only as a revision-history stub and `https://dl.acm.org/journal/tsas/r
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://fairmlbook.org/
+  -     first at L34: **F7 — FACT (external).** *Fairness and Machine Learning: Limitations and Opportunities* (MIT Press, 2023; site last updated 2023-11-10) sta
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://fairmlbook.org/testing.html
+  -     first at L34: **F7 — FACT (external).** *Fairness and Machine Learning: Limitations and Opportunities* (MIT Press, 2023; site last updated 2023-11-10) sta
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1003285
+  -     first at L38: **F9 — FACT (external).** Sandve et al. (PLOS Comput Biol, 24 Oct 2013) make "for every result, keep track of how it was produced" Rule 1, r
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://nvlpubs.nist.gov/NISTpubs/SpecialPublications/NIST.SP.1270.pdf
+  -     first at L30: **F5 — FACT (external).** NIST Special Publication 1270 (March 2022) identifies three categories of AI bias — systemic, computational/statis
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://scikit-learn.org/stable/common_pitfalls.html
+  -     first at L40: **F10 — FACT (external).** The scikit-learn 1.9.1 documentation warns that data leakage — using information unavailable at prediction time —
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://tsapps.nist.gov/publication/get_pdf.cfm?pub_id=917303
+  -     first at L9: **F2 — FACT (external).** A NIST paper defines the bootstrap percentile interval exactly: resample the per-topic scores with replacement, co
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://www.acm.org/publications/policies/artifact-review-and-badging-current
+  -     first at L36: **F8 — FACT (external).** ACM's artifact policy defines *repeatability* as the same team and setup, *reproducibility* as a different team us
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://www.acm.org/publications/policies/artifact-review-badging
+  -     first at L36: **F8 — FACT (external).** ACM's artifact policy defines *repeatability* as the same team and setup, *reproducibility* as a different team us
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://www.itl.nist.gov/div898/handbook/eda/section3/bootplot.htm
+  -     first at L7: **F1 — FACT (external).** The NIST/SEMATECH e-Handbook describes the bootstrap as generating subsamples *with replacement* from the data, co
+  - R6-eval-responsible-ai.md: DUPLICATE URL x2: https://www.nist.gov/itl/ai-risk-management-framework
+  -     first at L28: **F4 — FACT (external).** NIST AI RMF 1.0 (released 2023-01-26; the NIST page says a revision is in progress as of access) names seven trust

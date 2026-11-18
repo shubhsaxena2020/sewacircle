@@ -99,3 +99,7 @@ docs/research now has R1, R2, R3, R4, R5, R6 and up_districts.json. Lead read R6
 
 ## BATCH B2 — extraction prompts + labelled briefs + label/prompt review
 Pending.
+
+---
+HEAD NOTICE 2026-11-19 00:10: provider down since about 23:30; remaining Lane B items (extract_roles, draft_cards, badges, extraction eval) REASSIGNED TO THE HEAD. Do not write more files.
+CARD BLOCKED: reassigned to head (provider outage)
