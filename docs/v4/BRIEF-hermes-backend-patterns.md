@@ -38,4 +38,4 @@ Also write docs\v4\BACKEND-PATTERNS.md: for each feature, what it does, why it m
 endpoints and schemas, and the exact test command output. Then run the full test suite and paste its real final line.
 
 RULES. No invented numbers. No secrets in code. Do not change the behaviour of existing endpoints except adding the optional
-X-Demo-Role check (default organiser). When done, write DONE as the last line of PROGRESS.md.
+X-Demo-Role check (default organiser). When done, write CARD COMPLETE as the last line of PROGRESS.md.
