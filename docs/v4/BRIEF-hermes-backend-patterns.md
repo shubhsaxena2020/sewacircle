@@ -8,7 +8,7 @@ organiser-side youth-volunteering crew planner. Read README.md, PROJECT_REPORT.m
 Tests: from backend\ run ..\..\sewacircle\.venv\Scripts\python.exe -m pytest -q (the venv lives in the main checkout). All 692
 current tests must keep passing.
 
-WHAT TO ADD. Four original, clean-room features. They are generic engineering patterns; do NOT copy any code, text, names,
+WHAT TO ADD. Three original, clean-room features. They are generic engineering patterns; do NOT copy any code, text, names,
 endpoint paths, keys or assets from any other system. Write every line yourself.
 
 1. Contribution card state machine with a back-edge. Today a card goes draft or flagged, then the host does confirm, correct or
@@ -23,12 +23,10 @@ endpoint paths, keys or assets from any other system. Write every line yourself.
    or a random value generated at startup and kept in memory (state that in the docstring). Sequential task ids must never be
    accepted on this route. Tests: unknown key 404, key does not reveal the task id, response contains no volunteer id or name.
 
-3. One cached geography tree. Add GET /api/geo/tree returning the 20 UP districts from docs\research\up_districts.json with their
-   blocks from backend\app\data\synth.py BLOCKS as one nested JSON tree (state > district > block), with the source URL fields
-   carried through, computed once and cached (functools.lru_cache). Include an ETag header and honour If-None-Match with 304.
-   Tests for shape, caching and 304.
+(A geography-tree endpoint is being added by another agent in this same worktree: do not build it, do not edit
+backend	ests	est_geo_tree.py, and if main.py changes under you, rebase your edits on the new content.)
 
-4. Capability-driven menu (demo roles, no real auth). Add GET /api/capabilities?role=organiser|host|volunteer|viewer returning
+3. Capability-driven menu (demo roles, no real auth). Add GET /api/capabilities?role=organiser|host|volunteer|viewer returning
    the list of screens and actions that role may use (for example host may confirm cards; viewer may only read the evaluation).
    Enforce the same matrix server-side on the mutating evidence routes using a request header X-Demo-Role (default organiser so
    current clients keep working); a forbidden action returns 403. Say clearly in the docstring that this is a demo role switch,
