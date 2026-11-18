@@ -6,3 +6,4 @@ scratch/
 logs/
 backend/data/llm_cache/
 frontend/dist/
+.serena/

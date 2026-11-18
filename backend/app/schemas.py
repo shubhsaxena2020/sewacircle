@@ -7,7 +7,7 @@ from typing import Literal, Optional
 
 from pydantic import BaseModel, Field, field_validator
 
-from .taxonomy import SKILLS
+from .taxonomy import SKILLS, SLOTS
 
 Gender = Literal["F", "M", "X", "undisclosed"]
 Language = Literal["hi", "en", "hinglish"]
@@ -45,6 +45,35 @@ class Volunteer(BaseModel):
                 raise ValueError("skill level must be 1..3")
         return v
 
+    @field_validator("available_slots")
+    @classmethod
+    def _slots_valid(cls, v: list[str]) -> list[str]:
+        bad = [s for s in v if s not in SLOTS]
+        if bad:
+            raise ValueError(f"unknown slots {bad}; use taxonomy.SLOTS")
+        return v
+
+    @field_validator("lat")
+    @classmethod
+    def _lat(cls, v: float) -> float:
+        if not -90 <= v <= 90:
+            raise ValueError("lat out of range")
+        return v
+
+    @field_validator("lon")
+    @classmethod
+    def _lon(cls, v: float) -> float:
+        if not -180 <= v <= 180:
+            raise ValueError("lon out of range")
+        return v
+
+    @field_validator("past_drives", "times_picked_last_90d")
+    @classmethod
+    def _nonneg(cls, v: int) -> int:
+        if v < 0:
+            raise ValueError("must be >= 0")
+        return v
+
     @property
     def is_minor(self) -> bool:
         return self.age < 18
@@ -69,6 +98,14 @@ class RoleSpec(BaseModel):
     evidence_span: str = ""
     confidence: Literal["high", "medium", "low"] = "high"
 
+    @field_validator("required_skills")
+    @classmethod
+    def _skills_in_taxonomy(cls, v: list[str]) -> list[str]:
+        bad = [s for s in v if s not in SKILLS]
+        if bad:
+            raise ValueError(f"unknown skills {bad}")
+        return v  # empty list = open to any volunteer (explicit semantics)
+
 
 class TaskSpec(BaseModel):
     id: str
@@ -86,6 +123,13 @@ class TaskSpec(BaseModel):
     roles: list[RoleSpec] = Field(default_factory=list)
     synthetic: bool = True
 
+    @field_validator("slot")
+    @classmethod
+    def _slot_valid(cls, v: str) -> str:
+        if v not in SLOTS:
+            raise ValueError(f"unknown slot {v}; use taxonomy.SLOTS")
+        return v
+
 
 # ---------------- extraction (LLM) ----------------
 class ExtractedRole(BaseModel):
@@ -95,6 +139,14 @@ class ExtractedRole(BaseModel):
     evidence_span: str = ""
     confidence: Literal["high", "medium", "low"] = "medium"
     reason: str = ""
+
+    @field_validator("required_skills")
+    @classmethod
+    def _skills_in_taxonomy(cls, v: list[str]) -> list[str]:
+        bad = [s for s in v if s not in SKILLS]
+        if bad:
+            raise ValueError(f"unknown skills {bad}")
+        return v
 
 
 class ExtractionResult(BaseModel):
@@ -136,14 +188,29 @@ class StandbyPick(BaseModel):
     reason: str = ""
 
 
+class SlotRef(BaseModel):
+    role_id: str
+    slot_index: int = Field(ge=0)
+
+
 class RosterMetrics(BaseModel):
-    role_coverage: float            # filled qualified slots / required slots (must-roles weighted equally)
+    """DEFINITIONS (head amendment A1, from Codex contract review; every method uses the SAME function):
+    role_coverage = filled qualified MUST slots / total MUST slots (each (role_id, slot_index) counted once; 1.0 if no must slots).
+    should_coverage = same for 'should' slots (None if there are none).
+    robustness = over each assigned volunteer v (single dropout), 1 if a maximum matching from (assigned minus v) plus the roster's
+      unique standby pool covers every must slot (each person used once; qualification, availability, travel, consent re-checked),
+      else 0; robustness = mean over assigned volunteers (0.0 if nobody assigned, 1.0 if there are no must slots). Dropping a standby is out of scope.
+    repeat_pick_share = assigned with times_picked_last_90d >= 3 / assigned (0.0 if nobody assigned).
+    exposure_gini = Gini of times_picked_last_90d over the task-ELIGIBLE candidate pool, where selected people get +1 for this pick
+      (0.0 if all zero or pool empty); this stops a planner looking fair by choosing only newcomers."""
+    role_coverage: float
     slots_filled: int
     slots_required: int
-    robustness: float               # share of single-dropout scenarios leaving all must roles covered (0..1)
-    repeat_pick_share: float        # share of assigned volunteers with times_picked_last_90d >= 3
-    exposure_gini: float            # Gini of times_picked_last_90d among assigned (lower = fairer)
-    district_spread: int            # distinct districts/blocks among assigned
+    robustness: float
+    repeat_pick_share: float
+    exposure_gini: float
+    district_spread: int            # distinct (district, block) among assigned
+    should_coverage: Optional[float] = None
     novices: int = 0
     mentor_pairs: int = 0
     solve_ms: int = 0
@@ -155,7 +222,8 @@ class RosterResult(BaseModel):
     method: Method
     assignments: list[Assignment]
     standby: list[StandbyPick] = Field(default_factory=list)
-    unfilled_role_ids: list[str] = Field(default_factory=list)
+    unfilled_role_ids: list[str] = Field(default_factory=list)  # derived summary: roles with at least one unfilled MUST slot
+    unfilled_slots: list[SlotRef] = Field(default_factory=list)  # exact unfilled (role_id, slot_index) pairs; assignments are unique per pair
     metrics: RosterMetrics
     explanations: list[str] = Field(default_factory=list)
     synthetic: bool = True
@@ -190,13 +258,25 @@ class Flag(BaseModel):
     message: str
 
 
+class AttendanceRow(BaseModel):
+    """One row of the attendance sheet. `hours` = RECORDED hours on site (never the volunteer's claim). Claims live on the card.
+    check_in/check_out are ISO-8601 with offset when present; if both are present `hours` must equal their difference (+-0.1 h)."""
+    volunteer_id: str
+    task_id: str
+    hours: float = Field(ge=0, le=24)
+    check_in: Optional[str] = None
+    check_out: Optional[str] = None
+    age: Optional[int] = None
+    guardian_consent: Optional[bool] = None
+
+
 class ContributionCard(BaseModel):
-    id: str
+    id: str   # deterministic: f"card-{task_id}-{volunteer_id}-{role_slug}" so retries are idempotent
     task_id: str
     volunteer_id: str
     role: str
-    claimed_hours: float
-    recorded_hours: Optional[float] = None   # from the attendance sheet
+    claimed_hours: float = Field(ge=0, le=24)
+    recorded_hours: Optional[float] = Field(default=None, ge=0, le=24)   # from the attendance sheet
     summary: str = ""
     evidence_refs: list[str] = Field(default_factory=list)
     status: CardStatus = "draft"

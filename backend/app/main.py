@@ -1,22 +1,37 @@
-"""FastAPI app. OWNED BY HEAD. Wires lane modules; any unimplemented lane function returns HTTP 501 until its lane lands."""
+"""FastAPI app. OWNED BY HEAD. Wires lane modules; any unimplemented lane function returns HTTP 501 until its lane lands.
+LLM failures map to 502 (the UI then offers manual entry). Local demo only: unauthenticated, 'actor' is a label, not an identity."""
 from __future__ import annotations
 
+import json
 import os
+from pathlib import Path
 from typing import Any, Callable, Optional
 
-from fastapi import Body, FastAPI, HTTPException
+from fastapi import FastAPI, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from .evidence import badges, ledger as ledger_mod, rules
 from .llm import extract as llm_extract
-from .schemas import (ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult, LedgerEntry,
-                      LedgerVerification, RosterOptions, RosterResult, TaskSpec, Volunteer)
+from .llm.client import LLMError
+from .schemas import (Assignment, AttendanceRow, ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult,
+                      LedgerEntry, LedgerVerification, RosterOptions, RosterResult, TaskSpec, Volunteer)
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
+DATA_DIR = Path(os.environ.get("SEWA_DATA_DIR", Path(__file__).resolve().parents[1] / "data" / "state"))
+CARDS_PATH = DATA_DIR / "cards.json"
+
 app = FastAPI(title="SewaCircle", version="0.1.0-idea-stage-prototype")
-app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
+_origins = [o.strip() for o in os.environ.get("SEWA_CORS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:8000,http://127.0.0.1:8000").split(",") if o.strip()]
+app.add_middleware(CORSMiddleware, allow_origins=_origins, allow_methods=["*"], allow_headers=["*"])
+
+
+@app.exception_handler(LLMError)
+async def _llm_error(_: Request, exc: LLMError) -> JSONResponse:
+    return JSONResponse(status_code=502, content={"detail": f"AI unavailable: {exc}", "code": "llm_unavailable", "hint": "enter the roles manually"})
 
 
 def _guard(fn: Callable[[], Any]) -> Any:
@@ -29,8 +44,7 @@ def _guard(fn: Callable[[], Any]) -> Any:
 class _State:
     volunteers: list[Volunteer] | None = None
     tasks: list[TaskSpec] | None = None
-    cards: dict[str, ContributionCard] = {}
-    attendance: dict[str, list[dict]] = {}
+    cards: dict[str, ContributionCard] | None = None
     ledger: Optional[ledger_mod.Ledger] = None
 
 
@@ -53,8 +67,25 @@ def tasks() -> list[TaskSpec]:
 
 def ledger() -> ledger_mod.Ledger:
     if S.ledger is None:
-        S.ledger = ledger_mod.Ledger(os.environ.get("SEWA_LEDGER_PATH"))
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        S.ledger = ledger_mod.Ledger(os.environ.get("SEWA_LEDGER_PATH") or str(DATA_DIR / "ledger.jsonl"))
     return S.ledger
+
+
+def cards() -> dict[str, ContributionCard]:
+    """Cards persist next to the ledger so a restart does not make them disagree."""
+    if S.cards is None:
+        S.cards = {}
+        if CARDS_PATH.exists():
+            for d in json.loads(CARDS_PATH.read_text(encoding="utf-8")):
+                c = ContributionCard.model_validate(d)
+                S.cards[c.id] = c
+    return S.cards
+
+
+def _save_cards() -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    CARDS_PATH.write_text(json.dumps([c.model_dump(mode="json") for c in cards().values()], ensure_ascii=False), encoding="utf-8")
 
 
 @app.get("/api/health")
@@ -93,17 +124,21 @@ class RosterReq(BaseModel):
     options: RosterOptions = Field(default_factory=RosterOptions)
 
 
-class RosterBoth(BaseModel):
+class RosterAll(BaseModel):
     cp_sat: RosterResult
     nearest_skill: RosterResult
+    random_feasible: RosterResult
+    manual_greedy: RosterResult
 
 
-@app.post("/api/roster", response_model=RosterBoth)
+@app.post("/api/roster", response_model=RosterAll)
 def make_roster(req: RosterReq) -> Any:
-    def run() -> RosterBoth:
+    def run() -> RosterAll:
         v = volunteers()
-        return RosterBoth(cp_sat=solver.build_roster(req.task, v, req.options),
-                          nearest_skill=solver.baseline_nearest_skill(req.task, v))
+        return RosterAll(cp_sat=solver.build_roster(req.task, v, req.options),
+                         nearest_skill=solver.baseline_nearest_skill(req.task, v),
+                         random_feasible=solver.baseline_random_feasible(req.task, v, req.options.seed),
+                         manual_greedy=solver.baseline_manual_greedy(req.task, v))
     return _guard(run)
 
 
@@ -134,60 +169,74 @@ def dropout(req: DropoutReq) -> Any:
 class DraftReq(BaseModel):
     task: TaskSpec
     host_notes: str
-    attendance_rows: list[dict] = Field(default_factory=list)
-    assignments: list[dict] = Field(default_factory=list)
+    attendance_rows: list[AttendanceRow] = Field(default_factory=list)
+    assignments: list[Assignment] = Field(default_factory=list)
 
 
 @app.post("/api/evidence/draft", response_model=list[ContributionCard])
 def draft(req: DraftReq) -> Any:
+    """Idempotent: card ids are deterministic; a card already decided by the host is never overwritten by a re-draft."""
     def run() -> list[ContributionCard]:
-        cards = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
-        S.attendance[req.task.id] = req.attendance_rows
-        for c in cards:
-            c.flags = rules.check_card(c, list(S.cards.values()) + cards, req.attendance_rows)
-            if any(f.severity in ("warn", "block") for f in c.flags):
-                c.status = "flagged"
-            S.cards[c.id] = c
+        store = cards()
+        out: list[ContributionCard] = []
+        for c in llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments):
+            existing = store.get(c.id)
+            if existing is not None and existing.status not in ("draft", "flagged"):
+                out.append(existing)
+                continue
+            c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
+            c.status = "flagged" if any(f.severity in ("warn", "block") for f in c.flags) else "draft"
+            store[c.id] = c
             ledger().append("flag" if c.status == "flagged" else "draft", c, "system")
-        return cards
+            out.append(c)
+        _save_cards()
+        return out
     return _guard(run)
 
 
 @app.get("/api/evidence/cards", response_model=list[ContributionCard])
 def list_cards() -> Any:
-    return list(S.cards.values())
+    return list(cards().values())
 
 
 class DecisionReq(BaseModel):
-    actor: str = "host"
-    claimed_hours: Optional[float] = None  # for correct
+    actor: str = "host"                      # demo label, not an authenticated identity
+    claimed_hours: Optional[float] = Field(default=None, ge=0, le=24)  # required for correct
+
+
+_ALLOWED_FROM = {"draft", "flagged"}
 
 
 def _decide(card_id: str, action: str, status: str, req: DecisionReq) -> ContributionCard:
-    c = S.cards.get(card_id)
+    c = cards().get(card_id)
     if c is None:
         raise HTTPException(404, "card not found")
-    if action == "correct" and req.claimed_hours is not None:
+    if c.status not in _ALLOWED_FROM:
+        raise HTTPException(409, f"card is already {c.status}; decisions are final in this prototype")
+    if action == "correct":
+        if req.claimed_hours is None:
+            raise HTTPException(422, "claimed_hours is required to correct a card")
         c.claimed_hours = req.claimed_hours
     c.status = status  # type: ignore[assignment]
     if status in ("confirmed", "corrected"):
         c.confirmed_by = req.actor
     ledger().append(action, c, req.actor)
+    _save_cards()
     return c
 
 
 @app.post("/api/evidence/{card_id}/confirm", response_model=ContributionCard)
-def confirm(card_id: str, req: DecisionReq = Body(default_factory=DecisionReq)) -> Any:
+def confirm(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
     return _guard(lambda: _decide(card_id, "confirm", "confirmed", req))
 
 
 @app.post("/api/evidence/{card_id}/correct", response_model=ContributionCard)
-def correct(card_id: str, req: DecisionReq = Body(default_factory=DecisionReq)) -> Any:
+def correct(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
     return _guard(lambda: _decide(card_id, "correct", "corrected", req))
 
 
 @app.post("/api/evidence/{card_id}/reject", response_model=ContributionCard)
-def reject(card_id: str, req: DecisionReq = Body(default_factory=DecisionReq)) -> Any:
+def reject(card_id: str, req: DecisionReq = DecisionReq()) -> Any:
     return _guard(lambda: _decide(card_id, "reject", "rejected", req))
 
 
@@ -204,7 +253,7 @@ def verify_ledger() -> Any:
 @app.get("/api/export/credential/{card_id}")
 def export_credential(card_id: str) -> Any:
     def run() -> dict:
-        c = S.cards.get(card_id)
+        c = cards().get(card_id)
         if c is None or c.status not in ("confirmed", "corrected"):
             raise HTTPException(409, "only host-confirmed cards can be exported")
         v = next((x for x in volunteers() if x.id == c.volunteer_id), None)
@@ -220,3 +269,9 @@ def export_credential(card_id: str) -> Any:
 def run_eval() -> Any:
     from eval import harness  # lane A: backend/eval/harness.py
     return _guard(lambda: harness.run_eval(volunteers(), tasks()))
+
+
+# Serve the production frontend build (npm run build) when present: one command demo.
+_DIST = Path(__file__).resolve().parents[2] / "frontend" / "dist"
+if _DIST.exists():
+    app.mount("/", StaticFiles(directory=str(_DIST), html=True), name="ui")

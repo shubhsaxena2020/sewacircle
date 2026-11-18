@@ -2,11 +2,12 @@
 from __future__ import annotations
 
 from ..schemas import ContributionCard, ExtractionResult, RoleSpec, TaskSpec
+from .redact import redact as _redact
 
 
 def redact(text: str) -> tuple[str, int]:
     """Remove Indian PII (phone, Aadhaar, PAN, email, ...) before any model call. Returns (clean_text, n_redactions)."""
-    raise NotImplementedError
+    return _redact(text)
 
 
 def extract_roles(brief_text: str, language_hint: str | None = None) -> ExtractionResult:
