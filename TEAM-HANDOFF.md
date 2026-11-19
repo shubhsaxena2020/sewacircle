@@ -12,7 +12,7 @@ after a youth clicks "Interested"); it is not affiliated with MY Bharat or any g
 | Branch | What is on it | State |
 |---|---|---|
 | `main` | Backend (FastAPI + OR-Tools CP-SAT solver + LLM layer), docs, idea answers | **Stable.** 948 backend tests pass |
-| `frontend-v3` | **New website**: scroll-driven 3D paper-village story (three.js) + organiser console + all media | **In progress** (round 2 of visual polish) |
+| `frontend-v3` | **New website**: scroll-driven 3D paper-village story (three.js) + organiser console + all media | **Working, polishing** (round 2 done: paper look, day cycle, film) |
 | `frontend-v2` | Previous website (kept as a template) + the **8 UI design options** in `design/ui-options/` | Reference |
 | `backend-ideas` | Backend feature branch | Already merged into `main` |
 
@@ -59,12 +59,14 @@ cd frontend ; npm ci ; npm run dev               # open http://127.0.0.1:5173
   full console, share page, districts, volunteer view, mock mode, reduced-motion and no-WebGL fallbacks; accessibility (axe) 0
   violations in English and Hindi.
 
-## In progress / still to do
+## Done since the first handoff, and still to do
 
-1. **Website round 2** (running now): real paper-craft look, 3D scene as the hero, camera path with a dawn-to-night cycle, the
-   film as full-screen transitions, exact counter values, faster story page.
-2. After round 2: final review, merge `frontend-v3` into `main`, rebuild the submission zip and a demo video.
-3. Team lead: team details on the form, ask the organisers about the age rule (one member is 17), **submit the idea form by 20 Nov**.
+- **Website round 2 is done and pushed** (`frontend-v3`): warm paper-craft village, camera path from the notice board to a
+  night view of many villages, visible dawn-to-night cycle, the 58.8 s film as six skippable full-screen transitions, exact
+  counters. Story page Lighthouse performance 97 (was 78), console 100; accessibility 0 violations in English and Hindi.
+1. Remaining polish: the village is still a simplified procedural diorama; prop detail and organic paper edges do not yet match
+   the film. Then merge `frontend-v3` into `main`, rebuild the submission zip and a demo video.
+2. Team lead: team details on the form, ask the organisers about the age rule (one member is 17), **submit the idea form by 20 Nov**.
 
 ## Rules we keep (please keep them too)
 
