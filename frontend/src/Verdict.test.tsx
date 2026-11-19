@@ -7,8 +7,8 @@ import type { RecruitRequest, RosterResult } from './types'
 
 const roster = {ready:true,metrics:{slots_filled:6,slots_required:6}} as RosterResult
 const request:RecruitRequest={role_id:'first',role:'First-aid support',needed:1,skills:['first_aid'],min_level:1,checked_skill_required:true,slot:'sat_morning',area:'Akbarpur',max_travel_km:25,reason:'No checked first-aider is available.'}
-const en = {lang:'en' as const,t:(key:Parameters<typeof tr>[1])=>tr('en',key)}
-const hi = {lang:'hi' as const,t:(key:Parameters<typeof tr>[1])=>tr('hi',key)}
+const en = {lang:'en' as const,t:(key:Parameters<typeof tr>[1])=>tr('en',key),toggleLang:()=>{}}
+const hi = {lang:'hi' as const,t:(key:Parameters<typeof tr>[1])=>tr('hi',key),toggleLang:()=>{}}
 afterEach(cleanup)
 describe('crew decision',()=>{
   it('announces the ready verdict and filled slots',()=>{

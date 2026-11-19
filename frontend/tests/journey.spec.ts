@@ -58,6 +58,7 @@ test('live organiser journey and desktop pages',async({page})=>{
   await axe(page,'console ledger')
   await page.locator('.console-nav-item').filter({hasText:'Evaluation'}).click()
   await expect(page.locator('.eval-metric').first()).toBeVisible()
+  await expect(page.locator('.recharts-errorBar')).toHaveCount(20)
   await consoleShot(page,'console-evaluation-1440x900.png')
   await axe(page,'console evaluation')
   await page.getByRole('button',{name:'हिन्दी'}).click()
@@ -85,6 +86,14 @@ test('mock mode works without API',async({page})=>{
   await page.getByRole('button',{name:'Build crew'}).click()
   await expect(page.getByRole('status').filter({hasText:'READY'}).first()).toBeVisible()
   await axe(page,'mock console')
+})
+
+test('reduced motion shows the rendered hero still',async({page})=>{
+  await page.emulateMedia({reducedMotion:'reduce'})
+  await page.goto('/')
+  await expect(page.locator('.hero-art img.hero-fallback')).toBeVisible()
+  await expect(page.locator('.hero-art canvas')).toHaveCount(0)
+  await expect(page.locator('.hero-art video')).toHaveCount(0)
 })
 test('phone pages fit and pass axe',async({page})=>{
   await page.setViewportSize({width:390,height:844})
@@ -150,7 +159,7 @@ test('3D stays on landing and static fallbacks work',async({page,browser})=>{
       } as typeof original
     })
     await noWebgl.goto('/')
-    await expect(noWebgl.locator('.hero-art img.hero-fallback')).toBeVisible()
+    await expect(noWebgl.locator('.hero-art video.hero-fallback')).toBeVisible()
     await expect(noWebgl.locator('.hero-art canvas')).toHaveCount(0)
   }finally{await noWebgl.close()}
 })

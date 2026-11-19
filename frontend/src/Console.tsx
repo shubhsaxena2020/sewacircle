@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { lazy, Suspense, useEffect, useMemo, useState } from 'react'
 import { ArrowRight, ChevronRight, RotateCcw, ShieldCheck, Sparkles, UserRoundX } from 'lucide-react'
 import { motion, AnimatePresence, useReducedMotion } from 'motion/react'
 import { api, defaultOptions } from './api'
@@ -6,6 +6,8 @@ import { useUi } from './ui-context'
 import { formatNumber, formatPercent, formatSlot, type Key } from './i18n'
 import type { AttendanceRow, ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RoleSpec, RosterBoth, RosterOptions, RosterResult, TaskSpec, Volunteer } from './types'
 import { RecruitRequests, VerdictPanel } from './Verdict'
+
+const EvaluationChart = lazy(() => import('./EvaluationChart'))
 
 type Step = 'task' | 'roles' | 'crew' | 'evidence' | 'ledger' | 'evaluation'
 const steps: Step[] = ['task', 'roles', 'crew', 'evidence', 'ledger', 'evaluation']
@@ -140,5 +142,5 @@ function CrewView(p:{task:TaskSpec;roster:RosterResult;all:RosterBoth|null;optio
 function EvalView({report}:{report:EvalReport}){
   const {t,lang}=useUi()
   const metrics:[keyof EvalReport['summary'][string],Key][]=[['ready','readyMetric'],['role_coverage','coverage'],['robustness','robustness'],['repeat_pick_share','repeat'],['exposure_gini','gini']]
-  return <div className="eval-view"><div className="eval-head"><span>{t('synthetic')}</span><strong>{formatNumber(report.n_tasks,lang)} {t('drives')} · {formatNumber(report.n_volunteers,lang)} {t('volunteers')}</strong></div>{metrics.map(([metric,label])=><section className="eval-metric" key={metric}><h3>{t(label)}</h3>{methodKeys.map(({key,label:ml})=>{const value=report.summary[key]?.[metric]??0;const ci=report.ci95[key]?.[metric];return <div className="eval-bar-row" key={key}><span>{t(ml)}</span><div className="eval-track"><i style={{width:`${Math.max(1,value*100)}%`}}/></div><strong>{metric==='exposure_gini'?formatNumber(value,lang,2):formatPercent(value,lang)}</strong>{ci&&<small>[{formatNumber(ci[0],lang,2)}, {formatNumber(ci[1],lang,2)}]</small>}</div>})}</section>)}<div className="misses"><h3>{t('misses')}</h3>{report.misses.length?<ul>{report.misses.map((x,i)=><li key={i}>{x}</li>)}</ul>:<p>{t('noMisses')}</p>}</div></div>
+  return <div className="eval-view"><div className="eval-head"><span>{t('synthetic')}</span><strong>{formatNumber(report.n_tasks,lang)} {t('drives')} · {formatNumber(report.n_volunteers,lang)} {t('volunteers')}</strong></div>{metrics.map(([metric,label])=><section className="eval-metric" key={metric}><h3>{t(label)}</h3><Suspense fallback={<div className="eval-chart-placeholder"/>}><EvaluationChart report={report} metric={metric}/></Suspense><div className="eval-values">{methodKeys.map(({key,label:ml})=>{const value=report.summary[key]?.[metric]??0;const ci=report.ci95[key]?.[metric];return <div className="eval-value-row" key={key}><span>{t(ml)}</span><strong>{metric==='exposure_gini'?formatNumber(value,lang,2):formatPercent(value,lang)}</strong>{ci&&<small>{t('ci95')} [{formatNumber(ci[0],lang,2)}, {formatNumber(ci[1],lang,2)}]</small>}</div>})}</div></section>)}<div className="misses"><h3>{t('misses')}</h3>{report.misses.length?<ul>{report.misses.map((x,i)=><li key={i}>{x}</li>)}</ul>:<p>{t('noMisses')}</p>}</div></div>
 }

@@ -1,5 +1,5 @@
 import { createContext, useContext } from 'react'
 import { tr, type Key, type Lang } from './i18n'
-export type UiContext = { lang: Lang; t: (key: Key) => string }
-export const Context = createContext<UiContext>({ lang: 'en', t: key => tr('en', key) })
+export type UiContext = { lang: Lang; t: (key: Key) => string; toggleLang: () => void }
+export const Context = createContext<UiContext>({ lang: 'en', t: key => tr('en', key), toggleLang: () => {} })
 export const useUi = () => useContext(Context)

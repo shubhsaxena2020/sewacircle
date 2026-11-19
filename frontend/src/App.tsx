@@ -33,8 +33,8 @@ function Frame() {
   </>
 }
 function LanguageToggle() {
-  const { lang } = useUi()
-  return <button className="icon-button language-button" aria-label={lang === 'en' ? 'हिन्दी' : 'English'} onClick={() => window.dispatchEvent(new CustomEvent('sewa-lang'))}><Languages size={17}/><span>{lang === 'en' ? 'हिन्दी' : 'English'}</span></button>
+  const { lang, toggleLang } = useUi()
+  return <button className="icon-button language-button" aria-label={lang === 'en' ? 'हिन्दी' : 'English'} onClick={toggleLang}><Languages size={17}/><span>{lang === 'en' ? 'हिन्दी' : 'English'}</span></button>
 }
 function ProjectorToggle() {
   const { t } = useUi()
@@ -44,7 +44,6 @@ function ProjectorToggle() {
 }
 export default function App() {
   const [lang, setLang] = useState<Lang>(() => localStorage.getItem('sewa-lang') === 'hi' ? 'hi' : 'en')
-  useEffect(() => { const toggle = () => setLang(v => v === 'en' ? 'hi' : 'en'); window.addEventListener('sewa-lang', toggle); return () => window.removeEventListener('sewa-lang', toggle) }, [])
   useEffect(() => { localStorage.setItem('sewa-lang', lang); document.documentElement.lang = lang }, [lang])
-  return <Context.Provider value={{ lang, t: key => tr(lang, key) }}><BrowserRouter><Frame/></BrowserRouter></Context.Provider>
+  return <Context.Provider value={{ lang, t: key => tr(lang, key), toggleLang: () => setLang(v => v === 'en' ? 'hi' : 'en') }}><BrowserRouter><Frame/></BrowserRouter></Context.Provider>
 }
