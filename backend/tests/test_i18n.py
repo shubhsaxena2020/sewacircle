@@ -142,6 +142,32 @@ def test_hindi_renderings_never_change_the_english_fields(client):
     assert [q["role_id"] for q in hindi["recruit_requests"]] == [q["role_id"] for q in english["recruit_requests"]]
 
 
+def test_hindi_pick_reason_carries_no_number_that_could_disagree(client):
+    """The Hindi pick sentence deliberately quotes no distance: Assignment.distance_km is rounded to 1 dp,
+    so a kilometre figure there could round differently from the English sentence's raw value."""
+    hindi = _roster(client, "hi")["cp_sat"]["display"]["assignments"]
+    for shown in hindi:
+        assert not _digits(shown["text"]), shown["text"]
+        assert _devanagari(shown["text"])
+
+
+def test_a_robustness_percentage_is_the_same_number_in_both_languages(client):
+    english = _roster(client, "en")["cp_sat"]
+    hindi = _roster(client, "hi")["cp_sat"]
+    english_percent = [n for text in english["explanations"] for n in _digits(text) if "%" in text]
+    if english_percent:                                            # only when the English lines quote one
+        hindi_text = " ".join(hindi["display"]["explanations"])
+        for number in english_percent:
+            assert number in _digits(hindi_text)
+
+
+def test_standby_sentence_uses_the_hindi_role_label():
+    role = RoleSpec(id="role-01", role="Health educator", count=1, required_skills=["health_education", "first_aid"])
+    text = i18n._recruit_text("standby", role, 1, role.required_skills, True, "sun_morning", "Kashi Vidyapeeth, Varanasi", 25)
+    assert i18n.ROLE_LABELS_HI["Health educator"] in text
+    assert "Health educator" not in text
+
+
 def test_unknown_text_is_returned_unchanged_not_machine_translated():
     assert i18n.role_label("Mystery role typed by the organiser", "hi") == "Mystery role typed by the organiser"
     assert i18n.title_label("Some drive", "hi") == "Some drive"

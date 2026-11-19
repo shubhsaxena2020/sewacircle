@@ -153,6 +153,31 @@ def test_share_keys_are_role_restricted(client):
         assert "not authentication" in r.json()["detail"]
 
 
+def test_snapshot_summary_contains_no_volunteer_id_or_name(client):
+    """The branch that builds the summary from a computed plan must be scanned too."""
+    edited = _task("task-01", "Clean-up drive")
+    r = client.post("/api/roster", json={"task": edited.model_dump(mode="json")})
+    assert r.status_code == 200, r.text
+    key = share.share_key_for("task-01")
+    body = client.get(f"/api/drive/{key}")
+    assert body.status_code == 200
+    text = body.text
+    assert body.json()["ready"] is not None
+    for volunteer in main.volunteers():
+        assert volunteer.id not in text
+        assert volunteer.display_name not in text
+    assert "task-01" not in text
+
+
+def test_a_changed_env_secret_only_rotates_after_reset(client, monkeypatch):
+    """Documented behaviour: the secret is cached per process; rotation is an explicit act."""
+    key = share.share_key_for("task-01")
+    monkeypatch.setenv("SEWA_SHARE_SECRET", "changed-but-not-reset")
+    assert client.get(f"/api/drive/{key}").status_code == 200     # still the cached secret
+    share.reset_secret()
+    assert client.get(f"/api/drive/{key}").status_code == 404     # reset rotated it
+
+
 def test_secret_is_read_from_env_or_generated_in_memory(client, monkeypatch):
     assert share.server_secret() == SECRET.encode("utf-8")
 

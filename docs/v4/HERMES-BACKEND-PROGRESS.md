@@ -30,7 +30,7 @@ Baseline before any change: `pytest -q` in `backend/` printed `692 passed, 93 wa
       schemas, exact test output, and the honest limits.
 - [x] Step 6 - head review round 2 (share mint route + plan snapshot, roster gating, Hindi display) done and
       recorded in `docs/v4/HERMES-ROUND2-PROGRESS.md`.
-- [x] Step 7 - full suite, real final line: `839 passed, 154 warnings in 16.82s`.
+- [x] Step 7 - full suite, real final line: `845 passed, 156 warnings in 17.14s`.
 
 ## Per-file test output (real)
 
@@ -39,19 +39,19 @@ Baseline before any change: `pytest -q` in `backend/` printed `692 passed, 93 wa
 38 passed in 0.18s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/evidence/test_card_state_machine.py -q
-35 passed, 37 warnings in 4.67s
+36 passed, 39 warnings in 5.20s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_share_keys.py -q
-24 passed, 1 warning in 1.83s
+26 passed, 1 warning in 1.54s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_capabilities.py -q
-32 passed, 25 warnings in 2.87s
+32 passed, 25 warnings in 2.12s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_i18n.py -q
-12 passed, 2 warnings in 1.78s
+15 passed, 2 warnings in 1.46s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest -q
-839 passed, 154 warnings in 16.82s
+845 passed, 156 warnings in 17.14s
 ```
 
 CARD COMPLETE

@@ -163,11 +163,26 @@ def _verdict(ready: bool | None, lang: Lang) -> str:
 
 
 def _explanation(roster: RosterResult, lang: Lang) -> list[str]:
+    """Hindi verdict lines state the same facts as the English ones: gap count, unfilled roles, robustness.
+
+    Percentages use the identical expression as solver/ready.py and solver/cp_sat.py (``:.0%`` on the same
+    float), so the digits match; the wording of each line is hand-written, not a word-by-word rendering.
+    """
     if lang == "en":
         return list(roster.explanations)
+    lines: list[str] = []
     if roster.ready:
         return ["तैयार: हर ज़रूरी भूमिका भरी है और कोई भी एक साथी निकल जाए तो भी कोई ज़रूरी जगह खाली नहीं रहेगी।"]
-    return [f"तैयार नहीं: इस ड्राइव को सुरक्षित चलाने के लिए {len(roster.recruit_requests)} काम बाकी हैं।"]
+    unfilled = roster.unfilled_role_ids
+    if unfilled:
+        lines.append(f"{len(unfilled)} भूमिका में ज़रूरी जगह खाली है: {', '.join(unfilled)}।")
+    if roster.metrics.robustness < 1.0:
+        percent = f"{roster.metrics.robustness:.0%}"
+        lines.append(f"एक साथी के निकलने पर भरोसा {percent} है: हर भूमिका के लिए पर्याप्त स्टैंडबाय नहीं है।")
+    count = len(roster.recruit_requests)
+    lines.append(f"तैयार नहीं: इस ड्राइव को सुरक्षित चलाने के लिए {count} काम बाकी "
+                 + ("है।" if count == 1 else "हैं।"))
+    return lines
 
 
 def _recruit_text(request_kind: str, role: RoleSpec | None, needed: int, skills: list[str],
@@ -179,7 +194,7 @@ def _recruit_text(request_kind: str, role: RoleSpec | None, needed: int, skills:
         return ("इस भूमिका को ज्ञात कौशलों से नहीं जोड़ा जा सका। किसी को जोड़ने से पहले कौशल तय करें "
                 "या भूमिका को सबके लिए खुला रखें।")
     if request_kind == "standby":
-        label = role.role if role is not None else ""
+        label = role_label(role.role, "hi") if role is not None else ""
         return (f"एक ही व्यक्ति पर निर्भरता: अगर ये साथी न आ सकें तो {label} के लिए कोई योग्य व्यक्ति नहीं है। "
                 "एक स्टैंडबाय जोड़ें।").replace("  ", " ")
     return (f"{needed} जगह के लिए कोई योग्य स्वयंसेवक नहीं मिला: {skill_text} चाहिए{checked_text}, "
@@ -208,6 +223,6 @@ def roster_display(task: TaskSpec, roster: RosterResult, lang: Lang) -> RosterDi
         assignments=[AssignmentDisplay(
             volunteer_id=a.volunteer_id, role_id=a.role_id,
             text=(f"{role_label(roles[a.role_id].role, 'hi') if a.role_id in roles else a.role_id} के लिए चुने गए; "
-                  f"{a.distance_km:.0f} किमी दूर, {slot_label(task.slot, 'hi')} उपलब्ध।"))
+                  f"{slot_label(task.slot, 'hi')} उपलब्ध।"))
             for a in roster.assignments],
     )

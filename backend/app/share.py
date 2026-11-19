@@ -29,8 +29,10 @@ that variable is unset (the default for a local demo) it generates 32 random
 bytes at first use and keeps them **in memory only** for the lifetime of the
 process: nothing is written to disk, no key is committed to the repository, and
 restarting the server invalidates every link it handed out. Setting the variable
-makes links survive a restart and lets two workers agree; rotating the variable
-(or calling :func:`reset_secret`) deliberately invalidates the old links.
+makes links survive a restart and lets two workers agree. Because the value is
+cached at first use, changing the variable while the process runs does NOT take
+effect by itself: call :func:`reset_secret` (or restart) to rotate, which
+deliberately invalidates every link minted before that point.
 
 This module never returns volunteer data - it only computes and resolves keys.
 """
@@ -57,6 +59,8 @@ def server_secret() -> bytes:
 
     ``SEWA_SHARE_SECRET`` wins when it is set and non-blank. Otherwise 32 random
     bytes are created on first call and cached for the process lifetime only.
+    The cache is deliberate (one secret per process); a changed environment
+    variable is only picked up by :func:`reset_secret` or a restart.
     """
     global _SECRET
     if _SECRET is None:

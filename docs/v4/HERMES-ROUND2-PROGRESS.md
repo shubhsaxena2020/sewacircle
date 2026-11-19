@@ -35,16 +35,16 @@ geo-tree tests). Closing every OPEN item in `docs/v4/REVIEW-backend-ideas.md`.
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_share_keys.py -q
-24 passed, 1 warning in 1.83s
+26 passed, 1 warning in 1.54s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_capabilities.py -q
-32 passed, 25 warnings in 2.87s
+32 passed, 25 warnings in 2.12s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_i18n.py -q
-12 passed, 2 warnings in 1.78s
+15 passed, 2 warnings in 1.46s
 
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest -q
-839 passed, 154 warnings in 16.82s
+845 passed, 156 warnings in 17.14s
 ```
 
 ## 403 vs 422 (as requested by the head)
