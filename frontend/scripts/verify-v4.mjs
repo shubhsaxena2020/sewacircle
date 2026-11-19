@@ -179,7 +179,7 @@ try {
     await page.waitForFunction(expected => document.documentElement.lang === expected, lang)
     for (const [name, route] of [...routePages, ['share', sharePath]]) {
       await page.goto(`${base}${route}`)
-      await page.waitForTimeout(400)
+      await page.waitForTimeout(route === '/' ? 1800 : 400) // let entrance reveals finish; axe would otherwise score half-faded text
       if (lang === 'en') await capture(`page-${name}`)
       const result = await new AxeBuilder({ page }).withTags(['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa']).analyze()
       const blocking = result.violations.filter(item => ['serious', 'critical'].includes(item.impact ?? ''))

@@ -10,7 +10,7 @@
     },
     {
       "story": {
-        "planned": "Planned live from the API · 5/5 · 22 ms",
+        "planned": "Planned live from the API · 5/5 · 18 ms",
         "seatLabels": 6,
         "verdict": "READY · तैयार",
         "gapVerdict": "NOT READY",
