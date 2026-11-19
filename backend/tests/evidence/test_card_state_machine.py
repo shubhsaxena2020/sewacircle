@@ -135,11 +135,15 @@ def test_every_action_from_a_final_state_is_409(client, state, action):
     card = _draft(client)[0]
     assert client.post(f"/api/evidence/{card['id']}/{setup_action}", json=setup_body).status_code == 200
 
+    before = client.get("/api/evidence/cards").json()[0]
     r = client.post(f"/api/evidence/{card['id']}/{action}", json=_payload(action))
     assert r.status_code == 409
     detail = r.json()["detail"]
     assert "illegal transition" in detail and state in detail and "legal actions" in detail
-    assert client.get("/api/evidence/cards").json()[0]["status"] == state   # state untouched
+    after = client.get("/api/evidence/cards").json()[0]
+    assert after["status"] == state                                  # state untouched
+    assert after["revision_reason"] is None                          # a refused request stores no reason
+    assert after["claimed_hours"] == before["claimed_hours"]         # a refused correct changes no hours
 
 
 @pytest.mark.parametrize("action", HOST_ACTIONS)
@@ -169,14 +173,44 @@ def test_revision_requested_card_is_superseded_when_the_volunteer_leaves_the_dra
     assert all(c["status"] != "revision_requested" for c in cards)
 
 
-def test_legacy_journal_line_without_a_reason_still_verifies(client, tmp_path):
-    """Backward compatibility: entries written before the reason field existed stay valid."""
+def test_redraft_that_trips_a_rule_still_returns_to_draft(client):
+    """The table's target for the back-edge is draft; flags are attached to the card, not turned into a state."""
+    card = _draft(client)[0]
+    assert client.post(f"/api/evidence/{card['id']}/request_revision",
+                       json={"reason": "hours look wrong"}).status_code == 200
+
+    again = _draft(client, claimed=11.0)[0]          # 11 h claimed vs 5 h recorded -> a warn flag
+    assert again["status"] == "draft"                # exactly the declared target of the redraft edge
+    assert "hours_exceed_recorded" in [f["code"] for f in again["flags"]]
+    assert again["revision_reason"] is None
+
+
+def test_legacy_journal_written_before_the_reason_field_still_verifies(client, tmp_path):
+    """Build a genuine pre-feature journal by hand: six canonical fields, no reason key, chained manually.
+
+    The join is hard-coded here on purpose - calling the module's own helper would let a change to the
+    canonical format pass unnoticed.
+    """
+    import hashlib
+
+    from app.evidence.ledger import GENESIS_HASH
+
     card = _draft(client)[0]
     journal = tmp_path / "ledger.jsonl"
-    lines = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines() if line.strip()]
-    for record in lines:
-        record.pop("reason", None)                                  # exactly the pre-feature journal shape
-    journal.write_text("\n".join(json.dumps(r, sort_keys=True) for r in lines) + "\n", encoding="utf-8")
+    records = [json.loads(line) for line in journal.read_text(encoding="utf-8").splitlines() if line.strip()]
+    rebuilt, prev = [], GENESIS_HASH
+    for record in records:
+        raw = "|".join((prev, record["ts"], record["action"], record["card_id"], record["actor"], record["payload_hash"]))
+        entry_hash = hashlib.sha256(raw.encode("utf-8")).hexdigest()
+        rebuilt.append({"index": record["index"], "ts": record["ts"], "action": record["action"],
+                        "card_id": record["card_id"], "actor": record["actor"],
+                        "payload_hash": record["payload_hash"], "prev_hash": prev, "entry_hash": entry_hash})
+        prev = entry_hash
+    journal.write_text("".join(json.dumps(r, sort_keys=True, separators=(",", ":")) + "\n" for r in rebuilt),
+                       encoding="utf-8")
+    (tmp_path / "ledger.jsonl.head").write_text(
+        json.dumps({"count": len(rebuilt), "head_hash": prev}, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+
     assert client.get("/api/ledger/verify").json()["ok"] is True
     assert client.get("/api/ledger").json()[-1]["reason"] == ""     # loaded as empty, not invented
 

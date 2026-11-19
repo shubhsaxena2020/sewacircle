@@ -357,11 +357,12 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
     moved someone to another role) are superseded: removed from the card store so they cannot trigger false
     duplicate-evidence flags. Their earlier 'draft' entries stay in the ledger history. Host-decided cards are kept.
 
-    Revision back-edge: a card the host sent back with request_revision is re-drafted. It passes through the state
-    machine's revision_requested -> draft edge (see evidence/transitions.py), the stale reason is cleared, and the
+    Revision back-edge: a card the host sent back with request_revision is re-drafted. The table's target for
+    revision_requested -> draft is applied as-is (the back-edge always returns the card to draft), the stale
+    reason is cleared, any rule flags raised by the new text stay on the card for the host to see, and the
     ledger records a 'draft' entry whose reason names the revision request. A revision_requested card whose
-    volunteer is no longer in the new draft is superseded like an undecided draft card (removed, history kept),
-    so no card can be stranded in a state with no outgoing edge."""
+    volunteer is no longer in the new draft is superseded like an undecided draft card (removed, history
+    kept), so no card can be stranded in a state with no outgoing edge."""
     def run() -> list[ContributionCard]:
         store = cards()
         out: list[ContributionCard] = []
@@ -376,14 +377,15 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
                 out.append(existing)
                 continue
             redrafted = existing is not None and existing.status == "revision_requested"
-            if redrafted:
-                transitions.next_state(existing.status, "redraft")   # asserts the table allows the move
             c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
-            c.status = "flagged" if any(f.severity in ("warn", "block") for f in c.flags) else "draft"
+            if redrafted:
+                c.status = transitions.next_state(existing.status, "redraft")   # the table decides: "draft"
+            else:
+                c.status = "flagged" if any(f.severity in ("warn", "block") for f in c.flags) else "draft"
             c.revision_reason = None
-            store[c.id] = c
             ledger().append("flag" if c.status == "flagged" else "draft", c, "system",
                             "re-drafted after a host revision request" if redrafted else "")
+            store[c.id] = c
             out.append(c)
         _save_cards()
         return out
@@ -435,17 +437,20 @@ def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
     reason = (req.reason or "").strip()
     if action == "request_revision" and not reason:
         raise HTTPException(422, "reason is required to request a revision")
+    updates: dict[str, Any] = {"status": status, "revision_reason": reason if action == "request_revision" else None}
     if action == "correct":
         if req.claimed_hours is None:
             raise HTTPException(422, "claimed_hours is required to correct a card")
-        c.claimed_hours = req.claimed_hours
-    c.status = status  # type: ignore[assignment]
-    c.revision_reason = reason if action == "request_revision" else None
+        updates["claimed_hours"] = req.claimed_hours
     if status in ("confirmed", "corrected"):
-        c.confirmed_by = req.actor
-    ledger().append(action, c, req.actor, reason)
+        updates["confirmed_by"] = req.actor
+    # Append FIRST, then commit: the ledger commits to the post-transition card, and a failed append
+    # (for example a corrupt journal) must not leave a decided card that no entry exists for.
+    updated = c.model_copy(update=updates)
+    ledger().append(action, updated, req.actor, reason)
+    cards()[card_id] = updated
     _save_cards()
-    return c
+    return updated
 
 
 @app.post("/api/evidence/{card_id}/confirm", response_model=ContributionCard)
