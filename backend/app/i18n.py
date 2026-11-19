@@ -29,7 +29,7 @@ from __future__ import annotations
 
 from typing import Literal
 
-from .schemas import (AssignmentDisplay, RecruitDisplay, RoleDisplay, RosterDisplay, RoleSpec, RosterResult,
+from .schemas import (AssignmentDisplay, PickReason, RecruitDisplay, RoleDisplay, RosterDisplay, RoleSpec, RosterResult,
                       SkillLabel, TaskDisplay, TaskSpec)
 from .taxonomy import SKILLS
 
@@ -162,6 +162,75 @@ def _verdict(ready: bool | None, lang: Lang) -> str:
     return "अभी तय नहीं" if ready is None else ("तैयार" if ready else "तैयार नहीं")
 
 
+#: Days window used by the fairness reason codes (mirrors solver/cp_sat.py's 90-day window).
+RECENT_DAYS = 90
+
+
+def reason_text(reason: PickReason, lang: Lang) -> str:
+    """Render ONE structured pick reason in the requested language.
+
+    Both languages are built from the same ``code`` + ``params``, so a fact cannot exist in one language
+    and be missing from the other: the same skill and level, the same distance in whole km, the same
+    "not picked in N days", the same newcomer count and mentor name, the same slot. That is the point -
+    the Hindi view is a rendering, not a summary of a sentence the solver wrote in English.
+    """
+    code, p = reason.code, reason.params
+    skill = str(p.get("skill", ""))
+    label_en = skill_label(skill, "en").lower() if skill else ""
+    label_hi = skill_label(skill, "hi") if skill else ""
+    if code == "skill_confirmed":
+        if lang == "en":
+            return f"Has {label_en} (level {p['level']})"
+        return f"{label_hi} में स्तर {p['level']} तक प्रशिक्षित"
+    if code == "skill_self_declared":
+        if lang == "en":
+            return f"Self-declared {label_en} (host to confirm)"
+        return f"स्वयं घोषित {label_hi} (होस्ट की पुष्टि बाकी)"
+    if code == "open_role":
+        return "Open role: any volunteer can do it" if lang == "en" else "खुली भूमिका: कोई भी स्वयंसेवक यह काम कर सकता है"
+    if code == "slot_and_distance":
+        if lang == "en":
+            return f"Free {str(p['slot']).replace('_', ' ')}; {float(p['distance_km']):.0f} km from the site"
+        return (f"{slot_label(str(p['slot']), 'hi')} उपलब्ध; साइट से "
+                f"{float(p['distance_km']):.0f} किमी दूर")
+    if code == "not_picked_recently":
+        days = p.get("days", RECENT_DAYS)
+        return (f"Not picked in the last {days} days" if lang == "en"
+                else f"पिछले {days} दिनों में नहीं चुने गए")
+    if code == "picked_heavily":
+        count, days = p["count"], p.get("days", RECENT_DAYS)
+        if lang == "en":
+            return (f"Picked {count} times in {days} days; chosen because no less-used qualified person "
+                    "fitted better")
+        return (f"{days} दिनों में {count} बार चुने गए; कम इस्तेमाल वाले योग्य व्यक्ति के न मिलने पर चुना गया")
+    if code == "newcomer":
+        drives = p["past_drives"]
+        mentor = str(p.get("mentor_name", "") or "")
+        if lang == "en":
+            return f"Newcomer ({drives} past drives)" + (f", paired with {mentor}" if mentor else "")
+        return f"नए स्वयंसेवक ({drives} पिछली ड्राइव)" + (f", {mentor} के साथ जोड़ी" if mentor else "")
+    if code == "experienced_mentor":
+        drives = p["past_drives"]
+        return (f"Experienced ({drives} drives): can guide newcomers" if lang == "en"
+                else f"अनुभवी ({drives} ड्राइव): नए साथियों का मार्गदर्शन कर सकते हैं")
+    if code == "minor_guardian_consent":
+        return "Under 18: guardian consent on file" if lang == "en" else "18 वर्ष से कम: अभिभावक की सहमति दर्ज है"
+    if code == "promoted_from_standby":
+        return "Promoted from standby" if lang == "en" else "स्टैंडबाय से पदोन्नत"
+    raise ValueError(f"unknown pick reason code {code!r}")   # a new code must be rendered, not guessed
+
+
+def assignment_reason_text(role_label_hi: str, slot: str, reason_codes: list[PickReason]) -> str:
+    """Hindi sentence for one pick, built from the solver's structured reasons.
+
+    A roster method that writes no codes (the baselines keep their own English narration) falls back to
+    the role + slot line rather than inventing facts it does not have.
+    """
+    if reason_codes:
+        return "; ".join(reason_text(code, "hi") for code in reason_codes) + "।"
+    return f"{role_label_hi} के लिए चुने गए; {slot_label(slot, 'hi')} उपलब्ध।"
+
+
 def _explanation(roster: RosterResult, lang: Lang) -> list[str]:
     """Hindi verdict lines state the same facts as the English ones: gap count, unfilled roles, robustness.
 
@@ -186,8 +255,14 @@ def _explanation(roster: RosterResult, lang: Lang) -> list[str]:
 
 
 def _recruit_text(request_kind: str, role: RoleSpec | None, needed: int, skills: list[str],
-                  checked: bool, slot: str, area: str, travel_km: float) -> str:
-    """One Hindi recruit-request sentence, built from the same facts as the English template."""
+                  checked: bool, slot: str, area: str, travel_km: float,
+                  blocked_by: list[str] | tuple[str, ...] = ()) -> str:
+    """One Hindi recruit-request sentence, built from the same facts as the English template.
+
+    ``blocked_by`` is the standby case's list of people whose absence would leave the role uncovered; the
+    names are shown here too, so the two languages carry the same information (the earlier Hindi template
+    said "if this person cannot come" without saying who).
+    """
     skill_text = " या ".join(skill_label(s, "hi") for s in skills) or "कोई विशेष कौशल नहीं"
     checked_text = ", केवल होस्ट द्वारा जाँचे कौशल" if checked else ""
     if request_kind == "unresolved":
@@ -195,8 +270,10 @@ def _recruit_text(request_kind: str, role: RoleSpec | None, needed: int, skills:
                 "या भूमिका को सबके लिए खुला रखें।")
     if request_kind == "standby":
         label = role_label(role.role, "hi") if role is not None else ""
-        return (f"एक ही व्यक्ति पर निर्भरता: अगर ये साथी न आ सकें तो {label} के लिए कोई योग्य व्यक्ति नहीं है। "
-                "एक स्टैंडबाय जोड़ें।").replace("  ", " ")
+        who = ", ".join(str(n) for n in blocked_by)
+        condition = f"अगर {who} न आ सकें" if who else "अगर ये साथी न आ सकें"
+        return (f"एक ही व्यक्ति पर निर्भरता: {condition} तो {label} के लिए कोई योग्य व्यक्ति नहीं है। "
+                "एक स्टैंडबाय जोड़ें।")
     return (f"{needed} जगह के लिए कोई योग्य स्वयंसेवक नहीं मिला: {skill_text} चाहिए{checked_text}, "
             f"{slot_label(slot, 'hi')} खाली, {area} से {travel_km:.0f} किमी के भीतर।")
 
@@ -219,10 +296,10 @@ def roster_display(task: TaskSpec, roster: RosterResult, lang: Lang) -> RosterDi
         recruit=[RecruitDisplay(
             role_id=q.role_id, role=role_label(q.role, "hi"), needed=q.needed,
             text=_recruit_text(q.kind, roles.get(q.role_id), q.needed, q.skills, q.checked_skill_required,
-                               q.slot, q.area, q.max_travel_km)) for q in roster.recruit_requests],
+                               q.slot, q.area, q.max_travel_km, q.blocked_by_names)) for q in roster.recruit_requests],
         assignments=[AssignmentDisplay(
             volunteer_id=a.volunteer_id, role_id=a.role_id,
-            text=(f"{role_label(roles[a.role_id].role, 'hi') if a.role_id in roles else a.role_id} के लिए चुने गए; "
-                  f"{slot_label(task.slot, 'hi')} उपलब्ध।"))
+            text=assignment_reason_text(role_label(roles[a.role_id].role, "hi") if a.role_id in roles else a.role_id,
+                                        task.slot, a.reason_codes))
             for a in roster.assignments],
     )

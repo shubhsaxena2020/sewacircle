@@ -14,10 +14,12 @@ from ..taxonomy import SKILLS
 from .metrics import _rescue_matches, _slot_list
 
 
-def _request(task: TaskSpec, role: RoleSpec, needed: int, reason: str, kind: str) -> RecruitRequest:
+def _request(task: TaskSpec, role: RoleSpec, needed: int, reason: str, kind: str,
+             blocked_by: list[str] | None = None) -> RecruitRequest:
     return RecruitRequest(kind=kind, role_id=role.id, role=role.role, needed=needed, skills=list(role.required_skills),
                           min_level=role.min_level, checked_skill_required=role.safety_critical, slot=task.slot,
-                          area=f"{task.block}, {task.district}", max_travel_km=task.max_travel_km, reason=reason)
+                          area=f"{task.block}, {task.district}", max_travel_km=task.max_travel_km, reason=reason,
+                          blocked_by_names=list(blocked_by or []))
 
 
 def annotate(task: TaskSpec, volunteers: list[Volunteer], roster: RosterResult) -> RosterResult:
@@ -58,7 +60,7 @@ def annotate(task: TaskSpec, volunteers: list[Volunteer], roster: RosterResult) 
         role = roles[rid]
         requests.append(_request(task, role, 1, f"Single point of failure: if {', '.join(names)} cannot come, nobody "
                                                 f"qualified can step in as {role.role}. Recruit one standby.",
-                                 "standby"))
+                                 "standby", blocked_by=names))
 
     roster.recruit_requests = requests
     roster.ready = (not unfilled) and (not fragile_roles) and not any(r.unresolved for r in task.roles) and bool(must_slots)

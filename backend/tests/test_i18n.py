@@ -142,13 +142,89 @@ def test_hindi_renderings_never_change_the_english_fields(client):
     assert [q["role_id"] for q in hindi["recruit_requests"]] == [q["role_id"] for q in english["recruit_requests"]]
 
 
-def test_hindi_pick_reason_carries_no_number_that_could_disagree(client):
-    """The Hindi pick sentence deliberately quotes no distance: Assignment.distance_km is rounded to 1 dp,
-    so a kilometre figure there could round differently from the English sentence's raw value."""
-    hindi = _roster(client, "hi")["cp_sat"]["display"]["assignments"]
-    for shown in hindi:
-        assert not _digits(shown["text"]), shown["text"]
-        assert _devanagari(shown["text"])
+def test_hindi_pick_reason_carries_the_same_facts_as_the_english(client):
+    """The review's honesty follow-up: Hindi renders the solver's structured reason codes, so the fairness
+    facts are not lost. Asserted on digits (level, distance, 90 days, past drives) - not on prose."""
+    task = _solvable_task()
+    body = client.post("/api/roster", json={"task": task, "lang": "hi"}).json()["cp_sat"]
+    assert body["assignments"], "this test needs a solvable roster"
+    display = {a["volunteer_id"]: a["text"] for a in body["display"]["assignments"]}
+    for assignment in body["assignments"]:
+        codes = assignment["reason_codes"]
+        assert codes, "the cp_sat solver must write structured reasons"
+        english = "; ".join(assignment["reasons"])
+        hindi = display[assignment["volunteer_id"]]
+        assert _devanagari(hindi)
+        assert sorted(_digits(hindi)) == sorted(_digits(english)), (english, hindi)
+        # the facts the review named, present in both languages
+        for code in codes:
+            if code["code"] == "skill_confirmed":
+                assert str(code["params"]["level"]) in english and str(code["params"]["level"]) in hindi
+            if code["code"] == "slot_and_distance":
+                assert f"{code['params']['distance_km']:.0f}" in english
+                assert f"{code['params']['distance_km']:.0f}" in hindi
+            if code["code"] == "not_picked_recently":
+                assert str(code["params"]["days"]) in english and str(code["params"]["days"]) in hindi
+
+
+def test_every_reason_code_renders_in_both_languages():
+    """No code may be written by the solver and left unrenderable: a new code must fail loudly here."""
+    from app.schemas import PickReason
+
+    samples = {
+        "skill_confirmed": {"skill": "first_aid", "level": 2},
+        "skill_self_declared": {"skill": "first_aid"},
+        "open_role": {},
+        "slot_and_distance": {"slot": "sat_morning", "distance_km": 7.4},
+        "not_picked_recently": {"days": 90},
+        "picked_heavily": {"count": 4, "days": 90},
+        "newcomer": {"past_drives": 1, "mentor_name": "Imran B."},
+        "experienced_mentor": {"past_drives": 9},
+        "minor_guardian_consent": {},
+        "promoted_from_standby": {},
+    }
+    for code, params in samples.items():
+        for lang in ("en", "hi"):
+            text = i18n.reason_text(PickReason(code=code, params=params), lang)
+            assert text and (lang == "en" or _devanagari(text)), (code, lang, text)
+    assert "Imran B." in i18n.reason_text(PickReason(code="newcomer", params=samples["newcomer"]), "hi")
+
+
+def test_the_standby_request_names_the_person_in_both_languages():
+    """Review follow-up 2: if the English standby sentence names who is the single point of failure, so does
+    the Hindi one - the name is data (blocked_by_names), not prose."""
+    from app.schemas import Assignment, RosterMetrics, RosterResult, StandbyPick
+
+    roster = RosterResult(
+        task_id="task-01", method="cp_sat", synthetic=True,
+        assignments=[Assignment(role_id="role-01", volunteer_id="v-068", volunteer_name="Imran B.")],
+        standby=[StandbyPick(volunteer_id="v-069", volunteer_name="Sunita K.", covers_role_ids=["role-01"])],
+        metrics=RosterMetrics(role_coverage=1.0, slots_filled=1, slots_required=1, robustness=0.0,
+                             repeat_pick_share=0.0, exposure_gini=0.0, district_spread=0),
+        recruit_requests=[{
+            "kind": "standby", "role_id": "role-01", "role": "First-aid support", "needed": 1,
+            "skills": ["first_aid"], "slot": "sat_morning", "area": "Akbarpur, Kanpur Dehat",
+            "max_travel_km": 25, "blocked_by_names": ["Imran B."],
+            "reason": "Single point of failure: if Imran B. cannot come, nobody qualified can step in "
+                      "as First-aid support. Recruit one standby."}])
+    shown = i18n.roster_display(TaskSpec(id="task-01", title="t", district="Kanpur Dehat", block="Akbarpur",
+                                         lat=26.8, lon=79.9), roster, "hi")
+    text = shown.recruit[0].text
+    assert "Imran B." in text and _devanagari(text)
+    assert "First-aid support" not in text                     # the Hindi role label, not the English one
+
+
+def _solvable_task() -> dict:
+    """A task built from a real synthetic volunteer, so the cp_sat roster has at least one assignment."""
+    for v in main.volunteers():
+        if v.is_minor or not v.skills or not v.available_slots:
+            continue
+        skill = sorted(v.skills)[0]
+        return {"id": "task-solvable", "title": "Water and hygiene camp", "slot": v.available_slots[0],
+                "district": v.district, "block": v.block, "lat": v.lat, "lon": v.lon, "max_travel_km": 25,
+                "roles": [{"id": "role-01", "role": "First-aid support", "count": 1,
+                           "required_skills": [skill]}]}
+    raise AssertionError("no usable synthetic volunteer")
 
 
 def test_a_robustness_percentage_is_the_same_number_in_both_languages(client):

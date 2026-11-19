@@ -267,6 +267,21 @@ class RosterOptions(BaseModel):
     seed: int = 7
 
 
+class PickReason(BaseModel):
+    """ONE structured cause for a pick, next to the English sentence it renders.
+
+    The solver writes ``Assignment.reasons`` (English, human readable) AND these codes with their
+    parameters. The Hindi view is rendered from the codes, so both languages carry the same facts -
+    the same skill and level, the same distance, the same "not picked in N days", the same newcomer
+    count and mentor name - instead of Hindi paraphrasing a finished sentence. ``params`` holds only
+    primitives, so it survives JSON and can be compared field by field in a test.
+    """
+    code: Literal["skill_confirmed", "skill_self_declared", "open_role", "slot_and_distance",
+                  "not_picked_recently", "picked_heavily", "newcomer", "experienced_mentor",
+                  "minor_guardian_consent", "promoted_from_standby"]
+    params: dict[str, str | int | float] = Field(default_factory=dict)
+
+
 class Assignment(BaseModel):
     role_id: str
     slot_index: int = 0
@@ -275,6 +290,7 @@ class Assignment(BaseModel):
     score: float = 0.0
     distance_km: float = 0.0
     reasons: list[str] = Field(default_factory=list)
+    reason_codes: list[PickReason] = Field(default_factory=list)  # the same reasons, structured, for Hindi
     flags: list[str] = Field(default_factory=list)  # e.g. "self_declared_skill", "novice", "minor_guardian_consent"
 
 
@@ -327,6 +343,7 @@ class RecruitRequest(BaseModel):
     area: str
     max_travel_km: float
     reason: str
+    blocked_by_names: list[str] = Field(default_factory=list)  # standby kind: who is the single point of failure
 
 
 class RosterResult(BaseModel):
