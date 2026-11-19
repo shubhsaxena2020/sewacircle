@@ -10,7 +10,7 @@ const RingScene = lazy(() => import('./RingScene'))
 
 const CHAPTERS = ['intro', 'interest', 'brief', 'crew', 'bench', 'verdict', 'gap', 'dropout', 'evidence', 'numbers', 'districts', 'try'] as const
 type Chapter = typeof CHAPTERS[number]
-const RING_LABEL_CHAPTERS: Chapter[] = ['crew', 'bench', 'verdict', 'gap', 'dropout']
+const RING_LABEL_CHAPTERS: Chapter[] = ['crew', 'bench', 'gap', 'dropout']
 
 const T = {
   en: {
@@ -44,6 +44,14 @@ const T = {
     open: 'खाली सीट', recruit: 'भर्ती', hostCheck: 'होस्ट-जाँचा', left: 'टीम से हटे', synthetic: 'काल्पनिक डेटा · MY Bharat या किसी सरकारी संस्था से संबद्ध नहीं',
   },
 } as const
+
+/** Word-by-word reveal: each word rises and un-blurs with a stagger when its chapter becomes active. */
+function Split({ text }: { text: string }) {
+  const NL = String.fromCharCode(10), NBSP = String.fromCharCode(160)
+  const lines = text.split(NL).map(l => l.split(' '))
+  const offsets = lines.map((_, li) => lines.slice(0, li).reduce((n, w) => n + w.length, 0))
+  return <>{lines.map((words, li) => <span key={li} className="line">{words.map((w, wi) => <span key={wi} className="w" style={{ '--i': offsets[li] + wi } as React.CSSProperties}>{w}{wi < words.length - 1 ? NBSP : ''}</span>)}</span>)}</>
+}
 
 function webgl() { try { const c = document.createElement('canvas'); return Boolean(c.getContext('webgl2') || c.getContext('webgl')) } catch { return false } }
 
@@ -85,6 +93,7 @@ export default function Story({ lang }: { lang: Lang }) {
   // The opening screen shows a still rendered from this same scene; the live WebGL ring takes over on the
   // first interaction (or after 6 s), so the headline paints and responds without waiting for shader compilation.
   const [stageOn, setStageOn] = useState(false)
+  const [stageLive, setStageLive] = useState(false)
   useEffect(() => {
     const start = () => setStageOn(true)
     if (matchMedia('(prefers-reduced-motion: reduce)').matches) { start(); return }
@@ -110,6 +119,8 @@ export default function Story({ lang }: { lang: Lang }) {
   const [toast, setToast] = useState('')
   const [error, setError] = useState('')
   const labelEls = useRef<(HTMLElement | null)[]>([])
+  const [hovered, setHovered] = useState<number | null>(null)
+  const bar = useRef<HTMLDivElement>(null)
   const root = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -123,6 +134,18 @@ export default function Story({ lang }: { lang: Lang }) {
   useEffect(() => {
     let lenis: Lenis | null = null
     if (motion) { lenis = new Lenis({ lerp: 0.11 }); const raf = (time: number) => { lenis?.raf(time); id = requestAnimationFrame(raf) }; let id = requestAnimationFrame(raf); const stop = () => cancelAnimationFrame(id); return () => { stop(); lenis?.destroy() } }
+  }, [motion])
+  useEffect(() => {
+    const onScroll = () => { const h = document.documentElement; if (bar.current) bar.current.style.transform = `scaleX(${h.scrollTop / Math.max(1, h.scrollHeight - h.clientHeight)})` }
+    // magnetic buttons (pattern from Motion Primitives' Magnetic, written fresh): pull toward the pointer, spring back
+    const onMove = (e: PointerEvent) => {
+      const b = (e.target as HTMLElement).closest<HTMLElement>('.story .btn'); if (!b || !motion) return
+      const r = b.getBoundingClientRect(); b.style.transform = `translate(${((e.clientX - r.left) / r.width - 0.5) * 10}px, ${((e.clientY - r.top) / r.height - 0.5) * 8}px)`
+    }
+    const onLeave = (e: PointerEvent) => { const b = (e.target as HTMLElement).closest<HTMLElement>('.story .btn'); if (b) b.style.transform = '' }
+    window.addEventListener('scroll', onScroll, { passive: true }); root.current?.addEventListener('pointermove', onMove); root.current?.addEventListener('pointerout', onLeave)
+    const node = root.current
+    return () => { window.removeEventListener('scroll', onScroll); node?.removeEventListener('pointermove', onMove); node?.removeEventListener('pointerout', onLeave) }
   }, [motion])
   useEffect(() => {
     const els = root.current?.querySelectorAll<HTMLElement>('[data-chapter]') ?? []
@@ -168,7 +191,7 @@ export default function Story({ lang }: { lang: Lang }) {
   const optedCount = useMemo(() => task ? vols.filter(v => v.opted_in_task_ids?.includes(task.id)).length : 0, [vols, task])
   const standby = chapter === 'gap' ? gapRoster?.standby[0] : shownRoster?.standby[0]
   const activeRoster = chapter === 'gap' ? gapRoster : shownRoster
-  const sceneData: SceneData = { chapter, seats, poolIds, standbyId: standby?.volunteer_id, glow: chapter === 'verdict' && roster?.ready === true, drives: drives.length ? drives : Array.from({ length: 10 }, () => ({ ready: null })) }
+  const sceneData: SceneData = { chapter, seats, poolIds, standbyId: standby?.volunteer_id, glow: chapter === 'verdict' && roster?.ready === true, drives: drives.length ? drives : Array.from({ length: 10 }, () => ({ ready: null })), hovered }
   const showLabels = RING_LABEL_CHAPTERS.includes(chapter) && Boolean(activeRoster)
   const spans = useMemo(() => extraction?.roles ?? [], [extraction])
   const briefHtml = useMemo(() => {
@@ -190,91 +213,95 @@ export default function Story({ lang }: { lang: Lang }) {
 
   return <div className={`story chapter-${chapter}`} ref={root}>
     <div className="stage" aria-hidden="true">
-      {gl ? <><picture className="stage-still"><source media="(max-width: 820px)" srcSet="/media/ring-hero-m.webp" /><img src="/media/ring-hero.webp" alt="" fetchPriority="high" /></picture>{stageOn && <Suspense fallback={null}><RingScene data={sceneData} labelEls={labelEls} motion={motion} /></Suspense>}</> : <svg className="stage-fallback" viewBox="0 0 800 500"><ellipse cx="520" cy="250" rx="240" ry="100" fill="none" stroke="#c98a2e" strokeWidth="26" /></svg>}
+      {gl ? <>{!stageLive && <picture className="stage-still"><source media="(max-width: 820px)" srcSet="/media/ring-hero-m.webp" /><img src="/media/ring-hero.webp" alt="" fetchPriority="high" /></picture>}{stageOn && <Suspense fallback={null}><RingScene data={sceneData} labelEls={labelEls} motion={motion} onHover={setHovered} onReady={() => setStageLive(true)} /></Suspense>}</> : <svg className="stage-fallback" viewBox="0 0 800 500"><ellipse cx="520" cy="250" rx="240" ry="100" fill="none" stroke="#c98a2e" strokeWidth="26" /></svg>}
       <div className={`seat-labels ${showLabels ? 'on' : ''}`}>
-        {seats.map((s, i) => <div key={`${chapter}-${i}`} ref={el => { labelEls.current[i] = el }} className={`seat-label s-${s.state}`}>
-          <b>{s.state === 'filled' ? s.name : s.state === 'gap' ? `${t.recruit}: ${s.role}` : s.state === 'dropped' ? s.name : t.open}</b>
-          <small>{s.state === 'dropped' ? t.left : s.role}{s.safety && s.state === 'filled' ? ` · ${t.hostCheck} ✓` : ''}</small>
+        {seats.map((s, i) => <div key={`${chapter}-${i}`} ref={el => { labelEls.current[i] = el }} className={`seat-label s-${s.state} ${hovered === i ? 'hot' : ''}`} onMouseEnter={() => setHovered(i)} onMouseLeave={() => setHovered(null)}>
+          <div className="seat-inner">
+            <b>{s.state === 'filled' ? s.name : s.state === 'gap' ? `${t.recruit}: ${s.role}` : s.state === 'dropped' ? s.name : t.open}</b>
+            <small>{s.state === 'dropped' ? t.left : s.role}{s.safety && s.state === 'filled' ? ` · ${t.hostCheck} ✓` : ''}</small>
+            {s.state === 'filled' && s.reasons?.length ? <ul className="why">{s.reasons.slice(0, 4).map((r, k) => <li key={k}>{r}</li>)}</ul> : null}
+          </div>
         </div>)}
       </div>
     </div>
     <ul className="sr-only" aria-live="polite" aria-label="Crew on the ring">{seats.map((s, i) => <li key={i}>{s.state === 'filled' ? `${s.name}, ${s.role}. ${s.reasons?.join('. ') ?? ''}` : s.state === 'gap' ? `${t.recruit}: ${s.role}` : `${t.open}: ${s.role}`}</li>)}</ul>
-    <nav className="chapter-dots" aria-label="Story chapters">{CHAPTERS.map((c, i) => <a key={c} href={`#${c}`} aria-current={chapter === c ? 'step' : undefined} aria-label={`${String(i + 1).padStart(2, '0')} ${c}`}><span>{String(i + 1).padStart(2, '0')}</span></a>)}</nav>
+    <nav className="chapter-dots" aria-label="Story chapters">{CHAPTERS.map((c, i) => <a key={c} href={`#${c}`} aria-current={chapter === c ? 'step' : undefined} aria-label={`${String(i + 1).padStart(2, '0')} ${c}`}><span>{String(i + 1).padStart(2, '0')} · {c}</span></a>)}</nav>
+    <div className="scroll-bar" ref={bar} aria-hidden="true" />
     {toast && <div className="toast" role="status">{toast}</div>}
     {error && <div className="toast toast-error" role="alert">{error}</div>}
 
-    <section id="intro" data-chapter="intro" className="ch ch-intro">
+    <section id="intro" data-chapter="intro" className={`ch ch-intro ${chapter === 'intro' ? 'on' : ''}`}>
       <p className="k">{t.kicker}</p>
-      <h1 lang={lang}>{t.h1}</h1>
+      <h1 lang={lang}><Split text={t.h1} /></h1>
       <p className="lede">{t.sub}</p>
       <a className="btn" href="#crew">{t.start} ↓</a>
     </section>
 
-    <section id="interest" data-chapter="interest" className="ch">
+    <section id="interest" data-chapter="interest" className={`ch ${chapter === 'interest' ? 'on' : ''}`}>
       <p className="k">{t.interestK}</p>
-      <h2>{t.interestH}</h2>
+      <h2><Split text={t.interestH} /></h2>
       <p className="giant"><Counter to={optedCount || null} lang={lang} /></p>
       <p className="giant-label">{t.optedIn}</p>
       <p className="body">{t.interestP}</p>
     </section>
 
-    <section id="brief" data-chapter="brief" className="ch">
+    <section id="brief" data-chapter="brief" className={`ch ${chapter === 'brief' ? 'on' : ''}`}>
       <p className="k">{t.briefK}</p>
-      <h2>{t.briefH}</h2>
+      <h2><Split text={t.briefH} /></h2>
       <p className="body">{t.briefP}</p>
       <blockquote className="brief" lang={task?.language === 'hi' ? 'hi' : undefined}>{briefHtml.map((p, k) => p.i === null ? <span key={k}>{p.s}</span> : <button key={k} className={`phrase ${phrase === p.i ? 'on' : ''}`} onClick={() => setPhrase(p.i)} aria-pressed={phrase === p.i}>{p.s}</button>)}</blockquote>
       <div className="role-chips">{spans.map((r, i) => <button key={i} className={`chip ${phrase === i ? 'on' : ''}`} onClick={() => setPhrase(i)}><b>{r.role}</b><small>{phrase === i ? t.aiProposed : `${t.confidence}: ${r.confidence}`}</small></button>)}</div>
     </section>
 
-    <section id="crew" data-chapter="crew" className="ch">
+    <section id="crew" data-chapter="crew" className={`ch ${chapter === 'crew' ? 'on' : ''}`}>
       <p className="k">{t.crewK}</p>
-      <h2>{t.crewH}</h2>
+      <h2><Split text={t.crewH} /></h2>
       <p className="body">{t.crewP}</p>
       <button className="btn" onClick={plan} disabled={busy === 'plan' || !task}>{busy === 'plan' ? t.planning : t.plan}</button>
       {roster && <p className="meta">{t.planned} · {roster.metrics.slots_filled}/{roster.metrics.slots_required} · {formatNumber(Math.round(roster.metrics.solve_ms), lang)} ms</p>}
     </section>
 
-    <section id="bench" data-chapter="bench" className="ch">
+    <section id="bench" data-chapter="bench" className={`ch ${chapter === 'bench' ? 'on' : ''}`}>
       <p className="k">{t.benchK}</p>
-      <h2>{t.benchH}</h2>
+      <h2><Split text={t.benchH} /></h2>
       <p className="body">{t.benchP}</p>
       {roster?.standby.map(s => <p key={s.volunteer_id} className="standby-line"><b>{t.standby}: {s.volunteer_name}</b> — {t.covers} {s.covers_role_ids.map(id => task?.roles.find(r => r.id === id)?.role ?? id).join(', ')}</p>)}
     </section>
 
-    <section id="verdict" data-chapter="verdict" className="ch ch-center">
+    <section id="verdict" data-chapter="verdict" className={`ch ch-center ${chapter === 'verdict' ? 'on' : ''}`}>
       <p className="k">{t.verdictK}</p>
       <p className={`verdict ${roster?.ready ? 'ok' : roster ? 'no' : ''}`}>{roster ? (roster.ready ? `${t.ready} · तैयार` : `${t.notReady}`) : '…'}</p>
       <p className="body">{roster?.ready ? t.verdictP : roster ? t.verdictNo : ''}</p>
       <button className="btn ghost" onClick={share} disabled={!roster}>{t.share}</button>
     </section>
 
-    <section id="gap" data-chapter="gap" className="ch">
+    <section id="gap" data-chapter="gap" className={`ch ${chapter === 'gap' ? 'on' : ''}`}>
       <p className="k">{t.gapK}</p>
-      <h2>{t.gapH}</h2>
+      <h2><Split text={t.gapH} /></h2>
       <p className="body">{t.gapP}</p>
       {gapRoster && <><p className={`verdict small ${gapRoster.ready ? 'ok' : 'no'}`}>{gapRoster.ready ? t.ready : t.notReady}</p>
         <ul className="recruit">{gapRoster.recruit_requests?.map((r, i) => <li key={i}><b>{r.needed} × {r.role}</b><small>{r.slot.replaceAll('_', ' ')} · {r.area} · ≤ {r.max_travel_km} km{r.checked_skill_required ? ` · ${t.hostCheck}` : ''}</small><small>{r.reason}</small></li>)}</ul>
         {recruitText && <button className="btn ghost" onClick={() => copy(recruitText)}>{t.copyReq}</button>}</>}
     </section>
 
-    <section id="dropout" data-chapter="dropout" className="ch">
+    <section id="dropout" data-chapter="dropout" className={`ch ${chapter === 'dropout' ? 'on' : ''}`}>
       <p className="k">{t.dropK}</p>
-      <h2>{t.dropH}</h2>
+      <h2><Split text={t.dropH} /></h2>
       <p className="body">{t.dropP}</p>
       <button className="btn" onClick={dropOne} disabled={!roster || busy === 'drop'}>{busy === 'drop' ? t.dropping : `${t.drop} ${((dropRoster ?? roster)?.assignments[3] ?? (dropRoster ?? roster)?.assignments[0])?.volunteer_name ?? ''}`}</button>
       {dropped && dropRoster && <div className="drop-result" role="status"><p><b>{dropped.name}</b> {t.left}. {dropped.healed ? `${t.standby} ↑` : ''}</p><p className={`verdict small ${dropRoster.ready ? 'ok' : 'no'}`}>{dropRoster.ready ? t.ready : t.notReady}</p>{dropRoster.recruit_requests?.map((r, i) => <p key={i} className="meta">{r.needed} × {r.role} — {r.reason}</p>)}</div>}
     </section>
 
-    <section id="evidence" data-chapter="evidence" className="ch">
+    <section id="evidence" data-chapter="evidence" className={`ch ${chapter === 'evidence' ? 'on' : ''}`}>
       <p className="k">{t.evidenceK}</p>
-      <h2>{t.evidenceH}</h2>
+      <h2><Split text={t.evidenceH} /></h2>
       <p className="body">{t.evidenceP}</p>
       <div className="card-demo"><span className="flag">8 h claimed · 5 h recorded</span><span>Draft · AI</span></div>
       <button className="btn ghost" onClick={() => api.verify().then(setLedger).catch(e => setError(e.message))}>{t.verify}</button>
       {ledger && <p className="meta" role="status">{ledger.entries === 0 ? t.empty : ledger.ok ? `${t.verified} · ${ledger.entries}` : `${t.broken} ${ledger.first_bad_index}`}</p>}
     </section>
 
-    <section id="numbers" data-chapter="numbers" className="ch ch-numbers">
+    <section id="numbers" data-chapter="numbers" className={`ch ch-numbers ${chapter === 'numbers' ? 'on' : ''}`}>
       <p className="k">{t.numbersK} · {t.numbersH}</p>
       <div className="nums">
         <div className="num big"><Counter to={ev ? Math.round(ev.cp_sat.ready * 100) : null} suffix="%" lang={lang} /><small>{t.readyLbl}</small><em>{ev ? `${Math.round(ev.nearest_skill.ready * 100)}%` : '—'} {t.nearest}</em></div>
@@ -285,16 +312,16 @@ export default function Story({ lang }: { lang: Lang }) {
       <p className="source">{t.synthetic} · docs/EVAL_RESULTS.md · docs/LOCAL_MODEL_RESULTS.md</p>
     </section>
 
-    <section id="districts" data-chapter="districts" className="ch">
+    <section id="districts" data-chapter="districts" className={`ch ${chapter === 'districts' ? 'on' : ''}`}>
       <p className="k">{t.districtsK}</p>
-      <h2>{t.districtsH}</h2>
+      <h2><Split text={t.districtsH} /></h2>
       <p className="body">{t.districtsP}</p>
       <Link className="btn ghost" to="/districts">{t.openDistricts} →</Link>
     </section>
 
-    <section id="try" data-chapter="try" className="ch ch-center">
+    <section id="try" data-chapter="try" className={`ch ch-center ${chapter === 'try' ? 'on' : ''}`}>
       <p className="k">{t.tryK}</p>
-      <h2>{t.tryH}</h2>
+      <h2><Split text={t.tryH} /></h2>
       <p className="body">{t.tryP}</p>
       <div className="row"><Link className="btn" to="/console">{t.console} →</Link><Link className="btn ghost" to="/volunteer">{t.volunteer}</Link><Link className="btn ghost" to="/method">{t.method}</Link></div>
       <p className="source">{t.synthetic}</p>

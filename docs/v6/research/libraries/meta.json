@@ -1,0 +1,7667 @@
+{
+"https://github.com/jasonslyvia/react-lazyload": {
+"name": "react-lazyload",
+"src": "awesome-react-components",
+"section": "Infinite Scroll",
+"repo": "twobin/react-lazyload",
+"stars": 5884,
+"pushed": "2024-04-01",
+"archived": false,
+"desc": "Lazy load your component, image or anything matters the performance.",
+"license": "MIT",
+"topics": [
+"lazyload",
+"react"
+]
+},
+"https://github.com/orgsync/react-list": {
+"name": "react-list",
+"src": "awesome-react-components",
+"section": "Infinite Scroll",
+"repo": "caseywebdev/react-list",
+"stars": 1969,
+"pushed": "2026-07-02",
+"archived": false,
+"desc": ":scroll: A versatile infinite scroll React component.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/nowaalex/af-utils": {
+"name": "@af-utils/virtual",
+"src": "awesome-react-components",
+"section": "Infinite Scroll",
+"repo": "nowaalex/af-utils",
+"stars": 81,
+"pushed": "2026-10-03",
+"archived": false,
+"desc": "Simple open-source tools that just work (usually fast)",
+"license": "MIT",
+"topics": [
+"react",
+"performance",
+"windowing",
+"react-components",
+"virtual-scroll",
+"infinite-scroll",
+"typescript",
+"virtualization"
+]
+},
+"https://github.com/bvaughn/react-window": {
+"name": "react-window",
+"src": "awesome-react-components",
+"section": "Infinite Scroll",
+"repo": "bvaughn/react-window",
+"stars": 17212,
+"pushed": "2026-11-15",
+"archived": false,
+"desc": "React components for efficiently rendering large lists and tabular data",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/inokawa/virtua": {
+"name": "virtua",
+"src": "awesome-react-components",
+"section": "Infinite Scroll",
+"repo": "inokawa/virtua",
+"stars": 3766,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A zero-config, fast and small virtual list, grid and masonry component for React, Vue, Solid, Svelte and Angular.",
+"license": "MIT",
+"topics": [
+"infinite-scroll",
+"performance",
+"react",
+"react-component",
+"virtualization",
+"virtualized",
+"windowing",
+"virtual-scroll"
+]
+},
+"https://github.com/davidtheclark/react-aria-modal": {
+"name": "react-aria-modal",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "davidtheclark/react-aria-modal",
+"stars": 1034,
+"pushed": "2023-10-30",
+"archived": false,
+"desc": "A fully accessible React modal built according WAI-ARIA Authoring Practices",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/reactjs/react-modal": {
+"name": "react-modal",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "reactjs/react-modal",
+"stars": 7403,
+"pushed": "2026-03-02",
+"archived": false,
+"desc": "Accessible modal dialog component for React",
+"license": "MIT",
+"topics": [
+"react",
+"javascript",
+"modal"
+]
+},
+"https://github.com/Paratco/async-modal": {
+"name": "@paratco/async-modal",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "Paratco/async-modal",
+"stars": 3,
+"pushed": "2026-09-27",
+"archived": false,
+"desc": "React async modal",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/hiradary/reoverlay": {
+"name": "reoverlay",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "hiradary/reoverlay",
+"stars": 156,
+"pushed": "2026-04-25",
+"archived": false,
+"desc": "The missing solution for managing modals in React.",
+"license": "MIT",
+"topics": [
+"modal",
+"overlay",
+"react",
+"react-modal",
+"react-overlay",
+"reoverlay"
+]
+},
+"https://github.com/sweetalert2/sweetalert2": {
+"name": "sweetalert2",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "sweetalert2/sweetalert2",
+"stars": 18102,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\u2728 A beautiful, responsive, highly customizable and accessible (WAI-ARIA) replacement for JavaScript's popup boxes. Zero dependencies. \ud83c\uddfa\ud83c\udde6\ud83c\uddea\ud83c\uddfa",
+"license": "MIT",
+"topics": [
+"sweetalert",
+"alert",
+"popup",
+"prompt",
+"dialog",
+"toast",
+"notifications",
+"wai-aria"
+]
+},
+"https://github.com/sweetalert2/sweetalert2-react-content": {
+"name": "sweetalert2-react-content",
+"src": "awesome-react-components",
+"section": "Overlay",
+"repo": "sweetalert2/sweetalert2-react-content",
+"stars": 728,
+"pushed": "2026-05-13",
+"archived": false,
+"desc": "Official SweetAlert2 enhancer adding support for React elements as content",
+"license": "MIT",
+"topics": [
+"sweetalert",
+"sweetalert2",
+"react"
+]
+},
+"https://github.com/teodosii/react-notifications-component": {
+"name": "react-notifications-component",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "teodosii/react-notifications-component",
+"stars": 1275,
+"pushed": "2023-08-28",
+"archived": false,
+"desc": "Delightful and highly customisable React Component to notify your users",
+"license": "MIT",
+"topics": [
+"react",
+"react-component",
+"react-notifications",
+"notifications-component",
+"toast-notifications",
+"toast-component",
+"notifications",
+"react-notifications-component"
+]
+},
+"https://github.com/OlegWock/react-local-toast": {
+"name": "react-local-toast",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "OlegWock/react-local-toast",
+"stars": 135,
+"pushed": "2024-05-02",
+"archived": false,
+"desc": "Local toast helps you to provide feedback related to particular components on page",
+"license": "MIT",
+"topics": [
+"react",
+"toast"
+]
+},
+"https://github.com/moharnadreza/react-toast": {
+"name": "react-toast",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "moharnadreza/react-toast",
+"stars": 85,
+"pushed": "2023-04-20",
+"archived": false,
+"desc": "Minimal toast notifications for React.",
+"license": "MIT",
+"topics": [
+"react-toast",
+"react",
+"toast",
+"toast-notifications"
+]
+},
+"https://github.com/fkhadra/react-toastify": {
+"name": "react-toastify",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "fkhadra/react-toastify",
+"stars": 13443,
+"pushed": "2026-10-28",
+"archived": false,
+"desc": "React notification made easy \ud83d\ude80 !",
+"license": "MIT",
+"topics": [
+"toast",
+"react",
+"javascript",
+"reactjs",
+"react-component",
+"notification",
+"snackbar"
+]
+},
+"https://github.com/SaadNasir-git/react-confirm-lite": {
+"name": "react-confirm-lite",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "SaadNasir-git/react-confirm-lite",
+"stars": 1,
+"pushed": "2026-08-30",
+"archived": false,
+"desc": "A lightweight, promise-based confirm dialog for React with built-in Tailwind CSS support. Designed to be as easy to use as `react-toastify`, while remaining ful",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/LouisBarranqueiro/reapop": {
+"name": "reapop",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "LouisBarranqueiro/reapop",
+"stars": 1561,
+"pushed": "2026-10-12",
+"archived": false,
+"desc": ":postbox: A simple and customizable React notifications system",
+"license": "MIT",
+"topics": [
+"react",
+"redux",
+"notifications",
+"notification",
+"toast",
+"toasts",
+"reapop",
+"redux-notifications"
+]
+},
+"https://github.com/timolins/react-hot-toast": {
+"name": "react-hot-toast",
+"src": "awesome-react-components",
+"section": "Notification",
+"repo": "timolins/react-hot-toast",
+"stars": 10993,
+"pushed": "2026-09-16",
+"archived": false,
+"desc": "Smoking Hot React Notifications \ud83d\udd25 ",
+"license": "MIT",
+"topics": [
+"react",
+"notifications",
+"toast-notifications",
+"snackbar"
+]
+},
+"https://github.com/wwayne/react-tooltip": {
+"name": "react-tooltip",
+"src": "awesome-react-components",
+"section": "Tooltip",
+"repo": "ReactTooltip/react-tooltip",
+"stars": 3825,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "React Tooltip Component",
+"license": "MIT",
+"topics": [
+"javascript",
+"react",
+"tooltip",
+"react18",
+"typescript"
+]
+},
+"https://github.com/luukdv/hamburger-react": {
+"name": "hamburger-react",
+"src": "awesome-react-components",
+"section": "Menu",
+"repo": "cyntler/hamburger-react",
+"stars": 1036,
+"pushed": "2024-12-22",
+"archived": false,
+"desc": "Animated hamburger menu icons for React.js weighs only 1.5 KB.",
+"license": "MIT",
+"topics": [
+"animation",
+"burger",
+"hamburger",
+"icon",
+"icons",
+"menu",
+"react",
+"toggle"
+]
+},
+"https://github.com/negomi/react-burger-menu": {
+"name": "react-burger-menu",
+"src": "awesome-react-components",
+"section": "Menu",
+"repo": "negomi/react-burger-menu",
+"stars": 5082,
+"pushed": "2025-11-14",
+"archived": false,
+"desc": ":hamburger: An off-canvas sidebar component with a collection of effects and styles using CSS transitions and SVG path animations",
+"license": "MIT",
+"topics": [
+"react",
+"component",
+"animations",
+"transitions",
+"hamburger-menu",
+"sidebar"
+]
+},
+"https://github.com/vutran/react-offcanvas": {
+"name": "react-offcanvas",
+"src": "awesome-react-components",
+"section": "Menu",
+"repo": "vutran/react-offcanvas",
+"stars": 52,
+"pushed": "2020-04-22",
+"archived": false,
+"desc": ":art: Off-canvas menus for React.",
+"license": "MIT",
+"topics": [
+"react",
+"react-component",
+"sidebar",
+"javascript"
+]
+},
+"https://github.com/innFactory/react-planet": {
+"name": "react-planet",
+"src": "awesome-react-components",
+"section": "Menu",
+"repo": "innFactory/react-planet",
+"stars": 203,
+"pushed": "2021-08-31",
+"archived": false,
+"desc": "A react lib for building circular menus in a very easy and handy way.",
+"license": "MIT",
+"topics": [
+"planet",
+"planet-menu",
+"circular",
+"circular-menu",
+"menu",
+"submenu",
+"react-menu",
+"react-planet"
+]
+},
+"https://github.com/icflorescu/mantine-contextmenu": {
+"name": "mantine-contextmenu",
+"src": "awesome-react-components",
+"section": "Menu",
+"repo": "icflorescu/mantine-contextmenu",
+"stars": 176,
+"pushed": "2026-11-14",
+"archived": false,
+"desc": "Craft your applications for productivity and meet your users\u2019 expectations by enhancing your Mantine-based UIs with a desktop-grade, lightweight yet fully-featu",
+"license": "MIT",
+"topics": [
+"javascript",
+"react",
+"typescript",
+"context-menu",
+"dark-mode",
+"dark-theme",
+"mantine",
+"ui"
+]
+},
+"https://github.com/KyleAMathews/react-headroom": {
+"name": "react-headroom",
+"src": "awesome-react-components",
+"section": "Sticky",
+"repo": "KyleAMathews/react-headroom",
+"stars": 1869,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "Hide your header until you need it",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/yahoo/react-stickynode": {
+"name": "react-stickynode",
+"src": "awesome-react-components",
+"section": "Sticky",
+"repo": "yahoo/react-stickynode",
+"stars": 1336,
+"pushed": "2026-02-02",
+"archived": false,
+"desc": "A performant and comprehensive React sticky component.",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"ui",
+"react-sticky",
+"web"
+]
+},
+"https://github.com/reactjs/react-tabs": {
+"name": "react-tabs",
+"src": "awesome-react-components",
+"section": "Tabs",
+"repo": "reactjs/react-tabs",
+"stars": 3143,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "An accessible and easy tab component for ReactJS.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/ctxhou/react-tabtab": {
+"name": "react-tabtab",
+"src": "awesome-react-components",
+"section": "Tabs",
+"repo": "ctxhou/react-tabtab",
+"stars": 416,
+"pushed": "2022-12-10",
+"archived": false,
+"desc": "\ud83d\udc83 Make your react tab dance\ud83d\udd7a",
+"license": "MIT",
+"topics": [
+"react-tab",
+"tab",
+"react-component",
+"react-tabtab",
+"react",
+"drag",
+"drop-tab"
+]
+},
+"https://github.com/mhnpd/react-loader-spinner": {
+"name": "react-loader-spinner",
+"src": "awesome-react-components",
+"section": "Loader",
+"repo": "mhnpd/react-loader-spinner",
+"stars": 1039,
+"pushed": "2026-01-14",
+"archived": false,
+"desc": "Collection sets of a spinners for async operations for ReactJS",
+"license": "MIT",
+"topics": [
+"react",
+"loader",
+"spinner",
+"spinner-components",
+"spinner-icon",
+"svg-loader",
+"react-spinners",
+"react-component"
+]
+},
+"https://github.com/mironov/react-redux-loading-bar": {
+"name": "react-redux-loading-bar",
+"src": "awesome-react-components",
+"section": "Loader",
+"repo": "mironov/react-redux-loading-bar",
+"stars": 934,
+"pushed": "2024-12-06",
+"archived": true,
+"desc": "Loading Bar (aka Progress Bar) for Redux and React",
+"license": "MIT",
+"topics": [
+"middleware",
+"redux",
+"react",
+"promise-middleware",
+"loading-bar",
+"progress-bar",
+"progress-simulation"
+]
+},
+"https://github.com/JoshK2/react-spinners-css": {
+"name": "react-spinners-css",
+"src": "awesome-react-components",
+"section": "Loader",
+"repo": "JoshK2/react-spinners-css",
+"stars": 335,
+"pushed": "2025-03-26",
+"archived": false,
+"desc": "Amazing collection of React spinners components with pure css",
+"license": "MIT",
+"topics": [
+"spinners",
+"loaders",
+"animation",
+"css",
+"react-spinners",
+"css-spinners",
+"progress",
+"animations"
+]
+},
+"https://github.com/davidhu2000/react-spinners": {
+"name": "react-spinners",
+"src": "awesome-react-components",
+"section": "Loader",
+"repo": "davidhu2000/react-spinners",
+"stars": 3357,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "A collection of loading spinner components for react",
+"license": "MIT",
+"topics": [
+"loader",
+"react",
+"spinners",
+"progressbar",
+"react-component",
+"react-spinners",
+"loading-spinners",
+"component"
+]
+},
+"https://github.com/danilowoz/react-content-loader": {
+"name": "react-content-loader",
+"src": "awesome-react-components",
+"section": "Loader",
+"repo": "danilowoz/react-content-loader",
+"stars": 13995,
+"pushed": "2026-01-22",
+"archived": false,
+"desc": "\u26aa SVG-Powered component to easily create skeleton loadings.",
+"license": "MIT",
+"topics": [
+"react",
+"loader",
+"svg",
+"loading",
+"facebook-cards-loaders",
+"skeleton-screen",
+"placeholder",
+"skeleton"
+]
+},
+"https://github.com/rcaferati/react-awesome-slider": {
+"name": "react-awesome-slider",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "rcaferati/react-awesome-slider",
+"stars": 2974,
+"pushed": "2026-07-13",
+"archived": false,
+"desc": "A performant, lightweight React slider/carousel for media and content transitions, featuring 60fps animations, modular styling, optional HOCs, and fullpage navi",
+"license": "MIT",
+"topics": [
+"image-slider",
+"media-slider",
+"media-gallery",
+"gallery-component",
+"carousel",
+"carousel-component",
+"gallery",
+"react-carousel"
+]
+},
+"https://github.com/express-labs/pure-react-carousel": {
+"name": "pure-react-carousel",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "express-labs/pure-react-carousel",
+"stars": 1698,
+"pushed": "2026-11-06",
+"archived": false,
+"desc": "A highly impartial suite of React components that can be assembled by the consumer to create a carousel with almost no limits on DOM structure or CSS styles.  I",
+"license": "MIT",
+"topics": [
+"hacktoberfest"
+]
+},
+"https://github.com/kidjp85/react-id-swiper": {
+"name": "react-id-swiper",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "kidjp85/react-id-swiper",
+"stars": 1478,
+"pushed": "2023-05-06",
+"archived": false,
+"desc": "A library to use idangerous Swiper as a ReactJs component which allows Swiper's modules custom build",
+"license": "MIT",
+"topics": [
+"react-id-swiper",
+"idangerous",
+"swiper",
+"react-slider",
+"react-carousel",
+"react-swiper",
+"react-native-swiper",
+"react-slider-component"
+]
+},
+"https://github.com/skozer/react-instagram-zoom-slider": {
+"name": "react-instagram-zoom-slider",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "skozer/react-instagram-zoom-slider",
+"stars": 78,
+"pushed": "2023-01-05",
+"archived": false,
+"desc": "\ud83c\udf04\u2194\ufe0f A slider component with pinch to zoom capabilities inspired by Instagram",
+"license": "MIT",
+"topics": [
+"react",
+"slider",
+"carousel",
+"zoom",
+"pinch-to-zoom",
+"instagram"
+]
+},
+"https://github.com/leandrowd/react-responsive-carousel": {
+"name": "react-responsive-carousel",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "leandrowd/react-responsive-carousel",
+"stars": 2673,
+"pushed": "2026-10-17",
+"archived": false,
+"desc": "React.js Responsive Carousel (with Swipe)",
+"license": "MIT",
+"topics": [
+"react",
+"carousel",
+"swipe",
+"mobile",
+"react-component",
+"slider",
+"gallery",
+"keyboard-navigation"
+]
+},
+"https://github.com/akiran/react-slick": {
+"name": "react-slick",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "akiran/react-slick",
+"stars": 11915,
+"pushed": "2025-08-07",
+"archived": false,
+"desc": "React carousel component ",
+"license": "MIT",
+"topics": [
+"react",
+"carousel",
+"slick"
+]
+},
+"https://github.com/rcbyr/keen-slider": {
+"name": "keen-slider",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "rcbyr/keen-slider",
+"stars": 5016,
+"pushed": "2026-01-22",
+"archived": false,
+"desc": "The HTML touch slider carousel with the most native feeling you will get.",
+"license": "MIT",
+"topics": [
+"slider",
+"carousel",
+"touch",
+"mobile",
+"react",
+"vue",
+"angular",
+"native"
+]
+},
+"https://github.com/nolimits4web/Swiper": {
+"name": "swiper",
+"src": "awesome-react-components",
+"section": "Carousel",
+"repo": "nolimits4web/swiper",
+"stars": 41908,
+"pushed": "2026-10-30",
+"archived": false,
+"desc": "Most modern mobile touch slider with hardware accelerated transitions",
+"license": "MIT",
+"topics": [
+"swipe",
+"swiper",
+"gallery",
+"touch",
+"touch-events",
+"mobile",
+"slider",
+"carousel"
+]
+},
+"https://github.com/springload/react-accessible-accordion": {
+"name": "react-accessible-accordion",
+"src": "awesome-react-components",
+"section": "Collapse",
+"repo": "springload/react-accessible-accordion",
+"stars": 784,
+"pushed": "2025-04-17",
+"archived": false,
+"desc": "Accessible Accordion component for React",
+"license": "MIT",
+"topics": [
+"react",
+"component",
+"accordion",
+"collapse",
+"accessible",
+"accessibility",
+"hacktoberfest"
+]
+},
+"https://github.com/nkbt/react-collapse": {
+"name": "react-collapse",
+"src": "awesome-react-components",
+"section": "Collapse",
+"repo": "nkbt/react-collapse",
+"stars": 1131,
+"pushed": "2022-10-19",
+"archived": false,
+"desc": "Component-wrapper for collapse animation with react-motion for elements with variable (and dynamic) height",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/Hexastack/eazychart": {
+"name": "EazyChart",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "Hexastack/eazychart",
+"stars": 34,
+"pushed": "2025-11-06",
+"archived": false,
+"desc": "EazyChart is a reactive chart library \ud83d\udcc8, it allows you to easily add SVG charts in your React and Vue web applications.",
+"license": "MIT",
+"topics": [
+"chart",
+"react",
+"charts",
+"d3",
+"data",
+"dataanalysis",
+"dataviz",
+"graphs"
+]
+},
+"https://github.com/hustcc/echarts-for-react": {
+"name": "echarts for react",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "hustcc/echarts-for-react",
+"stars": 5010,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "\u26f3\ufe0f  Apache ECharts components for React wrapper. \u4e00\u4e2a\u7b80\u5355\u7684 Apache echarts \u7684 React \u5c01\u88c5\u3002",
+"license": "MIT",
+"topics": [
+"echarts",
+"react",
+"react-component",
+"javascript",
+"echarts-for-react",
+"visualization"
+]
+},
+"https://github.com/jscharting/jscharting-react": {
+"name": "jscharting-react",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "jscharting/jscharting-react",
+"stars": 20,
+"pushed": "2023-03-01",
+"archived": false,
+"desc": "Official JSCharting React Plugin & Examples",
+"license": "NOASSERTION",
+"topics": [
+"reactjs",
+"chart",
+"jscharting",
+"react"
+]
+},
+"https://github.com/fraserxu/react-chartist": {
+"name": "react-chartist",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "fraserxu/react-chartist",
+"stars": 525,
+"pushed": "2026-10-30",
+"archived": false,
+"desc": "\u269b React component for Chartist.js",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/99ff00/react-charty": {
+"name": "react-charty",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "99ff00/react-charty",
+"stars": 73,
+"pushed": "2026-08-10",
+"archived": false,
+"desc": "Data Visualization Component",
+"license": "MIT",
+"topics": [
+"chart",
+"react",
+"reactjs",
+"canvas",
+"canvas2d",
+"pie",
+"area",
+"line"
+]
+},
+"https://github.com/jerairrest/react-chartjs-2": {
+"name": "react-chartjs-2",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "reactchartjs/react-chartjs-2",
+"stars": 6940,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "React components for Chart.js, the most popular charting library",
+"license": "MIT",
+"topics": [
+"react",
+"reactjs",
+"chart",
+"chartjs",
+"chartjs-2",
+"charts",
+"charting-library",
+"data-visualization"
+]
+},
+"https://github.com/codesuki/react-d3-components": {
+"name": "react-d3-components",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "codesuki/react-d3-components",
+"stars": 1615,
+"pushed": "2022-01-11",
+"archived": false,
+"desc": "D3 Components for React",
+"license": "MIT",
+"topics": [
+"javascript",
+"react",
+"d3",
+"graph",
+"chart",
+"charting-library",
+"charts",
+"waveform"
+]
+},
+"https://github.com/RakanNimer/react-google-charts": {
+"name": "react-google-charts",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "rakannimer/react-google-charts",
+"stars": 1720,
+"pushed": "2025-10-30",
+"archived": false,
+"desc": "A thin, typed, React wrapper over Google Charts Visualization and Charts API.",
+"license": "MIT",
+"topics": [
+"react",
+"google-charts",
+"charts",
+"react-google-charts",
+"area-chart",
+"bar-chart",
+"bubble-chart",
+"calendar-chart"
+]
+},
+"https://github.com/kirjs/react-highcharts": {
+"name": "react-highcharts",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "kirjs/react-highcharts",
+"stars": 1242,
+"pushed": "2022-12-07",
+"archived": false,
+"desc": "React wrapper for Highcharts library",
+"license": "MIT",
+"topics": [
+"highcharts",
+"react-highcharts",
+"highmaps",
+"highstock",
+"react"
+]
+},
+"https://github.com/borisyankov/react-sparklines": {
+"name": "react-sparklines",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "borisyankov/react-sparklines",
+"stars": 2852,
+"pushed": "2024-09-21",
+"archived": false,
+"desc": "Beautiful and expressive Sparklines React component",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/esnet/react-timeseries-charts": {
+"name": "react-timeseries-charts",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "esnet/react-timeseries-charts",
+"stars": 878,
+"pushed": "2023-09-18",
+"archived": false,
+"desc": "Declarative and modular timeseries charting components for React",
+"license": "NOASSERTION",
+"topics": [
+"javascript",
+"chart",
+"timeseries",
+"react",
+"pond"
+]
+},
+"https://github.com/uber/react-vis": {
+"name": "react-vis",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "uber/react-vis",
+"stars": 8784,
+"pushed": "2024-12-18",
+"archived": false,
+"desc": "Data Visualization Components",
+"license": "MIT",
+"topics": [
+"uber",
+"chart",
+"data-visualization",
+"charting-library",
+"visualization",
+"react"
+]
+},
+"https://github.com/recharts/recharts": {
+"name": "recharts",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "recharts/recharts",
+"stars": 27722,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Redefined chart library built with React and D3",
+"license": "MIT",
+"topics": [
+"react",
+"charting-library",
+"recharts",
+"d3",
+"chart",
+"components",
+"javascript",
+"ui"
+]
+},
+"https://github.com/rumble-charts/rumble-charts": {
+"name": "rumble-charts",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "rumble-charts/rumble-charts",
+"stars": 343,
+"pushed": "2023-01-07",
+"archived": false,
+"desc": "React components for building composable and flexible charts",
+"license": "MIT",
+"topics": [
+"chart",
+"react",
+"visualization",
+"svg",
+"d3"
+]
+},
+"https://github.com/FormidableLabs/victory": {
+"name": "victory",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "FormidableLabs/victory",
+"stars": 11251,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "A collection of composable React components for building interactive data visualizations",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"charts",
+"d3",
+"data-visualization"
+]
+},
+"https://github.com/chartshq/react-muze": {
+"name": "react-muze",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "chartshq/react-muze",
+"stars": 17,
+"pushed": "2020-10-16",
+"archived": false,
+"desc": "React SDK for Muze charting Library",
+"license": "MIT",
+"topics": [
+"muze",
+"react",
+"react-applications",
+"datamodel",
+"webassembly",
+"javascript-charts",
+"charts",
+"charting-application"
+]
+},
+"https://github.com/joyceworks/flowchart-react": {
+"name": "Flowchart React",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "wekoworks/flowchart-react",
+"stars": 48,
+"pushed": "2025-01-11",
+"archived": false,
+"desc": "Lightweight flowchart & flowchart designer for React.js.",
+"license": "MIT",
+"topics": [
+"flowchart",
+"reactjs",
+"diagram"
+]
+},
+"https://github.com/flatlogic/react-dashboard": {
+"name": "react-dashboard",
+"src": "awesome-react-components",
+"section": "Chart",
+"repo": "flatlogic/react-dashboard",
+"stars": 1647,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\ud83d\udd25React Dashboard - isomorphic admin dashboard template (React.js, Bootstrap, Node.js, GraphQL, React Router, Babel, Webpack, Browsersync) \ud83d\udd25",
+"license": null,
+"topics": [
+"react",
+"dashboard",
+"bootstrap",
+"graphql",
+"hmr",
+"browsersync",
+"webpack",
+"react-router"
+]
+},
+"https://github.com/sakhnyuk/rc-scrollbars": {
+"name": "rc-scrollbars",
+"src": "awesome-react-components",
+"section": "Custom Scrollbar",
+"repo": "sakhnyuk/rc-scrollbars",
+"stars": 159,
+"pushed": "2023-06-18",
+"archived": false,
+"desc": "React scrollbars component",
+"license": "MIT",
+"topics": [
+"react",
+"scrollbars",
+"scroll",
+"scroll-events"
+]
+},
+"https://github.com/rommguy/react-custom-scroll": {
+"name": "react-custom-scroll",
+"src": "awesome-react-components",
+"section": "Custom Scrollbar",
+"repo": "rommguy/react-custom-scroll",
+"stars": 577,
+"pushed": "2026-03-03",
+"archived": false,
+"desc": "Easily customize the browser scroll bar with native OS scroll behavior",
+"license": "MIT",
+"topics": [
+"javascript",
+"css",
+"reactjs"
+]
+},
+"https://github.com/andrelmlins/react-shadow-scroll": {
+"name": "react-shadow-scroll",
+"src": "awesome-react-components",
+"section": "Custom Scrollbar",
+"repo": "andrelmlins/react-shadow-scroll",
+"stars": 32,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "Component that customizes the list and inserts shadow when scrolling exists",
+"license": "MIT",
+"topics": [
+"react",
+"shadow",
+"scroll",
+"library"
+]
+},
+"https://github.com/istarkov/google-map-react": {
+"name": "google-map-react",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "GoogleMapReact/google-map-react",
+"stars": 6481,
+"pushed": "2026-02-17",
+"archived": false,
+"desc": "Google map library for react that allows rendering components as markers :tada:",
+"license": "MIT",
+"topics": [
+"react",
+"map",
+"google",
+"component",
+"maps"
+]
+},
+"https://github.com/1amageek/mapkit": {
+"name": "mapkit",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "1amageek/mapkit",
+"stars": 6,
+"pushed": "2025-10-22",
+"archived": false,
+"desc": "A React wrapper for Apple's MapKit JS, providing a seamless way to integrate Apple Maps into your React applications.",
+"license": null,
+"topics": [
+"applemaps",
+"mapkit",
+"mapkit-js"
+]
+},
+"https://github.com/mariusandra/pigeon-maps": {
+"name": "pigeon-maps",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "mariusandra/pigeon-maps",
+"stars": 3519,
+"pushed": "2025-06-04",
+"archived": false,
+"desc": "ReactJS Maps without external dependencies",
+"license": "MIT",
+"topics": [
+"pigeon",
+"pigeon-maps",
+"react",
+"react-component",
+"map",
+"inferno",
+"inferno-component",
+"hacktoberfest"
+]
+},
+"https://github.com/ubilabs/react-geosuggest": {
+"name": "react-geosuggest",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "ubilabs/react-geosuggest",
+"stars": 1038,
+"pushed": "2025-03-31",
+"archived": true,
+"desc": "A React autosuggest for the Google Maps Places API.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/PaulLeCam/react-leaflet": {
+"name": "react-leaflet",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "PaulLeCam/react-leaflet",
+"stars": 5609,
+"pushed": "2026-11-15",
+"archived": false,
+"desc": "React components for Leaflet maps",
+"license": "NOASSERTION",
+"topics": [
+"leaflet",
+"map",
+"react",
+"javascript",
+"typescript",
+"leaflet-maps",
+"react-components"
+]
+},
+"https://github.com/uber/react-map-gl": {
+"name": "react-map-gl",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "visgl/react-map-gl",
+"stars": 8514,
+"pushed": "2026-10-24",
+"archived": false,
+"desc": "React friendly API wrapper around MapboxGL JS",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"map",
+"mapbox-gl-js",
+"mapbox-gl",
+"webgl",
+"uber",
+"data-visualization"
+]
+},
+"https://github.com/VictorCazanave/react-svg-map": {
+"name": "react-svg-map",
+"src": "awesome-react-components",
+"section": "Map",
+"repo": "VictorCazanave/react-svg-map",
+"stars": 242,
+"pushed": "2022-11-19",
+"archived": false,
+"desc": "A set of React.js components to display an interactive SVG map",
+"license": "MIT",
+"topics": [
+"react",
+"component",
+"svg",
+"interactive",
+"map",
+"checkbox",
+"radiobutton"
+]
+},
+"https://github.com/sachinchoolur/lightGallery": {
+"name": "lightGallery",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "sachinchoolur/lightGallery",
+"stars": 7065,
+"pushed": "2026-11-04",
+"archived": false,
+"desc": "A customizable, modular, responsive, lightbox gallery plugin. ",
+"license": "GPL-3.0",
+"topics": [
+"lightbox-gallery-plugin",
+"image-gallery",
+"video-gallery",
+"lightbox",
+"video",
+"thumbnails",
+"youtube",
+"vimeo"
+]
+},
+"https://github.com/junkboy0315/react-compare-image": {
+"name": "react-compare-image",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "tam315/react-compare-image",
+"stars": 410,
+"pushed": "2026-09-30",
+"archived": false,
+"desc": "React component to compare two images with a slider",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/xiaolin/react-image-gallery": {
+"name": "react-image-gallery",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "xiaolin/react-image-gallery",
+"stars": 3941,
+"pushed": "2026-05-23",
+"archived": false,
+"desc": "React carousel image gallery component with thumbnail support  \ud83d\uddbc",
+"license": "MIT",
+"topics": [
+"image-gallery",
+"carousel",
+"slide-images",
+"react-components",
+"react",
+"image-slider",
+"gallery",
+"react-carousel"
+]
+},
+"https://github.com/igordanchenko/yet-another-react-lightbox": {
+"name": "yet-another-react-lightbox",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "igordanchenko/yet-another-react-lightbox",
+"stars": 1337,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Modern React lightbox component",
+"license": "MIT",
+"topics": [
+"lightbox",
+"react",
+"lightbox-component",
+"react-lightbox",
+"image-carousel",
+"reactjs",
+"lightbox-image",
+"image-lightbox"
+]
+},
+"https://github.com/brycedorn/react-intense": {
+"name": "react-intense",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "brycedorn/react-intense",
+"stars": 188,
+"pushed": "2023-11-27",
+"archived": false,
+"desc": "A React component for viewing large images up close \ud83d\udd0d",
+"license": "MIT",
+"topics": [
+"react",
+"images",
+"fullscreen",
+"component",
+"requestanimationframe",
+"javascript"
+]
+},
+"https://github.com/igordanchenko/react-photo-album": {
+"name": "react-photo-album",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "igordanchenko/react-photo-album",
+"stars": 792,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Responsive photo gallery component for React",
+"license": "MIT",
+"topics": [
+"responsive",
+"gallery",
+"images",
+"react",
+"photo-gallery",
+"photo",
+"react-photo-album",
+"react-photo-gallery"
+]
+},
+"https://github.com/chrvadala/react-svg-pan-zoom": {
+"name": "react-svg-pan-zoom",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "chrvadala/react-svg-pan-zoom",
+"stars": 695,
+"pushed": "2024-08-15",
+"archived": false,
+"desc": ":eyes: A React component that adds pan and zoom features to SVG",
+"license": "MIT",
+"topics": [
+"react",
+"svg",
+"pan",
+"zoom",
+"webcomponents",
+"web",
+"frontend"
+]
+},
+"https://github.com/malerba118/react-particle-image": {
+"name": "react-particle-image",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "malerba118/react-particle-image",
+"stars": 507,
+"pushed": "2023-03-01",
+"archived": false,
+"desc": "Render images as interactive particles",
+"license": null,
+"topics": []
+},
+"https://github.com/imgix/react-imgix": {
+"name": "react-imgix",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "imgix/react-imgix",
+"stars": 381,
+"pushed": "2026-01-16",
+"archived": false,
+"desc": "React component to display imgix images",
+"license": "NOASSERTION",
+"topics": [
+"imgix",
+"srcset",
+"src",
+"images",
+"signing-imgix-urls",
+"react",
+"reactjs",
+"components"
+]
+},
+"https://github.com/Frameright/react-image-display-control": {
+"name": "@frameright/react-image-display-control",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "Frameright/react-image-display-control",
+"stars": 28,
+"pushed": "2026-03-23",
+"archived": false,
+"desc": "\ud83d\ude80 Next-gen responsive images in React",
+"license": "MIT",
+"topics": [
+"image",
+"image-manipulation",
+"metadata",
+"react",
+"reactjs",
+"responsive-design",
+"frameright",
+"image-display-control"
+]
+},
+"https://github.com/willnguyen1312/zoom-image": {
+"name": "zoom-image",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "willnguyen1312/zoom-image",
+"stars": 357,
+"pushed": "2026-10-13",
+"archived": false,
+"desc": "A little yet powerful framework agnostic headless library to zoom images on the web",
+"license": "MIT",
+"topics": [
+"zoom",
+"frameworks",
+"preact",
+"react",
+"svelte",
+"vue",
+"headless",
+"nextjs"
+]
+},
+"https://github.com/AlirezaAzizi145/react-infinite-gallery": {
+"name": "react-infinite-gallery",
+"src": "awesome-react-components",
+"section": "Photo / Image",
+"repo": "AlirezaAzizi145/react-infinite-gallery",
+"stars": 3,
+"pushed": "2025-06-16",
+"archived": false,
+"desc": " Infinite scrollable gallery with freeform drag \u2013 explore in any direction without limits",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/iconify/iconify-react": {
+"name": "iconify-react",
+"src": "awesome-react-components",
+"section": "Icons",
+"repo": "iconify/iconify-react",
+"stars": 224,
+"pushed": "2021-02-08",
+"archived": false,
+"desc": "Iconify icon component for React",
+"license": "MIT",
+"topics": [
+"react",
+"reactjs-components",
+"svg-react",
+"react-icons"
+]
+},
+"https://github.com/gorangajic/react-icons": {
+"name": "react-icons",
+"src": "awesome-react-components",
+"section": "Icons",
+"repo": "react-icons/react-icons",
+"stars": 12702,
+"pushed": "2026-10-23",
+"archived": false,
+"desc": "svg react icons of popular icon packs",
+"license": "NOASSERTION",
+"topics": [
+"icons",
+"react",
+"svg-icons"
+]
+},
+"https://github.com/lunahq/react-open-doodles": {
+"name": "react-open-doodles",
+"src": "awesome-react-components",
+"section": "Icons",
+"repo": "lunahq/react-open-doodles",
+"stars": 83,
+"pushed": "2022-12-12",
+"archived": false,
+"desc": "A Free Set of Sketchy Illustrations provided by opendoodles",
+"license": "MIT",
+"topics": [
+"illustration",
+"react",
+"svg",
+"icons"
+]
+},
+"https://github.com/aykutkardas/react-icomoon": {
+"name": "react-icomoon",
+"src": "awesome-react-components",
+"section": "Icons",
+"repo": "aykutkardas/react-icomoon",
+"stars": 245,
+"pushed": "2026-10-25",
+"archived": false,
+"desc": "It makes it very simple to use SVG icons in your React and React-Native projects.",
+"license": "MIT",
+"topics": [
+"icomoon",
+"icons",
+"svg",
+"icon",
+"react",
+"reactjs",
+"svg-icons",
+"react-native"
+]
+},
+"https://github.com/lucide-icons/lucide": {
+"name": "Lucide",
+"src": "awesome-react-components",
+"section": "Icons",
+"repo": "lucide-icons/lucide",
+"stars": 25863,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Beautiful & consistent icon toolkit made by the community. Lucide is an open-source icon library that provides 2000+ vector (svg) files for displaying icons and",
+"license": "NOASSERTION",
+"topics": [
+"svgs",
+"icons",
+"feather-icons",
+"figma",
+"ui-design",
+"ui-components",
+"react",
+"vue"
+]
+},
+"https://github.com/konvajs/react-konva": {
+"name": "react-konva",
+"src": "awesome-react-components",
+"section": "Canvas",
+"repo": "konvajs/react-konva",
+"stars": 6448,
+"pushed": "2026-10-15",
+"archived": false,
+"desc": "React components for the Konva 2d canvas library. Build interactive graphics, design editors, and whiteboards with JSX.",
+"license": "MIT",
+"topics": [
+"konva",
+"draw-graphics",
+"react",
+"canvas",
+"konva-framework",
+"visualization",
+"canvas-editor",
+"design-editor"
+]
+},
+"https://github.com/tbolis/react-sketch": {
+"name": "react-sketch",
+"src": "awesome-react-components",
+"section": "Canvas",
+"repo": "tbolis/react-sketch",
+"stars": 709,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "Sketch Tool for React-based applications, backed up by FabricJS",
+"license": "MIT",
+"topics": [
+"fabricjs",
+"react",
+"sketch",
+"drawing",
+"draw",
+"paint"
+]
+},
+"https://github.com/vinothpandian/react-sketch-canvas": {
+"name": "react-sketch-canvas",
+"src": "awesome-react-components",
+"section": "Canvas",
+"repo": "vinothpandian/react-sketch-canvas",
+"stars": 568,
+"pushed": "2026-11-03",
+"archived": false,
+"desc": "Freehand vector drawing component for React using SVG as canvas \ud83d\udd8c\ufe0f",
+"license": "MIT",
+"topics": [
+"canvas",
+"react",
+"sketch",
+"component",
+"freehand-drawing",
+"sketching",
+"react-library"
+]
+},
+"https://github.com/uiwjs/react-heat-map": {
+"name": "react-heat-map",
+"src": "awesome-react-components",
+"section": "Canvas",
+"repo": "uiwjs/react-heat-map",
+"stars": 287,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A lightweight calendar heatmap react component built on SVG, customizable version of GitHub's contribution graph.",
+"license": "MIT",
+"topics": [
+"reactjs",
+"heatmap",
+"react-heat-map",
+"uiwjs",
+"heat-map",
+"svg",
+"calendar",
+"react"
+]
+},
+"https://github.com/anatoliygatt/heart-switch": {
+"name": "@anatoliygatt/heart-switch",
+"src": "awesome-react-components",
+"section": "Toggle",
+"repo": "anatoliygatt/heart-switch",
+"stars": 449,
+"pushed": "2023-06-05",
+"archived": false,
+"desc": "\u2764\ufe0f A heart-shaped toggle switch component for React.",
+"license": "MIT",
+"topics": [
+"react",
+"component",
+"react-component",
+"toggle",
+"switch",
+"toggle-switch",
+"accessible",
+"javascript"
+]
+},
+"https://github.com/clari/react-ios-switch": {
+"name": "react-ios-switch",
+"src": "awesome-react-components",
+"section": "Toggle",
+"repo": "clari/react-ios-switch",
+"stars": 129,
+"pushed": "2023-01-24",
+"archived": true,
+"desc": "React switch component https://clari.github.io/react-ios-switch",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/instructure-react/react-toggle": {
+"name": "react-toggle",
+"src": "awesome-react-components",
+"section": "Toggle",
+"repo": "aaronshaf/react-toggle",
+"stars": 949,
+"pushed": "2023-07-03",
+"archived": false,
+"desc": "Elegant, accessible toggle component for React. Also a glorified checkbox.",
+"license": "MIT",
+"topics": [
+"react",
+"toggle"
+]
+},
+"https://github.com/yairEO/ui-switch": {
+"name": "ui-switch",
+"src": "awesome-react-components",
+"section": "Toggle",
+"repo": "yairEO/ui-switch",
+"stars": 5,
+"pushed": "2020-10-29",
+"archived": false,
+"desc": "React Switch component based on native checkbox input, using CSS variables (custom properties) as much as possible. Easily customisable and super lightweight.",
+"license": "MIT",
+"topics": [
+"ui-switch",
+"react",
+"component",
+"ui",
+"web",
+"checkbox"
+]
+},
+"https://github.com/JedWatson/react-input-autosize": {
+"name": "react-input-autosize",
+"src": "awesome-react-components",
+"section": "Autosize Input / Textarea",
+"repo": "JedWatson/react-input-autosize",
+"stars": 773,
+"pushed": "2023-03-03",
+"archived": false,
+"desc": "Auto-resizing input field for React",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/kierien/react-autowidth-input": {
+"name": "react-autowidth-input",
+"src": "awesome-react-components",
+"section": "Autosize Input / Textarea",
+"repo": "kierianlee/react-autowidth-input",
+"stars": 14,
+"pushed": "2023-12-28",
+"archived": false,
+"desc": "Highly configurable & extensible automatically sized input field built with hooks.",
+"license": null,
+"topics": []
+},
+"https://github.com/andreypopp/react-textarea-autosize": {
+"name": "react-textarea-autosize",
+"src": "awesome-react-components",
+"section": "Autosize Input / Textarea",
+"repo": "Andarist/react-textarea-autosize",
+"stars": 2411,
+"pushed": "2025-03-30",
+"archived": false,
+"desc": "<textarea /> component for React which grows with content",
+"license": "MIT",
+"topics": [
+"react",
+"react-component",
+"javascript"
+]
+},
+"https://github.com/smastrom/react-rating": {
+"name": "react-rating",
+"src": "awesome-react-components",
+"section": "Star Rating",
+"repo": "smastrom/react-rating",
+"stars": 381,
+"pushed": "2026-06-06",
+"archived": false,
+"desc": "Zero-dependency, highly customizable rating component for React",
+"license": "MIT",
+"topics": [
+"rating",
+"rating-stars",
+"react",
+"react-component",
+"stars",
+"react-rating",
+"reviews",
+"rating-star"
+]
+},
+"https://github.com/fedoryakubovich/react-awesome-stars-rating": {
+"name": "react-awesome-stars-rating",
+"src": "awesome-react-components",
+"section": "Star Rating",
+"repo": "fedoryakubovich/react-awesome-stars-rating",
+"stars": 41,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "Accessible React star rating component with half stars, keyboard and touch controls, RTL support, customizable styling, and form integration. Supports React 18 ",
+"license": "MIT",
+"topics": [
+"react",
+"a11y",
+"accessibility",
+"customizable",
+"keyboard-navigation",
+"rating",
+"rating-component",
+"react-component"
+]
+},
+"https://github.com/ikr/react-star-rating-input": {
+"name": "react-star-rating-input",
+"src": "awesome-react-components",
+"section": "Star Rating",
+"repo": "ikr/react-star-rating-input",
+"stars": 55,
+"pushed": "2018-08-02",
+"archived": false,
+"desc": "React.js components for entering 0\u2014N stars (N is 5 by default), or displaying 0\u2014N stars",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/atlassian/react-beautiful-dnd": {
+"name": "react-beautiful-dnd",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "atlassian/react-beautiful-dnd",
+"stars": 33880,
+"pushed": "2025-08-18",
+"archived": true,
+"desc": "Beautiful and accessible drag and drop for lists with React",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"drag-and-drop",
+"drag",
+"dnd",
+"sortable",
+"reordering"
+]
+},
+"https://github.com/gaearon/react-dnd": {
+"name": "react-dnd",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "react-dnd/react-dnd",
+"stars": 21624,
+"pushed": "2025-07-06",
+"archived": false,
+"desc": "Drag and Drop for React",
+"license": "MIT",
+"topics": [
+"react",
+"drag-and-drop",
+"not-the-game"
+]
+},
+"https://github.com/fritx/react-drag-sizing": {
+"name": "react-drag-sizing",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "fritx/react-drag-sizing",
+"stars": 19,
+"pushed": "2022-09-04",
+"archived": false,
+"desc": "\"Drag to resize\" (sizing) as React Component.",
+"license": null,
+"topics": [
+"react",
+"hooks",
+"drag-and-drop",
+"dnd",
+"resize",
+"sizing",
+"layout"
+]
+},
+"https://github.com/mzabriskie/react-draggable": {
+"name": "react-draggable",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "react-grid-layout/react-draggable",
+"stars": 9291,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "React draggable component",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/bevacqua/react-dragula": {
+"name": "react-dragula",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "bevacqua/react-dragula",
+"stars": 995,
+"pushed": "2020-09-09",
+"archived": false,
+"desc": ":ok_hand: Drag and drop so simple it hurts",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/okonet/react-dropzone": {
+"name": "react-dropzone",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "react-dropzone/react-dropzone",
+"stars": 11026,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Simple HTML5 drag-drop zone with React.js.",
+"license": "MIT",
+"topics": [
+"react",
+"drag-and-drop",
+"file",
+"file-upload"
+]
+},
+"https://github.com/tajo/react-movable": {
+"name": "react-movable",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "tajo/react-movable",
+"stars": 1674,
+"pushed": "2025-07-14",
+"archived": false,
+"desc": "\ud83d\udd00 Drag and drop for your React lists and tables. Accessible. Tiny.",
+"license": "MIT",
+"topics": [
+"react",
+"drag-and-drop",
+"movable",
+"dnd",
+"sortable",
+"order",
+"component"
+]
+},
+"https://github.com/bokuweb/react-sortable-pane": {
+"name": "react-sortable-pane",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "bokuweb/react-sortable-pane",
+"stars": 650,
+"pushed": "2026-05-06",
+"archived": false,
+"desc": ":sparkles: A sortable and resizable pane component for React.",
+"license": "MIT",
+"topics": [
+"react",
+"sortable",
+"pane"
+]
+},
+"https://github.com/PuruVJ/neodrag": {
+"name": "neodrag",
+"src": "awesome-react-components",
+"section": "Drag and Drop",
+"repo": "PuruVJ/neodrag",
+"stars": 2453,
+"pushed": "2026-08-10",
+"archived": false,
+"desc": "One Draggable to rule them all \ud83d\udc8d",
+"license": "MIT",
+"topics": [
+"svelte",
+"draggable",
+"javascript",
+"typescript"
+]
+},
+"https://github.com/liferay/alloy-editor": {
+"name": "alloyeditor",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "liferay/alloy-editor",
+"stars": 1407,
+"pushed": "2023-10-24",
+"archived": false,
+"desc": "WYSIWYG editor based on CKEditor with completely rewritten UI",
+"license": "LGPL-3.0",
+"topics": [
+"wedeploy"
+]
+},
+"https://github.com/ckeditor/ckeditor4-react": {
+"name": "ckeditor4-react",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "ckeditor/ckeditor4-react",
+"stars": 104,
+"pushed": "2026-07-09",
+"archived": false,
+"desc": "Official CKEditor 4 React component.",
+"license": "NOASSERTION",
+"topics": []
+},
+"https://github.com/ckeditor/ckeditor5-react": {
+"name": "ckeditor5-react",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "ckeditor/ckeditor5-react",
+"stars": 468,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "Official CKEditor 5 React component.",
+"license": "NOASSERTION",
+"topics": []
+},
+"https://github.com/facebook/draft-js": {
+"name": "draft-js",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "facebookarchive/draft-js",
+"stars": 22547,
+"pushed": "2023-02-06",
+"archived": true,
+"desc": "A React framework for building text editors.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/edtr-io/edtr-io": {
+"name": "edtr-io",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "edtr-io/edtr-io",
+"stars": 705,
+"pushed": "2023-12-09",
+"archived": true,
+"desc": "Edtr.io is an open source WYSIWYG in-line web editor written in React. Its plugin architecture makes Edtr.io lean and extensive at the same time.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/globocom/megadraft": {
+"name": "megadraft",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "globocom/megadraft",
+"stars": 1223,
+"pushed": "2025-11-13",
+"archived": false,
+"desc": "Megadraft is a Rich Text editor built on top of Facebook's Draft.JS featuring a nice default base of components and extensibility",
+"license": "MIT",
+"topics": [
+"react",
+"megadraft",
+"rich-text-editor",
+"contenteditable",
+"draft-js",
+"reactjs",
+"editor",
+"javascript"
+]
+},
+"https://github.com/securingsincity/react-ace": {
+"name": "react-ace",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "securingsincity/react-ace",
+"stars": 4205,
+"pushed": "2026-10-27",
+"archived": false,
+"desc": "React Ace Component",
+"license": "MIT",
+"topics": [
+"ace",
+"javascript",
+"react",
+"reactjs",
+"code-editor",
+"hacktoberfest"
+]
+},
+"https://github.com/uiwjs/react-codemirror": {
+"name": "react-codemirror",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "uiwjs/react-codemirror",
+"stars": 2261,
+"pushed": "2026-09-24",
+"archived": false,
+"desc": "CodeMirror 6 component for React. @codemirror https://uiwjs.github.io/react-codemirror/",
+"license": "MIT",
+"topics": [
+"react",
+"codemirror",
+"react-codemirror",
+"editor",
+"ide",
+"codemirror6",
+"hook",
+"react-codemirror2"
+]
+},
+"https://github.com/lovasoa/react-contenteditable": {
+"name": "react-contenteditable",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "lovasoa/react-contenteditable",
+"stars": 1672,
+"pushed": "2023-03-15",
+"archived": false,
+"desc": "React component for a div with editable contents",
+"license": "Apache-2.0",
+"topics": [
+"react",
+"html",
+"react-component",
+"contenteditable",
+"wysiwyg",
+"editing",
+"text"
+]
+},
+"https://github.com/jpuri/react-draft-wysiwyg": {
+"name": "react-draft-wysiwyg",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "jpuri/react-draft-wysiwyg",
+"stars": 6449,
+"pushed": "2024-12-01",
+"archived": false,
+"desc": "A Wysiwyg editor build on top of ReactJS and DraftJS. https://jpuri.github.io/react-draft-wysiwyg",
+"license": "MIT",
+"topics": [
+"wysiwyg-editor",
+"draft-js",
+"reactjs",
+"javascript"
+]
+},
+"https://github.com/fritx/react-editor": {
+"name": "react-editor",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "fritx/react-editor",
+"stars": 55,
+"pushed": "2022-08-15",
+"archived": false,
+"desc": "Pure Rich-text Editor with TS & React-hooks",
+"license": null,
+"topics": [
+"react",
+"hooks",
+"editor",
+"content-editable",
+"rich-text"
+]
+},
+"https://github.com/wangzuo/react-medium-editor": {
+"name": "react-medium-editor",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "wangzuo/react-medium-editor",
+"stars": 502,
+"pushed": "2023-05-29",
+"archived": false,
+"desc": "React wrapper for medium-editor",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/jaywcjlove/react-monacoeditor": {
+"name": "react-monacoeditor",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "uiwjs/react-monacoeditor",
+"stars": 319,
+"pushed": "2026-04-21",
+"archived": false,
+"desc": "Monaco Editor component for React.",
+"license": "MIT",
+"topics": [
+"monaco-editor",
+"editor",
+"react",
+"vscode",
+"react-monacoeditor",
+"ide"
+]
+},
+"https://github.com/satya164/react-simple-code-editor": {
+"name": "react-simple-code-editor",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "react-simple-code-editor/react-simple-code-editor",
+"stars": 1731,
+"pushed": "2024-07-04",
+"archived": false,
+"desc": "Simple no-frills code editor with syntax highlighting",
+"license": "MIT",
+"topics": [
+"react",
+"editor",
+"hacktoberfest"
+]
+},
+"https://github.com/zenoamaro/react-quill": {
+"name": "react-quill",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "zenoamaro/react-quill",
+"stars": 6996,
+"pushed": "2025-02-22",
+"archived": false,
+"desc": "A Quill component for React.",
+"license": "MIT",
+"topics": [
+"react",
+"quill",
+"editor",
+"wysiwyg-editor",
+"rich-text-editor"
+]
+},
+"https://github.com/RD17/react-trumbowyg": {
+"name": "react-trumbowyg",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "RD17/react-trumbowyg",
+"stars": 147,
+"pushed": "2021-11-09",
+"archived": false,
+"desc": "React wrapper for lightweight WYSIWYG editor Trumbowyg",
+"license": "MIT",
+"topics": [
+"react",
+"trumbowyg",
+"react-components",
+"trumbowyg-wysiwyg",
+"editorjs"
+]
+},
+"https://github.com/remirror/remirror": {
+"name": "remirror",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "remirror/remirror",
+"stars": 3029,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "ProseMirror toolkit for React \ud83c\udf89",
+"license": "MIT",
+"topics": [
+"react",
+"editor",
+"text-editor",
+"typescript",
+"wysiwyg",
+"mobile",
+"browser",
+"prosemirror"
+]
+},
+"https://github.com/ianstormtaylor/slate": {
+"name": "slate",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "ianstormtaylor/slate",
+"stars": 31750,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "A completely customizable framework for building rich text editors. (Currently in beta.)",
+"license": "MIT",
+"topics": [
+"editor",
+"browser",
+"react",
+"rich-text",
+"framework",
+"slate",
+"javascript",
+"text-editor"
+]
+},
+"https://github.com/appleple/smartblock": {
+"name": "smartblock",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "appleple/smartblock",
+"stars": 318,
+"pushed": "2026-11-05",
+"archived": false,
+"desc": "intuitive block based wysiwyg editor built with React and ProseMirror",
+"license": "MIT",
+"topics": [
+"react",
+"smartphone",
+"typescript",
+"ui",
+"editor",
+"prosemirror",
+"ui-components",
+"javascript"
+]
+},
+"https://github.com/ueberdosis/tiptap": {
+"name": "tiptap",
+"src": "awesome-react-components",
+"section": "Rich Text Editor",
+"repo": "ueberdosis/tiptap",
+"stars": 39085,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "The headless rich text editor framework for web artisans.",
+"license": "MIT",
+"topics": [
+"js",
+"vue",
+"wysiwyg",
+"wysiwyg-editor",
+"rich-text",
+"editor",
+"javascript",
+"react"
+]
+},
+"https://github.com/mosch/react-avatar-editor": {
+"name": "react-avatar-editor",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "mosch/react-avatar-editor",
+"stars": 2504,
+"pushed": "2026-10-01",
+"archived": false,
+"desc": "Small avatar & profile picture component. Resize and crop uploaded images using a intuitive user interface.",
+"license": "MIT",
+"topics": [
+"react",
+"avatar",
+"crop",
+"javascript",
+"image",
+"profile-picture-component"
+]
+},
+"https://github.com/JosephSmith127/react-avatar-generator": {
+"name": "react-avatar-generator",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "jsmmth/react-avatar-generator",
+"stars": 75,
+"pushed": "2022-12-03",
+"archived": false,
+"desc": "Generate fun kaleidoscope for user avatars.",
+"license": null,
+"topics": []
+},
+"https://github.com/ricardo-ch/react-easy-crop": {
+"name": "react-easy-crop",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "ValentinH/react-easy-crop",
+"stars": 2788,
+"pushed": "2026-11-09",
+"archived": false,
+"desc": "A React component to crop images/videos with easy interactions",
+"license": "MIT",
+"topics": [
+"react",
+"crop",
+"crop-image",
+"image-manipulation",
+"cropping"
+]
+},
+"https://github.com/DominicTobias/react-image-crop": {
+"name": "react-image-crop",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "dominictobias/react-image-crop",
+"stars": 4109,
+"pushed": "2026-06-21",
+"archived": false,
+"desc": "A responsive image cropping tool for React",
+"license": "ISC",
+"topics": [
+"react",
+"crop-image",
+"responsive",
+"javascript"
+]
+},
+"https://github.com/jerryshew/react-image-cropper": {
+"name": "react-image-cropper",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "flyfloor/react-image-cropper",
+"stars": 172,
+"pushed": "2023-06-26",
+"archived": false,
+"desc": "react image crop",
+"license": "MIT",
+"topics": [
+"react",
+"image-cropper"
+]
+},
+"https://github.com/advanced-cropper/react-advanced-cropper": {
+"name": "react-advanced-cropper",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "advanced-cropper/react-advanced-cropper",
+"stars": 885,
+"pushed": "2026-07-25",
+"archived": false,
+"desc": "The react cropper library that embraces power of the advanced cropper core to give the possibility to create croppers that exactly suited for your website desig",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"cropper",
+"react-cropper",
+"library",
+"image-cropper",
+"advanced",
+"flexible",
+"react-component"
+]
+},
+"https://github.com/advanced-cropper/react-mobile-cropper": {
+"name": "react-mobile-cropper",
+"src": "awesome-react-components",
+"section": "Image Editing",
+"repo": "advanced-cropper/react-mobile-cropper",
+"stars": 47,
+"pushed": "2026-06-17",
+"archived": false,
+"desc": "The react mobile cropper highly inspirited by popular Android mobile croppers.",
+"license": null,
+"topics": [
+"react",
+"react-component",
+"react-cropper",
+"cropper",
+"image-cropper",
+"image-cropping",
+"mobile",
+"component"
+]
+},
+"https://github.com/xudafeng/autoresponsive-react": {
+"name": "autoresponsive-react",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "xudafeng/autoresponsive-react",
+"stars": 1587,
+"pushed": "2025-12-06",
+"archived": false,
+"desc": "\u269b\ufe0f Auto Responsive Layout Library For React",
+"license": "MIT",
+"topics": [
+"react",
+"layout",
+"autoresponsive",
+"component"
+]
+},
+"https://github.com/JSBros/hedron": {
+"name": "hedron",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "ariamckinley/hedron",
+"stars": 858,
+"pushed": "2024-12-15",
+"archived": true,
+"desc": "A no-frills flexbox grid system for React, powered by styled-components.",
+"license": "MIT",
+"topics": [
+"react",
+"flexbox",
+"styled-components",
+"reactjs"
+]
+},
+"https://github.com/martinnov92/React-Splitters": {
+"name": "m-react-splitters",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "martinnov92/React-Splitters",
+"stars": 160,
+"pushed": "2022-12-10",
+"archived": true,
+"desc": "React splitter component, written in TypeScript. ",
+"license": "MIT",
+"topics": [
+"react",
+"javascript",
+"typescript",
+"reactjs",
+"component",
+"react-components",
+"react-component",
+"ts"
+]
+},
+"https://github.com/Paol-imi/muuri-react": {
+"name": "muuri-react",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "paol-imi/muuri-react",
+"stars": 369,
+"pushed": "2023-06-22",
+"archived": false,
+"desc": "The layout engine for React",
+"license": "MIT",
+"topics": [
+"muuri",
+"react",
+"grid",
+"layout",
+"sorting",
+"drag-and-drop",
+"filter",
+"bin-packing"
+]
+},
+"https://github.com/STRML/react-grid-layout": {
+"name": "react-grid-layout",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "react-grid-layout/react-grid-layout",
+"stars": 22496,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A draggable and resizable grid layout with responsive breakpoints, for React.",
+"license": "MIT",
+"topics": [
+"javascript",
+"react",
+"grid",
+"drag-and-drop",
+"resize",
+"es2015"
+]
+},
+"https://github.com/Jeshwin/react-layman": {
+"name": "react-layman",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "Jeshwin/react-layman",
+"stars": 14,
+"pushed": "2026-07-01",
+"archived": false,
+"desc": "A tiling window manager for websites in React and Typescript",
+"license": "MIT",
+"topics": [
+"react",
+"tiling-window",
+"typescript"
+]
+},
+"https://github.com/eiriklv/react-masonry-component": {
+"name": "react-masonry-component",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "eiriklv/react-masonry-component",
+"stars": 1467,
+"pushed": "2025-03-04",
+"archived": false,
+"desc": "A React.js component for using @desandro's Masonry",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/leefsmp/Re-Flex": {
+"name": "react-reflex",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "leefsmp/Re-Flex",
+"stars": 663,
+"pushed": "2026-07-30",
+"archived": false,
+"desc": "Resizable Flex layout container components for advanced React web applications",
+"license": "MIT",
+"topics": [
+"react",
+"react-components",
+"flex",
+"layout",
+"resizable",
+"responsive"
+]
+},
+"https://github.com/aeagle/react-spaces": {
+"name": "react-spaces",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "aeagle/react-spaces",
+"stars": 1315,
+"pushed": "2026-10-25",
+"archived": false,
+"desc": "React components that allow you to divide a page or container into nestable anchored, scrollable and resizable spaces.",
+"license": "MIT",
+"topics": [
+"react",
+"components",
+"web",
+"web-ui",
+"web-ui-framework",
+"component-library",
+"javascript-library",
+"reactjs"
+]
+},
+"https://github.com/dantrain/react-stonecutter": {
+"name": "react-stonecutter",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "dantrain/react-stonecutter",
+"stars": 1229,
+"pushed": "2019-12-23",
+"archived": false,
+"desc": "Animated grid layout component for React",
+"license": "MIT",
+"topics": [
+"react",
+"react-component",
+"react-motion",
+"grid",
+"grid-component"
+]
+},
+"https://github.com/phphe/react-colrow": {
+"name": "react-colrow",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "phphe/react-colrow",
+"stars": 10,
+"pushed": "2020-04-15",
+"archived": false,
+"desc": "Smarter layout components. Based on css flexbox. Support responsive design, Typescript, server side render. 3 KB gzipped.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/umeshmk/react-schematic": {
+"name": "react-schematic",
+"src": "awesome-react-components",
+"section": "UI Layout",
+"repo": "umeshmk/react-schematic",
+"stars": 12,
+"pushed": "2021-11-18",
+"archived": false,
+"desc": "Build responsive react layouts using styled schematics without an overhead of any theme configuration",
+"license": "MIT",
+"topics": [
+"react",
+"grid",
+"flexbox",
+"styled-components",
+"css",
+"typescript"
+]
+},
+"https://github.com/tkh44/data-driven-motion": {
+"name": "data-driven-motion",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "tkh44/data-driven-motion",
+"stars": 551,
+"pushed": "2017-06-08",
+"archived": false,
+"desc": "Easily animate your data in react",
+"license": "MIT",
+"topics": [
+"react",
+"reactjs",
+"animation",
+"react-motion",
+"motion",
+"data-driven-motion",
+"spring"
+]
+},
+"https://github.com/inokawa/react-animatable": {
+"name": "react-animatable",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "inokawa/react-animatable",
+"stars": 120,
+"pushed": "2026-06-10",
+"archived": false,
+"desc": "Tiny(~1kB) animation hooks for React, built on Web Animations API.",
+"license": "MIT",
+"topics": [
+"react",
+"css",
+"animation",
+"svg",
+"transition",
+"tween",
+"web-animations",
+"d3"
+]
+},
+"https://github.com/stelatech/react-anime": {
+"name": "react-anime",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "plus1tv/react-anime",
+"stars": 1567,
+"pushed": "2023-02-27",
+"archived": false,
+"desc": "\u2728 (\uff89\u00b4\u30ee\u00b4)\uff89*:\uff65\uff9f\u2727 A super easy animation library for React!",
+"license": "MIT",
+"topics": [
+"react",
+"animation",
+"anime",
+"typescript",
+"hooks",
+"npm",
+"dynamic"
+]
+},
+"https://github.com/joshwcomeau/react-flip-move": {
+"name": "react-flip-move",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "joshwcomeau/react-flip-move",
+"stars": 4134,
+"pushed": "2022-12-06",
+"archived": false,
+"desc": "Effortless animation between DOM changes (eg. list reordering) using the FLIP technique.",
+"license": "MIT",
+"topics": [
+"reactjs",
+"react-flip-move",
+"animation",
+"react",
+"hardware-acceleration",
+"flip",
+"transition-animation"
+]
+},
+"https://github.com/azazdeaz/react-gsap-enhancer": {
+"name": "react-gsap-enhancer",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "azazdeaz/react-gsap-enhancer",
+"stars": 732,
+"pushed": "2023-07-05",
+"archived": false,
+"desc": "Use the full power of React and GSAP together",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/chenglou/react-motion": {
+"name": "react-motion",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "chenglou/react-motion",
+"stars": 21911,
+"pushed": "2024-01-05",
+"archived": false,
+"desc": "A spring that solves your animation problems.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/moarwick/react-mt-svg-lines": {
+"name": "react-mt-svg-lines",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "moarwick/react-mt-svg-lines",
+"stars": 360,
+"pushed": "2019-01-27",
+"archived": false,
+"desc": "A React.js wrapper component to animate the line stroke in SVGs",
+"license": "MIT",
+"topics": [
+"svg",
+"css-animations",
+"reactjs",
+"tween",
+"higher-order-component",
+"stroke",
+"path"
+]
+},
+"https://github.com/maisano/react-router-transition": {
+"name": "react-router-transition",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "maisano/react-router-transition",
+"stars": 2572,
+"pushed": "2021-04-30",
+"archived": false,
+"desc": "painless transitions built for react-router, powered by react-motion",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/react-spring/react-spring": {
+"name": "react-spring",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "pmndrs/react-spring",
+"stars": 29318,
+"pushed": "2026-11-01",
+"archived": false,
+"desc": "\u270c\ufe0f A spring physics based React animation library",
+"license": "MIT",
+"topics": [
+"animation-library",
+"spring-physics",
+"react",
+"springs",
+"react-spring"
+]
+},
+"https://github.com/gerardmarquinarubio/ReactTypewriter": {
+"name": "react-ts-typewriter",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "gerardmarquinarubio/ReactTypewriter",
+"stars": 40,
+"pushed": "2023-05-18",
+"archived": false,
+"desc": "Easy to use typewriter component written with Typescript and React 18+ in mind",
+"license": "BSD-3-Clause",
+"topics": [
+"components",
+"react",
+"react-components",
+"reactjs"
+]
+},
+"https://github.com/framer/motion": {
+"name": "framer-motion",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "motiondivision/motion",
+"stars": 35363,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A modern animation library for React and JavaScript",
+"license": "MIT",
+"topics": [
+"animation",
+"animation-js",
+"motion",
+"react",
+"reactanimations",
+"spring"
+]
+},
+"https://github.com/gilbox/react-spark-scroll": {
+"name": "react-spark-scroll",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "gilbox/react-spark-scroll",
+"stars": 354,
+"pushed": "2017-07-04",
+"archived": false,
+"desc": "Scroll-based actions and animations for react",
+"license": null,
+"topics": []
+},
+"https://github.com/gilbox/react-track": {
+"name": "react-track",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "gilbox/react-track",
+"stars": 342,
+"pushed": "2017-06-02",
+"archived": false,
+"desc": "Track the position of DOM elements. Create cool animations.",
+"license": null,
+"topics": [
+"react",
+"animation",
+"dom-element"
+]
+},
+"https://github.com/Lapple/react-transitive-number": {
+"name": "react-transitive-number",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "Lapple/react-transitive-number",
+"stars": 213,
+"pushed": "2018-02-26",
+"archived": false,
+"desc": "React component to apply transition effect to numeric strings, a la old Groupon timers",
+"license": null,
+"topics": []
+},
+"https://github.com/bringking/react-web-animation": {
+"name": "react-web-animation",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "bringking/react-web-animation",
+"stars": 297,
+"pushed": "2018-04-06",
+"archived": false,
+"desc": "React components for the Web Animations API - http://react-web-animation.surge.sh",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/DualWield/auto-size-transition": {
+"name": "auto-size-transition",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "DualWield/auto-size-transition",
+"stars": 10,
+"pushed": "2021-02-25",
+"archived": false,
+"desc": "A component that scale dynamically according to the internal size",
+"license": null,
+"topics": []
+},
+"https://github.com/lindelof/particles-bg": {
+"name": "react-particles-bg",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "lindelof/particles-bg",
+"stars": 673,
+"pushed": "2021-04-02",
+"archived": false,
+"desc": "React particles animation background component",
+"license": null,
+"topics": [
+"react-particle",
+"react-particles",
+"react-background",
+"react-component",
+"react-background-component",
+"react-bg",
+"react-theme",
+"react-resume"
+]
+},
+"https://github.com/luukdv/gooey-react": {
+"name": "gooey-react",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "luukdv/gooey-react",
+"stars": 675,
+"pushed": "2023-02-03",
+"archived": false,
+"desc": "The gooey effect for React, used for shape blobbing / metaballs (0.5 KB) \ud83e\uddfd",
+"license": "MIT",
+"topics": [
+"gooey",
+"goo",
+"react",
+"reactjs",
+"svg-filters",
+"gooeyeffect",
+"svg-filter",
+"svg"
+]
+},
+"https://github.com/react-voodoo/react-voodoo": {
+"name": "react-voodoo",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "react-voodoo/react-voodoo",
+"stars": 28,
+"pushed": "2026-06-22",
+"archived": false,
+"desc": "Faster, simplier, swipeable, progressive & additive tween / animation engine for React",
+"license": "Apache-2.0",
+"topics": [
+"tween",
+"swipeable",
+"additive-tween",
+"additive-animation",
+"scrollable-animation",
+"reactjs",
+"tween-composition-engine",
+"composable-animations"
+]
+},
+"https://github.com/react-voodoo/react-voodoo-samples": {
+"name": "demo/samples",
+"src": "awesome-react-components",
+"section": "UI Animation",
+"repo": "react-voodoo/react-voodoo-samples",
+"stars": 5,
+"pushed": "2026-06-05",
+"archived": false,
+"desc": "Samples for react-voodoo ",
+"license": null,
+"topics": [
+"swipeable-cards",
+"inertia"
+]
+},
+"https://github.com/geosigno/simpleParallax.js": {
+"name": "simple-parallax-js",
+"src": "awesome-react-components",
+"section": "Parallax",
+"repo": "geosigno/simpleParallax.js",
+"stars": 2159,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "Easy Parallax Effect for React & JavaScript",
+"license": "MIT",
+"topics": [
+"parallax",
+"simple",
+"scroll",
+"image",
+"javacript",
+"animation",
+"react",
+"ui"
+]
+},
+"https://github.com/mkosir/react-parallax-tilt": {
+"name": "react-parallax-tilt",
+"src": "awesome-react-components",
+"section": "Parallax",
+"repo": "mkosir/react-parallax-tilt",
+"stars": 1085,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "\ud83d\udc40  Easily apply tilt hover effect to React components - lightweight/zero dependencies 2.9kB",
+"license": "MIT",
+"topics": [
+"parallax",
+"typescript",
+"react-library",
+"react",
+"tilt",
+"parallax-effect",
+"react-tilt",
+"gyroscope"
+]
+},
+"https://github.com/ant-design/ant-design": {
+"name": "ant-design",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "ant-design/ant-design",
+"stars": 100294,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "An enterprise-class UI design language and React UI library",
+"license": "MIT",
+"topics": [
+"react",
+"ui-kit",
+"typescript",
+"antd",
+"ant-design",
+"design-systems",
+"ui-library"
+]
+},
+"https://github.com/carbon-design-system/carbon": {
+"name": "carbon",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "carbon-design-system/carbon",
+"stars": 9630,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A design system built by IBM",
+"license": "Apache-2.0",
+"topics": [
+"scss",
+"design-system",
+"react",
+"javascript",
+"hacktoberfest"
+]
+},
+"https://github.com/Devwares-Team/cdbreact": {
+"name": "cdbreact",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "Devwares-Team/cdbreact",
+"stars": 55,
+"pushed": "2026-03-31",
+"archived": false,
+"desc": "Contrast Design Bootstrap : Elegant UI Kit and reusable components for building mobile-first, responsive websites and web apps",
+"license": "NOASSERTION",
+"topics": [
+"contrast",
+"react",
+"reactjs",
+"bootstrap",
+"cdbreact",
+"react-bootstrap",
+"react-bootstrap-components",
+"react-bootstrap-form"
+]
+},
+"https://github.com/chakra-ui/chakra-ui": {
+"name": "chakra-ui",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "chakra-ui/chakra-ui",
+"stars": 40742,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Chakra UI is a component system for building SaaS products with speed \u26a1\ufe0f",
+"license": "MIT",
+"topics": [
+"chakra-ui",
+"react",
+"uikit",
+"react-components",
+"accessible",
+"a11y",
+"wai-aria",
+"reactjs"
+]
+},
+"https://github.com/alibaba/ChatUI": {
+"name": "ChatUI",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "alibaba/ChatUI",
+"stars": 4463,
+"pushed": "2026-10-12",
+"archived": false,
+"desc": "The UI design language and React library for Conversational UI",
+"license": "MIT",
+"topics": [
+"ui",
+"chat",
+"chatbot",
+"react"
+]
+},
+"https://github.com/coreui/coreui-react": {
+"name": "CoreUI for React",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "coreui/coreui-react",
+"stars": 717,
+"pushed": "2026-11-14",
+"archived": false,
+"desc": "CoreUI React.js UI Components. CoreUI for React.js replaces and extends the Bootstrap javascript. Components have been built from scratch as true React.js hook ",
+"license": "MIT",
+"topics": [
+"react",
+"react-components",
+"coreui",
+"bootstrap",
+"react-bootstrap",
+"reactstrap",
+"coreui-react",
+"reactjs"
+]
+},
+"https://github.com/segmentio/evergreen": {
+"name": "evergreen",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "segmentio/evergreen",
+"stars": 12427,
+"pushed": "2026-06-25",
+"archived": false,
+"desc": "\ud83c\udf32 Evergreen React UI Framework by Segment",
+"license": "MIT",
+"topics": [
+"design-systems",
+"react",
+"segment",
+"ui",
+"ui-components",
+"component-library",
+"evergreen"
+]
+},
+"https://github.com/microsoft/fluentui": {
+"name": "fluentui",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "microsoft/fluentui",
+"stars": 20417,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Fluent UI web represents a collection of utilities, React components, and web components for building web applications.",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"react-components",
+"office-ui-fabric",
+"microsoft",
+"components",
+"fluent"
+]
+},
+"https://github.com/pinterest/gestalt": {
+"name": "gestalt",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "pinterest/gestalt",
+"stars": 4386,
+"pushed": "2026-10-05",
+"archived": false,
+"desc": "A set of React UI components that supports Pinterest\u2019s design language",
+"license": "Apache-2.0",
+"topics": [
+"javascript",
+"react",
+"design-system"
+]
+},
+"https://github.com/grommet/grommet": {
+"name": "grommet",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "grommet/grommet",
+"stars": 8352,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "a react-based framework that provides accessibility, modularity, responsiveness, and theming in a tidy package",
+"license": "Apache-2.0",
+"topics": [
+"grommet",
+"javascript",
+"ux-framework",
+"babel",
+"react",
+"a11y",
+"design-system"
+]
+},
+"https://github.com/kokonut-labs/kokonutui": {
+"name": "kokonut-ui",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "kokonut-labs/kokonutui",
+"stars": 2385,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "Open-source collection of stunning Components built with Tailwind CSS, shadcn/ui and Motion to use on your websites",
+"license": "MIT",
+"topics": [
+"components",
+"library",
+"nextjs",
+"tailwindcss",
+"framer-motion",
+"shadcn-ui",
+"react",
+"vercel"
+]
+},
+"https://github.com/mantinedev/mantine": {
+"name": "Mantine",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "mantinedev/mantine",
+"stars": 31956,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "A fully featured React components library",
+"license": "MIT",
+"topics": [
+"react",
+"typescript",
+"uikit",
+"hooks",
+"dark-theme",
+"dark-mode"
+]
+},
+"https://github.com/kiwicom/orbit": {
+"name": "orbit",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "kiwicom/orbit",
+"stars": 1438,
+"pushed": "2026-07-06",
+"archived": false,
+"desc": "React components of open-source Orbit design system by Kiwi.com",
+"license": "MIT",
+"topics": [
+"kiwi",
+"react",
+"component",
+"component-library",
+"styled-components",
+"design-system",
+"orbit",
+"kiwicom"
+]
+},
+"https://github.com/themesberg/flowbite-react": {
+"name": "flowbite-react",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "themesberg/flowbite-react",
+"stars": 2151,
+"pushed": "2026-10-30",
+"archived": false,
+"desc": "Official React components built for Flowbite and Tailwind CSS",
+"license": "MIT",
+"topics": [
+"react",
+"tailwindcss",
+"a11y",
+"component-library",
+"components",
+"components-react",
+"flowbite",
+"reactjs"
+]
+},
+"https://github.com/primefaces/primereact": {
+"name": "primereact",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "primefaces/primereact",
+"stars": 8314,
+"pushed": "2026-11-02",
+"archived": false,
+"desc": "The Most Complete React UI Component Library",
+"license": "MIT",
+"topics": [
+"ui-components",
+"react-components",
+"charts",
+"tree",
+"primereact",
+"react",
+"treetable",
+"grid"
+]
+},
+"https://github.com/react-bootstrap/react-bootstrap": {
+"name": "react-bootstrap",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "react-bootstrap/react-bootstrap",
+"stars": 22616,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Bootstrap components built with React",
+"license": "MIT",
+"topics": [
+"react",
+"bootstrap",
+"hacktoberfest",
+"react-components",
+"typescript",
+"javascript"
+]
+},
+"https://github.com/digiaonline/react-foundation": {
+"name": "react-foundation",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "digiaonline/react-foundation",
+"stars": 594,
+"pushed": "2023-03-03",
+"archived": true,
+"desc": "Foundation as React components.",
+"license": "MIT",
+"topics": [
+"react",
+"react-components",
+"foundation",
+"scss",
+"css",
+"hacktoberfest"
+]
+},
+"https://github.com/ariakit/ariakit": {
+"name": "reakit",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "ariakit/ariakit",
+"stars": 8641,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Toolkit with accessible components, styles, and examples for your next web app",
+"license": null,
+"topics": [
+"react",
+"components",
+"a11y",
+"accessibility",
+"wai-aria",
+"accessible",
+"reactjs",
+"ariakit"
+]
+},
+"https://github.com/searchkit/searchkit": {
+"name": "searchkit",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "searchkit/searchkit",
+"stars": 4861,
+"pushed": "2026-11-15",
+"archived": false,
+"desc": "React + Vue Search UI for Elasticsearch & Opensearch. Compatible with Algolia's Instantsearch and Autocomplete components.",
+"license": "Apache-2.0",
+"topics": [
+"elasticsearch",
+"react",
+"search",
+"ui-components",
+"javascript",
+"ui",
+"nodejs",
+"typescript"
+]
+},
+"https://github.com/Semantic-Org/Semantic-UI-React": {
+"name": "semantic-ui-react",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "Semantic-Org/Semantic-UI-React",
+"stars": 13196,
+"pushed": "2024-11-22",
+"archived": false,
+"desc": "The official Semantic-UI-React integration",
+"license": "MIT",
+"topics": [
+"react",
+"semantic-ui",
+"component-library",
+"components",
+"javascript-libraries",
+"javascript-library",
+"frontend-framework",
+"frontend-components"
+]
+},
+"https://github.com/DouyinFE/semi-design": {
+"name": "semi-design",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "DouyinFE/semi-design",
+"stars": 10496,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\ud83d\ude80A modern, comprehensive, flexible design system and React UI library, AI-friendly built-in.\ud83c\udfa8Provide 3000+ Design Tokens, easy to build your design system. Make",
+"license": "NOASSERTION",
+"topics": [
+"react",
+"ui-libary",
+"design-system",
+"dark-mode",
+"design2code",
+"code2design",
+"designops",
+"theme"
+]
+},
+"https://github.com/shadcn-ui/ui": {
+"name": "shadcn/ui",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "shadcn-ui/ui",
+"stars": 128561,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Composable, accessible components with thoughtful defaults. Build your own component library with code you can customize, extend, and make your own.",
+"license": "MIT",
+"topics": [
+"components",
+"nextjs",
+"radix-ui",
+"react",
+"tailwindcss",
+"ui",
+"shadcn",
+"base-ui"
+]
+},
+"https://github.com/sheinsight/shineout": {
+"name": "shineout",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "sheinsight/shineout",
+"stars": 940,
+"pushed": "2026-10-27",
+"archived": false,
+"desc": "\u9ad8\u6027\u80fd React \u7ec4\u4ef6\u5e93",
+"license": "MIT",
+"topics": [
+"ui-components",
+"high-performance",
+"fast",
+"css",
+"form",
+"react",
+"ui-design"
+]
+},
+"https://github.com/tremorlabs/tremor-raw": {
+"name": "Tremor",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "tremorlabs/tremor-raw",
+"stars": 4,
+"pushed": "2025-01-01",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/untitleduico/react": {
+"name": "untitled-ui-react",
+"src": "awesome-react-components",
+"section": "Responsive",
+"repo": "untitleduico/react",
+"stars": 2016,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Untitled UI React is the world\u2019s largest collection of open-source React components built with Tailwind CSS and React Aria. Just copy, paste, and build.",
+"license": "MIT",
+"topics": [
+"components",
+"design-system",
+"react",
+"react-aria",
+"react-aria-components",
+"tailwindcss",
+"ui-library"
+]
+},
+"https://github.com/jeroencoumans/react-scroll-components": {
+"name": "react-scroll-components",
+"src": "awesome-react-components",
+"section": "Scroll Events",
+"repo": "jeroencoumans/react-scroll-components",
+"stars": 122,
+"pushed": "2016-09-14",
+"archived": false,
+"desc": "A set of components that react to page scrolling",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/milesj/aesthetic": {
+"name": "aesthetic",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "aesthetic-suite/framework",
+"stars": 207,
+"pushed": "2021-07-21",
+"archived": false,
+"desc": "\ud83c\udfa8 Aesthetic is an end-to-end multi-platform styling framework that offers a strict design system, robust atomic CSS-in-JS engine, a structural style sheet speci",
+"license": "MIT",
+"topics": [
+"react",
+"css",
+"css-in-js",
+"design-system",
+"web",
+"android",
+"ios",
+"atomic-css"
+]
+},
+"https://github.com/Khan/aphrodite": {
+"name": "aphrodite",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "Khan/aphrodite",
+"stars": 5339,
+"pushed": "2025-07-24",
+"archived": false,
+"desc": "Framework-agnostic CSS-in-JS with support for server-side rendering, browser prefixing, and minimum CSS generation",
+"license": null,
+"topics": [
+"javascript",
+"css",
+"aphrodite",
+"css-in-js"
+]
+},
+"https://github.com/rofrischmann/inline-style-prefixer": {
+"name": "inline-style-prefixer",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "robinweser/inline-style-prefixer",
+"stars": 393,
+"pushed": "2024-07-04",
+"archived": false,
+"desc": "Autoprefixer for JavaScript style objects",
+"license": "MIT",
+"topics": [
+"cssinjs",
+"autoprefixer",
+"css",
+"legacy-support",
+"vendor-prefix"
+]
+},
+"https://github.com/d6u/react-container-query": {
+"name": "react-container-query",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "react-container-query/react-container-query",
+"stars": 887,
+"pushed": "2023-09-14",
+"archived": false,
+"desc": ":package: Modular responsive component",
+"license": "MIT",
+"topics": [
+"react",
+"responsive",
+"browser",
+"responsive-layout",
+"container-queries",
+"element-queries"
+]
+},
+"https://github.com/contra/react-responsive": {
+"name": "react-responsive",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "yocontra/react-responsive",
+"stars": 7180,
+"pushed": "2025-03-01",
+"archived": false,
+"desc": "CSS media queries in react - for responsive design, and more.",
+"license": "MIT",
+"topics": [
+"react"
+]
+},
+"https://github.com/jmlweb/reactponsive": {
+"name": "reactponsive",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "jmlweb/reactponsive",
+"stars": 13,
+"pushed": "2025-02-13",
+"archived": true,
+"desc": "Responsive components and Hooks \u2692 for your favorite framework \u269b\ufe0f",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/styled-components/styled-components": {
+"name": "styled-components",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "styled-components/styled-components",
+"stars": 41062,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "Fast, expressive styling for React. Server components, client components, streaming SSR, React Native\u2014one API.",
+"license": "MIT",
+"topics": [
+"react",
+"css-in-js",
+"styled-components",
+"css",
+"reactnative",
+"rsc"
+]
+},
+"https://github.com/stitchesjs/stitches": {
+"name": "stitches",
+"src": "awesome-react-components",
+"section": "CSS / Style",
+"repo": "stitchesjs/stitches",
+"stars": 7758,
+"pushed": "2025-02-10",
+"archived": true,
+"desc": "[Not Actively Maintained] CSS-in-JS with near-zero runtime, SSR, multi-variant support, and a best-in-class developer experience.",
+"license": "MIT",
+"topics": [
+"stitches",
+"css",
+"react",
+"css-in-js",
+"css-framework"
+]
+},
+"https://github.com/ganonym741/ergon-shadcn-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ganonym741/ergon-shadcn-ui",
+"stars": 1,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "A React component library built on shadcn/ui",
+"license": "MIT",
+"topics": [
+"ai",
+"bun",
+"chart",
+"component",
+"deno",
+"echarts",
+"npm",
+"reactjs"
+]
+},
+"https://github.com/orwa-mahmoud/adapttable": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "orwa-mahmoud/adapttable",
+"stars": 74,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A headless TypeScript data table for React, Angular and Vue. 25 native UI-kit adapters, optional AI agents, pivot tables, editing, mobile cards and shareable vi",
+"license": "MIT",
+"topics": [
+"ant-design",
+"chakra-ui",
+"data-table",
+"datagrid",
+"mantine",
+"mui",
+"react",
+"tailwind"
+]
+},
+"https://github.com/Yonom/assistant-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "assistant-ui/assistant-ui",
+"stars": 13334,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Typescript/React Library for AI Chat \ud83d\udcac\ud83d\ude80",
+"license": "MIT",
+"topics": [
+"conversational-ai",
+"radix-ui",
+"shadcn",
+"ui-components",
+"copilot",
+"chatbot",
+"vercel-ai-sdk",
+"ai-chatbot"
+]
+},
+"https://github.com/ouestlabs/audio-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ouestlabs/audio-ui",
+"stars": 209,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Audio controls for React: knobs, faders, meters, waveforms, timelines, sequencers and piano rolls, as headless primitives on npm or shadcn/ui components.",
+"license": "MIT",
+"topics": [
+"audio-ui",
+"react",
+"shadcn",
+"tailwindcss",
+"accessibility",
+"audio",
+"daw",
+"fader"
+]
+},
+"https://github.com/vantezzen/auto-form": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "vantezzen/autoform",
+"stars": 3494,
+"pushed": "2026-10-29",
+"archived": false,
+"desc": "\ud83c\udf1f Automatically render forms for your existing data schema",
+"license": "MIT",
+"topics": [
+"form-validation",
+"react",
+"react-component",
+"shadcn-ui"
+]
+},
+"https://github.com/F0Rextasy/bigbullui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "F0Rextasy/bigbullui",
+"stars": 12,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "659 zero-dependency React 19 + Tailwind v4 components, 63 blocks, 1023 icons \u2014 Ticket Stub aesthetic, MIT. Copy-paste or CLI.",
+"license": "MIT",
+"topics": [
+"blocks",
+"cli",
+"components",
+"copy-paste",
+"design-system",
+"icons",
+"react",
+"shadcn-ui"
+]
+},
+"https://github.com/commet-labs/billui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "commet-labs/billui",
+"stars": 39,
+"pushed": "2026-10-11",
+"archived": false,
+"desc": "",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/lirena00/blobz": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "lirena00/blobz",
+"stars": 66,
+"pushed": "2026-11-08",
+"archived": false,
+"desc": "Deterministic SVG avatars from any name or ID. React components, a framework-free generator, and a hosted image API.",
+"license": "MIT",
+"topics": [
+"avatar",
+"avatar-generator",
+"deterministic",
+"nextjs",
+"profile-picture",
+"react",
+"svg",
+"typescript"
+]
+},
+"https://github.com/ephraimduncan/blocks": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ephraimduncan/blocks",
+"stars": 1865,
+"pushed": "2026-10-30",
+"archived": false,
+"desc": "An open-source library of UI blocks. Built with React, Tailwind and shadcn/ui",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/charlietlamb/calendar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "charlietlamb/calendar",
+"stars": 577,
+"pushed": "2025-02-10",
+"archived": false,
+"desc": "React/shadcn full calendar",
+"license": null,
+"topics": []
+},
+"https://github.com/vmnog/calendarcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "vmnog/calendarcn",
+"stars": 157,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "A calendar for React inspired by Notion Calendar, built on shadcn/ui. Day, week and month views with drag, resize, touch and keyboard support.",
+"license": "MIT",
+"topics": [
+"calendar",
+"nextjs",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/gluer-space/calendar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "r2hu1/calendar",
+"stars": 31,
+"pushed": "2026-05-08",
+"archived": false,
+"desc": "A multi-purpose calendar component, built on top of date-fn and shadcn-ui",
+"license": "NOASSERTION",
+"topics": [
+"calendar",
+"calendar-component",
+"calendar-widget",
+"shadcn-calendar-timeline",
+"shadcn-ui"
+]
+},
+"https://github.com/UretzkyZvi/capture-photo": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "UretzkyZvi/capture-photo",
+"stars": 197,
+"pushed": "2024-05-04",
+"archived": false,
+"desc": "Capture-Photo is a versatile, browser-based React component designed to streamline the integration of camera functionalities directly into your web applications",
+"license": null,
+"topics": [
+"browser-based",
+"media-streamer",
+"photo-capture",
+"react-components",
+"typescript",
+"web-camera",
+"profile-picture-uploader"
+]
+},
+"https://github.com/mnove/carouselcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "mnove/carouselcn",
+"stars": 9,
+"pushed": "2026-10-11",
+"archived": false,
+"desc": "Simple and easy carousels for React. Copy-paste ready carousel components for your apps",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/Ademking/cascader-shadcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Ademking/cascader-shadcn",
+"stars": 116,
+"pushed": "2025-12-04",
+"archived": false,
+"desc": "A cascading dropdown menu component for selecting hierarchical data like locations, categories, or organizational structures.",
+"license": "MIT",
+"topics": [
+"cascader",
+"shadcn",
+"shadcn-ui"
+]
+},
+"https://github.com/stormynight9/clerk-shadcn-theme": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "stormynight9/clerk-shadcn-theme",
+"stars": 214,
+"pushed": "2025-06-13",
+"archived": false,
+"desc": "Easily synchronize your Clerk components with your shadcn/ui styles.",
+"license": "MIT",
+"topics": [
+"clerk",
+"css",
+"shadcn"
+]
+},
+"https://github.com/stackzero-labs/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "stackzero-labs/ui",
+"stars": 266,
+"pushed": "2025-09-01",
+"archived": false,
+"desc": "Collection of components to build e-commerce sites and commerce apps. Built for React, Next.js, Tailwind CSS and shadcn/ui.",
+"license": "MIT",
+"topics": [
+"ecommerce",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/harshjdhv/componentry": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "harshjdhv/componentry",
+"stars": 655,
+"pushed": "2026-11-15",
+"archived": false,
+"desc": "Animated, production-ready UI components. Built the way real products need them.",
+"license": "MIT",
+"topics": [
+"components",
+"components-library",
+"ui"
+]
+},
+"https://github.com/Aslam97/react-confirm-dialog": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Aslam97/react-confirm-dialog",
+"stars": 175,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "React Confirm Dialog",
+"license": "MIT",
+"topics": [
+"alert-dialog",
+"radix-ui",
+"shadcn-ui"
+]
+},
+"https://github.com/Jayprecode/country-state-dropdown": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Jayprecode/country-state-dropdown",
+"stars": 260,
+"pushed": "2024-06-05",
+"archived": false,
+"desc": "This Component is built with Nextjs, Tailwindcss, Shadcn-ui & Zustand for state management",
+"license": null,
+"topics": []
+},
+"https://github.com/creatorem/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "creatorem/ui",
+"stars": 43,
+"pushed": "2026-07-23",
+"archived": false,
+"desc": "A bunch of React components (like Tour, Stepper, ...) built on top of radix primitives and motion.",
+"license": "MIT",
+"topics": [
+"components-library",
+"components-react",
+"react",
+"ui"
+]
+},
+"https://github.com/redpangilinan/credenza": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "redpangilinan/credenza",
+"stars": 893,
+"pushed": "2025-11-15",
+"archived": false,
+"desc": "Ready-made responsive modal component for shadcn/ui.",
+"license": "MIT",
+"topics": [
+"component",
+"drawer",
+"modal",
+"modal-dialog",
+"next-14",
+"nextjs",
+"react",
+"shadcn-ui"
+]
+},
+"https://github.com/jstnw10/crypto-charts": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jstnw10/crypto-charts",
+"stars": 143,
+"pushed": "2025-08-20",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/johnpolacek/date-range-picker-for-shadcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "johnpolacek/date-range-picker-for-shadcn",
+"stars": 1023,
+"pushed": "2024-04-13",
+"archived": false,
+"desc": "DateRangePicker is a reusable component for shadcn using Radix UI and Tailwind CSS. Includes preset date ranges, text entry, calendar selection and date compari",
+"license": "MIT",
+"topics": [
+"datepicker",
+"shadcn",
+"shadcn-ui",
+"tailwind",
+"tailwind-css"
+]
+},
+"https://github.com/sadmann7/diceui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sadmann7/diceui",
+"stars": 2118,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Accessible shadcn/ui components built with React, TypeScript, and Tailwind CSS. Copy-paste ready, and customizable.",
+"license": "MIT",
+"topics": [
+"react",
+"ui",
+"wai-aria",
+"accessibility",
+"components",
+"data-table",
+"radix-ui",
+"shadcn-ui"
+]
+},
+"https://github.com/olliethedev/dnd-dashboard": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "olliethedev/dnd-dashboard",
+"stars": 442,
+"pushed": "2024-09-03",
+"archived": false,
+"desc": "A beautiful, performant dashboard with drop-to-swap layouts built using Next.js, shadcn/ui, and swapy",
+"license": null,
+"topics": []
+},
+"https://github.com/TheOmer77/downshift-shadcn-combobox": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "OmerMakesStuff/downshift-shadcn-combobox",
+"stars": 134,
+"pushed": "2025-01-19",
+"archived": false,
+"desc": "Combobox/autocomplete component built with shadcn/ui and Downshift.",
+"license": "MIT",
+"topics": [
+"autocomplete",
+"combobox",
+"component",
+"downshift",
+"react",
+"shadcn-ui"
+]
+},
+"https://github.com/lumpinif/drag-to-resize-sidebar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "lumpinif/shadcn-resizable-sidebar",
+"stars": 230,
+"pushed": "2026-06-22",
+"archived": false,
+"desc": "A drop-in resizable shadcn/ui `sidebar.tsx` replacement",
+"license": "MIT",
+"topics": [
+"shadcn",
+"sidebar",
+"ui",
+"resizeable",
+"shadn-ui",
+"drag-to-resize",
+"nextjs15",
+"dashbarod"
+]
+},
+"https://github.com/jiaweing/DropDrawer": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jiaweing/DropDrawer",
+"stars": 207,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "A responsive component that automatically switches between a dropdown menu on desktop and a drawer on mobile devices for shadcn/ui. A drop-in replacement for sh",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/JaleelB/emblor": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "JaleelB/emblor",
+"stars": 1215,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "A fully-featured tag input component built with shadcn/ui",
+"license": "MIT",
+"topics": [
+"input",
+"radix",
+"shadcn-ui",
+"autocomplete",
+"popover",
+"react-tag-input",
+"tag-input"
+]
+},
+"https://github.com/jakobhoeg/enhanced-button": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jakobhoeg/enhanced-button",
+"stars": 928,
+"pushed": "2025-06-28",
+"archived": false,
+"desc": "An enhanced version of the default shadcn-button component ",
+"license": "MIT",
+"topics": [
+"button",
+"component",
+"component-library",
+"nextjs",
+"nextjs14",
+"shadcn",
+"shadcn-ui",
+"typescript"
+]
+},
+"https://github.com/aeonzz/eo-n": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "aeonzz/eo-n",
+"stars": 97,
+"pushed": "2026-08-03",
+"archived": false,
+"desc": "Accessible and customizable components built with Tailwind and Shadcn.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/Aslam97/react-fancy-switch": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Aslam97/react-fancy-switch",
+"stars": 219,
+"pushed": "2026-09-30",
+"archived": false,
+"desc": "React Fancy Switch",
+"license": "MIT",
+"topics": [
+"react-switch",
+"react-radio"
+]
+},
+"https://github.com/sadmann7/file-uploader": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sadmann7/file-uploader",
+"stars": 1423,
+"pushed": "2025-12-14",
+"archived": false,
+"desc": "File uploader built with shadcn/ui and Radix UI.",
+"license": "MIT",
+"topics": [
+"dropzone",
+"shadcnui",
+"uploader",
+"uploadthing"
+]
+},
+"https://github.com/ManishBisht777/file-vault": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ManishBisht777/file-vault",
+"stars": 400,
+"pushed": "2024-05-09",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/nishansanjuka/react-drag-card": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "nishansanjuka/react-drag-card",
+"stars": 53,
+"pushed": "2024-11-13",
+"archived": false,
+"desc": "This project showcases a reusable React component called DraggableWrapper that allows users to drag, resize, maximize, and minimize a customizable UI element. T",
+"license": null,
+"topics": [
+"component",
+"isolate",
+"re-usable"
+]
+},
+"https://github.com/shadcn-labs/framecn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "shadcn-labs/framecn",
+"stars": 164,
+"pushed": "2026-10-31",
+"archived": false,
+"desc": "Beautiful video components, built on Editframe. 100% Free, Zero config, one command setup.",
+"license": "MIT",
+"topics": [
+"editframe",
+"react",
+"shadcn",
+"video"
+]
+},
+"https://github.com/nyxb-ui/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "nyxb-ui/ui",
+"stars": 838,
+"pushed": "2025-05-26",
+"archived": true,
+"desc": "Fusion UI library combining Shadcn/UI and MagicUI. Featuring 150+ free and open-source components built with React, Typescript, Tailwind CSS, and Framer Motion.",
+"license": "MIT",
+"topics": [
+"components",
+"framer-motion",
+"magicui",
+"nextjs",
+"radix-ui",
+"react",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/itsjavi/glasscn-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "itsjavi/glasscn-ui",
+"stars": 98,
+"pushed": "2024-11-25",
+"archived": true,
+"desc": "shadcn/ui component library with glassmorphism variants, and many additional components",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/h3rmel/guarahooks": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "h3rmel/guarahooks",
+"stars": 108,
+"pushed": "2025-12-15",
+"archived": false,
+"desc": "Reusable and customizable hooks that you can copy-and-paste into your apps. Free. Open Source and Open Code.",
+"license": "MIT",
+"topics": [
+"hooks",
+"nextjs",
+"react",
+"react-hooks",
+"shadcn"
+]
+},
+"https://github.com/ilyichv/hookagain": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ilyichv/hookagain",
+"stars": 104,
+"pushed": "2025-05-06",
+"archived": false,
+"desc": "A collection of shadcn installable react hooks",
+"license": "MIT",
+"topics": [
+"hooks",
+"reactjs",
+"shadcn-ui"
+]
+},
+"https://github.com/ibelick/background-snippets": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ibelick/background-snippets",
+"stars": 2027,
+"pushed": "2024-09-26",
+"archived": false,
+"desc": "Modern background snippets: copy, paste, ready-to-use",
+"license": null,
+"topics": [
+"background",
+"css",
+"tailwind",
+"tailwindcss"
+]
+},
+"https://github.com/JsCodeDevlopment/upload-crop-image": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "JsCodeDevlopment/upload-crop-image",
+"stars": 6,
+"pushed": "2026-03-19",
+"archived": false,
+"desc": "Componente moderno e reutiliz\u00e1vel para upload, recorte, zoom e rota\u00e7\u00e3o de imagens, adicionado na biblioteca awesome-shadcn: https://awesomeshadcn.dev/categories",
+"license": "MIT",
+"topics": [
+"nextjs",
+"pinned",
+"react",
+"react-easy-crop",
+"react-hook-form",
+"typescript",
+"zod"
+]
+},
+"https://github.com/kushagrasarathe/image-upload-shadcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "kushagrasarathe/image-upload-shadcn",
+"stars": 132,
+"pushed": "2025-01-14",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": [
+"cloudinary",
+"image-upload",
+"nextjs",
+"shadcn-ui",
+"typescript",
+"cloudinary-nextjs"
+]
+},
+"https://github.com/Ali-Hussein-dev/indie-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "alibey-10/indie-ui",
+"stars": 710,
+"pushed": "2026-01-07",
+"archived": false,
+"desc": "Collection of UI components",
+"license": "MIT",
+"topics": [
+"nextjs",
+"shadcn",
+"tailwindcss",
+"nextjs16"
+]
+},
+"https://github.com/Johuniq/jolyui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Johuniq/jolyui",
+"stars": 269,
+"pushed": "2026-10-07",
+"archived": false,
+"desc": "A custom registry of composable, accessible and extensible components designed for use with shadcn/ui. Free and open source, forever.",
+"license": "MIT",
+"topics": [
+"component-library",
+"shadcn",
+"shadcn-registry",
+"shadcn-ui",
+"jolyui"
+]
+},
+"https://github.com/jiji-hoon96/kalyx": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jiji-hoon96/kalyx",
+"stars": 9,
+"pushed": "2026-09-17",
+"archived": false,
+"desc": "A headless React DatePicker library with a composable API for date, range, time, and date-time. Zero CSS, under 16 KB, SSR-safe, and ISO-first.",
+"license": "MIT",
+"topics": [
+"accessibility",
+"calendar",
+"date-fns",
+"datepicker",
+"daterangepicker",
+"datetimepicker",
+"headless",
+"headless-ui"
+]
+},
+"https://github.com/keenthemes/ktui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "keenthemes/ktui",
+"stars": 155,
+"pushed": "2026-06-17",
+"archived": false,
+"desc": "Open-source collection of customizable UI components for Tailwind CSS and vanilla JavaScript",
+"license": "MIT",
+"topics": [
+"components",
+"javascript",
+"metronic",
+"shadcn-ui",
+"tailwindcss",
+"typescript",
+"ui",
+"vanilla-js"
+]
+},
+"https://github.com/nainglinnkhant/lingua-time": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "nainglinnkhant/lingua-time",
+"stars": 354,
+"pushed": "2025-05-23",
+"archived": false,
+"desc": "A smart datetime picker which understands natural language input.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/ardasisbot/linked-chart": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ardasisbot/linked-chart",
+"stars": 70,
+"pushed": "2025-05-05",
+"archived": false,
+"desc": "Recharts-based chart synced with TanStack DataTable, enabling data exploration through linked filtering and aggregation.",
+"license": null,
+"topics": [
+"nextjs",
+"recharts",
+"shadcn-ui",
+"tanstack-table"
+]
+},
+"https://github.com/arikchakma/maily.to": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "arikchakma/maily.to",
+"stars": 4006,
+"pushed": "2026-11-05",
+"archived": false,
+"desc": "Craft beautiful emails effortlessly with Maily, the powerful email editor that ensures impeccable communication across all major clients.",
+"license": "MIT",
+"topics": [
+"email-editor",
+"nexjts",
+"react",
+"shadcn-ui",
+"tiptap",
+"wysiwyg",
+"tiptap-email"
+]
+},
+"https://github.com/manfromexistence/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "manfromexistence/ui",
+"stars": 75,
+"pushed": "2025-05-15",
+"archived": false,
+"desc": "Beautifully crafted, accessible, and customizable components to accelerate your development. Open Source.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/SSShooter/mindmapcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "SSShooter/mindmapcn",
+"stars": 88,
+"pushed": "2026-08-14",
+"archived": false,
+"desc": "Beautiful mind maps, works seamlessly with shadcn/ui.",
+"license": "MIT",
+"topics": [
+"graph",
+"mindmap",
+"shadcn",
+"shadcn-ui"
+]
+},
+"https://github.com/Aslam97/shadcn-minimal-tiptap": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Aslam97/minimal-tiptap",
+"stars": 1798,
+"pushed": "2026-03-30",
+"archived": false,
+"desc": "Minimal Tiptap Editor",
+"license": "MIT",
+"topics": [
+"tiptap-editor",
+"wysiwyg-editor",
+"minimal-tiptap"
+]
+},
+"https://github.com/mrdogeco/docs": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "mrdogeco/docs",
+"stars": 5,
+"pushed": "2026-08-14",
+"archived": false,
+"desc": "Open-source components for sports apps. Built with Tailwind and shadcn/ui.",
+"license": "MIT",
+"topics": [
+"shadcn",
+"sports",
+"sports-api",
+"sports-data",
+"typescript",
+"ui"
+]
+},
+"https://github.com/sherifawad/multi-selection-with-add-remove": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sherifawad/multi-selection-with-add-remove",
+"stars": 18,
+"pushed": "2025-01-17",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": [
+"react",
+"shadcn-ui",
+"typescript"
+]
+},
+"https://github.com/ekmas/neobrutalism-components": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ekmas/neobrutalism-components",
+"stars": 5658,
+"pushed": "2026-11-15",
+"archived": false,
+"desc": "A collection of neobrutalism-styled Tailwind components.",
+"license": "MIT",
+"topics": [
+"nextjs",
+"react-components",
+"tailwind",
+"neobrutalism",
+"react",
+"react-component-library",
+"react-typescript",
+"react-ui-components"
+]
+},
+"https://github.com/ebulku/next-stepper": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "ebulku/next-stepper",
+"stars": 109,
+"pushed": "2024-12-06",
+"archived": false,
+"desc": "A dynamic multi-step form. Built with: Next.js | shadcn/ui | zustand | framer-motion",
+"license": null,
+"topics": [
+"framer-motion",
+"nextjs",
+"nextjs15",
+"shadcn-ui",
+"zustand"
+]
+},
+"https://github.com/sujjeee/nextjs-dnd": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sujjeee/nextjs-dnd",
+"stars": 177,
+"pushed": "2024-08-26",
+"archived": false,
+"desc": "Sortable Drag and Drop with Next.js, Shadcn UI, and DnD-Kit.",
+"license": null,
+"topics": []
+},
+"https://github.com/jacksonkasi0/nextjs-multi-image-upload": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jacksonkasi0/nextjs-multi-image-upload",
+"stars": 70,
+"pushed": "2025-02-25",
+"archived": false,
+"desc": "",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/steven-tey/novel": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "steven-tey/novel",
+"stars": 16467,
+"pushed": "2025-01-18",
+"archived": false,
+"desc": "Notion-style WYSIWYG editor with AI-powered autocompletion.",
+"license": "Apache-2.0",
+"topics": [
+"chatgpt",
+"notion",
+"openai",
+"prosemirror",
+"tiptap",
+"ai-sdk",
+"nextjs",
+"vercel"
+]
+},
+"https://github.com/shadcn-labs/ogimagecn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "shadcn-labs/ogimagecn",
+"stars": 292,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "Beautiful Open Graph image components, built on Satori. 100% Free, Zero config, one command setup.",
+"license": "MIT",
+"topics": [
+"react",
+"satori",
+"shadcn",
+"ogimage",
+"nextjs",
+"typescript"
+]
+},
+"https://github.com/PremPrakashCodes/payment-gateways": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "PremPrakashCodes/payment-gateways",
+"stars": 237,
+"pushed": "2024-12-12",
+"archived": false,
+"desc": "This project demonstrates the integration of multiple payment gateways, including Stripe, Razorpay, PayPal and Coinbase using Next.js 14. It showcases how to im",
+"license": "MIT",
+"topics": [
+"coinbase",
+"nextjs",
+"nextjs-server-actions",
+"nextjs14",
+"paypal",
+"razorpay",
+"stripe",
+"stripe-webhooks"
+]
+},
+"https://github.com/akii09/pdfx": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "akii09/pdfx",
+"stars": 1182,
+"pushed": "2026-09-22",
+"archived": false,
+"desc": "A React PDF component library with pre-built, themeable components and a CLI for seamless PDF document creation.",
+"license": "MIT",
+"topics": [
+"pdf",
+"pdf-generation",
+"pdfx",
+"react",
+"react-pdf",
+"react-pdf-renderer"
+]
+},
+"https://github.com/pittaya-ui/ui-kit": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "pittaya-ui/ui-kit",
+"stars": 15,
+"pushed": "2026-03-03",
+"archived": false,
+"desc": "Pittaya UI kit",
+"license": "MIT",
+"topics": [
+"uikit",
+"nextjs",
+"react",
+"taildwindcss",
+"typescript",
+"shadcn-ui",
+"shadcn",
+"ui-library"
+]
+},
+"https://github.com/UretzkyZvi/planner": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "UretzkyZvi/planner",
+"stars": 446,
+"pushed": "2024-11-03",
+"archived": false,
+"desc": "Planner Component: A React component for dynamic appointment management. Features drag-and-drop, date range selections, and integrates with shadcn/ui. Perfect f",
+"license": "MIT",
+"topics": [
+"appointment-scheduling",
+"calendar-component",
+"date-picker",
+"drag-and-drop",
+"react",
+"react-component",
+"scheduling",
+"time-management"
+]
+},
+"https://github.com/udecode/plate": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "udecode/plate",
+"stars": 16709,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Rich-text editor with AI and shadcn/ui",
+"license": "NOASSERTION",
+"topics": [
+"slate",
+"wysiwyg",
+"react",
+"typescript",
+"ai",
+"shadcn-ui",
+"mcp"
+]
+},
+"https://github.com/m4nute/pricing-page-shadcn": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "m4nute/pricing-page-shadcn",
+"stars": 240,
+"pushed": "2024-04-05",
+"archived": false,
+"desc": "Pricing Page template made with Shadcn UI & Next.js 14. Completely customizable",
+"license": null,
+"topics": [
+"nextjs",
+"pricing",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/tomredman/ProgressButton": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "tomredman/ProgressButton",
+"stars": 112,
+"pushed": "2024-06-11",
+"archived": false,
+"desc": "An extension of shadcn/ui button component that uses a state machine to drive a progress UX.",
+"license": null,
+"topics": []
+},
+"https://github.com/Georgegriff/react-dnd-kit-tailwind-shadcn-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Georgegriff/react-dnd-kit-tailwind-shadcn-ui",
+"stars": 822,
+"pushed": "2024-05-18",
+"archived": false,
+"desc": "Drag and drop Accessible kanban board implementing using React, @dnd-kit, tailwind and shadcn/ui",
+"license": "MIT",
+"topics": [
+"dnd-kit",
+"react",
+"shadc",
+"tailwindcss"
+]
+},
+"https://github.com/mohitkumawat310/react-pdf-flipbook-viewer": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "mohitkumawat310/react-pdf-flipbook-viewer",
+"stars": 68,
+"pushed": "2025-11-15",
+"archived": false,
+"desc": "React-based PDF flipbook viewer that allows users to view PDF documents in a flipbook format. It is built using Next.js and various other libraries to provide a",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/mehrdadrafiee/recursive-dnd-kanban-board": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "mehrdadrafiee/recursive-dnd-kanban-board",
+"stars": 87,
+"pushed": "2026-02-03",
+"archived": false,
+"desc": "Recursively-generated drag and drop Accessible kanban board implementing using Next.js, @dnd-kit, Tailwind CSS and shadcn/ui",
+"license": null,
+"topics": []
+},
+"https://github.com/w3cproject/rivelle-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "w3cproject/rivelle-ui",
+"stars": 6,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "Rivelle is an open-source UI library for React and Next.js with editable components, interactive effects, reusable blocks, and complete templates. Install only ",
+"license": "MIT",
+"topics": [
+"nextjs-template",
+"shadcn",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/haydenbleasel/roadmap-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "shadcnblocks/kibo",
+"stars": 3985,
+"pushed": "2026-05-04",
+"archived": false,
+"desc": "A custom registry of composable, accessible and extensible components designed for use with shadcn/ui. Free and open source, forever.",
+"license": "MIT",
+"topics": [
+"composable",
+"react",
+"typescript",
+"ui",
+"shadcn-ui",
+"components",
+"accessible"
+]
+},
+"https://github.com/baxy5/scificn-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "baxy5/scificn-ui",
+"stars": 126,
+"pushed": "2026-04-07",
+"archived": false,
+"desc": "A retro sci-fi UI design system inspired by classic starship consoles and alien computer terminals, featuring modular HUD components, neon data grids, tactical ",
+"license": null,
+"topics": []
+},
+"https://github.com/UretzkyZvi/search-address": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "UretzkyZvi/search-address",
+"stars": 171,
+"pushed": "2024-05-20",
+"archived": false,
+"desc": "",
+"license": "MIT",
+"topics": [
+"component",
+"react",
+"search-address"
+]
+},
+"https://github.com/NiazMorshed2007/shadcn-address-autocomplete": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "NiazMorshed2007/shadcn-address-autocomplete",
+"stars": 374,
+"pushed": "2024-07-09",
+"archived": false,
+"desc": "An address autocomplete component built with Google Places API and shadcn components.",
+"license": null,
+"topics": [
+"address",
+"autocomplete",
+"shadcn-ui"
+]
+},
+"https://github.com/satnaing/shadcn-admin": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "satnaing/shadcn-admin",
+"stars": 16819,
+"pushed": "2026-09-10",
+"archived": false,
+"desc": "Admin Dashboard UI built with Shadcn and Vite.",
+"license": "MIT",
+"topics": [
+"admin-dashboard",
+"admin-panel",
+"dashboard",
+"shadcn-ui",
+"shadcn-admin"
+]
+},
+"https://github.com/marmelab/shadcn-admin-kit": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "marmelab/shadcn-admin-kit",
+"stars": 1154,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Component kit to build your Admin app with shadcn/ui",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/sersavan/shadcn-calendar-component": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sersavan/shadcn-calendar-component",
+"stars": 338,
+"pushed": "2025-12-13",
+"archived": false,
+"desc": "A calendar date picker component designed with shadcn/ui",
+"license": "MIT",
+"topics": [
+"calendar",
+"calendar-component",
+"date-picker",
+"date-picker-range",
+"datepicker",
+"nextjs",
+"radix-ui",
+"reactjs"
+]
+},
+"https://github.com/johanguse/shadcn-carousel-testimonials": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "johanguse/shadcn-carousel-testimonials",
+"stars": 85,
+"pushed": "2024-01-01",
+"archived": false,
+"desc": "shadcn UI Carousel Testimonials",
+"license": "MIT",
+"topics": [
+"shadcn",
+"shadcn-ui",
+"testimonials"
+]
+},
+"https://github.com/jakobhoeg/shadcn-chat": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jakobhoeg/shadcn-chat",
+"stars": 1623,
+"pushed": "2025-08-12",
+"archived": false,
+"desc": "CLI for adding customizable and re-usable chat components to your applications. Build beautiful chat interfaces in minutes.",
+"license": "MIT",
+"topics": [
+"nextjs",
+"nextjs14",
+"react",
+"react-component",
+"shadcn",
+"shadcn-ui",
+"ui-library",
+"cli"
+]
+},
+"https://github.com/r2hu1/shadcn-cookie-consent": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "r2hu1/shadcn-cookie-consent",
+"stars": 292,
+"pushed": "2026-01-07",
+"archived": false,
+"desc": "Beautifully designed, customizable cookie consent for web built on top of shadcn-ui and tailwind-css!",
+"license": null,
+"topics": [
+"cookie-consent",
+"nextjs",
+"shadcn-ui",
+"shadcnui",
+"tailwindcss"
+]
+},
+"https://github.com/danielagg/shadcn-data-table-advanced-col-opions": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "danielagg/shadcn-data-table-resize-columns",
+"stars": 92,
+"pushed": "2024-06-01",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/crystaltai/shadcn-drag-and-drop": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "crystaltai/shadcn-drag-and-drop",
+"stars": 36,
+"pushed": "2026-10-09",
+"archived": false,
+"desc": "drag and drop using dnd-kit/core and dnd-kit/sortable",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/zenoncao/shadcn-drag-table": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "zenoncao/shadcn-drag-table",
+"stars": 89,
+"pushed": "2023-08-03",
+"archived": false,
+"desc": "A drag-and-drop table component using shadcn-ui and next.js",
+"license": null,
+"topics": []
+},
+"https://github.com/janglad/shadcn-dropzone": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "janglad/shadcn-dropzone",
+"stars": 55,
+"pushed": "2025-02-23",
+"archived": false,
+"desc": "A dropzone component built in the style of Shadcn using react-dropzone",
+"license": "MIT",
+"topics": [
+"dropzone",
+"radix",
+"react-dropzone",
+"shadcn",
+"drag-and-drop"
+]
+},
+"https://github.com/htmujahid/shadcn-editor": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "htmujahid/shadcn-editor",
+"stars": 1395,
+"pushed": "2026-11-14",
+"archived": false,
+"desc": "Lexical base rich text editor using shadcn/ui components",
+"license": "MIT",
+"topics": [
+"editor",
+"lexical",
+"rich-text",
+"rich-text-editor",
+"shadcn",
+"shadcn-editor",
+"wysiwyg",
+"shadcn-lexical"
+]
+},
+"https://github.com/lucioew28/extends": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "lucioew28/extends",
+"stars": 70,
+"pushed": "2024-09-20",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/BelkacemYerfa/shadcn-extension": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "BelkacemYerfa/shadcn-extension",
+"stars": 1330,
+"pushed": "2025-08-04",
+"archived": false,
+"desc": "An open source component collection , that extends your ui library , built using shadcn component",
+"license": "MIT",
+"topics": [
+"component",
+"radix-ui",
+"react",
+"shadcn-ui",
+"tailwindcss",
+"nextjs"
+]
+},
+"https://github.com/yassir-jeraidi/full-calendar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "yassir-jeraidi/full-calendar",
+"stars": 485,
+"pushed": "2026-04-14",
+"archived": false,
+"desc": "A feature-rich calendar application built with React, TypeScript, and ShadCN UI components. This project provides a customizable and interactive calendar experi",
+"license": "MIT",
+"topics": [
+"big-calendar",
+"calendar",
+"calendar-component",
+"calendar-events",
+"full-calendar",
+"full-calendar-scheduler",
+"fullcalendar-scheduler",
+"nextjs"
+]
+},
+"https://github.com/sujjeee/shadcn-image-cropper": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sujjeee/shadcn-image-cropper",
+"stars": 453,
+"pushed": "2024-09-29",
+"archived": false,
+"desc": "Image cropper built with shadcn/ui and react-image-crop",
+"license": null,
+"topics": [
+"avatar",
+"cropper",
+"nextjs",
+"shadcnui"
+]
+},
+"https://github.com/damianricobelli/shadcn-linear-combobox": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "damianricobelli/shadcn-linear-combobox",
+"stars": 267,
+"pushed": "2024-04-23",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/brielov/shadcn-location-picker": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "brielov/shadcn-location-picker",
+"stars": 23,
+"pushed": "2025-02-25",
+"archived": false,
+"desc": "A simple google maps location picker that integrates shadcn",
+"license": null,
+"topics": []
+},
+"https://github.com/sersavan/shadcn-multi-select-component": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sersavan/shadcn-multi-select-component",
+"stars": 2209,
+"pushed": "2026-08-27",
+"archived": false,
+"desc": "A multi-select component designed with shadcn/ui",
+"license": "MIT",
+"topics": [
+"nextjs",
+"reactjs",
+"shadcn-ui",
+"radix-ui",
+"multi-select",
+"multi-select-container",
+"multi-select-dropdown",
+"multi-selection"
+]
+},
+"https://github.com/camwebby/shadcn-react-number-scrubber": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "camwebby/shadcn-react-number-scrubber",
+"stars": 34,
+"pushed": "2025-01-02",
+"archived": false,
+"desc": "Number scrubber ui component inspired by Resolve",
+"license": null,
+"topics": [
+"react",
+"shadcn",
+"shadcn-react",
+"shadcn-ui",
+"nextjs"
+]
+},
+"https://github.com/anuoua/shadcn-packaged": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "anuoua/shadcn-packaged",
+"stars": 23,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "This is an npm package that exports all shadcn/ui components without the need for a CLI, designed for ease of use.",
+"license": "MIT",
+"topics": [
+"components",
+"npm",
+"react",
+"shadcn",
+"shadcn-ui",
+"typescript"
+]
+},
+"https://github.com/omeralpi/shadcn-phone-input": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "omeralpi/shadcn-phone-input",
+"stars": 969,
+"pushed": "2025-08-20",
+"archived": false,
+"desc": "Customizable phone input component with proper validation for any country. Built on top of shadcn.",
+"license": "MIT",
+"topics": [
+"phone-number",
+"radix-ui",
+"react",
+"shadcn-ui",
+"react-phone-number-input"
+]
+},
+"https://github.com/damianricobelli/shadcn-phone-input": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "damianricobelli/shadcn-phone-input",
+"stars": 277,
+"pushed": "2024-04-23",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/aymanch-03/shadcn-pricing-page": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "aymanch-03/shadcn-pricing-page",
+"stars": 76,
+"pushed": "2025-09-08",
+"archived": false,
+"desc": "Responsive and customizable pricing component built with shadcn/ui. Features payment frequency toggles, tier highlights and smooth price transitions.",
+"license": null,
+"topics": [
+"nextjs",
+"shadcn",
+"shadcn-ui",
+"tailwindcss",
+"ui"
+]
+},
+"https://github.com/allipiopereira/shadcn-spinner": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "allipiopereira/shadcn-spinner",
+"stars": 90,
+"pushed": "2024-11-28",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/JoachimBrasier/shadcn-stacked-progress-bar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "JoachimBrasier/shadcn-stacked-progress-bar",
+"stars": 2,
+"pushed": "2026-06-19",
+"archived": false,
+"desc": "A composable stacked progress bar for shadcn/ui to display multiple statuses in one track, with optional legend, tooltips, and accessible semantics.",
+"license": null,
+"topics": [
+"component",
+"progress-bar",
+"shadcn",
+"shadcn-ui",
+"tailwindcss"
+]
+},
+"https://github.com/damianricobelli/stepperize": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "damianricobelli/stepperize",
+"stars": 1615,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "The type-safe way to build multi-step experiences in React.",
+"license": null,
+"topics": [
+"primitive",
+"react",
+"react-native",
+"shadcn-ui",
+"stepper",
+"typesafe"
+]
+},
+"https://github.com/sadmann7/shadcn-table": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sadmann7/tablecn",
+"stars": 6387,
+"pushed": "2026-11-13",
+"archived": false,
+"desc": "Data table and data grid components built with shadcn/ui, featuring sorting, filtering, pagination, infinite scrolling, and real-time collaboration.",
+"license": "MIT",
+"topics": [
+"shadcn-ui",
+"nextjs",
+"tanstack-table",
+"table",
+"data-grid",
+"multiplayer",
+"partykit",
+"tanstack-db"
+]
+},
+"https://github.com/timDeHof/shadcn-timeline": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "timDeHof/shadcn-timeline",
+"stars": 319,
+"pushed": "2026-05-07",
+"archived": false,
+"desc": "Customizable and re-usable timeline component for you to use in your projects. Built on top of shadcn. ",
+"license": "MIT",
+"topics": [
+"nextjs",
+"nextjs14",
+"react",
+"react-component",
+"ui-library",
+"shadcn",
+"shadcn-ui",
+"component"
+]
+},
+"https://github.com/NiazMorshed2007/shadcn-tiptap": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "NiazMorshed2007/shadcn-tiptap",
+"stars": 705,
+"pushed": "2024-10-27",
+"archived": false,
+"desc": "Sets of custom extensions & toolbars for tiptap editor. Install with shadcn/cli.",
+"license": "MIT",
+"topics": [
+"editor",
+"prosemirror",
+"rich-text-editor",
+"tiptap",
+"shadcn",
+"shadcn-ui"
+]
+},
+"https://github.com/mrlightful/shadcn-tree-view": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "MrLightful/shadcn-tree-view",
+"stars": 395,
+"pushed": "2025-11-20",
+"archived": false,
+"desc": "A Shadcn UI component for hierarchical lists of data with nested levels that can be expanded and collapsed.",
+"license": "MIT",
+"topics": [
+"component",
+"react",
+"shadcn-ui",
+"tailwind",
+"tailwindcss",
+"ui",
+"nested",
+"tree-view"
+]
+},
+"https://github.com/hsuanyi-chou/shadcn-ui-expansions": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "hsuanyi-chou/shadcn-ui-expansions",
+"stars": 1943,
+"pushed": "2026-06-18",
+"archived": false,
+"desc": "More components built on top of shadcn-ui.",
+"license": "MIT",
+"topics": [
+"nextjs",
+"react",
+"shadcnui"
+]
+},
+"https://github.com/salimi-my/shadcn-ui-sidebar": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "salimi-my/shadcn-ui-sidebar",
+"stars": 1799,
+"pushed": "2025-04-04",
+"archived": false,
+"desc": "A stunning, functional and responsive retractable sidebar for Next.js built on top of shadcn/ui.",
+"license": "MIT",
+"topics": [
+"nextjs",
+"shadcn-ui",
+"sidebar",
+"tailwind",
+"admin-panel",
+"dashboard"
+]
+},
+"https://github.com/vaunblu/SimpleKit": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "vaunblu/SimpleKit",
+"stars": 68,
+"pushed": "2024-07-17",
+"archived": false,
+"desc": "Responsive connect wallet and account component built on top of Wagmi and shadcn/ui.",
+"license": null,
+"topics": []
+},
+"https://github.com/sadmann7/sortable": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "sadmann7/sortable",
+"stars": 672,
+"pushed": "2025-12-14",
+"archived": false,
+"desc": "Sortable built with shadcn/ui, radix ui, and dnd-kit.",
+"license": "MIT",
+"topics": [
+"dnd-kit",
+"sortable",
+"shadcn-ui",
+"dnd"
+]
+},
+"https://github.com/arihantcodes/spectrum-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "arihantcodes/spectrum-ui",
+"stars": 1543,
+"pushed": "2026-09-21",
+"archived": false,
+"desc": "Spectrum UI \u2b50 is a collection of re-usable components built using Aceternity UI Magic UI and ShadCN UI that you can copy and paste into your apps.",
+"license": "Apache-2.0",
+"topics": []
+},
+"https://github.com/nanyx95/Stateful-Button-React": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "nanyx95/Stateful-Button-React",
+"stars": 18,
+"pushed": "2026-01-04",
+"archived": false,
+"desc": "A custom stateful button component designed to integrate seamlessly with shadcn/ui, providing visual feedback for loading/progress, success, and error states du",
+"license": "MIT",
+"topics": [
+"components",
+"loading",
+"progress",
+"progress-bar",
+"radix-ui",
+"react",
+"shadcn-ui",
+"spinner"
+]
+},
+"https://github.com/bitjaru/styleseed": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "bitjaru/styleseed",
+"stars": 1023,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Open-source design-method engine for Claude Code, Codex & Cursor. One agent skill with 22 internal workflows for fixed design judgment, multiple grammars, seman",
+"license": "MIT",
+"topics": [
+"ai-coding",
+"claude-code",
+"design-system",
+"design-tokens",
+"react",
+"shadcn-ui",
+"tailwindcss",
+"vibe-coding"
+]
+},
+"https://github.com/thisisfel1x/supabase-shadcn-database-example": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "thisisfel1x/supabase-shadcn-database-example",
+"stars": 43,
+"pushed": "2025-01-17",
+"archived": false,
+"desc": "Demo project showcasing how to fetch, filter, and display supabase data in a tanstack table with server-side rendering",
+"license": "MIT",
+"topics": [
+"react",
+"shadcn-ui",
+"ssr",
+"supabase",
+"tailwindcss",
+"tanstack",
+"tanstack-table"
+]
+},
+"https://github.com/slickwit/supercharged-shadcn-components": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "slickwit/supercharged-shadcn-components",
+"stars": 46,
+"pushed": "2025-03-25",
+"archived": false,
+"desc": "An open-source ReactJS library with pre-built components to supercharge your development workflow. Inspired by shadcn/ui, Material-UI, and more.",
+"license": "GPL-3.0",
+"topics": []
+},
+"https://github.com/drefahl/tanstack-ui-table": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "drefahl/tanstack-ui-table",
+"stars": 34,
+"pushed": "2025-02-23",
+"archived": false,
+"desc": "",
+"license": null,
+"topics": []
+},
+"https://github.com/openstatusHQ/time-picker": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "openstatusHQ/time-picker",
+"stars": 864,
+"pushed": "2024-12-19",
+"archived": false,
+"desc": "A simple shadcn/ui TimePicker component",
+"license": "MIT",
+"topics": [
+"nextjs",
+"react",
+"shadcn-ui",
+"time-picker"
+]
+},
+"https://github.com/jacksonkasi1/tnks-data-table": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jacksonkasi1/tnks-data-table",
+"stars": 244,
+"pushed": "2026-03-25",
+"archived": false,
+"desc": "Advanced data table component with server-side operations using Hono.js, Drizzle ORM, and PostgreSQL",
+"license": "MIT",
+"topics": [
+"data-table",
+"drizzle",
+"filtering",
+"hono",
+"nextjs",
+"postgresql",
+"react",
+"server-side-pagination"
+]
+},
+"https://github.com/jacksonkasi1/TableCraft": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "jacksonkasi1/TableCraft",
+"stars": 68,
+"pushed": "2026-10-22",
+"archived": false,
+"desc": "Complex data tables in 5 minutes. Drizzle ORM + TanStack Table + auto-generated APIs with filtering, sorting, pagination, and type safety.",
+"license": "MIT",
+"topics": [
+"admin-dashboard",
+"api-builder",
+"data-table",
+"drizzle-orm",
+"elysia",
+"express",
+"filtering",
+"hono"
+]
+},
+"https://github.com/tremorlabs/tremor": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "tremorlabs/tremor",
+"stars": 3705,
+"pushed": "2025-10-10",
+"archived": false,
+"desc": "Copy & Paste React components to build modern web applications. ",
+"license": "Apache-2.0",
+"topics": [
+"components",
+"dashboard",
+"radix-ui",
+"react",
+"tailwindcss",
+"typescript",
+"ui"
+]
+},
+"https://github.com/tommyjepsen/twblocks": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "tommyjepsen/twblocks",
+"stars": 780,
+"pushed": "2025-12-15",
+"archived": false,
+"desc": "Website blocks to copy/paste - based on shadcn & Radix using Tailwind and NextJS",
+"license": "MIT",
+"topics": [
+"blocks",
+"nextjs",
+"react",
+"shadcn-ui",
+"tailwindcss",
+"typescript"
+]
+},
+"https://github.com/codedthemes/uiable": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "codedthemes/uiable",
+"stars": 153,
+"pushed": "2026-11-04",
+"archived": false,
+"desc": "A free, open-source collection of beautifully designed UI components that you can copy, paste, customize, and make your own.",
+"license": "MIT",
+"topics": [
+"base-ui",
+"free",
+"nextjs",
+"open-source",
+"react",
+"shadcn-ui",
+"tailwindcss-v4",
+"components"
+]
+},
+"https://github.com/uixmat/onborda": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "uixmat/onborda",
+"stars": 1414,
+"pushed": "2026-06-08",
+"archived": false,
+"desc": "An onboarding wizard flow / product tour for Next.js animated by framer motion",
+"license": null,
+"topics": [
+"framer-motion",
+"next",
+"nextjs",
+"onboarding",
+"react",
+"setup",
+"tailwindcss",
+"wizard"
+]
+},
+"https://github.com/domidex01/tour-kit": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "domidex01/tour-kit",
+"stars": 73,
+"pushed": "2026-10-02",
+"archived": false,
+"desc": "Headless onboarding and product tour library for React.",
+"license": "MIT",
+"topics": [
+"accessibility",
+"headless-ui",
+"onboarding",
+"product-tour",
+"react",
+"shadcn",
+"walkthrough"
+]
+},
+"https://github.com/w3-kit/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "w3-kit/ui",
+"stars": 17,
+"pushed": "2026-08-07",
+"archived": false,
+"desc": "Web3 React component library",
+"license": "MIT",
+"topics": [
+"component-library",
+"daoapp",
+"ui-components",
+"web3",
+"react",
+"shadcn",
+"tailwindcss"
+]
+},
+"https://github.com/Yayaw-SAS/Yayaw-Table": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "Yayaw-SAS/Yayaw-Table",
+"stars": 4,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Flexible, type-safe data table for React. One component, clean API, minimal boilerplate. Built on TanStack Table with Shadcn UI & Tailwind CSS.",
+"license": "MIT",
+"topics": [
+"data-table",
+"datatable",
+"nextjs",
+"react",
+"shadcn-ui",
+"tailwindcss",
+"tanstack-table",
+"typescript"
+]
+},
+"https://github.com/shelwinsunga/zoom-chart-demo": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Libs and Components",
+"repo": "shelwinsunga/zoom-chart-demo",
+"stars": 628,
+"pushed": "2024-07-14",
+"archived": false,
+"desc": "A zoomable shadcn/rechart chart.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/mehrdadrafiee/animated-header": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "mehrdadrafiee/animated-header",
+"stars": 56,
+"pushed": "2026-02-03",
+"archived": false,
+"desc": "Vercel-like animated header",
+"license": null,
+"topics": []
+},
+"https://github.com/mehrdadrafiee/animated-tabs": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "mehrdadrafiee/animated-tabs",
+"stars": 139,
+"pushed": "2026-02-03",
+"archived": false,
+"desc": "Vercel-like animated tabs",
+"license": null,
+"topics": []
+},
+"https://github.com/whatisjery/atelier-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "whatisjery/atelier-ui",
+"stars": 45,
+"pushed": "2026-10-20",
+"archived": false,
+"desc": "A registry of WebGL and motion components for React.",
+"license": "MIT",
+"topics": [
+"animation-library",
+"css",
+"motion",
+"nextjs",
+"react",
+"shaders",
+"taiwlindcss",
+"ui-library"
+]
+},
+"https://github.com/AmanShakya0018/forgeui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "AmanShakya0018/forgeui",
+"stars": 214,
+"pushed": "2026-07-20",
+"archived": false,
+"desc": "A library of React components for smooth, fast front-end development.",
+"license": "NOASSERTION",
+"topics": [
+"nextjs",
+"shadcn-ui",
+"tailwindcss",
+"typescript",
+"framer-motion",
+"reactjs"
+]
+},
+"https://github.com/mekai-ui/mekai-ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "mekai-ui/mekai-ui",
+"stars": 1,
+"pushed": "2026-11-08",
+"archived": false,
+"desc": "53 free animated React components for apps, landing pages and games. TypeScript, Tailwind CSS 4 and Motion. Install with the shadcn CLI.",
+"license": "MIT",
+"topics": [
+"animation",
+"framer-motion",
+"game-ui",
+"gamification",
+"motion",
+"nextjs",
+"react",
+"react-components"
+]
+},
+"https://github.com/taqui-786/mixcnui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "taqui-786/mixcnui",
+"stars": 316,
+"pushed": "2026-02-16",
+"archived": false,
+"desc": "Collection of Nextjs Components",
+"license": null,
+"topics": [
+"react",
+"reactjs",
+"taiwindcss",
+"ui-components"
+]
+},
+"https://github.com/chrisabdo/motionvariants": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "ChrisAbdo/MotionVariants",
+"stars": 996,
+"pushed": "2025-09-08",
+"archived": false,
+"desc": "A collection of handmade Framer Motion variants made for your next project.",
+"license": null,
+"topics": [
+"animation",
+"framer",
+"framer-motion",
+"nextjs",
+"nextjs13",
+"tailwindcss"
+]
+},
+"https://github.com/RMahammad/motiq": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "RMahammad/motiq",
+"stars": 40,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "Beautiful, production-ready animated React & shadcn components, installed as editable source. Free & open source.",
+"license": "MIT",
+"topics": [
+"animation",
+"components",
+"design-system",
+"motion",
+"nextjs",
+"react",
+"react-components",
+"shadcn"
+]
+},
+"https://github.com/teodoravadani/qodesign-free": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "teodoravadani/qodesign-free",
+"stars": 0,
+"pushed": "2026-10-26",
+"archived": false,
+"desc": "Free animated UI components and dashboards, as single HTML files and React. More at qodesign.dev",
+"license": "MIT",
+"topics": [
+"animation",
+"dashboard",
+"framer-motion",
+"html-css",
+"nextjs",
+"react",
+"tailwindcss",
+"ui-components"
+]
+},
+"https://github.com/sopo/shadcn-animated": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "sopo/shadcn-animated",
+"stars": 28,
+"pushed": "2026-09-30",
+"archived": false,
+"desc": "shadcn but animated",
+"license": "MIT",
+"topics": [
+"animation",
+"component-libraries",
+"framer-motion",
+"micro-interaction",
+"motion",
+"shadcn-ui-components",
+"tailwindcss",
+"typescript"
+]
+},
+"https://github.com/viberdy-dev/ui": {
+"name": "Link",
+"src": "awesome-shadcn-ui",
+"section": "Animations",
+"repo": "viberdy-dev/ui",
+"stars": 3,
+"pushed": "2026-10-24",
+"archived": false,
+"desc": "161 animated React components in 14 design styles: glassmorphism, aurora, kinetic type, spatial 3D, dither & ASCII. Install one at a time with the shadcn CLI. T",
+"license": "NOASSERTION",
+"topics": [
+"ai-prompts",
+"animation",
+"component-library",
+"framer-motion",
+"glassmorphism",
+"kinetic-typography",
+"micro-interactions",
+"nextjs"
+]
+},
+"https://github.com/magicuidesign/magicui": {
+"name": "magicui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "magicuidesign/magicui",
+"stars": 23376,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "UI Library for Design Engineers. Animated components and effects you can copy and paste into your apps. Free. Open Source.",
+"license": "MIT",
+"topics": [
+"framer-motion",
+"nextjs",
+"react",
+"tailwindcss",
+"typescript",
+"components",
+"shadcn-ui"
+]
+},
+"https://github.com/DavidHDev/react-bits": {
+"name": "react-bits",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "DavidHDev/react-bits",
+"stars": 52307,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "The largest open-source library of animated, interactive, and customizable React & Next.js components for building standout web products and experiences. Built ",
+"license": "NOASSERTION",
+"topics": [
+"animations",
+"components",
+"components-library",
+"components-react",
+"javascript",
+"react",
+"reactjs",
+"web"
+]
+},
+"https://github.com/ibelick/motion-primitives": {
+"name": "motion-primitives",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "ibelick/motion-primitives",
+"stars": 6987,
+"pushed": "2026-09-28",
+"archived": false,
+"desc": "UI kit to make beautiful, animated interfaces, faster. Customizable. Open Source.",
+"license": "MIT",
+"topics": [
+"animated",
+"animation",
+"components",
+"framer-motion",
+"tailwindcss",
+"animate",
+"motion",
+"ui"
+]
+},
+"https://github.com/nolly-studio/cult-ui": {
+"name": "cult-ui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "nolly-studio/cult-ui",
+"stars": 7560,
+"pushed": "2026-10-29",
+"archived": false,
+"desc": "Animated components for design engineers. 150+ free shadcn/ui components, built with Tailwind CSS and Motion. MIT licensed.",
+"license": "MIT",
+"topics": [
+"components",
+"design-engineering",
+"framer-motion",
+"nextjs",
+"react",
+"shadcn-ui",
+"tailwindcss",
+"typescript"
+]
+},
+"https://github.com/origin-space/originui": {
+"name": "originui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "cosscom/ui",
+"stars": 10873,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "coss.com/ui is the official design system of Cal.com",
+"license": "MIT",
+"topics": [
+"nextjs",
+"radix-ui",
+"react",
+"tailwindcss",
+"shadcn",
+"shadcn-ui",
+"tanstack-table",
+"base-ui"
+]
+},
+"https://github.com/karthikmudunuri/eldoraui": {
+"name": "eldoraui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "karthikmudunuri/eldoraui",
+"stars": 1977,
+"pushed": "2026-09-26",
+"archived": false,
+"desc": "Eldora UI is a collection of re-usable components that you can copy and paste into your web apps. It primarily features components, blocks, and templates.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/codse/animata": {
+"name": "animata",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "codse/animata",
+"stars": 3003,
+"pushed": "2026-11-03",
+"archived": false,
+"desc": "Bring your site to life with easy to use animation & interaction code. Copy. Paste. Animate. ",
+"license": "MIT",
+"topics": [
+"animation",
+"interaction",
+"nextjs",
+"react",
+"tailwindcss",
+"css-animations",
+"hacktoberfest",
+"hacktoberfest-accepted"
+]
+},
+"https://github.com/uiverse-io/galaxy": {
+"name": "galaxy",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "uiverse-io/galaxy",
+"stars": 15047,
+"pushed": "2024-09-02",
+"archived": false,
+"desc": "The largest Open-Source UI Library! Community-made and free to use. Made with either CSS or Tailwind.",
+"license": "MIT",
+"topics": [
+"community",
+"css",
+"tailwind",
+"ui"
+]
+},
+"https://github.com/radix-ui/primitives": {
+"name": "primitives",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "radix-ui/primitives",
+"stars": 19528,
+"pushed": "2026-10-14",
+"archived": false,
+"desc": "Radix Primitives is an open-source UI component library for building high-quality, accessible design systems and web apps. Maintained by @workos.",
+"license": "MIT",
+"topics": [
+"ui",
+"ui-components",
+"ui-kit",
+"design-systems",
+"accessibility",
+"react",
+"component-library",
+"radix-ui"
+]
+},
+"https://github.com/chakra-ui/ark": {
+"name": "ark",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "chakra-ui/ark",
+"stars": 5477,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Unstyled, accessible UI components for your design System. Works in React, Vue, Solid, and Svelte.",
+"license": "MIT",
+"topics": [
+"headless",
+"react",
+"vue",
+"solid",
+"components",
+"design-system",
+"ui",
+"svelte"
+]
+},
+"https://github.com/tailwindlabs/headlessui": {
+"name": "headlessui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "tailwindlabs/headlessui",
+"stars": 28835,
+"pushed": "2026-04-13",
+"archived": false,
+"desc": "Completely unstyled, fully accessible UI components, designed to integrate beautifully with Tailwind CSS.",
+"license": "MIT",
+"topics": [
+"react",
+"headless-ui",
+"headlessui",
+"vue",
+"accessibility",
+"a11y",
+"tailwindcss",
+"components"
+]
+},
+"https://github.com/adobe/react-spectrum": {
+"name": "react-spectrum",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "adobe/react-spectrum",
+"stars": 16051,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A collection of libraries and tools that help you build adaptive, accessible, and robust user experiences.",
+"license": "Apache-2.0",
+"topics": [
+"react",
+"accessibility",
+"design-systems",
+"react-components",
+"wai-aria",
+"ui-components"
+]
+},
+"https://github.com/nextui-org/nextui": {
+"name": "nextui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "heroui-inc/heroui",
+"stars": 31263,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "\ud83d\ude80 Beautiful, fast and modern React UI library. (Previously NextUI)",
+"license": "Apache-2.0",
+"topics": [
+"reactjs",
+"library",
+"component-library",
+"components"
+]
+},
+"https://github.com/saadeghi/daisyui": {
+"name": "daisyui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "saadeghi/daisyui",
+"stars": 42906,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\ud83c\udf3c \ud83c\udf3c \ud83c\udf3c \ud83c\udf3c \ud83c\udf3c \u2003The most popular, free and open-source Tailwind CSS component library",
+"license": "MIT",
+"topics": [
+"tailwind-css",
+"ui-library",
+"design-system",
+"ui-pattern",
+"ui-framework",
+"css-components",
+"css-framework",
+"ui-kit"
+]
+},
+"https://github.com/pmndrs/drei": {
+"name": "drei",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/drei",
+"stars": 10176,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "\ud83e\udd49 useful helpers for react-three-fiber",
+"license": "MIT",
+"topics": [
+"threejs",
+"react-three-fiber",
+"hooks",
+"react",
+"helpers"
+]
+},
+"https://github.com/pmndrs/react-postprocessing": {
+"name": "react-postprocessing",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/react-postprocessing",
+"stars": 1661,
+"pushed": "2026-10-21",
+"archived": false,
+"desc": "\ud83d\udcec  Postprocessing for react-three-fiber",
+"license": "MIT",
+"topics": [
+"3d",
+"threejs",
+"react-postprocessing",
+"react",
+"postprocessing",
+"webgl",
+"react-three-fiber"
+]
+},
+"https://github.com/pmndrs/react-spring": {
+"name": "react-spring",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/react-spring",
+"stars": 29318,
+"pushed": "2026-11-01",
+"archived": false,
+"desc": "\u270c\ufe0f A spring physics based React animation library",
+"license": "MIT",
+"topics": [
+"animation-library",
+"spring-physics",
+"react",
+"springs",
+"react-spring"
+]
+},
+"https://github.com/pmndrs/use-gesture": {
+"name": "use-gesture",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/use-gesture",
+"stars": 9627,
+"pushed": "2024-07-15",
+"archived": false,
+"desc": "\ud83d\udc47Bread n butter utility for component-tied mouse/touch gestures in React and Vanilla Javascript.",
+"license": "MIT",
+"topics": [
+"gestures",
+"hooks",
+"drag",
+"pinch",
+"zoom",
+"wheel",
+"scroll",
+"react"
+]
+},
+"https://github.com/pmndrs/maath": {
+"name": "maath",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/math",
+"stars": 1346,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\ud83e\uddee The playful web's math engine",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/pmndrs/lamina": {
+"name": "lamina",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/lamina",
+"stars": 1111,
+"pushed": "2025-06-22",
+"archived": true,
+"desc": "\ud83c\udf70 An extensible, layer based shader material for ThreeJS",
+"license": "MIT",
+"topics": [
+"threejs",
+"shaders",
+"layers"
+]
+},
+"https://github.com/motiondivision/motion": {
+"name": "motion",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "motiondivision/motion",
+"stars": 35363,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A modern animation library for React and JavaScript",
+"license": "MIT",
+"topics": [
+"animation",
+"animation-js",
+"motion",
+"react",
+"reactanimations",
+"spring"
+]
+},
+"https://github.com/greensock/GSAP": {
+"name": "GSAP",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "greensock/GSAP",
+"stars": 30936,
+"pushed": "2026-11-04",
+"archived": false,
+"desc": "GSAP (GreenSock Animation Platform), a JavaScript animation library for the modern web",
+"license": null,
+"topics": [
+"animation",
+"gsap",
+"javascript",
+"javascript-library",
+"scroll"
+]
+},
+"https://github.com/darkroomengineering/lenis": {
+"name": "lenis",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "darkroomengineering/lenis",
+"stars": 17369,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Smooth scroll as it should be",
+"license": "MIT",
+"topics": [
+"scroll",
+"smooth",
+"smooth-scroll",
+"performance",
+"react",
+"vanilla",
+"vue",
+"snap"
+]
+},
+"https://github.com/studio-freight/hamo": {
+"name": "hamo",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "darkroomengineering/hamo",
+"stars": 321,
+"pushed": "2026-11-10",
+"archived": false,
+"desc": "Hamo means hook, do the math.",
+"license": "MIT",
+"topics": [
+"hooks",
+"react",
+"darkroom-engineering"
+]
+},
+"https://github.com/juliangarnier/anime": {
+"name": "anime",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "juliangarnier/anime",
+"stars": 74904,
+"pushed": "2026-11-02",
+"archived": false,
+"desc": "JavaScript animation engine",
+"license": "MIT",
+"topics": [
+"animation",
+"anime",
+"javascript-library",
+"svg",
+"canvas",
+"css",
+"javascript"
+]
+},
+"https://github.com/theatre-js/theatre": {
+"name": "theatre",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "theatre-js/theatre",
+"stars": 13064,
+"pushed": "2024-08-14",
+"archived": false,
+"desc": "Motion design editor for the web",
+"license": "Apache-2.0",
+"topics": [
+"animation",
+"threejs",
+"generative-art",
+"motion-design",
+"r3f",
+"devtools"
+]
+},
+"https://github.com/airbnb/lottie-web": {
+"name": "lottie-web",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "airbnb/lottie-web",
+"stars": 32524,
+"pushed": "2025-09-01",
+"archived": false,
+"desc": "Render After Effects animations natively on Web, Android and iOS, and React Native. http://airbnb.io/lottie/",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/rive-app/rive-react": {
+"name": "rive-react",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "rive-app/rive-react",
+"stars": 1191,
+"pushed": "2026-11-09",
+"archived": false,
+"desc": "React runtime for Rive, the agent-native 2D and 3D engine for games, apps, and interactive UI.",
+"license": "MIT",
+"topics": [
+"animation",
+"react"
+]
+},
+"https://github.com/oframe/ogl": {
+"name": "ogl",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "oframe/ogl",
+"stars": 4760,
+"pushed": "2025-04-13",
+"archived": false,
+"desc": "Minimal WebGL Library",
+"license": null,
+"topics": []
+},
+"https://github.com/pixijs/pixijs": {
+"name": "pixijs",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pixijs/pixijs",
+"stars": 48846,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.",
+"license": "MIT",
+"topics": [
+"canvas2d",
+"pixijs",
+"javascript",
+"webgl",
+"glsl",
+"canvas",
+"rendering",
+"pixi"
+]
+},
+"https://github.com/mrdoob/three.js": {
+"name": "three.js",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "mrdoob/three.js",
+"stars": 118933,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "JavaScript 3D Library.",
+"license": "MIT",
+"topics": [
+"javascript",
+"3d",
+"virtual-reality",
+"augmented-reality",
+"webgl",
+"webgl2",
+"webgpu",
+"webxr"
+]
+},
+"https://github.com/vasturiano/react-globe.gl": {
+"name": "react-globe.gl",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "vasturiano/react-globe.gl",
+"stars": 1470,
+"pushed": "2026-05-16",
+"archived": false,
+"desc": "React component for Globe Data Visualization using ThreeJS/WebGL",
+"license": "MIT",
+"topics": [
+"globe",
+"webgl",
+"threejs",
+"datavisualization",
+"react"
+]
+},
+"https://github.com/shuding/cobe": {
+"name": "cobe",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "shuding/cobe",
+"stars": 6078,
+"pushed": "2026-09-22",
+"archived": false,
+"desc": "5KB WebGL globe lib.",
+"license": "MIT",
+"topics": [
+"webgl",
+"globe"
+]
+},
+"https://github.com/tsparticles/tsparticles": {
+"name": "tsparticles",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "tsparticles/tsparticles",
+"stars": 9118,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "tsParticles - Easily create highly customizable JavaScript particles effects, confetti explosions and fireworks animations and use them as animated backgrounds ",
+"license": "MIT",
+"topics": [
+"particles",
+"typescript",
+"npm",
+"javascript",
+"animations",
+"web",
+"tsparticles",
+"angular"
+]
+},
+"https://github.com/emilkowalski/sonner": {
+"name": "sonner",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "emilkowalski/sonner",
+"stars": 13238,
+"pushed": "2026-08-10",
+"archived": false,
+"desc": "An opinionated toast component for React.",
+"license": "MIT",
+"topics": [
+"react",
+"toast",
+"notifications"
+]
+},
+"https://github.com/emilkowalski/vaul": {
+"name": "vaul",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "emilkowalski/vaul",
+"stars": 8754,
+"pushed": "2025-10-03",
+"archived": false,
+"desc": "A drawer component for React.",
+"license": "MIT",
+"topics": [
+"dialog",
+"drawer",
+"react"
+]
+},
+"https://github.com/pacocoursey/cmdk": {
+"name": "cmdk",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "dip/cmdk",
+"stars": 13164,
+"pushed": "2025-10-29",
+"archived": false,
+"desc": "Fast, unstyled command menu React component.",
+"license": "MIT",
+"topics": [
+"combobox",
+"command-palette",
+"radix-ui",
+"react",
+"command-menu"
+]
+},
+"https://github.com/floating-ui/floating-ui": {
+"name": "floating-ui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "floating-ui/floating-ui",
+"stars": 32818,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "A JavaScript library to position floating elements and create interactions for them.",
+"license": "MIT",
+"topics": [
+"positioning-engine",
+"tooltip",
+"position",
+"dropdown",
+"popover",
+"positioning",
+"tooltip-position",
+"popovers"
+]
+},
+"https://github.com/atomiks/tippyjs": {
+"name": "tippyjs",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "atomiks/tippyjs",
+"stars": 12227,
+"pushed": "2024-05-27",
+"archived": true,
+"desc": "Tooltip, popover, dropdown, and menu library",
+"license": "MIT",
+"topics": [
+"tooltip",
+"popover",
+"menu",
+"combobox",
+"dropdown",
+"popup"
+]
+},
+"https://github.com/airbnb/visx": {
+"name": "visx",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "airbnb/visx",
+"stars": 21116,
+"pushed": "2026-06-22",
+"archived": false,
+"desc": "\ud83d\udc2f visx | visualization components",
+"license": "MIT",
+"topics": [
+"vx",
+"react",
+"d3",
+"visualization",
+"chart",
+"svg",
+"data-visualization",
+"visx"
+]
+},
+"https://github.com/plouc/nivo": {
+"name": "nivo",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "plouc/nivo",
+"stars": 14144,
+"pushed": "2026-07-21",
+"archived": false,
+"desc": "nivo provides a rich set of dataviz components, built on top of the awesome d3 and React libraries",
+"license": "MIT",
+"topics": [
+"dataviz",
+"react",
+"d3js",
+"isomorphic",
+"svg",
+"charts",
+"components",
+"canvas"
+]
+},
+"https://github.com/d3/d3": {
+"name": "d3",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "d3/d3",
+"stars": 113972,
+"pushed": "2026-11-03",
+"archived": false,
+"desc": "Bring data to life with SVG, Canvas and HTML. :bar_chart::chart_with_upwards_trend::tada:",
+"license": "ISC",
+"topics": [
+"visualization",
+"data-visualization",
+"charts",
+"svg",
+"chart",
+"d3"
+]
+},
+"https://github.com/phosphor-icons/react": {
+"name": "react",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "phosphor-icons/react",
+"stars": 1800,
+"pushed": "2026-01-06",
+"archived": false,
+"desc": "A flexible icon family for React",
+"license": "MIT",
+"topics": [
+"icons",
+"icon-pack",
+"react",
+"reactjs",
+"svg",
+"svg-icons",
+"icon-font"
+]
+},
+"https://github.com/tabler/tabler-icons": {
+"name": "tabler-icons",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "tabler/tabler-icons",
+"stars": 22717,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "A set of over 6500 free MIT-licensed high-quality SVG icons for you to use in your web projects.",
+"license": "MIT",
+"topics": [
+"icons",
+"iconset",
+"svg-icons",
+"svg",
+"icons-pack",
+"bootstrap-icons",
+"css",
+"icon-pack"
+]
+},
+"https://github.com/iconify/iconify": {
+"name": "iconify",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "iconify/iconify",
+"stars": 6411,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "Universal icon framework. One syntax for FontAwesome, Material Design Icons, DashIcons, Feather Icons, EmojiOne, Noto Emoji and many other open source icon sets",
+"license": "MIT",
+"topics": [
+"icons",
+"emoji",
+"svg",
+"svg-framework",
+"vector-icons",
+"glyph-fonts"
+]
+},
+"https://github.com/streamich/react-use": {
+"name": "react-use",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "streamich/react-use",
+"stars": 43978,
+"pushed": "2026-06-10",
+"archived": false,
+"desc": "React Hooks \u2014 \ud83d\udc4d",
+"license": "Unlicense",
+"topics": []
+},
+"https://github.com/react-hook-form/react-hook-form": {
+"name": "react-hook-form",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "react-hook-form/react-hook-form",
+"stars": 44925,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "\ud83d\udccb React Hooks for form state management and validation (Web + React Native)",
+"license": "MIT",
+"topics": [
+"typescript",
+"react-hooks",
+"forms",
+"validation",
+"react-native",
+"form-builder",
+"dx",
+"ux"
+]
+},
+"https://github.com/TanStack/table": {
+"name": "table",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "TanStack/table",
+"stars": 28586,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "\ud83e\udd16 Headless UI for building powerful tables & datagrids for TS/JS -  React-Table, Vue-Table, Solid-Table, Svelte-Table",
+"license": "MIT",
+"topics": [
+"react",
+"table",
+"datagrid",
+"datatable",
+"grid",
+"datagrids",
+"hooks",
+"sorting"
+]
+},
+"https://github.com/TanStack/virtual": {
+"name": "virtual",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "TanStack/virtual",
+"stars": 7201,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "\ud83e\udd16 Headless UI for Virtualizing Large Element Lists in JS/TS, React, Solid, Vue and Svelte",
+"license": "MIT",
+"topics": [
+"react",
+"reactjs",
+"virtualization",
+"virtualized",
+"javascript",
+"scrolling",
+"performance",
+"solid"
+]
+},
+"https://github.com/nolimits4web/swiper": {
+"name": "swiper",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "nolimits4web/swiper",
+"stars": 41908,
+"pushed": "2026-10-30",
+"archived": false,
+"desc": "Most modern mobile touch slider with hardware accelerated transitions",
+"license": "MIT",
+"topics": [
+"swipe",
+"swiper",
+"gallery",
+"touch",
+"touch-events",
+"mobile",
+"slider",
+"carousel"
+]
+},
+"https://github.com/splidejs/splide": {
+"name": "splide",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "Splidejs/splide",
+"stars": 5362,
+"pushed": "2024-07-08",
+"archived": false,
+"desc": "Splide is a lightweight, flexible and accessible slider/carousel written in TypeScript. No dependencies, no Lighthouse errors.",
+"license": "MIT",
+"topics": [
+"slider",
+"carousel",
+"swipe",
+"drag",
+"breakpoints",
+"autoplay",
+"lazy-loading",
+"lightweight"
+]
+},
+"https://github.com/atlassian/pragmatic-drag-and-drop": {
+"name": "pragmatic-drag-and-drop",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "atlassian/pragmatic-drag-and-drop",
+"stars": 12797,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Fast drag and drop for any experience on any tech stack",
+"license": "NOASSERTION",
+"topics": [
+"drag-and-drop",
+"dnd",
+"dropzone",
+"sortable"
+]
+},
+"https://github.com/mattboldt/typed.js": {
+"name": "typed.js",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "mattboldt/typed.js",
+"stars": 16275,
+"pushed": "2026-01-25",
+"archived": false,
+"desc": "A JavaScript Typing Animation Library",
+"license": "NOASSERTION",
+"topics": []
+},
+"https://github.com/yuanqing/charming": {
+"name": "charming",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "yuanqing/charming",
+"stars": 1000,
+"pushed": "2021-01-30",
+"archived": false,
+"desc": ":tophat: Lettering.js in vanilla JavaScript",
+"license": "MIT",
+"topics": [
+"javascript",
+"dom",
+"typography"
+]
+},
+"https://github.com/michalsnik/aos": {
+"name": "aos",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "michalsnik/aos",
+"stars": 28057,
+"pushed": "2024-03-26",
+"archived": false,
+"desc": "Animate on scroll library",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/locomotivemtl/locomotive-scroll": {
+"name": "locomotive-scroll",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "locomotivemtl/locomotive-scroll",
+"stars": 8897,
+"pushed": "2026-11-16",
+"archived": false,
+"desc": "\ud83d\udee4 Detection of elements in viewport & smooth scrolling with parallax.",
+"license": "MIT",
+"topics": [
+"smooth-scrolling",
+"parallax",
+"in-view",
+"javascript"
+]
+},
+"https://github.com/dixonandmoe/rellax": {
+"name": "rellax",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "dixonandmoe/rellax",
+"stars": 7116,
+"pushed": "2024-08-24",
+"archived": false,
+"desc": "Lightweight, vanilla javascript parallax library",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/lukePeavey/SplitType": {
+"name": "SplitType",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "lukePeavey/SplitType",
+"stars": 736,
+"pushed": "2023-12-03",
+"archived": false,
+"desc": "Javascript utility that splits text into lines, words, characters for animation ",
+"license": null,
+"topics": [
+"animation",
+"javascript",
+"split-text",
+"typography"
+]
+},
+"https://github.com/vercel/geist-font": {
+"name": "geist-font",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "vercel/geist-font",
+"stars": 3777,
+"pushed": "2026-11-06",
+"archived": false,
+"desc": "",
+"license": "OFL-1.1",
+"topics": [
+"font",
+"variable-fonts"
+]
+},
+"https://github.com/rsms/inter": {
+"name": "inter",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "rsms/inter",
+"stars": 20096,
+"pushed": "2024-11-19",
+"archived": false,
+"desc": "The Inter font family",
+"license": "OFL-1.1",
+"topics": [
+"typeface",
+"font",
+"design"
+]
+},
+"https://github.com/animate-css/animate.css": {
+"name": "animate.css",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "animate-css/animate.css",
+"stars": 83030,
+"pushed": "2024-07-29",
+"archived": false,
+"desc": "\ud83c\udf7f A cross-browser library of CSS animations. As easy to use as an easy thing.",
+"license": "NOASSERTION",
+"topics": [
+"css-animations",
+"css",
+"animation",
+"stylesheets"
+]
+},
+"https://github.com/IanLunn/Hover": {
+"name": "Hover",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "IanLunn/Hover",
+"stars": 29415,
+"pushed": "2023-10-28",
+"archived": false,
+"desc": "A collection of CSS3 powered hover effects to be applied to links, buttons, logos, SVG, featured images and so on. Easily apply to your own elements, modify or ",
+"license": "NOASSERTION",
+"topics": [
+"css-effects",
+"css",
+"sass"
+]
+},
+"https://github.com/alyssaxuu/screenity": {
+"name": "screenity",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "alyssaxuu/screenity",
+"stars": 19003,
+"pushed": "2026-11-08",
+"archived": false,
+"desc": "The free and privacy-friendly screen recorder with no limits \ud83c\udfa5",
+"license": "GPL-3.0",
+"topics": [
+"screen-capture",
+"screencast",
+"recorder",
+"annotation",
+"design",
+"productivity",
+"video",
+"editor"
+]
+},
+"https://github.com/ui-layouts/uilayouts": {
+"name": "uilayouts",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "ui-layouts/uilayouts",
+"stars": 3865,
+"pushed": "2026-10-31",
+"archived": false,
+"desc": "UI Layouts isn\u2019t just a library. It\u2019s your complete front-end universe with components, effects, design tools, and ready-to-use blocks, everything you need to b",
+"license": "MIT",
+"topics": [
+"component-library",
+"framer-motion",
+"react-animation-components",
+"tailwindcss",
+"accertinity",
+"accordion-component",
+"animated-tabs",
+"components"
+]
+},
+"https://github.com/ruru-m07/ruru-ui": {
+"name": "ruru-ui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "ruru-m07/ruru-ui",
+"stars": 90,
+"pushed": "2026-01-15",
+"archived": false,
+"desc": "Ruru UI is a design system for building classic web applications.",
+"license": "MIT",
+"topics": [
+"ui",
+"ruru-ui",
+"design",
+"design-system",
+"fumadocs",
+"mdx",
+"nextjs",
+"tailwind-css"
+]
+},
+"https://github.com/damien-schneider/cuicui": {
+"name": "cuicui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "damien-schneider/cuicui",
+"stars": 981,
+"pushed": "2026-10-11",
+"archived": false,
+"desc": "Simplify your UI with clean, copy-paste components that minimize JavaScript, maximize CSS, spark creativity, and empower you with code you fully own and underst",
+"license": "MIT",
+"topics": [
+"copy-paste",
+"ui",
+"ui-components",
+"components-library",
+"components-react",
+"framer-motion",
+"tailwind-css"
+]
+},
+"https://github.com/syntaxUI/syntaxui": {
+"name": "syntaxui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "SyntaxUI/syntaxui",
+"stars": 991,
+"pushed": "2026-05-18",
+"archived": false,
+"desc": "Get free access to pre-built, Tailwind CSS-powered components, animations and effects - brought to life using Framer Motion. Just copy, paste and you're ready t",
+"license": "MIT",
+"topics": [
+"css",
+"framer-motion",
+"nextjs",
+"react",
+"tailwindcss",
+"components",
+"typescript",
+"ui"
+]
+},
+"https://github.com/educlopez/smoothui": {
+"name": "smoothui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "educlopez/smoothui",
+"stars": 1064,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "SmoothUI is a collection of beautifully designed components with smooth animations built with React, Tailwind CSS, Shadcn/ui and Motion",
+"license": "MIT",
+"topics": [
+"animation",
+"framer-motion",
+"nextjs",
+"react",
+"tailwindcss",
+"motion",
+"components",
+"shadcn"
+]
+},
+"https://github.com/serafimcloud/21st": {
+"name": "21st",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "serafimcloud/21st",
+"stars": 5567,
+"pushed": "2025-05-28",
+"archived": false,
+"desc": "npm for design engineers: largest marketplace of shadcn/ui-based React Tailwind components, blocks and hooks",
+"license": "MIT",
+"topics": [
+"react",
+"shadcn-ui",
+"tailwindcss",
+"ui-components",
+"nextjs",
+"shadcn",
+"ui",
+"ui-library"
+]
+},
+"https://github.com/heroui-inc/heroui": {
+"name": "heroui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "heroui-inc/heroui",
+"stars": 31263,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "\ud83d\ude80 Beautiful, fast and modern React UI library. (Previously NextUI)",
+"license": "Apache-2.0",
+"topics": [
+"reactjs",
+"library",
+"component-library",
+"components"
+]
+},
+"https://github.com/mui/material-ui": {
+"name": "material-ui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "mui/material-ui",
+"stars": 99364,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Material UI: Comprehensive React component library that implements Google's Material Design. Free forever.",
+"license": "MIT",
+"topics": [
+"react-components",
+"react",
+"material-design",
+"material-ui",
+"design-system"
+]
+},
+"https://github.com/palantir/blueprint": {
+"name": "blueprint",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "palantir/blueprint",
+"stars": 22221,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "A React-based UI toolkit for the web",
+"license": "Apache-2.0",
+"topics": [
+"react",
+"components",
+"typescript",
+"lerna",
+"design",
+"system",
+"ui",
+"toolkit"
+]
+},
+"https://github.com/elastic/eui": {
+"name": "eui",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "elastic/eui",
+"stars": 6388,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Elastic UI Framework \ud83d\ude4c",
+"license": "NOASSERTION",
+"topics": [
+"eui",
+"react",
+"design-system",
+"elasticsearch",
+"kibana",
+"css-in-js"
+]
+},
+"https://github.com/Shopify/polaris": {
+"name": "polaris",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "Shopify/polaris-react-archive",
+"stars": 6146,
+"pushed": "2026-09-11",
+"archived": true,
+"desc": "Shopify's Polaris Design System - React implementation (Deprecated)",
+"license": "NOASSERTION",
+"topics": [
+"shopify-polaris",
+"react",
+"typescript",
+"design-system",
+"component-library",
+"design-systems",
+"design-tokens",
+"figma-plugin"
+]
+},
+"https://github.com/chakra-ui/zag": {
+"name": "zag",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "chakra-ui/zag",
+"stars": 5288,
+"pushed": "2026-11-19",
+"archived": false,
+"desc": "Build your design system in React, Solid, Vue, Svelte or Vanilla. Powered by finite state machines",
+"license": "MIT",
+"topics": [
+"react",
+"vue",
+"solid",
+"accessibility",
+"ui",
+"ui-kit",
+"state-machines",
+"ui-components"
+]
+},
+"https://github.com/tailwindlabs/tailwindcss": {
+"name": "tailwindcss",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "tailwindlabs/tailwindcss",
+"stars": 98654,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "A utility-first CSS framework for rapid UI development.",
+"license": "MIT",
+"topics": [
+"tailwindcss",
+"css",
+"css-framework",
+"postcss",
+"functional-css",
+"utility-classes",
+"responsive"
+]
+},
+"https://github.com/vanilla-extract-css/vanilla-extract": {
+"name": "vanilla-extract",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "vanilla-extract-css/vanilla-extract",
+"stars": 10453,
+"pushed": "2026-11-11",
+"archived": false,
+"desc": "Zero-runtime Stylesheets-in-TypeScript",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/unocss/unocss": {
+"name": "unocss",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "unocss/unocss",
+"stars": 18991,
+"pushed": "2026-11-17",
+"archived": false,
+"desc": "The instant on-demand atomic CSS engine.",
+"license": "NOASSERTION",
+"topics": [
+"atomic-css",
+"vite-plugin",
+"windicss",
+"engine",
+"unocss"
+]
+},
+"https://github.com/pmndrs/react-three-fiber": {
+"name": "react-three-fiber",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/react-three-fiber",
+"stars": 33830,
+"pushed": "2026-10-21",
+"archived": false,
+"desc": "\ud83c\udde8\ud83c\udded A React renderer for Three.js",
+"license": "MIT",
+"topics": [
+"react",
+"threejs",
+"fiber",
+"renderer",
+"3d",
+"animation"
+]
+},
+"https://github.com/pmndrs/react-three-rapier": {
+"name": "react-three-rapier",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/react-three-rapier",
+"stars": 1688,
+"pushed": "2026-10-12",
+"archived": false,
+"desc": "\ud83e\udd3a Rapier physics in React",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/pmndrs/postprocessing": {
+"name": "postprocessing",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/postprocessing",
+"stars": 2986,
+"pushed": "2026-11-01",
+"archived": false,
+"desc": "A post processing library for three.js.",
+"license": "Zlib",
+"topics": [
+"post-processing",
+"image-effects",
+"real-time",
+"webgl",
+"image-processing",
+"three-js",
+"effects",
+"composer"
+]
+},
+"https://github.com/pmndrs/leva": {
+"name": "leva",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/leva",
+"stars": 6277,
+"pushed": "2025-11-09",
+"archived": false,
+"desc": "\ud83c\udf0b React-first components GUI",
+"license": "MIT",
+"topics": [
+"gui",
+"react"
+]
+},
+"https://github.com/pmndrs/zustand": {
+"name": "zustand",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "pmndrs/zustand",
+"stars": 58956,
+"pushed": "2026-11-06",
+"archived": false,
+"desc": "\ud83d\udc3b Bear necessities for state management in React",
+"license": "MIT",
+"topics": [
+"hooks",
+"react",
+"react-context",
+"reactjs",
+"redux",
+"state-management",
+"hacktoberfest"
+]
+},
+"https://github.com/vercel/satori": {
+"name": "satori",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "vercel/satori",
+"stars": 14206,
+"pushed": "2026-11-12",
+"archived": false,
+"desc": "Enlightened library to convert HTML and CSS to SVG",
+"license": "MPL-2.0",
+"topics": [
+"image-generator",
+"jsx",
+"svg",
+"image",
+"css",
+"image-generation",
+"opengraph-images",
+"satori"
+]
+},
+"https://github.com/russellgoldenberg/scrollama": {
+"name": "scrollama",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "russellsamora/scrollama",
+"stars": 6014,
+"pushed": "2025-11-13",
+"archived": false,
+"desc": "Scrollytelling with IntersectionObserver.",
+"license": "MIT",
+"topics": []
+},
+"https://github.com/matteobruni/tsparticles": {
+"name": "tsparticles",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "tsparticles/tsparticles",
+"stars": 9118,
+"pushed": "2026-11-18",
+"archived": false,
+"desc": "tsParticles - Easily create highly customizable JavaScript particles effects, confetti explosions and fireworks animations and use them as animated backgrounds ",
+"license": "MIT",
+"topics": [
+"particles",
+"typescript",
+"npm",
+"javascript",
+"animations",
+"web",
+"tsparticles",
+"angular"
+]
+},
+"https://github.com/wobsoriano/vue-sonner": {
+"name": "vue-sonner",
+"src": "seed (known design/animation libraries)",
+"section": "seed",
+"repo": "wobsoriano/vue-sonner",
+"stars": 1,
+"pushed": "2025-11-15",
+"archived": false,
+"desc": "\ud83d\udd14 An opinionated toast component for Vue.",
+"license": "MIT",
+"topics": []
+}
+}

@@ -63,3 +63,48 @@ site does not depend on generated video.
 - The live scene renders in software (SwiftShader) in the headless test runs; real GPUs look sharper.
 - 0.33 s and 93% are documented results from earlier runs (`docs/EVAL_RESULTS.md`, `docs/LOCAL_MODEL_RESULTS.md`), not
   computed by the page. All data is synthetic; not affiliated with MY Bharat or any government body.
+
+## v4.1 polish (19 Nov 2026, night)
+
+**Library research.** 447 candidate repos from brillout/awesome-react-components, birobirobiro/awesome-shadcn-ui and known
+design/animation libraries; GitHub API metadata for each; ranked by stars, relevance, recent activity and licence.
+The ranked 200 are in `docs/v6/research/libraries/LIBRARIES-200.md` (169 MIT, 12 Apache-2.0; 99 component kits,
+41 motion/scroll, 20 3D/WebGL, 15 overlays, 10 text, 10 charts, 5 icons).
+- **Installed (MIT):** `@react-three/drei` 10.7.9 (Environment + Lightformer studio lighting, Sparkles) and
+  `maath` 0.10.8 (critically damped camera easing).
+- **Patterns adopted and written fresh, no code copied:** word-by-word blur reveal (Motion Primitives `TextEffect`,
+  React Bits `SplitText`); magnetic buttons (Motion Primitives `Magnetic`); scroll progress bar; hover cards; chapter
+  tooltips. React Bits is MIT + Commons Clause, so nothing was copied from it.
+
+**Ring.**
+- A flat, bevelled band (lathe of a rounded-rectangle profile) replaces the plain tube, with 120 engraved bezel ticks,
+  an inner hairline and an outer orbit line.
+- Seats are recessed sockets with brass rims and glowing pearls. Volunteers fly in and merge into the pearls.
+- Studio softbox reflections (drei Lightformers) light the brass, and soft dust particles float in the air.
+- The camera eases between per-chapter shots, with a slow breathing motion and pointer parallax (maath).
+
+**Text and hover.**
+- Headlines reveal word by word.
+- Hovering a name on the ring lights its seat and opens a card with the solver's reasons.
+- Hovering a pearl does the same.
+- Buttons pull toward the cursor, and chapter dots show their names.
+
+**Robustness found and fixed.**
+- Bloom blanked whole frames whenever any pixel was NaN or infinite.
+- Three causes were traced:
+  - an invalid volunteer-point position after a dropout;
+  - zero-scale instance matrices;
+  - grazing-angle specular maths.
+- Fixes:
+  - finite guards on positions;
+  - a minimum instance scale;
+  - a shader guard that clamps every lit material to finite HDR;
+  - a single-pass kernel bloom instead of the mipmap chain.
+- Three consecutive full captures show no blank chapter.
+
+**Verification.**
+- `npm run build`, `oxlint` (0 warnings) and vitest 4/4 pass.
+- `npm run verify:v4` passes: counters 70/23, live READY, gap NOT READY, dropout re-plan, axe 12 checks / 0 violations,
+  reduced motion, no WebGL, phone overflow, no page errors.
+- The axe check now waits 1.8 s on `/` so it does not score text that is still fading in.
+- Lighthouse `/`: performance 100, accessibility 100, best practices 100, TBT 20 ms, CLS 0.
