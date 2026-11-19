@@ -1,0 +1,5 @@
+﻿# Frontend media provenance
+
+`intro.mp4` and `intro.webm` are web encodes of the owner's illustrative Gemini clip `design/scrolly/media/video/c1.mp4`. The clip remains labelled Illustrative; its watermark is retained. Transition clips `c2.mp4` through `c5.mp4` are encodes of the matching owner-provided Gemini clips. Video streams were scaled to 960x540, encoded as H.264 with a capped bitrate, and copied with their watermark intact. The browser loads these clips only as a chapter transition, never as a source of application data or interaction.
+
+`c2-poster.jpg` through `c5-poster.jpg` are downsized frames sampled from the corresponding clips and used as lazy-loading/reduced-motion fallbacks. Chapters 6–9 reference optional `c6.mp4`–`c9.mp4` slots but the files are absent; the live paper village/poster remains visible when those clips cannot load. `up-map.webp` is a web-optimized copy of the illustrative source map in `design/scrolly/media/images/up-map.png`. `paper.jpg` and `village-poster.jpg` are copies of the generated stills. No readable synthetic text, logo, flag, or government emblem is baked into the images.
