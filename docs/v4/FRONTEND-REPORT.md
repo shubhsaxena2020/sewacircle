@@ -57,3 +57,5 @@ All four cumulative layout shift values were below 0.001. The 3D `CrewScene` chu
 ### Limits
 
 The 3D interaction is intentionally static on phone and reduced-data settings to protect load time. The video and screenshots show synthetic app data; they are not field evidence. The Remotion licence depends on the eventual user's eligibility. The Fusion design is reproducible from the script and OBJ export; it is not a native `.f3d` archive. Lighthouse scores are from one local run per profile and can vary by machine.
+
+The automatic approval review rejected removal of the now-empty temporary Fusion add-in directory under `%APPDATA%`. Its Python and manifest files were removed, so it cannot auto-run. Seven screenshot paths were already modified when this task began; the Playwright captures refreshed them locally, but those files remain unstaged to avoid committing pre-existing work without review. The unrelated `backend/` and `docs/lanes/` worktree files were not touched.
