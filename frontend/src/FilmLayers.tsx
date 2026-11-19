@@ -42,7 +42,8 @@ export default function FilmLayers({ progress }: { progress: { current: number }
         const index = following < 0 ? starts.length - 1 : Math.max(0, following - 1)
         setPair([index, index])
         root.style.setProperty('--film-mix', '0')
-        root.querySelectorAll<HTMLElement>('.film-depth').forEach(layer => { layer.style.transform = 'none' })
+        root.style.setProperty('--film-shift-x', '0px')
+        root.style.setProperty('--film-shift-y', '0px')
       }
       showStaticChapter()
       window.addEventListener('scroll', showStaticChapter, { passive: true })
@@ -62,12 +63,16 @@ export default function FilmLayers({ progress }: { progress: { current: number }
       const chapterIndex = Math.floor(chapter)
       const next = Math.min(10, chapterIndex + 1)
       const a = frames[chapterIndex], b = frames[next]
-      setPair(old => old[0] === chapterIndex && old[1] === next ? old : [chapterIndex, next])
-      root.style.setProperty('--film-mix', a === b ? '0' : String(chapter - chapterIndex))
-      root.querySelectorAll<HTMLElement>('.film-depth').forEach((layer, depth) => {
-        const amount = depth * 5 + 2
-        layer.style.transform = `translate3d(${pointerX * amount}px,${pointerY * amount + (chapter / 10 - .5) * amount * 2}px,0) scale(1.035)`
+      const ringScenes = ['turmeric-ring', 'crew-backups', 'ready-seal']
+      const bothScenesShowRing = ringScenes.includes(a) && ringScenes.includes(b)
+      setPair(old => {
+        const pair: [number, number] = bothScenesShowRing ? [chapterIndex, chapterIndex] : [chapterIndex, next]
+        return old[0] === pair[0] && old[1] === pair[1] ? old : pair
       })
+      root.style.setProperty('--film-mix', a === b || bothScenesShowRing ? '0' : String(chapter - chapterIndex))
+      const amount = 12
+      root.style.setProperty('--film-shift-x', `${pointerX * amount}px`)
+      root.style.setProperty('--film-shift-y', `${pointerY * amount + (chapter / 10 - .5) * amount * 2}px`)
       frameId = requestAnimationFrame(tick)
     }
     window.addEventListener('pointermove', move, { passive: true })

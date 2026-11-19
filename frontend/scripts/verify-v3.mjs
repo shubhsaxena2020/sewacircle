@@ -61,6 +61,12 @@ try {
     await page.waitForTimeout(350)
     await capture(`chapter-${String(index).padStart(2, '0')}-${id}`)
   }
+  const storyHeight = await page.evaluate(() => document.documentElement.scrollHeight - window.innerHeight)
+  for (const [index, fraction] of [0.31, 0.52, 0.73].entries()) {
+    await page.evaluate(({ height, progress }) => window.scrollTo({ top: height * progress, behavior: 'instant' }), { height: storyHeight, progress: fraction })
+    await page.waitForTimeout(250)
+    await capture(`mid-scroll-${String(index + 1).padStart(2, '0')}`)
+  }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'instant' }))
   await page.getByRole('button', { name: 'हिन्दी' }).click()
   await page.waitForFunction(() => document.documentElement.lang === 'hi')
@@ -73,12 +79,19 @@ try {
   await page.locator('#crew').scrollIntoViewIfNeeded()
   await page.getByRole('button', { name: 'Plan the crew' }).click()
   await page.locator('.crew-pill-list').waitFor({ timeout: 30000 })
+  await page.waitForTimeout(350)
+  await capture('chapter-03-crew')
+  await page.locator('#bench').scrollIntoViewIfNeeded()
+  await page.waitForTimeout(350)
+  await capture('chapter-04-bench')
   await page.locator('#dropout').scrollIntoViewIfNeeded()
   const firstDrop = page.locator('#dropout').getByRole('button', { name: /^Drop / })
   await firstDrop.click()
   const dropoutStatus = page.locator('#dropout [role="status"]')
   await dropoutStatus.waitFor({ timeout: 30000 })
   const firstDropResult = await dropoutStatus.innerText()
+  await page.waitForTimeout(400)
+  await capture('chapter-06-dropout')
   if (!firstDropResult.includes('NOT READY')) throw new Error(`Live dropout did not expose NOT READY: ${firstDropResult}`)
   await capture('story-dropout-not-ready')
   const secondDrop = page.locator('#dropout').getByRole('button', { name: /^Drop Heena P\./ })
@@ -263,7 +276,7 @@ try {
   await videoContext.close()
 
   e2e.push({ filmCuts: filmRanges })
-  const summary = { viewport: '1440x900', e2e, axe: axeResults, api403, apiRequests, reducedMotion: reducedMotionResult, noWebgl: noWebglResult, pageErrors, screenshots: ['page-story.png', 'page-story-hi.png', 'story-dropout-not-ready.png', ...chapters.map((id, i) => `chapter-${String(i).padStart(2, '0')}-${id}.png`), 'page-console.png', 'page-volunteer.png', 'page-districts.png', 'page-method.png', 'page-share.png'], video: 'story-scroll.webm' }
+  const summary = { viewport: '1440x900', e2e, axe: axeResults, api403, apiRequests, reducedMotion: reducedMotionResult, noWebgl: noWebglResult, pageErrors, screenshots: ['page-story.png', 'page-story-hi.png', 'story-dropout-not-ready.png', 'mid-scroll-01.png', 'mid-scroll-02.png', 'mid-scroll-03.png', ...chapters.map((id, i) => `chapter-${String(i).padStart(2, '0')}-${id}.png`), 'page-console.png', 'page-volunteer.png', 'page-districts.png', 'page-method.png', 'page-share.png'], video: 'story-scroll.webm' }
   await writeFile(path.join(out, 'verification-summary.json'), JSON.stringify(summary, null, 2))
   console.log(JSON.stringify(summary, null, 2))
   const blocking = axeResults.filter(item => item.blocking.length)
