@@ -279,3 +279,84 @@ Full results: [`lighthouse-home.json`](../screens/v5/round2/after/lighthouse-hom
 - The scene chunk fell from 1,136.27 KB to 933.43 KB minified (343.28 KB to 247.45 KB gzip) and is split away from `/console`, but it still triggers Vite's 500 KB advisory and costs more to render than a static scene. No mid-range device frame-rate test was performed.
 - The six chapter transitions use time ranges from the same full film master rather than independently encoded clip files. The browser seeks to the relevant interval after lazy load; startup/seek behavior can vary by browser and network.
 - Lighthouse is a desktop run. The accessibility scan is automated and does not replace a full keyboard/screen-reader review.
+
+
+## Round 3 — paper fidelity polish
+
+### Film comparison before editing
+
+I captured the live 11-chapter set first, then extracted film frames at 5 s, 25 s and 50 s from `design/scrolly/media/video/sewacircle-film-web.mp4`. The paired evidence is in [`before/`](../screens/v5/round3/before/) and the labeled contact sheet is [`film-vs-current-before.jpg`](../screens/v5/round3/before/film-vs-current-before.jpg).
+
+- At 5 s, the film board sits in a ground-level, densely dressed square. The live version had a broad, nearly blank board, sparse repeated trees and houses, and little surface grain.
+- At 25 s, the film ring is a narrow, irregular paper band with individually glowing sockets. The live ring read as a thick, uniform annulus; its seats and figures were simple repeated disks and silhouettes.
+- At 50 s, the film village has layered, varied tiled roofs, leafy canopies, mustard rows and textured ground. The live view showed large unbroken fields, a straight-looking river strip and a high aerial angle.
+- Across the three pairs, the film has visible fibers, uneven cut edges and layered contact shadows. The live scene had mostly regular silhouettes, broad flat color areas and harder shadows. Its sky also looked brown and flat at the sampled moments.
+
+### Changes
+
+- `VillageScene.tsx` now perturbs polygon vertices deterministically, rounds the cut corners, and uses irregular polygon rings. Extrusions use a lighter side material, bevels, the supplied `paper.jpg` color map and subtle bump. The ground has a denser fiber repeat; cut materials have small seeded hue/value shifts.
+- The roof rows, mustard flower dots and river ripple strips use instanced meshes. The ring has narrow layered edge bands and surface marks. The board now has separate pinned note sheets and marks; figures have a scarf layer; tree canopies use more staggered paper layers.
+- The camera stays closer to the village through the crew chapters. The sun is lower and warmer; the day/night sky shader now applies Three.js tone/color output transforms and blends a warm horizon into a blue day sky. Night lighting and lanterns remain scroll-driven. Shadow bias and normal bias are set to reduce acne and peter-panning.
+- Shared cut/disk geometries and materials are cached. The production build splits React, Three.js and React Three Fiber into separate chunks. The `/console` route loaded six scripts and requested none of `VillageScene`, `three-core` or `three-fiber`.
+- No dependency was added. The final build’s `VillageScene` chunk is 20.55 kB (6.65 kB gzip); `three-core` is 742.94 kB (187.56 kB gzip), below the 900 kB scene budget. Vite still prints its general 500 kB advisory for the Three.js vendor chunk.
+
+### Round 3 visual evidence
+
+The final 1440×900 chapter captures and route pages are in [`after/`](../screens/v5/round3/after/); matching chapter captures from before the edits are in [`before/`](../screens/v5/round3/before/). I reviewed the before/after chapter contact sheets, all six film-cut captures, all route screenshots, and the labeled [`film-vs-live.jpg`](../screens/v5/round3/after/film-vs-live.jpg) comparison. Film frames are shown beside canvas-only live frames so the 3D scene is visible without the transition video covering it.
+
+The final slow-scroll video is [`story-scroll.webm`](../screens/v5/round3/after/story-scroll.webm): 1440×900, 42.04 seconds, 4,930,775 bytes (`ffprobe`). The six transition captures retain their Illustrative label and the source film’s watermark. Lighthouse reports are [`lighthouse-home.json`](../screens/v5/round3/after/lighthouse-home.json) and [`lighthouse-console.json`](../screens/v5/round3/after/lighthouse-console.json); the browser workflow record is [`verification-summary.json`](../screens/v5/round3/after/verification-summary.json).
+
+### Round 3 verification
+
+Commands ran from `frontend/`. The already-running API on port 8000 and Vite server on 5180 were left running; the production preview used port 4177.
+
+```text
+npm run build
+vite v8.3.8; 3055 modules transformed; build successful.
+Before the final React split, VillageScene was 20.50 kB (gzip 6.62 kB); the final output is 20.55 kB (gzip 6.65 kB).
+three-fiber: 176.96 kB (gzip 56.14 kB); three-core: 742.94 kB (gzip 187.56 kB).
+Vite retains its >500 kB vendor-chunk advisory.
+
+npm run lint
+> oxlint
+No warnings or errors.
+
+npm test
+Test Files 1 passed (1)
+Tests 4 passed (4)
+
+$env:SCREENSHOT_DIR='../docs/screens/v5/round3/after'; $env:BASE_URL='http://127.0.0.1:4177'; npm run verify:v3
+Demo reset: HTTP 200.
+Story anchors: all 11 captured; Hindi headline rendered in Devanagari.
+Live dropout: standby promoted; NOT READY, 1 Logistics and supplies.
+Console: six roles extracted; planner and public share succeeded.
+Evidence: draft, revision request, redraft, confirmation, correction and ledger verification succeeded.
+Role switch: host, volunteer and viewer capabilities loaded; viewer request returned HTTP 403.
+Districts: 20 markers loaded; Kanpur Dehat selected. Volunteer route loaded.
+Mock route: completed fixture planning with zero API calls.
+Counters: 70%, 10%, 23%, 40%.
+Film cuts: all six documented time ranges exercised.
+Axe: zero violations on 6 routes in English and 6 in Hindi.
+Reduced motion: canvas=0, video=0, still=1. No WebGL: canvas=0, still=1.
+Browser page errors: 0.
+
+Console chunk check (production preview)
+6 JavaScript requests; no VillageScene, three-core or three-fiber requests.
+
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4177/ --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round3/after/lighthouse-home.json
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4177/console --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round3/after/lighthouse-console.json
+```
+
+| Route | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 95 | 100 | 100 | 83 | 1,147 ms | 124 ms | 0.076 |
+| `/console` | 100 | 100 | 100 | 82 | 723 ms | 0 ms | 0.037 |
+
+The verification script calls `POST /api/demo/reset` against the local synthetic demo state before exercising the live workflows. No backend files were changed.
+
+### Remaining gaps
+
+- The live scene is more textured, layered and detailed, but it is still a procedural diorama. Its houses, people, vegetation and notice illustrations remain simpler than the film’s authored miniature set, and the wide chapter views still show a large amount of open ground. The comparison image makes this gap visible.
+- The board notes are modeled marks rather than readable hand-drawn notices. The pump, flowers and river ripples are still small at the wide camera distance.
+- The Three.js renderer reports that `PCFSoftShadowMap` has been removed and falls back to `PCFShadowMap`; shadow bias is tuned, but there is no device-level proof of soft-shadow quality or sustained 60 fps. Lighthouse is a desktop lab run, not a mid-range laptop frame-rate test.
+- The scene remains procedural; this round did not create a Fusion export or GLB. The accessible static poster remains the reduced-motion and no-WebGL fallback.

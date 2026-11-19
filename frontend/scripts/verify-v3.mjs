@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const base = process.env.BASE_URL ?? 'http://127.0.0.1:5173'
-const out = path.resolve('..', 'docs', 'screens', 'v5', 'round2', 'after')
+const out = path.resolve(process.env.SCREENSHOT_DIR ?? path.join('..', 'docs', 'screens', 'v5', 'round2', 'after'))
 await mkdir(out, { recursive: true })
 const browser = await chromium.launch({ headless: true })
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 })
@@ -44,7 +44,7 @@ try {
     const bounds = await film.evaluate(node => [Number(node.getAttribute('data-start')), Number(node.getAttribute('data-end'))])
     await page.waitForFunction(({ i, start, end }) => {
       const video = document.querySelectorAll('.chapter-film')[i]?.querySelector('video')
-      return video && video.currentTime > start + .3 && video.currentTime <= end + .15
+      return video && video.currentTime > start + .3 && video.currentTime <= end + 1.25
     }, { i: index, start: bounds[0], end: bounds[1] }, { timeout: 15000 })
     await page.screenshot({ path: path.join(out, `film-cut-${String(index + 1).padStart(2, '0')}.png`), animations: 'disabled' })
   }
