@@ -107,3 +107,13 @@ paper-craft world and our own 3D crew board are the identity.
   agent on this worktree. Start from a clean frontend\ (git status) and build from scratch.
 - design\fusion\SewaCrewKit (copied from frontend-v2) and frontend\public\models\*.glb (the old v2 kit) are available as a start
   for the crew ring parts; restyle them as paper or rebuild procedurally - your call, judged by how it looks.
+
+## UPDATE 4 FROM THE HEAD (model + clips)
+- You now run on gpt-6-luna (the owner switched models to save usage). A gpt-6-sol attempt was stopped after a few minutes;
+  its uncommitted edits (frontend/package.json, App.tsx, shared.tsx, public/media) are in the tree: keep or discard them, your call.
+- Video is BACK as an optional layer, but never the source of interactivity: the owner is generating a continuous paper-craft
+  film clip by clip (c1.mp4 exists; c2.mp4 ... will appear in design\scrolly\media\video\, each starting on the previous clip's
+  last frame). Use clips as short cinematic transitions BETWEEN live 3D chapters (c1 intro -> interest; c2 interest; c3-c5 crew
+  and bench; c6 verdict; c7 the drive; c8 evidence; c9 many villages), always labelled "Illustrative", Gemini watermark kept.
+  Build each transition slot so it shows the matching still/3D frame when its clip is missing, and picks up clips that appear.
+- Do NOT use anything from any copy of the oryzo/Lusion site (images, copy, fonts, CSS, code). Patterns only.
