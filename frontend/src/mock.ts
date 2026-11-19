@@ -2,6 +2,7 @@
 import type {
   Assignment, ContributionCard, EvalReport, ExtractionResult, LedgerEntry, RosterBoth, RosterResult, TaskSpec, Volunteer,
 } from './types'
+import recordedEval from './eval-report.recorded.json'
 
 const roles = [
   ['role-01', 'Team lead', ['team_leadership', 'event_coordination']],
@@ -85,17 +86,8 @@ function log(action: string, c: ContributionCard, actor: string) {
   ledger.push({ index: ledger.length, ts: new Date().toISOString(), action, card_id: c.id, actor, payload_hash, prev_hash: prev, entry_hash: hash(prev + payload_hash + action) })
 }
 
-export const mockEval: EvalReport = {
-  n_tasks: 10, n_volunteers: 40, synthetic: true, generated_by: 'MOCK FIXTURE - not a real run', misses: ['mock: example miss on t7'],
-  rows: [],
-  summary: {
-    cp_sat: { ready: 0.7, role_coverage: 0.97, robustness: 0.9, repeat_pick_share: 0.15, exposure_gini: 0.3 },
-    nearest_skill: { ready: 0.1, role_coverage: 0.7, robustness: 0.05, repeat_pick_share: 0.45, exposure_gini: 0.5 },
-    manual_greedy: { ready: 0.6, role_coverage: 0.85, robustness: 0.4, repeat_pick_share: 0.4, exposure_gini: 0.45 },
-    random_feasible: { ready: 0.1, role_coverage: 0.6, robustness: 0.1, repeat_pick_share: 0.3, exposure_gini: 0.4 },
-  },
-  ci95: {},
-}
+// Frozen, verbatim recorded result. The mock planner above remains illustrative.
+export const mockEval = recordedEval as unknown as EvalReport
 
 const delay = <T,>(v: T, ms = 350) => new Promise<T>((r) => setTimeout(() => r(v), ms))
 
@@ -103,6 +95,7 @@ export async function mockHandler(method: string, path: string, body: unknown): 
   const b = (body ?? {}) as Record<string, any> // eslint-disable-line @typescript-eslint/no-explicit-any
   if (path === '/health') return { ok: true, disclaimer: 'SYNTHETIC DATA - illustrative, no real people', model: 'mock', llm_mode: 'mock' }
   if (path === '/meta') return { disclaimer: 'SYNTHETIC', skills: {} }
+  if (path === '/capabilities?role=host') return { role: 'host', actions: ['request_revision'] }
   if (path === '/tasks') return [mockTask]
   if (path === '/volunteers') return mockVolunteers
   if (path === '/extract-roles') return delay(mockExtraction, 900)
@@ -117,23 +110,31 @@ export async function mockHandler(method: string, path: string, body: unknown): 
     return delay({ task_id: 't1', dropped_volunteer_id: b.dropped_volunteer_id, healed_with_standby: true, replacement_volunteer_id: 'v7', uncovered_role_ids: [], roster_after: after }, 500)
   }
   if (path === '/evidence/draft') {
-    cards = [
+    const next = [
       mkCard('c1', 'v3', 'First-aid support', 5, 5, [{ code: 'self_declared_skill_unconfirmed', severity: 'info', message: 'First-aid skill is self-declared; host should confirm.' }], 'draft'),
       mkCard('c2', 'v6', 'Documentation', 8, 5, [{ code: 'hours_exceed_recorded', severity: 'warn', message: 'Claimed 8 h but the attendance sheet shows 5 h.' }], 'flagged'),
       mkCard('c3', 'v2', 'Local-language liaison', 5, 5, [], 'draft'),
     ]
-    ledger = []
-    cards.forEach((c) => log(c.status === 'flagged' ? 'flag' : 'draft', c, 'system'))
-    return delay(cards, 900)
+    cards = next.map(c => {
+      const previous = cards.find(old => old.id === c.id)
+      return previous?.status === 'revision_requested' ? { ...c, status: 'draft' as const } :
+        previous && ['confirmed', 'corrected', 'rejected'].includes(previous.status) ? previous : c
+    })
+    cards.filter(c => ['draft', 'flagged'].includes(c.status)).forEach(c => log(c.status === 'flagged' ? 'flag' : 'draft', c, 'system'))
+    return delay(cards.map(c => ({ ...c })), 900)
   }
   if (path === '/evidence/cards') return cards
-  const m = path.match(/^\/evidence\/(\w+)\/(confirm|correct|reject)$/)
+  const m = path.match(/^\/evidence\/(\w+)\/(confirm|correct|reject|request_revision)$/)
   if (m) {
     const c = cards.find((x) => x.id === m[1])!
+    if (!c || !['draft', 'flagged'].includes(c.status)) throw new Error('mock: 409 illegal card transition')
+    if (m[2] === 'request_revision' && !String(b.reason ?? '').trim()) throw new Error('mock: 422 reason required')
     if (m[2] === 'correct' && b.claimed_hours != null) c.claimed_hours = b.claimed_hours
-    c.status = m[2] === 'confirm' ? 'confirmed' : m[2] === 'correct' ? 'corrected' : 'rejected'
-    if (c.status !== 'rejected') c.confirmed_by = 'host'
+    c.status = m[2] === 'request_revision' ? 'revision_requested' : m[2] === 'confirm' ? 'confirmed' : m[2] === 'correct' ? 'corrected' : 'rejected'
+    c.revision_reason = m[2] === 'request_revision' ? String(b.reason).trim() : null
+    if (c.status === 'confirmed' || c.status === 'corrected') c.confirmed_by = 'host'
     log(m[2], c, 'host')
+    if (m[2] === 'request_revision') ledger[ledger.length - 1].reason = c.revision_reason ?? ''
     return delay({ ...c }, 200)
   }
   if (path === '/ledger') return ledger

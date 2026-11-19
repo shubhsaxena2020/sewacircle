@@ -1,7 +1,7 @@
 // Mirrors backend/app/schemas.py. Keep in sync by hand (the head owns both).
 export type Language = 'hi' | 'en' | 'hinglish'
 export type Method = 'cp_sat' | 'nearest_skill' | 'random_feasible' | 'manual_greedy'
-export type CardStatus = 'draft' | 'flagged' | 'confirmed' | 'corrected' | 'rejected'
+export type CardStatus = 'draft' | 'flagged' | 'revision_requested' | 'confirmed' | 'corrected' | 'rejected'
 
 export interface Volunteer {
   id: string; display_name: string; age: number; gender: string
@@ -67,10 +67,12 @@ export interface ContributionCard {
   id: string; task_id: string; volunteer_id: string; role: string; claimed_hours: number
   recorded_hours: number | null; summary: string; evidence_refs: string[]; status: CardStatus
   flags: Flag[]; drafted_by: 'ai' | 'human'; confirmed_by: string | null; created_at: string; synthetic: boolean
+  revision_reason?: string | null
 }
 export interface LedgerEntry {
   index: number; ts: string; action: string; card_id: string; actor: string
   payload_hash: string; prev_hash: string; entry_hash: string
+  reason?: string
 }
 export interface LedgerVerification { ok: boolean; entries: number; first_bad_index: number | null; note: string }
 export interface EvalRow {

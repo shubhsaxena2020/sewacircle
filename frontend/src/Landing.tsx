@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from 'react'
 import { Link } from 'react-router'
 import { ArrowRight, ArrowUpRight, ClipboardList, HeartHandshake, ShieldCheck, Sparkles } from 'lucide-react'
 import { animate, motion, useReducedMotion } from 'motion/react'
-import { api } from './api'
+import { MOCK, api } from './api'
 import { useUi } from './ui-context'
 import { formatPercent } from './i18n'
 import type { EvalReport } from './types'
@@ -62,7 +62,7 @@ export default function Landing() {
 
     <section className="story-section safety-section"><div className="safety-copy"><span className="kicker">03 / {t('sectionSafety')}</span><h2>{t('safety')}</h2><p>{t('safetyText')}</p><Link to="/method" className="text-link">{t('method')}<ArrowUpRight size={18}/></Link></div><div className="safety-visual"><div className="safety-orbit"><ShieldCheck size={86} strokeWidth={1}/></div><div className="safety-tag">{t('checkedRule')}</div></div></section>
 
-    <section className="story-section results-section"><div className="section-heading"><span className="kicker">04 / {t('sectionMeasured')}</span><h2>{t('results')}</h2><p>{t('resultsNote')}</p></div>{report ? <div className="result-cards">{(['cp_sat', 'nearest_skill', 'manual_greedy', 'random_feasible'] as const).map((method) => <article key={method}><span className="small-label">{t(method === 'cp_sat' ? 'methodCp' : method === 'nearest_skill' ? 'methodNear' : method === 'manual_greedy' ? 'methodManual' : 'methodRandom')}</span><AnimatedPercent value={report.summary[method]?.ready ?? 0} lang={lang}/><span>{t('readyMetric')}</span><div className="result-track"><i style={{ width: `${(report.summary[method]?.ready ?? 0) * 100}%` }}/></div></article>)}</div> : <p className="muted" role="status">{evalState==='loading'?t('loading'):t('evalUnavailable')}</p>}<Link className="button dark" to="/console?step=evaluation">{t('viewEval')}<ArrowRight size={18}/></Link></section>
+    <section className="story-section results-section"><div className="section-heading"><span className="kicker">04 / {t('sectionMeasured')}</span><h2>{t('results')}</h2><p>{t('resultsNote')}</p>{MOCK && <p className="recorded-source"><strong>{t('recordedRun')}</strong> · <a href="/reference/eval_report.json">{t('sourceReport')}</a></p>}</div>{report ? <div className="result-cards">{(['cp_sat', 'nearest_skill', 'manual_greedy', 'random_feasible'] as const).map((method) => <article key={method}><span className="small-label">{t(method === 'cp_sat' ? 'methodCp' : method === 'nearest_skill' ? 'methodNear' : method === 'manual_greedy' ? 'methodManual' : 'methodRandom')}</span><AnimatedPercent value={report.summary[method]?.ready ?? 0} lang={lang}/><span>{t('readyMetric')}</span><div className="result-track"><i style={{ width: `${(report.summary[method]?.ready ?? 0) * 100}%` }}/></div></article>)}</div> : <p className="muted" role="status">{evalState==='loading'?t('loading'):t('evalUnavailable')}</p>}<Link className="button dark" to="/console?step=evaluation">{t('viewEval')}<ArrowRight size={18}/></Link></section>
 
     <section className="story-section evidence-story"><div className="evidence-image"><img src={evidenceImage} alt={t('evidenceArt')}/></div><div className="evidence-copy"><span className="kicker">05 / {t('sectionReview')}</span><h2>{t('principles')}</h2><div className="principle-list"><p>{t('principleOne')}</p><p>{t('principleTwo')}</p><p>{t('principleThree')}</p></div></div></section>
 

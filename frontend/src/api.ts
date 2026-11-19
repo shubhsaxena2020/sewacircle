@@ -34,6 +34,7 @@ export const defaultOptions: RosterOptions = {
 }
 
 export const api = {
+  capabilities: () => call<{ role: string; actions: string[] }>('GET', '/capabilities?role=host'),
   health: () => call<{ ok: boolean; disclaimer: string; model: string; llm_mode: string }>('GET', '/health'),
   meta: () => call<{ disclaimer: string; skills: Record<string, string> }>('GET', '/meta'),
   tasks: () => call<TaskSpec[]>('GET', '/tasks'),
@@ -47,8 +48,8 @@ export const api = {
   draft: (task: TaskSpec, host_notes: string, attendance_rows: AttendanceRow[], assignments: unknown[]) =>
     call<ContributionCard[]>('POST', '/evidence/draft', { task, host_notes, attendance_rows, assignments }),
   cards: () => call<ContributionCard[]>('GET', '/evidence/cards'),
-  decide: (id: string, action: 'confirm' | 'correct' | 'reject', claimed_hours?: number) =>
-    call<ContributionCard>('POST', `/evidence/${id}/${action}`, { actor: 'host', claimed_hours }),
+  decide: (id: string, action: 'confirm' | 'correct' | 'reject' | 'request_revision', claimed_hours?: number, reason?: string) =>
+    call<ContributionCard>('POST', `/evidence/${id}/${action}`, { actor: 'host', claimed_hours, reason }),
   ledger: () => call<LedgerEntry[]>('GET', '/ledger'),
   verify: () => call<LedgerVerification>('GET', '/ledger/verify'),
   credential: (id: string) => call<Record<string, unknown>>('GET', `/export/credential/${id}`),

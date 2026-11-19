@@ -22,7 +22,7 @@ function Frame() {
     <a className="skip" href="#main">{t('skip')}</a>
     <div className="notice"><span className="notice-dot" />{t('synthetic')}{MOCK && <strong className="mock-notice">{t('mock')}</strong>}<span className="notice-right">{t('unaffiliated')}</span></div>
     <header className="site-header">
-      <Link to="/" className="logo" aria-label={t('brand')}><span className="logo-mark"><CircleDot size={23} strokeWidth={2.5}/></span><span>Sewa<span className="logo-accent">Circle</span></span></Link>
+      <Link to="/" className="logo" aria-label={`SewaCircle · ${t('brand')}`}><span className="logo-mark"><CircleDot size={23} strokeWidth={2.5}/></span><span>Sewa<span className="logo-accent">Circle</span></span></Link>
       <nav aria-label={t('mainNav')} className="main-nav">{nav.map(([href, key]) => <NavLink key={href} end={href === '/'} to={href} className={({ isActive }) => isActive ? 'active' : ''}>{t(key)}</NavLink>)}</nav>
       <div className="header-actions"><LanguageToggle/><ProjectorToggle/></div>
     </header>

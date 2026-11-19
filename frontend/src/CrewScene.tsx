@@ -1,6 +1,6 @@
-import { Suspense, useMemo, useRef, useState } from 'react'
+import { Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
-import { ContactShadows, Environment, useGLTF } from '@react-three/drei'
+import { Environment, useGLTF } from '@react-three/drei'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
 import { BufferGeometry, InstancedMesh, Mesh, MeshStandardMaterial, Object3D } from 'three'
 import type { Group } from 'three'
@@ -11,7 +11,9 @@ const slots = Array.from({ length: 6 }, (_, i) => {
   return [4 * Math.cos(angle), 4 * Math.sin(angle)] as const
 })
 
-function Part({ name, color, position }: { name: string; color: string; position?: [number, number, number] }) {
+function Part({ name, color, position, rotation }: {
+  name: string; color: string; position?: [number, number, number]; rotation?: [number, number, number]
+}) {
   const { scene } = useGLTF(`/models/${name}.glb`)
   const model = useMemo(() => {
     const copy = scene.clone(true)
@@ -24,7 +26,7 @@ function Part({ name, color, position }: { name: string; color: string; position
     })
     return copy
   }, [scene, color])
-  return <primitive object={model} position={position}/>
+  return <primitive object={model} position={position} rotation={rotation}/>
 }
 
 function Tokens() {
@@ -82,10 +84,17 @@ function CrewKit({ onReady }: { onReady: () => void }) {
   })
   return <group ref={group}>
     <Part name="crew_ring" color="#303b59"/>
-    {slots.map(([x, z], i) => <Part key={i} name="role_slot" color={i === 5 ? '#655064' : '#465772'} position={[x, .2, z]}/>)}
+    {slots.map(([x, z], i) => <group key={i} position={[x, .2, z]}>
+      <Part name="role_slot" color={i === 5 ? '#655064' : '#465772'}/>
+      <mesh position={[0, .45, 0]} rotation={[-Math.PI / 2, 0, 0]}>
+        <torusGeometry args={[1.12, .055, 8, 48]}/>
+        <meshStandardMaterial color={i === 5 ? '#d88077' : '#b7c9cf'} metalness={.36} roughness={.38}/>
+      </mesh>
+    </group>)}
     {[0, 2, 4].map(i => {
       const [x, z] = slots[i]
-      return <Part key={i} name="standby_node" color="#e6ad72" position={[x * 1.35, .15, z * 1.35]}/>
+      return <Part key={i} name="standby_node" color="#e6ad72" position={[x * 1.35, .15, z * 1.35]}
+        rotation={[0, -Math.atan2(z, x), 0]}/>
     })}
     <group ref={gap} position={[slots[5][0], .46, slots[5][1]]}><Part name="gap_marker" color="#e87970"/></group>
     <group ref={ready} position={[0, .28, 0]}><Part name="ready_seal" color="#e6b77a"/></group>
@@ -96,19 +105,25 @@ function CrewKit({ onReady }: { onReady: () => void }) {
 export default function CrewSceneV2() {
   const { t } = useUi()
   const [ready, setReady] = useState(false)
+  const [failed, setFailed] = useState(false)
+  const canvas = useRef<HTMLCanvasElement | null>(null)
+  const onContextLost = useCallback((event: Event) => { event.preventDefault(); setFailed(true) }, [])
+  useEffect(() => () => canvas.current?.removeEventListener('webglcontextlost', onContextLost), [onContextLost])
   return <div className="scene-wrap" role="img" aria-label={t('heroText')} data-ready={ready}>
-    <Canvas dpr={[1, 1.5]} camera={{ position: [0, 10, 16], fov: 44 }} gl={{ antialias: true, powerPreference: 'low-power' }}>
+    {failed ? <img src="/models/hero-still.webp" alt="" className="hero-fallback"/> : <Canvas
+      dpr={[1, 1.5]} camera={{ position: [0, 10, 16], fov: 44 }}
+      gl={{ antialias: true, powerPreference: 'low-power' }}
+      onCreated={({ gl }) => { canvas.current = gl.domElement; canvas.current.addEventListener('webglcontextlost', onContextLost) }}>
       <color attach="background" args={['#151d34']}/>
       <ambientLight intensity={1.2}/>
       <directionalLight position={[2, 8, 7]} intensity={3.4} castShadow/>
       <Suspense fallback={null}>
         <Environment files="/models/studio.hdr" environmentIntensity={.7}/>
         <CrewKit onReady={() => setReady(true)}/>
-        <ContactShadows position={[0, -.12, 0]} opacity={.32} scale={14} blur={2.2} far={3} resolution={256}/>
         <EffectComposer multisampling={0}><Bloom intensity={.22} luminanceThreshold={1.1} mipmapBlur/></EffectComposer>
       </Suspense>
-    </Canvas>
-    {!ready && <img src="/models/hero-still.webp" alt="" className="scene-poster"/>}
+    </Canvas>}
+    {!ready && !failed && <img src="/models/hero-still.webp" alt="" className="scene-poster"/>}
     <div className="scene-caption"><span className="caption-dot"/><span>{t('roleCaption')}</span><span className="caption-dash"/> <span>{t('standbyCaption')}</span></div>
   </div>
 }

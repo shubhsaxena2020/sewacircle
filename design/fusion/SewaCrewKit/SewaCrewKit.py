@@ -48,6 +48,26 @@ def disc(comp, x, y, radius, height, operation=NEW, z=0):
     return extrudes.add(input_)
 
 
+def plate(comp, points, height, z):
+    """Raise a closed outline from the top face of an existing component."""
+    plane_input = comp.constructionPlanes.createInput()
+    plane_input.setByOffset(comp.xYConstructionPlane, adsk.core.ValueInput.createByReal(z / 10))
+    plane = comp.constructionPlanes.add(plane_input)
+    sketch = comp.sketches.add(plane)
+    lines = sketch.sketchCurves.sketchLines
+    for start, end in zip(points, points[1:] + points[:1]):
+        lines.addByTwoPoints(
+            adsk.core.Point3D.create(start[0] / 10, start[1] / 10, 0),
+            adsk.core.Point3D.create(end[0] / 10, end[1] / 10, 0))
+    extrudes = comp.features.extrudeFeatures
+    input_ = extrudes.createInput(sketch.profiles.item(0), JOIN)
+    input_.participantBodies = [comp.bRepBodies.item(i) for i in range(comp.bRepBodies.count)]
+    input_.setOneSideExtent(
+        adsk.fusion.DistanceExtentDefinition.create(adsk.core.ValueInput.createByReal(height / 10)),
+        adsk.fusion.ExtentDirections.PositiveExtentDirection)
+    return extrudes.add(input_)
+
+
 def soften(comp, radius):
     """Round circular outside edges; skip any edge too short for this radius."""
     body = comp.bRepBodies.item(0)
@@ -68,16 +88,24 @@ def build(root):
     token = component(root, 'volunteer_token')
     disc(token, 0, 0, P['token_d'] / 2, P['token_h'])
     soften(token, P['edge_r'])
+    # A deliberately abstract person: separate round head above broad shoulders.
+    disc(token, 0, 3.2, 2.1, 1.1, JOIN, P['token_h'])
+    plate(token, [(-5.3, -4.4), (5.3, -4.4), (5.3, -2.6), (3.4, -.8),
+                  (-3.4, -.8), (-5.3, -2.6)], 1.1, P['token_h'])
     parts['volunteer_token'] = token
 
     slot = component(root, 'role_slot')
     disc(slot, 0, 0, P['slot_d'] / 2, P['slot_h'])
-    disc(slot, 0, 0, P['token_d'] / 2 + .8, 1.1, CUT, P['slot_h'] - 1.1)
+    disc(slot, 0, 0, P['token_d'] / 2 + .8, 2.4, CUT, P['slot_h'] - 2.4)
+    disc(slot, 0, 0, P['slot_d'] / 2, .45, JOIN, P['slot_h'])
+    disc(slot, 0, 0, P['token_d'] / 2 + 1.4, .45, CUT, P['slot_h'])
     parts['role_slot'] = slot
 
     standby = component(root, 'standby_node')
     disc(standby, 0, 0, P['standby_d'] / 2, 3)
     soften(standby, .7)
+    plate(standby, [(-10, -1.2), (0, -1.2), (0, 1.2), (-10, 1.2)], .8, 3)
+    disc(standby, -10, 0, 1.8, 1.2, JOIN, 3)
     parts['standby_node'] = standby
 
     gap = component(root, 'gap_marker')
@@ -88,6 +116,8 @@ def build(root):
     seal = component(root, 'ready_seal')
     disc(seal, 0, 0, P['seal_d'] / 2, 4)
     disc(seal, 0, 0, P['seal_d'] / 2 - 3, .8, CUT, 3.2)
+    plate(seal, [(-7, -.4), (-4.8, -2.8), (-1.6, .2), (5.7, -6.2),
+                 (7.3, -4.3), (-1.6, 3.4)], 1.4, 4)
     parts['ready_seal'] = seal
 
     hero = component(root, 'crew_ring')
