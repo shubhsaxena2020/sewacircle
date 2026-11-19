@@ -4,7 +4,7 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import path from 'node:path'
 
 const base = process.env.BASE_URL ?? 'http://127.0.0.1:5173'
-const out = path.resolve('..', 'docs', 'screens', 'v5')
+const out = path.resolve('..', 'docs', 'screens', 'v5', 'round2', 'after')
 await mkdir(out, { recursive: true })
 const browser = await chromium.launch({ headless: true })
 const context = await browser.newContext({ viewport: { width: 1440, height: 900 }, deviceScaleFactor: 1 })
@@ -16,6 +16,7 @@ const api403 = []
 const apiRequests = []
 const axeResults = []
 const e2e = []
+let filmRanges = []
 page.on('pageerror', error => pageErrors.push(error.message))
 page.on('response', response => { if (response.status() === 403) api403.push(response.url()) })
 page.on('request', request => { if (request.url().includes('/api/roster')) apiRequests.push(`${request.method()} ${new URL(request.url()).pathname}`) })
@@ -27,14 +28,36 @@ const chapters = ['intro', 'interest', 'brief', 'crew', 'bench', 'verdict', 'dro
 const capture = async name => page.screenshot({ path: path.join(out, `${name}.png`), animations: 'disabled' })
 
 try {
+  const resetResponse = await page.request.post(`${base}/api/demo/reset`, { headers: { 'X-Demo-Role': 'organiser' } })
+  if (!resetResponse.ok()) throw new Error(`Could not reset the local synthetic demo state: HTTP ${resetResponse.status()}`)
+  e2e.push({ demoReset: `HTTP ${resetResponse.status()} before the verification workflow` })
   // Full story and updated 1440x900 chapter screenshots.
   await page.goto(base, { waitUntil: 'domcontentloaded' })
   await page.getByRole('heading', { level: 1 }).waitFor()
+  filmRanges = await page.locator('.chapter-film').evaluateAll(nodes => nodes.map(node => node.getAttribute('aria-label')))
+  if (filmRanges.length !== 6 || filmRanges.some(range => !range?.includes('Illustrative film'))) throw new Error(`Expected all six illustrative film cuts, got ${filmRanges.length}`)
   await page.waitForTimeout(800)
   await capture('page-story')
+  for (let index = 0; index < 6; index++) {
+    const film = page.locator('.chapter-film').nth(index)
+    await film.scrollIntoViewIfNeeded()
+    const bounds = await film.evaluate(node => [Number(node.getAttribute('data-start')), Number(node.getAttribute('data-end'))])
+    await page.waitForFunction(({ i, start, end }) => {
+      const video = document.querySelectorAll('.chapter-film')[i]?.querySelector('video')
+      return video && video.currentTime > start + .3 && video.currentTime <= end + .15
+    }, { i: index, start: bounds[0], end: bounds[1] }, { timeout: 15000 })
+    await page.screenshot({ path: path.join(out, `film-cut-${String(index + 1).padStart(2, '0')}.png`), animations: 'disabled' })
+  }
   for (let index = 0; index < chapters.length; index++) {
     const id = chapters[index]
     await page.locator(`#${id}`).scrollIntoViewIfNeeded()
+    if (id === 'numbers') {
+      await page.waitForFunction(() => document.querySelectorAll('.story-metric[data-counter-ready="true"]').length === 5, null, { timeout: 5000 })
+      const values = await page.locator('#numbers .story-metric strong').allTextContents()
+      const expected = ['70%', '10%', '23%', '40%']
+      if (expected.some((value, i) => values[i] !== value)) throw new Error(`Evaluation counters did not settle at ${expected.join(', ')}: ${values.join(', ')}`)
+      e2e.push({ evaluationCounters: values.slice(0, 4) })
+    }
     await page.waitForTimeout(350)
     await capture(`chapter-${String(index).padStart(2, '0')}-${id}`)
   }
@@ -225,17 +248,21 @@ try {
   const videoPage = await videoContext.newPage()
   await videoPage.goto(base)
   await videoPage.waitForTimeout(1000)
-  for (const id of chapters) {
-    const top = await videoPage.locator(`#${id}`).evaluate(element => element.getBoundingClientRect().top + window.scrollY)
-    await videoPage.evaluate(y => window.scrollTo({ top: y, behavior: 'smooth' }), top)
-    await videoPage.waitForTimeout(1150)
+  const maxScroll = await videoPage.evaluate(() => document.documentElement.scrollHeight - window.innerHeight)
+  const step = Math.ceil(maxScroll / 42)
+  for (let y = step; y < maxScroll; y += step) {
+    await videoPage.evaluate(top => window.scrollTo({ top, behavior: 'smooth' }), y)
+    await videoPage.waitForTimeout(480)
   }
+  await videoPage.evaluate(top => window.scrollTo({ top, behavior: 'smooth' }), maxScroll)
+  await videoPage.waitForTimeout(1200)
   await videoPage.waitForTimeout(1000)
   const video = videoPage.video()
   await videoPage.close()
   await video.saveAs(path.join(out, 'story-scroll.webm'))
   await videoContext.close()
 
+  e2e.push({ filmCuts: filmRanges })
   const summary = { viewport: '1440x900', e2e, axe: axeResults, api403, apiRequests, reducedMotion: reducedMotionResult, noWebgl: noWebglResult, pageErrors, screenshots: ['page-story.png', 'page-story-hi.png', 'story-dropout-not-ready.png', ...chapters.map((id, i) => `chapter-${String(i).padStart(2, '0')}-${id}.png`), 'page-console.png', 'page-volunteer.png', 'page-districts.png', 'page-method.png', 'page-share.png'], video: 'story-scroll.webm' }
   await writeFile(path.join(out, 'verification-summary.json'), JSON.stringify(summary, null, 2))
   console.log(JSON.stringify(summary, null, 2))

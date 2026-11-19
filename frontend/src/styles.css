@@ -31,3 +31,46 @@
 .action-button:disabled,.quiet-button:disabled{opacity:1;color:#424943;border-color:#6c6b62;background:#e1d9c9}
 .button:disabled,.btn:disabled{opacity:1;background:#626964;color:#fff}
 .console-nav-item:disabled,.step:disabled{opacity:1;color:#515550;cursor:not-allowed}
+
+/* Round 2: the village leads, with copy carried on small sheets of paper. */
+.story{background:#d7bd83}
+.world-canvas{z-index:0;background:#e5bc70;pointer-events:none}
+.world-canvas canvas{filter:saturate(1.12) contrast(1.02)}
+.story .site-header{background:rgba(247,236,211,.88)}
+.chapter{z-index:2;padding-inline:clamp(18px,6vw,96px)}
+.chapter-copy{width:min(420px,30vw);max-height:min(76svh,740px);overflow:auto;padding:clamp(18px,2vw,28px);background-color:rgba(255,242,216,.91);background-image:linear-gradient(rgba(255,242,216,.84),rgba(255,242,216,.88)),url('/media/paper.jpg');background-size:auto,260px 260px;border:1px solid rgba(104,76,48,.28);box-shadow:3px 4px 0 rgba(90,59,34,.2),8px 10px 22px rgba(59,42,27,.2);backdrop-filter:none}
+.chapter:nth-of-type(even) .chapter-copy{margin-left:auto}
+.chapter h1,.chapter h2{font-size:clamp(38px,3.65vw,54px);line-height:.99;letter-spacing:-.05em;color:#332e29;margin:12px 0 15px}
+.chapter .lead{font-size:17px}
+.chapter p{font-size:13px;line-height:1.48}
+.chapter .eyebrow,.chapter .story-note,.chapter .small-caveat,.chapter .jump-link{font-size:10px}
+.chapter .source-figures{gap:12px;margin:15px 0}
+.chapter .source-figures strong{font-size:22px;line-height:1.1}
+.chapter .source-figures small{font-size:9px}
+.chapter .paper-people,.chapter .crew-pill-list,.chapter .role-chips{gap:5px;margin-top:10px}
+.chapter .paper-people button,.chapter .crew-pill-list button,.chapter .role-chips button,.chapter .paper-slip{padding:7px 9px}
+.chapter .role-chips small,.chapter .crew-pill-list small,.chapter .paper-slip small{font-size:9px}
+.chapter .quote-paper{padding:12px;font-size:13px;line-height:1.55}
+.chapter .story-metrics{margin:13px 0}
+.chapter .story-metric{padding:11px}
+.chapter .story-metric strong{font-size:25px}
+.chapter .story-metric:last-child:nth-child(odd){grid-column:1/-1}
+.chapter-intro{min-height:calc(100svh - 94px);padding-top:94px}
+.chapter-intro>.chapter-copy{margin-right:auto!important;z-index:2}
+.chapter-intro h1{font-size:clamp(42px,4vw,58px);max-width:10ch}
+.chapter-intro .chapter-film{position:absolute;inset:0;width:100%;height:100%;min-height:0;margin:0;z-index:0}
+.chapter-film{position:relative;display:block;width:100vw;height:100svh;min-height:640px;margin:0 calc(50% - 50vw);overflow:hidden;background:#293349;box-shadow:none;border:0;isolation:isolate}
+.chapter-film img,.chapter-film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.chapter-film img{z-index:0;filter:saturate(.96)}
+.chapter-film video{z-index:1;opacity:0;transition:opacity .6s ease}
+.chapter-film.is-playing video{opacity:1}
+.chapter-film .film-label{position:absolute;z-index:3;left:clamp(16px,4vw,58px);right:auto;bottom:clamp(18px,4vh,42px);padding:8px 12px;background:rgba(250,240,216,.92);color:#533b2b;font-size:10px;letter-spacing:.04em;text-transform:none}
+.chapter-film .film-skip{position:absolute;z-index:3;right:clamp(16px,4vw,58px);bottom:clamp(18px,4vh,42px);min-height:38px;padding:8px 14px;border:1px solid rgba(255,245,221,.75);background:rgba(39,47,60,.86);color:#fff6e1;font-size:11px;cursor:pointer}
+.chapter-film .film-skip:focus-visible{outline-color:#fff}
+.chapter-intro .chapter-copy{background-color:rgba(255,242,216,.9)}
+.story-scroll-hint{background:rgba(255,242,216,.92);color:#49392e}
+.progress-rail a::before{background:#9f8a60}
+.progress-rail a.active::before{background:#a94f36}
+.reduced .chapter-film{display:none}
+@media(max-width:850px){.chapter-copy{width:min(420px,30vw)}.chapter h1,.chapter h2{font-size:clamp(30px,3.65vw,46px)}}
+@media(max-width:650px){.chapter{padding:86px 14px 30px;align-items:flex-end;min-height:93svh}.chapter-copy{width:100%;max-height:68svh;padding:19px 17px}.chapter h1,.chapter h2{font-size:clamp(38px,11vw,56px)}.chapter-intro{min-height:calc(100svh - 94px);align-items:flex-end}.chapter-intro .chapter-copy{max-width:82%;max-height:55svh}.chapter-intro h1{font-size:clamp(40px,12vw,58px)}.chapter-film{height:76svh;min-height:480px}.chapter-intro .chapter-film{height:100%;min-height:0}.chapter-film .film-label{font-size:9px}.source-figures strong{font-size:22px}}

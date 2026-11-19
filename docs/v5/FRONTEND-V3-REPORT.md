@@ -200,3 +200,82 @@ page-method.png, page-share.png
 - The final browser run began with `POST /api/demo/reset` as organiser; the API archived `cards.json`, `ledger.jsonl` and `ledger.jsonl.head` synthetic state files before the evidence workflow ran.
 - Public share keys are in-memory demo keys and can expire if the backend process restarts; the UI displays freshness/staleness from the API.
 - All displayed roster, status and evaluation data is synthetic. No government service is integrated, and the site makes no field-impact claim.
+
+## Round 2 — film-like paper story
+
+This round reshapes the story around the owner's finished film. The procedural Three.js scene now uses extruded, irregular cut-paper forms with the supplied paper texture, warm colors, layered shadows, terracotta roof tiles, a winding paper river, mustard fields, notice board, pump, paper figures and the turmeric ring with sockets. The scroll path rises from the board to the ring, moves into the sockets, crosses to the second village, then ends above the map at night. Warm sun direction/color, sky, windows, lanterns and stars change through the scroll. Chapter copy is a compact paper label with a maximum 30vw width; the scene remains the hero.
+
+The completed film is used as six full-bleed, muted, skippable transitions. Each transition loads the local master lazily near its chapter, seeks within the clip's documented time range, keeps the Gemini watermark, and is labelled illustrative. A film poster is used while the clip initializes. The intro also shows a film frame immediately, so it is not a blank capture. Removed the old absent-c6-c9 fallbacks. Evaluation counters now settle at the API values 70 / 10 / 23 / 40 before screenshot capture.
+
+### Round 2 visual evidence
+
+All chapter images are 1440×900. The `before` and `after` directories contain matching chapter-00 through chapter-10 captures; the `after` directory also contains six film-cut captures and the route screenshots. I reviewed the full chapter set and five sampled frames from the slow scroll recording against the finished film frames. The live scene now has the requested warm paper palette, layers, tiled roofs, river, ring, day cycle and camera progression. It remains a simplified procedural diorama; its prop detail and organic cut shapes do not yet reach the owner's film fidelity.
+
+- Before: [`docs/screens/v5/round2/before/`](../screens/v5/round2/before/)
+- After and all six transition cuts: [`docs/screens/v5/round2/after/`](../screens/v5/round2/after/)
+- Full-scroll recording: [`story-scroll.webm`](../screens/v5/round2/after/story-scroll.webm), 1440×900, 34.68 seconds, 5,087,971 bytes (`ffprobe`).
+- Film reference frames reviewed: [`film-reference/`](../screens/v5/round2/film-reference/)
+
+The owner film masters and six generated poster frames are local in `frontend/public/media/`. Their provenance and the source time ranges are recorded in [`frontend/public/media/PROVENANCE.md`](../../frontend/public/media/PROVENANCE.md). The master files are 7,465,611 bytes (MP4) and 4,891,736 bytes (WebM); poster frames are 51–105 KB each.
+
+### Round 2 verification
+
+PowerShell commands were run from `frontend/` unless noted:
+
+```text
+npm run build
+vite v8.3.8 building client environment for production...
+✓ 3055 modules transformed.
+VillageScene-*.js  933.43 kB │ gzip: 247.45 kB
+✓ built successfully (Vite retains its >500 kB chunk advisory)
+
+npm run lint
+> oxlint
+No warnings or errors.
+
+npm test
+RUN v4.1.12
+Test Files 1 passed (1)
+Tests 4 passed (4)
+
+$env:BASE_URL='http://127.0.0.1:4176'; npm run verify:v3
+demoReset HTTP 200
+evaluationCounters: 70%, 10%, 23%, 40%
+story: all 11 anchors captured; Hindi title rendered in Devanagari
+filmCuts: all six documented intervals exercised
+console: live extraction, planning, readiness and share succeeded
+evidence: draft, revision, redraft, confirm, correct, ledger verify and evaluation succeeded
+roles: host, volunteer and viewer exercised; viewer restricted request returned HTTP 403
+districts: 20 markers loaded; Kanpur Dehat selected
+mock: completed with zero API requests
+axe: zero violations across 6 routes in English and 6 routes in Hindi
+reducedMotion: canvas=0, video=0, still=1
+noWebgl: canvas=0, still=1
+pageErrors: []
+
+Console chunk check
+{"route":"/console","VillageSceneRequests":[]}
+```
+
+The complete browser record, including the exact API calls and axe result for each route/language, is [`verification-summary.json`](../screens/v5/round2/after/verification-summary.json). The final desktop Lighthouse 12.8.2 production-preview run produced:
+
+| Route | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 97 | 100 | 100 | 83 | 1,112 ms | 48 ms | 0.076 |
+| `/console` | 100 | 100 | 100 | 82 | 734 ms | 0 ms | 0.037 |
+
+Commands from `frontend/`, run serially against the production preview:
+
+```text
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4176/ --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round2/after/lighthouse-home.json
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4176/console --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round2/after/lighthouse-console.json
+```
+
+Full results: [`lighthouse-home.json`](../screens/v5/round2/after/lighthouse-home.json) and [`lighthouse-console.json`](../screens/v5/round2/after/lighthouse-console.json). These are desktop lab scores, not evidence of sustained frame rate on a device.
+
+### Remaining gaps
+
+- The paper forms, people, trees and props are procedural approximations. The scene is substantially warmer and layered, but not film-level authored art; some outlines and forms still read as stylized low-poly geometry.
+- The scene chunk fell from 1,136.27 KB to 933.43 KB minified (343.28 KB to 247.45 KB gzip) and is split away from `/console`, but it still triggers Vite's 500 KB advisory and costs more to render than a static scene. No mid-range device frame-rate test was performed.
+- The six chapter transitions use time ranges from the same full film master rather than independently encoded clip files. The browser seeks to the relevant interval after lazy load; startup/seek behavior can vary by browser and network.
+- Lighthouse is a desktop run. The accessibility scan is automated and does not replace a full keyboard/screen-reader review.
