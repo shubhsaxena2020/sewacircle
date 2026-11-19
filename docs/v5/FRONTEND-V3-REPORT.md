@@ -43,7 +43,7 @@ The referenced [Oryzo site](https://oryzo.ai/) was consulted only for interactio
 
 ### 3D provenance and size
 
-The live scene is procedural Three.js geometry and does not load a GLB. It does not use Autodesk Fusion exports. Existing v2 SewaCrewKit GLBs were left unused and are identified in [`frontend/public/models/PROVENANCE.md`](../../frontend/public/models/PROVENANCE.md). The scene’s built JS chunk is 1,136.39 KB minified / 343.34 KB gzip; `paper.jpg` is 139,802 bytes and `studio.hdr` is 8,239 bytes. Together the downloaded scene code, texture and environment are about 1.31 MB uncompressed (1.25 MiB), or about 0.50 MB with the JS chunk gzipped, below the 1.5 MB requested scene budget. The map is a separate districts-page asset. The procedural scene, local HDR source and unused GLBs are documented in the provenance file.
+The live scene is procedural Three.js geometry and does not load a GLB. It does not use Autodesk Fusion exports. Existing v2 SewaCrewKit GLBs were left unused and are identified in [`frontend/public/models/PROVENANCE.md`](../../frontend/public/models/PROVENANCE.md). The scene’s built JS chunk is 1,136.27 KB minified / 343.28 KB gzip; `paper.jpg` is 139,802 bytes and `studio.hdr` is 8,239 bytes. Together the downloaded scene code, texture and environment are about 1.31 MB uncompressed (1.25 MiB), or about 0.50 MB with the JS chunk gzipped, below the 1.5 MB requested scene budget. The map is a separate districts-page asset. The procedural scene, local HDR source and unused GLBs are documented in the provenance file.
 
 The map is explicitly illustrative and not a geographic-boundary claim. The HDR is a local inherited v2 studio environment, not a generated village photograph. No model or asset from the Oryzo/Lusion site is in the runtime.
 
@@ -104,10 +104,10 @@ The four unit cases cover API READY/null handling, exact recruit-request copy, E
 ```text
 > npm run build
 vite v8.3.8 building client environment for production...
-✓ 3075 modules transformed.
-VillageScene-D0_qH6gI.js  1,136.39 kB │ gzip: 343.34 kB
+✓ 3074 modules transformed.
+VillageScene-DZeiLnY8.js  1,136.27 kB │ gzip: 343.28 kB
 (!) Some chunks are larger than 500 kB after minification.
-✓ built in 1.01s
+✓ built in 941ms
 ```
 
 This build warning is retained as a known performance limit. The console remains split from the 3D scene chunk.
@@ -136,7 +136,7 @@ The final full browser run used `BASE_URL=http://127.0.0.1:4176 npm run verify:v
     {
       "evidence": "drafted cards, requested revision with reason, redrafted card, confirmed and corrected records, verified ledger, opened evaluation",
       "draftedCardCount": 5,
-      "initialFlagCount": 5
+      "initialFlagCount": 4
     },
     {
       "roleSwitch": "capabilities loaded for host, volunteer and viewer; viewer volunteer request returned HTTP 403; UI surfaced the error; organiser restored",
@@ -166,10 +166,12 @@ Desktop Lighthouse 12.8.2 used the production build on Chromium 1248. Full JSON 
 
 | Route | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| `/` | 78 | 100 | 100 | 83 | 1.1 s | 440 ms | 0.077 |
+| `/` | 78 | 100 | 100 | 83 | 1.0 s | 440 ms | 0.077 |
 | `/console` | 100 | 100 | 100 | 82 | 0.8 s | 0 ms | 0.037 |
 
 The story score reflects its 3D scene cost; the large minified scene chunk is visible in the build output. Lighthouse is a desktop lab run, not a field-device or sustained frame-rate test.
+
+Three.js 0.187 emits one development-console deprecation warning because React Three Fiber 9.8.2 creates `THREE.Clock` internally. The app-level HDR and shadow configuration use the current `HDRLoader` and PCF shadow API.
 
 ## Screenshots and recording
 
@@ -185,7 +187,7 @@ page-console.png, page-volunteer.png, page-districts.png,
 page-method.png, page-share.png
 ```
 
-`story-scroll.webm` is the 1440×900 slow full-story Playwright recording: 26.64 seconds, 3,014,151 bytes. It was reviewed at multiple points through the scroll; the film transitions into the scene and chapter copy remains legible. `review-chapters.jpg`, `review-pages.jpg`, and `review-video.jpg` are contact sheets used for the visual check.
+`story-scroll.webm` is the 1440×900 slow full-story Playwright recording: 29.00 seconds, 3,684,204 bytes. It was reviewed at multiple points through the scroll; the film transitions into the scene and chapter copy remains legible. `review-chapters.jpg`, `review-pages.jpg`, and `review-video.jpg` are contact sheets used for the visual check.
 
 ## Known gaps and limits
 
@@ -195,5 +197,6 @@ page-method.png, page-share.png
 - The live village map is labelled illustrative and is not an accurate district boundary map.
 - A browser-based Lighthouse run does not establish 60 fps on a mid-range laptop. The scene chunk exceeds Vite’s 500 KB advisory threshold after minification even though gzip is 343.34 KB.
 - Demo roles are an interface simulation, not authentication. The running API explicitly returns 403 for viewer-only restricted actions; production identity and authorization remain backend work.
+- The final browser run began with `POST /api/demo/reset` as organiser; the API archived `cards.json`, `ledger.jsonl` and `ledger.jsonl.head` synthetic state files before the evidence workflow ran.
 - Public share keys are in-memory demo keys and can expire if the backend process restarts; the UI displays freshness/staleness from the API.
 - All displayed roster, status and evaluation data is synthetic. No government service is integrated, and the site makes no field-impact claim.

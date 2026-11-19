@@ -23,7 +23,7 @@
     {
       "evidence": "drafted cards, requested revision with reason, redrafted card, confirmed and corrected records, verified ledger, opened evaluation",
       "draftedCardCount": 5,
-      "initialFlagCount": 5
+      "initialFlagCount": 4
     },
     {
       "roleSwitch": "capabilities loaded for host, volunteer and viewer; viewer volunteer request returned HTTP 403; UI surfaced the error; organiser restored",

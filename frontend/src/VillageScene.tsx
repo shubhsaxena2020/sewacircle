@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react'
 import { Canvas, useFrame, useLoader, useThree } from '@react-three/fiber'
 import { Bloom, EffectComposer, SMAA } from '@react-three/postprocessing'
 import * as THREE from 'three'
-import { RGBELoader } from 'three/examples/jsm/loaders/RGBELoader.js'
+import { HDRLoader } from 'three/addons/loaders/HDRLoader.js'
 
 function Village({ progress }: { progress: number }) {
   const world = useRef<THREE.Group>(null)
@@ -10,7 +10,7 @@ function Village({ progress }: { progress: number }) {
   const sun = useRef<THREE.DirectionalLight>(null)
   const seal = useRef<THREE.MeshStandardMaterial>(null)
   const paperTexture = useLoader(THREE.TextureLoader, '/media/paper.jpg')
-  const environment = useLoader(RGBELoader, '/models/studio.hdr')
+  const environment = useLoader(HDRLoader, '/models/studio.hdr')
   const scene = useThree(state => state.scene)
   useEffect(() => {
     // R3F exposes this scene for imperative environment setup after the HDR finishes loading.
@@ -63,4 +63,4 @@ function House({ x, z, roof, wall }: { x: number; z: number; roof: THREE.Materia
 function Tree({ x, z, mat }: { x: number; z: number; mat: THREE.Material }) { return <group position={[x, 0, z]}><mesh position={[0, .25, 0]}><cylinderGeometry args={[.07, .12, .5, 7]} /><meshStandardMaterial color="#997459" /></mesh><mesh position={[0, .67, 0]}><coneGeometry args={[.46, .85, 7]} /><primitive object={mat} attach="material" /></mesh></group> }
 function Person({ position, tone }: { position: readonly [number, number, number]; tone: string }) { return <group position={position}><mesh position={[0, .24, 0]}><capsuleGeometry args={[.1, .22, 3, 8]} /><meshStandardMaterial color={tone} roughness={1} /></mesh><mesh position={[0, .49, 0]}><sphereGeometry args={[.1, 10, 8]} /><meshStandardMaterial color="#d7a787" roughness={1} /></mesh></group> }
 function VillagePostProcessing() { return <EffectComposer multisampling={0}><Bloom luminanceThreshold={.78} luminanceSmoothing={.12} intensity={.18} mipmapBlur /><SMAA /></EffectComposer> }
-export default function VillageScene({ progress }: { progress: number }) { return <Canvas fallback={<img className="scene-still" src="/media/village-poster.jpg" alt="Illustrative paper village" />} dpr={[1, 1.5]} shadows="basic" camera={{ position: [0, 5, 10], fov: 37 }} gl={{ antialias: true, powerPreference: 'low-power' }}><Village progress={progress} /><VillagePostProcessing /></Canvas> }
+export default function VillageScene({ progress }: { progress: number }) { return <Canvas fallback={<img className="scene-still" src="/media/village-poster.jpg" alt="Illustrative paper village" />} dpr={[1, 1.5]} shadows={{ type: THREE.PCFShadowMap }} camera={{ position: [0, 5, 10], fov: 37 }} gl={{ antialias: true, powerPreference: 'low-power' }}><Village progress={progress} /><VillagePostProcessing /></Canvas> }
