@@ -262,7 +262,7 @@ The catalogue covers every reason the solver writes:
 
 | code | params | English | Hindi |
 |---|---|---|---|
-| skill_confirmed | skill, level | Has first aid (level 2) | प्राथमिक उपचार में स्तर 2 तक प्रशिक्षित |
+| skill_confirmed | skill, level | Has first aid (level 2) | प्राथमिक उपचार (स्तर 2 तक प्रशिक्षित) |
 | skill_self_declared | skill | Self-declared ... (host to confirm) | स्वयं घोषित ... (होस्ट की पुष्टि बाकी) |
 | open_role | - | Open role: any volunteer can do it | खुली भूमिका: कोई भी स्वयंसेवक यह काम कर सकता है |
 | slot_and_distance | slot, distance_km | Free sat morning; 7 km from the site | शनिवार सुबह उपलब्ध; साइट से 7 किमी दूर |

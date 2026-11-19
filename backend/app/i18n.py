@@ -188,7 +188,7 @@ def reason_text(reason: PickReason, lang: Lang) -> str:
     if code == "skill_confirmed":
         if lang == "en":
             return f"Has {label_en} (level {p['level']})"
-        return f"{label_hi} में स्तर {p['level']} तक प्रशिक्षित"
+        return f"{label_hi} (स्तर {p['level']} तक प्रशिक्षित)"
     if code == "skill_self_declared":
         if lang == "en":
             return f"Self-declared {label_en} (host to confirm)"
