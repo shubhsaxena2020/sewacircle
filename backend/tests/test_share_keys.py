@@ -33,6 +33,7 @@ def client(tmp_path, monkeypatch):
     monkeypatch.setattr(main, "CARDS_PATH", tmp_path / "cards.json")
     monkeypatch.setattr(main.S, "tasks", [_task("task-01"), _task("task-02", "Plantation drive")])
     monkeypatch.setattr(main.S, "share_snapshots", {})
+    monkeypatch.setattr(main.S, "latest_plan", {})
     share.reset_secret()
     yield TestClient(main.app)
     share.reset_secret()
@@ -82,9 +83,10 @@ def test_public_summary_shape(client):
     ]
     assert body["ready"] is None                                    # no roster computed in this process yet
     assert body["computed_at"] is None
+    assert body["plan_version"] == "" and body["stale"] is False     # no plan to be stale against
     assert body["synthetic"] is True and "synthetic" in body["notice"]
-    assert set(body) == {"title", "district", "block", "slot", "roles", "ready", "computed_at", "notice",
-                         "synthetic"}
+    assert set(body) == {"title", "district", "block", "slot", "roles", "ready", "computed_at", "plan_version",
+                         "stale", "notice", "synthetic"}
 
 
 def test_summary_contains_no_volunteer_id_or_name(client):

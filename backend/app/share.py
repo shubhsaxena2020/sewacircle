@@ -35,15 +35,25 @@ effect by itself: call :func:`reset_secret` (or restart) to rotate, which
 deliberately invalidates every link minted before that point.
 
 This module never returns volunteer data - it only computes and resolves keys.
+
+Plan versioning
+---------------
+A share link is only as honest as its freshness, so a snapshot of "what was planned" carries a
+``plan_version``: the SHA-256 of the plan itself - the roles as the organiser has them, the roster options,
+and the crew that was chosen (roles, slot index, volunteer id, standby ids). Two plans with the same roles
+but a different crew (for example after a dropout healed the roster) are therefore different versions, which
+is exactly the case a viewer must be told about: ``GET /api/drive/{key}`` reports ``stale: true`` when the
+organiser's latest solved roster for that task is no longer the plan the summary describes.
 """
 from __future__ import annotations
 
 import base64
 import hashlib
 import hmac
+import json
 import os
 import secrets
-from typing import Iterable, Optional
+from typing import Any, Iterable, Optional
 
 #: Number of base32 characters kept from the HMAC digest (80 bits).
 KEY_LENGTH = 16
@@ -114,3 +124,44 @@ def task_id_for_share_key(share_key: str, task_ids: Iterable[str]) -> Optional[s
         if hmac.compare_digest(candidate, share_key):
             found = task_id
     return found
+
+
+def _role_fingerprint(role: Any) -> dict[str, Any]:
+    """The fields of a RoleSpec that change what the plan means (sorted skill list, fixed keys)."""
+    return {
+        "id": role.id,
+        "role": role.role,
+        "count": role.count,
+        "required_skills": sorted(role.required_skills),
+        "min_level": role.min_level,
+        "priority": role.priority,
+        "needs_experienced": role.needs_experienced,
+        "safety_critical": role.safety_critical,
+        "unresolved": role.unresolved,
+    }
+
+
+def roster_fingerprint(roster: Any) -> tuple[list[str], list[str]]:
+    """(assignment keys, standby ids) for one roster: the crew, independent of dict/list order."""
+    assignments = sorted(f"{a.role_id}:{a.slot_index}:{a.volunteer_id}" for a in roster.assignments)
+    standby = sorted(s.volunteer_id for s in roster.standby)
+    return assignments, standby
+
+
+def plan_version(roles: Iterable[Any], options: Any | None = None,
+                 assignments: Iterable[str] | None = None,
+                 standby_ids: Iterable[str] | None = None) -> str:
+    """SHA-256 of one plan: its roles, its roster options and (when solved) its crew.
+
+    Deterministic: roles are sorted by id, skills sorted, assignments/standby sorted, JSON keys sorted. So the
+    same plan always produces the same version and any change to roles, options, crew or standby produces a
+    different one. Returns a hex digest (never the plan itself, so it can be logged or shown).
+    """
+    payload = {
+        "roles": sorted((_role_fingerprint(r) for r in roles), key=lambda r: r["id"]),
+        "options": json.loads(options.model_dump_json()) if options is not None else None,
+        "assignments": sorted(assignments or []),
+        "standby": sorted(standby_ids or []),
+    }
+    body = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+    return hashlib.sha256(body.encode("utf-8")).hexdigest()

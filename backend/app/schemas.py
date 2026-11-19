@@ -207,6 +207,11 @@ class DriveShareSummary(BaseModel):
     process, the summary is the snapshot of what was actually planned (title,
     roles, ready verdict, ``computed_at``); otherwise it is built from the known
     task with ``ready=None`` and no timestamp.
+
+    ``plan_version`` identifies the plan this summary describes (SHA-256 of roles,
+    options and crew). ``stale`` is True when the organiser's latest solved roster
+    for the task is a different plan - for example after a dropout healed the crew -
+    so a viewer is never told an old verdict is current.
     """
     title: str
     district: str
@@ -215,8 +220,25 @@ class DriveShareSummary(BaseModel):
     roles: list[SharedRoleCount] = Field(default_factory=list)
     ready: Optional[bool] = None
     computed_at: Optional[datetime] = None
+    plan_version: str = ""
+    stale: bool = False
     notice: str = "Public read-only summary of one synthetic drive. No volunteer is named or identified."
     synthetic: bool = True
+
+
+class DriveStatusRow(BaseModel):
+    """One row of the district map: the LAST computed verdict for a task, never a new solve."""
+    task_id: str
+    ready: Optional[bool] = None          # None = no roster computed for this task in this process
+    computed_at: Optional[datetime] = None
+    stale: bool = False
+
+
+class DriveStatus(BaseModel):
+    """GET /api/drive/status: read-only summary for the district map, no solver run, no state change."""
+    tasks: list[DriveStatusRow] = Field(default_factory=list)
+    note: str = ("Reads the last computed verdict per task id. Never runs the planner and never changes state; "
+                 "no volunteer is named or identified.")
 
 
 class ShareLink(BaseModel):

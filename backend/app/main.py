@@ -35,9 +35,9 @@ from .evidence import badges, ledger as ledger_mod, rules, transitions
 from .llm import extract as llm_extract
 from .llm.client import LLMError
 from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard, Counterfactual, DropoutResult,
-                      DriveShareSummary, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterOptions,
-                      RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
-from . import capabilities, i18n, share
+                      DriveShareSummary, DriveStatus, DriveStatusRow, EvalReport, ExtractionResult, LedgerEntry,
+                      LedgerVerification, RosterOptions, RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
+from . import capabilities, demo_mode, i18n, share
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
@@ -70,9 +70,27 @@ def _demo_role(request: Request) -> str:
         raise HTTPException(403, f"{exc}. This is a demo role switch, not authentication.") from exc
 
 
+def _require_operator(request: Request) -> None:
+    """FastAPI dependency: enforce the public-demo operator token when SEWA_PUBLIC_DEMO is on.
+
+    Off (the local default) this is a no-op, so every existing client keeps working. On, it refuses with 403
+    unless ``X-Operator-Token`` matches ``SEWA_OPERATOR_TOKEN`` (constant-time), and refuses everything when
+    the deployment forgot to set the token. See app/demo_mode.py.
+    """
+    try:
+        demo_mode.check(request.headers.get(demo_mode.TOKEN_HEADER))
+    except demo_mode.OperatorRequired as exc:
+        raise HTTPException(403, exc.message) from exc
+
+
 def _require_demo(action: str) -> Callable[[Request], str]:
-    """FastAPI dependency: 403 unless the caller's demo role lists ``action``."""
+    """FastAPI dependency: 403 unless the caller's demo role lists ``action``.
+
+    The operator token is checked FIRST, so the role header can never grant an action the token does not grant
+    (nor stand in for a missing token). The order is: operator token -> demo role -> capability matrix.
+    """
     def dependency(request: Request) -> str:
+        _require_operator(request)
         role = _demo_role(request)
         if not capabilities.may(role, action):
             raise HTTPException(403, f"the demo role {role!r} may not {action}. "
@@ -124,10 +142,11 @@ def share_snapshots() -> dict[str, DriveShareSummary]:
 
 
 def latest_plan() -> dict[str, str]:
-    """Plan version of the most recent plan (roster or dropout result) computed for each task id.
+    """Plan version of the LAST SOLVED roster per task id (the organiser's latest plan).
 
-    The public snapshot keeps the version of the plan a viewer was given; comparing the two is
-    what lets ``GET /api/drive/{key}`` say ``stale: true`` instead of serving an older crew.
+    The public snapshot records the plan its summary describes. A dropout heals the crew, which is a different
+    plan, so the snapshot's version no longer equals the latest solved roster's - and ``GET /api/drive/{key}``
+    then reports ``stale: true`` instead of presenting an old crew as current.
     """
     if S.latest_plan is None:
         S.latest_plan = {}
@@ -188,7 +207,8 @@ def _save_cards() -> None:
 @app.get("/api/health")
 def health() -> dict:
     return {"ok": True, "disclaimer": DISCLAIMER, "model": os.environ.get("SEWA_LLM_MODEL", "cc/claude-sonnet-5-5"),
-            "llm_mode": os.environ.get("SEWA_LLM_MODE", "record")}
+            "llm_mode": os.environ.get("SEWA_LLM_MODE", "record"),
+            "public_demo": demo_mode.public_demo_enabled()}
 
 
 @app.get("/api/meta")
@@ -260,7 +280,12 @@ def geo_tree(request: Request) -> Any:
 
 
 @app.get("/api/volunteers", response_model=list[Volunteer])
-def list_volunteers() -> Any:
+def list_volunteers(operator: None = Depends(_require_operator)) -> Any:
+    """The synthetic volunteer pool: names, blocks, skills, contact-adjacent fields.
+
+    Personal-data read, so in public-demo mode it needs the operator token (403 otherwise). Locally the gate
+    is off and nothing changes.
+    """
     return _guard(volunteers)
 
 
@@ -296,6 +321,28 @@ def create_share(req: ShareReq, demo_role: str = Depends(_require_demo("share_dr
     return ShareLink(share_key=key, path=f"/api/drive/{key}")
 
 
+@app.get("/api/drive/status", response_model=DriveStatus)
+def drive_status() -> Any:
+    """The LAST computed verdict per known task id, for the district map - without running the solver.
+
+    Public on purpose: it carries no volunteer data (task id, verdict, timestamp, staleness only). Registered
+    BEFORE ``/api/drive/{share_key}`` so the literal path is not read as a key. It changes nothing: it reads the
+    in-memory snapshots and plan versions and never calls the planner, the ledger or the card store.
+    """
+    def run() -> DriveStatus:
+        rows: list[DriveStatusRow] = []
+        for task in tasks():
+            snapshot = share_snapshots().get(task.id)
+            if snapshot is None:
+                rows.append(DriveStatusRow(task_id=task.id))            # nothing computed yet: nulls
+                continue
+            rows.append(DriveStatusRow(
+                task_id=task.id, ready=snapshot.ready, computed_at=snapshot.computed_at,
+                stale=snapshot.plan_version != latest_plan().get(task.id, snapshot.plan_version)))
+        return DriveStatus(tasks=rows)
+    return _guard(run)
+
+
 @app.get("/api/drive/{share_key}", response_model=DriveShareSummary)
 def drive_summary(share_key: str) -> Any:
     """Public, read-only summary of one drive, addressed by an opaque share key - never by a task id.
@@ -307,6 +354,9 @@ def drive_summary(share_key: str) -> Any:
     computed without the secret, sequential task ids are useless on this route: anything that is not a
     key derived from this secret is 404, and the task id is never echoed back. The body contains no
     volunteer name, id or contact.
+
+    ``stale`` is computed at read time: the snapshot names the plan it describes (``plan_version``), and the
+    organiser's latest solved roster may be a different plan (a healed dropout, a re-plan).
     """
     def run() -> DriveShareSummary:
         known = tasks()
@@ -315,7 +365,9 @@ def drive_summary(share_key: str) -> Any:
             raise HTTPException(404, "unknown share link")
         snapshot = share_snapshots().get(task_id)
         if snapshot is not None:
-            return snapshot                       # exactly what was planned, including any edited roles
+            # exactly what was planned, including any edited roles - plus whether it is still the latest plan
+            return snapshot.model_copy(update={
+                "stale": snapshot.plan_version != latest_plan().get(task_id, snapshot.plan_version)})
         task = next(t for t in known if t.id == task_id)
         return DriveShareSummary(
             title=task.title,
@@ -352,6 +404,16 @@ class RosterAll(BaseModel):
     manual_greedy: RosterResult
 
 
+def _share_snapshot(task: TaskSpec, roster: RosterResult, version: str) -> DriveShareSummary:
+    """The public summary of exactly this plan: what was planned, the verdict, when, and which plan it is."""
+    return DriveShareSummary(
+        title=task.title, district=task.district, block=task.block, slot=task.slot,
+        roles=[SharedRoleCount(role=r.role, count=r.count, required_skills=list(r.required_skills),
+                               safety_critical=r.safety_critical) for r in task.roles],
+        ready=roster.ready, computed_at=datetime.now(timezone.utc), plan_version=version,
+    )
+
+
 @app.post("/api/roster", response_model=RosterAll)
 def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("read_roster"))) -> Any:
     def run() -> RosterAll:
@@ -368,13 +430,9 @@ def make_roster(req: RosterReq, demo_role: str = Depends(_require_demo("read_ros
         # organiser saw (title and roles may have been edited). Only ids this server knows are stored:
         # a client cannot grow the dict without bound or advertise a verdict for a drive that does not exist.
         if any(t.id == req.task.id for t in tasks()):
-            share_snapshots()[req.task.id] = DriveShareSummary(
-                title=req.task.title, district=req.task.district, block=req.task.block, slot=req.task.slot,
-                roles=[SharedRoleCount(role=r.role, count=r.count, required_skills=list(r.required_skills),
-                                       safety_critical=r.safety_critical) for r in req.task.roles],
-                ready=result.cp_sat.ready,
-                computed_at=datetime.now(timezone.utc),
-            )
+            version = share.plan_version(req.task.roles, o, *share.roster_fingerprint(result.cp_sat))
+            latest_plan()[req.task.id] = version
+            share_snapshots()[req.task.id] = _share_snapshot(req.task, result.cp_sat, version)
         return result
     return _guard(run)
 
@@ -400,7 +458,19 @@ class DropoutReq(BaseModel):
 
 @app.post("/api/roster/dropout", response_model=DropoutResult)
 def dropout(req: DropoutReq, demo_role: str = Depends(_require_demo("read_roster"))) -> Any:
-    return _guard(lambda: solver.simulate_dropout(req.task, volunteers(), req.roster, req.dropped_volunteer_id, req.options))
+    """Simulate one dropout and, for a known task id, refresh the public snapshot with the healed plan.
+
+    The healed crew is a DIFFERENT plan version from the one the organiser last solved, so the public summary
+    shows the new verdict and timestamp and reports ``stale: true`` until the organiser re-runs the roster.
+    """
+    def run() -> DropoutResult:
+        result = solver.simulate_dropout(req.task, volunteers(), req.roster, req.dropped_volunteer_id, req.options)
+        if any(t.id == req.task.id for t in tasks()):
+            version = share.plan_version(req.task.roles, req.options,
+                                         *share.roster_fingerprint(result.roster_after))
+            share_snapshots()[req.task.id] = _share_snapshot(req.task, result.roster_after, version)
+        return result
+    return _guard(run)
 
 
 class DraftReq(BaseModel):
@@ -484,11 +554,14 @@ def demo_reset(demo_role: str = Depends(_require_demo("reset_demo"))) -> dict:
     S.cards = None
     S.ledger = None
     S.share_snapshots = None
+    S.latest_plan = None
+    S.attendance_rows = None
     return {"ok": True, "archived": archived}
 
 
 @app.get("/api/evidence/cards", response_model=list[ContributionCard])
-def list_cards() -> Any:
+def list_cards(operator: None = Depends(_require_operator)) -> Any:
+    """The card store: names, hours and host review state. Needs the operator token in public-demo mode."""
     return list(cards().values())
 
 
@@ -584,12 +657,14 @@ def request_revision(card_id: str, req: DecisionReq = DecisionReq(),
 
 
 @app.get("/api/ledger", response_model=list[LedgerEntry])
-def get_ledger() -> Any:
+def get_ledger(operator: None = Depends(_require_operator)) -> Any:
+    """The audit journal. Needs the operator token in public-demo mode (it names actors and cards)."""
     return _guard(lambda: ledger().entries())
 
 
 @app.get("/api/ledger/verify", response_model=LedgerVerification)
-def verify_ledger() -> Any:
+def verify_ledger(operator: None = Depends(_require_operator)) -> Any:
+    """Chain verification. Same data family as /api/ledger, so the same gate."""
     return _guard(lambda: ledger().verify())
 
 
