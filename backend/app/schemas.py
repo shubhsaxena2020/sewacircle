@@ -12,7 +12,55 @@ from .taxonomy import SAFETY_CRITICAL_SKILLS, SKILLS, SLOTS
 Gender = Literal["F", "M", "X", "undisclosed"]
 Language = Literal["hi", "en", "hinglish"]
 Method = Literal["cp_sat", "nearest_skill", "random_feasible", "manual_greedy"]
-CardStatus = Literal["draft", "flagged", "confirmed", "corrected", "rejected"]
+CardStatus = Literal["draft", "flagged", "revision_requested", "confirmed", "corrected", "rejected"]
+
+
+# ---------------- localized display text (Hindi/English) ----------------
+class SkillLabel(BaseModel):
+    id: str
+    label: str
+
+
+class RoleDisplay(BaseModel):
+    role_id: str
+    role: str          # role name in the requested language
+    count: int
+    required_skills: list[SkillLabel] = Field(default_factory=list)
+
+
+class TaskDisplay(BaseModel):
+    """Localized copy of a task's display text. Ids, counts and decisions are unchanged."""
+    lang: Literal["en", "hi"]
+    title: str
+    slot: str
+    roles: list[RoleDisplay] = Field(default_factory=list)
+
+
+class RecruitDisplay(BaseModel):
+    role_id: str
+    role: str
+    needed: int
+    text: str
+
+
+class AssignmentDisplay(BaseModel):
+    volunteer_id: str
+    role_id: str
+    text: str
+
+
+class RosterDisplay(BaseModel):
+    """Localized rendering of a roster's verdict, explanations and repair asks.
+
+    ``ready`` is copied from the roster, never re-decided; ``recruit[].needed`` and the numbers inside
+    every sentence come from the same structured fields, so English and Hindi cannot disagree.
+    """
+    lang: Literal["en", "hi"]
+    ready: Optional[bool] = None
+    verdict: str = ""
+    explanations: list[str] = Field(default_factory=list)
+    recruit: list[RecruitDisplay] = Field(default_factory=list)
+    assignments: list[AssignmentDisplay] = Field(default_factory=list)
 
 
 class Volunteer(BaseModel):
@@ -130,6 +178,7 @@ class TaskSpec(BaseModel):
     max_travel_km: float = 15.0
     allow_minors: bool = True
     roles: list[RoleSpec] = Field(default_factory=list)
+    display: Optional[TaskDisplay] = None   # localized text for GET /api/tasks; canonical fields stay as written
     synthetic: bool = True
 
     @field_validator("slot")
@@ -138,6 +187,65 @@ class TaskSpec(BaseModel):
         if v not in SLOTS:
             raise ValueError(f"unknown slot {v}; use taxonomy.SLOTS")
         return v
+
+
+# ---------------- public drive summary (opaque share keys) ----------------
+class SharedRoleCount(BaseModel):
+    """One role in a public summary: what the drive needs, never who fills it."""
+    role: str
+    count: int
+    required_skills: list[str] = Field(default_factory=list)
+    safety_critical: bool = False
+
+
+class DriveShareSummary(BaseModel):
+    """Public, read-only view of ONE drive reached through an opaque share key.
+
+    Deliberately has no volunteer id, name, contact field or task id: the key is
+    the only handle the holder gets, and the summary is safe to paste into a
+    WhatsApp group. When a roster for this drive was computed in this server
+    process, the summary is the snapshot of what was actually planned (title,
+    roles, ready verdict, ``computed_at``); otherwise it is built from the known
+    task with ``ready=None`` and no timestamp.
+
+    ``plan_version`` identifies the plan this summary describes (SHA-256 of roles,
+    options and crew). ``stale`` is True when the organiser's latest solved roster
+    for the task is a different plan - for example after a dropout healed the crew -
+    so a viewer is never told an old verdict is current.
+    """
+    title: str
+    district: str
+    block: str
+    slot: str
+    roles: list[SharedRoleCount] = Field(default_factory=list)
+    ready: Optional[bool] = None
+    computed_at: Optional[datetime] = None
+    plan_version: str = ""
+    stale: bool = False
+    notice: str = "Public read-only summary of one synthetic drive. No volunteer is named or identified."
+    synthetic: bool = True
+
+
+class DriveStatusRow(BaseModel):
+    """One row of the district map: the LAST computed verdict for a task, never a new solve."""
+    task_id: str
+    ready: Optional[bool] = None          # None = no roster computed for this task in this process
+    computed_at: Optional[datetime] = None
+    stale: bool = False
+
+
+class DriveStatus(BaseModel):
+    """GET /api/drive/status: read-only summary for the district map, no solver run, no state change."""
+    tasks: list[DriveStatusRow] = Field(default_factory=list)
+    note: str = ("Reads the last computed verdict per task id. Never runs the planner and never changes state; "
+                 "no volunteer is named or identified.")
+
+
+class ShareLink(BaseModel):
+    """What an organiser gets back when minting a public link for one drive."""
+    share_key: str
+    path: str
+    note: str = "Read-only public summary. Anyone holding this key can open it; it names no volunteer."
 
 
 # ---------------- extraction (LLM) ----------------
@@ -181,6 +289,21 @@ class RosterOptions(BaseModel):
     seed: int = 7
 
 
+class PickReason(BaseModel):
+    """ONE structured cause for a pick, next to the English sentence it renders.
+
+    The solver writes ``Assignment.reasons`` (English, human readable) AND these codes with their
+    parameters. The Hindi view is rendered from the codes, so both languages carry the same facts -
+    the same skill and level, the same distance, the same "not picked in N days", the same newcomer
+    count and mentor name - instead of Hindi paraphrasing a finished sentence. ``params`` holds only
+    primitives, so it survives JSON and can be compared field by field in a test.
+    """
+    code: Literal["skill_confirmed", "skill_self_declared", "open_role", "slot_and_distance",
+                  "not_picked_recently", "picked_heavily", "newcomer", "experienced_mentor",
+                  "minor_guardian_consent", "promoted_from_standby"]
+    params: dict[str, str | int | float] = Field(default_factory=dict)
+
+
 class Assignment(BaseModel):
     role_id: str
     slot_index: int = 0
@@ -189,6 +312,7 @@ class Assignment(BaseModel):
     score: float = 0.0
     distance_km: float = 0.0
     reasons: list[str] = Field(default_factory=list)
+    reason_codes: list[PickReason] = Field(default_factory=list)  # the same reasons, structured, for Hindi
     flags: list[str] = Field(default_factory=list)  # e.g. "self_declared_skill", "novice", "minor_guardian_consent"
 
 
@@ -230,6 +354,7 @@ class RosterMetrics(BaseModel):
 
 class RecruitRequest(BaseModel):
     """Ready Crew repair action: what exactly to recruit to make the crew ready."""
+    kind: Literal["unresolved", "unfilled", "standby"] = "unfilled"   # which template produced `reason`
     role_id: str
     role: str
     needed: int
@@ -240,6 +365,7 @@ class RecruitRequest(BaseModel):
     area: str
     max_travel_km: float
     reason: str
+    blocked_by_names: list[str] = Field(default_factory=list)  # standby kind: who is the single point of failure
 
 
 class RosterResult(BaseModel):
@@ -252,6 +378,7 @@ class RosterResult(BaseModel):
     metrics: RosterMetrics
     explanations: list[str] = Field(default_factory=list)
     recruit_requests: list[RecruitRequest] = Field(default_factory=list)
+    display: Optional[RosterDisplay] = None   # localized verdict/explanations for POST /api/roster
     ready: Optional[bool] = None    # True only if every must slot is filled AND any single dropout leaves them coverable
     synthetic: bool = True
 
@@ -310,6 +437,7 @@ class ContributionCard(BaseModel):
     flags: list[Flag] = Field(default_factory=list)
     drafted_by: Literal["ai", "human"] = "ai"
     confirmed_by: Optional[str] = None
+    revision_reason: Optional[str] = None   # set by request_revision, cleared by the next re-draft
     created_at: datetime = Field(default_factory=datetime.utcnow)
     synthetic: bool = True
 
@@ -317,9 +445,10 @@ class ContributionCard(BaseModel):
 class LedgerEntry(BaseModel):
     index: int
     ts: datetime
-    action: Literal["draft", "flag", "confirm", "correct", "reject", "export"]
+    action: Literal["draft", "flag", "confirm", "correct", "reject", "request_revision", "export"]
     card_id: str
     actor: str
+    reason: str = ""   # why the actor moved the card; hashed when non-empty
     payload_hash: str
     prev_hash: str
     entry_hash: str
@@ -330,6 +459,16 @@ class LedgerVerification(BaseModel):
     entries: int
     first_bad_index: Optional[int] = None
     note: str = "Hash chain shows edits, not truth; truth comes from host confirmation."
+
+
+# ---------------- capability menu (demo roles, not authentication) ----------------
+class CapabilitySet(BaseModel):
+    """What one DEMO role may open and do. demo_only is always True: the caller picks its own role."""
+    role: str
+    screens: list[str] = Field(default_factory=list)
+    actions: list[str] = Field(default_factory=list)
+    demo_only: bool = True
+    note: str = ""
 
 
 # ---------------- evaluation ----------------

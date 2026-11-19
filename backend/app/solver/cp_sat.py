@@ -22,10 +22,14 @@ import time
 
 from ortools.sat.python import cp_model
 
-from ..schemas import (Assignment, Counterfactual, DropoutResult, RoleSpec, RosterMetrics, RosterOptions, RosterResult,
+from ..i18n import reason_text
+from ..schemas import (Assignment, Counterfactual, DropoutResult, PickReason, RoleSpec, RosterMetrics, RosterOptions,
+                       RosterResult,
                        SlotRef, StandbyPick, TaskSpec, Volunteer)
-from ..taxonomy import SKILLS
 from .metrics import best_skill_level, compute_metrics, distance_km, is_eligible, unfilled_slots
+
+#: Fairness window used by the reason codes ("not picked in the last N days").
+RECENT_PICK_DAYS = 90
 
 WEIGHTS = {
     "skill_per_level": 30,       # confirmed level 1..3 of the best matching skill
@@ -151,33 +155,50 @@ def _solve_assignment(task: TaskSpec, vols: list[Volunteer], opts: RosterOptions
     return chosen, status, notes
 
 
-def _reasons(v: Volunteer, role: RoleSpec, task: TaskSpec, mentor_name: str | None) -> tuple[list[str], list[str]]:
-    reasons: list[str] = []
+def _reasons(v: Volunteer, role: RoleSpec, task: TaskSpec, mentor_name: str | None) -> tuple[list[PickReason], list[str]]:
+    """Structured pick reasons (code + params) and the flag labels they imply.
+
+    The English sentences in ``Assignment.reasons`` are rendered from these codes with
+    ``i18n.reason_text(code, "en")``, and the Hindi view from the same codes, so a fact that appears in
+    one language cannot be missing from the other. Distance is stored raw (one value, rounded only when
+    printed), so the whole-km figure is identical in both languages.
+    """
+    codes: list[PickReason] = []
     flags: list[str] = []
     confirmed = [(s, v.skills[s]) for s in role.required_skills if v.skills.get(s, 0) >= role.min_level]
     if confirmed:
         s, lvl = max(confirmed, key=lambda t: t[1])
-        reasons.append(f"Has {SKILLS[s].lower()} (level {lvl})")
+        codes.append(PickReason(code="skill_confirmed", params={"skill": s, "level": lvl}))
     elif role.required_skills:
         s = next(s for s in role.required_skills if s in v.self_declared_skills)
-        reasons.append(f"Self-declared {SKILLS[s].lower()} (host to confirm)")
+        codes.append(PickReason(code="skill_self_declared", params={"skill": s}))
         flags.append("self_declared_skill")
     else:
-        reasons.append("Open role: any volunteer can do it")
-    reasons.append(f"Free {task.slot.replace('_', ' ')}; {distance_km(task, v):.0f} km from the site")
+        codes.append(PickReason(code="open_role"))
+    codes.append(PickReason(code="slot_and_distance",
+                            params={"slot": task.slot, "distance_km": distance_km(task, v)}))
     if v.times_picked_last_90d == 0:
-        reasons.append("Not picked in the last 90 days")
+        codes.append(PickReason(code="not_picked_recently", params={"days": RECENT_PICK_DAYS}))
     elif v.times_picked_last_90d >= HEAVY:
-        reasons.append(f"Picked {v.times_picked_last_90d} times in 90 days; chosen because no less-used qualified person fitted better")
+        codes.append(PickReason(code="picked_heavily",
+                                params={"count": v.times_picked_last_90d, "days": RECENT_PICK_DAYS}))
     if v.is_novice:
         flags.append("novice")
-        reasons.append(f"Newcomer ({v.past_drives} past drives)" + (f", paired with {mentor_name}" if mentor_name else ""))
+        params: dict[str, str | int | float] = {"past_drives": v.past_drives}
+        if mentor_name:
+            params["mentor_name"] = mentor_name
+        codes.append(PickReason(code="newcomer", params=params))
     elif role.needs_experienced and v.can_mentor:
-        reasons.append(f"Experienced ({v.past_drives} drives): can guide newcomers")
+        codes.append(PickReason(code="experienced_mentor", params={"past_drives": v.past_drives}))
     if v.is_minor:
         flags.append("minor_guardian_consent")
-        reasons.append("Under 18: guardian consent on file")
-    return reasons, flags
+        codes.append(PickReason(code="minor_guardian_consent"))
+    return codes, flags
+
+
+def _reason_texts(codes: list[PickReason]) -> list[str]:
+    """The canonical English sentences for a pick, rendered from the structured codes."""
+    return [reason_text(code, "en") for code in codes]
 
 
 def _standby(task: TaskSpec, vols: list[Volunteer], roster: RosterResult, opts: RosterOptions) -> list[StandbyPick]:
@@ -222,10 +243,11 @@ def build_roster(task: TaskSpec, volunteers: list[Volunteer], options: RosterOpt
     roles_by_id = {r.id: r for r in task.roles}
     assignments: list[Assignment] = []
     for (rid, i), v in sorted(chosen.items(), key=lambda kv: ([r.id for r in task.roles].index(kv[0][0]), kv[0][1])):
-        reasons, flags = _reasons(v, roles_by_id[rid], task, mentor_for.get(v.id))
+        codes, flags = _reasons(v, roles_by_id[rid], task, mentor_for.get(v.id))
         assignments.append(Assignment(role_id=rid, slot_index=i, volunteer_id=v.id, volunteer_name=v.display_name,
                                       score=float(_quality(v, roles_by_id[rid], task, opts)),
-                                      distance_km=round(distance_km(task, v), 1), reasons=reasons, flags=flags))
+                                      distance_km=round(distance_km(task, v), 1), reasons=_reason_texts(codes),
+                                      reason_codes=codes, flags=flags))
     open_slots = unfilled_slots(task, volunteers, assignments)
     roster = RosterResult(task_id=task.id, method="cp_sat", assignments=assignments, standby=[],
                           unfilled_role_ids=list(dict.fromkeys(r for r, _ in open_slots)),
@@ -312,10 +334,11 @@ def simulate_dropout(task: TaskSpec, volunteers: list[Volunteer], roster: Roster
     for sb in roster.standby:
         v = by_id.get(sb.volunteer_id)
         if v is not None and is_eligible(v, role, task):
-            reasons, flags = _reasons(v, role, task, None)
+            codes, flags = _reasons(v, role, task, None)
+            promoted = [PickReason(code="promoted_from_standby")] + codes
             new = Assignment(role_id=role.id, slot_index=gone.slot_index, volunteer_id=v.id, volunteer_name=v.display_name,
                              score=float(_quality(v, role, task, opts)), distance_km=round(distance_km(task, v), 1),
-                             reasons=["Promoted from standby"] + reasons, flags=flags)
+                             reasons=_reason_texts(promoted), reason_codes=promoted, flags=flags)
             after = roster.model_copy(deep=True)
             after.assignments = sorted(remaining + [new], key=lambda a: ([r.id for r in task.roles].index(a.role_id), a.slot_index))
             after.standby = [s for s in roster.standby if s.volunteer_id != v.id]
