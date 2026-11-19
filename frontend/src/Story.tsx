@@ -95,9 +95,9 @@ function FilmRosterOverlay({ chapter, roster, dropInfo, task }: { chapter: strin
       const dropped = index === dropInfo?.anchorIndex
       const role = task?.roles.find(row => row.id === assignment?.role_id)
       const checked = Boolean(role?.safety_critical || assignment?.flags.some(flag => /host.?check|safety/i.test(flag)))
-      return <span key={`${frame}-${index}`} className={`film-anchor ${assignment ? 'occupied' : 'empty'} ${dropped ? 'left' : ''}`} style={{ left: `${anchor.x * 100}%`, top: `${anchor.y * 100}%` }}>
+      return <span key={`${frame}-${index}`} className={`film-anchor ${assignment ? 'occupied' : 'empty'} ${dropped ? 'left' : ''}`} style={{ left: `${anchor.x * 100}%`, top: `${anchor.y * 100}%`, '--tag-dy': `${anchor.dy ?? 0}px` } as CSSProperties}>
         <i className="film-socket-glow" />
-        {dropped ? <span title="This seated volunteer left the crew" className={`paper-name-tag dropped ${anchor.x > .60 ? 'side-left' : ''}`}><b>{dropInfo.dropped.volunteer_name}</b><small>Left</small></span> : assignment && <span title={assignment.reasons.join('; ')} className={`paper-name-tag ${anchor.x > .60 ? 'side-left' : ''}`}><b>{assignment.volunteer_name}</b><small>{role?.role ?? 'Volunteer'}{checked ? ' Host check' : ''}</small></span>}
+        {dropped ? <span title="This seated volunteer left the crew" className={`paper-name-tag dropped ${(anchor.side ?? (anchor.x > .60 ? 'left' : 'center')) === 'left' ? 'side-left' : ''}`}><b>{dropInfo.dropped.volunteer_name}</b><small>Left</small></span> : assignment && <span title={assignment.reasons.join('; ')} className={`paper-name-tag ${(anchor.side ?? (anchor.x > .60 ? 'left' : 'center')) === 'left' ? 'side-left' : ''}`}><b>{assignment.volunteer_name}</b><small>{role?.role ?? 'Volunteer'}{checked ? ' Host check' : ''}</small></span>}
         {dropped && dropInfo.replacement && <span className="paper-name-tag promoted"><b>{roster.assignments.find(a => a.volunteer_id === dropInfo.replacement)?.volunteer_name ?? 'Standby'}</b><small>Promoted</small></span>}
       </span>
     })}

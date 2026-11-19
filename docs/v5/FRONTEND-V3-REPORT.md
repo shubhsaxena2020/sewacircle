@@ -493,3 +493,13 @@ npx --yes lighthouse@12.8.2 http://127.0.0.1:4179/console --preset=desktop --qui
 - Anchor coordinates are authored and visually checked at 1440?900. The CSS scales them with the viewport; alignment was not separately checked on small screens or physical devices.
 - Axe is automated; no manual screen-reader session or device frame-rate test was run. Lighthouse results are desktop lab scores, not evidence of sustained 60 fps.
 - The Three.js vendor chunk still triggers Vite?s general 500 kB advisory. All roster, verdict and evaluation values remain synthetic API data; no backend files were changed.
+
+## Round 5b - head fixes (Claude Code, 19 Nov 2026)
+
+Review of round 5 found overlapping name tags on the film ring (crew: Kabir/Mohit/Divya; verdict: Mohit/Divya), one bench tag
+hidden under the copy card, and the standby tag clipped at the right edge under the progress rail. Fixes:
+`film-anchors.ts` gains optional per-anchor `side` and `dy` (hand-tuned against 1440x900 renders); the hidden bench anchor moved to
+the visible left socket; standby tags now stack bottom-left. Verified: `npm run build` OK, `oxlint` clean, vitest 4/4,
+`BASE_URL=http://127.0.0.1:5180 SCREENSHOT_DIR=../docs/screens/v5/round5b npm run verify:v3` passed (counters 70/10/23/40, live
+dropout NOT READY, axe 12 checks / 0 violations, reduced-motion and no-WebGL stills, no page errors). Screenshots in
+`docs/screens/v5/round5b/`.
