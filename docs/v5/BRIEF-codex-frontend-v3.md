@@ -85,3 +85,11 @@ Lighthouse, screenshots and video list, honest known gaps).
 - Videos: the owner may drop Gemini/Veo clips into design\scrolly\media\video\ (v1-desk, v2-camp, v3-stamp, v4-phone) during your
   run. Use any that exist. For missing ones, do not fake footage: either render a short code-made clip with Remotion from the 3D
   scene (as last night in design\motion on frontend-v2) or leave that insert out. List what was used in the report.
+
+## UPDATE 2 FROM THE HEAD (video)
+The owner's first Gemini clip (desk top-down) was rejected: static, no story. The owner is now generating a 9-clip paper-craft
+film with design\scrolly\media\video\GEMINI-CLIP-PROMPTS.md as c1.mp4 ... c9.mp4 (each 8-15 s, with a Gemini watermark that must
+stay). Plan the story page so these clips can play as chapter inserts (c1 intro, c2 the gap/interest, c3-c5 the crew and bench,
+c6 the verdict, c7 the drive, c8 evidence/ledger, c9 outro behind the title). Build placeholders that degrade gracefully to the
+still images when a clip is missing, and pick up any clip that appears during your run. Do not ape oryzo: the film's
+paper-craft world and our own 3D crew board are the identity.
