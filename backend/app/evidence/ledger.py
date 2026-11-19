@@ -71,11 +71,15 @@ Crash safety / concurrency
 Every append is serialized under one ``threading.RLock``. It writes the
 journal line, ``flush()`` and ``os.fsync()`` on the journal file, THEN
 atomically rewrites the sidecar via a temp file with its own ``flush()`` and
-``os.fsync()`` before ``os.replace``. A crash cannot leave a journal entry
-without its matching sidecar state, and concurrent appends cannot interleave
-their writes. Directory-level fsync after the rename is not performed (it is
-not portable to this prototype's Windows host); that is a residual, documented
-limitation for power-loss recovery.
+``os.fsync()`` before ``os.replace``. If the sidecar cannot be written the
+journal line is truncated away again, so an append commits both files or
+neither: the caller sees the exception and the store is not committed either
+(see ``app/main.py``), which keeps "one card, one decision entry" true and stops
+``verify()`` from reporting tampering after a half-written append. A crash cannot
+leave a consumable journal entry without its matching sidecar state, and
+concurrent appends cannot interleave their writes. Directory-level fsync after
+the rename is not performed (it is not portable to this prototype's Windows
+host); that is a residual, documented limitation for power-loss recovery.
 """
 from __future__ import annotations
 
@@ -211,6 +215,18 @@ class Ledger:
             os.fsync(handle.fileno())
         os.replace(tmp_path, self.head_path)
 
+    def _rollback_journal(self, size: int) -> None:
+        """Drop a journal line whose sidecar write failed, so an append is all-or-nothing.
+
+        ``size`` is the journal's byte length before the line was written. Truncating back to it restores the
+        previous byte string exactly (the line is only ever appended), which keeps ``verify()`` clean and stops
+        a retry from adding a second entry for the same decision.
+        """
+        with open(self.path, "r+b") as handle:
+            handle.truncate(size)
+            handle.flush()
+            os.fsync(handle.fileno())
+
     def _read_head(self) -> tuple[int, str] | None:
         """Return (count, head_hash); None if the sidecar does not exist yet."""
         if not os.path.exists(self.head_path):
@@ -249,8 +265,15 @@ class Ledger:
                     prev_hash, ts_text, action, card.id, actor, payload, reason or "",
                 )),
             )
+            size_before = os.path.getsize(self.path) if os.path.exists(self.path) else 0
             self._write_entry(entry)
-            self._write_head(index + 1, entry.entry_hash)
+            try:
+                self._write_head(index + 1, entry.entry_hash)
+            except Exception:
+                # All-or-nothing: a journal line with no matching sidecar would report tampering and let a
+                # retry append a second entry for one decision. Undo the line, then let the caller fail.
+                self._rollback_journal(size_before)
+                raise
             self._entries = current + [entry]
             return entry
 

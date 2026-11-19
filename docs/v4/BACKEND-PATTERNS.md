@@ -14,7 +14,7 @@ Test command (run from `backend/`, the venv lives in the main checkout):
 Final line of the full suite after this work:
 
 ```
-922 passed, 195 warnings in 23.52s
+948 passed, 207 warnings in 25.93s
 ```
 
 Section map: 1-4 are the round-2 patterns (state machine, share keys, capability
@@ -214,13 +214,16 @@ authenticated identity - that is out of scope here.
 * Enforced: `POST /api/roster`, `/api/roster/why-not`, `/api/roster/dropout`
   (`read_roster`), `/api/evidence/draft` (`draft_cards`), `/confirm`, `/correct`,
   `/reject`, `/request_revision`, `/api/export/credential/{id}`, `POST /api/drive/share`
-  (`share_drive`) and `POST /api/demo/reset` (`reset_demo`).
+  (`share_drive`) and `POST /api/demo/reset` (`reset_demo`). The private **reads** follow
+  the same dependency: `GET /api/evidence/cards` (`read_cards`), `/api/ledger` and
+  `/api/ledger/verify` (`read_ledger`), `/api/volunteers` (`read_volunteers`, organiser
+  only) - so a viewer cannot read the evidence the matrix says it may not see.
 
 **Tests.**
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_capabilities.py -q
-32 passed, 25 warnings in 2.12s
+40 passed, 25 warnings in 5.78s
 ```
 
 Covered: the menu equals the matrix for each of the four roles, the default is
@@ -229,8 +232,10 @@ named, the matrix invariants (organiser may every mutating action; viewer and
 volunteer may none; host may confirm but not draft or reset), no header keeps the old
 behaviour, viewer/volunteer get 403 on **every** mutating route (the test table is
 asserted equal to `capabilities.MUTATING_ACTIONS`, so a new action cannot be added
-without a test), host confirms and exports, only the organiser may reset, and an
-unknown header role is 403 with the reason.
+without a test), viewer/volunteer get 403 on the private reads and a host may read the
+cards and the ledger but not the volunteer pool, an unknown role is refused on the reads
+too, host confirms and exports, only the organiser may reset, and an unknown header role
+is 403 with the reason.
 
 ---
 
@@ -274,18 +279,29 @@ The catalogue covers every reason the solver writes:
 | promoted_from_standby | - | Promoted from standby | स्टैंडबाय से पदोन्नत |
 
 Both renderings take the numbers from the same `params`, and the distance is stored
-raw (`round(distance_km, 3)`) and formatted with `:.0f` in both languages, so the
-whole-kilometre figure cannot differ between them. The test asserts that the
-**digits** in the Hindi sentence are the same multiset as the digits in the English
-sentences (level, km, 90, past drives), which is a fact check rather than a prose
-check; the old "Hindi contains no digits" rule existed only because Hindi had no
-structured source, and is gone.
+**raw** (not pre-rounded) and formatted with `:.0f` in both languages, so the
+whole-kilometre figure cannot differ between them - a reviewer showed that a 3 dp
+pre-round moved 9.4999 km to "10 km". The test asserts that the **digits** in the Hindi
+sentence are the same multiset as the digits in the English sentences (level, km, 90,
+past drives), which is a fact check rather than a prose check; the old "Hindi contains
+no digits" rule existed only because Hindi had no structured source, and is gone.
+
+The Hindi verdict lines follow the same rule: they name the unfilled slots by Hindi role
+label and slot number (`टीम लीड #1`) exactly as the English does (`Team lead #1`), never
+by internal role id, and they quote the robustness percentage under the same condition
+as the English line.
 
 Standby requests keep the person's name in both languages: `RecruitRequest` gained
 `blocked_by_names`, so the English "if Imran B. cannot come" and the Hindi
-"अगर Imran B. न आ सकें" name the same volunteer. A roster method that writes no codes
-(the baselines keep their own English narration) falls back to a role + slot Hindi
-line rather than inventing facts.
+"अगर Imran B. न आ सकें" name the same volunteer.
+
+**The one place parity is not yet complete, stated plainly.** The three baseline roster
+methods (`nearest_skill`, `random_feasible`, `manual_greedy`) write free-form English
+reasons and no reason codes, so their Hindi assignment text falls back to the role + slot
+line and loses the distance, travel limit and past-drive counts the English shows.
+Turning that into parity means giving the baselines the same code-based reasons as the
+solver - a mechanical follow-up, not a translation problem. Unknown reasons are never
+invented: the fallback says only what it knows.
 
 **What is NOT translated, deliberately.**
 
@@ -305,7 +321,7 @@ chooses the Hindi template honestly instead of guessing from the English sentenc
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_i18n.py -q
-17 passed, 2 warnings in 1.67s
+19 passed, 2 warnings in 2.17s
 ```
 
 Covered: ids, counts and skill ids match the canonical task per role; the default
@@ -316,8 +332,10 @@ role asks for a decision with `needed` unchanged; the two languages produce the 
 assignments and metrics (only `solve_ms` differs, it is timing); the Hindi pick text
 carries exactly the digits of the English pick text and the facts named by every
 reason code; every reason code renders in both languages; the standby sentence names
-the same person in both; unknown text is returned unchanged; card text is not
-localized.
+the same person in both; the Hindi verdict line names roles and slot numbers instead of
+internal ids and matches the English digits; a distance prints the same whole km in both
+languages at the 9.4999/9.5 boundary; unknown text is returned unchanged; card text is
+not localized.
 
 ---
 
@@ -333,7 +351,25 @@ CARD_LOCK: lookup card -> transitions.next_state -> ledger.append -> store -> _s
 `CARD_LOCK` is one process-wide `threading.RLock`. The ledger append happens *before*
 the store commit, and `_save_cards()` writes a temp file in the data directory, fsyncs
 it and `os.replace`s it over `cards.json`, so a reader or a crash never sees half a
-file. The drafting route and the demo reset take the same lock.
+file. The drafting route takes the same lock for its store mutation (the model call
+itself stays outside it - holding the lock across a network call would stall every
+decision in the process), and the demo reset takes it too: archiving the journal while
+a decision is mid-commit would let that decision be written into the archived file and
+then erased from the live store.
+
+Two failure paths are handled explicitly:
+
+* **Append fails** -> nothing was committed (the store is only touched after the append
+  succeeds), so the card and the journal stay exactly as they were.
+* **Store mutation fails part-way** (a draft writing its second card) -> the store is
+  restored from a snapshot taken under the lock, and `cards.json` is untouched because
+  the write is the last step and is atomic.
+
+The ledger itself is all-or-nothing too: if the sidecar `{"count", "head_hash"}` cannot
+be written, `Ledger.append` truncates the journal back to its previous byte length
+before re-raising, so an append can never leave a journal line without its sidecar -
+which would make `verify()` report tampering and let a retry append a *second* decision
+entry for one card (a reviewer reproduced exactly that).
 
 **Why an organiser cares.** Two hosts looking at the same contribution card is the
 normal case, not an exotic one: the district organiser and the person who was on site
@@ -355,7 +391,7 @@ the append). That is stated in the `app/main.py` module docstring, not just here
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/evidence/test_atomic_decisions.py -q
-6 passed, 7 warnings in 2.13s
+9 passed, 12 warnings in 3.16s
 ```
 
 Covered: a barrier releases one `confirm` and one `reject` at the same instant on the
@@ -364,8 +400,13 @@ same card (three rounds, fresh cards) and the result is always exactly one 200 a
 `/api/ledger/verify` ok; an injected `OSError` from the ledger's write leaves the
 journal bytes, the cards file bytes and the in-memory card unchanged (the route is
 500 and nothing is decided); the card file is written through `os.replace` on a
-`.tmp` file *after* the append, with no temp files left behind; and a plain illegal
-second action writes nothing.
+`.tmp` file *after* the append, with no temp files left behind; a plain illegal
+second action writes nothing; an injected **sidecar** failure rolls the journal line
+back, `verify()` stays ok, and the retry produces exactly one decision entry; a demo
+reset issued while a decision is inside its file write blocks until the decision
+finishes (checked with two threads: the resetter is still alive and nothing is
+archived), and the archived journal then contains the decision; and a draft that fails
+on its second append restores the store and the cards file exactly.
 
 The barrier test was checked against a deliberately unlocked build (a temporary
 conftest replacing `CARD_LOCK` with `contextlib.nullcontext()`): all three rounds
@@ -392,24 +433,37 @@ The ledger records `draft` or `flag`, and the reason names the revision request.
 
 **Empty drafting is non-destructive.** If the drafting step produces no card, the
 route answers **502** when assignments were sent ("nothing was changed") and `[]` when
-none were, without touching the card store or the journal. This is checked *before*
-the supersede loop, so a failed draft can never delete the undecided cards the host is
-still reviewing. A non-empty draft still supersedes stale undecided cards exactly as
-before (tested, so the guard has not disabled the real path).
+none were, without touching the card store or the journal. A **partial** draft - some
+assignments get a card, others silently do not - is refused the same way, because the
+supersede step deletes every undecided card that is not in the new draft: a draft that
+dropped one rostered volunteer would delete that volunteer's card while a host was
+still reviewing it. Both guards run *before* the supersede loop, and the store is
+restored from a snapshot if the mutation itself fails. A non-empty, complete draft
+still supersedes stale undecided cards exactly as before (tested, so the guard has not
+disabled the real path).
+
+**A restart cannot silently drop a block flag.** When `correct` runs after the
+attendance sheet has left memory, the reconstructed rows carry only volunteer, task and
+recorded hours. Rules that need sheet-only fields (`overlapping_tasks`,
+`minor_without_guardian_consent`) cannot be re-evaluated, so their previous verdict is
+**kept** rather than dropped: a block flag must not disappear because the server
+restarted. Everything that is derivable from the card itself (hours, duplicates,
+missing evidence, round numbers) is recomputed from scratch.
 
 **Tests.**
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/evidence/test_revision_and_rules.py -q
-8 passed, 10 warnings in 2.65s
+10 passed, 15 warnings in 2.20s
 ```
 
 Covered: correcting above the recorded hours stores the warning (message quotes the
 number), correcting back down clears it, correcting to 14 h stores the block flag
-while the status stays `corrected`, the restart fallback still fires, `correct` still
-requires hours (422, card unmoved), an empty draft with assignments is 502 with the
-journal and cards file byte-identical, an empty draft with no assignments removes
-nothing, and a real supersede still happens.
+while the status stays `corrected`, the restart fallback still fires and **keeps** a
+sheet-only block flag, `correct` still requires hours (422, card unmoved), an empty
+draft with assignments is 502 with the journal and cards file byte-identical, an empty
+draft with no assignments removes nothing, a **partial** draft is 502 and leaves the
+existing card untouched, and a real supersede still happens.
 
 ---
 
@@ -419,63 +473,90 @@ nothing, and a real supersede still happens.
 
 | env | effect |
 |---|---|
-| `SEWA_PUBLIC_DEMO` unset / `0` / `false` | gate OFF - the local prototype behaves exactly as before |
-| `SEWA_PUBLIC_DEMO=1` + `SEWA_OPERATOR_TOKEN=<secret>` | every mutating route and the personal-data reads need `X-Operator-Token: <secret>` |
-| `SEWA_PUBLIC_DEMO=1` and no token configured | **fail closed**: every protected route is 403, naming the missing variable |
+| `SEWA_PUBLIC_DEMO` unset / `0` / `false` / `no` / `off` | gate OFF - the local prototype behaves exactly as before |
+| `SEWA_PUBLIC_DEMO` set to anything else (incl. a typo like `production`) | gate ON - a typo fails **closed**, never open |
+| gate ON + `SEWA_OPERATOR_TOKEN=<secret>` | every mutating route and the personal-data reads need `X-Operator-Token: <secret>` |
+| gate ON and no token configured | **fail closed**: every protected route is 403, naming the missing variable |
 
-The comparison is `hmac.compare_digest`. This is deliberately **not a login system**:
-no account, no session, no user table - just a shared secret so a demo reachable from
-the internet can be shown to a district officer without letting an anonymous visitor
-reset the demo, re-plan a roster, decide cards, mint share links, or read the
-volunteer list, the card store and the ledger.
+The comparison is `hmac.compare_digest` against the token **as configured** (not
+stripped: sending exactly what the deployment set always works, and stray spaces are
+part of the secret). Two `X-Operator-Token` headers are refused outright - a proxy that
+validates one occurrence while the application reads another is exactly the ambiguity a
+token boundary must not have. This is deliberately **not a login system**: no account,
+no session, no user table - just a shared secret so a demo reachable from the internet
+can be shown to a district officer without letting an anonymous visitor reset the demo,
+re-plan a roster, decide cards, mint share links, or read the volunteer list, the card
+store and the ledger.
 
 **What is protected, and what stays public.**
 
 * Requires the token: `POST /api/demo/reset`, `POST /api/roster`,
   `/api/roster/why-not`, `/api/roster/dropout`, `POST /api/evidence/draft`, the four
   decision routes, `GET /api/export/credential/{id}` (it names a volunteer and their
-  hours, and it appends to the ledger), `POST /api/drive/share`, and the reads
-  `GET /api/evidence/cards`, `/api/ledger`, `/api/ledger/verify`, `/api/volunteers`.
+  hours, and it appends to the ledger), `POST /api/drive/share`, and
+  `POST /api/extract-roles` (it spends the deployment's model budget and, in record
+  mode, writes a cache file outside `SEWA_DATA_DIR`, so an anonymous caller could grow
+  it without bound).
+* Requires the token **and** the capability matrix: `GET /api/evidence/cards`
+  (`read_cards`), `/api/ledger` and `/api/ledger/verify` (`read_ledger`),
+  `/api/volunteers` (`read_volunteers`, organiser only). A `viewer` or `volunteer` demo
+  role is refused these even with a valid token, and an unknown role is refused on
+  them exactly as on the mutating routes - the menu and the API agree.
 * Stays public: `/api/tasks`, `/api/eval`, `/api/geo/tree`, `/api/capabilities`,
   `/api/drive/{key}`, `/api/drive/status`, `/api/health`, `/api/meta`. None of them
   carries a volunteer id, name, contact, card text or ledger line.
 
+**Order of checks, stated because it is observable.** Dependencies run after request
+parsing, so an unparsable JSON body gets **422** before the token is examined, while a
+parsable body with the wrong token gets **403**. The gate is still never bypassed; this
+is simply the order FastAPI can offer. Trailing-slash redirects (`/api/ledger/` ->
+`/api/ledger`) are issued by the router before dependencies run and build `Location`
+from the request `Host`; a deployment must pin `Host` at the proxy (standard practice)
+and may set `redirect_slashes=False`.
+
 **`X-Demo-Role` stays a labelled simulation on top.** The dependency order is
 operator token -> demo role -> capability matrix, so a role header can never grant an
 action the token does not grant, and can never stand in for a missing token. A valid
-token with `X-Demo-Role: viewer` still gets 403 on `confirm`; `X-Demo-Role:
-organiser` without the token still gets 403.
+token with `X-Demo-Role: viewer` still gets 403 on `confirm` and on the private reads;
+`X-Demo-Role: organiser` without the token still gets 403.
 
 **Plan-versioned snapshots.** `share.plan_version(roles, options, assignments,
-standby)` is the SHA-256 of the plan. The snapshot stores `plan_version` and
-`computed_at`; `POST /api/roster/dropout` refreshes the snapshot with the healed plan;
-`GET /api/drive/{key}` computes `stale` on read by comparing the snapshot's version
-with the organiser's latest solved roster. `GET /api/drive/status` returns
-`{task_id, ready, computed_at, stale}` for every known task id - nulls before any plan
-- and never calls the solver.
+standby)` is **HMAC-SHA256, keyed by the server's share secret**, over the plan. The
+snapshot stores it with `computed_at`; `POST /api/roster/dropout` refreshes the snapshot
+with the healed plan; `GET /api/drive/{key}` computes `stale` on read by comparing the
+snapshot's version with the organiser's latest solved roster. The key matters: the
+version is published on an unauthenticated page, and a bare SHA-256 over a payload
+containing sequential volunteer ids is an offline membership oracle - a reviewer
+recovered the whole crew and standby from the public body with ~800k hashes. Keyed with
+a per-server secret the digest is stable here and useless outside. `GET
+/api/drive/status` returns `{task_id, ready, computed_at, stale}` for every known task
+id - nulls before any plan - and never calls the solver.
 
 **Tests.**
 
 ```
 ..\..\sewacircle\.venv\Scripts\python.exe -m pytest tests/test_public_demo.py -q
-53 passed, 23 warnings in 4.02s
+64 passed, 25 warnings in 4.66s
 ```
 
 Covered: the gate is off by default and for `0/false/no/off/""`, on for
-`1/true/YES/" on "`; every one of the eleven mutating routes is 403 without the token
-and 403 with a wrong token (the endpoint table is data, so a new route shows up as a
-missing case); the full evidence flow works with the token (draft, confirm, export,
-cards, ledger, verify, volunteers, share, roster, reset); the four private reads are
-403 without it; the five public reads and the public drive summary answer 200 without
-it; `organiser`/`host` role headers never substitute for the token, and a valid token
-with `viewer` is still refused; a missing configured token fails closed; the
-comparison is exact (`TOKEN+" "` and `TOKEN.upper()` do not match); a roster run
-stores a 64-hex `plan_version` that recomputes from roles + crew; a dropout refreshes
-the snapshot and makes `stale` true while `latest_plan` keeps the organiser's plan;
-re-solving clears it; `/api/drive/status` lists every known task with nulls first,
-matches the snapshot afterwards, is idempotent, and leaves the ledger, snapshots, plan
-registry and cards file untouched - asserted twice: by comparing state before/after and
-by making every solver entry point raise while it still returns 200.
+`1/true/YES/" on "` and for unrecognised values such as `production`, `enabled`, `2`
+(fail closed); every one of the twelve mutating routes (including
+`POST /api/extract-roles`) is 403 without the token and 403 with a wrong token (the
+endpoint table is data, so a new route shows up as a missing case); the full evidence
+flow works with the token (draft, confirm, export, cards, ledger, verify, volunteers,
+share, roster, reset); the private reads are 403 without it; the five public reads and
+the public drive summary answer 200 without it; `organiser`/`host` role headers never
+substitute for the token, a valid token with `viewer` is still refused, duplicate token
+headers are refused, a token configured with spaces is compared as written, and a
+missing configured token fails closed; a roster run stores a 64-hex `plan_version` that
+recomputes in-process from roles + crew but **not** without the secret (nor after
+rotation); a dropout refreshes the snapshot and makes `stale` true while `latest_plan`
+keeps the organiser's plan; re-solving clears it; `/api/drive/status` lists every known
+task with nulls first, matches the snapshot afterwards, is idempotent, and leaves the
+ledger, snapshots, plan registry and cards file untouched - asserted twice: by comparing
+state before/after and by making every solver entry point raise while it still returns
+200.
 
 ---
 
@@ -489,7 +570,7 @@ by making every solver entry point raise while it still returns 200.
   still pass, except three that asserted the behaviour this round deliberately
   reverses (one back-edge only; a redraft that trips a rule returns to `draft`; the
   Hindi pick text quoting no digits) - those three were rewritten to the new contract
-  and the suite is now 922.
+  and the suite is now 948.
 * **No secrets in code.** The share secret and the operator token are environment
   variables (the share secret may instead be generated in memory); nothing secret is
   committed or logged, and the ledger records no token.
@@ -517,11 +598,31 @@ by making every solver entry point raise while it still returns 200.
   capability matrix) is a *simulation* of who does what; `X-Operator-Token` (public
   demo mode) is the only thing that keeps an anonymous caller out. They are separate
   on purpose: the matrix must stay fake so the demo can show four roles without four
-  accounts, and the token must stay real so the demo can be public. `GET
-  /api/evidence/cards`, `/api/ledger` and `/api/volunteers` are not in the capability
-  matrix (no demo role is refused them by role) but they ARE behind the operator token
-  in public mode; `POST /api/extract-roles` and `GET /api/eval` are behind neither
-  (no evidence state, no personal data).
+  accounts, and the token must stay real so the demo can be public. The private reads
+  now run through **both** (`read_cards`, `read_ledger`, `read_volunteers`), so a
+  `viewer` cannot read the evidence the menu says it may not see; `POST
+  /api/extract-roles` is behind the token (model budget and the record cache) and `GET
+  /api/eval` is behind neither (synthetic metrics only).
+* **Independent verification round.** Three read-only reviewers audited B1-B3 against
+  this document and the code, and every defect they could reproduce was fixed rather
+  than argued away: the demo reset could erase a decision mid-commit (now under
+  `CARD_LOCK`, with a two-thread test); a failed sidecar write left a journal line
+  without its sidecar, so `verify()` cried tamper and a retry wrote a second decision
+  entry (now rolled back); the draft held the lock across the model call (livelock);
+  `correct` after a restart dropped a `block` flag that only the sheet could re-prove
+  (now kept); a short draft silently deleted a rostered volunteer's card (now 502);
+  the switch failed *open* on unrecognised values (now closed); duplicate token headers
+  and a whitespace-mangled configured token were accepted (both now exact); the public
+  `plan_version` was a bare SHA-256 over sequential volunteer ids, i.e. an offline
+  membership oracle (now HMAC-keyed); `POST /api/extract-roles` was ungated; the private
+  reads ignored the matrix; the Hindi verdict line printed internal role ids and the
+  distance was pre-rounded before `:.0f`. What was **not** changed, and why: the
+  trailing-slash 307 is emitted by Starlette before dependencies run and builds
+  `Location` from `Host` (a proxy concern, documented above); an unparsable body is 422
+  before the token is checked (FastAPI's parse order, no bypass); `GET /api/evidence/cards`
+  iterates the store without the lock (a 400-delete probe found no reader error, since
+  dict iteration is atomic under the GIL for the size involved); and the baseline
+  methods still narrate only in English (see section 4).
 * **Rotating the share secret** is an explicit act: the value is cached per process, so
   changing `SEWA_SHARE_SECRET` needs `share.reset_secret()` or a restart, as the
   docstring now says.

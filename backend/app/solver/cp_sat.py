@@ -176,7 +176,7 @@ def _reasons(v: Volunteer, role: RoleSpec, task: TaskSpec, mentor_name: str | No
     else:
         codes.append(PickReason(code="open_role"))
     codes.append(PickReason(code="slot_and_distance",
-                            params={"slot": task.slot, "distance_km": round(distance_km(task, v), 3)}))
+                            params={"slot": task.slot, "distance_km": distance_km(task, v)}))
     if v.times_picked_last_90d == 0:
         codes.append(PickReason(code="not_picked_recently", params={"days": RECENT_PICK_DAYS}))
     elif v.times_picked_last_90d >= HEAVY:

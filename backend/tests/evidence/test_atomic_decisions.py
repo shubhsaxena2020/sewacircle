@@ -163,3 +163,99 @@ def test_an_illegal_second_action_writes_nothing(client, tmp_path):
     assert r.status_code == 409
     assert (tmp_path / "ledger.jsonl").read_bytes() == journal_before
     assert (tmp_path / "cards.json").read_bytes() == cards_before
+
+
+def test_a_failed_sidecar_write_rolls_the_journal_line_back(client, tmp_path, monkeypatch):
+    """A journal line whose sidecar write fails must not survive: otherwise verify() reports tampering and a
+    retry appends a SECOND decision entry for one card (the failure mode a reviewer found)."""
+    card = _draft(client)
+    journal = tmp_path / "ledger.jsonl"
+    journal_before = journal.read_bytes()
+
+    def boom(self, count, head_hash):
+        raise OSError("sidecar disk full (injected)")
+    monkeypatch.setattr(main.ledger_mod.Ledger, "_write_head", boom)
+
+    failing = TestClient(main.app, raise_server_exceptions=False)
+    assert failing.post(f"/api/evidence/{card['id']}/confirm", json={"actor": "host"}).status_code == 500
+    assert journal.read_bytes() == journal_before                  # the line was rolled back
+    assert main.cards()[card["id"]].status == "draft"              # and nothing was committed
+    assert failing.get("/api/ledger/verify").json()["ok"] is True   # no phantom entry, no tamper alarm
+
+    monkeypatch.undo()
+    retry = client.post(f"/api/evidence/{card['id']}/confirm", json={"actor": "host"})
+    assert retry.status_code == 200, retry.text
+    decisions = [e for e in client.get("/api/ledger").json()
+                 if e["card_id"] == card["id"] and e["action"] in DECISION_ACTIONS]
+    assert len(decisions) == 1                                     # exactly one, not one per attempt
+    assert client.get("/api/ledger/verify").json()["ok"] is True
+
+
+def test_demo_reset_cannot_erase_a_decision_that_is_mid_commit(client, tmp_path, monkeypatch):
+    """The reset archives the journal, so it must not run between a decision's append and its store commit."""
+    card = _draft(client)
+    real_save = main._save_cards
+    inside = threading.Event()
+    release = threading.Event()
+
+    def slow_save():
+        inside.set()
+        assert release.wait(timeout=10)
+        real_save()
+    monkeypatch.setattr(main, "_save_cards", slow_save)
+
+    outcomes: dict[str, object] = {}
+
+    def confirm():
+        outcomes["confirm"] = client.post(f"/api/evidence/{card['id']}/confirm", json={"actor": "host"})
+
+    def reset():
+        outcomes["reset"] = client.post("/api/demo/reset")
+
+    decision = threading.Thread(target=confirm)
+    decision.start()
+    assert inside.wait(timeout=10), "the decision never reached its file write"
+
+    resetter = threading.Thread(target=reset)
+    resetter.start()
+    resetter.join(timeout=0.4)
+    assert resetter.is_alive(), "demo reset ran while a decision was mid-commit"
+    assert not list(tmp_path.glob("archive-*")), "files were archived before the decision finished"
+
+    release.set()
+    decision.join(timeout=15)
+    resetter.join(timeout=15)
+
+    assert outcomes["confirm"].status_code == 200
+    assert outcomes["reset"].status_code == 200
+    archived = list(tmp_path.glob("archive-*-ledger.jsonl"))
+    assert len(archived) == 1
+    actions = [json.loads(line)["action"] for line in archived[0].read_text(encoding="utf-8").splitlines()]
+    assert "confirm" in actions                     # the decision exists in the archived history, not lost
+    assert client.get("/api/ledger").json() == []    # and the demo is clean afterwards
+
+
+def test_the_store_is_restored_when_a_draft_fails_mid_commit(client, monkeypatch):
+    """A draft that fails after some cards were written leaves the store exactly as it was."""
+    first = _draft(client)                                   # one card, committed
+    real_append = main.ledger().append
+    calls = {"n": 0}
+
+    def fail_second(*args, **kwargs):
+        calls["n"] += 1
+        if calls["n"] >= 2:
+            raise OSError("journal unavailable (injected)")
+        return real_append(*args, **kwargs)
+    monkeypatch.setattr(main.ledger(), "append", fail_second)
+
+    failing = TestClient(main.app, raise_server_exceptions=False)
+    r = failing.post("/api/evidence/draft", json={
+        "task": TASK, "host_notes": "Sunita worked 4 hours. Ravi worked 4 hours.",
+        "attendance_rows": [{"volunteer_id": "v-069", "task_id": "task-01", "hours": 4},
+                            {"volunteer_id": "v-070", "task_id": "task-01", "hours": 4}],
+        "assignments": [{"role_id": "role-01", "volunteer_id": "v-069", "volunteer_name": "Sunita K."},
+                        {"role_id": "role-01", "volunteer_id": "v-070", "volunteer_name": "Ravi P."}]})
+    assert r.status_code == 500
+    assert calls["n"] >= 2                                   # the failure happened after a card was written
+    assert [c["id"] for c in failing.get("/api/evidence/cards").json()] == [first["id"]]   # nothing replaced
+    assert json.loads((main.CARDS_PATH).read_text(encoding="utf-8"))[0]["id"] == first["id"]

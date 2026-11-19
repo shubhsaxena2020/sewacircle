@@ -182,6 +182,28 @@ def test_unknown_header_role_is_403_and_says_why(client):
     assert "root" in r.json()["detail"] and "demo role switch" in r.json()["detail"]
 
 
+#: Private reads that the matrix now governs too (they expose names, hours or the audit trail).
+READ_ROUTES = {"/api/evidence/cards": "read_cards", "/api/ledger": "read_ledger",
+               "/api/ledger/verify": "read_ledger", "/api/volunteers": "read_volunteers"}
+
+
+@pytest.mark.parametrize("path", sorted(READ_ROUTES))
+def test_private_reads_follow_the_same_matrix_as_the_mutations(client, path):
+    """A reviewer found these answered 200 for viewer/volunteer and even for an unknown role."""
+    assert client.get(path).status_code == 200                       # default organiser keeps working
+    for role in ("viewer", "volunteer"):
+        assert client.get(path, headers={"X-Demo-Role": role}).status_code == 403, (path, role)
+    host_expected = 200 if READ_ROUTES[path] != "read_volunteers" else 403
+    assert client.get(path, headers={"X-Demo-Role": "host"}).status_code == host_expected
+
+
+@pytest.mark.parametrize("path", sorted(READ_ROUTES))
+def test_an_unknown_role_is_refused_on_the_private_reads(client, path):
+    r = client.get(path, headers={"X-Demo-Role": "root"})
+    assert r.status_code == 403
+    assert "demo role switch" in r.json()["detail"]
+
+
 def test_header_role_is_case_insensitive(client):
     card = _draft(client).json()[0]
     r = client.post(f"/api/evidence/{card['id']}/confirm", json={}, headers={"X-Demo-Role": " HOST "})

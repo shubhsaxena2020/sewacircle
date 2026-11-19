@@ -10,16 +10,19 @@ or read the volunteer list, the card store and the audit ledger.
 
 Two switches, and the local default is "off"
 --------------------------------------------
-* ``SEWA_PUBLIC_DEMO`` unset / ``0`` / ``false`` -> the gate is OFF and every route behaves exactly as before
-  (the local prototype's behaviour is unchanged). This is the default.
-* ``SEWA_PUBLIC_DEMO=1`` -> the gate is ON: the mutating routes and the personal-data reads require the
-  header.
+* ``SEWA_PUBLIC_DEMO`` unset / ``0`` / ``false`` / ``no`` / ``off`` -> the gate is OFF and every route behaves
+  exactly as before (the local prototype's behaviour is unchanged). This is the default.
+* ``SEWA_PUBLIC_DEMO`` set to anything else (``1``, ``true``, ``YES``, ``on``, and - deliberately - a value
+  nobody meant, such as ``production`` or ``enabled``) -> the gate is ON. Unrecognised values therefore fail
+  closed: a typo can make the demo refuse traffic, never expose it.
 
 Fail closed, not open
 ---------------------
-If public-demo mode is on but ``SEWA_OPERATOR_TOKEN`` is empty, EVERY protected route refuses with 403 and a
-message naming the missing variable. A demo that is accidentally open is worse than a demo that is accidentally
-closed, so a missing token never means "no token needed".
+If public-demo mode is on but ``SEWA_OPERATOR_TOKEN`` is empty or blank, EVERY protected route refuses with 403
+and a message naming the missing variable. A demo that is accidentally open is worse than a demo that is
+accidentally closed, so a missing token never means "no token needed". The configured token is compared as
+written (it is not stripped): sending exactly what was configured always works, and a value with accidental
+leading/trailing spaces is treated as part of the secret.
 
 How it composes with X-Demo-Role
 --------------------------------
@@ -48,8 +51,9 @@ PUBLIC_DEMO_ENV = "SEWA_PUBLIC_DEMO"
 #: Environment variable holding the shared secret.
 OPERATOR_TOKEN_ENV = "SEWA_OPERATOR_TOKEN"
 
-#: Values of SEWA_PUBLIC_DEMO that turn the gate on. Anything else (and unset) means off.
-_TRUTHY = frozenset({"1", "true", "yes", "on"})
+#: Values of SEWA_PUBLIC_DEMO that turn the gate OFF. Anything else - including values nobody meant - turns it
+#: ON, so a typo fails closed instead of publishing an open demo.
+_FALSY = frozenset({"", "0", "false", "no", "off"})
 
 
 class OperatorRequired(Exception):
@@ -61,13 +65,22 @@ class OperatorRequired(Exception):
 
 
 def public_demo_enabled() -> bool:
-    """True only when ``SEWA_PUBLIC_DEMO`` is explicitly switched on."""
-    return os.environ.get(PUBLIC_DEMO_ENV, "").strip().lower() in _TRUTHY
+    """True unless ``SEWA_PUBLIC_DEMO`` is unset or explicitly falsy.
+
+    Fail-closed by design: ``production``/``enabled``/``2`` are read as "on", because the cost of guessing
+    wrong in that direction is a demo that refuses traffic, not a demo anyone can reset.
+    """
+    return os.environ.get(PUBLIC_DEMO_ENV, "").strip().lower() not in _FALSY
 
 
 def operator_token() -> str:
-    """The configured shared secret (empty when the deployment has not set one)."""
-    return os.environ.get(OPERATOR_TOKEN_ENV, "").strip()
+    """The configured shared secret, exactly as written (empty when the deployment has not set one).
+
+    Not stripped: a token with accidental surrounding spaces is compared with those spaces included, so the
+    value the deployment configured is the value that works. Blank counts as unset (fail closed).
+    """
+    token = os.environ.get(OPERATOR_TOKEN_ENV, "")
+    return token if token.strip() else ""
 
 
 def token_matches(candidate: str | None) -> bool:

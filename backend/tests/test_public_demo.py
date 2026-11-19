@@ -57,6 +57,7 @@ MUTATING_ROUTES = {
                                                                    "hours": 5}],
                                               "assignments": [{"role_id": "role-01", "volunteer_id": "v-068",
                                                                "volunteer_name": "Imran B."}]}),
+    "extract": ("post", "/api/extract-roles", {"brief_text": ""}),
     "confirm": ("post", "/api/evidence/{card}/confirm", {}),
     "correct": ("post", "/api/evidence/{card}/correct", {"claimed_hours": 4}),
     "reject": ("post", "/api/evidence/{card}/reject", {}),
@@ -232,6 +233,44 @@ def test_token_comparison_is_exact(client, monkeypatch):
     assert demo_mode.token_matches("") is False
 
 
+@pytest.mark.parametrize("value", ["production", "enabled", "2", "1.0", "yes1"])
+def test_an_unrecognised_switch_value_fails_closed(client, monkeypatch, value):
+    """A typo in SEWA_PUBLIC_DEMO must not publish an open demo (reviewer finding: it failed open)."""
+    monkeypatch.setenv(demo_mode.PUBLIC_DEMO_ENV, value)
+    monkeypatch.setenv(demo_mode.OPERATOR_TOKEN_ENV, TOKEN)
+    assert demo_mode.public_demo_enabled() is True
+    assert client.get("/api/volunteers").status_code == 403
+    assert client.get("/api/volunteers", headers=AUTH).status_code == 200
+
+
+def test_duplicate_operator_token_headers_are_refused(demo):
+    """Two occurrences of the header are ambiguous (a proxy may validate a different one): refuse them."""
+    r = demo.get("/api/ledger", headers=[(demo_mode.TOKEN_HEADER, TOKEN), (demo_mode.TOKEN_HEADER, "nope")])
+    assert r.status_code == 403
+    assert "duplicate" in r.json()["detail"]
+    r = demo.get("/api/ledger", headers=[(demo_mode.TOKEN_HEADER, TOKEN), (demo_mode.TOKEN_HEADER, TOKEN)])
+    assert r.status_code == 403
+
+
+def test_a_configured_token_is_compared_as_written(client, monkeypatch):
+    """A token configured with surrounding spaces is used exactly as written, not silently trimmed."""
+    spaced = "  spaced-token  "
+    monkeypatch.setenv(demo_mode.OPERATOR_TOKEN_ENV, spaced)
+    monkeypatch.setenv(demo_mode.PUBLIC_DEMO_ENV, "1")
+    assert demo_mode.token_matches(spaced) is True
+    assert demo_mode.token_matches(spaced.strip()) is False
+    assert client.get("/api/ledger", headers={demo_mode.TOKEN_HEADER: spaced}).status_code == 200
+
+
+def test_extract_roles_is_gated_even_when_the_gate_fails_closed(client, monkeypatch):
+    """Reviewer finding: POST /api/extract-roles was ungated - it spends the model budget and writes a cache."""
+    monkeypatch.setenv(demo_mode.PUBLIC_DEMO_ENV, "1")
+    monkeypatch.delenv(demo_mode.OPERATOR_TOKEN_ENV, raising=False)
+    r = client.post("/api/extract-roles", json={"brief_text": ""})
+    assert r.status_code == 403
+    assert demo_mode.TOKEN_HEADER in r.json()["detail"]
+
+
 # ---------------- 3. plan-versioned snapshots + drive status ----------------
 
 
@@ -322,6 +361,30 @@ def test_drive_status_marks_a_task_stale_after_a_dropout(client):
     row = next(r for r in client.get("/api/drive/status").json()["tasks"] if r["task_id"] == "task-01")
     assert row["stale"] is True
     assert row["ready"] == client.get(f"/api/drive/{key}").json()["ready"]
+
+
+def test_plan_version_is_keyed_so_the_public_summary_is_not_a_membership_oracle(client, monkeypatch):
+    """The published version must be useless to someone who can only see the public body.
+
+    A bare SHA-256 over roles + crew could be brute-forced from the published roles (sequential volunteer
+    ids), telling an outsider who is on the drive. Keyed with the share secret it cannot be recomputed
+    without that secret, so the reviewer's oracle attack no longer works - while staleness still compares
+    versions minted inside this process.
+    """
+    from app.schemas import RosterOptions, RosterResult
+
+    key = share.share_key_for("task-01")
+    roster = client.post("/api/roster", json={"task": TASK}).json()["cp_sat"]
+    published = client.get(f"/api/drive/{key}").json()["plan_version"]
+
+    roles = [RoleSpec(**r) for r in TASK["roles"]]
+    crew = share.roster_fingerprint(RosterResult.model_validate(roster))
+    assert share.plan_version(roles, RosterOptions(), *crew) == published          # reproducible in-process
+    assert share.plan_version(roles, RosterOptions(), *crew, secret=b"guess") != published   # not without it
+
+    monkeypatch.setenv("SEWA_SHARE_SECRET", "a-rotated-secret")
+    share.reset_secret()
+    assert share.plan_version(roles, RosterOptions(), *crew) != published          # rotation re-keys versions
 
 
 def test_plan_version_is_deterministic_and_sensitive():

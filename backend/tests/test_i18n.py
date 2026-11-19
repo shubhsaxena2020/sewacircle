@@ -227,6 +227,35 @@ def _solvable_task() -> dict:
     raise AssertionError("no usable synthetic volunteer")
 
 
+def test_the_hindi_explanation_names_roles_and_slots_like_the_english(client):
+    """A reviewer found the Hindi verdict line printed internal role ids while English named roles and slots."""
+    task = {"id": "task-77", "title": "Team day", "slot": "sat_morning", "district": "Lucknow", "block": "Chinhat",
+            "lat": 26.8, "lon": 80.9,
+            "roles": [{"id": "role-01", "role": "Team lead", "count": 2, "required_skills": ["team_leadership"]}]}
+    options = {"forced_out": [v.id for v in main.volunteers()]}      # nobody may be picked -> 2 empty slots
+    english = client.post("/api/roster", json={"task": task, "options": options, "lang": "en"}).json()["cp_sat"]
+    hindi = client.post("/api/roster", json={"task": task, "options": options, "lang": "hi"}).json()["cp_sat"]
+
+    assert english["ready"] is False and english["unfilled_slots"]
+    en_text = " ".join(english["display"]["explanations"])
+    hi_text = " ".join(hindi["display"]["explanations"])
+    assert "#1" in en_text and "#2" in en_text                      # English names role + slot number
+    assert "#1" in hi_text and "#2" in hi_text                      # so does Hindi
+    assert "टीम लीड" in hi_text
+    assert "role-01" not in hi_text                                 # an internal id is not a fact for a host
+    assert sorted(_digits(hi_text)) == sorted(_digits(en_text))
+
+
+def test_a_distance_is_printed_as_the_same_whole_km_in_both_languages():
+    """The raw distance is stored (not pre-rounded), so the km figure cannot shift between languages."""
+    from app.schemas import PickReason
+
+    for raw, expected in ((9.4999, "9"), (9.5, "10"), (0.4, "0"), (12.24, "12")):
+        code = PickReason(code="slot_and_distance", params={"slot": "sat_morning", "distance_km": raw})
+        assert f"{expected} km" in i18n.reason_text(code, "en"), (raw, i18n.reason_text(code, "en"))
+        assert f"{expected} किमी" in i18n.reason_text(code, "hi"), (raw, i18n.reason_text(code, "hi"))
+
+
 def test_a_robustness_percentage_is_the_same_number_in_both_languages(client):
     english = _roster(client, "en")["cp_sat"]
     hindi = _roster(client, "hi")["cp_sat"]

@@ -39,11 +39,18 @@ This module never returns volunteer data - it only computes and resolves keys.
 Plan versioning
 ---------------
 A share link is only as honest as its freshness, so a snapshot of "what was planned" carries a
-``plan_version``: the SHA-256 of the plan itself - the roles as the organiser has them, the roster options,
-and the crew that was chosen (roles, slot index, volunteer id, standby ids). Two plans with the same roles
-but a different crew (for example after a dropout healed the roster) are therefore different versions, which
-is exactly the case a viewer must be told about: ``GET /api/drive/{key}`` reports ``stale: true`` when the
-organiser's latest solved roster for that task is no longer the plan the summary describes.
+``plan_version``: the plan itself - the roles as the organiser has them, the roster options, and the crew that
+was chosen (roles, slot index, volunteer id, standby ids) - hashed with **HMAC-SHA256 keyed by this server's
+share secret**. Two plans with the same roles but a different crew (for example after a dropout healed the
+roster) are therefore different versions, which is exactly the case a viewer must be told about:
+``GET /api/drive/{key}`` reports ``stale: true`` when the organiser's latest solved roster for that task is no
+longer the plan the summary describes.
+
+The key is not decoration. The version is published on the unauthenticated summary, and a bare SHA-256 over a
+payload containing sequential volunteer ids would be an *offline membership oracle*: take the published roles,
+guess the defaults, hash candidate crews until one matches, and you have learned who is on the drive - which
+is exactly what the summary promises never to disclose. Keyed with a per-server secret the digest is stable
+inside this process (so snapshots can be compared) and useless to anyone outside it.
 """
 from __future__ import annotations
 
@@ -150,12 +157,15 @@ def roster_fingerprint(roster: Any) -> tuple[list[str], list[str]]:
 
 def plan_version(roles: Iterable[Any], options: Any | None = None,
                  assignments: Iterable[str] | None = None,
-                 standby_ids: Iterable[str] | None = None) -> str:
-    """SHA-256 of one plan: its roles, its roster options and (when solved) its crew.
+                 standby_ids: Iterable[str] | None = None,
+                 secret: bytes | None = None) -> str:
+    """HMAC-SHA256 (keyed by the share secret) of one plan: roles, roster options and, when solved, the crew.
 
-    Deterministic: roles are sorted by id, skills sorted, assignments/standby sorted, JSON keys sorted. So the
-    same plan always produces the same version and any change to roles, options, crew or standby produces a
-    different one. Returns a hex digest (never the plan itself, so it can be logged or shown).
+    Deterministic within one secret: roles are sorted by id, skills sorted, assignments/standby sorted, JSON keys
+    sorted, so the same plan always produces the same version and any change to roles, options, crew or standby
+    produces a different one. Keyed - not a plain digest - so that publishing it on the public summary cannot be
+    turned into an offline "who is on this crew" oracle (see the module docstring). Returns a hex digest, never
+    the plan itself.
     """
     payload = {
         "roles": sorted((_role_fingerprint(r) for r in roles), key=lambda r: r["id"]),
@@ -164,4 +174,5 @@ def plan_version(roles: Iterable[Any], options: Any | None = None,
         "standby": sorted(standby_ids or []),
     }
     body = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
-    return hashlib.sha256(body.encode("utf-8")).hexdigest()
+    return hmac.new(secret if secret is not None else server_secret(), body.encode("utf-8"),
+                    hashlib.sha256).hexdigest()

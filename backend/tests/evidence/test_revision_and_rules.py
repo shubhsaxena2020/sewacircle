@@ -149,3 +149,48 @@ def test_a_non_empty_draft_still_supersedes_the_stale_card(client):
     second = _draft(client, volunteer="v-069", name="Sunita K.")
     assert [c["volunteer_id"] for c in client.get("/api/evidence/cards").json()] == ["v-069"]
     assert second["status"] == "draft"
+
+
+def test_a_partial_draft_is_502_and_changes_nothing(client, tmp_path, monkeypatch):
+    """A draft that silently drops a rostered volunteer would delete that card via the supersede step."""
+    stale = _draft(client)                                     # v-068, undecided
+    journal_before = (tmp_path / "ledger.jsonl").read_bytes()
+    cards_before = (tmp_path / "cards.json").read_bytes()
+
+    import app.llm.extract as extract_mod
+    real = extract_mod.draft_cards
+
+    def one_of_two(*args, **kwargs):
+        return real(*args, **kwargs)[:1]                       # pretend the model skipped the second volunteer
+    monkeypatch.setattr(main.llm_extract, "draft_cards", one_of_two)
+
+    r = client.post("/api/evidence/draft", json={
+        "task": TASK, "host_notes": "Imran worked 5 hours. Sunita worked 4 hours.",
+        "attendance_rows": [{"volunteer_id": "v-068", "task_id": "task-01", "hours": 5},
+                            {"volunteer_id": "v-069", "task_id": "task-01", "hours": 4}],
+        "assignments": [{"role_id": "role-01", "volunteer_id": "v-068", "volunteer_name": "Imran B."},
+                        {"role_id": "role-01", "volunteer_id": "v-069", "volunteer_name": "Sunita K."}]})
+    assert r.status_code == 502, r.text
+    assert "nothing was changed" in r.json()["detail"]
+    assert (tmp_path / "ledger.jsonl").read_bytes() == journal_before
+    assert (tmp_path / "cards.json").read_bytes() == cards_before
+    assert [c["id"] for c in client.get("/api/evidence/cards").json()] == [stale["id"]]
+
+
+def test_correct_keeps_a_block_flag_only_the_sheet_could_prove(client):
+    """After a restart the sheet is gone; a block flag that depends on sheet fields must NOT silently vanish."""
+    card = _draft(client, claimed=5.0, recorded=5.0)
+    # re-draft the same card with an attendance row that records a minor without consent -> block flag
+    rows = [{"volunteer_id": "v-068", "task_id": "task-01", "hours": 5, "age": 16}]
+    r = client.post("/api/evidence/draft", json={
+        "task": TASK, "host_notes": "Imran worked 5 hours.", "attendance_rows": rows,
+        "assignments": [{"role_id": "role-01", "volunteer_id": "v-068", "volunteer_name": "Imran B."}]})
+    assert r.status_code == 200, r.text
+    assert "minor_without_guardian_consent" in _codes(r.json()[0])
+
+    main.S.attendance_rows = None                       # restart: the sheet is no longer in memory
+    corrected = client.post(f"/api/evidence/{card['id']}/correct", json={"claimed_hours": 4})
+    assert corrected.status_code == 200, corrected.text
+    assert "minor_without_guardian_consent" in _codes(corrected.json())     # kept, not dropped
+    assert any(f["code"] == "minor_without_guardian_consent" and f["severity"] == "block"
+               for f in corrected.json()["flags"])

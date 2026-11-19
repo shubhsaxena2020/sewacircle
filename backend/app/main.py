@@ -6,12 +6,17 @@ Concurrency, stated honestly
 This prototype is a SINGLE-PROCESS server: one uvicorn worker, one Python process, one in-memory card store. A
 card decision (lookup -> transition -> ledger append -> store -> card-file write) runs under one process-wide
 ``threading.RLock``, and the card file is replaced atomically, so two hosts clicking "confirm" and "reject" on
-the same card at the same moment get exactly one 200 and one 409 - never two decisions for one card.
+the same card at the same moment get exactly one 200 and one 409 - never two decisions for one card. The draft
+route and the demo reset take the same lock (the draft route's slow model call stays OUTSIDE it, so a slow model
+cannot stall decisions), and both restore or refuse rather than half-commit.
 
 The lock does NOT survive multiple processes: two uvicorn workers (or gunicorn -w 2) would each have their own
 lock, their own in-memory store, and the ledger's own RLock is process-local too, so two writers on one journal
 would fork the hash chain. Running more than one worker needs a shared store and a cross-process lock (a database
 transaction, or a file lock around the append), which is explicitly out of scope for this prototype.
+
+Public-demo boundary: see app/demo_mode.py. Off by default; when SEWA_PUBLIC_DEMO is set, the mutating routes
+and the personal-data reads require X-Operator-Token, and X-Demo-Role can never grant what the token does not.
 """
 from __future__ import annotations
 
@@ -35,7 +40,7 @@ from .evidence import badges, ledger as ledger_mod, rules, transitions
 from .llm import extract as llm_extract
 from .llm.client import LLMError
 from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard, Counterfactual, DropoutResult,
-                      DriveShareSummary, DriveStatus, DriveStatusRow, EvalReport, ExtractionResult, LedgerEntry,
+                      DriveShareSummary, DriveStatus, DriveStatusRow, EvalReport, ExtractionResult, Flag, LedgerEntry,
                       LedgerVerification, RosterOptions, RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
 from . import capabilities, demo_mode, i18n, share
 from .solver import api as solver
@@ -76,9 +81,19 @@ def _require_operator(request: Request) -> None:
     Off (the local default) this is a no-op, so every existing client keeps working. On, it refuses with 403
     unless ``X-Operator-Token`` matches ``SEWA_OPERATOR_TOKEN`` (constant-time), and refuses everything when
     the deployment forgot to set the token. See app/demo_mode.py.
+
+    Two or more ``X-Operator-Token`` headers are refused outright: a proxy that validates one occurrence while
+    this application reads another is exactly the ambiguity a token boundary must not have.
     """
+    if not demo_mode.public_demo_enabled():
+        return
+    values = [value for key, value in request.headers.items()
+              if key.lower() == demo_mode.TOKEN_HEADER.lower()]
+    if len(values) > 1:
+        raise HTTPException(403, f"public demo mode: send exactly one {demo_mode.TOKEN_HEADER} header; "
+                                 "duplicate headers are ambiguous and are refused.")
     try:
-        demo_mode.check(request.headers.get(demo_mode.TOKEN_HEADER))
+        demo_mode.check(values[0] if values else None)
     except demo_mode.OperatorRequired as exc:
         raise HTTPException(403, exc.message) from exc
 
@@ -184,6 +199,17 @@ def cards() -> dict[str, ContributionCard]:
     return S.cards
 
 
+def _restore_store(snapshot: dict[str, ContributionCard]) -> None:
+    """Put the card store back exactly as it was (caller holds CARD_LOCK).
+
+    Used when a mutation fails before its ledger entry exists: the in-memory store and cards.json must both
+    describe the state the journal describes, and nothing more.
+    """
+    store = cards()
+    store.clear()
+    store.update(snapshot)
+
+
 def _save_cards() -> None:
     """Replace the card file atomically: write a temp file in the same directory, fsync, then os.replace.
 
@@ -280,11 +306,11 @@ def geo_tree(request: Request) -> Any:
 
 
 @app.get("/api/volunteers", response_model=list[Volunteer])
-def list_volunteers(operator: None = Depends(_require_operator)) -> Any:
+def list_volunteers(demo_role: str = Depends(_require_demo("read_volunteers"))) -> Any:
     """The synthetic volunteer pool: names, blocks, skills, contact-adjacent fields.
 
-    Personal-data read, so in public-demo mode it needs the operator token (403 otherwise). Locally the gate
-    is off and nothing changes.
+    Planning data, so the capability matrix allows it to the organiser only, and public-demo mode puts it behind
+    the operator token. Locally the token gate is off and the default role is organiser, so nothing changes.
     """
     return _guard(volunteers)
 
@@ -387,7 +413,13 @@ class ExtractReq(BaseModel):
 
 
 @app.post("/api/extract-roles", response_model=ExtractionResult)
-def extract_roles(req: ExtractReq) -> Any:
+def extract_roles(req: ExtractReq, operator: None = Depends(_require_operator)) -> Any:
+    """Turn a brief into roles with the language model.
+
+    Gated in public-demo mode even though it writes no evidence: it spends the deployment's model budget and,
+    in record mode, writes a cache file outside ``SEWA_DATA_DIR`` (so demo_reset does not archive it), which an
+    anonymous caller could otherwise grow without bound.
+    """
     return _guard(lambda: llm_extract.extract_roles(req.brief_text, req.language_hint))
 
 
@@ -495,46 +527,65 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
 
     Empty drafting is non-destructive: if the drafting step produces no card at all - the model returned an empty
     list, or the caller posted no assignments - the route returns HTTP 502 (assignments were sent) or an empty list
-    (nothing was sent) and touches neither the card store nor the ledger. A failed draft must never wipe the cards a
-    host is still reviewing.
+    (nothing was sent) and touches neither the card store nor the ledger. A PARTIAL draft is refused the same way
+    (502, nothing changed): the supersede step deletes every undecided card of the task that is not in the new
+    draft, so a draft that silently drops a rostered volunteer would delete a card a host is still reviewing. A
+    failed draft must never wipe the cards a host is still reviewing.
+
+    The model call itself runs OUTSIDE :data:`CARD_LOCK` (it can take seconds; holding the lock would stall every
+    decision in the process). The lock is taken for the store mutation only, and the store is restored if the
+    mutation fails before its ledger entries exist.
     """
     def run() -> list[ContributionCard]:
+        drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
+        if not drafted:                       # checked BEFORE anything is removed or written
+            if req.assignments:
+                raise HTTPException(502, "the drafting step returned no cards for "
+                                         f"{len(req.assignments)} assignment(s); nothing was changed. "
+                                         "Retry, or enter the cards manually.")
+            return []
+        expected = {a.volunteer_id for a in req.assignments}
+        missing = sorted(expected - {c.volunteer_id for c in drafted})
+        if missing:
+            raise HTTPException(502, "the drafting step returned no card for "
+                                     f"{len(missing)} of {len(expected)} rostered volunteer(s); nothing was "
+                                     "changed. Retry, or enter the cards manually.")
         with CARD_LOCK:
             store = cards()
-            drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
-            if not drafted:                       # checked BEFORE anything is removed or written
-                if req.assignments:
-                    raise HTTPException(502, "the drafting step returned no cards for "
-                                             f"{len(req.assignments)} assignment(s); nothing was changed. "
-                                             "Retry, or enter the cards manually.")
-                return []
+            before = dict(store)
+            try:
+                out: list[ContributionCard] = []
+                new_ids = {c.id for c in drafted}
+                for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
+                              and x.status in ("draft", "flagged", "revision_requested")]:
+                    del store[stale.id]
+                for c in drafted:
+                    existing = store.get(c.id)
+                    if existing is not None and existing.status not in ("draft", "flagged", "revision_requested"):
+                        out.append(existing)
+                        continue
+                    redrafted = existing is not None and existing.status == "revision_requested"
+                    c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out,
+                                               req.attendance_rows)
+                    flagged = any(f.severity in ("warn", "block") for f in c.flags)
+                    if redrafted:                     # the table decides where a redraft may land
+                        c.status = transitions.next_state(existing.status,
+                                                          "redraft_flagged" if flagged else "redraft")
+                    else:
+                        c.status = "flagged" if flagged else "draft"
+                    c.revision_reason = None
+                    reason = ""
+                    if redrafted:
+                        reason = ("re-drafted after a host revision request; the new text raised a rule flag"
+                                  if flagged else "re-drafted after a host revision request")
+                    ledger().append("flag" if c.status == "flagged" else "draft", c, "system", reason)
+                    store[c.id] = c
+                    out.append(c)
+                _save_cards()
+            except Exception:
+                _restore_store(before)
+                raise
             attendance_rows()[req.task.id] = list(req.attendance_rows)
-            out: list[ContributionCard] = []
-            new_ids = {c.id for c in drafted}
-            for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
-                          and x.status in ("draft", "flagged", "revision_requested")]:
-                del store[stale.id]
-            for c in drafted:
-                existing = store.get(c.id)
-                if existing is not None and existing.status not in ("draft", "flagged", "revision_requested"):
-                    out.append(existing)
-                    continue
-                redrafted = existing is not None and existing.status == "revision_requested"
-                c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
-                flagged = any(f.severity in ("warn", "block") for f in c.flags)
-                if redrafted:                     # the table decides where a redraft may land
-                    c.status = transitions.next_state(existing.status, "redraft_flagged" if flagged else "redraft")
-                else:
-                    c.status = "flagged" if flagged else "draft"
-                c.revision_reason = None
-                reason = ""
-                if redrafted:
-                    reason = ("re-drafted after a host revision request; the new text raised a rule flag"
-                              if flagged else "re-drafted after a host revision request")
-                ledger().append("flag" if c.status == "flagged" else "draft", c, "system", reason)
-                store[c.id] = c
-                out.append(c)
-            _save_cards()
             return out
     return _guard(run)
 
@@ -542,26 +593,36 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
 @app.post("/api/demo/reset")
 def demo_reset(demo_role: str = Depends(_require_demo("reset_demo"))) -> dict:
     """Start a clean demo: archive the current card store and ledger (renamed with a timestamp, never deleted).
-    Destructive, so the capability matrix allows it for the organiser demo role only."""
+    Destructive, so the capability matrix allows it for the organiser demo role only.
+
+    Takes :data:`CARD_LOCK`: archiving the journal while a decision is half-committed would let that decision be
+    written into the archived file and then erased from the live store, so a 200 would describe a card that no
+    longer exists anywhere. Under the lock the reset either happens entirely before or entirely after a decision.
+    """
     import time
-    stamp = time.strftime("%Y%m%d-%H%M%S")
-    DATA_DIR.mkdir(parents=True, exist_ok=True)
-    archived = []
-    for p in DATA_DIR.glob("*"):
-        if p.is_file() and not p.name.startswith("archive-"):
-            p.rename(p.with_name(f"archive-{stamp}-{p.name}"))
-            archived.append(p.name)
-    S.cards = None
-    S.ledger = None
-    S.share_snapshots = None
-    S.latest_plan = None
-    S.attendance_rows = None
+    with CARD_LOCK:
+        stamp = time.strftime("%Y%m%d-%H%M%S")
+        DATA_DIR.mkdir(parents=True, exist_ok=True)
+        archived = []
+        for p in DATA_DIR.glob("*"):
+            if p.is_file() and not p.name.startswith("archive-"):
+                p.rename(p.with_name(f"archive-{stamp}-{p.name}"))
+                archived.append(p.name)
+        S.cards = None
+        S.ledger = None
+        S.share_snapshots = None
+        S.latest_plan = None
+        S.attendance_rows = None
     return {"ok": True, "archived": archived}
 
 
 @app.get("/api/evidence/cards", response_model=list[ContributionCard])
-def list_cards(operator: None = Depends(_require_operator)) -> Any:
-    """The card store: names, hours and host review state. Needs the operator token in public-demo mode."""
+def list_cards(demo_role: str = Depends(_require_demo("read_cards"))) -> Any:
+    """The card store: names, hours and host review state.
+
+    Gated like the mutating routes (capability matrix + operator token in public-demo mode), so the menu's
+    promise and the API agree: a viewer may read the evaluation, not the evidence.
+    """
     return list(cards().values())
 
 
@@ -569,6 +630,13 @@ class DecisionReq(BaseModel):
     actor: str = "host"                      # demo label, not an authenticated identity
     claimed_hours: Optional[float] = Field(default=None, ge=0, le=24)  # required for correct
     reason: Optional[str] = Field(default=None, max_length=500)        # required for request_revision
+
+
+#: Rules that read AttendanceRow fields the card does not persist (check-in/out windows, age and guardian
+#: consent). When a correction has no attendance sheet in this process, these cannot be re-evaluated, so their
+#: previous verdict is KEPT rather than silently dropped - a block flag must not disappear because the server
+#: restarted.
+_SHEET_ONLY_RULE_CODES = frozenset({"overlapping_tasks", "minor_without_guardian_consent"})
 
 
 def _rule_rows(card: ContributionCard) -> list[AttendanceRow]:
@@ -584,6 +652,17 @@ def _rule_rows(card: ContributionCard) -> list[AttendanceRow]:
     return [AttendanceRow(volunteer_id=c.volunteer_id, task_id=c.task_id, hours=c.recorded_hours)
             for c in cards().values()
             if c.task_id == card.task_id and c.recorded_hours is not None]
+
+
+def _rule_flags(card: ContributionCard, others: list[ContributionCard]) -> list[Flag]:
+    """The rule verdict for a corrected card, keeping sheet-only verdicts the sheet cannot re-establish."""
+    rows = _rule_rows(card)
+    flags = rules.check_card(card, others, rows)
+    if not attendance_rows().get(card.task_id):
+        fresh = {f.code for f in flags}
+        flags = flags + [f for f in card.flags
+                         if f.code in _SHEET_ONLY_RULE_CODES and f.code not in fresh]
+    return flags
 
 
 def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
@@ -622,9 +701,10 @@ def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
         updated = c.model_copy(update=updates)
         if action == "correct":
             others = [x for x in cards().values() if x.id != updated.id]
-            updated.flags = rules.check_card(updated, others, _rule_rows(updated))
+            updated.flags = _rule_flags(updated, others)
         # Append FIRST, then commit: the ledger commits to the post-transition card, and a failed append
-        # (for example a corrupt journal) must not leave a decided card that no entry exists for.
+        # (for example a corrupt journal) must not leave a decided card that no entry exists for. Nothing in
+        # the store is touched before the append succeeds.
         ledger().append(action, updated, req.actor, reason)
         cards()[card_id] = updated
         _save_cards()
@@ -657,13 +737,13 @@ def request_revision(card_id: str, req: DecisionReq = DecisionReq(),
 
 
 @app.get("/api/ledger", response_model=list[LedgerEntry])
-def get_ledger(operator: None = Depends(_require_operator)) -> Any:
-    """The audit journal. Needs the operator token in public-demo mode (it names actors and cards)."""
+def get_ledger(demo_role: str = Depends(_require_demo("read_ledger"))) -> Any:
+    """The audit journal: names actors and cards, so it follows the matrix and the operator token."""
     return _guard(lambda: ledger().entries())
 
 
 @app.get("/api/ledger/verify", response_model=LedgerVerification)
-def verify_ledger(operator: None = Depends(_require_operator)) -> Any:
+def verify_ledger(demo_role: str = Depends(_require_demo("read_ledger"))) -> Any:
     """Chain verification. Same data family as /api/ledger, so the same gate."""
     return _guard(lambda: ledger().verify())
 

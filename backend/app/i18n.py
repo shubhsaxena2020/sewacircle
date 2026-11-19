@@ -238,21 +238,28 @@ def assignment_reason_text(role_label_hi: str, slot: str, reason_codes: list[Pic
     return f"{role_label_hi} के लिए चुने गए; {slot_label(slot, 'hi')} उपलब्ध।"
 
 
-def _explanation(roster: RosterResult, lang: Lang) -> list[str]:
-    """Hindi verdict lines state the same facts as the English ones: gap count, unfilled roles, robustness.
+def _explanation(task: TaskSpec, roster: RosterResult, lang: Lang) -> list[str]:
+    """Hindi verdict lines state the same facts as the English ones: which slots are empty, robustness, actions.
 
     Percentages use the identical expression as solver/ready.py and solver/cp_sat.py (``:.0%`` on the same
-    float), so the digits match; the wording of each line is hand-written, not a word-by-word rendering.
+    float), slot numbers are the same (``#n``), and roles are named by their Hindi label rather than by internal
+    role id - an id is not a fact a host can act on, and the English line names the role too.
     """
     if lang == "en":
         return list(roster.explanations)
     lines: list[str] = []
     if roster.ready:
         return ["तैयार: हर ज़रूरी भूमिका भरी है और कोई भी एक साथी निकल जाए तो भी कोई ज़रूरी जगह खाली नहीं रहेगी।"]
-    unfilled = roster.unfilled_role_ids
-    if unfilled:
-        lines.append(f"{len(unfilled)} भूमिका में ज़रूरी जगह खाली है: {', '.join(unfilled)}।")
-    if roster.metrics.robustness < 1.0:
+    roles = {r.id: r for r in task.roles}
+    if roster.unfilled_slots:
+        slots = ", ".join(f"{role_label(roles[s.role_id].role, 'hi') if s.role_id in roles else s.role_id} "
+                          f"#{s.slot_index + 1}" for s in roster.unfilled_slots)
+        lines.append(f"ये ज़रूरी जगह खाली हैं: {slots}। कोई योग्य स्वयंसेवक उपलब्ध नहीं था।")
+    elif roster.unfilled_role_ids:
+        names = ", ".join(role_label(next((r.role for r in task.roles if r.id == rid), rid), "hi")
+                          for rid in roster.unfilled_role_ids)
+        lines.append(f"{len(roster.unfilled_role_ids)} भूमिका में ज़रूरी जगह खाली है: {names}।")
+    if roster.assignments and roster.metrics.robustness < 1.0:   # same condition as the English line
         percent = f"{roster.metrics.robustness:.0%}"
         lines.append(f"एक साथी के निकलने पर भरोसा {percent} है: हर भूमिका के लिए पर्याप्त स्टैंडबाय नहीं है।")
     count = len(roster.recruit_requests)
@@ -291,7 +298,7 @@ def roster_display(task: TaskSpec, roster: RosterResult, lang: Lang) -> RosterDi
     if lang == "en":
         return RosterDisplay(
             lang="en", ready=roster.ready, verdict=_verdict(roster.ready, "en"),
-            explanations=_explanation(roster, "en"),
+            explanations=_explanation(task, roster, "en"),
             recruit=[RecruitDisplay(role_id=q.role_id, role=q.role, needed=q.needed, text=q.reason)
                      for q in roster.recruit_requests],
             assignments=[AssignmentDisplay(volunteer_id=a.volunteer_id, role_id=a.role_id,
@@ -299,7 +306,7 @@ def roster_display(task: TaskSpec, roster: RosterResult, lang: Lang) -> RosterDi
         )
     return RosterDisplay(
         lang="hi", ready=roster.ready, verdict=_verdict(roster.ready, "hi"),
-        explanations=_explanation(roster, "hi"),
+        explanations=_explanation(task, roster, "hi"),
         recruit=[RecruitDisplay(
             role_id=q.role_id, role=role_label(q.role, "hi"), needed=q.needed,
             text=_recruit_text(q.kind, roles.get(q.role_id), q.needed, q.skills, q.checked_skill_required,
