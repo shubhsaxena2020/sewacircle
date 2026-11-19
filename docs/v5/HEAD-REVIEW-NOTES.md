@@ -18,3 +18,18 @@ Gaps against STORYBOARD v2 (to send back if the final build still has them):
 3. Chapters look identical: the camera barely moves and the day-cycle (dawn -> dusk -> night) is not visible.
 4. The film appears as a small thumbnail inside the card; it should be a full-bleed transition between chapters.
 5. The finished 58.8 s film (design/scrolly/media/video/sewacircle-film-web.*) exists now; use it.
+
+## Head review of commits 6619fbe + cfc0ba8 (11:55)
+Verified: live story dropout, console extraction -> crew -> share link, evidence revision/redraft/confirm/correct, ledger verify,
+role switch with 403, districts, volunteer, mock (0 API calls), reduced motion + no-WebGL fallbacks, axe 0 violations (en + hi),
+Lighthouse story 78/100/100/83, console 100/100/100/82, npm audit 0. Live /api/eval = cp_sat ready 0.70, repeat 0.23.
+
+Must fix (round 2):
+A. chapter-00-intro capture is BLANK WHITE (first impression).
+B. Numbers chapter shows 67% / 10% / 22% / 39% - the counters were captured mid-animation; final values must be 70 / 10 / 23 / 40
+   and screenshots must wait for final values.
+C. The 5 visual gaps from the first look are still present (flat untextured low-poly, not paper; copy card covers half the
+   frame; chapters look the same, no visible day cycle; film only as a thumbnail; finished film not used - only c1-c5 used and
+   c6-c9 "absent" although sewacircle-film-web.mp4 covers the whole story).
+D. Fusion 360 was not used (procedural only) - acceptable if the procedural paper look is reached; otherwise use it.
+E. Story Lighthouse performance 78 (TBT 440 ms) - lazy-load the film, defer non-visible chapter work.
