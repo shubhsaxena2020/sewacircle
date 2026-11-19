@@ -3,7 +3,6 @@ import { BrowserRouter, Link, Route, Routes, useLocation } from 'react-router'
 import { Context, type UiContext } from './ui-context'
 import { api, MOCK, setDemoRole } from './api'
 import { tr, type Lang } from './i18n'
-import './styles.css'
 
 const Story = lazy(() => import('./Story'))
 const Console = lazy(() => import('./Console'))

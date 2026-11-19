@@ -1,0 +1,154 @@
+{
+  "viewport": "1440x900",
+  "e2e": [
+    {
+      "demoReset": "HTTP 200 before the verification workflow"
+    },
+    {
+      "story": {
+        "planned": "Planned live from the API · 5/5 · 14 ms",
+        "seatLabels": 6,
+        "verdict": "READY · तैयार",
+        "gapVerdict": "NOT READY",
+        "dropout": "Divya H. left the crew. Standby ↑ NOT READY 1 × Logistics and supplies — Single point of failure: if Heena P. cannot come, nobody qualified can step in as Logistics and supplies. Recruit one standby.",
+        "counters": [
+          "70%",
+          "23%",
+          "0.33 s",
+          "93%"
+        ]
+      }
+    },
+    {
+      "samples": "Hindi and Hinglish text loaded; English selected for extraction",
+      "hindiConsoleHeading": "रुचि को टीम के निर्णय में बदलें।",
+      "console": "English sample -> live role extraction -> crew planner -> READY/NOT READY view -> real public share",
+      "extractedRoleCount": 6,
+      "readyText": true,
+      "sharePath": "/drive/5LSMDAWESWLD7HFX"
+    },
+    {
+      "evidence": "drafted cards, requested revision with reason, redrafted card, confirmed and corrected records, verified ledger, opened evaluation",
+      "draftedCardCount": 5,
+      "initialFlagCount": 4
+    },
+    {
+      "roleSwitch": "capabilities loaded for host, volunteer and viewer; viewer volunteer request returned HTTP 403; UI surfaced the error; organiser restored",
+      "roleActions": {
+        "host": "not authentication · 9 API actions",
+        "volunteer": "not authentication · 1 API actions",
+        "viewer": "not authentication · 1 API actions"
+      },
+      "viewerActions": "not authentication · 1 API actions",
+      "forbiddenUrl": "http://127.0.0.1:5181/api/volunteers"
+    },
+    {
+      "districts": "loaded 20 read-only map markers; selected Kanpur Dehat",
+      "volunteer": "A volunteer’s view"
+    },
+    {
+      "mock": "fixture task/extraction/planner completed (MOCK · NOT LIVE); zero API network calls"
+    }
+  ],
+  "axe": [
+    {
+      "lang": "en",
+      "page": "story",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "console",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "volunteer",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "districts",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "method",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "share",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "story",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "console",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "volunteer",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "districts",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "method",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "share",
+      "violations": [],
+      "blocking": []
+    }
+  ],
+  "api403": [
+    "http://127.0.0.1:5181/api/volunteers",
+    "http://127.0.0.1:5181/api/evidence/cards",
+    "http://127.0.0.1:5181/api/volunteers",
+    "http://127.0.0.1:5181/api/evidence/cards",
+    "http://127.0.0.1:5181/api/evidence/cards"
+  ],
+  "apiRequests": [
+    "POST /api/roster",
+    "POST /api/roster",
+    "POST /api/roster/dropout",
+    "POST /api/roster",
+    "POST /api/roster"
+  ],
+  "reducedMotion": {
+    "canvas": 1,
+    "lenis": false
+  },
+  "noWebgl": {
+    "canvas": 0,
+    "fallback": 1
+  },
+  "phoneNoOverflow": {
+    "story": true,
+    "console": true
+  },
+  "pageErrors": []
+}

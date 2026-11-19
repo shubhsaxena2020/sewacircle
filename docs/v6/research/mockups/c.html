@@ -1,0 +1,67 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&family=Inter:wght@400;600&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}body{font-family:Inter,sans-serif;color:#1F1B16;background:#F3EEE4}
+section{width:1440px;height:900px;position:relative;overflow:hidden;background:#F3EEE4}
+.nav{position:absolute;top:28px;left:56px;right:56px;display:flex;justify-content:space-between;font-size:14px;border-bottom:1px solid #1F1B16;padding-bottom:14px}
+.serif{font-family:Fraunces,serif;letter-spacing:-.03em}
+.hi{font-family:'Tiro Devanagari Hindi',serif}
+.kick{font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:#C2462B}
+.bar{height:46px;margin:10px 0;display:flex;align-items:center;padding-left:16px;font-weight:600;color:#fff}
+</style></head><body>
+<section>
+  <div class="nav"><b>SewaCircle — Field report</b><span>Story · Console · Districts · हिन्दी</span></div>
+  <div style="position:absolute;left:56px;top:140px;width:620px">
+    <div class="kick">Uttar Pradesh · volunteer drives</div>
+    <h1 class="serif" style="font-size:118px;font-weight:300;line-height:.95;margin-top:22px">Willing volunteers are here.<br><i style="font-weight:500;color:#C2462B">Can this drive run?</i></h1>
+    <p class="hi" style="font-size:26px;margin-top:26px;opacity:.75">इच्छुक युवा तैयार हैं। क्या यह अभियान चल सकता है?</p>
+  </div>
+  <svg width="760" height="900" style="position:absolute;right:0;top:0" id="c1"></svg>
+  <div style="position:absolute;right:56px;bottom:50px;font-size:14px;max-width:520px;text-align:right;opacity:.7">80 people opted in. 8 seats. The solver picks a crew that can actually show up.</div>
+</section>
+<section>
+  <div class="nav"><b>SewaCircle — Field report</b><span>04 · The crew</span></div>
+  <svg width="1440" height="900" style="position:absolute;inset:0" id="c2"></svg>
+  <div style="position:absolute;left:56px;top:150px;width:470px">
+    <div class="kick">Live result</div>
+    <h2 class="serif" style="font-size:92px;font-weight:300;line-height:.95;margin-top:16px">From 80 hands,<br><i style="font-weight:500">a crew of 7.</i></h2>
+    <p style="font-size:18px;line-height:1.55;margin-top:24px">Six seated, one standby who can step into three roles. First-aid goes only to a host-checked skill. Each pick shows its reasons — distance, fairness, newcomer.</p>
+    <div class="serif" style="font-size:40px;margin-top:30px;color:#2F6B3A">READY · तैयार</div>
+  </div>
+</section>
+<section>
+  <div class="nav"><b>SewaCircle — Field report</b><span>07 · Measured on 10 synthetic drives</span></div>
+  <div style="position:absolute;left:56px;top:130px">
+    <div class="kick">Drives ready to run</div>
+    <div class="serif" style="font-size:260px;font-weight:300;line-height:.9">70<span style="font-size:120px">%</span></div>
+  </div>
+  <div style="position:absolute;left:56px;top:520px;width:640px">
+    <div class="bar" style="width:448px;background:#C2462B">SewaCircle · 70%</div>
+    <div class="bar" style="width:448px;background:#7A8C6E">Careful human organiser · 70%</div>
+    <div class="bar" style="width:64px;background:#9B9488;white-space:nowrap;overflow:visible">10%&nbsp;&nbsp;<span style="color:#1F1B16">Nearest-skill matching</span></div>
+    <div class="bar" style="width:96px;background:#B9B2A6;white-space:nowrap;overflow:visible">15%&nbsp;&nbsp;<span style="color:#1F1B16">Random feasible</span></div>
+  </div>
+  <div style="position:absolute;right:56px;top:150px;width:520px;display:grid;gap:42px">
+    <div><div class="kick">Fairness</div><div class="serif" style="font-size:96px;font-weight:300">23% <span style="font-size:40px;opacity:.5">vs 43%</span></div><div>repeat picks — SewaCircle vs the careful human, at the same readiness.</div></div>
+    <div><div class="kick">Speed</div><div class="serif" style="font-size:96px;font-weight:300">0.33 s</div><div>to plan a crew from 500 volunteers on a laptop CPU.</div></div>
+  </div>
+  <div style="position:absolute;left:56px;bottom:36px;font-size:13px;opacity:.6">Synthetic data · bars show means, 95% bootstrap intervals in the full report · not affiliated with MY Bharat or any government body</div>
+</section>
+<script>
+function rnd(i){const x=Math.sin(i*99.13)*43758.5453;return x-Math.floor(x)}
+// hero: 80 dots, 8 of them forming a ring
+let s='';const cx=380,cy=430,R=150;
+for(let i=0;i<80;i++){let x=60+rnd(i)*640,y=140+rnd(i+300)*640;if(Math.hypot(x-cx,y-cy)<R+40){x+= x<cx?-120:120}
+ s+=`<circle cx="${x}" cy="${y}" r="9" fill="#1F1B16" opacity="${.18+rnd(i+7)*.3}"/>`}
+for(let i=0;i<8;i++){const a=-Math.PI/2+i/8*Math.PI*2;s+=`<circle cx="${cx+Math.cos(a)*R}" cy="${cy+Math.sin(a)*R}" r="16" fill="${i<6?'#C2462B':'none'}" stroke="#C2462B" stroke-width="3" ${i<6?'':'stroke-dasharray="5 5"'}/>`}
+s+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="#C2462B" stroke-width="1.5" opacity=".5"/>`;
+document.getElementById('c1').innerHTML=s;
+// crew: lines from pool to ring
+s='';const X=980,Y=470,R2=230;const N=['Shreya Z. · Team lead','Kabir Z. · Liaison','Mohit Z. · First-aid ✓','Divya H. · Supplies','Gaurav A. · Hygiene','Bhavna X. · Documentation'];
+for(let i=0;i<80;i++){const x=600+rnd(i+50)*800,y=120+rnd(i+90)*720;if(Math.hypot(x-X,y-Y)<R2+70)continue;s+=`<circle cx="${x}" cy="${y}" r="7" fill="#1F1B16" opacity=".16"/>`}
+s+=`<circle cx="${X}" cy="${Y}" r="${R2}" fill="none" stroke="#1F1B16" stroke-width="1"/>`;
+for(let i=0;i<6;i++){const a=-Math.PI/2+i/6*Math.PI*2,x=X+Math.cos(a)*R2,y=Y+Math.sin(a)*R2;
+ s+=`<circle cx="${x}" cy="${y}" r="22" fill="#C2462B"/><text x="${x+(x>=X?34:-34)}" y="${y+6}" text-anchor="${x>=X?'start':'end'}" font-family="Inter" font-weight="600" font-size="17" fill="#1F1B16">${N[i]}</text>`}
+s+=`<circle cx="${X}" cy="${Y}" r="20" fill="#F3EEE4" stroke="#2F6B3A" stroke-width="3"/><text x="${X}" y="${Y+52}" text-anchor="middle" font-family="Inter" font-size="15" fill="#2F6B3A" font-weight="600">Heena P. · standby for 3 roles</text>`;
+document.getElementById('c2').innerHTML=s;
+</script></body></html>

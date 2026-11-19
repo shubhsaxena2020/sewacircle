@@ -1,115 +1,303 @@
-﻿import { lazy, Suspense, useEffect, useRef, useState, type CSSProperties } from 'react'
+﻿import { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router'
-import { gsap } from 'gsap'
-import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import Lenis from 'lenis'
 import { api, defaultOptions } from './api'
-import { formatNumber } from './i18n'
-import type { Lang } from './i18n'
-import type { Assignment, EvalReport, ExtractionResult, RosterResult, TaskSpec, Volunteer } from './types'
-import { filmAnchors } from './film-anchors'
-import TransitionFilm from './TransitionFilm'
-import FilmLayers from './FilmLayers'
+import { formatNumber, type Lang } from './i18n'
+import type { EvalReport, ExtractionResult, LedgerVerification, RosterResult, TaskSpec, Volunteer } from './types'
+import type { Seat, SceneData } from './RingScene'
 
-const VillageScene = lazy(() => import('./VillageScene'))
-function supportsWebGL() {
-  try {
-    const canvas = document.createElement('canvas')
-    return Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'))
-  } catch {
-    return false
+const RingScene = lazy(() => import('./RingScene'))
+
+const CHAPTERS = ['intro', 'interest', 'brief', 'crew', 'bench', 'verdict', 'gap', 'dropout', 'evidence', 'numbers', 'districts', 'try'] as const
+type Chapter = typeof CHAPTERS[number]
+const RING_LABEL_CHAPTERS: Chapter[] = ['crew', 'bench', 'verdict', 'gap', 'dropout']
+
+const T = {
+  en: {
+    kicker: 'Willing volunteers are here', h1: 'Can this\ndrive run?', sub: 'SewaCircle answers READY or NOT READY for a volunteer drive, and names exactly who is still needed.', start: 'Plan a crew',
+    interestK: '02 · Interest', interestH: 'Many said yes.', interestP: 'National platforms bring interest at scale: 2.22+ crore youth are registered on MY Bharat (PIB backgrounder, 05 July 2026). An organiser still has to turn a list of willing people into a crew that actually shows up.', optedIn: 'people opted in to this drive',
+    briefK: '03 · The brief', briefH: 'A brief becomes roles.', briefP: 'The organiser writes the drive in Hindi, English or Hinglish. AI proposes roles and shows the phrase each came from. Tap a phrase.', aiProposed: 'AI proposed · you confirm', confidence: 'confidence',
+    crewK: '04 · The crew', crewH: 'Fill the ring.', crewP: 'Only people who opted in. A solver weighs skills, availability, travel, guardian consent for 16–17 year olds, and fairness — so the same few are not picked every time.', plan: 'Plan the crew', planning: 'Planning…', planned: 'Planned live from the API',
+    benchK: '05 · The bench', benchH: 'Every seat needs\na second plan.', benchP: 'A standby with the right skills is ready for the essential roles. Safety roles accept host-checked skills only.', standby: 'Standby', covers: 'can cover',
+    verdictK: '06 · The verdict', ready: 'READY', notReady: 'NOT READY', verdictP: 'Every essential role is filled and has cover.', verdictNo: 'Some roles have no cover yet.', share: 'Copy public summary link', copied: 'Link copied',
+    gapK: '07 · Honest gaps', gapH: 'Not every drive\ncan run.', gapP: 'A blood-donation camp in Chinhat, Lucknow. The solver will not pretend: it says what is missing and writes the recruit request.', copyReq: 'Copy recruit request',
+    dropK: '08 · Someone drops out', dropH: 'A real exit.\nA real re-plan.', dropP: 'Drop a seated volunteer. The plan re-runs live: the standby steps in — and if that leaves a single point of failure, it says so.', drop: 'Drop', dropping: 'Re-planning…',
+    evidenceK: '09 · After the drive', evidenceH: 'Work leaves a trail.', evidenceP: 'Host notes become draft contribution cards. Rules check them against attendance — one card claims 8 hours where 5 were recorded, so it is flagged. A host confirms, corrects or sends it back; every step goes into a hash-chained log.', verify: 'Verify the log', verified: 'Chain intact', broken: 'Chain broken at entry', empty: 'The log is empty after the demo reset. Confirm a card in the console to start it.',
+    numbersK: '10 · Measured', numbersH: 'On 10 synthetic drives', readyLbl: 'drives READY with SewaCircle', nearest: 'with nearest-skill matching', repeat: 'repeat picks', repeatVs: 'careful human organiser: 43%', speed: 'to plan a crew from 500 volunteers', recall: 'of roles found by a small open model on one free GPU',
+    districtsK: '11 · Many places', districtsH: 'One plan.\nMany drives.', districtsP: 'Every drive keeps its own live status: ready, not ready, or not computed yet.', openDistricts: 'Open the district view',
+    tryK: '12 · Try it', tryH: 'Bring a real brief.', tryP: 'AI drafts. The solver decides. A person confirms. Nothing is auto-verified.', console: 'Open the organiser console', volunteer: 'Volunteer view', method: 'How it works',
+    open: 'open seat', recruit: 'Recruit', hostCheck: 'host-checked', left: 'left the crew', synthetic: 'Synthetic data · not affiliated with MY Bharat or any government body',
+  },
+  hi: {
+    kicker: 'इच्छुक स्वयंसेवक मौजूद हैं', h1: 'क्या यह अभियान\nचल सकता है?', sub: 'सेवासर्कल बताता है — अभियान तैयार है या नहीं, और अभी ठीक किसकी ज़रूरत है।', start: 'टीम बनाएँ',
+    interestK: '02 · रुचि', interestH: 'बहुतों ने हाँ कहा।', interestP: 'राष्ट्रीय मंच बड़े स्तर पर रुचि लाते हैं: MY Bharat पर 2.22+ करोड़ युवा पंजीकृत हैं (PIB, 05 जुलाई 2026)। फिर भी आयोजक को इच्छुक लोगों की सूची से ऐसी टीम बनानी होती है जो सच में पहुँचे।', optedIn: 'लोगों ने इस अभियान में रुचि दिखाई',
+    briefK: '03 · विवरण', briefH: 'विवरण से भूमिकाएँ।', briefP: 'आयोजक हिन्दी, अंग्रेज़ी या हिंग्लिश में अभियान लिखता है। AI भूमिकाएँ सुझाता है और बताता है कि हर भूमिका किस वाक्यांश से आई। किसी वाक्यांश पर टैप करें।', aiProposed: 'AI ने सुझाया · आप पुष्टि करें', confidence: 'विश्वास',
+    crewK: '04 · टीम', crewH: 'घेरा भरें।', crewP: 'केवल वही लोग जिन्होंने रुचि दिखाई। सॉल्वर कौशल, उपलब्धता, दूरी, 16–17 वर्ष वालों के लिए अभिभावक अनुमति और निष्पक्षता देखता है।', plan: 'टीम बनाएँ', planning: 'योजना बन रही है…', planned: 'API से अभी बनी योजना',
+    benchK: '05 · विकल्प', benchH: 'हर सीट का\nदूसरा विकल्प।', benchP: 'ज़रूरी भूमिकाओं के लिए सही कौशल वाला विकल्प तैयार है। सुरक्षा भूमिकाओं में केवल होस्ट द्वारा जाँचे गए कौशल मान्य हैं।', standby: 'विकल्प', covers: 'संभाल सकते हैं',
+    verdictK: '06 · फैसला', ready: 'तैयार', notReady: 'तैयार नहीं', verdictP: 'हर ज़रूरी भूमिका भरी है और उसका विकल्प भी है।', verdictNo: 'कुछ भूमिकाओं का अभी विकल्प नहीं है।', share: 'सार्वजनिक सारांश लिंक कॉपी करें', copied: 'लिंक कॉपी हो गया',
+    gapK: '07 · ईमानदार कमी', gapH: 'हर अभियान\nनहीं चल सकता।', gapP: 'चिनहट, लखनऊ में रक्तदान शिविर। सॉल्वर दिखावा नहीं करता: वह बताता है क्या कम है और भर्ती अनुरोध लिखता है।', copyReq: 'भर्ती अनुरोध कॉपी करें',
+    dropK: '08 · कोई हट जाए', dropH: 'असली बदलाव।\nअसली नई योजना।', dropP: 'किसी स्वयंसेवक को हटाएँ। योजना फिर से चलती है: विकल्प आगे आता है — और अगर इससे कोई कमज़ोर कड़ी बनती है, तो वह साफ़ बताता है।', drop: 'हटाएँ', dropping: 'नई योजना…',
+    evidenceK: '09 · अभियान के बाद', evidenceH: 'काम का रिकॉर्ड।', evidenceP: 'होस्ट के नोट्स से योगदान कार्ड का मसौदा बनता है। नियम उपस्थिति से मिलान करते हैं — एक कार्ड में 8 घंटे का दावा है पर 5 दर्ज हैं, इसलिए उसे चिह्नित किया गया। होस्ट पुष्टि करता है, सुधारता है या लौटाता है; हर कदम हैश-शृंखला लॉग में जाता है।', verify: 'लॉग जाँचें', verified: 'शृंखला सही है', broken: 'शृंखला टूटी है, प्रविष्टि', empty: 'डेमो रीसेट के बाद लॉग खाली है। शुरू करने के लिए कंसोल में कोई कार्ड पक्का करें।',
+    numbersK: '10 · मापा गया', numbersH: '10 काल्पनिक अभियानों पर', readyLbl: 'अभियान सेवासर्कल से तैयार', nearest: 'निकटतम-कौशल मिलान से', repeat: 'बार-बार चयन', repeatVs: 'सावधान मानव आयोजक: 43%', speed: '500 स्वयंसेवकों से टीम बनाने में', recall: 'भूमिकाएँ एक मुफ़्त GPU पर छोटे ओपन मॉडल ने पहचानीं',
+    districtsK: '11 · कई जगह', districtsH: 'एक योजना।\nकई अभियान।', districtsP: 'हर अभियान की अपनी स्थिति: तैयार, तैयार नहीं, या अभी गणना नहीं हुई।', openDistricts: 'ज़िला दृश्य खोलें',
+    tryK: '12 · आज़माएँ', tryH: 'असली विवरण लाएँ।', tryP: 'AI मसौदा बनाता है। सॉल्वर तय करता है। व्यक्ति पुष्टि करता है। कुछ भी अपने-आप सत्यापित नहीं।', console: 'आयोजक कंसोल खोलें', volunteer: 'स्वयंसेवक दृश्य', method: 'यह कैसे काम करता है',
+    open: 'खाली सीट', recruit: 'भर्ती', hostCheck: 'होस्ट-जाँचा', left: 'टीम से हटे', synthetic: 'काल्पनिक डेटा · MY Bharat या किसी सरकारी संस्था से संबद्ध नहीं',
+  },
+} as const
+
+function webgl() { try { const c = document.createElement('canvas'); return Boolean(c.getContext('webgl2') || c.getContext('webgl')) } catch { return false } }
+
+/** One seat per required slot, in role order, filled from a roster's assignments. */
+function seatsFor(task: TaskSpec | null, roster: RosterResult | null, dropped?: string): Array<Seat & { role: string; roleId: string; name?: string; reasons?: string[]; safety: boolean }> {
+  if (!task) return []
+  const seats: Array<Seat & { role: string; roleId: string; name?: string; reasons?: string[]; safety: boolean }> = []
+  for (const r of task.roles) for (let k = 0; k < r.count; k++) {
+    const a = roster?.assignments.find(x => x.role_id === r.id && x.slot_index === k)
+    const unfilled = roster && !a
+    seats.push({ state: a ? 'filled' : unfilled ? 'gap' : 'empty', volunteerId: a?.volunteer_id, role: r.role, roleId: r.id, name: a?.volunteer_name, reasons: a?.reasons, safety: Boolean(r.safety_critical) })
   }
+  if (dropped) seats.forEach(s => { if (s.volunteerId === dropped) s.state = 'dropped' })
+  return seats.slice(0, 12)
 }
-const nav = [{ id: 'intro', name: 'Intro' }, { id: 'brief', name: 'Brief' }, { id: 'crew', name: 'Crew' }, { id: 'verdict', name: 'Verdict' }, { id: 'evidence', name: 'Evidence' }, { id: 'numbers', name: 'Numbers' }, { id: 'try', name: 'Try it' }]
-const labels = { en: { overline: 'A crew is more than a list', title: 'Willing hands.<br/>A crew that can show up.', intro: 'Can this drive run?', brief: 'A brief becomes<br/>real roles.', crew: 'Make a circle<br/>that can hold.', verdict: 'Ready means<br/>every role has cover.', evidence: 'Work leaves<br/>a paper trail.', numbers: 'Measure what<br/>the plan can do.', try: 'One village.<br/>A hundred ways to help.', plan: 'Plan the crew', drop: 'Drop Heena P.', loading: 'A village is taking shape…', scroll: 'Scroll to continue', detail: 'AI proposed · you confirm', role: 'Role from the brief', synthetic: 'Synthetic data', share: 'Copy public summary link' }, hi: { overline: 'टीम केवल नामों की सूची नहीं', title: 'इच्छुक हाथ।<br/>एक तैयार टीम।', intro: 'क्या यह अभियान चल सकता है?', brief: 'विवरण से<br/>भूमिकाएँ बनती हैं।', crew: 'ऐसा घेरा<br/>जो साथ निभाए।', verdict: 'तैयार का अर्थ है<br/>हर भूमिका का सहारा।', evidence: 'काम का<br/>लिखित रिकॉर्ड।', numbers: 'योजना की<br/>क्षमता मापें।', try: 'एक गाँव।<br/>मदद के कई रास्ते।', plan: 'टीम बनाएँ', drop: 'हीना पी. को हटाएँ', loading: 'गाँव तैयार हो रहा है…', scroll: 'आगे पढ़ने के लिए स्क्रॉल करें', detail: 'AI का सुझाव · आपकी पुष्टि', role: 'विवरण से भूमिका', synthetic: 'सिंथेटिक डेटा', share: 'सार्वजनिक लिंक कॉपी करें' } }
+
+function Counter({ to, suffix = '', decimals = 0, lang }: { to: number | null; suffix?: string; decimals?: number; lang: Lang }) {
+  const el = useRef<HTMLSpanElement>(null)
+  const [reduced] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [anim, setV] = useState(0)
+  const v = reduced && to !== null ? to : anim
+  useEffect(() => {
+    if (to === null || !el.current || reduced) return
+    const io = new IntersectionObserver(es => {
+      if (!es.some(e => e.isIntersecting)) return
+      io.disconnect(); const t0 = performance.now()
+      const tick = (now: number) => { const p = Math.min(1, (now - t0) / 1100); setV(p === 1 ? to : to * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick) }
+      requestAnimationFrame(tick)
+    }, { threshold: 0.5 })
+    io.observe(el.current); return () => io.disconnect()
+  }, [to, reduced])
+  return <span ref={el} data-final={to !== null && v === to}>{to === null ? '—' : formatNumber(Number(v.toFixed(decimals)), lang)}{suffix}</span>
+}
 
 export default function Story({ lang }: { lang: Lang }) {
-  const text = labels[lang]; const root = useRef<HTMLDivElement>(null); const progressRef = useRef(0); const [webglAvailable] = useState(supportsWebGL); const [sceneReady, setSceneReady] = useState(() => !webglAvailable); const [task, setTask] = useState<TaskSpec | null>(null); const [volunteers, setVolunteers] = useState<Volunteer[]>([]); const [extraction, setExtraction] = useState<ExtractionResult | null>(null); const [evalReport, setEvalReport] = useState<EvalReport | null>(null); const [roster, setRoster] = useState<RosterResult | null>(null); const [dropResult, setDropResult] = useState<string>(''); const [dropInfo, setDropInfo] = useState<{ dropped: Assignment; anchorIndex: number; replacement: string | null } | null>(null); const autoPlanStarted = useRef(false); const [selectedRole, setSelectedRole] = useState(''); const [error, setError] = useState(''); const [active, setActive] = useState('intro'); const [share, setShare] = useState('');
+  const t = T[lang]
+  const [motion] = useState(() => !matchMedia('(prefers-reduced-motion: reduce)').matches)
+  const [gl] = useState(webgl)
+  // The opening screen shows a still rendered from this same scene; the live WebGL ring takes over on the
+  // first interaction (or after 6 s), so the headline paints and responds without waiting for shader compilation.
+  const [stageOn, setStageOn] = useState(false)
   useEffect(() => {
-    if (!webglAvailable || matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    const crew = root.current?.querySelector('#crew')
-    if (!crew) return
-    const observer = new IntersectionObserver(entries => {
-      if (entries.some(entry => entry.isIntersecting)) {
-        setSceneReady(true)
-        observer.disconnect()
-      }
-    }, { rootMargin: '120% 0px' })
-    observer.observe(crew)
-    return () => observer.disconnect()
-  }, [webglAvailable])
-  useEffect(() => { api.tasksLang(lang).then(rows => setTask(rows.find(x => x.id === 'task-01') ?? rows[0] ?? null)).catch(e => setError(e.message)); api.volunteers().then(setVolunteers).catch(() => undefined); api.evalReport().then(setEvalReport).catch(() => undefined) }, [lang])
-  useEffect(() => { if (task?.brief_text) api.extract(task.brief_text).then(setExtraction).catch(() => undefined) }, [task?.id, task?.brief_text])
-  useEffect(() => {
-    if (!root.current || matchMedia('(prefers-reduced-motion: reduce)').matches) return
-    gsap.registerPlugin(ScrollTrigger)
-    const lenis = new Lenis({ lerp: .1, smoothWheel: true })
-    const update = (time: number) => lenis.raf(time * 1000)
-    gsap.ticker.add(update); gsap.ticker.lagSmoothing(0)
-    lenis.on('scroll', ScrollTrigger.update)
-    const ctx = gsap.context(() => {
-      gsap.to(progressRef, { current: 1, ease: 'none', scrollTrigger: { trigger: root.current, start: 'top top', end: 'bottom bottom', scrub: 1 } })
-      root.current?.querySelectorAll<HTMLElement>('.chapter').forEach(section => {
-        ScrollTrigger.create({ trigger: section, start: 'top center', end: 'bottom center', onEnter: () => setActive(section.dataset.id ?? 'intro'), onEnterBack: () => setActive(section.dataset.id ?? 'intro') })
-        gsap.fromTo(section.querySelector('.chapter-copy'), { y: 40 }, { y: 0, scrollTrigger: { trigger: section, start: 'top 78%', end: 'center center', scrub: true } })
-      })
-    }, root)
-    return () => { ctx.revert(); gsap.ticker.remove(update); lenis.destroy() }
+    const start = () => setStageOn(true)
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) { start(); return }
+    const evs = ['pointermove', 'wheel', 'touchstart', 'keydown', 'scroll'] as const
+    evs.forEach(e => window.addEventListener(e, start, { once: true, passive: true }))
+    const id = setTimeout(start, 6000)
+    return () => { clearTimeout(id); evs.forEach(e => window.removeEventListener(e, start)) }
   }, [])
-  useEffect(() => { if (active === 'verdict' && task && !roster && !autoPlanStarted.current) { autoPlanStarted.current = true; void api.roster(task, defaultOptions, lang).then(result => setRoster(result.cp_sat)).catch(e => setError((e as Error).message)) } }, [active, task, roster, lang])
-  async function plan() { if (!task) return; setError(''); setDropResult(''); setDropInfo(null); try { const r = await api.roster(task, defaultOptions, lang); setRoster(r.cp_sat) } catch (e) { setError((e as Error).message) } }
-  async function dropout() { if (!task || !roster) return; setError(''); try { const chosen = roster.assignments[3] ?? roster.assignments[0]; if (!chosen) throw new Error('No seated volunteer is available to drop.'); const r = await api.dropout(task, roster, chosen.volunteer_id, defaultOptions); setDropInfo({ dropped: chosen, anchorIndex: roster.assignments.findIndex(a => a.volunteer_id === chosen.volunteer_id), replacement: r.replacement_volunteer_id }); setRoster(r.roster_after); setDropResult(`Dropout recorded. ${r.healed_with_standby ? 'Standby promoted.' : 'No standby could cover the gap.'} Current verdict: ${r.roster_after.ready === true ? 'READY' : 'NOT READY'}. ${r.roster_after.recruit_requests?.map(x => `${x.needed} ${x.role}`).join('; ') ?? ''}`) } catch (e) { setError((e as Error).message) } }
-  async function sharePlan() { if (!task) return; try { const r = await api.share(task.id); const url = `${location.origin}/drive/${r.share_key}`; await navigator.clipboard.writeText(url); setShare(url) } catch (e) { setError((e as Error).message) } }
-  const reduce = typeof matchMedia !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
-  const headline = (key: keyof typeof text) => text[key]
-  const briefRoles = extraction ? extraction.roles.map((r, i) => ({ key: `extracted-${i}`, role: r.role, source: r.evidence_span || r.reason, confidence: r.confidence })) : (task?.roles ?? []).map(r => ({ key: r.id, role: r.role, source: r.evidence_span || r.required_skills.join(', '), confidence: r.confidence }))
-  return <div className={`story ${reduce ? 'reduced' : ''}`} ref={root}>
-    <div className="world-canvas" aria-hidden="true"><FilmLayers progress={progressRef}/>{reduce || !webglAvailable ? <img className="scene-still" src="/media/layers/dawn-board-base.webp" alt="Illustrative paper village"/> : sceneReady && <Suspense fallback={null}><VillageScene progress={progressRef}/></Suspense>}<span className="scene-illustrative">Illustrative - film layers</span>{roster && ['crew','bench','verdict','dropout'].includes(active) && <FilmRosterOverlay chapter={active} roster={roster} dropInfo={dropInfo} task={task} />}</div><ul className="sr-only" aria-label="Live crew assignments" aria-live="polite">{roster?.assignments.map(a => <li key={a.volunteer_id}>{a.volunteer_name}, {task?.roles.find(r => r.id === a.role_id)?.role ?? a.role_id}. {a.reasons.join('. ')}{task?.roles.find(r => r.id === a.role_id)?.safety_critical ? '. Host check required.' : ''}</li>)}{roster?.standby.map(person => <li key={person.volunteer_id}>Standby: {person.volunteer_name}. {person.reason}</li>)}{dropInfo && <li>{dropInfo.dropped.volunteer_name} left the crew. {dropInfo.replacement ? 'A standby volunteer was promoted.' : 'No standby could cover the gap.'}</li>}</ul>
-    <aside className="progress-rail" aria-label="Story progress">{nav.map(n => <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''} aria-label={n.name} title={n.name}><span>{n.name}</span></a>)}</aside>
-    <div className="story-scroll-hint">↓ {text.scroll}</div>
-    <section className="chapter chapter-intro" id="intro" data-id="intro"><TransitionFilm start={0} end={10} poster="/media/film-poster-01.jpg" label="Dawn at the notice board" immediate/><div className="chapter-copy"><p className="eyebrow">{text.overline} <span>· 01 / 10</span></p><h1><span lang={lang} dangerouslySetInnerHTML={{ __html: headline('title') }} /></h1><p className="lead">{text.intro}</p><p className="story-note">An interactive paper village · <span>Illustrative</span></p><a className="jump-link" href="#interest">Explore the village ↓</a></div></section>
-    <section className="chapter" id="interest" data-id="intro"><div className="chapter-copy"><p className="eyebrow">Interest · 02 / 10</p><h2>Many say yes.<br/><span>Then what?</span></h2><p>Interest is the beginning. A safe, role-complete team takes planning.</p><div className="source-figures"><strong>2.22+ crore <small>youth on MY Bharat</small></strong><strong>1.52+ lakh <small>opportunities</small></strong></div><small>Source: PIB backgrounder, 05 July 2026. Not affiliated with MY Bharat.</small><div className="paper-people">{volunteers.filter(v => v.opted_in_task_ids?.includes(task?.id ?? '')).slice(0, 5).map(v => <button key={v.id} title={`${v.age} · ${Object.keys(v.skills).join(', ') || v.self_declared_skills.join(', ')}`} onClick={() => setSelectedRole(`${v.display_name} · ${Object.keys(v.skills).join(', ') || v.self_declared_skills.join(', ')}`)}><i/><span>{v.display_name}</span></button>)}{selectedRole && <p role="status">{selectedRole}</p>}</div></div></section>
-    <TransitionFilm start={10} end={20} poster="/media/film-poster-02.jpg" label="Young volunteers gather" />
-    <section className="chapter" id="brief" data-id="brief"><div className="chapter-copy"><p className="eyebrow">The brief · 03 / 10</p><h2 dangerouslySetInnerHTML={{ __html: headline('brief') }} /><p className="quote-paper" lang={lang}>{task?.brief_text || 'गाँव स्तर पर स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर।'}</p><div className="evidence-phrases">{extraction?.roles.filter(r => r.evidence_span).map(r => <button key={r.role} onClick={() => setSelectedRole(r.role)}><mark>{r.evidence_span}</mark><span> → {r.role}</span>{selectedRole === r.role && <b>{text.detail}</b>}</button>)}</div><div className="role-chips">{briefRoles.map(r => <button key={r.key} className={selectedRole === r.key ? 'chosen' : ''} onClick={() => setSelectedRole(selectedRole === r.key ? '' : r.key)}><b>{r.role}</b><small>{r.source} · {r.confidence}</small>{selectedRole === r.key && <em>{text.detail}</em>}</button>)}</div><small>{text.role}: select any highlighted phrase to see its proposed role.</small></div></section>
-    <TransitionFilm start={20} end={30} poster="/media/film-poster-03.jpg" label="The turmeric ring forms" />
-    <section className="chapter" id="crew" data-id="crew"><div className="chapter-copy"><p className="eyebrow">The crew · 04 / 10</p><h2 dangerouslySetInnerHTML={{ __html: headline('crew') }} /><p>Only people who opted in. A solver weighs skills, travel, fairness and backup.</p><button className="action-button" onClick={plan} disabled={!task}>{text.plan}</button>{roster && <div className="crew-pill-list">{roster.assignments.map(a => <button key={a.volunteer_id} title={a.reasons.join(' · ')}>{a.volunteer_name}<small>{a.reasons.join(' · ')}</small></button>)}{roster.standby.map(s => <span key={s.volunteer_id}>↳ Standby · {s.volunteer_name}</span>)}</div>}{error && <p className="inline-error" role="alert">{error}</p>}</div></section>
-    <TransitionFilm start={30} end={38.8} poster="/media/film-poster-04.jpg" label="Crew and backups settle into the ring" />
-    <section className="chapter" id="bench" data-id="bench"><div className="chapter-copy"><p className="eyebrow">The bench · 05 / 10</p><h2>Every seat needs<br/><span>a second plan.</span></h2><p>Standby is only useful when the person has the right skills and is available. Safety-critical skills need host checks.</p>{roster?.standby.map(s => <p className="paper-slip" key={s.volunteer_id}>Standby · {s.volunteer_name}<small>{s.reason}</small></p>)}</div></section>
-    <section className="chapter" id="verdict" data-id="verdict"><div className="chapter-copy"><p className="eyebrow">The verdict · 06 / 10</p><h2 dangerouslySetInnerHTML={{ __html: headline('verdict') }} /><div className={`verdict-stamp ${roster?.ready ? 'ready' : 'waiting'}`}>{roster ? (roster.ready ? 'READY · तैयार' : 'NOT READY · भर्ती चाहिए') : 'PLAN TO SEE'}</div>{!roster && <button className="action-button" onClick={plan} disabled={!task}>Plan crew to see the live verdict</button>}{roster?.recruit_requests?.map((r,i) => <p className="paper-slip" key={i}>{r.needed} more {r.role}<small>{r.slot.replaceAll('_',' ')} · {r.area} · within {r.max_travel_km} km · {r.reason}</small></p>)}<button className="quiet-button" onClick={sharePlan} disabled={!roster}>{text.share}</button>{share && <a className="share-result" href={share}>{share}</a>}</div></section>
-    <TransitionFilm start={38.8} end={48.8} poster="/media/film-poster-05.jpg" label="The last gap closes and the seal lands" />
-    <section className="chapter" id="dropout" data-id="dropout"><div className="chapter-copy"><p className="eyebrow">What if someone drops? · 07 / 10</p><h2>A real exit.<br/><span>A real re-plan.</span></h2><p>Heena P. is in the opted-in pool, but the default solver leaves her off the seated crew. This moment drops a real seated volunteer so the API can return an honest result.</p><button className="action-button" onClick={dropout} disabled={!roster}>{roster ? `Drop ${roster.assignments[3]?.volunteer_name ?? roster.assignments[0]?.volunteer_name ?? 'volunteer'}` : text.drop}</button>{dropResult && <p className="paper-slip" role="status">{dropResult}</p>}{roster?.recruit_requests?.map((request, index) => <p className="paper-slip" key={`${request.role_id}-${index}`}>{request.needed} needed: {request.role}<small>{request.slot.replaceAll('_',' ')} · {request.area} · {request.reason}</small></p>)}</div></section>
-    <section className="chapter" id="evidence" data-id="evidence"><div className="chapter-copy"><p className="eyebrow">The drive and evidence · 08 / 10</p><h2 dangerouslySetInnerHTML={{ __html: headline('evidence') }} /><p>After the work, a host reviews contribution cards against attendance. The ledger records decisions; it does not prove the work happened.</p><p className="paper-slip">8 hours claimed · 5 hours recorded<small>Example flag · synthetic data</small></p><Link className="jump-link" to="/console">Review evidence in the console ↗</Link></div></section>
-    <TransitionFilm start={48.8} end={58.8} poster="/media/film-poster-06.jpg" label="Drive, evidence and the village map" />
-    <section className="chapter" id="districts" data-id="numbers"><div className="chapter-copy"><p className="eyebrow">Many villages · 09 / 10</p><h2>One small plan.<br/><span>Many places.</span></h2><p>District and block markers show only public geography and drive status. Map: illustrative.</p><Link className="jump-link" to="/districts">Explore the district view ↗</Link></div></section>
-    <section className="chapter" id="numbers" data-id="numbers"><div className="chapter-copy"><p className="eyebrow">Synthetic evaluation · 10 / 10</p><h2 dangerouslySetInnerHTML={{ __html: headline('numbers') }} /><div className="story-metrics">{evalReport ? <><Metric target={evalReport.summary.cp_sat?.ready ?? 0} lang={lang} label="Ready · SewaCircle"/><Metric target={evalReport.summary.nearest_skill?.ready ?? 0} lang={lang} label="Ready · nearest skill"/><Metric target={evalReport.summary.cp_sat?.repeat_pick_share ?? 0} lang={lang} label="Repeat picks · SewaCircle"/><Metric target={evalReport.summary.nearest_skill?.repeat_pick_share ?? 0} lang={lang} label="Repeat picks · nearest skill"/><Metric value={`${formatNumber(evalReport.n_tasks,lang)} drives`} label="Evaluation set"/></> : <p>Loading live evaluation…</p>}</div><p className="small-caveat">Proxy results on synthetic data. No field impact claim.</p></div></section>
-    <section className="chapter chapter-end" id="try" data-id="try"><div className="chapter-copy"><p className="eyebrow">Ready Crew · SewaCircle</p><h2 dangerouslySetInnerHTML={{ __html: headline('try') }} /><p>AI reads the brief. A deterministic solver proposes the team. A person approves.</p><div className="end-actions"><Link className="action-button" to="/console">Open organiser console ↗</Link><Link className="quiet-button" to="/volunteer">Volunteer view ↗</Link></div><p className="small-caveat">Synthetic data · Not affiliated with MY Bharat or any government body.</p></div></section>
-  </div>
-}
-function FilmRosterOverlay({ chapter, roster, dropInfo, task }: { chapter: string; roster: RosterResult; dropInfo: { dropped: Assignment; anchorIndex: number; replacement: string | null } | null; task: TaskSpec | null }) {
-  const frame = chapter === 'crew' ? 'turmeric-ring' : chapter === 'bench' ? 'crew-backups' : 'ready-seal'
-  const anchors = filmAnchors[frame]
-  const items: Assignment[] = roster.assignments.slice(0, anchors.length)
-  return <div className="film-roster-overlay" aria-hidden="true">
-    {anchors.map((anchor, index) => {
-      const assignment = items[index]
-      const dropped = index === dropInfo?.anchorIndex
-      const role = task?.roles.find(row => row.id === assignment?.role_id)
-      const checked = Boolean(role?.safety_critical || assignment?.flags.some(flag => /host.?check|safety/i.test(flag)))
-      return <span key={`${frame}-${index}`} className={`film-anchor ${assignment ? 'occupied' : 'empty'} ${dropped ? 'left' : ''}`} style={{ left: `${anchor.x * 100}%`, top: `${anchor.y * 100}%`, '--tag-dy': `${anchor.dy ?? 0}px` } as CSSProperties}>
-        <i className="film-socket-glow" />
-        {dropped ? <span title="This seated volunteer left the crew" className={`paper-name-tag dropped ${(anchor.side ?? (anchor.x > .60 ? 'left' : 'center')) === 'left' ? 'side-left' : ''}`}><b>{dropInfo.dropped.volunteer_name}</b><small>Left</small></span> : assignment && <span title={assignment.reasons.join('; ')} className={`paper-name-tag ${(anchor.side ?? (anchor.x > .60 ? 'left' : 'center')) === 'left' ? 'side-left' : ''}`}><b>{assignment.volunteer_name}</b><small>{role?.role ?? 'Volunteer'}{checked ? ' Host check' : ''}</small></span>}
-        {dropped && dropInfo.replacement && <span className="paper-name-tag promoted"><b>{roster.assignments.find(a => a.volunteer_id === dropInfo.replacement)?.volunteer_name ?? 'Standby'}</b><small>Promoted</small></span>}
-      </span>
-    })}
-    {roster.standby.map((person, index) => <span key={person.volunteer_id} className="paper-name-tag standby-slide" style={{ '--standby-index': index } as CSSProperties}><b>{person.volunteer_name}</b><small>Standby</small></span>)}
-    {!roster.standby.length && !dropInfo && <span className="no-standby-glow">No standby yet</span>}
-    {dropInfo?.replacement && <span className="paper-name-tag promoted-slide"><b>{roster.assignments.find(a => a.volunteer_id === dropInfo.replacement)?.volunteer_name ?? 'Standby'}</b><small>Standby - promoted</small></span>}
-  </div>
-}
+  const [chapter, setChapter] = useState<Chapter>('intro')
+  const [task, setTask] = useState<TaskSpec | null>(null)
+  const [gapTask, setGapTask] = useState<TaskSpec | null>(null)
+  const [vols, setVols] = useState<Volunteer[]>([])
+  const [extraction, setExtraction] = useState<ExtractionResult | null>(null)
+  const [roster, setRoster] = useState<RosterResult | null>(null)
+  const [gapRoster, setGapRoster] = useState<RosterResult | null>(null)
+  const [dropRoster, setDropRoster] = useState<RosterResult | null>(null)
+  const [dropped, setDropped] = useState<{ id: string; name: string; healed: boolean } | null>(null)
+  const [evalReport, setEvalReport] = useState<EvalReport | null>(null)
+  const [drives, setDrives] = useState<Array<{ ready: boolean | null }>>([])
+  const [ledger, setLedger] = useState<LedgerVerification | null>(null)
+  const [busy, setBusy] = useState('')
+  const [phrase, setPhrase] = useState<number | null>(null)
+  const [toast, setToast] = useState('')
+  const [error, setError] = useState('')
+  const labelEls = useRef<(HTMLElement | null)[]>([])
+  const root = useRef<HTMLDivElement>(null)
 
-function Metric({ value, target, lang, label }: { value?: string; target?: number; lang?: Lang; label: string }) {
-  const element = useRef<HTMLDivElement>(null); const [shown, setShown] = useState(() => matchMedia('(prefers-reduced-motion: reduce)').matches ? target ?? 0 : 0)
-  useEffect(() => { if (target === undefined || !element.current || matchMedia('(prefers-reduced-motion: reduce)').matches) return; const observer = new IntersectionObserver(entries => { if (!entries.some(e => e.isIntersecting)) return; observer.disconnect(); const start = performance.now(); const tick = (now: number) => { const p = Math.min(1, (now - start) / 800); setShown(p === 1 ? target : target * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(tick) }; requestAnimationFrame(tick) }, { threshold: .4 }); observer.observe(element.current); return () => observer.disconnect() }, [target])
-  const ready = target === undefined || shown === target
-  return <div className="story-metric" ref={element} data-counter-ready={ready}><strong>{target === undefined ? value : `${formatNumber(Math.round(shown * 100), lang ?? 'en')}%`}</strong><span>{label}</span></div>
+  useEffect(() => {
+    api.tasksLang(lang).then(rows => { setTask(rows.find(x => x.id === 'task-01') ?? rows[0] ?? null); setGapTask(rows.find(x => x.id === 'task-05') ?? null) }).catch(e => setError(e.message))
+    api.volunteers().then(setVols).catch(() => undefined)
+    api.evalReport().then(setEvalReport).catch(() => undefined)
+  }, [lang])
+  useEffect(() => { if (task?.brief_text) api.extract(task.brief_text).then(setExtraction).catch(() => undefined) }, [task?.id, task?.brief_text])
+
+  // smooth scroll + active chapter
+  useEffect(() => {
+    let lenis: Lenis | null = null
+    if (motion) { lenis = new Lenis({ lerp: 0.11 }); const raf = (time: number) => { lenis?.raf(time); id = requestAnimationFrame(raf) }; let id = requestAnimationFrame(raf); const stop = () => cancelAnimationFrame(id); return () => { stop(); lenis?.destroy() } }
+  }, [motion])
+  useEffect(() => {
+    const els = root.current?.querySelectorAll<HTMLElement>('[data-chapter]') ?? []
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) setChapter((e.target as HTMLElement).dataset.chapter as Chapter) }), { rootMargin: '-48% 0px -48% 0px' })
+    els.forEach(el => io.observe(el)); return () => io.disconnect()
+  }, [])
+
+  const plan = async () => {
+    if (!task || busy) return
+    setBusy('plan'); setError('')
+    try { const r = await api.roster(task, defaultOptions, lang); setRoster(r.cp_sat); setDropRoster(null); setDropped(null) } catch (e) { setError((e as Error).message) } finally { setBusy('') }
+  }
+  // scrolling past the crew chapter without clicking still shows a live plan
+  // eslint-disable-next-line react-hooks/exhaustive-deps, react/set-state-in-effect -- one-shot API call when the reader scrolls past the crew chapter without clicking
+  useEffect(() => { if (['bench', 'verdict'].includes(chapter) && !roster && task && !busy) void plan() }, [chapter, roster, task])
+  useEffect(() => {
+    if (chapter === 'gap' && gapTask && !gapRoster) api.roster(gapTask, defaultOptions, lang).then(r => setGapRoster(r.cp_sat)).catch(e => setError(e.message))
+    if (chapter === 'districts' && !drives.length) api.driveStatus().then(s => setDrives(((s.tasks as Array<{ ready: boolean | null }>) ?? []).map(x => ({ ready: x.ready })))).catch(() => undefined)
+  }, [chapter, gapTask, gapRoster, drives.length, lang])
+
+  const dropOne = async () => {
+    const base = dropRoster ?? roster
+    if (!task || !base || busy) return
+    const target = base.assignments[3] ?? base.assignments[0]
+    if (!target) return
+    setBusy('drop'); setError('')
+    try {
+      const r = await api.dropout(task, base, target.volunteer_id, defaultOptions)
+      setDropped({ id: target.volunteer_id, name: target.volunteer_name, healed: r.healed_with_standby })
+      setDropRoster(r.roster_after)
+    } catch (e) { setError((e as Error).message) } finally { setBusy('') }
+  }
+  const copy = async (text: string) => { try { await navigator.clipboard.writeText(text); setToast(t.copied) } catch { setToast(text) } setTimeout(() => setToast(''), 2400) }
+  const share = async () => { if (!task) return; try { const r = await api.share(task.id); await copy(`${location.origin}/drive/${r.share_key}`) } catch (e) { setError((e as Error).message) } }
+
+  const shownRoster = chapter === 'dropout' && dropRoster ? dropRoster : roster
+  const seats = useMemo(() => chapter === 'gap' ? seatsFor(gapTask, gapRoster) : seatsFor(task, shownRoster, chapter === 'dropout' ? undefined : undefined), [chapter, task, gapTask, gapRoster, shownRoster])
+  const poolTask = chapter === 'gap' ? gapTask : task
+  const poolIds = useMemo(() => {
+    const opted = vols.filter(v => poolTask && v.opted_in_task_ids?.includes(poolTask.id))
+    return (opted.length ? opted : vols.slice(0, 40)).map(v => v.id)
+  }, [vols, poolTask])
+  const optedCount = useMemo(() => task ? vols.filter(v => v.opted_in_task_ids?.includes(task.id)).length : 0, [vols, task])
+  const standby = chapter === 'gap' ? gapRoster?.standby[0] : shownRoster?.standby[0]
+  const activeRoster = chapter === 'gap' ? gapRoster : shownRoster
+  const sceneData: SceneData = { chapter, seats, poolIds, standbyId: standby?.volunteer_id, glow: chapter === 'verdict' && roster?.ready === true, drives: drives.length ? drives : Array.from({ length: 10 }, () => ({ ready: null })) }
+  const showLabels = RING_LABEL_CHAPTERS.includes(chapter) && Boolean(activeRoster)
+  const spans = useMemo(() => extraction?.roles ?? [], [extraction])
+  const briefHtml = useMemo(() => {
+    const text = task?.brief_text ?? ''
+    const parts: Array<{ s: string; i: number | null }> = []
+    let rest = text
+    const found = spans.map((r, i) => ({ i, span: r.evidence_span })).filter(x => x.span && text.includes(x.span))
+    while (rest) {
+      let best: { i: number; at: number; span: string } | null = null
+      for (const f of found) { const at = rest.indexOf(f.span); if (at >= 0 && (!best || at < best.at)) best = { i: f.i, at, span: f.span } }
+      if (!best) { parts.push({ s: rest, i: null }); break }
+      if (best.at) parts.push({ s: rest.slice(0, best.at), i: null })
+      parts.push({ s: best.span, i: best.i }); rest = rest.slice(best.at + best.span.length)
+    }
+    return parts
+  }, [task?.brief_text, spans])
+  const ev = evalReport?.summary
+  const recruitText = (gapRoster?.recruit_requests ?? []).map(r => `${r.needed} × ${r.role} · ${r.slot.replaceAll('_', ' ')} · ${r.area} · within ${r.max_travel_km} km`).join('\n')
+
+  return <div className={`story chapter-${chapter}`} ref={root}>
+    <div className="stage" aria-hidden="true">
+      {gl ? <><picture className="stage-still"><source media="(max-width: 820px)" srcSet="/media/ring-hero-m.webp" /><img src="/media/ring-hero.webp" alt="" fetchPriority="high" /></picture>{stageOn && <Suspense fallback={null}><RingScene data={sceneData} labelEls={labelEls} motion={motion} /></Suspense>}</> : <svg className="stage-fallback" viewBox="0 0 800 500"><ellipse cx="520" cy="250" rx="240" ry="100" fill="none" stroke="#c98a2e" strokeWidth="26" /></svg>}
+      <div className={`seat-labels ${showLabels ? 'on' : ''}`}>
+        {seats.map((s, i) => <div key={`${chapter}-${i}`} ref={el => { labelEls.current[i] = el }} className={`seat-label s-${s.state}`}>
+          <b>{s.state === 'filled' ? s.name : s.state === 'gap' ? `${t.recruit}: ${s.role}` : s.state === 'dropped' ? s.name : t.open}</b>
+          <small>{s.state === 'dropped' ? t.left : s.role}{s.safety && s.state === 'filled' ? ` · ${t.hostCheck} ✓` : ''}</small>
+        </div>)}
+      </div>
+    </div>
+    <ul className="sr-only" aria-live="polite" aria-label="Crew on the ring">{seats.map((s, i) => <li key={i}>{s.state === 'filled' ? `${s.name}, ${s.role}. ${s.reasons?.join('. ') ?? ''}` : s.state === 'gap' ? `${t.recruit}: ${s.role}` : `${t.open}: ${s.role}`}</li>)}</ul>
+    <nav className="chapter-dots" aria-label="Story chapters">{CHAPTERS.map((c, i) => <a key={c} href={`#${c}`} aria-current={chapter === c ? 'step' : undefined} aria-label={`${String(i + 1).padStart(2, '0')} ${c}`}><span>{String(i + 1).padStart(2, '0')}</span></a>)}</nav>
+    {toast && <div className="toast" role="status">{toast}</div>}
+    {error && <div className="toast toast-error" role="alert">{error}</div>}
+
+    <section id="intro" data-chapter="intro" className="ch ch-intro">
+      <p className="k">{t.kicker}</p>
+      <h1 lang={lang}>{t.h1}</h1>
+      <p className="lede">{t.sub}</p>
+      <a className="btn" href="#crew">{t.start} ↓</a>
+    </section>
+
+    <section id="interest" data-chapter="interest" className="ch">
+      <p className="k">{t.interestK}</p>
+      <h2>{t.interestH}</h2>
+      <p className="giant"><Counter to={optedCount || null} lang={lang} /></p>
+      <p className="giant-label">{t.optedIn}</p>
+      <p className="body">{t.interestP}</p>
+    </section>
+
+    <section id="brief" data-chapter="brief" className="ch">
+      <p className="k">{t.briefK}</p>
+      <h2>{t.briefH}</h2>
+      <p className="body">{t.briefP}</p>
+      <blockquote className="brief" lang={task?.language === 'hi' ? 'hi' : undefined}>{briefHtml.map((p, k) => p.i === null ? <span key={k}>{p.s}</span> : <button key={k} className={`phrase ${phrase === p.i ? 'on' : ''}`} onClick={() => setPhrase(p.i)} aria-pressed={phrase === p.i}>{p.s}</button>)}</blockquote>
+      <div className="role-chips">{spans.map((r, i) => <button key={i} className={`chip ${phrase === i ? 'on' : ''}`} onClick={() => setPhrase(i)}><b>{r.role}</b><small>{phrase === i ? t.aiProposed : `${t.confidence}: ${r.confidence}`}</small></button>)}</div>
+    </section>
+
+    <section id="crew" data-chapter="crew" className="ch">
+      <p className="k">{t.crewK}</p>
+      <h2>{t.crewH}</h2>
+      <p className="body">{t.crewP}</p>
+      <button className="btn" onClick={plan} disabled={busy === 'plan' || !task}>{busy === 'plan' ? t.planning : t.plan}</button>
+      {roster && <p className="meta">{t.planned} · {roster.metrics.slots_filled}/{roster.metrics.slots_required} · {formatNumber(Math.round(roster.metrics.solve_ms), lang)} ms</p>}
+    </section>
+
+    <section id="bench" data-chapter="bench" className="ch">
+      <p className="k">{t.benchK}</p>
+      <h2>{t.benchH}</h2>
+      <p className="body">{t.benchP}</p>
+      {roster?.standby.map(s => <p key={s.volunteer_id} className="standby-line"><b>{t.standby}: {s.volunteer_name}</b> — {t.covers} {s.covers_role_ids.map(id => task?.roles.find(r => r.id === id)?.role ?? id).join(', ')}</p>)}
+    </section>
+
+    <section id="verdict" data-chapter="verdict" className="ch ch-center">
+      <p className="k">{t.verdictK}</p>
+      <p className={`verdict ${roster?.ready ? 'ok' : roster ? 'no' : ''}`}>{roster ? (roster.ready ? `${t.ready} · तैयार` : `${t.notReady}`) : '…'}</p>
+      <p className="body">{roster?.ready ? t.verdictP : roster ? t.verdictNo : ''}</p>
+      <button className="btn ghost" onClick={share} disabled={!roster}>{t.share}</button>
+    </section>
+
+    <section id="gap" data-chapter="gap" className="ch">
+      <p className="k">{t.gapK}</p>
+      <h2>{t.gapH}</h2>
+      <p className="body">{t.gapP}</p>
+      {gapRoster && <><p className={`verdict small ${gapRoster.ready ? 'ok' : 'no'}`}>{gapRoster.ready ? t.ready : t.notReady}</p>
+        <ul className="recruit">{gapRoster.recruit_requests?.map((r, i) => <li key={i}><b>{r.needed} × {r.role}</b><small>{r.slot.replaceAll('_', ' ')} · {r.area} · ≤ {r.max_travel_km} km{r.checked_skill_required ? ` · ${t.hostCheck}` : ''}</small><small>{r.reason}</small></li>)}</ul>
+        {recruitText && <button className="btn ghost" onClick={() => copy(recruitText)}>{t.copyReq}</button>}</>}
+    </section>
+
+    <section id="dropout" data-chapter="dropout" className="ch">
+      <p className="k">{t.dropK}</p>
+      <h2>{t.dropH}</h2>
+      <p className="body">{t.dropP}</p>
+      <button className="btn" onClick={dropOne} disabled={!roster || busy === 'drop'}>{busy === 'drop' ? t.dropping : `${t.drop} ${((dropRoster ?? roster)?.assignments[3] ?? (dropRoster ?? roster)?.assignments[0])?.volunteer_name ?? ''}`}</button>
+      {dropped && dropRoster && <div className="drop-result" role="status"><p><b>{dropped.name}</b> {t.left}. {dropped.healed ? `${t.standby} ↑` : ''}</p><p className={`verdict small ${dropRoster.ready ? 'ok' : 'no'}`}>{dropRoster.ready ? t.ready : t.notReady}</p>{dropRoster.recruit_requests?.map((r, i) => <p key={i} className="meta">{r.needed} × {r.role} — {r.reason}</p>)}</div>}
+    </section>
+
+    <section id="evidence" data-chapter="evidence" className="ch">
+      <p className="k">{t.evidenceK}</p>
+      <h2>{t.evidenceH}</h2>
+      <p className="body">{t.evidenceP}</p>
+      <div className="card-demo"><span className="flag">8 h claimed · 5 h recorded</span><span>Draft · AI</span></div>
+      <button className="btn ghost" onClick={() => api.verify().then(setLedger).catch(e => setError(e.message))}>{t.verify}</button>
+      {ledger && <p className="meta" role="status">{ledger.entries === 0 ? t.empty : ledger.ok ? `${t.verified} · ${ledger.entries}` : `${t.broken} ${ledger.first_bad_index}`}</p>}
+    </section>
+
+    <section id="numbers" data-chapter="numbers" className="ch ch-numbers">
+      <p className="k">{t.numbersK} · {t.numbersH}</p>
+      <div className="nums">
+        <div className="num big"><Counter to={ev ? Math.round(ev.cp_sat.ready * 100) : null} suffix="%" lang={lang} /><small>{t.readyLbl}</small><em>{ev ? `${Math.round(ev.nearest_skill.ready * 100)}%` : '—'} {t.nearest}</em></div>
+        <div className="num"><Counter to={ev ? Math.round(ev.cp_sat.repeat_pick_share * 100) : null} suffix="%" lang={lang} /><small>{t.repeat}</small><em>{t.repeatVs}</em></div>
+        <div className="num"><span>0.33 s</span><small>{t.speed}</small></div>
+        <div className="num"><span>93%</span><small>{t.recall}</small></div>
+      </div>
+      <p className="source">{t.synthetic} · docs/EVAL_RESULTS.md · docs/LOCAL_MODEL_RESULTS.md</p>
+    </section>
+
+    <section id="districts" data-chapter="districts" className="ch">
+      <p className="k">{t.districtsK}</p>
+      <h2>{t.districtsH}</h2>
+      <p className="body">{t.districtsP}</p>
+      <Link className="btn ghost" to="/districts">{t.openDistricts} →</Link>
+    </section>
+
+    <section id="try" data-chapter="try" className="ch ch-center">
+      <p className="k">{t.tryK}</p>
+      <h2>{t.tryH}</h2>
+      <p className="body">{t.tryP}</p>
+      <div className="row"><Link className="btn" to="/console">{t.console} →</Link><Link className="btn ghost" to="/volunteer">{t.volunteer}</Link><Link className="btn ghost" to="/method">{t.method}</Link></div>
+      <p className="source">{t.synthetic}</p>
+    </section>
+  </div>
 }
