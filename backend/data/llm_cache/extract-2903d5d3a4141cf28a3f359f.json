@@ -1,0 +1,1 @@
+{"json": {"roles": [{"role": "Clean-up volunteer", "count": 8, "required_skills": [], "evidence_span": "Anyone can join, we need eight volunteers", "confidence": "high", "reason": "Eight volunteers are requested for the river ghat clean-up and anyone can join."}], "needs_decision": [], "language_detected": "en"}, "model": "nilabh/Deepseek-v4.1-Flash", "purpose": "extract"}
