@@ -360,3 +360,79 @@ The verification script calls `POST /api/demo/reset` against the local synthetic
 - The board notes are modeled marks rather than readable hand-drawn notices. The pump, flowers and river ripples are still small at the wide camera distance.
 - The Three.js renderer reports that `PCFSoftShadowMap` has been removed and falls back to `PCFShadowMap`; shadow bias is tuned, but there is no device-level proof of soft-shadow quality or sustained 60 fps. Lighthouse is a desktop lab run, not a mid-range laptop frame-rate test.
 - The scene remains procedural; this round did not create a Fusion export or GLB. The accessible static poster remains the reduced-motion and no-WebGL fallback.
+
+## Round 4 - film layers and 3D hero objects
+
+### What changed
+
+The procedural village that replaced the film has been removed. Seven authored frames from the owner's film now carry the story's village world as four transparent WebP planes per scene: an unchanged full-frame base, a sky cutout, a middle village band, and a foreground band. The masks are hand-authored in `frontend/scripts/generate-film-layers.py`, with gently waved edges feathered by 8 px. The unchanged base stays below every cutout, so the limited parallax cannot reveal holes. The masks are broad depth bands rather than object-by-object segmentation; parallax is intentionally subtle to avoid visible seams. Each frame is 1280x720, WebP quality 68, and the complete 28-file backdrop payload is 3,462,316 bytes (3.30 MiB). Source frames, extracted from the 1280x720 film master with ffmpeg, and timestamps are recorded in `frontend/public/media/PROVENANCE.md`.
+
+The chapter sequence maps to dawn board (intro), youth gathering (interest), dawn board (brief), turmeric ring (crew), crew and backups (bench), READY seal (verdict and dropout), drive/evidence, and the night map (districts, numbers, try-it). Only the current and next backdrop sets mount; the intro frame is preloaded. Backdrops cross-fade at the chapter boundaries, with scroll and pointer parallax on the image planes. A persistent `Illustrative` tag sits over the scene and the original Gemini watermark stays in each base frame. Full-bleed film transitions remain intact.
+
+The procedural environment, houses, roofs, trees, river, and fields are removed from Three.js. The transparent, lazily mounted R3F canvas now contains the floating turmeric ring, glowing sockets, faceless seated paper figures with scarves, and scroll-arriving READY seal, evidence cards/ledger block, and map pins. Figures bob gently; the ring responds to hover and scroll. The 3D chunk starts loading as the crew chapter approaches. Reduced-motion mode shows static chapter layers with no scroll scrub; no-WebGL mode uses the static dawn still. The console does not fetch `VillageScene`, `three-core`, or `three-fiber`. Setting chapter `scroll-margin-top` to zero fixes the 35 px film-poster strip at the top of the crew chapter.
+
+### Visual evidence
+
+The before captures are the round 3 output captured before this pass; the after captures are from the final production preview at 1440x900. I reviewed all 11 chapter screenshots, all six film-cut screenshots, and each route screenshot using the chapter and route contact sheets. I also reviewed sampled frames from the new slow-scroll video. The side-by-side comparison uses the same notice-board, turmeric-ring, and village-square film frames as round 3.
+
+- [Before chapter screenshots](../screens/v5/round4/before/)
+- [After chapter and route screenshots](../screens/v5/round4/after/)
+- [Film vs live comparison](../screens/v5/round4/after/film-vs-live.jpg)
+- [Chapter review contact sheet](../screens/v5/round4/after/review-after-chapters.jpg)
+- [Route and film-cut review contact sheet](../screens/v5/round4/after/review-pages-and-cuts.jpg)
+- [Slow-scroll frame review](../screens/v5/round4/after/review-scroll.jpg)
+- [Slow full-story recording](../screens/v5/round4/after/story-scroll.webm), 1440x900, 25.68 seconds, 3,658,663 bytes
+- [Verification record](../screens/v5/round4/after/verification-summary.json)
+
+### Verification commands and outputs
+
+Commands ran from `frontend/`. Preview used port 4178; the existing API on 8000 and Vite server on 5180 were left running.
+
+```text
+npm run build
+vite v8.3.8; 3056 modules transformed; build succeeded.
+VillageScene chunk: 7.42 kB (2.49 kB gzip).
+three-core: 742.90 kB (187.53 kB gzip); three-fiber: 176.95 kB (56.13 kB gzip).
+The 3D code remains lazy and split from /console. Vite retains its general >500 kB vendor-chunk advisory.
+
+npm run lint
+> oxlint
+No warnings or errors.
+
+npm test
+Test Files 1 passed (1)
+Tests 4 passed (4)
+
+$env:SCREENSHOT_DIR='../docs/screens/v5/round4/after'; $env:BASE_URL='http://127.0.0.1:4178'; npm run verify:v3
+Demo reset: HTTP 200.
+Story dropout: standby promoted; NOT READY; one Logistics and supplies request.
+Console: live extraction, crew planning and public share succeeded.
+Evidence: draft, revision request, redraft, confirm, correct, ledger verification and evaluation succeeded.
+Role switch: host, volunteer and viewer exercised; viewer restriction returned HTTP 403 and surfaced in the UI.
+Districts: 20 markers loaded; Kanpur Dehat selected. Volunteer route loaded.
+Mock route: fixture workflow completed with zero API requests.
+Counters: 70%, 10%, 23%, 40%.
+Story: all 11 anchors captured; Hindi title rendered.
+Film transitions: all six ranges exercised.
+Axe: zero violations across 6 routes in English and 6 in Hindi.
+Reduced motion: canvas=0, video=0, still=1. No WebGL: canvas=0, still=1.
+Browser page errors: 0.
+Console route: 6 JavaScript requests; no VillageScene, three-core or three-fiber requests.
+
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4178/ --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round4/after/lighthouse-home.json
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4178/console --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round4/after/lighthouse-console.json
+```
+
+| Route | Performance | Accessibility | Best practices | SEO | LCP | TBT | CLS |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| `/` | 92 | 100 | 100 | 83 | 1,701 ms | 0 ms | 0.076 |
+| `/console` | 99 | 100 | 100 | 82 | 845 ms | 0 ms | 0.037 |
+
+Full Lighthouse output: [home](../screens/v5/round4/after/lighthouse-home.json) and [console](../screens/v5/round4/after/lighthouse-console.json).
+
+### Remaining gaps
+
+- The backdrop cuts use broad horizontal depth bands rather than semantic object masks, so the 2.5D effect is restrained. This avoids holes and seams but does not make every house, figure, or grass prop independently move in depth.
+- The ring and seated figures are original procedural paper geometry and remain simpler than the film's miniature set. The film frame behind the live ring can show a second ring at a different depth.
+- Lighthouse is desktop lab data. Sustained 60 fps on a mid-range device was not measured.
+- The map remains illustrative and not an accurate district-boundary map. Demo roles remain interface simulation, not authentication; all records remain synthetic.
