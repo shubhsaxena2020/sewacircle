@@ -19,6 +19,8 @@ test('live organiser journey and desktop pages',async({page})=>{
   await page.goto('/')
   await expect(page.getByRole('heading',{level:1})).toContainText('Willing volunteers')
   await expect(page.locator('.result-cards')).toBeVisible()
+  await expect(page.locator('.scene-wrap')).toHaveAttribute('data-ready','true')
+  await page.evaluate(() => new Promise<void>(resolve => requestAnimationFrame(() => requestAnimationFrame(() => resolve()))))
   expect(await page.evaluate(()=>document.documentElement.scrollWidth)).toBeLessThanOrEqual(1440)
   await page.screenshot({path:shot+'landing-1440x900.png',fullPage:true})
   await axe(page,'landing')

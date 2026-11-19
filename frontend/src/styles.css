@@ -32,3 +32,4 @@
 .eval-chart,.eval-chart-placeholder{width:100%;height:190px}.eval-values{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 22px}.eval-value-row{display:flex;gap:8px;align-items:baseline;font-size:11px}.eval-value-row strong{margin-left:auto}.eval-value-row small{color:var(--muted)}@media(max-width:760px){.eval-values{grid-template-columns:1fr}.eval-value-row{flex-wrap:wrap}.eval-value-row small{width:100%}}
 .hero-fallback{display:block;width:100%;height:100%;object-fit:contain;background:#151d34}
 .loading-page{min-height:100vh}
+.scene-wrap{position:relative}.scene-poster{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#151d34;pointer-events:none}

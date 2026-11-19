@@ -1,4 +1,4 @@
-import { Suspense, useMemo, useRef } from 'react'
+import { Suspense, useMemo, useRef, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { ContactShadows, Environment, useGLTF } from '@react-three/drei'
 import { Bloom, EffectComposer } from '@react-three/postprocessing'
@@ -51,11 +51,13 @@ function Tokens() {
   return <instancedMesh ref={instances} args={[mesh.geometry, material, 6]} castShadow/>
 }
 
-function CrewKit() {
+function CrewKit({ onReady }: { onReady: () => void }) {
   const group = useRef<Group>(null)
   const gap = useRef<Group>(null)
   const ready = useRef<Group>(null)
+  const reported = useRef(false)
   useFrame(({ clock, camera, pointer }) => {
+    if (!reported.current) { reported.current = true; onReady() }
     const phase = (clock.elapsedTime % 9) / 9
     if (gap.current) {
       gap.current.visible = phase < .84
@@ -93,18 +95,20 @@ function CrewKit() {
 
 export default function CrewSceneV2() {
   const { t } = useUi()
-  return <div className="scene-wrap" role="img" aria-label={t('heroText')}>
+  const [ready, setReady] = useState(false)
+  return <div className="scene-wrap" role="img" aria-label={t('heroText')} data-ready={ready}>
     <Canvas dpr={[1, 1.5]} camera={{ position: [0, 10, 16], fov: 44 }} gl={{ antialias: true, powerPreference: 'low-power' }}>
       <color attach="background" args={['#151d34']}/>
       <ambientLight intensity={1.2}/>
       <directionalLight position={[2, 8, 7]} intensity={3.4} castShadow/>
       <Suspense fallback={null}>
         <Environment files="/models/studio.hdr" environmentIntensity={.7}/>
-        <CrewKit/>
+        <CrewKit onReady={() => setReady(true)}/>
         <ContactShadows position={[0, -.12, 0]} opacity={.32} scale={14} blur={2.2} far={3} resolution={256}/>
         <EffectComposer multisampling={0}><Bloom intensity={.22} luminanceThreshold={1.1} mipmapBlur/></EffectComposer>
       </Suspense>
     </Canvas>
+    {!ready && <img src="/models/hero-still.webp" alt="" className="scene-poster"/>}
     <div className="scene-caption"><span className="caption-dot"/><span>{t('roleCaption')}</span><span className="caption-dash"/> <span>{t('standbyCaption')}</span></div>
   </div>
 }
