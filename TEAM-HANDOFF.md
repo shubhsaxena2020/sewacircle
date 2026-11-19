@@ -11,8 +11,9 @@ after a youth clicks "Interested"); it is not affiliated with MY Bharat or any g
 
 | Branch | What is on it | State |
 |---|---|---|
-| `main` | Everything: backend (FastAPI + OR-Tools CP-SAT solver + LLM layer), the new website (merged from `frontend-v3`), docs, idea answers | **Stable.** 948 backend tests pass; site verified (axe 0, Lighthouse story 91 / console 99) |
-| `frontend-v3` | Where the new website was built (film-layer story + live 3D + console) | Merged into `main` on 19 Nov |
+| `main` | Everything: backend (FastAPI + OR-Tools CP-SAT solver + LLM layer), the new website (merged from `frontend-v3`), docs, idea answers | **Stable.** 948 backend tests pass; site verified (axe 0, Lighthouse story 100 / console 100) |
+| `frontend-v4` | **Current website "The Ring"**: dark 3D brass-ring story rebuilt from zero after a 200-site design study | Merged into `main` on 19 Nov (evening) |
+| `frontend-v3` | Previous website (film-layer paper village) | Superseded by v4 |
 | `frontend-v2` | Previous website (kept as a template) + the **8 UI design options** in `design/ui-options/` | Reference |
 | `backend-ideas` | Backend feature branch | Already merged into `main` |
 
@@ -22,7 +23,7 @@ Most useful files:
   [`PROJECT_REPORT.md`](PROJECT_REPORT.md)
 - How we differ from MY Bharat (sourced): [`docs/MYBHARAT-COMPARISON.md`](docs/MYBHARAT-COMPARISON.md)
 - Backend features and API: [`docs/v4/BACKEND-PATTERNS.md`](docs/v4/BACKEND-PATTERNS.md); review: [`docs/v4/HARD-REVIEW.md`](docs/v4/HARD-REVIEW.md) (on `frontend-v2`)
-- New website report and screenshots: `docs/v5/FRONTEND-V3-REPORT.md`, `docs/screens/v5/` (on `frontend-v3`)
+- Website report and screenshots: `docs/v6/FRONTEND-V4-REPORT.md`, `docs/screens/v6/`; design study of 200 sites: `docs/v6/research/DESIGN-STUDY.md`
 - The 58.8 s paper-craft film: `design/scrolly/media/video/sewacircle-film-web.mp4` (on `frontend-v3`)
 - 8 design directions with 11 screens each, plus a side-by-side gallery: `design/ui-options/index.html` (on `frontend-v2`)
 
@@ -60,11 +61,12 @@ cd frontend ; npm ci ; npm run dev               # open http://127.0.0.1:5173
 
 ## Done since the first handoff, and still to do
 
-- **The new website is finished and merged into `main`** (19 Nov). The story uses layers cut from our own paper-craft film, so it
-  looks like the film, and the live parts sit on top of it: the film's ring shows the real crew picked by the solver (names and
-  roles from the API), the drop-a-volunteer moment re-plans live and honestly shows NOT READY, plus share links, districts,
-  numbers. Checked: build, lint, unit tests, full browser run, accessibility 0 violations in English and Hindi, Lighthouse story 91.
-1. Remaining: rebuild the submission zip and record a demo video from the real site.
+- **The website was rebuilt from zero as "The Ring" (v4) and merged into `main`** (19 Nov, evening), after studying 200
+  award-winning sites. One real-time 3D brass ring carries the whole story; its seats are the drive's real slots and fill
+  live from the solver (names, roles, host-check), then show READY · तैयार, an honest NOT READY drive with a recruit request,
+  and a live dropout re-plan. Checked: build, lint, unit tests, full browser run (`npm run verify:v4`), accessibility
+  0 violations in English and Hindi, Lighthouse story 100 / console 100. Report: `docs/v6/FRONTEND-V4-REPORT.md`.
+1. Remaining: re-record the demo video and screenshots from the v4 site for the submission pack (the current pack shows v3).
 2. Team lead: team details on the form, ask the organisers about the age rule (one member is 17), **submit the idea form by 20 Nov**.
 
 ## Rules we keep (please keep them too)
