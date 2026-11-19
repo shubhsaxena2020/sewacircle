@@ -1,0 +1,76 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,700;12..96,800&family=Tiro+Devanagari+Hindi&display=swap" rel="stylesheet">
+<style>
+*{margin:0;box-sizing:border-box}body{font-family:'Bricolage Grotesque',sans-serif;color:#1C2147}
+section{width:1440px;height:900px;position:relative;overflow:hidden}
+.nav{position:absolute;top:28px;left:48px;right:48px;display:flex;justify-content:space-between;font-weight:700;font-size:15px;z-index:5}
+.nav span{opacity:.8;margin-left:28px}
+.big{font-family:Anton,sans-serif;line-height:.86;text-transform:uppercase;letter-spacing:-1px}
+.hi{font-family:'Tiro Devanagari Hindi',serif}
+.btn{display:inline-block;background:#1C2147;color:#FFF3DC;padding:18px 28px;border-radius:999px;font-weight:800;font-size:18px}
+.paper{position:absolute;inset:0;pointer-events:none;mix-blend-mode:multiply;opacity:.35}
+.tag{position:absolute;background:#FFF8EA;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:700;box-shadow:2px 3px 0 rgba(28,33,71,.25);white-space:nowrap}
+.tag small{display:block;font-weight:400;font-size:11px;opacity:.75}
+</style></head><body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<filter id="lift" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="3" dy="5" stdDeviation="3" flood-color="#3a1d05" flood-opacity=".35"/></filter>
+<filter id="fibre"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="3"/><feColorMatrix values="0 0 0 0 .5  0 0 0 0 .45  0 0 0 0 .4  0 0 0 .5 0"/></filter>
+</defs></svg>
+
+<!-- 1. HERO -->
+<section style="background:#F4B829">
+  <div class="nav"><b>SewaCircle · Ready Crew</b><div><span>Story</span><span>Console</span><span>Districts</span><span>हिन्दी</span></div></div>
+  <svg width="1440" height="900" style="position:absolute;inset:0">
+    <path d="M0 640 C300 590 520 700 820 650 C1080 610 1260 690 1440 640 L1440 900 L0 900Z" fill="#E36A2E" filter="url(#lift)"/>
+    <path d="M0 740 C260 700 560 790 900 740 C1140 705 1300 770 1440 740 L1440 900 L0 900Z" fill="#1C2147" filter="url(#lift)"/>
+    <g id="r1"></g>
+  </svg>
+  <div class="big" style="position:absolute;left:48px;top:120px;font-size:250px;z-index:2">Willing<br>hands.</div>
+  <div class="hi" style="position:absolute;left:56px;top:560px;font-size:44px;z-index:2">इच्छुक हाथ। क्या अभियान चल सकता है?</div>
+  <div style="position:absolute;left:56px;top:790px;z-index:3;display:flex;gap:18px;align-items:center;color:#FFF3DC;font-size:20px;font-weight:700">
+    <span class="btn" style="background:#F4B829;color:#1C2147">Plan a crew →</span> Can this drive run? READY or NOT READY, in seconds.</div>
+  <svg width="1440" height="900" style="position:absolute;inset:0;z-index:4" id="h1"></svg>
+  <svg class="paper" width="1440" height="900"><rect width="100%" height="100%" filter="url(#fibre)"/></svg>
+</section>
+
+<!-- 2. THE RING -->
+<section style="background:#FBEBD2">
+  <div class="nav"><b>SewaCircle</b><div><span>04 / 08 · The crew</span></div></div>
+  <div class="big" style="position:absolute;left:48px;top:110px;font-size:150px;color:#E36A2E">Every seat<br>needs a<br><span style="color:#1C2147">second<br>person.</span></div>
+  <svg width="1440" height="900" style="position:absolute;inset:0" id="h2"></svg>
+  <div style="position:absolute;left:52px;bottom:56px;font-size:20px;max-width:520px;font-weight:700">6 seated · 1 standby · First-aid needs a host-checked skill. <span style="color:#E36A2E">Drag a volunteer out to see the plan heal.</span></div>
+  <svg class="paper" width="1440" height="900"><rect width="100%" height="100%" filter="url(#fibre)"/></svg>
+</section>
+
+<!-- 3. NUMBERS -->
+<section style="background:#1C2147;color:#FFF3DC">
+  <div class="nav"><b>SewaCircle</b><div><span>07 / 08 · Measured</span></div></div>
+  <div class="big" style="position:absolute;left:48px;top:120px;font-size:330px;color:#F4B829">7/10</div>
+  <div style="position:absolute;left:60px;top:430px;font-size:34px;font-weight:800;max-width:640px">synthetic drives READY with SewaCircle.<br><span style="opacity:.6">Nearest-skill matching: 1 of 10.</span></div>
+  <div style="position:absolute;right:60px;top:150px;display:grid;gap:44px;text-align:right">
+    <div><div class="big" style="font-size:140px;color:#E36A2E">23%</div><div style="font-size:20px">repeat picks, vs 43% for a careful human</div></div>
+    <div><div class="big" style="font-size:140px">0.33s</div><div style="font-size:20px">to plan a crew from 500 volunteers</div></div>
+  </div>
+  <svg width="1440" height="900" style="position:absolute;inset:0" id="h3"></svg>
+  <div style="position:absolute;left:60px;bottom:48px;font-size:14px;opacity:.6">Synthetic data · 10 drives, 80 volunteers · not affiliated with MY Bharat or any government body</div>
+  <svg class="paper" width="1440" height="900"><rect width="100%" height="100%" filter="url(#fibre)"/></svg>
+</section>
+<script src="common.js"></script>
+<script>
+const P=['#1C2147','#E36A2E','#2E7D5B','#B83A4B','#5B3E96','#0E6E7E','#C2410C','#3F6212'], S=['#F4B829','#FFF3DC','#F28C28'];
+// hero: ring breaking through the type + crowd walking in
+let r=ring(1090,360,190,Array(8).fill({}));
+document.getElementById('h1').innerHTML=r.svg+r.seats.map((s,i)=>i<5?person(s.x,s.y-30,.9,P[i],S[i%3]):'<circle cx="'+s.x+'" cy="'+s.y+'" r="16" fill="#FFF3DC" stroke="#1C2147" stroke-width="3" stroke-dasharray="5 4"/>').join('')
+ +[[860,690],[940,700],[1010,686],[1180,694],[1260,700],[1330,690]].map(([x,y],i)=>person(x,y,1.05,P[(i+3)%8],S[(i+1)%3])).join('');
+// ring chapter
+const names=[['Shreya Z.','Team lead'],['Kabir Z.','Local-language liaison'],['Mohit Z.','First-aid · host-checked'],['Divya H.','Supplies'],['Gaurav A.','Hygiene educator'],['Bhavna X.','Documentation'],[null,'Open seat'],[null,'Open seat']];
+r=ring(990,470,250,names,{c1:'#E36A2E',c2:'#F4B829'});
+let h=r.svg;
+r.seats.forEach((s,i)=>{const [n]=names[i];h+= n? person(s.x,s.y-34,1.05,P[i],S[i%3]) : `<circle cx="${s.x}" cy="${s.y}" r="26" fill="#FBEBD2" stroke="#E36A2E" stroke-width="4" stroke-dasharray="7 6"/>`;});
+h+=person(1340,780,1.0,'#5B3E96','#F4B829')+`<text x="1290" y="866" font-size="15" font-weight="700" fill="#1C2147">Heena P. · standby</text>`;
+document.getElementById('h2').innerHTML=h;
+const sec2=document.querySelectorAll('section')[1];
+r.seats.forEach((s,i)=>{const [n,role]=names[i]; if(!n)return; const d=document.createElement('div');d.className='tag';d.style.left=(s.x+(s.x>990?30:-170))+'px';d.style.top=(s.y-20)+'px';d.innerHTML=n+'<small>'+role+'</small>';sec2.appendChild(d)});
+// numbers: crowd of small people on the right edge
+document.getElementById('h3').innerHTML=Array.from({length:14},(_,i)=>person(700+i*52,760-(i%2)*14,.75,P[i%8],S[i%3],'#C98B5E')).join('');
+</script></body></html>

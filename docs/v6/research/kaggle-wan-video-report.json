@@ -1,0 +1,19 @@
+{
+ "gpu": "Tesla T4",
+ "bf16_supported": true,
+ "load_s": 229.1,
+ "small": {
+  "size": "704x384",
+  "frames": 33,
+  "steps": 30,
+  "gen_s": 948.9,
+  "peak_vram_gb": 11.65
+ },
+ "short": {
+  "size": "832x480",
+  "frames": 49,
+  "steps": 30,
+  "gen_s": 2108.8,
+  "peak_vram_gb": 11.66
+ }
+}
