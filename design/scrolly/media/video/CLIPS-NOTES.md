@@ -12,3 +12,5 @@
 - c4b.mp4 (10.0 s): figure runs through mustard fields, fills the last socket; ring flashes gold; check-mark seal stamps; marigold
   petals; ring starts to descend. Good.
 - Next (owner request): ONE 30 s clip for everything left (drive, evidence chain, map), prompt c5-FINAL-30s-PROMPT.txt.
+- c5.mp4 (20.0 s): extension again: 0-10 repeats c4b; 10-20 is new: ring lands in the square, drive time-lapse, dusk lanterns /
+  cards, paper map unrolls (no labels), gold and amber rings under the stars. Good. FILM COMPLETE.

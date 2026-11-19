@@ -1,16 +1,1 @@
-STARTING IMAGE: upload c1-last-frame.png (the empty paper notice board in the village square at sunrise).
-
-STYLE LOCK: Handcrafted paper-cut stop-motion diorama, layered matte paper with visible fibres and soft cast shadows between
-layers, warm sunrise light, palette of indigo, terracotta, turmeric yellow, leaf green and off-white paper, subtle miniature
-tilt-shift depth of field, gentle stop-motion movement, calm slow camera. People are simple faceless paper figures. No readable
-text or letters anywhere, no logos, no flags, no national emblems, no religious symbols, no red cross symbol.
-
-CLIP 2 - A drive is announced:
-Start exactly on this frame: the empty paper notice board centred in the village square, sunrise behind it, the hand water pump
-on the right. A folded paper notice slides up from below the frame, unfolds itself and pins onto the board with two small paper
-pins (only abstract lines on it, no words). Then, from the lanes on both sides, faceless paper figures of young people (about ten
-to twelve, in kurtas and simple shirts in terracotta, indigo and turmeric paper) walk in calmly and gather in a loose semicircle
-in front of the board. As each one arrives, a small warm glowing paper dot lights up above their head, showing they are
-interested. The camera slowly rises a little and pulls back so the whole group and the board are visible.
-End frame: the notice board with the pinned notice, a loose semicircle of about twelve paper figures each with a glowing dot
-above them, sunrise light, camera slightly higher than the start.
+Handcrafted paper-cut stop-motion diorama of a village square in rural Uttar Pradesh, made of layered matte paper with visible fibres and soft cast shadows between the layers, warm sunrise light, palette of indigo, terracotta, turmeric yellow, leaf green and off-white paper, subtle miniature tilt-shift depth of field, gentle stop-motion movement and a calm, slow camera. Start exactly on the provided image: the empty paper notice board centred in the square, the sun rising behind it, the hand water pump on the right. A folded paper notice slides up from below the frame, unfolds itself and pins onto the board with two small paper pins; it shows only abstract lines, no words. Then, from the lanes on both sides, about ten to twelve faceless paper figures of young people in simple kurtas and shirts cut from terracotta, indigo and turmeric paper walk in calmly and gather in a loose semicircle in front of the board. As each one arrives, a small warm glowing paper dot lights up above their head to show they are interested. The camera slowly rises a little and pulls back until the whole group and the board are in view. End on the notice board with its pinned notice, a loose semicircle of about twelve paper figures each with a glowing dot above them, in warm sunrise light, from a slightly higher camera than the start. No readable text or letters anywhere, no faces, no logos, no flags, no national emblems, no religious symbols, no red cross symbol.
