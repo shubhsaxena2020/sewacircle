@@ -93,3 +93,17 @@ stay). Plan the story page so these clips can play as chapter inserts (c1 intro,
 c6 the verdict, c7 the drive, c8 evidence/ledger, c9 outro behind the title). Build placeholders that degrade gracefully to the
 still images when a clip is missing, and pick up any clip that appears during your run. Do not ape oryzo: the film's
 paper-craft world and our own 3D crew board are the identity.
+
+## UPDATE 3 FROM THE HEAD - READ THIS FIRST, IT OVERRIDES EARLIER SECTIONS
+- design\scrolly\STORYBOARD.md has been REWRITTEN (v2). The world is now a LIVE, interactive paper-craft village diorama in
+  three.js / react-three-fiber, not a desk. Wherever this brief says "desk scene", "desk props" or "crew board on the desk", read
+  "paper-craft village" and "the crew ring floating above the square". Follow STORYBOARD v2 chapter by chapter.
+- The art-direction reference is the owner's Gemini clip design\scrolly\media\video\c1.mp4 (frames c1-frame-*.jpg). Use c1.mp4
+  as the intro clip (cross-fade into the live scene, labelled "Illustrative"; keep its Gemini watermark). The 9-clip film plan
+  is DROPPED: no more video inserts are coming. Interactivity comes from the live 3D scene and the live API, never from video.
+- The stills in design\scrolly\media\images are generated and reviewed; paper.jpg is the main texture; up-map.png is the map
+  base ("Illustrative map"). hero-desk.jpg / desk-wood.jpg / og-share.jpg are optional now.
+- A previous attempt at this brief collided: three Codex sessions ran at once and their edits were discarded. You are the ONLY
+  agent on this worktree. Start from a clean frontend\ (git status) and build from scratch.
+- design\fusion\SewaCrewKit (copied from frontend-v2) and frontend\public\models\*.glb (the old v2 kit) are available as a start
+  for the crew ring parts; restyle them as paper or rebuild procedurally - your call, judged by how it looks.
