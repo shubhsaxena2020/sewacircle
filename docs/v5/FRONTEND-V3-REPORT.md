@@ -503,3 +503,13 @@ the visible left socket; standby tags now stack bottom-left. Verified: `npm run 
 `BASE_URL=http://127.0.0.1:5180 SCREENSHOT_DIR=../docs/screens/v5/round5b npm run verify:v3` passed (counters 70/10/23/40, live
 dropout NOT READY, axe 12 checks / 0 violations, reduced-motion and no-WebGL stills, no page errors). Screenshots in
 `docs/screens/v5/round5b/`.
+
+## Round 5c - console styling restored (Claude Code, 19 Nov 2026)
+
+While recording the demo, the console's role editor rendered with no layout: about 75 class names used by Console, Volunteer,
+District and Method (role-editor, role-fields, info-strip, ledger-block, attendance-row, eval-chart, ...) had no CSS since the v3
+rebuild. Their rules were ported from frontend-v2 into `frontend/src/console-base.css` (loaded before styles.css so v3 wins on any
+overlap; v2's teal mapped to #3d5236 for AA contrast). Also fixed literal "?" separators in the story's recruit-request line
+(now "·"). `frontend/scripts/record-demo.mjs` records the 1 min 49 s demo video (`BASE_URL`, `DEMO_OUT`).
+Verified: build OK, oxlint clean, vitest 4/4, verify:v3 passed (axe 12 checks / 0 violations, counters 70/10/23/40, no page
+errors). Screenshots in `docs/screens/v5/round5c/`.
