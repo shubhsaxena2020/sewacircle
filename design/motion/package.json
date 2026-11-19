@@ -1,0 +1,21 @@
+{
+  "name": "sewacircle-motion",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "compositions": "remotion compositions src/index.tsx --public-dir ../../docs/screens/v4",
+    "render:hero": "remotion render src/index.tsx HeroLoop ../../docs/video/hero-loop.mp4 --public-dir ../../docs/screens/v4 --codec h264 --concurrency 1",
+    "render:explainer": "remotion render src/index.tsx Explainer ../../docs/video/product-explainer.mp4 --public-dir ../../docs/screens/v4 --codec h264 --concurrency 1"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.518",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "remotion": "4.0.518"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.27",
+    "typescript": "5.9.3"
+  }
+}
