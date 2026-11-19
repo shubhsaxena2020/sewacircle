@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Drive Brief Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Kanpur Dehat</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Task-01 Brief</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item active"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">📝</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>District Drive Brief Entry</h1>
+              <p class="doc-subtitle">
+                Paste the community volunteering brief as received from village leaders or grassroots organizers. The system extracts role requirements, estimates skill tiers, and prepares the constraint solver.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <span class="tag green" style="padding: 6px 12px; font-size: 13px;">Selected: task-01</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- 3-Column Working Layout: Drive List (Left) | Brief Editor (Center) | What Happens Next (Right) -->
+        <div style="display: grid; grid-template-columns: 310px 1fr 310px; gap: 24px;">
+          
+          <!-- Left: Drive Selector List (10 tasks from sample data) -->
+          <div>
+            <div style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between;">
+              <span>District Drives (10)</span>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">UP Cohort</span>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- task-01 Selected -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--tint-blue-bg); border-color: var(--tint-blue-border); cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--tint-blue-ink); font-size: 13.5px;">task-01: Water &amp; hygiene camp</strong>
+                  <span class="tag green" style="font-size: 12px;">Active</span>
+                </div>
+                <div style="font-size: 12px; color: var(--tint-blue-ink);">
+                  Kanpur Dehat, Akbarpur • sat_morning • Team: 6
+                </div>
+              </div>
+
+              <!-- task-02 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft); cursor: pointer;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-02: Blood donation camp</strong>
+                  <span class="tag amber" style="font-size: 12px;">Sample</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Lucknow, Chinhat • sun_morning • Team: 6
+                </div>
+              </div>
+
+              <!-- task-03 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-03: Tree plantation drive</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Gorakhpur, Pipraich • sun_morning • Team: 4
+                </div>
+              </div>
+
+              <!-- task-04 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-04: Evening literacy class</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Varanasi, Cholapur • sat_afternoon • Team: 4
+                </div>
+              </div>
+
+              <!-- task-05 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-05: Flood relief distribution</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Gorakhpur, Gola • sat_morning • Team: 6
+                </div>
+              </div>
+
+              <!-- task-06 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-06: Block sports day</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Lucknow, Kakori • sun_afternoon • Team: 4
+                </div>
+              </div>
+
+              <!-- task-07 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-07: Health awareness camp</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Varanasi, Kashi Vidyapeeth • sun_morning • Team: 5
+                </div>
+              </div>
+
+              <!-- task-08 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-08: Cleanliness drive</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Kanpur Dehat, Maitha • sun_morning • Team: 5
+                </div>
+              </div>
+
+              <!-- task-09 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-09: Digital literacy for elders</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Lucknow, Mohanlalganj • sat_afternoon • Team: 3
+                </div>
+              </div>
+
+              <!-- task-10 -->
+              <div class="doc-card" style="margin-bottom: 0; padding: 12px 14px; background: var(--bg-surface-soft);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                  <strong style="color: var(--text-ink); font-size: 13.5px;">task-10: Elderly care visits</strong>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Kanpur Dehat, Rasulabad • sat_morning • Team: 3
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Center: Main Brief Card -->
+          <div>
+            <!-- Sample Buttons Row -->
+            <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+              <button class="btn btn-secondary" style="font-size: 12.5px; background: var(--bg-surface-soft);">
+                <span>🇮🇳</span> Hindi sample — Water and hygiene camp (task-01)
+              </button>
+              <button class="btn btn-secondary" style="font-size: 12.5px;">
+                <span>🇬🇧</span> English sample — Blood donation camp (task-02)
+              </button>
+            </div>
+
+            <!-- The Working Brief Card -->
+            <div class="doc-card" style="padding: 24px; border-color: var(--border-subtle); margin-bottom: 20px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+                <span class="tag">Brief Text (Hindi Input)</span>
+                <span class="mono" style="font-size: 12px; color: var(--text-muted);">task-01 • Akbarpur</span>
+              </div>
+
+              <!-- Devanagari Brief Text Verbatim -->
+              <div class="devanagari" style="font-size: 18px; line-height: 1.8; color: var(--text-ink); padding: 18px; background: var(--bg-surface-soft); border-radius: 6px; border: 1px solid var(--border-hairline); margin-bottom: 18px;">
+                गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर। लगभग 120 लोग आएँगे। पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।
+              </div>
+
+              <!-- Metadata Row -->
+              <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; padding: 14px 16px; background: var(--bg-canvas); border-radius: 6px; border: 1px solid var(--border-hairline); font-size: 12.5px; margin-bottom: 20px;">
+                <div>
+                  <span style="color: var(--text-subtle); display: block;">District / Block</span>
+                  <strong style="color: var(--text-ink);">Kanpur Dehat / Akbarpur</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-subtle); display: block;">Time Slot &amp; Scale</span>
+                  <strong style="color: var(--text-ink);">sat_morning • Team: 6</strong>
+                </div>
+                <div>
+                  <span style="color: var(--text-subtle); display: block;">Travel &amp; Minors Policy</span>
+                  <strong style="color: var(--text-ink);">Max 25.0 km • Minors: Yes</strong>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; align-items: center; justify-content: space-between;">
+                <div style="display: flex; gap: 12px;">
+                  <a href="03-console-roles.html" class="btn btn-primary" style="padding: 10px 22px; font-size: 14px;">
+                    Extract Roles with AI
+                    <span>→</span>
+                  </a>
+                  <button class="btn btn-secondary">Clear Brief</button>
+                </div>
+                <span class="tag blue">Language: Hindi (hi)</span>
+              </div>
+            </div>
+
+            <!-- Extraction Engine Metadata Strip -->
+            <div class="callout" style="padding: 12px 18px; font-size: 12.5px; background: var(--bg-surface-soft); border-color: var(--border-hairline);">
+              <div class="callout-icon">⚙️</div>
+              <div class="callout-content">
+                <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+                  <span><strong>Extraction Model:</strong> <span class="mono">cc/claude-sonnet-5-5</span></span>
+                  <span><strong>Language Detected:</strong> <span class="mono">hi</span></span>
+                  <span><strong>Cached:</strong> <span class="mono">yes</span></span>
+                  <span><strong>PII Redactions:</strong> <span class="mono">0</span></span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Rail: Workflow Context & Guidelines -->
+          <div>
+            <div style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 10px;">
+              What Happens Next
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 16px;">
+              <h3 style="font-size: 14px; margin-bottom: 6px;">1. AI Proposes, You Confirm</h3>
+              <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.55;">
+                The language model extracts necessary skill sets and estimates team sizing. It flags ambiguities (like which local dialect is needed) for your explicit human decision.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 16px;">
+              <h3 style="font-size: 14px; margin-bottom: 6px;">2. Constraint Solver Execution</h3>
+              <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.55;">
+                Once roles are locked, CP-SAT searches 80 candidate volunteers within 25 km, checking slot availability, past drive exposure, and verified skill endorsements.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 16px;">
+              <h3 style="font-size: 14px; margin-bottom: 6px;">3. Redundant Standby Pairing</h3>
+              <p style="font-size: 12.5px; color: var(--text-muted); line-height: 1.55;">
+                Every essential role must have an active primary volunteer and a qualified standby. A drive is never marked READY without full dropout survivability.
+              </p>
+            </div>
+
+            <div class="callout warning" style="margin-bottom: 0; font-size: 12.5px;">
+              <div class="callout-icon">💡</div>
+              <div class="callout-content">
+                <strong>Organiser Rule:</strong> The AI proposes roles based on keyword cues, but the district organiser retains full editorial authority to adjust headcount or priority.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

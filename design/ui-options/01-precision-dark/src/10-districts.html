@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 10 UP Districts Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-subtitle">Ready Crew</span>
+        </div>
+      </div>
+
+      <div class="command-bar">
+        <svg class="command-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Type a command or search drives...</span>
+        <span class="command-bar-shortcut">Ctrl+K</span>
+      </div>
+
+      <div class="header-controls">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+        <span class="kbd-help">?</span>
+      </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item active"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+          <div class="section-eyebrow">GEOGRAPHIC DISTRIBUTION • 20 ADMINISTRATIVE DISTRICTS</div>
+          <h1>Uttar Pradesh District Readiness Map</h1>
+          <p style="margin-top: 4px; font-size: 14px; color: var(--text-muted);">
+            20 districts mapped, 4 with drives in this sample, coordinates approximate (Open Admin Data, CC-BY-4.0).
+          </p>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <span class="tag tag-verified">4 Active Districts</span>
+          <span class="tag">16 Inactive in Sample</span>
+        </div>
+      </div>
+
+      <!-- 2-Column: Left (Stylized SVG Schematic Map), Right (District Details) -->
+      <div style="display: grid; grid-template-columns: 740px 1fr; gap: 24px; margin-bottom: 32px;">
+        
+        <!-- Left: Original Stylized SVG Map -->
+        <div class="card" style="padding: 20px; background-color: var(--bg-surface-1);">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase;">
+              SCHEMATIC COORDINATE GRID • UTTAR PRADESH
+            </div>
+            <div style="display: flex; align-items: center; gap: 12px; font-size: 11.5px; font-family: var(--font-mono);">
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--success-green);"></span> READY</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--warning-amber);"></span> NOT READY</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 8px; height: 8px; border-radius: 50%; background: var(--accent-text);"></span> Unsolved</span>
+              <span style="display: flex; align-items: center; gap: 4px;"><span style="width: 6px; height: 6px; border-radius: 50%; background: var(--border-strong);"></span> No Drives</span>
+            </div>
+          </div>
+
+          <div style="background-color: var(--bg-canvas); border: 1px solid var(--border-hairline); border-radius: 8px; position: relative; overflow: hidden;">
+            <svg width="700" height="460" viewBox="0 0 720 460" style="display: block;">
+              <!-- Coordinate Grid Lines -->
+              <line x1="40" y1="100" x2="680" y2="100" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="40" y1="200" x2="680" y2="200" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="40" y1="300" x2="680" y2="300" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="40" y1="400" x2="680" y2="400" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="160" y1="30" x2="160" y2="430" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="320" y1="30" x2="320" y2="430" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="480" y1="30" x2="480" y2="430" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="600" y1="30" x2="600" y2="430" stroke="#1d1e20" stroke-width="1" stroke-dasharray="3,3"></line>
+
+              <!-- State Schematic Outline (Polygonal hand-drawn hull) -->
+              <polygon points="81,50 110,80 180,110 260,130 350,170 470,200 580,220 640,307 580,350 557,405 520,364 468,343 324,282 223,328 170,270 126,231 85,139 81,50" 
+                       fill="rgba(94, 106, 210, 0.03)" stroke="#23252a" stroke-width="1.5" stroke-linejoin="round"></polygon>
+
+              <!-- Network Interconnect Lines (Connecting In-Sample Corridor) -->
+              <line x1="284.2" y1="272.8" x2="373.4" y2="246.6" stroke="#4d57b5" stroke-width="1.5" stroke-dasharray="4,4"></line>
+              <line x1="373.4" y1="246.6" x2="583.2" y2="257.1" stroke="#3e424d" stroke-width="1" stroke-dasharray="3,3"></line>
+              <line x1="373.4" y1="246.6" x2="542.7" y2="340.5" stroke="#3e424d" stroke-width="1" stroke-dasharray="3,3"></line>
+
+              <!-- 16 Inactive Districts (Quiet Nodes) -->
+              <!-- Saharanpur (81.5, 49.5) -->
+              <circle cx="81.5" cy="49.5" r="3.5" fill="#3e424d"></circle>
+              <text x="90" y="53" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Saharanpur</text>
+
+              <!-- Meerut (107.2, 106.1) -->
+              <circle cx="107.2" cy="106.1" r="3.5" fill="#3e424d"></circle>
+              <text x="116" y="110" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Meerut</text>
+
+              <!-- Gautam Buddha Nagar (85.5, 139.2) -->
+              <circle cx="85.5" cy="139.2" r="3.5" fill="#3e424d"></circle>
+              <text x="12" y="152" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">G.B. Nagar</text>
+
+              <!-- Agra (126.2, 231.1) -->
+              <circle cx="126.2" cy="231.1" r="3.5" fill="#3e424d"></circle>
+              <text x="135" y="235" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Agra</text>
+
+              <!-- Bareilly (246.7, 143.5) -->
+              <circle cx="246.7" cy="143.5" r="3.5" fill="#3e424d"></circle>
+              <text x="255" y="147" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Bareilly</text>
+
+              <!-- Jhansi (223.4, 327.6) -->
+              <circle cx="223.4" cy="327.6" r="3.5" fill="#3e424d"></circle>
+              <text x="232" y="331" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Jhansi</text>
+
+              <!-- Kanpur Nagar (323.7, 281.7) -->
+              <circle cx="323.7" cy="281.7" r="3.5" fill="#3e424d"></circle>
+              <text x="290" y="308" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Kanpur Nagar</text>
+
+              <!-- Unnao (339.5, 259.9) -->
+              <circle cx="339.5" cy="259.9" r="3.5" fill="#3e424d"></circle>
+              <text x="320" y="250" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Unnao</text>
+
+              <!-- Gonda (465.6, 231.3) -->
+              <circle cx="465.6" cy="231.3" r="3.5" fill="#3e424d"></circle>
+              <text x="475" y="226" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Gonda</text>
+
+              <!-- Basti (521.0, 249.7) -->
+              <circle cx="521.0" cy="249.7" r="3.5" fill="#3e424d"></circle>
+              <text x="510" y="268" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Basti</text>
+
+              <!-- Sultanpur (468.4, 283.3) -->
+              <circle cx="468.4" cy="283.3" r="3.5" fill="#3e424d"></circle>
+              <text x="445" y="300" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Sultanpur</text>
+
+              <!-- Azamgarh (558.6, 300.8) -->
+              <circle cx="558.6" cy="300.8" r="3.5" fill="#3e424d"></circle>
+              <text x="567" y="304" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Azamgarh</text>
+
+              <!-- Ballia (640.1, 307.2) -->
+              <circle cx="640.1" cy="307.2" r="3.5" fill="#3e424d"></circle>
+              <text x="630" y="324" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Ballia</text>
+
+              <!-- Allahabad (468.5, 343.4) -->
+              <circle cx="468.5" cy="343.4" r="3.5" fill="#3e424d"></circle>
+              <text x="408" y="358" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Allahabad</text>
+
+              <!-- Mirzapur (520.2, 364.1) -->
+              <circle cx="520.2" cy="364.1" r="3.5" fill="#3e424d"></circle>
+              <text x="528" y="367" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Mirzapur</text>
+
+              <!-- Sonbhadra (557.2, 405.2) -->
+              <circle cx="557.2" cy="405.2" r="3.5" fill="#3e424d"></circle>
+              <text x="565" y="408" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">Sonbhadra</text>
+
+              <!-- 4 Active In-Sample Districts (Hero Nodes) -->
+              <!-- 1. Kanpur Dehat (284.2, 272.8) - READY (Emerald Glow) -->
+              <circle cx="284.2" cy="272.8" r="14" fill="rgba(52, 211, 153, 0.15)"></circle>
+              <circle cx="284.2" cy="272.8" r="6" fill="#34d399" stroke="#08090a" stroke-width="2"></circle>
+              <text x="268" y="268" text-anchor="end" fill="#34d399" font-size="12" font-weight="700" font-family="'JetBrains Mono', monospace">Kanpur Dehat [READY]</text>
+              <text x="268" y="282" text-anchor="end" fill="#d0d6e0" font-size="12" font-family="'JetBrains Mono', monospace">task-01 • 3 drives</text>
+
+              <!-- 2. Lucknow (373.4, 246.6) - NOT READY (Amber Glow) -->
+              <circle cx="373.4" cy="246.6" r="14" fill="rgba(251, 191, 36, 0.15)"></circle>
+              <circle cx="373.4" cy="246.6" r="6" fill="#fbbf24" stroke="#08090a" stroke-width="2"></circle>
+              <text x="373.4" y="216" text-anchor="middle" fill="#fbbf24" font-size="12" font-weight="700" font-family="'JetBrains Mono', monospace">Lucknow [NOT READY]</text>
+              <text x="373.4" y="230" text-anchor="middle" fill="#d0d6e0" font-size="12" font-family="'JetBrains Mono', monospace">task-02 • 3 drives</text>
+
+              <!-- 3. Gorakhpur (583.2, 257.1) - In Sample (Lavender) -->
+              <circle cx="583.2" cy="257.1" r="10" fill="rgba(94, 106, 210, 0.2)"></circle>
+              <circle cx="583.2" cy="257.1" r="5" fill="#828fff" stroke="#08090a" stroke-width="1.5"></circle>
+              <text x="595" y="252" fill="#828fff" font-size="12" font-weight="600" font-family="'JetBrains Mono', monospace">Gorakhpur</text>
+              <text x="595" y="264" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">2 drives in sample</text>
+
+              <!-- 4. Varanasi (542.7, 340.5) - In Sample (Lavender) -->
+              <circle cx="542.7" cy="340.5" r="10" fill="rgba(94, 106, 210, 0.2)"></circle>
+              <circle cx="542.7" cy="340.5" r="5" fill="#828fff" stroke="#08090a" stroke-width="1.5"></circle>
+              <text x="555" y="336" fill="#828fff" font-size="12" font-weight="600" font-family="'JetBrains Mono', monospace">Varanasi</text>
+              <text x="555" y="348" fill="#9ea6b2" font-size="12" font-family="'JetBrains Mono', monospace">2 drives in sample</text>
+            </svg>
+          </div>
+
+          <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); margin-top: 12px;">
+            Caption: 20 districts mapped, 4 with drives in this sample, coordinates approximate (Open Admin Data, CC-BY-4.0).
+          </div>
+        </div>
+
+        <!-- Right: Active Districts Breakdown -->
+        <div style="display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase;">
+            ACTIVE DISTRICT DETAILS (4 DISTRICTS)
+          </div>
+
+          <!-- District 1: Kanpur Dehat -->
+          <div class="card" style="padding: 14px; border-color: var(--success-border);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+              <span style="font-size: 15px; font-weight: 700; color: var(--text-ink);">Kanpur Dehat</span>
+              <span class="tag tag-verified">3 Drives</span>
+            </div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 8px;">
+              Lat 26.437°N, Lon 79.862°E
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-01: Water &amp; hygiene camp (Akbarpur)</span>
+                <strong style="color: var(--success-green);">READY</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; color: var(--text-subtle);">
+                <span>• task-08: Cleanliness drive (Maitha)</span>
+                <span>not solved in this sample</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; color: var(--text-subtle);">
+                <span>• task-10: Elderly care visits (Rasulabad)</span>
+                <span>not solved in this sample</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- District 2: Lucknow -->
+          <div class="card" style="padding: 14px; border-color: var(--warning-border);">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+              <span style="font-size: 15px; font-weight: 700; color: var(--text-ink);">Lucknow</span>
+              <span class="tag tag-warn">3 Drives</span>
+            </div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 8px;">
+              Lat 26.843°N, Lon 80.907°E
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px;">
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-02: Blood donation camp (Chinhat)</span>
+                <strong style="color: var(--warning-amber);">NOT READY</strong>
+              </div>
+              <div style="display: flex; justify-content: space-between; color: var(--text-subtle);">
+                <span>• task-06: Block sports day (Kakori)</span>
+                <span>not solved in this sample</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; color: var(--text-subtle);">
+                <span>• task-09: Digital literacy for elders (Mohanlalganj)</span>
+                <span>not solved in this sample</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- District 3: Varanasi -->
+          <div class="card" style="padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+              <span style="font-size: 15px; font-weight: 700; color: var(--text-ink);">Varanasi</span>
+              <span class="tag">2 Drives</span>
+            </div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 8px;">
+              Lat 25.388°N, Lon 82.891°E
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-subtle);">
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-04: Evening literacy class (Cholapur)</span>
+                <span>not solved in this sample</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-07: Health awareness camp (Kashi Vidyapeeth)</span>
+                <span>not solved in this sample</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- District 4: Gorakhpur -->
+          <div class="card" style="padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 6px;">
+              <span style="font-size: 15px; font-weight: 700; color: var(--text-ink);">Gorakhpur</span>
+              <span class="tag">2 Drives</span>
+            </div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 8px;">
+              Lat 26.680°N, Lon 83.366°E
+            </div>
+            <div style="display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-subtle);">
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-03: Tree plantation drive (Pipraich)</span>
+                <span>not solved in this sample</span>
+              </div>
+              <div style="display: flex; justify-content: space-between;">
+                <span>• task-05: Flood relief distribution (Gola)</span>
+                <span>not solved in this sample</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- 16 Remaining Notice -->
+          <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 12px; font-size: 12px; color: var(--text-subtle);">
+            <strong>Remaining 16 districts:</strong> Agra, Meerut, Allahabad, Azamgarh, Ballia, Basti, Bareilly, Gonda, Jhansi, Mirzapur, Saharanpur, Sonbhadra, Sultanpur, Unnao, Gautam Buddha Nagar, Kanpur Nagar have no drives in this synthetic sample.
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-text">
+          <span class="affiliation-indicator"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 01-precision-dark • Desktop 1440px Specification</span>
+        </div>
+        <div class="footer-shortcuts">
+          <span><kbd>Ctrl+K</kbd> Command Bar</span>
+          <span><kbd>1-9</kbd> Switch Views</span>
+          <span><kbd>?</kbd> Help</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

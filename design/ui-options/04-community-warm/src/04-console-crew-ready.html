@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Console — Crew Board (READY)</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .crew-section-heading {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 28px 0 16px;
+    }
+
+    .crew-section-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--ink);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* Primary Crew Cards */
+    .crew-card-role-badge {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--ready-green);
+      background-color: var(--ready-green-soft);
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+    }
+
+    .crew-score-badge {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--ink);
+      background: var(--surface-soft);
+      padding: 2px 8px;
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--hairline);
+    }
+
+    /* Standby Section */
+    .standby-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+
+    .standby-card {
+      background: #FFFDF9;
+      border: 1.5px dashed #FFD699;
+      border-radius: var(--radius-card);
+      padding: 20px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    /* Interactive Tools Panel */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin: 36px 0;
+    }
+
+    .tool-box {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .tool-narrative-bubble {
+      background-color: var(--surface-soft);
+      border-radius: var(--radius-card);
+      padding: 16px 18px;
+      font-size: 13px;
+      color: var(--ink);
+      line-height: 1.5;
+      border: 1px solid var(--hairline);
+      margin-top: 14px;
+    }
+
+    /* Comparison Table Card */
+    .comparison-card {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+      margin-top: 36px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link">Story</a>
+      <a href="02-console-task.html" class="nav-link active">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm">RK</div>
+        <div>
+          <div class="user-role-label">Rajesh Kumar</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ORGANISER CONSOLE SUBNAV -->
+  <div class="console-subnav-bar">
+    <div class="console-step-tabs">
+      <a href="02-console-task.html" class="step-tab">
+        <span class="step-number">1</span>
+        <span>Brief & Task</span>
+      </a>
+      <a href="03-console-roles.html" class="step-tab">
+        <span class="step-number">2</span>
+        <span>Roles</span>
+      </a>
+      <a href="04-console-crew-ready.html" class="step-tab active">
+        <span class="step-number">3</span>
+        <span>Crew (Ready)</span>
+      </a>
+      <a href="05-console-crew-not-ready.html" class="step-tab">
+        <span class="step-number">4</span>
+        <span>Crew (Not Ready)</span>
+      </a>
+      <a href="06-console-evidence.html" class="step-tab">
+        <span class="step-number">5</span>
+        <span>Evidence</span>
+      </a>
+      <a href="07-console-ledger.html" class="step-tab">
+        <span class="step-number">6</span>
+        <span>Ledger</span>
+      </a>
+      <a href="08-console-evaluation.html" class="step-tab">
+        <span class="step-number">7</span>
+        <span>Evaluation</span>
+      </a>
+    </div>
+
+    <div class="console-drive-chip">
+      <span class="drive-chip-dot"></span>
+      <span>Task-01: Water and hygiene camp</span>
+      <span style="color: var(--muted); font-weight: normal;">• Akbarpur</span>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-container">
+    
+    <!-- HERO VERDICT: READY (Hero of the screen) -->
+    <div class="verdict-hero ready">
+      <div class="verdict-left">
+        <div class="verdict-icon-bubble">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </div>
+        <div>
+          <span class="verdict-badge">Solver Verdict</span>
+          <h2 class="verdict-title">READY TO RUN</h2>
+          <p class="verdict-desc">
+            All 4 must-roles are filled by qualified, available volunteers. Standbys are confirmed for every critical role to guarantee single-dropout resilience. Zero unresolved positions.
+          </p>
+        </div>
+      </div>
+
+      <div class="verdict-metrics-row">
+        <div class="verdict-metric-chip">
+          <div class="verdict-metric-val" style="color: var(--ready-green);">100%</div>
+          <div class="verdict-metric-label">Role Coverage</div>
+        </div>
+        <div class="verdict-metric-chip">
+          <div class="verdict-metric-val" style="color: var(--ready-green);">100%</div>
+          <div class="verdict-metric-label">Robustness</div>
+        </div>
+        <div class="verdict-metric-chip">
+          <div class="verdict-metric-val" style="color: var(--ink);">0.0%</div>
+          <div class="verdict-metric-label">Repeat Picks</div>
+        </div>
+        <div class="verdict-metric-chip">
+          <div class="verdict-metric-val">15 ms</div>
+          <div class="verdict-metric-label">CP-SAT Solve</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SECTION: PRIMARY CREW ROSTER -->
+    <div class="crew-section-heading">
+      <div class="crew-section-title">
+        <span>Primary Crew</span>
+        <span class="badge-pill badge-green">4 Confirmed</span>
+      </div>
+      <div style="font-size: 13px; color: var(--muted);">
+        Drive: <strong>Water and hygiene camp</strong> • Saturday morning • Akbarpur
+      </div>
+    </div>
+
+    <div class="crew-grid">
+      
+      <!-- Volunteer 1: Heena P. -->
+      <div class="crew-card">
+        <div>
+          <div class="crew-role-header">
+            <div class="crew-role-name">
+              <span>Poster team</span>
+              <span class="crew-score-badge">Fit: 74.0</span>
+            </div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 2px;">Slot 1 of 1 • Must</div>
+          </div>
+
+          <div class="crew-person-profile">
+            <div class="avatar av-coral">HP</div>
+            <div>
+              <div class="person-name">Heena P.</div>
+              <div class="person-meta">27 yrs, Female • Sarvankheda</div>
+            </div>
+          </div>
+
+          <ul class="reason-list">
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Has posters and graphic design (level 2)</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Free sat morning; 7 km from the site</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Not picked in the last 90 days</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center;">
+          <span class="code-chip">v-008</span>
+          <span style="font-size: 11px; font-weight: 700; color: var(--ready-green);">Primary Slot Filled</span>
+        </div>
+      </div>
+
+      <!-- Volunteer 2: Mohit Z. (SAFETY CRITICAL) -->
+      <div class="crew-card" style="border-top: 4px solid var(--alert-coral);">
+        <div>
+          <div class="crew-role-header">
+            <div class="crew-role-name">
+              <span>First-aid support</span>
+              <span class="crew-score-badge">Fit: 113.0</span>
+            </div>
+            <div style="display: flex; gap: 6px; margin-top: 4px;">
+              <span style="font-size: 10px; background: #FFF2EF; color: var(--alert-coral); padding: 2px 6px; border-radius: 4px; font-weight: 700;">Safety Critical</span>
+              <span style="font-size: 10px; background: #EBF9F1; color: var(--ready-green); padding: 2px 6px; border-radius: 4px; font-weight: 700;">Host Verified</span>
+            </div>
+          </div>
+
+          <div class="crew-person-profile">
+            <div class="avatar av-mint">MZ</div>
+            <div>
+              <div class="person-name">Mohit Z.</div>
+              <div class="person-meta">22 yrs, Male • Akbarpur</div>
+            </div>
+          </div>
+
+          <ul class="reason-list">
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Has first aid / basic medical support (level 3)</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Free sat morning; 2 km from the site</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Newcomer (0 past drives, paired)</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center;">
+          <span class="code-chip">v-070</span>
+          <span style="font-size: 11px; background: #FFF8EB; color: #B25E00; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Novice</span>
+        </div>
+      </div>
+
+      <!-- Volunteer 3: Divya H. -->
+      <div class="crew-card">
+        <div>
+          <div class="crew-role-header">
+            <div class="crew-role-name">
+              <span>Supplies & site setup</span>
+              <span class="crew-score-badge">Fit: 89.0</span>
+            </div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 2px;">Slot 1 of 1 • Must</div>
+          </div>
+
+          <div class="crew-person-profile">
+            <div class="avatar av-amber">DH</div>
+            <div>
+              <div class="person-name">Divya H.</div>
+              <div class="person-meta">24 yrs, Female • Akbarpur</div>
+            </div>
+          </div>
+
+          <ul class="reason-list">
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Has logistics, supplies and setup (level 3)</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Free sat morning; 16 km from the site</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Experienced organizer support</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center;">
+          <span class="code-chip">v-067</span>
+          <span style="font-size: 11px; font-weight: 700; color: var(--ready-green);">Primary Slot Filled</span>
+        </div>
+      </div>
+
+      <!-- Volunteer 4: Kabir Z. -->
+      <div class="crew-card">
+        <div>
+          <div class="crew-role-header">
+            <div class="crew-role-name">
+              <span>Local-language liaison</span>
+              <span class="crew-score-badge">Fit: 118.0</span>
+            </div>
+            <div style="font-size: 11px; color: var(--muted); margin-top: 2px;">Slot 1 of 1 • Must</div>
+          </div>
+
+          <div class="crew-person-profile">
+            <div class="avatar av-lavender">KZ</div>
+            <div>
+              <div class="person-name">Kabir Z.</div>
+              <div class="person-meta">26 yrs, Male • Akbarpur</div>
+            </div>
+          </div>
+
+          <ul class="reason-list">
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Has Awadhi speaker fluency (level 3)</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Free sat morning; 5 km from the site</span>
+            </li>
+            <li class="reason-item">
+              <span class="reason-bullet">✓</span>
+              <span>Not picked in the last 90 days</span>
+            </li>
+          </ul>
+        </div>
+
+        <div style="margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center;">
+          <span class="code-chip">v-011</span>
+          <span style="font-size: 11px; background: #FFF8EB; color: #B25E00; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Novice</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION: STANDBY CREW -->
+    <div class="crew-section-heading">
+      <div class="crew-section-title">
+        <span>Dropout Standbys</span>
+        <span class="badge-pill badge-amber">2 Assigned (100% Robustness)</span>
+      </div>
+      <div style="font-size: 13px; color: var(--muted);">
+        Every single-dropout scenario can be healed without canceling the drive.
+      </div>
+    </div>
+
+    <div class="standby-grid">
+      
+      <!-- Standby 1: Imran B. -->
+      <div class="standby-card">
+        <div class="avatar av-sky" style="width: 50px; height: 50px;">IB</div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 16px; font-weight: 700; color: var(--ink);">Imran B. (17 yrs)</div>
+            <span class="code-chip">v-068</span>
+          </div>
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">
+            13.1 km away • <span style="color: #0E65C9; font-weight: 600;">Under 18: Guardian consent on file</span>
+          </div>
+          <div style="font-size: 13px; color: var(--body); line-height: 1.4;">
+            <strong>Covers:</strong> Poster team (role-01) & Local-language liaison (role-04).
+          </div>
+          <div style="font-size: 12px; color: var(--warn-amber); font-weight: 600; margin-top: 6px;">
+            Raises single dropout robustness to 75%.
+          </div>
+        </div>
+      </div>
+
+      <!-- Standby 2: Kavya L. -->
+      <div class="standby-card">
+        <div class="avatar av-peach" style="width: 50px; height: 50px;">KL</div>
+        <div style="flex: 1;">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="font-size: 16px; font-weight: 700; color: var(--ink);">Kavya L. (21 yrs)</div>
+            <span class="code-chip">v-069</span>
+          </div>
+          <div style="font-size: 12px; color: var(--muted); margin-bottom: 8px;">
+            11.0 km away • Experienced volunteer (2 past drives)
+          </div>
+          <div style="font-size: 13px; color: var(--body); line-height: 1.4;">
+            <strong>Covers:</strong> Supplies and site setup (role-03).
+          </div>
+          <div style="font-size: 12px; color: var(--ready-green); font-weight: 600; margin-top: 6px;">
+            Raises single dropout robustness to 100%.
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION: INTERACTIVE TOOLS (Why Not & Dropout Healing) -->
+    <div class="tools-grid">
+      
+      <!-- TOOL 1: WHY NOT X? -->
+      <div class="tool-box">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--ink);">Tool 1: Counterfactual "Why Not X?"</h4>
+          <span class="badge-pill badge-coral" style="font-size: 11px;">Real Re-solve</span>
+        </div>
+        <p style="font-size: 13px; color: var(--body);">
+          Organisers can audit why an eligible volunteer was passed over. We re-solve with the candidate forced into the roster.
+        </p>
+
+        <div style="display: flex; gap: 10px; margin-top: 14px; align-items: center;">
+          <label style="font-size: 12px; font-weight: 700; color: var(--muted);">Candidate:</label>
+          <select style="flex: 1; padding: 8px 12px; border-radius: var(--radius-sm); border: 1px solid var(--hairline-strong); font-size: 13px; font-weight: 600;">
+            <option selected>Aarav C. (v-001) — Kanpur Dehat</option>
+            <option>Asha S. (v-002) — Kanpur Dehat</option>
+            <option>Deepika F. (v-005) — Kanpur Dehat</option>
+          </select>
+        </div>
+
+        <!-- Narrative verbatim from sample-data.json why_not block -->
+        <div class="tool-narrative-bubble">
+          <strong>Solver Explanation:</strong><br>
+          "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -&gt; 100%; dropout robustness 100% -&gt; 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+        </div>
+      </div>
+
+      <!-- TOOL 2: SIMULATE DROPOUT HEALING -->
+      <div class="tool-box">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--ink);">Tool 2: Simulate Live Dropout</h4>
+          <span class="badge-pill badge-green" style="font-size: 11px;">Instant Re-Healing</span>
+        </div>
+        <p style="font-size: 13px; color: var(--body);">
+          What happens when a volunteer calls in sick 2 hours before the drive? Test how standby auto-promotes.
+        </p>
+
+        <div style="display: flex; gap: 10px; margin-top: 14px; align-items: center;">
+          <button class="btn btn-sm btn-subtle" style="font-size: 12px; color: var(--alert-coral); border: 1px solid #FFD8D0;">
+            Simulate Drop: Heena P. (Poster team)
+          </button>
+          <a href="05-console-crew-not-ready.html" class="btn btn-sm btn-secondary" style="font-size: 12px;">
+            View Unhealable Not-Ready Drive →
+          </a>
+        </div>
+
+        <div class="tool-narrative-bubble" style="background-color: #F4FAF6; border-color: #B6ECC9;">
+          <strong style="color: var(--ready-green);">Status: HEALED_WITH_STANDBY</strong><br>
+          "Heena P. dropped out; Imran B. stepped in from standby for Poster team. Role coverage remains 100%."
+        </div>
+      </div>
+
+    </div>
+
+    <!-- SECTION: FOUR METHODS BENCHMARK TABLE -->
+    <div class="comparison-card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+        <div>
+          <h4 style="font-size: 18px; font-weight: 700; color: var(--ink);">The Four Methods Compared</h4>
+          <p style="font-size: 13px; color: var(--muted); margin-top: 2px;">
+            Averaged across 10 UP drives with 80 volunteers (evaluated against three distinct baselines).
+          </p>
+        </div>
+        <a href="08-console-evaluation.html" class="btn btn-sm btn-secondary btn-pill">Detailed Evaluation Harness →</a>
+      </div>
+
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>Planning Method</th>
+            <th>Ready Rate</th>
+            <th>Role Coverage</th>
+            <th>Robustness</th>
+            <th>Repeat Pick Share</th>
+            <th>Gini Inequality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background-color: #F8FDF9; font-weight: 700;">
+            <td style="color: var(--ready-green);">
+              ● CP-SAT Solver (SewaCircle)
+            </td>
+            <td>70.0% (7/10)</td>
+            <td>91.7%</td>
+            <td>76.0%</td>
+            <td>23.0%</td>
+            <td>0.4677</td>
+          </tr>
+          <tr>
+            <td>Nearest-Skill Baseline</td>
+            <td style="color: var(--alert-coral);">10.0% (1/10)</td>
+            <td>91.7%</td>
+            <td>15.3%</td>
+            <td>40.3%</td>
+            <td>0.5045</td>
+          </tr>
+          <tr>
+            <td>Manual Greedy (Careful Organiser)</td>
+            <td>70.0% (7/10)</td>
+            <td>91.7%</td>
+            <td>76.0%</td>
+            <td>42.7%</td>
+            <td>0.5081</td>
+          </tr>
+          <tr>
+            <td>Random Feasible Baseline</td>
+            <td>15.0% (1.5/10)</td>
+            <td>91.4%</td>
+            <td>21.8%</td>
+            <td>30.7%</td>
+            <td>0.4861</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PROCEED ACTION BAR -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--hairline);">
+      <div style="font-size: 13px; color: var(--muted);">
+        Next step: Review volunteer hours, host notes, and AI contribution cards post-drive.
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <a href="05-console-crew-not-ready.html" class="btn btn-secondary btn-pill">
+          Examine NOT READY Example
+        </a>
+        <a href="06-console-evidence.html" class="btn btn-primary btn-pill">
+          Proceed to Evidence Review →
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

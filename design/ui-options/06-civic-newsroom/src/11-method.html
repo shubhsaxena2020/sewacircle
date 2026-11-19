@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=1440">
+<title>Method — SewaCircle Ready Crew</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&family=Noto+Sans+Devanagari:wght@400;500;700&family=Noto+Serif+Devanagari:wght@700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="masthead">
+  <div class="topline">
+    <div class="wrap topline-in">
+      <span class="mono">Synthetic data · seed 7</span>
+      <span class="mono topline-mid">Method · how the roster is decided</span>
+      <span class="topline-right">
+        <span class="badge-synthetic mono">Synthetic data</span>
+        <span class="lang" role="group" aria-label="Language">
+          <button class="lang-btn is-on" aria-pressed="true">EN</button>
+          <button class="lang-btn" aria-pressed="false">हिंदी</button>
+        </span>
+      </span>
+    </div>
+  </div>
+  <div class="wrap masthead-in">
+    <a class="brand" href="01-landing.html">
+      <svg class="regmark" viewBox="0 0 32 32" aria-hidden="true">
+        <circle cx="16" cy="16" r="12" fill="none" stroke="#15120e" stroke-width="2"/>
+        <path d="M16 1v9M16 22v9M1 16h9M22 16h9" stroke="#15120e" stroke-width="2"/>
+        <circle cx="16" cy="16" r="4" fill="#b81f19"/>
+      </svg>
+      <span class="brand-word">Sewacircle</span>
+      <span class="brand-sub mono">Ready Crew</span>
+    </a>
+    <nav class="nav mono" aria-label="Primary">
+      <a href="02-console-task.html">Console</a>
+      <a href="04-console-crew-ready.html">Crew</a>
+      <a href="06-console-evidence.html">Evidence</a>
+      <a href="07-console-ledger.html">Ledger</a>
+      <a href="08-console-evaluation.html">Evaluation</a>
+      <a href="10-districts.html">Districts</a>
+      <a href="11-method.html" aria-current="page">Method</a>
+      <a href="09-volunteer.html">Volunteer</a>
+    </nav>
+  </div>
+  <div class="wrap strap">
+    <p class="mono">AI drafts · deterministic code decides · a human confirms</p>
+    <p class="mono">Complements MY Bharat · does not integrate with it</p>
+  </div>
+</header>
+
+<main id="main">
+  <div class="wrap">
+    <div class="console-head">
+      <div>
+        <p class="kicker">Method</p>
+        <h1 class="h1">How the crew<br>is decided.</h1>
+        <p class="deck">Hard constraints first, fairness second, and a standby pass at the end. Nothing in this page is a black box, and nothing here is a promise the evaluation does not support.</p>
+      </div>
+      <div class="console-meta">
+        <span class="mono">Solver</span>
+        <strong>OR-Tools CP-SAT</strong>
+        <span class="mono" style="margin-top:10px">Version</span>
+        <strong>9.15.6755</strong>
+      </div>
+    </div>
+
+    <div class="console-body">
+      <div>
+          <section>
+            <div class="sec-head" style="grid-template-columns:1fr auto;margin-bottom:22px">
+              <h2 class="h2" style="font-size:28px">Five moves, in order</h2>
+              <span class="meta mono">constraints before preferences</span>
+            </div>
+            <ol class="numbered">
+              <li><span><strong>Read the brief.</strong> Roles are proposed with a source phrase and a confidence label. Every open question is surfaced as a decision, not silently answered.</span></li>
+              <li><span><strong>Confirm the roles.</strong> The organiser sets the count and the dialect. Safety roles are marked before the solver runs, so the gate is never relaxed to make a roster look full.</span></li>
+              <li><span><strong>Filter to eligible.</strong> Available in the slot, inside the travel limit, skill level at or above the minimum. Minors only where the brief allows them and guardian consent is on file.</span></li>
+              <li><span><strong>Optimise in tiers.</strong> Fill every essential slot, then maximise dropout robustness, then spread turns. Ties break on distance and fit, never on seniority alone.</span></li>
+              <li><span><strong>Add the bench.</strong> A second pass names a standby for each essential role. If it cannot, the drive is not ready and the gap is printed.</span></li>
+            </ol>
+            <p class="figcap">Order matters: a fairness score never overrides an unfilled first-aid slot.</p>
+          </section>
+
+        <div class="two-col mt-32">
+          <div class="tool-panel">
+            <div class="tool-head"><span class="mono">Allowed to do</span></div>
+            <div class="tool-body">
+              <ul class="bullets">
+                <li>Fill a slot only with someone free in that slot.</li>
+                <li>Respect the travel limit on the brief.</li>
+                <li>Enforce the minimum skill level.</li>
+                <li>Require a host check for safety roles.</li>
+                <li>Use a minor only if allowed and consented.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="tool-panel">
+            <div class="tool-head"><span class="mono">Not allowed to do</span></div>
+            <div class="tool-body">
+              <ul class="bullets">
+                <li class="red">Guess a missing count and hide it.</li>
+                <li class="red">Relax a safety gate to fill a slot.</li>
+                <li class="red">Confirm a contribution card.</li>
+                <li class="red">Send anything to a volunteer.</li>
+                <li class="red">Claim the chain proves truth.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="note mt-32" style="max-width:70ch">
+          <span class="mono">The one-line version</span>
+          Hard constraints decide who is eligible. Fairness only ranks the eligible. A human confirms every card, and the log records what changed.
+        </div>
+
+          <section class="mt-48" id="metrics">
+            <div class="sec-head" style="grid-template-columns:1fr auto;margin-bottom:24px">
+              <h2 class="h2" style="font-size:28px">Five metrics, in plain words</h2>
+              <span class="meta mono">definitions &amp; formulas</span>
+            </div>
+
+            <div class="two-col" style="gap:44px">
+              <div>
+                <dl style="margin:0">
+                  <div class="def">
+                    <dt>Role coverage</dt>
+                    <span class="plain">Did every essential slot get a person?</span>
+                    <dd>The share of must-have slots that were filled. A “should” role does not count toward the verdict. 0.9167 across ten drives means 91.67% of essential slots were filled.</dd>
+                    <div class="formula">filled essential slots ÷ required essential slots</div>
+                  </div>
+                  <div class="def">
+                    <dt>Dropout robustness</dt>
+                    <span class="plain">What happens if someone cannot come?</span>
+                    <dd>How often removing any single person still leaves every essential role covered. 1.0 means every single dropout has a named replacement. 0 means the first absence opens a hole.</dd>
+                    <div class="formula">single-person dropouts covered ÷ single-person dropouts tested</div>
+                  </div>
+                  <div class="def">
+                    <dt>Repeat-pick share</dt>
+                    <span class="plain">Are we going back to the same faces?</span>
+                    <dd>The share of placements given to someone already picked in the last 90 days. Lower is better. The planner records 0.23 across the sample; manual greedy records 0.4267.</dd>
+                    <div class="formula">picks of people picked in the last 90 days ÷ all picks</div>
+                  </div>
+                </dl>
+              </div>
+              <div>
+                <dl style="margin:0">
+                  <div class="def">
+                    <dt>Exposure Gini</dt>
+                    <span class="plain">How unevenly are turns spread?</span>
+                    <dd>A 0–1 number borrowed from economics. 0 means everyone got the same number of turns; 1 means one person took everything. It is only ever shown here and on the evaluation page, with this sentence beside it.</dd>
+                    <div class="formula">Gini over per-volunteer pick counts</div>
+                  </div>
+                  <div class="def">
+                    <dt>Drives ready</dt>
+                    <span class="plain">Can the organiser actually run it?</span>
+                    <dd>The share of drives that come back READY: every essential role filled and any one dropout covered. This is the number a district feels, so it leads the evaluation page.</dd>
+                    <div class="formula">drives with a READY verdict ÷ all drives</div>
+                  </div>
+                  <div class="def" style="border-bottom:0;padding-bottom:0">
+                    <dt>What no metric captures</dt>
+                    <span class="plain">The part a number cannot hold</span>
+                    <dd>Whether a young person felt useful, whether the village trusted the camp, whether the host would invite the same crew again. Those are not scored here.</dd>
+                  </div>
+                </dl>
+              </div>
+            </div>
+          </section>
+
+          <section class="mt-48" id="sources">
+            <div class="sec-head" style="grid-template-columns:1fr auto;margin-bottom:20px">
+              <h2 class="h2" style="font-size:28px">Numbers with a source</h2>
+              <span class="meta mono">nothing uncited</span>
+            </div>
+            <table class="tbl">
+              <caption>Table 9 · Every outside number used anywhere in this direction</caption>
+              <thead>
+                <tr>
+                  <th style="width:260px">Claim</th>
+                  <th style="width:230px">Value</th>
+                  <th>Source</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Youth registered on MY Bharat</td>
+                  <td class="strong">2.22+ crore</td>
+                  <td>PIB backgrounder, 05 July 2026</td>
+                </tr>
+                <tr>
+                  <td>Volunteer opportunities listed</td>
+                  <td class="strong">1.52+ lakh</td>
+                  <td>Same PIB backgrounder</td>
+                </tr>
+                <tr>
+                  <td>Solver optimality at scale</td>
+                  <td class="strong">80/80 optimal up to 500 volunteers, max 0.327 s</td>
+                  <td>SewaCircle solver bench, synthetic instances</td>
+                </tr>
+                <tr>
+                  <td>Local model, role recall</td>
+                  <td class="strong">Qwen2.5-7B 4-bit on one T4: 0.932</td>
+                  <td>SewaCircle extraction bench, synthetic briefs</td>
+                </tr>
+                <tr>
+                  <td>District locator points</td>
+                  <td class="strong">20 districts, WGS84</td>
+                  <td>Open Admin Data, India Administrative Divisions, CC-BY-4.0</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="figcap">Source URL for the PIB figures: <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" style="text-decoration:underline">static.pib.gov.in · doc202675911701.pdf</a></p>
+
+            <div class="two-col mt-32" style="gap:44px">
+              <div>
+                <h3 class="h3 mb-8">The data behind these pages</h3>
+                <ul class="bullets">
+                  <li><strong>Sample API capture.</strong> 10 drives, 80 volunteers, seed 7, captured 19 November 2026. Names are synthetic; every number on this site comes from it.</li>
+                  <li><strong>Evaluation run.</strong> OR-Tools 9.15.6755, CP-SAT 1 worker, seed 7, sequential tiers; random_feasible is the mean of 20 seeds; paired task bootstrap n = 1000, seed 7.</li>
+                  <li><strong>District roll.</strong> 20 district names and locator points; only four had drives in this sample.</li>
+                </ul>
+              </div>
+              <div>
+                <h3 class="h3 mb-8">The stack, plainly</h3>
+                <ul class="facts" style="border-top:1px solid var(--rule);padding-top:10px">
+                  <li class="flex-between" style="padding:8px 0;border-bottom:1px dotted var(--rule)"><span class="mono">Allocation</span><span class="mono" style="color:var(--ink)">CP-SAT, 1 worker</span></li>
+                  <li class="flex-between" style="padding:8px 0;border-bottom:1px dotted var(--rule)"><span class="mono">Extraction</span><span class="mono" style="color:var(--ink)">cc/claude-sonnet-5-5, cached</span></li>
+                  <li class="flex-between" style="padding:8px 0;border-bottom:1px dotted var(--rule)"><span class="mono">Rules</span><span class="mono" style="color:var(--ink)">fixed code, no model</span></li>
+                  <li class="flex-between" style="padding:8px 0;border-bottom:1px dotted var(--rule)"><span class="mono">Log</span><span class="mono" style="color:var(--ink)">64-hex digest chain</span></li>
+                  <li class="flex-between" style="padding:8px 0"><span class="mono">Confirmations</span><span class="mono" style="color:var(--ink)">human only</span></li>
+                </ul>
+              </div>
+            </div>
+          </section>
+
+          <section class="mt-48" id="limits">
+            <div class="sec-head" style="grid-template-columns:1fr auto;margin-bottom:22px">
+              <h2 class="h2" style="font-size:28px">Honest limits</h2>
+              <span class="meta mono">read before trusting a verdict</span>
+            </div>
+            <ol class="numbered">
+              <li><span><strong>A hash chain shows edits, not truth.</strong> It proves a record was not quietly rewritten. It cannot prove the hours were worked. Truth comes from host confirmation.</span></li>
+              <li><span><strong>Ten tasks is a small sample.</strong> The robustness interval runs from 0.50 to 0.96. The direction of the result is clear; the exact size is not.</span></li>
+              <li><span><strong>“Not solved” is not “impossible”.</strong> Eight drives in this capture were never run through a roster. Two that were run could not be filled with the people available.</span></li>
+              <li><span><strong>Every person is synthetic.</strong> No real volunteer, family or minor appears in this data set. It is a design instrument, not a live register.</span></li>
+              <li><span><strong>The safety gate is only as good as the host check.</strong> The rule refuses an unchecked skill; it cannot make a check happen.</span></li>
+              <li><span><strong>The extractor is not authoritative.</strong> It returned four open questions on the Hindi brief and labelled one role low confidence. A person resolves them.</span></li>
+              <li><span><strong>No integration, no auto-send.</strong> SewaCircle complements MY Bharat and does not connect to it. Nothing is posted, messaged or filed automatically.</span></li>
+            </ol>
+          </section>
+        </div>
+
+
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-grid">
+    <div>
+      <div class="footer-brand">Sewacircle</div>
+      <p>Ready Crew turns a drive brief into a roster an organiser can defend: every pick has a reason, every essential role has a standby, and every change leaves a mark.</p>
+      <p class="mono">Synthetic data only · seed 7 · captured 19 Nov 2026</p>
+    </div>
+    <div class="footer-col">
+      <h4>Console</h4>
+      <ul>
+        <li><a href="02-console-task.html">Brief</a></li>
+        <li><a href="03-console-roles.html">Roles</a></li>
+        <li><a href="04-console-crew-ready.html">Crew</a></li>
+        <li><a href="06-console-evidence.html">Evidence</a></li>
+        <li><a href="07-console-ledger.html">Ledger</a></li>
+        <li><a href="08-console-evaluation.html">Evaluation</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Read</h4>
+      <ul>
+        <li><a href="11-method.html">Method</a></li>
+        <li><a href="10-districts.html">Districts</a></li>
+        <li><a href="09-volunteer.html">Volunteer view</a></li>
+        <li><a href="05-console-crew-not-ready.html">Not-ready example</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Standing</h4>
+      <ul>
+        <li><a href="11-method.html#sources">Data sources</a></li>
+        <li><a href="11-method.html#limits">Honest limits</a></li>
+        <li><a href="08-console-evaluation.html#misses">Printed misses</a></li>
+      </ul>
+      <p class="mono">Not affiliated with MY Bharat or any government body.</p>
+    </div>
+  </div>
+  <div class="wrap footer-legal">
+    <p class="mono">Not affiliated with MY Bharat or any government body.</p>
+    <p class="mono">Every figure comes from the sample API capture · no outside statistics except PIB, cited</p>
+  </div>
+</footer>
+</body>
+</html>

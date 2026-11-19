@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Console — Tamper-Evident Ledger & Credential Export</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Verification banner */
+    .ledger-banner {
+      background: linear-gradient(135deg, #F0FDF4 0%, #FFFFFF 100%);
+      border: 1.5px solid #86EFAC;
+      border-radius: var(--radius-card-lg);
+      padding: 28px 32px;
+      margin-bottom: 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .banner-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: #14532D;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .banner-note {
+      font-size: 13px;
+      color: #166534;
+      margin-top: 4px;
+    }
+
+    /* Chain layout */
+    .chain-container {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      position: relative;
+    }
+
+    .chain-block {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 18px 24px;
+      box-shadow: var(--shadow-subtle);
+      display: grid;
+      grid-template-columns: 80px 140px 1fr 220px;
+      gap: 20px;
+      align-items: center;
+      position: relative;
+      transition: all 0.15s ease;
+    }
+
+    .chain-block:hover {
+      box-shadow: var(--shadow-card);
+      border-color: #CBD5E1;
+      transform: translateX(4px);
+    }
+
+    .block-index-badge {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline-strong);
+      font-weight: 800;
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+    }
+
+    .action-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .action-draft { background: #E2E8F0; color: #334155; }
+    .action-flag { background: #FEF3C7; color: #92400E; }
+    .action-confirm { background: #DCFCE7; color: #166534; }
+    .action-correct { background: #FCE7F3; color: #9D174D; }
+
+    .hash-val-display {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      font-size: 11px;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Export Panel */
+    .export-card {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      margin-top: 36px;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link">Story</a>
+      <a href="02-console-task.html" class="nav-link active">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm">RK</div>
+        <div>
+          <div class="user-role-label">Rajesh Kumar</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ORGANISER CONSOLE SUBNAV -->
+  <div class="console-subnav-bar">
+    <div class="console-step-tabs">
+      <a href="02-console-task.html" class="step-tab">
+        <span class="step-number">1</span>
+        <span>Brief & Task</span>
+      </a>
+      <a href="03-console-roles.html" class="step-tab">
+        <span class="step-number">2</span>
+        <span>Roles</span>
+      </a>
+      <a href="04-console-crew-ready.html" class="step-tab">
+        <span class="step-number">3</span>
+        <span>Crew (Ready)</span>
+      </a>
+      <a href="05-console-crew-not-ready.html" class="step-tab">
+        <span class="step-number">4</span>
+        <span>Crew (Not Ready)</span>
+      </a>
+      <a href="06-console-evidence.html" class="step-tab">
+        <span class="step-number">5</span>
+        <span>Evidence</span>
+      </a>
+      <a href="07-console-ledger.html" class="step-tab active">
+        <span class="step-number">6</span>
+        <span>Ledger</span>
+      </a>
+      <a href="08-console-evaluation.html" class="step-tab">
+        <span class="step-number">7</span>
+        <span>Evaluation</span>
+      </a>
+    </div>
+
+    <div class="console-drive-chip">
+      <span class="drive-chip-dot"></span>
+      <span>Task-01: Cryptographic Ledger</span>
+      <span style="color: var(--muted); font-weight: normal;">• 9 Entries Verified</span>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-container">
+    
+    <div class="page-header">
+      <div class="page-badge-row">
+        <span class="badge-pill badge-green">Cryptographic Audit Chain</span>
+        <span class="badge-pill badge-coral">SHA-256 Hash Chain</span>
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Seed 7</span>
+      </div>
+      <h1 class="page-title">Tamper-Evident Ledger & Credential Export</h1>
+      <p class="page-desc">
+        Every draft, automated rule flag, host correction, and confirmation is logged into an append-only, SHA-256 hash-chained ledger. This guarantees a verifiable audit trail while keeping human host testimony as the ultimate source of truth.
+      </p>
+    </div>
+
+    <!-- VERIFICATION RESULT HERO CARD -->
+    <div class="ledger-banner">
+      <div>
+        <div class="banner-title">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+          CRYPTOGRAPHIC INTEGRITY: VERIFIED OK
+        </div>
+        <!-- Note verbatim from sample-data.json ledger_verify -->
+        <div class="banner-note">
+          "Hash chain shows edits, not truth; truth comes from host confirmation."
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 16px;">
+        <div style="background: white; padding: 10px 18px; border-radius: 12px; border: 1px solid #86EFAC; text-align: center;">
+          <div style="font-size: 20px; font-weight: 800; color: #14532D;">9 / 9</div>
+          <div style="font-size: 11px; font-weight: 700; color: #166534; text-transform: uppercase;">Entries Intact</div>
+        </div>
+        <div style="background: white; padding: 10px 18px; border-radius: 12px; border: 1px solid #86EFAC; text-align: center;">
+          <div style="font-size: 20px; font-weight: 800; color: #14532D;">None</div>
+          <div style="font-size: 11px; font-weight: 700; color: #166534; text-transform: uppercase;">First Bad Index</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- LINKED HASH BLOCKS (All 9 entries from sample-data.json verbatim) -->
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+      <h3 style="font-size: 18px; font-weight: 700; color: var(--ink);">Audit Chain Sequence (Block 0 → Block 8)</h3>
+      <span style="font-size: 12px; color: var(--muted);">Click any block to inspect full SHA-256 payload</span>
+    </div>
+
+    <div class="chain-container">
+      
+      <!-- Block 0 -->
+      <div class="chain-block">
+        <div class="block-index-badge">#0</div>
+        <div>
+          <span class="action-chip action-draft">draft</span>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 4px;">Actor: system</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-068-poster-team</div>
+          <div class="hash-val-display">prev: 0000000000000000000000000000000000000000000000000000000000000000</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">5376047aad2f...</div>
+        </div>
+      </div>
+
+      <!-- Block 1 -->
+      <div class="chain-block">
+        <div class="block-index-badge">#1</div>
+        <div>
+          <span class="action-chip action-flag">flag</span>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 4px;">Actor: system</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-070-first-aid-support</div>
+          <div class="hash-val-display">prev: 5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">cc415443fba0...</div>
+        </div>
+      </div>
+
+      <!-- Block 2 -->
+      <div class="chain-block">
+        <div class="block-index-badge">#2</div>
+        <div>
+          <span class="action-chip action-flag">flag</span>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 4px;">Actor: system</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-067-supplies-and-site-setup</div>
+          <div class="hash-val-display">prev: cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">b311746f3d95...</div>
+        </div>
+      </div>
+
+      <!-- Block 3 -->
+      <div class="chain-block">
+        <div class="block-index-badge">#3</div>
+        <div>
+          <span class="action-chip action-flag">flag</span>
+          <div style="font-size: 11px; color: var(--muted); margin-top: 4px;">Actor: system</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-011-local-language-liaison</div>
+          <div class="hash-val-display">prev: b311746f3d95c1c87515b672809fecdd7a4f5b5f25bf6083818e11a1413aee01</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">65457ef418eb...</div>
+        </div>
+      </div>
+
+      <!-- Block 4 -->
+      <div class="chain-block" style="border-left: 4px solid var(--ready-green);">
+        <div class="block-index-badge">#4</div>
+        <div>
+          <span class="action-chip action-confirm">confirm</span>
+          <div style="font-size: 11px; color: var(--ready-green); font-weight: 700; margin-top: 4px;">host-demo</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-068-poster-team</div>
+          <div class="hash-val-display">prev: 65457ef418eb4ebf944a99d42f556942da387ca436df7780be539f3bfb5d2729</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">1cb234ca299d...</div>
+        </div>
+      </div>
+
+      <!-- Block 5 -->
+      <div class="chain-block" style="border-left: 4px solid var(--ready-green);">
+        <div class="block-index-badge">#5</div>
+        <div>
+          <span class="action-chip action-confirm">confirm</span>
+          <div style="font-size: 11px; color: var(--ready-green); font-weight: 700; margin-top: 4px;">host-demo</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-070-first-aid-support</div>
+          <div class="hash-val-display">prev: 1cb234ca299deca6a378d387604d57c2bc9a022512f45ea07ce1e1ba1f1bcf4b</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">11e2fbc137ce...</div>
+        </div>
+      </div>
+
+      <!-- Block 6 -->
+      <div class="chain-block" style="border-left: 4px solid var(--ready-green);">
+        <div class="block-index-badge">#6</div>
+        <div>
+          <span class="action-chip action-confirm">confirm</span>
+          <div style="font-size: 11px; color: var(--ready-green); font-weight: 700; margin-top: 4px;">host-demo</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-067-supplies-and-site-setup</div>
+          <div class="hash-val-display">prev: 11e2fbc137ce90bbda8f8319fecbb577e774cce9a764c6198f828a2a7a40ca3c</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">2b3bc36ab075...</div>
+        </div>
+      </div>
+
+      <!-- Block 7 -->
+      <div class="chain-block" style="border-left: 4px solid var(--rausch);">
+        <div class="block-index-badge">#7</div>
+        <div>
+          <span class="action-chip action-correct">correct</span>
+          <div style="font-size: 11px; color: var(--rausch); font-weight: 700; margin-top: 4px;">host-demo</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-011-local-language-liaison</div>
+          <div class="hash-val-display">prev: 2b3bc36ab0757754d9c72ec1d05374e50eb9dd0d6c9343714f3b798cf0cf4198</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">1843b171f28b...</div>
+        </div>
+      </div>
+
+      <!-- Block 8 -->
+      <div class="chain-block" style="border-left: 4px solid var(--ready-green);">
+        <div class="block-index-badge">#8</div>
+        <div>
+          <span class="action-chip action-confirm">confirm</span>
+          <div style="font-size: 11px; color: var(--ready-green); font-weight: 700; margin-top: 4px;">host-demo</div>
+        </div>
+        <div>
+          <div style="font-size: 13px; font-weight: 700; color: var(--ink);">card-task-01-v-011-local-language-liaison</div>
+          <div class="hash-val-display">prev: 1843b171f28bf2a36d7560a8b98eb6f9ca5ecdafc34c44249a5b487f8aa8504f</div>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 11px; font-weight: 700; color: var(--ink);">entry_hash</div>
+          <div class="hash-val-display" style="color: var(--ready-green); font-weight: 700;">cfd628468b12...</div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- CREDENTIAL EXPORT PANEL -->
+    <div class="export-card">
+      <div>
+        <div style="font-size: 18px; font-weight: 800; color: var(--ink);">W3C Verifiable Credential Export</div>
+        <p style="font-size: 13px; color: var(--muted); margin-top: 4px; max-width: 600px;">
+          Signed digital credentials can be exported for young volunteers (Heena P., Mohit Z., Divya H., Kabir Z.) and verified offline without exposing raw PII.
+        </p>
+      </div>
+      <div style="display: flex; gap: 12px;">
+        <button class="btn btn-secondary btn-pill">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Export Ledger (JSONL)
+        </button>
+        <a href="08-console-evaluation.html" class="btn btn-primary btn-pill">
+          Proceed to Benchmark Evaluation →
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

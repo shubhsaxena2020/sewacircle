@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Methodology, Solvers & Boundaries</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Disclaimer Bar -->
+  <div class="disclaimer-strip">
+    <span>Not affiliated with MY Bharat or any government body. Demonstrating synthetic youth volunteering operations for Uttar Pradesh districts.</span>
+  </div>
+
+  <!-- Global Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="01-landing.html" class="brand-group">
+        <div class="brand-logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 9 9"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-edition">Ready Crew • Method</span>
+        </div>
+      </a>
+
+      <nav class="site-nav">
+        <a href="01-landing.html" class="nav-link">Overview</a>
+        <a href="02-console-task.html" class="nav-link">Brief</a>
+        <a href="03-console-roles.html" class="nav-link">Roles</a>
+        <a href="04-console-crew-ready.html" class="nav-link">Crew (Ready)</a>
+        <a href="05-console-crew-not-ready.html" class="nav-link">Crew (Gap)</a>
+        <a href="06-console-evidence.html" class="nav-link">Evidence</a>
+        <a href="07-console-ledger.html" class="nav-link">Ledger</a>
+        <a href="08-console-evaluation.html" class="nav-link">Evaluation</a>
+        <a href="09-volunteer.html" class="nav-link">Volunteers</a>
+        <a href="10-districts.html" class="nav-link">Districts</a>
+        <a href="11-method.html" class="nav-link active">Method</a>
+      </nav>
+
+      <div class="header-actions">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle" role="group" aria-label="Language selector">
+          <button class="lang-btn active" type="button">EN</button>
+          <button class="lang-btn devanagari" type="button">हिंदी</button>
+        </div>
+        <a href="02-console-task.html" class="btn btn-primary btn-sm">Open Console →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stage Header -->
+  <div style="background: var(--canvas-soft); border-bottom: 1px solid var(--hairline); padding: 18px 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span class="tag tag-indigo">Technical Whitepaper</span>
+          <span style="color: var(--ink-muted); font-size: 13px;">Algorithm: <strong>Google OR-Tools CP-SAT Solver</strong></span>
+          <span class="tag tag-green">Solve Time: 15 ms (OPTIMAL)</span>
+        </div>
+        <div style="font-size: 13px; color: var(--ink-muted);">
+          Dataset: Synthetic Seed 7 • WGS84 Geodesics
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main style="padding: 40px 0;">
+    <div class="container">
+
+      <!-- Header Title -->
+      <div style="margin-bottom: 40px;">
+        <span class="eyebrow">Algorithmic Formulation</span>
+        <h1 style="font-size: 36px; margin-bottom: 8px;">How the Crew is Decided</h1>
+        <p style="color: var(--ink-secondary); font-size: 16px; margin: 0; max-width: 880px;">
+          Mathematical specification of constraint satisfaction, standby redundancy assignment, plain-language metric definitions, and honest system boundaries.
+        </p>
+      </div>
+
+      <!-- 3-Step Decision Engine Architecture -->
+      <section style="margin-bottom: 48px;">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+          
+          <!-- Step 1 -->
+          <div class="card" style="border-top: 4px solid var(--primary);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--primary-deep); margin-bottom: 8px;">
+              STAGE 1 • HARD CONSTRAINTS FILTER
+            </div>
+            <h2 style="font-size: 18px; margin: 0 0 10px; color: var(--ink);">Strict Feasibility Pruning</h2>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6; margin: 0 0 12px;">
+              Before optimization begins, candidate pools are filtered through non-negotiable boundaries:
+            </p>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              <li><strong>Skill Match:</strong> Must possess required skill at or above minimum level.</li>
+              <li><strong>Availability:</strong> Volunteer must have registered the exact target time slot.</li>
+              <li><strong>Travel Radius:</strong> Haversine distance from volunteer block to site ≤ 25.0 km.</li>
+              <li><strong>Minor Protection:</strong> Youth &lt; 18 permitted only if drive allows minors with guardian consent.</li>
+              <li><strong>Safety Roles:</strong> First aid, transport, and site logistics strictly require <em>host-checked</em> claims.</li>
+            </ul>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="card" style="border-top: 4px solid var(--ready-dot);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--ready-text); margin-bottom: 8px;">
+              STAGE 2 • MULTI-TIER OPTIMIZATION
+            </div>
+            <h2 style="font-size: 18px; margin: 0 0 10px; color: var(--ink);">CP-SAT Integer Programming</h2>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6; margin: 0 0 12px;">
+              Google OR-Tools CP-SAT solves the assignment problem through hierarchical objective tiers:
+            </p>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              <li><strong>Tier 1:</strong> Maximize coverage of all <em>must-have</em> role slots.</li>
+              <li><strong>Tier 2:</strong> Maximize coverage of secondary <em>should</em> slots.</li>
+              <li><strong>Tier 3:</strong> Fair rotation (penalize volunteers picked in last 90 days; prioritize newcomers).</li>
+              <li><strong>Tier 4:</strong> Minimize total physical travel distance across the district.</li>
+            </ul>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="card" style="border-top: 4px solid var(--primary-deep);">
+            <div style="font-size: 12px; font-weight: 700; color: var(--primary-deep); margin-bottom: 8px;">
+              STAGE 3 • INVARIANCE VERIFICATION
+            </div>
+            <h2 style="font-size: 18px; margin: 0 0 10px; color: var(--ink);">1-Dropout Redundancy Proof</h2>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6; margin: 0 0 12px;">
+              Assigning primary volunteers is insufficient for operational reliability:
+            </p>
+            <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              <li>The solver pairs certified standbys to cover every primary slot.</li>
+              <li>Simulates dropping each assigned person individually.</li>
+              <li>If any single dropout causes an uncovered gap, status drops to <strong>NOT READY</strong>.</li>
+              <li>Guarantees the event can safely proceed regardless of morning cancellations.</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Metric Definitions in Plain Words -->
+      <section style="margin-bottom: 48px;">
+        <div style="margin-bottom: 20px;">
+          <span class="eyebrow">Clear Terminology</span>
+          <h2 style="font-size: 22px; margin: 0; color: var(--ink);">Metric Definitions in Plain Words</h2>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="width: 220px;">Metric Name</th>
+                <th>Mathematical Intent</th>
+                <th>Plain Language Explanation</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Role Coverage</strong></td>
+                <td><code class="code-inline tabular num">filled_must / total_must</code></td>
+                <td>Percentage of critical volunteer slots for which a fully qualified volunteer has been matched and assigned.</td>
+              </tr>
+              <tr>
+                <td><strong>Dropout Robustness</strong></td>
+                <td><code class="code-inline tabular num">survived_drops / total_slots</code></td>
+                <td>The fraction of single-volunteer cancellations that the roster can absorb on event morning without leaving any role unstaffed.</td>
+              </tr>
+              <tr>
+                <td><strong>Drive Ready Rate</strong></td>
+                <td><code class="code-inline tabular num">ready_drives / total_drives</code></td>
+                <td>The proportion of scheduled community drives that satisfy both 100% role coverage and certified standby redundancy.</td>
+              </tr>
+              <tr>
+                <td><strong>Repeat-Pick Share</strong></td>
+                <td><code class="code-inline tabular num">repeat_volunteers / total_assigned</code></td>
+                <td>The share of roster positions filled by individuals who have already served in recent drives; lower values reflect fairer community inclusion.</td>
+              </tr>
+              <tr>
+                <td><strong>Exposure Gini Coefficient</strong></td>
+                <td><code class="code-inline tabular num">G = ∑ |x_i - x_j| / (2n^2 μ)</code></td>
+                <td>The exposure Gini coefficient measures inequality in volunteering assignments: a score closer to 0 indicates opportunities are shared evenly across registered youth, while higher scores show an unfair concentration on the same repeat participants.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Data Sources and Computational Performance -->
+      <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px;">
+        
+        <div class="card" style="padding: 24px;">
+          <h2 style="font-size: 18px; margin: 0 0 12px; color: var(--ink);">Data Sources &amp; Foundations</h2>
+          <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 6px;">
+            <li><strong>Synthetic Data (Seed 7):</strong> 80 youth volunteers, 10 community drives across 4 active UP districts. Generates realistic skills, travel vectors, and availability constraints.</li>
+            <li><strong>Administrative Geography:</strong> Real district names and approximate centroid coordinates from Open Admin Data (CC-BY-4.0).</li>
+            <li><strong>National Context Baseline:</strong> 2.22+ crore youth registered and 1.52+ lakh opportunities officially cited from PIB backgrounder, 05 July 2026.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="padding: 24px;">
+          <h2 style="font-size: 18px; margin: 0 0 12px; color: var(--ink);">Computational Scaling Benchmarks</h2>
+          <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.7; display: flex; flex-direction: column; gap: 6px;">
+            <li><strong>Edge AI Role Extraction:</strong> <code class="code-inline">Qwen2.5-7B 4-bit on one T4: role recall 0.932</code>. High precision discovery of skill tokens directly from Devanagari text.</li>
+            <li><strong>Mathematical Solver Scaling:</strong> <code class="code-inline">80/80 optimal up to 500 volunteers, max 0.327 s</code>. Sub-second integer programming guarantees instant response in field conditions.</li>
+            <li><strong>Task-01 Solver Speed:</strong> OR-Tools CP-SAT runtime is 15 ms on single-core CPU with status OPTIMAL.</li>
+          </ul>
+        </div>
+
+      </section>
+
+      <!-- Honest Limitations Section -->
+      <section class="card card-cream" style="padding: 32px; border-radius: var(--radius-lg);">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--primary-deep)" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+          <h2 style="font-size: 20px; margin: 0; color: var(--ink);">Honest Engineering Boundaries</h2>
+        </div>
+
+        <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 20px;">
+          The SewaCircle engineering architecture is designed with strict epistemological modesty. We distinguish between mathematical guarantees and empirical realities:
+        </p>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+          <div>
+            <strong>1. Sample Boundary:</strong>
+            <p style="margin: 4px 0 0;">
+              Tested on 10 synthetic drives and 80 volunteers across Uttar Pradesh. It is a research prototype, not an active statewide deployment.
+            </p>
+          </div>
+
+          <div>
+            <strong>2. Checked Skills ≠ Certificates:</strong>
+            <p style="margin: 4px 0 0;">
+              Host checks mean a past field organizer affirmed attendance. They do not constitute formal government licenses or accredited degrees.
+            </p>
+          </div>
+
+          <div>
+            <strong>3. Ledger Integrity ≠ Ground Truth:</strong>
+            <p style="margin: 4px 0 0;">
+              The SHA-256 hash chain proves that records were not secretly altered in storage. Truth originates solely from human host confirmation.
+            </p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <div class="brand-logo-mark" style="width: 26px; height: 26px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle></svg>
+            </div>
+            <span style="font-weight: 700; font-size: 16px; color: var(--ink);">SewaCircle Ready Crew</span>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 16px;">
+            Constraint Programming &amp; Operations Research for Rural Youth Volunteer Mobilization.
+          </p>
+          <div style="font-size: 12px; color: var(--ink-light);">
+            Method: OR-Tools CP-SAT • Qwen2.5-7B Edge Extraction
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Console Workflow</div>
+          <ul class="footer-links">
+            <li><a href="02-console-task.html">02 Drive Brief Input</a></li>
+            <li><a href="03-console-roles.html">03 AI Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">04 Ready Crew Board</a></li>
+            <li><a href="05-console-crew-not-ready.html">05 Gap Analysis &amp; Recruits</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Post-Drive Audit</div>
+          <ul class="footer-links">
+            <li><a href="06-console-evidence.html">06 Host Notes &amp; Evidence</a></li>
+            <li><a href="07-console-ledger.html">07 SHA-256 Ledger</a></li>
+            <li><a href="08-console-evaluation.html">08 Model Benchmark</a></li>
+            <li><a href="09-volunteer.html">09 Youth Volunteer View</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">District Architecture</div>
+          <ul class="footer-links">
+            <li><a href="10-districts.html">10 UP 20 Districts Map</a></li>
+            <li><a href="11-method.html">11 Solver Methodology</a></li>
+            <li><a href="01-landing.html">Landing Overview</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Not affiliated with MY Bharat or any government body. Synthetic data (seed 7) for evaluation purposes only.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <span>PIB Ref: 05 July 2026</span>
+          <span>OR-Tools CP-SAT</span>
+          <span>Open Admin Data CC-BY-4.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — Crew Board: NOT READY & Recruits (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item active"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">03 · Crew Verdict (Gap State)</span>
+        <span class="pill-badge pill-badge-red" style="font-weight: 600;">NOT READY — 1 ACTION NEEDED</span>
+      </div>
+      <div class="sub-nav-right">
+        <a href="04-console-crew-ready.html" class="text-link" style="font-size: 14px; margin-right: 8px;">← View READY Case (Akbarpur)</a>
+        <button class="btn-primary" onclick="alert('WhatsApp broadcast message copied to clipboard!');">Copy WhatsApp Broadcast</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONSOLE -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 48px;">
+    <div class="container">
+
+      <!-- THE HERO VERDICT BANNER (NOT READY) -->
+      <section class="verdict-hero-not-ready">
+        <div class="verdict-hero-tag tag-not-ready">
+          <span style="display:inline-block; width:8px; height:8px; border-radius:50%; background:var(--status-not-ready);"></span>
+          Operational Alert
+        </div>
+        <h1 class="verdict-hero-headline" style="color: var(--status-not-ready);">
+          VERDICT: NOT READY
+        </h1>
+        <p class="verdict-hero-sub">
+          <strong>1 action needed before this drive is safe to run.</strong> Task-02 (Blood donation camp, Chinhat, Lucknow) cannot safely proceed because essential community mobilisation slots are vacant.
+        </p>
+
+        <!-- Stat strip -->
+        <div style="display: flex; justify-content: center; gap: 48px; margin-top: 32px; padding-top: 24px; border-top: 1px solid rgba(0,0,0,0.06);">
+          <div>
+            <div style="font-size: 28px; font-weight: 600; color: var(--status-not-ready);">3 / 5</div>
+            <div style="font-size: 12px; color: var(--ink-muted);">Must-Have Slots Filled</div>
+          </div>
+          <div>
+            <div style="font-size: 28px; font-weight: 600; color: var(--status-not-ready);">0%</div>
+            <div style="font-size: 12px; color: var(--ink-muted);">Dropout Robustness</div>
+          </div>
+          <div>
+            <div style="font-size: 28px; font-weight: 600; color: var(--ink);">2 Gaps</div>
+            <div style="font-size: 12px; color: var(--ink-muted);">Community Mobilisers</div>
+          </div>
+          <div>
+            <div style="font-size: 28px; font-weight: 600; color: var(--ink);">21 ms</div>
+            <div style="font-size: 12px; color: var(--ink-muted);">CP-SAT Solve Time</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SPOTLIGHT: RECRUIT REQUEST & BROADCAST GENERATOR -->
+      <div style="background: #ffffff; border: 1px solid var(--status-not-ready-border); border-radius: 18px; padding: 36px; box-shadow: var(--shadow-product); margin-bottom: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+          <div>
+            <span class="card-label-small" style="color: var(--status-not-ready);">Exact Recruit Request</span>
+            <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em; margin-top: 4px;">
+              Targeted Outreach Request for Chinhat
+            </h2>
+          </div>
+          <span class="pill-badge pill-badge-red" style="font-size: 13px; font-weight: 600;">2 Volunteers Required</span>
+        </div>
+
+        <div class="cards-grid-2" style="margin-bottom: 28px;">
+          <!-- Request Parameters -->
+          <div style="background: var(--canvas-parchment); border-radius: 12px; padding: 24px;">
+            <div class="card-label-small">Request Specifications</div>
+            <div style="margin-top: 12px; font-size: 14px; line-height: 1.8; color: var(--ink);">
+              <div>• <strong>Role:</strong> Community mobiliser (2 slots)</div>
+              <div>• <strong>Required Skill:</strong> community_mobilisation (Min Level 1)</div>
+              <div>• <strong>Safety Tier:</strong> Non-critical (Checked skill not required)</div>
+              <div>• <strong>Time Window:</strong> Sunday Morning (sun_morning)</div>
+              <div>• <strong>Target Radius:</strong> Chinhat, Lucknow (&le; 25.0 km)</div>
+            </div>
+            <div style="margin-top: 16px; font-size: 13px; color: var(--ink-muted); line-height: 1.5;">
+              <em>Reason: "No eligible volunteer for 2 slot(s): needs community mobilisation / door-to-door outreach, free sun morning, within 25 km."</em>
+            </div>
+          </div>
+
+          <!-- Copy-Ready Broadcast Card -->
+          <div style="background: #fafafc; border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="card-label-small" style="color: var(--primary);">Copy-Ready Broadcast</span>
+              <span style="font-size: 11px; color: var(--ink-muted);">WhatsApp / Telegram / SMS</span>
+            </div>
+            <div style="background: white; border: 1px solid var(--border-soft); border-radius: 8px; padding: 16px; font-size: 13px; line-height: 1.6; color: var(--ink); flex-grow: 1; font-family: var(--font-sans); margin-bottom: 16px;">
+              📢 <strong>URGENT VOLUNTEER CALL · Chinhat, Lucknow</strong><br>
+              Drive: Sunday Morning Blood Donation Camp<br>
+              Needed: <strong>2 Community Mobilisers</strong> for door-to-door neighbourhood outreach.<br>
+              Criteria: Available this Sunday morning, located within 25 km of Chinhat.<br>
+              Organised via SewaCircle Ready Crew. Reply to register interest!
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; color: var(--ink-muted);">Zero PII revealed</span>
+              <button class="btn-primary" style="padding: 8px 18px; font-size: 13px;" onclick="alert('Copied to clipboard!');">
+                Copy Broadcast Text
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div style="font-size: 13px; color: var(--ink-muted); text-align: center;">
+          Once 2 mobilisers register interest on MY Bharat or local dispatch, re-run CP-SAT solver to clear drive for dispatch.
+        </div>
+      </div>
+
+      <!-- SECTION: PARTIAL ROSTER ASSIGNMENT -->
+      <div style="margin-bottom: 48px;">
+        <div style="margin-bottom: 20px;">
+          <span class="card-label-small" style="color: var(--ink-muted);">Roster Status</span>
+          <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em;">
+            Current Assignments & Gaps (Task-02)
+          </h2>
+          <p style="font-size: 14px; color: var(--ink-secondary); margin-top: 4px;">
+            The solver filled 4 slots but explicitly reported the 2 missing mobilisation slots rather than obscuring the deficit.
+          </p>
+        </div>
+
+        <div class="cards-grid-3">
+          <!-- Filled 1: Uday Y. -->
+          <div class="utility-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <span class="card-label-small">First-aid support #1</span>
+              <span class="pill-badge pill-badge-blue">Score: 58</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Uday Y.</h3>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px;">
+              ID: <span class="hash-mono">v-022</span> · 8.2 km · Experienced (8 drives)
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              • Has first aid (level 3)<br>
+              • Free sun morning; 8 km from site<br>
+              • Mentor: paired with novice Ruchi Z.
+            </div>
+          </div>
+
+          <!-- Filled 2: Ruchi Z. -->
+          <div class="utility-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <span class="card-label-small">First-aid support #2</span>
+              <span class="pill-badge pill-badge-blue">Score: 80</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">
+              Ruchi Z. <span class="pill-badge pill-badge-neutral" style="font-size: 10px;">Novice</span>
+            </h3>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px;">
+              ID: <span class="hash-mono">v-033</span> · 15.5 km · Newcomer (0 drives)
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              • Has first aid (level 2)<br>
+              • Free sun morning; 16 km from site<br>
+              • Paired with experienced Uday Y.
+            </div>
+          </div>
+
+          <!-- Filled 3: Sahil P. -->
+          <div class="utility-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <span class="card-label-small">Donor registration</span>
+              <span class="pill-badge pill-badge-blue">Score: 61</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">Sahil P.</h3>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px;">
+              ID: <span class="hash-mono">v-019</span> · 14.4 km
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              • Has documentation & reporting (level 2)<br>
+              • Free sun morning; 14 km from site
+            </div>
+          </div>
+
+          <!-- Filled 4: Tanvi L. -->
+          <div class="utility-card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+              <span class="card-label-small">Supplies (Should)</span>
+              <span class="pill-badge pill-badge-blue">Score: 79</span>
+            </div>
+            <h3 style="font-size: 18px; font-weight: 600; margin-bottom: 4px;">
+              Tanvi L. <span class="pill-badge pill-badge-neutral" style="font-size: 10px;">Novice</span>
+            </h3>
+            <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px;">
+              ID: <span class="hash-mono">v-021</span> · 15.9 km
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              • Has logistics & supplies (level 2)<br>
+              • Free sun morning; 16 km from site
+            </div>
+          </div>
+
+          <!-- GAP SLOT 1 -->
+          <div style="background: #fff5f5; border: 1.5px dashed var(--status-not-ready); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span class="card-label-small" style="color: var(--status-not-ready);">Must Role (Slot 1)</span>
+                <span class="pill-badge pill-badge-red">VACANT</span>
+              </div>
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--status-not-ready); margin-bottom: 4px;">
+                Community mobiliser #1
+              </h3>
+              <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5; margin-top: 8px;">
+                No available volunteer with <em>community_mobilisation</em> within 25 km for Sunday morning.
+              </p>
+            </div>
+            <div style="margin-top: 16px; font-size: 12px; font-weight: 600; color: var(--status-not-ready);">
+              Recruit Request Active
+            </div>
+          </div>
+
+          <!-- GAP SLOT 2 -->
+          <div style="background: #fff5f5; border: 1.5px dashed var(--status-not-ready); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                <span class="card-label-small" style="color: var(--status-not-ready);">Must Role (Slot 2)</span>
+                <span class="pill-badge pill-badge-red">VACANT</span>
+              </div>
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--status-not-ready); margin-bottom: 4px;">
+                Community mobiliser #2
+              </h3>
+              <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5; margin-top: 8px;">
+                Second door-to-door outreach slot unfilled. Standbys cannot be allocated.
+              </p>
+            </div>
+            <div style="margin-top: 16px; font-size: 12px; font-weight: 600; color: var(--status-not-ready);">
+              Recruit Request Active
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Flow</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Honest Gap Presentation</span></li>
+          <li><span style="color: var(--ink-muted);">One-Click WhatsApp Broadcast</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

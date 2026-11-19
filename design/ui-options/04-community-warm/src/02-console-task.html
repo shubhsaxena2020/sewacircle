@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Console — Pick a Drive & Task Brief</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .task-layout {
+      display: grid;
+      grid-template-columns: 360px 1fr;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Drive selection list */
+    .drive-picker-col {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .drive-item {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 16px 18px;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .drive-item:hover {
+      border-color: var(--rausch);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .drive-item.selected {
+      border: 2px solid var(--rausch);
+      background-color: #FFFDFD;
+      box-shadow: var(--shadow-card);
+    }
+
+    .drive-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .drive-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .drive-meta-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    /* Brief Editor Card */
+    .brief-editor-card {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 32px;
+      box-shadow: var(--shadow-card);
+    }
+
+    .sample-buttons-strip {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--hairline);
+    }
+
+    .sample-btn {
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid var(--hairline-strong);
+      background: white;
+      cursor: pointer;
+      color: var(--ink);
+      transition: all 0.15s ease;
+    }
+
+    .sample-btn:hover {
+      background: var(--surface-soft);
+      border-color: var(--ink);
+    }
+
+    .sample-btn.active {
+      background: var(--ink);
+      color: white;
+      border-color: var(--ink);
+    }
+
+    .brief-textarea-wrap {
+      position: relative;
+      margin-bottom: 24px;
+    }
+
+    .brief-textarea {
+      width: 100%;
+      height: 140px;
+      padding: 18px;
+      border-radius: var(--radius-card);
+      border: 1.5px solid var(--hairline-strong);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--ink);
+      resize: vertical;
+      background-color: #FAFAFA;
+      transition: border-color 0.15s ease;
+    }
+
+    .brief-textarea:focus {
+      outline: none;
+      border-color: var(--rausch);
+      background-color: white;
+    }
+
+    .brief-char-counter {
+      position: absolute;
+      bottom: 12px;
+      right: 14px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      background: rgba(255, 255, 255, 0.85);
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    /* Metadata Config Grid */
+    .meta-config-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+      padding: 20px;
+      background-color: var(--surface-soft);
+      border-radius: var(--radius-card);
+      border: 1px solid var(--hairline);
+    }
+
+    .meta-field {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .meta-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--muted);
+    }
+
+    .meta-val-input {
+      background: white;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-sm);
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    /* Privacy Banner */
+    .privacy-notice-box {
+      background: linear-gradient(135deg, #F9FBFC 0%, #FFFFFF 100%);
+      border: 1px solid #E1E8ED;
+      border-radius: var(--radius-card);
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link">Story</a>
+      <a href="02-console-task.html" class="nav-link active">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm">RK</div>
+        <div>
+          <div class="user-role-label">Rajesh Kumar</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ORGANISER CONSOLE SUBNAV -->
+  <div class="console-subnav-bar">
+    <div class="console-step-tabs">
+      <a href="02-console-task.html" class="step-tab active">
+        <span class="step-number">1</span>
+        <span>Brief & Task</span>
+      </a>
+      <a href="03-console-roles.html" class="step-tab">
+        <span class="step-number">2</span>
+        <span>Roles</span>
+      </a>
+      <a href="04-console-crew-ready.html" class="step-tab">
+        <span class="step-number">3</span>
+        <span>Crew (Ready)</span>
+      </a>
+      <a href="05-console-crew-not-ready.html" class="step-tab">
+        <span class="step-number">4</span>
+        <span>Crew (Not Ready)</span>
+      </a>
+      <a href="06-console-evidence.html" class="step-tab">
+        <span class="step-number">5</span>
+        <span>Evidence</span>
+      </a>
+      <a href="07-console-ledger.html" class="step-tab">
+        <span class="step-number">6</span>
+        <span>Ledger</span>
+      </a>
+      <a href="08-console-evaluation.html" class="step-tab">
+        <span class="step-number">7</span>
+        <span>Evaluation</span>
+      </a>
+    </div>
+
+    <div class="console-drive-chip">
+      <span class="drive-chip-dot"></span>
+      <span>Task-01: Water and hygiene camp</span>
+      <span style="color: var(--muted); font-weight: normal;">• Akbarpur</span>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-container">
+    
+    <div class="page-header">
+      <div class="page-badge-row">
+        <span class="badge-pill badge-coral">Step 1 of 7: Drive Intake</span>
+        <span class="badge-pill badge-green">Replay Cache Active</span>
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Seed 7</span>
+      </div>
+      <h1 class="page-title">Pick a Drive & Paste Task Brief</h1>
+      <p class="page-desc">
+        District organisers paste an informal drive brief in Hindi, English, or Hinglish. SewaCircle extracts required volunteer roles, validates safety criteria, and preps solver constraints.
+      </p>
+    </div>
+
+    <div class="task-layout">
+      
+      <!-- LEFT: DRIVE SELECTION -->
+      <aside class="drive-picker-col">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+          <h3 style="font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted);">District Drives (10)</h3>
+          <span style="font-size: 12px; color: var(--rausch); font-weight: 600;">Kanpur Dehat</span>
+        </div>
+
+        <!-- Task 01 (Active) -->
+        <div class="drive-item selected">
+          <div class="drive-title-row">
+            <span class="drive-name">Water and hygiene camp</span>
+            <span class="code-chip">task-01</span>
+          </div>
+          <div class="drive-meta-row">
+            <span>📍 Akbarpur, Kanpur Dehat</span>
+            <span>•</span>
+            <span>🕒 Sat Morning</span>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 4px;">
+            <span style="font-size: 11px; background: #EBF9F1; color: #008A05; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Hindi Brief</span>
+            <span style="font-size: 11px; background: #F1F3F5; color: #484848; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Team: 6</span>
+          </div>
+        </div>
+
+        <!-- Task 02 -->
+        <div class="drive-item">
+          <div class="drive-title-row">
+            <span class="drive-name">Blood donation camp</span>
+            <span class="code-chip">task-02</span>
+          </div>
+          <div class="drive-meta-row">
+            <span>📍 Chinhat, Lucknow</span>
+            <span>•</span>
+            <span>🕒 Sun Morning</span>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 4px;">
+            <span style="font-size: 11px; background: #FFF2EF; color: #C13515; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Needs Mobilisers</span>
+            <span style="font-size: 11px; background: #F1F3F5; color: #484848; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Team: 4</span>
+          </div>
+        </div>
+
+        <!-- Task 03 -->
+        <div class="drive-item">
+          <div class="drive-title-row">
+            <span class="drive-name">Tree plantation drive</span>
+            <span class="code-chip">task-03</span>
+          </div>
+          <div class="drive-meta-row">
+            <span>📍 Pipraich, Gorakhpur</span>
+            <span>•</span>
+            <span>🕒 Sun Morning</span>
+          </div>
+          <div style="display: flex; gap: 6px; margin-top: 4px;">
+            <span style="font-size: 11px; background: #F1F3F5; color: #484848; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Hinglish</span>
+            <span style="font-size: 11px; background: #F1F3F5; color: #484848; padding: 2px 8px; border-radius: 9999px; font-weight: 600;">Team: 3</span>
+          </div>
+        </div>
+
+        <!-- Task 04 -->
+        <div class="drive-item">
+          <div class="drive-title-row">
+            <span class="drive-name">Evening literacy class</span>
+            <span class="code-chip">task-04</span>
+          </div>
+          <div class="drive-meta-row">
+            <span>📍 Cholapur, Varanasi</span>
+            <span>•</span>
+            <span>🕒 Sat Afternoon</span>
+          </div>
+        </div>
+
+        <!-- Task 05 -->
+        <div class="drive-item">
+          <div class="drive-title-row">
+            <span class="drive-name">Flood relief distribution</span>
+            <span class="code-chip">task-05</span>
+          </div>
+          <div class="drive-meta-row">
+            <span>📍 Gola, Gorakhpur</span>
+            <span>•</span>
+            <span>🕒 Sat Morning</span>
+          </div>
+        </div>
+
+      </aside>
+
+      <!-- RIGHT: BRIEF INPUT & ACTIONS -->
+      <section class="brief-editor-card">
+        
+        <div class="sample-buttons-strip">
+          <span style="font-size: 13px; font-weight: 700; color: var(--muted); margin-right: 4px;">Sample Briefs:</span>
+          <button class="sample-btn active">Water & Hygiene (Hindi)</button>
+          <button class="sample-btn">Blood Donation (English)</button>
+          <button class="sample-btn">Tree Plantation (Hinglish)</button>
+        </div>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+          <label style="font-size: 14px; font-weight: 700; color: var(--ink);">
+            Task Brief Text
+            <span style="font-size: 12px; font-weight: normal; color: var(--muted); margin-left: 6px;">(Verbatim from organizer notes)</span>
+          </label>
+          <span style="font-size: 12px; font-weight: 600; color: var(--rausch); background: var(--rausch-soft); padding: 2px 8px; border-radius: 9999px;">
+            Language: Hindi (hi)
+          </span>
+        </div>
+
+        <div class="brief-textarea-wrap">
+          <!-- Exact Hindi brief text from sample-data.json for task-01 -->
+          <textarea class="brief-textarea devanagari" readonly>गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर। लगभग 120 लोग आएँगे। पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।</textarea>
+          <span class="brief-char-counter">163 chars • UTF-8</span>
+        </div>
+
+        <!-- Metadata Parameters Grid -->
+        <div class="meta-config-grid">
+          <div class="meta-field">
+            <label class="meta-label">District & Block</label>
+            <input type="text" class="meta-val-input" value="Kanpur Dehat — Akbarpur" readonly>
+          </div>
+          <div class="meta-field">
+            <label class="meta-label">Target Slot</label>
+            <input type="text" class="meta-val-input" value="Saturday Morning (sat_morning)" readonly>
+          </div>
+          <div class="meta-field">
+            <label class="meta-label">Coordinates</label>
+            <input type="text" class="meta-val-input" value="26.4797° N, 79.8981° E" readonly>
+          </div>
+          <div class="meta-field">
+            <label class="meta-label">Target Team Size</label>
+            <input type="text" class="meta-val-input" value="6 volunteers" readonly>
+          </div>
+          <div class="meta-field">
+            <label class="meta-label">Max Travel Distance</label>
+            <input type="text" class="meta-val-input" value="25.0 km radius" readonly>
+          </div>
+          <div class="meta-field">
+            <label class="meta-label">Minors Permitted?</label>
+            <input type="text" class="meta-val-input" value="Yes (Age 16-17 with consent)" readonly>
+          </div>
+        </div>
+
+        <!-- Privacy & Redaction Protection notice -->
+        <div class="privacy-notice-box">
+          <div style="width: 36px; height: 36px; border-radius: 50%; background: #E8F4FD; color: #0E65C9; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+          </div>
+          <div>
+            <div style="font-size: 13px; font-weight: 700; color: #0E65C9;">PII Scrubbing & Gazetteer Masking Active</div>
+            <div style="font-size: 12px; color: var(--body);">
+              Phone numbers, email addresses, and personal names are replaced using a 61,000-name Indian gazetteer before sending to language models.
+            </div>
+          </div>
+        </div>
+
+        <!-- Action Bar -->
+        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid var(--hairline);">
+          <div style="font-size: 13px; color: var(--muted);">
+            Offline Model Ready: <strong>Qwen2.5-7B (4-bit)</strong> • 0.932 Recall
+          </div>
+          <a href="03-console-roles.html" class="btn btn-primary btn-pill" style="padding: 14px 28px; font-size: 15px;">
+            Extract Roles with AI
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

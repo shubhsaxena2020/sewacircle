@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>चरण 06: अपरिवर्तनीय बहीखाता · Tamper-Evident Ledger — सेवामंडल तत्पर दल (08-mitti-original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Block-print decorative runner ribbon -->
+  <div class="blockprint-ribbon"></div>
+
+  <!-- Shared Site Header -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        
+        <a href="01-landing.html" class="brand-lockup">
+          <div class="brand-seal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18"/>
+              <path d="M3 12h18"/>
+              <path d="M5.6 5.6l12.8 12.8"/>
+              <circle cx="12" cy="12" r="3" fill="var(--terracotta)"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">सेवामंडल · SewaCircle</span>
+            <span class="brand-sub">तत्पर दल · READY CREW</span>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="01-landing.html" class="nav-item">
+            <span class="nav-devanagari-prefix">परिचय</span> Story
+          </a>
+          <a href="02-console-task.html" class="nav-item active">
+            <span class="nav-devanagari-prefix">कंसोल</span> Organiser Console
+          </a>
+          <a href="09-volunteer.html" class="nav-item">
+            <span class="nav-devanagari-prefix">युवा पोर्टल</span> Volunteer
+          </a>
+          <a href="10-districts.html" class="nav-item">
+            <span class="nav-devanagari-prefix">20 जिले</span> Districts
+          </a>
+          <a href="11-method.html" class="nav-item">
+            <span class="nav-devanagari-prefix">कार्यप्रणाली</span> Method
+          </a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="badge-synthetic">
+            <span class="badge-synthetic-dot"></span>
+            Synthetic Data
+          </span>
+          <div class="lang-toggle">
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn active">हिन्दी</button>
+          </div>
+          <div class="district-badge">
+            <span class="district-badge-dot"></span>
+            <span>अकबरपुर, कानपुर देहात</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Workflow Progress Strip -->
+  <div class="console-workflow-bar">
+    <div class="site-container">
+      <div class="workflow-steps">
+        <a href="02-console-task.html" class="workflow-step">
+          <span class="workflow-step-num">1</span>
+          <span>कार्य विवरण (Brief)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="03-console-roles.html" class="workflow-step">
+          <span class="workflow-step-num">2</span>
+          <span>भूमिकाएं (Roles)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="04-console-crew-ready.html" class="workflow-step">
+          <span class="workflow-step-num">3</span>
+          <span>दल: तैयार (Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="05-console-crew-not-ready.html" class="workflow-step">
+          <span class="workflow-step-num">4</span>
+          <span>दल: अपूर्ण (Not Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="06-console-evidence.html" class="workflow-step">
+          <span class="workflow-step-num">5</span>
+          <span>साक्ष्य (Evidence)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="07-console-ledger.html" class="workflow-step active">
+          <span class="workflow-step-num">6</span>
+          <span>बहीखाता (Ledger)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="08-console-evaluation.html" class="workflow-step">
+          <span class="workflow-step-num">7</span>
+          <span>मूल्यांकन (Eval)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    <div class="site-container">
+
+      <!-- Page Title -->
+      <div class="page-title-block">
+        <h1 class="page-title-deva">अपरिवर्तनीय डिजिटल बहीखाता (Audit Ledger)</h1>
+        <div class="page-title-eng">Step 06: Tamper-Evident SHA-256 Hash Chain &amp; W3C Credential Export</div>
+        <p class="page-subtitle-lead">
+          प्रत्येक संपादन, प्रारूप, विसंगति फ्लैग और मेजबान पुष्टि क्रिप्टोग्राफिक रूप से शृंखलाबद्ध है। हैश-चेन संपादन के इतिहास को संरक्षित करती है।
+        </p>
+      </div>
+
+      <!-- LEDGER VERIFICATION BANNER (Verbatim from ledger_verify) -->
+      <section class="verdict-plaque ready" style="padding: 20px 26px; margin-bottom: 28px;">
+        <div class="verdict-plaque-left">
+          <div class="verdict-seal" style="width: 52px; height: 52px;">
+            <span style="font-size: 18px;">🔒</span>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ready-green-dark);">
+              बहीखाता सत्यापन: शृंखला पूर्ण एवं अखंडित (Chain Integrity: 100% OK)
+            </div>
+            <p style="font-size: 13.5px; color: var(--ink-secondary); margin-top: 3px;">
+              <strong>सत्यापन नोट:</strong> "Hash chain shows edits, not truth; truth comes from host confirmation."
+              (हैश-चेन यह प्रमाणित करती है कि किसी रिकॉर्ड में पिछले समय से छेड़छाड़ नहीं हुई; मूल सत्य केवल मेजबान की पुष्टि से आता है।)
+            </p>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 14px;">
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--ready-green);">9 / 9</div>
+            <div class="verdict-metric-lbl">प्रविष्टियां मान्य</div>
+          </div>
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--indigo);">शून्य</div>
+            <div class="verdict-metric-lbl">खराब ब्लॉक (Bad Index)</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TWO COLUMN LAYOUT: HASH CHAIN LIST & CREDENTIAL EXPORT -->
+      <div class="grid-main-aside" style="margin-bottom: 32px;">
+        
+        <!-- Left: 9 Linked SHA-256 Ledger Blocks -->
+        <div>
+          <div class="section-heading-mitti">
+            <div class="section-heading-deva">शृंखलाबद्ध प्रविष्टियां (Linked Audit Blocks #0 to #8)</div>
+            <div class="section-heading-eng">Cryptographic Trail of Edits, Flags &amp; Confirmations</div>
+          </div>
+
+          <div class="ledger-chain-view">
+            
+            <!-- Block 0 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#00</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">00:22:57 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill draft">draft (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-068-poster-team</strong>
+                <div class="hash-snippet" title="Payload Hash: 77b3817e082b0f7fa4034140ae806834d6f0f15e0313b43ab7cdd067382bc861">
+                  Pay: 77b3817e08...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: 5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01">
+                  Hash: 5376047a...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: 0000000000... (Genesis)</div>
+              </div>
+            </div>
+
+            <!-- Block 1 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#01</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">00:22:57 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill flag">flag (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-070-first-aid-support</strong>
+                <div class="hash-snippet" title="Payload Hash: 0d1c1e0480a5e92685526a710e339314db36a507549e2e4de4df769e431d8253">
+                  Pay: 0d1c1e0480...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e">
+                  Hash: cc415443...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: 5376047a... (#00)</div>
+              </div>
+            </div>
+
+            <!-- Block 2 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#02</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">00:22:57 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill flag">flag (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-067-supplies-and-site-setup</strong>
+                <div class="hash-snippet" title="Payload Hash: ec31a918450bbcd2088e7dc6f77772a0723b4e16c47c253d8963dab19c901ebb">
+                  Pay: ec31a91845...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d">
+                  Hash: b72f44b4...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: cc415443... (#01)</div>
+              </div>
+            </div>
+
+            <!-- Block 3 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#03</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">00:22:57 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill flag">flag (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--alert-madder);">card-task-01-v-011-local-language-liaison</strong>
+                <div class="hash-snippet" title="Payload Hash: ddbc80be481465cb064d1f016ba80daef8d8c61e928a860391727f716cf93c52">
+                  Pay: ddbc80be48...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: 568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6">
+                  Hash: 568c1553...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: b72f44b4... (#02)</div>
+              </div>
+            </div>
+
+            <!-- Block 4 -->
+            <div class="ledger-block" style="background: #FAFBF8; border-color: var(--ready-green-border);">
+              <span class="ledger-index-badge" style="background: var(--ready-green-light); color: var(--ready-green-dark); border-color: var(--ready-green-border);">#04</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">00:22:58 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill confirm">confirm (होस्ट)</span>
+              <div>
+                <strong style="color: var(--ready-green-dark);">card-task-01-v-068-poster-team</strong>
+                <div class="hash-snippet" title="Payload Hash: a326b66796e08fcf779a5ae8103db0580dffa3f80a00092529d93cd27c84621d">
+                  Pay: a326b66796...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: 8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0">
+                  Hash: 8943719e...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: 568c1553... (#03)</div>
+              </div>
+            </div>
+
+            <!-- Block 5 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#05</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">01:50:44 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill draft">draft (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-008-poster-team</strong>
+                <div class="hash-snippet" title="Payload Hash: dfb29d708c69dc9880e714b70ef6c360cb44e2d3c7e50170830247340acac4e9">
+                  Pay: dfb29d708c...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f">
+                  Hash: df7005a6...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: 8943719e... (#04)</div>
+              </div>
+            </div>
+
+            <!-- Block 6 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#06</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">01:50:44 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill draft">draft (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-070-first-aid-support</strong>
+                <div class="hash-snippet" title="Payload Hash: ed5dc93e3d9eb725df4f88561faa3c6b182490b2f7b9d8989d30ab97e204c5bf">
+                  Pay: ed5dc93e3d...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f">
+                  Hash: f964d4b1...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: df7005a6... (#05)</div>
+              </div>
+            </div>
+
+            <!-- Block 7 -->
+            <div class="ledger-block">
+              <span class="ledger-index-badge">#07</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">01:50:44 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill draft">draft (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--ink);">card-task-01-v-067-supplies-and-site-setup</strong>
+                <div class="hash-snippet" title="Payload Hash: d421926456327dc51ccdc10eb1ac09aa291f92db7258825ec46c3fbeecf157c1">
+                  Pay: d421926456...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: 34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05">
+                  Hash: 34ded9cd...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: f964d4b1... (#06)</div>
+              </div>
+            </div>
+
+            <!-- Block 8 -->
+            <div class="ledger-block" style="border-left: 4px solid var(--alert-madder);">
+              <span class="ledger-index-badge">#08</span>
+              <div style="font-size: 11.5px; color: var(--ink-muted);">01:50:44 UTC<br><span style="font-size: 10px;">2026-11-19</span></div>
+              <span class="ledger-action-pill flag">flag (सिस्टम)</span>
+              <div>
+                <strong style="color: var(--alert-madder);">card-task-01-v-011-local-language-liaison</strong>
+                <div class="hash-snippet" title="Payload Hash: 932e97dc171d4c4eb6cf22dd1e759a599a3f92f196f0b4eefb944ba89e6750d1">
+                  Pay: 932e97dc17...
+                </div>
+              </div>
+              <div>
+                <div class="hash-snippet" title="Entry Hash: 24b43390134c48a14bb638907a1dff5d6b1163e4324cc98b0f9686416ee564a9">
+                  Hash: 24b43390...
+                </div>
+                <div style="font-size: 10.5px; color: var(--ink-muted); margin-top: 2px;">Prev: 34ded9cd... (#07)</div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Right: W3C Verifiable Credential Export Card -->
+        <div>
+          
+          <div class="card-mitti" style="margin-bottom: 24px;">
+            <div class="card-mitti-header">
+              <div class="card-title-group">
+                <span class="card-title-devanagari">W3C सत्यापन प्रमाण पत्र</span>
+                <span class="card-subtitle-english">Verifiable Credential Export</span>
+              </div>
+              <span class="badge-pill badge-safety-check">JSON-LD 2.0</span>
+            </div>
+
+            <p style="font-size: 12.5px; color: var(--ink-secondary); margin-bottom: 12px; line-height: 1.5;">
+              प्रत्येक पुष्टि किए गए योगदान कार्ड को W3C Verifiable Credential मानक के अनुरूप निर्यात किया जा सकता है।
+            </p>
+
+            <div style="background: var(--paper-canvas); border: 1px solid var(--hairline-strong); border-radius: 4px; padding: 12px; font-family: var(--font-mono); font-size: 11px; line-height: 1.5; color: var(--ink-secondary); margin-bottom: 14px; overflow-x: auto;">
+              <pre>{
+  "@context": [
+    "https://www.w3.org/2018/credentials/v1"
+  ],
+  "id": "urn:sewacircle:vc:task-01:v-008",
+  "type": ["VerifiableCredential", "CommunityVolunteeringCredential"],
+  "issuer": "did:sewa:up:kanpur_dehat",
+  "issuanceDate": "2026-11-19T01:50:44Z",
+  "credentialSubject": {
+    "id": "did:volunteer:v-008",
+    "name": "Heena P.",
+    "task": "Water and hygiene camp",
+    "role": "Poster team",
+    "verified_hours": 5.0,
+    "ledger_root_hash": "df7005a6630826d1fd04..."
+  }
+}</pre>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button type="button" class="btn-indigo" style="font-size: 13px; justify-content: center;">
+                प्रमाण पत्र डाउनलोड करें (.JSON)
+              </button>
+              <button type="button" class="btn-outline-mitti" style="font-size: 12.5px; justify-content: center;">
+                क्रिप्टोग्राफिक हस्ताक्षर जांचें
+              </button>
+            </div>
+          </div>
+
+          <!-- Audit Discipline Box -->
+          <div class="card-mitti" style="background: var(--paper-card-warm); border-style: dashed;">
+            <h5 style="font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--indigo-deep); margin-bottom: 6px;">
+              ऑडिट सुरक्षा विशेषता
+            </h5>
+            <p style="font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+              यदि कोई भी पुराना रिकॉर्ड बदला जाता है, तो उससे जुड़े सभी आगामी हैश अमान्य हो जाएंगे। यह प्रणाली किसी भी प्रकार के फर्जीवाड़े को तत्काल पकड़ती है।
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 18px 24px; border-radius: 5px;">
+        <a href="06-console-evidence.html" class="btn-outline-mitti">
+          ← साक्ष्य समीक्षा पर वापस जाएं
+        </a>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <span style="font-size: 13px; color: var(--ink-muted);">9 ब्लॉक सत्यापित • शून्य विसंगति</span>
+          <a href="08-console-evaluation.html" class="btn-terracotta" style="font-size: 15px; padding: 10px 24px;">
+            <span>हार्नेस मूल्यांकन आंकड़े देखें (Evaluation)</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-disclaimer-box">
+        <div>
+          <strong>वैधानिक स्पष्टीकरण:</strong> यह वेबसाइट एक प्रोटोटाइप प्रदर्शन है। समस्त आंकड़े व स्वयंसेवक रिकॉर्ड काल्पनिक (Synthetic) हैं। Not affiliated with MY Bharat or any government body.
+        </div>
+        <span class="badge-synthetic">Synthetic Data Only</span>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 सेवामंडल तत्पर दल (SewaCircle Ready Crew) · Direction 08: Mitti Original</div>
+        <div style="display: flex; gap: 18px;">
+          <a href="06-console-evidence.html" style="color: var(--ink-muted); text-decoration: none;">चरण 05: साक्ष्य समीक्षा</a>
+          <span>•</span>
+          <a href="08-console-evaluation.html" style="color: var(--ink-muted); text-decoration: none;">चरण 07: मूल्यांकन</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

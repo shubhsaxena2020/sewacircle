@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>चरण 07: हार्नेस मूल्यांकन · Evaluation Harness — सेवामंडल तत्पर दल (08-mitti-original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Block-print decorative runner ribbon -->
+  <div class="blockprint-ribbon"></div>
+
+  <!-- Shared Site Header -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        
+        <a href="01-landing.html" class="brand-lockup">
+          <div class="brand-seal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18"/>
+              <path d="M3 12h18"/>
+              <path d="M5.6 5.6l12.8 12.8"/>
+              <circle cx="12" cy="12" r="3" fill="var(--terracotta)"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">सेवामंडल · SewaCircle</span>
+            <span class="brand-sub">तत्पर दल · READY CREW</span>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="01-landing.html" class="nav-item">
+            <span class="nav-devanagari-prefix">परिचय</span> Story
+          </a>
+          <a href="02-console-task.html" class="nav-item active">
+            <span class="nav-devanagari-prefix">कंसोल</span> Organiser Console
+          </a>
+          <a href="09-volunteer.html" class="nav-item">
+            <span class="nav-devanagari-prefix">युवा पोर्टल</span> Volunteer
+          </a>
+          <a href="10-districts.html" class="nav-item">
+            <span class="nav-devanagari-prefix">20 जिले</span> Districts
+          </a>
+          <a href="11-method.html" class="nav-item">
+            <span class="nav-devanagari-prefix">कार्यप्रणाली</span> Method
+          </a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="badge-synthetic">
+            <span class="badge-synthetic-dot"></span>
+            Synthetic Data
+          </span>
+          <div class="lang-toggle">
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn active">हिन्दी</button>
+          </div>
+          <div class="district-badge">
+            <span class="district-badge-dot"></span>
+            <span>अकबरपुर, कानपुर देहात</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Workflow Progress Strip -->
+  <div class="console-workflow-bar">
+    <div class="site-container">
+      <div class="workflow-steps">
+        <a href="02-console-task.html" class="workflow-step">
+          <span class="workflow-step-num">1</span>
+          <span>कार्य विवरण (Brief)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="03-console-roles.html" class="workflow-step">
+          <span class="workflow-step-num">2</span>
+          <span>भूमिकाएं (Roles)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="04-console-crew-ready.html" class="workflow-step">
+          <span class="workflow-step-num">3</span>
+          <span>दल: तैयार (Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="05-console-crew-not-ready.html" class="workflow-step">
+          <span class="workflow-step-num">4</span>
+          <span>दल: अपूर्ण (Not Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="06-console-evidence.html" class="workflow-step">
+          <span class="workflow-step-num">5</span>
+          <span>साक्ष्य (Evidence)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="07-console-ledger.html" class="workflow-step">
+          <span class="workflow-step-num">6</span>
+          <span>बहीखाता (Ledger)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="08-console-evaluation.html" class="workflow-step active">
+          <span class="workflow-step-num">7</span>
+          <span>मूल्यांकन (Eval)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    <div class="site-container">
+
+      <!-- Page Title -->
+      <div class="page-title-block">
+        <h1 class="page-title-deva">वैज्ञानिक हार्नेस मूल्यांकन एवं निष्पक्षता रिपोर्ट</h1>
+        <div class="page-title-eng">Step 07: Benchmark Evaluation across 10 Drives (95% CI &amp; Failures)</div>
+        <p class="page-subtitle-lead">
+          10 लेबल किए गए टास्क और 80 स्वयंसेवकों पर चार विधियों का कठोर परीक्षण। सेवामंडल अपनी असफलताओं और कमियों (Misses) को भी पूरी ईमानदारी से प्रदर्शित करता है।
+        </p>
+      </div>
+
+      <!-- HIGHLIGHT SUMMARY CARD -->
+      <section class="card-mitti" style="background: var(--paper-canvas); margin-bottom: 32px;">
+        <div class="grid-3col">
+          <div style="border-right: 1px solid var(--hairline-strong); padding-right: 20px;">
+            <div style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--ready-green); margin-bottom: 4px;">
+              7 / 10 तैयार (READY)
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.45;">
+              CP-SAT ने 70% अभियानों को संपूर्ण स्टैंडबाय सहित तैयार किया (Nearest-Skill केवल 10% कर सका)।
+            </div>
+          </div>
+          <div style="border-right: 1px solid var(--hairline-strong); padding-right: 20px;">
+            <div style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--terracotta); margin-bottom: 4px;">
+              -19.7% दोहराव में कमी
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.45;">
+              सतर्क मानव आयोजक की तुलना में पुराने लोगों को कम दोहराया और अधिक नए युवाओं को मौका दिया।
+            </div>
+          </div>
+          <div>
+            <div style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--indigo); margin-bottom: 4px;">
+              76.0% रोबस्टनेस
+            </div>
+            <div style="font-size: 13px; color: var(--ink-secondary); line-height: 1.45;">
+              औसत ड्रॉपआउट सुरक्षा 76% रही, जबकि निकटतम-कौशल में यह मात्र 15.3% थी।
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4 METHODS SUMMARY TABLE (Verbatim eval.summary) -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">चारों विधियों के तुलनात्मक औसत आंकड़े</span>
+            <span class="card-subtitle-english">Summary Metrics across 10 Tasks (n=10, Volunteers=80)</span>
+          </div>
+          <span class="badge-pill" style="background: var(--paper-subtle); color: var(--ink);">बीज 7 (Seed 7)</span>
+        </div>
+
+        <table class="table-mitti">
+          <thead>
+            <tr>
+              <th>आवंटन विधि (Method)</th>
+              <th>तैयार दर (Ready Rate)</th>
+              <th>भूमिका पूर्ति (Role Coverage)</th>
+              <th>ड्रॉपआउट सुरक्षा (Robustness)</th>
+              <th>दोहराव हिस्सा (Repeat Pick)</th>
+              <th>अवसर गिनी (Exposure Gini)</th>
+              <th>डेल्टा बनाम बेसलाइन</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--ready-green-light); font-weight: 700;">
+              <td><strong>CP-SAT (सेवामंडल)</strong></td>
+              <td><span class="badge-pill badge-safety-check">0.70 (7/10)</span></td>
+              <td>0.9167 (91.7%)</td>
+              <td>0.7600 (76.0%)</td>
+              <td>0.2300 (23.0%)</td>
+              <td>0.4677</td>
+              <td><strong style="color: var(--ready-green);">सर्वश्रेष्ठ परिणाम</strong></td>
+            </tr>
+            <tr>
+              <td>Nearest Skill (निकटतम कौशल)</td>
+              <td>0.10 (1/10)</td>
+              <td>0.9167 (91.7%)</td>
+              <td>0.1533 (15.3%)</td>
+              <td>0.4033 (40.3%)</td>
+              <td>0.5045</td>
+              <td style="color: var(--alert-madder);">+60.0% रोबस्टनेस लाभ</td>
+            </tr>
+            <tr>
+              <td>Manual Greedy (सतर्क मानव आयोजक)</td>
+              <td>0.70 (7/10)</td>
+              <td>0.9167 (91.7%)</td>
+              <td>0.7600 (76.0%)</td>
+              <td>0.4267 (42.7%)</td>
+              <td>0.5081</td>
+              <td style="color: var(--terracotta);">-19.7% निष्पक्षता लाभ</td>
+            </tr>
+            <tr>
+              <td>Random Feasible (यादृच्छिक सुसंगत)</td>
+              <td>0.15 (1.5/10)</td>
+              <td>0.9142 (91.4%)</td>
+              <td>0.2183 (21.8%)</td>
+              <td>0.3067 (30.7%)</td>
+              <td>0.4861</td>
+              <td>+54.2% रोबस्टनेस लाभ</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- 95% CONFIDENCE INTERVALS TABLE (Verbatim eval.ci95) -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">95% विश्वास अंतराल (95% Confidence Intervals)</span>
+            <span class="card-subtitle-english">Bootstrap Resampling (CI95 Lower to Upper Bounds)</span>
+          </div>
+          <span class="badge-pill" style="background: var(--paper-subtle); color: var(--ink);">p &lt; 0.05</span>
+        </div>
+
+        <table class="table-mitti">
+          <thead>
+            <tr>
+              <th>आवंटन विधि</th>
+              <th>Ready Rate [CI95]</th>
+              <th>Role Coverage [CI95]</th>
+              <th>Robustness [CI95]</th>
+              <th>Repeat Pick [CI95]</th>
+              <th>Exposure Gini [CI95]</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--ready-green-light); font-weight: 700;">
+              <td><strong>CP-SAT</strong></td>
+              <td class="mono-cell">[0.40, 0.90]</td>
+              <td class="mono-cell">[0.7667, 1.0000]</td>
+              <td class="mono-cell">[0.5000, 0.9600]</td>
+              <td class="mono-cell">[0.0833, 0.4100]</td>
+              <td class="mono-cell">[0.3764, 0.5463]</td>
+            </tr>
+            <tr>
+              <td>Nearest Skill</td>
+              <td class="mono-cell">[0.00, 0.30]</td>
+              <td class="mono-cell">[0.7667, 1.0000]</td>
+              <td class="mono-cell">[0.0167, 0.3700]</td>
+              <td class="mono-cell">[0.2150, 0.5933]</td>
+              <td class="mono-cell">[0.4029, 0.5875]</td>
+            </tr>
+            <tr>
+              <td>Manual Greedy</td>
+              <td class="mono-cell">[0.40, 0.90]</td>
+              <td class="mono-cell">[0.7667, 1.0000]</td>
+              <td class="mono-cell">[0.5000, 0.9600]</td>
+              <td class="mono-cell">[0.2483, 0.6100]</td>
+              <td class="mono-cell">[0.4062, 0.5906]</td>
+            </tr>
+            <tr>
+              <td>Random Feasible</td>
+              <td class="mono-cell">[0.01, 0.36]</td>
+              <td class="mono-cell">[0.7667, 0.9975]</td>
+              <td class="mono-cell">[0.0250, 0.4383]</td>
+              <td class="mono-cell">[0.1503, 0.4816]</td>
+              <td class="mono-cell">[0.3894, 0.5655]</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- TRANSPARENCY: MISSES & FAILURES LIST (All 7 items verbatim) -->
+      <section class="card-mitti" style="border-left: 5px solid var(--alert-madder); margin-bottom: 32px;">
+        <div class="card-mitti-header" style="border-bottom-color: var(--hairline-subtle);">
+          <div class="card-title-group">
+            <span class="card-title-devanagari" style="color: var(--alert-madder);">
+              प्रणालीगत सीमाएं एवं विफलताएं (Misses &amp; Failures List)
+            </span>
+            <span class="card-subtitle-english">Honest Documentation of Cases Where CP-SAT Struggled</span>
+          </div>
+          <span class="badge-pill" style="background: var(--alert-madder-light); color: var(--alert-madder);">7 दर्ज कमियां</span>
+        </div>
+
+        <p style="font-size: 13px; color: var(--ink-secondary); margin-bottom: 16px;">
+          सच्ची वैज्ञानिक प्रणाली अपनी कमियों को नहीं छुपाती। नीचे दिए गए 7 मामलों में CP-SAT या तो आवश्यक सीटें नहीं भर सका या रैंडम विधि से थोड़ा पीछे रहा:
+        </p>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 8px; font-size: 13px; color: var(--ink);">
+          <li style="padding: 10px 14px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--alert-madder);">1. task-02:</strong> cp_sat repeat_pick_share 0.17 worse than random_feasible 0.14
+          </li>
+          <li style="padding: 10px 14px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--alert-madder);">2. task-03:</strong> cp_sat repeat_pick_share 0.75 worse than random_feasible 0.74
+          </li>
+          <li style="padding: 10px 14px; background: var(--alert-madder-light); border-radius: 4px; border: 1px solid var(--alert-madder-border);">
+            <strong style="color: var(--alert-madder);">3. task-04:</strong> cp_sat could not fill every must slot (coverage 0.33); no eligible people
+          </li>
+          <li style="padding: 10px 14px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--alert-madder);">4. task-05:</strong> cp_sat exposure_gini 0.37 worse than random_feasible 0.37
+          </li>
+          <li style="padding: 10px 14px; background: var(--alert-madder-light); border-radius: 4px; border: 1px solid var(--alert-madder-border);">
+            <strong style="color: var(--alert-madder);">5. task-05:</strong> cp_sat could not fill every must slot (coverage 0.83); no eligible people
+          </li>
+          <li style="padding: 10px 14px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--alert-madder);">6. task-07:</strong> cp_sat dropout robustness only 0.60 (too few eligible standby people)
+          </li>
+          <li style="padding: 10px 14px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--alert-madder);">7. task-09:</strong> cp_sat exposure_gini 0.42 worse than random_feasible 0.41
+          </li>
+        </ul>
+      </section>
+
+      <!-- PLAIN-LANGUAGE METRICS DEFINITIONS -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">आयोजक हेतु सरल शब्दों में मीट्रिक्स परिभाषा</span>
+            <span class="card-subtitle-english">Plain-Language Metric Definitions for District Coordinators</span>
+          </div>
+        </div>
+
+        <div class="grid-2col" style="gap: 20px;">
+          <div>
+            <h5 style="font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--indigo-deep); margin-bottom: 4px;">
+              गिनी गुणांक (Exposure Gini) क्या है?
+            </h5>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              यह मापता है कि क्या सभी पंजीकृत युवाओं को समान अवसर मिल रहे हैं। 0.0 का अर्थ है पूर्ण समानता (हर युवा को बराबर मौके मिले), जबकि 1.0 का अर्थ है कि एक ही व्यक्ति को हर बार चुन लिया गया। हमारा लक्ष्य इसे 0.5 से नीचे रखना है।
+            </p>
+          </div>
+
+          <div>
+            <h5 style="font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--indigo-deep); margin-bottom: 4px;">
+              ड्रॉपआउट रोबस्टनेस (Robustness) क्या है?
+            </h5>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5;">
+              यह प्रतिशत दर्शाता है कि यदि कोई मुख्य स्वयंसेवक अंतिम क्षण में बीमार या अनुपस्थित हो जाए, तो क्या स्टैंडबाय बैकअप उस भूमिका को बिना अभियान रोके तुरंत संभाल सकता है। 100% का अर्थ है कोई एकल विफलता बिंदु (SPOF) नहीं है।
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 18px 24px; border-radius: 5px;">
+        <a href="07-console-ledger.html" class="btn-outline-mitti">
+          ← बहीखाता पर वापस जाएं
+        </a>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <a href="09-volunteer.html" class="btn-terracotta" style="font-size: 15px; padding: 10px 24px;">
+            <span>युवा स्वयंसेवक पोर्टल देखें (Volunteer View)</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-disclaimer-box">
+        <div>
+          <strong>वैधानिक स्पष्टीकरण:</strong> यह वेबसाइट एक प्रोटोटाइप प्रदर्शन है। समस्त आंकड़े व स्वयंसेवक रिकॉर्ड काल्पनिक (Synthetic) हैं। Not affiliated with MY Bharat or any government body.
+        </div>
+        <span class="badge-synthetic">Synthetic Data Only</span>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 सेवामंडल तत्पर दल (SewaCircle Ready Crew) · Direction 08: Mitti Original</div>
+        <div style="display: flex; gap: 18px;">
+          <a href="07-console-ledger.html" style="color: var(--ink-muted); text-decoration: none;">चरण 06: बहीखाता</a>
+          <span>•</span>
+          <a href="09-volunteer.html" style="color: var(--ink-muted); text-decoration: none;">स्वयंसेवक पोर्टल</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

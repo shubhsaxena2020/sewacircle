@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — Methodology & Honest Limits (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item active"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">Methodology</span>
+        <span class="sub-nav-chip">Sequential CP-SAT & Boundaries</span>
+      </div>
+      <div class="sub-nav-right">
+        <a href="08-console-evaluation.html" class="text-link" style="font-size: 14px; margin-right: 8px;">View Empirical Benchmark</a>
+        <a href="02-console-task.html" class="btn-primary">Launch Console →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN METHOD VIEW -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 48px;">
+    <div class="container">
+
+      <div class="keynote-header-left">
+        <div class="keynote-header-eyebrow">Deterministic Operations Research</div>
+        <h1 class="keynote-header-title">How the Crew is Decided.</h1>
+        <p class="keynote-header-sub">
+          SewaCircle Ready Crew replaces black-box heuristics with Google OR-Tools CP-SAT constraint programming organized into three strict sequential priority tiers.
+        </p>
+      </div>
+
+      <!-- SECTION 1: SEQUENTIAL CP-SAT FORMULATION -->
+      <div class="product-stage" style="margin-bottom: 56px;">
+        <div class="product-frame">
+          <div class="product-frame-bar">
+            <div class="product-frame-dots">
+              <span class="frame-dot" style="background:#ff5f56;"></span>
+              <span class="frame-dot" style="background:#ffbd2e;"></span>
+              <span class="frame-dot" style="background:#27c93f;"></span>
+            </div>
+            <div class="product-frame-title">Optimization Hierarchy — Sequential Constraint Programming Tiers</div>
+            <div style="font-size: 11px; color: var(--ink-muted);">OR-Tools CP-SAT 9.15</div>
+          </div>
+
+          <div class="product-frame-content" style="padding: 36px;">
+            
+            <div class="cards-grid-3">
+              <!-- Tier 1 -->
+              <div class="utility-card" style="border-top: 3px solid #0066cc;">
+                <span class="card-label-small" style="color: var(--primary);">Tier 1 (Hard Priority)</span>
+                <h3 style="font-size: 18px; font-weight: 600; margin: 4px 0 10px 0;">Safety & Feasibility</h3>
+                <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  • <strong>Role qualifications:</strong> Volunteer skill level &ge; minimum required.<br>
+                  • <strong>Safety gate:</strong> First aid, driving, and disaster relief accept <em>only host-checked skills</em>.<br>
+                  • <strong>Distance constraint:</strong> Distance &le; 25.0 km from task coordinates.<br>
+                  • <strong>Time slot:</strong> Volunteer marked available for drive time slot.<br>
+                  • <strong>Minor protection:</strong> Minors permitted only when guardian consent exists and task allows.
+                </p>
+              </div>
+
+              <!-- Tier 2 -->
+              <div class="utility-card" style="border-top: 3px solid #1e7e34;">
+                <span class="card-label-small" style="color: #1e7e34;">Tier 2 (Redundancy)</span>
+                <h3 style="font-size: 18px; font-weight: 600; margin: 4px 0 10px 0;">Dropout Robustness</h3>
+                <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  • <strong>Standby guarantee:</strong> Pre-allocates eligible standby volunteers for every essential station.<br>
+                  • <strong>Single fault tolerance:</strong> If any one volunteer drops out, standby auto-promotes without role deficit.<br>
+                  • <strong>Overlapping standbys:</strong> Volunteers with dual skills (e.g. Awadhi + Posters) cover multiple roles.
+                </p>
+              </div>
+
+              <!-- Tier 3 -->
+              <div class="utility-card" style="border-top: 3px solid var(--ink);">
+                <span class="card-label-small" style="color: var(--ink);">Tier 3 (Equity & Optimization)</span>
+                <h3 style="font-size: 18px; font-weight: 600; margin: 4px 0 10px 0;">Fairness & Travel</h3>
+                <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  • <strong>Fatigue penalty:</strong> Discourages picking youth chosen &ge; 3 times in past 90 days.<br>
+                  • <strong>Gini minimization:</strong> Distributes opportunities evenly across blocks.<br>
+                  • <strong>Mentor pairing:</strong> Pairs novices (0 past drives) with experienced volunteers (&ge; 3 drives).<br>
+                  • <strong>Travel minimization:</strong> Prefers closer youth when skills are tied.
+                </p>
+              </div>
+            </div>
+
+            <!-- Performance Metrics Box -->
+            <div style="background: var(--canvas-parchment); border-radius: 12px; padding: 20px 24px; margin-top: 28px; display: flex; align-items: center; justify-content: space-between;">
+              <div style="font-size: 13px; color: var(--ink);">
+                <strong>Solver Scalability:</strong> 80/80 optimal up to 500 volunteers in max <strong>0.327 seconds</strong> on a standard single-core CPU. Zero cloud dependencies.
+              </div>
+              <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Deterministic Guarantee</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 2: PLAIN-LANGUAGE METRIC DEFINITIONS -->
+      <div style="margin-bottom: 56px;">
+        <div style="margin-bottom: 24px;">
+          <span class="card-label-small" style="color: var(--primary);">Operational Clarity</span>
+          <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em;">
+            Metrics in Plain Words
+          </h2>
+          <p style="font-size: 14px; color: var(--ink-secondary); margin-top: 4px;">
+            District organisers should never have to decipher abstract academic formulas. Here is what every metric means on the ground:
+          </p>
+        </div>
+
+        <div class="cards-grid-2">
+          
+          <div class="utility-card" style="padding: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <h3 style="font-size: 18px; font-weight: 600;">Role Coverage</h3>
+              <span class="pill-badge pill-badge-blue">Current: 91.7%</span>
+            </div>
+            <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6;">
+              <strong>What it asks:</strong> <em>"Did we find someone qualified for every mandatory station?"</em><br>
+              A score of 100% means the leader, first-aider, language speaker, and logistics helper are all present. If coverage is below 100%, the system flags NOT READY and names the exact missing skills.
+            </p>
+          </div>
+
+          <div class="utility-card" style="padding: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <h3 style="font-size: 18px; font-weight: 600;">Dropout Robustness</h3>
+              <span class="pill-badge pill-badge-green">Current: 76.0%</span>
+            </div>
+            <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6;">
+              <strong>What it asks:</strong> <em>"If a volunteer's bicycle breaks down on Saturday morning, does the drive collapse?"</em><br>
+              Robustness measures what percentage of roles have a standby volunteer ready to step in immediately. 100% robustness means any single person can drop out and the drive still runs.
+            </p>
+          </div>
+
+          <div class="utility-card" style="padding: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <h3 style="font-size: 18px; font-weight: 600;">Repeat Pick Share</h3>
+              <span class="pill-badge pill-badge-neutral">Current: 23.0%</span>
+            </div>
+            <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6;">
+              <strong>What it asks:</strong> <em>"Are we burning out the same 5 hyper-active youth in the block?"</em><br>
+              Measures the proportion of slots assigned to volunteers who were already picked recently. Lower numbers mean the tool actively opens doors for new volunteers instead of recycling favorites.
+            </p>
+          </div>
+
+          <div class="utility-card" style="padding: 28px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
+              <h3 style="font-size: 18px; font-weight: 600;">Exposure Gini</h3>
+              <span class="pill-badge pill-badge-neutral">Current: 0.4677</span>
+            </div>
+            <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6;">
+              <strong>What it asks:</strong> <em>"Are volunteering opportunities distributed fairly across the district pool?"</em><br>
+              The Gini coefficient measures opportunity inequality (0.0 = perfect equality). CP-SAT achieves 0.4677, significantly fairer than nearest-skill (0.5045) or manual picking (0.5081).
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 3: EXTERNAL DATA SOURCES -->
+      <div style="background: #ffffff; border: 1px solid var(--hairline); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 56px;">
+        <div style="margin-bottom: 20px;">
+          <span class="card-label-small" style="color: var(--primary);">Data Provenance</span>
+          <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em;">
+            External Data Sources & Benchmarks
+          </h2>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px; font-size: 14px; line-height: 1.7; color: var(--ink-secondary);">
+          <div>
+            • <strong>MY Bharat Statistics:</strong> 2.22+ crore youth registered, 1.52+ lakh volunteer opportunities created. Sourced directly from official <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank" class="text-link">PIB Backgrounder (05 July 2026)</a>.
+          </div>
+          <div>
+            • <strong>Local NLP Inference:</strong> Role extraction evaluated with Qwen2.5-7B (4-bit quantization on a single T4 GPU), achieving a role recall rate of <strong>0.932</strong> across Hindi and Hinglish briefs.
+          </div>
+          <div>
+            • <strong>Synthetic Research Seed:</strong> Baseline evaluation conducted on synthetic seed 7 (80 volunteers across 20 UP districts, 10 tasks) with OR-Tools 9.15.6755 CP-SAT solver.
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 4: HONEST INSTITUTIONAL LIMITS -->
+      <div style="margin-bottom: 48px;">
+        <div style="margin-bottom: 24px;">
+          <span class="card-label-small" style="color: var(--status-not-ready);">Boundaries & Ethics</span>
+          <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em;">
+            Honest Institutional Limits
+          </h2>
+          <p style="font-size: 14px; color: var(--ink-secondary); margin-top: 4px;">
+            AI decision systems can overreach when boundaries are ambiguous. We state our limits explicitly:
+          </p>
+        </div>
+
+        <div class="cards-grid-3">
+          <div class="utility-card" style="padding: 24px;">
+            <strong style="font-size: 16px; color: var(--ink); margin-bottom: 8px; display: block;">
+              No Psychological Profiling
+            </strong>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              SewaCircle does not score youth personality, dependability, or reliability using AI classifiers. Eligibility is strictly based on declared availability, distance, and verified certifications.
+            </p>
+          </div>
+
+          <div class="utility-card" style="padding: 24px;">
+            <strong style="font-size: 16px; color: var(--ink); margin-bottom: 8px; display: block;">
+              No Automated Commitment
+            </strong>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              No service hours or credentials are ever committed to the tamper-evident ledger automatically. A physical community host must confirm attendance logs before cryptographic seals are generated.
+            </p>
+          </div>
+
+          <div class="utility-card" style="padding: 24px;">
+            <strong style="font-size: 16px; color: var(--ink); margin-bottom: 8px; display: block;">
+              Non-Governmental Independence
+            </strong>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+              SewaCircle Ready Crew is an independent research prototype designed to complement public volunteer platforms like MY Bharat. It is not affiliated with or endorsed by any government ministry.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Flow</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Sequential Priority Tiers</span></li>
+          <li><span style="color: var(--ink-muted);">Ethical Self-Restraint</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 03 Role Confirmation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-subtitle">Ready Crew</span>
+        </div>
+      </div>
+
+      <div class="command-bar">
+        <svg class="command-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Type a command or search drives...</span>
+        <span class="command-bar-shortcut">Ctrl+K</span>
+      </div>
+
+      <div class="header-controls">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+        <span class="kbd-help">?</span>
+      </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item active"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+          <div class="section-eyebrow">TASK-01 • ROLE EXTRACTION CONFIRMATION</div>
+          <h1>AI proposed 4 roles. You confirm them.</h1>
+          <p style="margin-top: 4px; font-size: 14px; color: var(--text-muted);">
+            Extracted from task-01 brief. 4 roles detected, 4 slots required, 1 low confidence flag, 2 safety-linked roles.
+          </p>
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px;">
+          <span class="code-chip">Task: Water &amp; hygiene camp</span>
+          <span class="tag tag-verified">Model: cc/claude-sonnet-5-5</span>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 380px; gap: 24px;">
+        <!-- Left: Proposed Roles List -->
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase;">
+              PROPOSED ROLES &amp; CONTROLS
+            </div>
+            <button class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px;">
+              + Add role
+            </button>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 14px;">
+            <!-- Role 1: Poster team -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Poster team</span>
+                    <span class="tag tag-novice">confidence: medium</span>
+                  </div>
+                  <div style="margin-top: 4px; font-size: 13px; color: var(--text-muted);">
+                    Reason: <span style="color: var(--text-ink);">Posters are requested but no number is given.</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="display: flex; align-items: center; background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 2px 6px; gap: 8px;">
+                    <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Count:</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">-</span>
+                    <span class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-ink);">1</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">+</span>
+                  </div>
+                  <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px; color: var(--text-subtle);">✕</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; border-top: 1px solid var(--border-hairline); padding-top: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Evidence:</span>
+                  <span class="devanagari" style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 2px 6px; border-radius: 4px; color: var(--text-ink);">पोस्टर</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Required Skill:</span>
+                  <span class="code-chip">graphic_design</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Priority:</span>
+                  <span class="tag tag-verified" style="font-size: 11.5px; padding: 1px 6px;">Must</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Role 2: First-aid support -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">First-aid support</span>
+                    <span class="tag tag-novice">confidence: medium</span>
+                    <span class="tag tag-warn" style="font-size: 11.5px;">Safety-Critical</span>
+                  </div>
+                  <div style="margin-top: 4px; font-size: 13px; color: var(--text-muted);">
+                    Reason: <span style="color: var(--text-ink);">First aid is requested but no number is given.</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="display: flex; align-items: center; background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 2px 6px; gap: 8px;">
+                    <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Count:</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">-</span>
+                    <span class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-ink);">1</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">+</span>
+                  </div>
+                  <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px; color: var(--text-subtle);">✕</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; border-top: 1px solid var(--border-hairline); padding-top: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Evidence:</span>
+                  <span class="devanagari" style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 2px 6px; border-radius: 4px; color: var(--text-ink);">प्राथमिक उपचार</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Required Skill:</span>
+                  <span class="code-chip">first_aid (Host-checked only)</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Priority:</span>
+                  <span class="tag tag-verified" style="font-size: 11.5px; padding: 1px 6px;">Must</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Role 3: Supplies and site setup -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Supplies and site setup</span>
+                    <span class="tag tag-novice">confidence: medium</span>
+                    <span class="tag tag-warn" style="font-size: 11.5px;">Safety-Critical</span>
+                  </div>
+                  <div style="margin-top: 4px; font-size: 13px; color: var(--text-muted);">
+                    Reason: <span style="color: var(--text-ink);">Supplies handling is requested but no number is given.</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="display: flex; align-items: center; background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 2px 6px; gap: 8px;">
+                    <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Count:</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">-</span>
+                    <span class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-ink);">1</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">+</span>
+                  </div>
+                  <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px; color: var(--text-subtle);">✕</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; border-top: 1px solid var(--border-hairline); padding-top: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Evidence:</span>
+                  <span class="devanagari" style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 2px 6px; border-radius: 4px; color: var(--text-ink);">सामान</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Required Skill:</span>
+                  <span class="code-chip">logistics_supplies</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Priority:</span>
+                  <span class="tag tag-verified" style="font-size: 11.5px; padding: 1px 6px;">Must</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Role 4: Local-language liaison -->
+            <div class="card" style="padding: 16px; border-color: var(--warning-border);">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 12px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Local-language liaison</span>
+                    <span class="tag tag-warn">confidence: low</span>
+                  </div>
+                  <div style="margin-top: 4px; font-size: 13px; color: var(--text-muted);">
+                    Reason: <span style="color: var(--text-ink);">Local dialect speakers are requested but the dialect and number are not stated.</span>
+                  </div>
+                </div>
+
+                <div style="display: flex; align-items: center; gap: 12px;">
+                  <div style="display: flex; align-items: center; background-color: var(--bg-surface-2); border: 1px solid var(--border-subtle); border-radius: 4px; padding: 2px 6px; gap: 8px;">
+                    <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Count:</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">-</span>
+                    <span class="mono" style="font-size: 13px; font-weight: 600; color: var(--text-ink);">1</span>
+                    <span style="cursor: pointer; color: var(--text-subtle); font-family: var(--font-mono); font-weight: 700;">+</span>
+                  </div>
+                  <button class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px; color: var(--text-subtle);">✕</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 12px; font-size: 12px; border-top: 1px solid var(--border-hairline); padding-top: 10px;">
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Evidence:</span>
+                  <span class="devanagari" style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 2px 6px; border-radius: 4px; color: var(--text-ink);">स्थानीय बोली में बात करने वाले</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Required Skills:</span>
+                  <span class="code-chip">dialect_awadhi</span>
+                  <span class="code-chip">dialect_bhojpuri</span>
+                </div>
+                <div style="display: flex; align-items: center; gap: 6px; margin-left: auto;">
+                  <span style="color: var(--text-subtle); font-family: var(--font-mono);">Priority:</span>
+                  <span class="tag tag-verified" style="font-size: 11.5px; padding: 1px 6px;">Must</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Needs Your Decision Rail -->
+        <div>
+          <div class="card" style="background-color: var(--bg-surface-1); border-color: var(--border-subtle); margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
+              <span class="badge-synthetic" style="background: rgba(251, 191, 36, 0.15); border-color: var(--warning-border); color: var(--warning-amber);">
+                4 Decisions Needed
+              </span>
+            </div>
+            
+            <h2 style="font-size: 16px; margin-bottom: 12px;">Needs Your Decision</h2>
+            <p style="font-size: 13px; color: var(--text-muted); margin-bottom: 16px;">
+              The AI extracted these ambiguities from the natural text. Please verify before triggering the solver:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <!-- Item 1 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); color: var(--warning-amber); font-weight: 600; margin-bottom: 4px;">
+                  01 • DIALECT AMBIGUITY
+                </div>
+                <div style="font-size: 13px; color: var(--text-ink); font-weight: 500; margin-bottom: 6px;">
+                  Which local dialect is needed (Awadhi or Bhojpuri)?
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Selected: <strong style="color: var(--accent-text);">Awadhi (Kanpur Dehat standard)</strong>
+                </div>
+              </div>
+
+              <!-- Item 2 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); color: var(--warning-amber); font-weight: 600; margin-bottom: 4px;">
+                  02 • HEADCOUNT SPECIFICATION
+                </div>
+                <div style="font-size: 13px; color: var(--text-ink); font-weight: 500; margin-bottom: 6px;">
+                  How many people are needed for each role (posters, first aid, supplies, local-language speakers)?
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Confirmed: <strong style="color: var(--text-ink);">1 volunteer per role (4 slots total)</strong>
+                </div>
+              </div>
+
+              <!-- Item 3 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); color: var(--warning-amber); font-weight: 600; margin-bottom: 4px;">
+                  03 • HYGIENE EDUCATOR ROLE
+                </div>
+                <div style="font-size: 13px; color: var(--text-ink); font-weight: 500; margin-bottom: 6px;">
+                  Is a hygiene or health educator needed to run the handwashing and safe drinking water sessions?
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Resolution: <strong style="color: var(--text-ink);">Deferred to next expansion (team size 4 sufficient)</strong>
+                </div>
+              </div>
+
+              <!-- Item 4 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); color: var(--warning-amber); font-weight: 600; margin-bottom: 4px;">
+                  04 • LOW CONFIDENCE CHECK
+                </div>
+                <div style="font-size: 13px; color: var(--text-ink); font-weight: 500; margin-bottom: 6px;">
+                  Please check the role 'Local-language liaison' (the AI was not sure).
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Verified: <strong style="color: var(--success-green);">Approved with Awadhi requirement</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer Action Strip -->
+      <div class="card" style="margin-top: 24px; padding: 16px 24px; background-color: var(--bg-surface-1);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 13px; color: var(--text-muted);">
+            <span>Summary:</span>
+            <strong style="color: var(--text-ink);">4 roles</strong> •
+            <strong style="color: var(--text-ink);">4 slots</strong> •
+            <strong style="color: var(--warning-amber);">1 low confidence</strong> •
+            <strong style="color: var(--text-ink);">2 safety-linked roles (first aid &amp; logistics)</strong>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <a href="02-console-task.html" class="btn btn-secondary" style="font-size: 13px;">
+              Re-extract
+            </a>
+            <a href="04-console-crew-ready.html" class="btn btn-primary" style="font-size: 13px; padding: 8px 20px;">
+              Confirm 4 roles and build the crew →
+            </a>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-text">
+          <span class="affiliation-indicator"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 01-precision-dark • Desktop 1440px Specification</span>
+        </div>
+        <div class="footer-shortcuts">
+          <span><kbd>Ctrl+K</kbd> Command Bar</span>
+          <span><kbd>C</kbd> Confirm &amp; Solve</span>
+          <span><kbd>1-9</kbd> Switch Views</span>
+          <span><kbd>?</kbd> Help</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

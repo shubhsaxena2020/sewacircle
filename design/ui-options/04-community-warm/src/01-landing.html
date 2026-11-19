@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew — Willing volunteers are here. Can this drive run?</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Landing-specific styles */
+    .hero-section {
+      padding: 64px 0 72px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 56px;
+      align-items: center;
+    }
+
+    .hero-headline-hi {
+      font-size: 38px;
+      font-weight: 800;
+      line-height: 1.25;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+
+    .hero-headline-en {
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--rausch);
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+      margin-bottom: 20px;
+    }
+
+    .hero-lead {
+      font-size: 17px;
+      color: var(--body);
+      line-height: 1.6;
+      margin-bottom: 28px;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .hero-trust-chips {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      padding-top: 24px;
+      border-top: 1px solid var(--hairline);
+    }
+
+    .trust-chip {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--muted);
+    }
+
+    /* Hero interactive card preview */
+    .hero-preview-card {
+      background: white;
+      border-radius: 24px;
+      padding: 28px;
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-floating);
+      position: relative;
+    }
+
+    .preview-header-pill {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .preview-verdict-banner {
+      background: linear-gradient(135deg, #F0FDF4 0%, #E8F8EE 100%);
+      border: 1px solid var(--ready-green-border);
+      border-radius: 16px;
+      padding: 18px 20px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    .preview-crew-roster {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .preview-crew-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 14px;
+      background-color: var(--surface-soft);
+      border-radius: 12px;
+      border: 1px solid var(--hairline);
+    }
+
+    /* Gap section */
+    .gap-section {
+      background: #FFFDFD;
+      border-radius: 28px;
+      padding: 56px 64px;
+      border: 1px solid #FFEBEF;
+      margin: 48px 0;
+    }
+
+    .gap-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .gap-stat-box {
+      background-color: white;
+      border-radius: 20px;
+      padding: 32px;
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .gap-stat-number {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--rausch);
+      letter-spacing: -1px;
+    }
+
+    .gap-stat-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* Steps Section */
+    .steps-section {
+      padding: 64px 0;
+    }
+
+    .section-headline-center {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 48px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -0.5px;
+    }
+
+    .section-subtitle {
+      font-size: 16px;
+      color: var(--body);
+      margin-top: 8px;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+
+    .step-card {
+      background: white;
+      border-radius: 20px;
+      padding: 36px 30px;
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-subtle);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.2s ease;
+    }
+
+    .step-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-card);
+      border-color: #E2E8F0;
+    }
+
+    .step-badge-num {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: var(--rausch-soft);
+      color: var(--rausch);
+      font-weight: 800;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 12px;
+    }
+
+    .step-text {
+      font-size: 14px;
+      color: var(--body);
+      line-height: 1.6;
+    }
+
+    /* Results section */
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin: 36px 0 64px;
+    }
+
+    .result-stat-card {
+      background: white;
+      border-radius: 18px;
+      padding: 28px 24px;
+      border: 1px solid var(--hairline);
+      box-shadow: var(--shadow-subtle);
+      text-align: center;
+    }
+
+    .result-big-num {
+      font-size: 38px;
+      font-weight: 800;
+      color: var(--ink);
+      letter-spacing: -1px;
+    }
+
+    .result-stat-label {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--rausch);
+      margin: 6px 0 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .result-stat-sub {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    /* Limits Banner */
+    .limits-card {
+      background-color: var(--surface-soft);
+      border-radius: 20px;
+      border: 1px solid var(--hairline-strong);
+      padding: 36px 40px;
+      margin: 40px 0;
+    }
+
+    .limits-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 20px;
+    }
+
+    .limit-item h5 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .limit-item p {
+      font-size: 13px;
+      color: var(--body);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link active">Story</a>
+      <a href="02-console-task.html" class="nav-link">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm">RK</div>
+        <div>
+          <div class="user-role-label">Rajesh Kumar</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN LANDING BODY -->
+  <main class="page-container">
+    
+    <!-- HERO SECTION -->
+    <section class="hero-section">
+      <div class="hero-text-col">
+        <div class="page-badge-row">
+          <span class="badge-pill badge-coral">District Youth Volunteering • Uttar Pradesh</span>
+          <span class="badge-pill badge-green">Ready Crew Engine</span>
+        </div>
+        
+        <!-- Hindi Hero Title demonstrating Noto Sans Devanagari typography -->
+        <h1 class="hero-headline-hi devanagari">
+          इच्छुक युवा तैयार हैं।<br>क्या यह सेवा अभियान चल सकता है?
+        </h1>
+        
+        <h2 class="hero-headline-en">
+          Willing volunteers are here. Can this drive run?
+        </h2>
+
+        <p class="hero-lead">
+          MY Bharat connects millions of energetic youth to civic volunteering. But after a volunteer clicks <em>Interested</em>, a district youth organiser in Uttar Pradesh faces an exhausting hurdle: turn a raw list of names into a safe, role-complete team with standbys, or determine exactly who is missing. <strong>SewaCircle answers with a verdict, not a list.</strong>
+        </p>
+
+        <div class="hero-cta-group">
+          <a href="02-console-task.html" class="btn btn-primary btn-pill" style="padding: 14px 28px; font-size: 15px;">
+            Open Organiser Console
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <a href="09-volunteer.html" class="btn btn-secondary btn-pill" style="padding: 14px 24px; font-size: 15px;">
+            Volunteer Dashboard
+          </a>
+        </div>
+
+        <div class="hero-trust-chips">
+          <div class="trust-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008A05" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            Host-checked safety roles
+          </div>
+          <div class="trust-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008A05" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Tamper-evident audit log
+          </div>
+          <div class="trust-chip">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#008A05" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+            0.3s deterministic solver
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero Interactive Visual Card Preview -->
+      <div class="hero-preview-card">
+        <div class="preview-header-pill">
+          <div>
+            <div style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--muted); letter-spacing: 0.5px;">Live Drive Status</div>
+            <div style="font-size: 18px; font-weight: 800; color: var(--ink);">Water and hygiene camp</div>
+            <div style="font-size: 12px; color: var(--muted);">Akbarpur, Kanpur Dehat • Sat Morning</div>
+          </div>
+          <span class="badge-pill badge-green">4 Roles Required</span>
+        </div>
+
+        <!-- Banner showing READY verdict -->
+        <div class="preview-verdict-banner">
+          <div style="width: 44px; height: 44px; border-radius: 50%; background: #008A05; color: white; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="20 6 9 17 4 12"></polyline>
+            </svg>
+          </div>
+          <div>
+            <div style="font-size: 16px; font-weight: 800; color: #008A05;">VERDICT: READY TO RUN</div>
+            <div style="font-size: 12px; color: var(--body);">All 4 essential slots filled • Standbys assigned • 0 unresolved roles</div>
+          </div>
+        </div>
+
+        <div class="preview-crew-roster">
+          <div class="preview-crew-row">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="avatar avatar-sm av-coral">HP</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 700;">Heena P. (27)</div>
+                <div style="font-size: 11px; color: var(--muted);">Poster team • 7 km away</div>
+              </div>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: var(--ready-green); background: white; padding: 4px 10px; border-radius: 9999px; border: 1px solid #EBEBEB;">Primary</span>
+          </div>
+
+          <div class="preview-crew-row">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="avatar avatar-sm av-mint">MZ</div>
+              <div>
+                <div style="display: flex; align-items: center; gap: 6px;">
+                  <span style="font-size: 13px; font-weight: 700;">Mohit Z. (22)</span>
+                  <span style="font-size: 10px; background: #EBF9F1; color: #008A05; padding: 1px 6px; border-radius: 4px; font-weight: 700;">Host Checked</span>
+                </div>
+                <div style="font-size: 11px; color: var(--muted);">First-aid support • 2 km away</div>
+              </div>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: var(--ready-green); background: white; padding: 4px 10px; border-radius: 9999px; border: 1px solid #EBEBEB;">Primary</span>
+          </div>
+
+          <div class="preview-crew-row" style="background-color: #FFFDF7; border-color: #FFE6B0;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div class="avatar avatar-sm av-sky">IB</div>
+              <div>
+                <div style="font-size: 13px; font-weight: 700;">Imran B. (17, Minor consent)</div>
+                <div style="font-size: 11px; color: var(--warn-amber);">Standby backup for Poster & Liaison</div>
+              </div>
+            </div>
+            <span style="font-size: 11px; font-weight: 700; color: var(--warn-amber); background: white; padding: 4px 10px; border-radius: 9999px; border: 1px solid #FFE6B0;">Standby</span>
+          </div>
+        </div>
+
+        <div style="margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--hairline); display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 12px; color: var(--muted);">CP-SAT Solve: <strong>15 ms</strong></span>
+          <a href="04-console-crew-ready.html" style="font-size: 13px; font-weight: 700; color: var(--rausch);">Inspect full crew board →</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- THE GAP AFTER "INTERESTED" -->
+    <section class="gap-section">
+      <div class="gap-grid">
+        <div>
+          <span class="badge-pill badge-coral">The Platform Gap</span>
+          <h3 style="font-size: 30px; font-weight: 800; color: var(--ink); margin: 12px 0 16px; letter-spacing: -0.4px;">
+            National platforms bring scale.<br>Organisers need operational crew certainty.
+          </h3>
+          <p style="font-size: 15px; color: var(--body); line-height: 1.6; margin-bottom: 20px;">
+            MY Bharat is India's national youth platform with massive scale: over <strong>2.22+ crore youth registered</strong> and <strong>1.52+ lakh volunteer opportunities</strong> created (PIB backgrounder, 05 July 2026). When youth find a drive, they click <em>Interested</em>.
+          </p>
+          <p style="font-size: 15px; color: var(--body); line-height: 1.6;">
+            However, current public guidelines leave roster decisions to individual organiser discretion. If someone drops out on Saturday morning, or if no one has verified first-aid certification, the camp fails. <strong>SewaCircle fills this operational gap</strong> without displacing national systems.
+          </p>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <div class="gap-stat-box">
+            <div class="gap-stat-number">2.22+ Crore</div>
+            <div class="gap-stat-label">Youth Registered on National MY Bharat Platform</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">Source: PIB Delhi Backgrounder, 05 July 2026</div>
+          </div>
+          <div class="gap-stat-box">
+            <div class="gap-stat-number">7 / 10 vs 1 / 10</div>
+            <div class="gap-stat-label">Ready Drives: SewaCircle CP-SAT vs Nearest-Skill Baseline</div>
+            <div style="font-size: 12px; color: var(--muted); margin-top: 4px;">Verified on 10 synthetic drives across Uttar Pradesh districts</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS (3 STEPS) -->
+    <section class="steps-section">
+      <div class="section-headline-center">
+        <span class="badge-pill badge-coral">Operational Workflow</span>
+        <h3 class="section-title">How SewaCircle Ready Crew Works</h3>
+        <p class="section-subtitle">
+          AI reads unstructured text, a deterministic solver decides, a human organiser confirms, and a tamper-evident ledger preserves the truth.
+        </p>
+      </div>
+
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-badge-num">1</div>
+          <h4 class="step-title">Role Extraction with Privacy Redaction</h4>
+          <p class="step-text">
+            Organisers paste briefs in Hindi, Hinglish, or English. All phone numbers, emails, and person names are scrubbed against a 61,000-name gazetteer before reaching the language model.
+          </p>
+          <div style="margin-top: 20px; padding: 12px; background: var(--surface-soft); border-radius: 10px; font-size: 12px; color: var(--muted);">
+            Offline Fallback: <strong>Qwen2.5-7B (4-bit)</strong> on one free T4 GPU reaches <strong>0.932 role recall</strong>.
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge-num">2</div>
+          <h4 class="step-title">Deterministic Solver with Standbys</h4>
+          <p class="step-text">
+            Google OR-Tools CP-SAT finds optimal crew assignments satisfying hard constraints: skills, travel distance, availability, minor consent, and strict host verification for safety roles.
+          </p>
+          <div style="margin-top: 20px; padding: 12px; background: var(--surface-soft); border-radius: 10px; font-size: 12px; color: var(--muted);">
+            Guaranteed Standby: Every critical role includes an eligible backup to survive single dropouts.
+          </div>
+        </div>
+
+        <div class="step-card">
+          <div class="step-badge-num">3</div>
+          <h4 class="step-title">Evidence & Tamper-Evident Ledger</h4>
+          <p class="step-text">
+            Post-drive, host notes are paired with attendance logs. An evidence rule flags discrepancies (e.g. round hour inflation), a host reviews, and a cryptographic hash chain logs every change.
+          </p>
+          <div style="margin-top: 20px; padding: 12px; background: var(--surface-soft); border-radius: 10px; font-size: 12px; color: var(--muted);">
+            Integrity Principle: The hash chain records edits; actual truth comes strictly from host sign-off.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEASURED RESULTS -->
+    <section style="margin: 48px 0;">
+      <div class="section-headline-center">
+        <span class="badge-pill badge-green">Empirical Verification</span>
+        <h3 class="section-title">Measured Results on 10 UP Drives</h3>
+        <p class="section-subtitle">
+          Evaluated rigorously against 3 standard baselines across 80 synthetic volunteers in Kanpur Dehat, Lucknow, Varanasi, and Gorakhpur.
+        </p>
+      </div>
+
+      <div class="results-grid">
+        <div class="result-stat-card">
+          <div class="result-big-num" style="color: var(--ready-green);">70%</div>
+          <div class="result-stat-label">Ready Drives (7/10)</div>
+          <div class="result-stat-sub">Nearest-skill baseline only reaches 10% (1/10 ready)</div>
+        </div>
+
+        <div class="result-stat-card">
+          <div class="result-big-num" style="color: var(--rausch);">0.0%</div>
+          <div class="result-stat-label">Repeat Pick Share</div>
+          <div class="result-stat-sub">19.7 points lower repeat burden than manual greedy allocation</div>
+        </div>
+
+        <div class="result-stat-card">
+          <div class="result-big-num">0.327 s</div>
+          <div class="result-stat-label">Max Solver Time</div>
+          <div class="result-stat-sub">80/80 OPTIMAL solutions verified up to 500 volunteers</div>
+        </div>
+
+        <div class="result-stat-card">
+          <div class="result-big-num">0.932</div>
+          <div class="result-stat-label">Offline Recall</div>
+          <div class="result-stat-sub">Qwen2.5-7B 4-bit model running on a single T4 card</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HONEST LIMITS & ETHICAL BOUNDARIES -->
+    <section class="limits-card">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <span class="badge-pill badge-coral">Honest Boundaries</span>
+          <h4 style="font-size: 20px; font-weight: 800; color: var(--ink); margin-top: 8px;">Product Limits & Safety Principles</h4>
+        </div>
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Seed 7 Data</span>
+      </div>
+
+      <div class="limits-grid">
+        <div class="limit-item">
+          <h5>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF385C" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg>
+            Safety Roles Require Verification
+          </h5>
+          <p>
+            First aid, disaster relief, and driving never accept self-declared skills. Only skills with documented host sign-off are considered by the solver.
+          </p>
+        </div>
+
+        <div class="limit-item">
+          <h5>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF385C" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            Minor Protection (Ages 16–17)
+          </h5>
+          <p>
+            Youth under 18 can only be scheduled for youth-permitted drives and only if signed guardian consent is verified on file.
+          </p>
+        </div>
+
+        <div class="limit-item">
+          <h5>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#FF385C" stroke-width="2.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+            No Auto-Verification
+          </h5>
+          <p>
+            The tamper-evident ledger logs chronological edits and confirmations. It does not certify that work happened—the host signature is required.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA BANNER -->
+    <section style="background: linear-gradient(135deg, #FF385C 0%, #E00B41 100%); border-radius: 24px; padding: 48px; color: white; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 12px 36px rgba(255, 56, 92, 0.35);">
+      <div>
+        <h3 style="font-size: 28px; font-weight: 800; letter-spacing: -0.4px;">Ready to run safe community drives?</h3>
+        <p style="font-size: 15px; opacity: 0.9; margin-top: 6px;">Experience the 11-step organiser workflow with verified synthetic Uttar Pradesh drives.</p>
+      </div>
+      <div style="display: flex; gap: 14px;">
+        <a href="02-console-task.html" class="btn btn-secondary btn-pill" style="color: var(--rausch); font-weight: 700; border: none; padding: 14px 28px;">
+          Start in Console
+        </a>
+        <a href="10-districts.html" class="btn btn-pill" style="background: rgba(255, 255, 255, 0.2); color: white; border: 1px solid rgba(255,255,255,0.4); padding: 14px 24px;">
+          View 20 Districts Map
+        </a>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

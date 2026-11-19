@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — Evidence Review & Cards (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item active"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">04 · Evidence Review</span>
+        <span class="pill-badge pill-badge-amber">1 Flag to Resolve</span>
+      </div>
+      <div class="sub-nav-right">
+        <a href="04-console-crew-ready.html" class="text-link" style="font-size: 14px; margin-right: 8px;">← Crew Roster</a>
+        <a href="07-console-ledger.html" class="btn-primary">Commit to Ledger →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONSOLE -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 48px;">
+    <div class="container">
+
+      <div class="keynote-header-left">
+        <div class="keynote-header-eyebrow">Post-Drive Reconciliation · Task-01 Akbarpur</div>
+        <h1 class="keynote-header-title">Raw Evidence to Verified Credentials.</h1>
+        <p class="keynote-header-sub">
+          After a drive, the community host submits rough field notes and attendance check-ins. The AI drafts structured contribution cards and deterministic rules flag discrepancies before committing to the tamper-evident ledger.
+        </p>
+      </div>
+
+      <!-- DUAL COLUMN STAGE: RAW SOURCES vs AI DRAFTS -->
+      <div style="display: grid; grid-template-columns: 360px 1fr; gap: 32px; margin-bottom: 48px;">
+        
+        <!-- LEFT: RAW HOST INPUTS -->
+        <div>
+          <!-- Host Notes Card -->
+          <div class="utility-card" style="margin-bottom: 24px; padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="card-label-small">Host Field Notes</span>
+              <span class="hash-mono" style="font-size: 11px;">Akbarpur Lead</span>
+            </div>
+            <div style="background: var(--canvas-parchment); border-radius: 8px; padding: 16px; font-size: 13px; line-height: 1.8; color: var(--ink); font-family: var(--font-mono);">
+              Heena P. worked about 5 hours.<br>
+              Mohit Z. worked about 5 hours.<br>
+              Divya H. worked about 5 hours.<br>
+              Kabir Z. worked about 8 hours.
+            </div>
+            <div style="font-size: 11px; color: var(--ink-muted); margin-top: 10px;">
+              Ref: host_note:task-01:v-008:cf512e004c
+            </div>
+          </div>
+
+          <!-- Attendance Records Card -->
+          <div class="utility-card" style="padding: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span class="card-label-small">Attendance Log (Check-In)</span>
+              <span class="pill-badge pill-badge-green" style="font-size: 11px;">4 Checked In</span>
+            </div>
+            <table style="width: 100%; border-collapse: collapse; font-size: 13px;">
+              <thead>
+                <tr style="border-bottom: 1px solid var(--hairline); text-align: left; color: var(--ink-muted); font-size: 11px;">
+                  <th style="padding: 6px 0;">Volunteer</th>
+                  <th style="padding: 6px 0; text-align: right;">Logged Hours</th>
+                </tr>
+              </thead>
+              <tbody style="line-height: 2;">
+                <tr style="border-bottom: 1px solid var(--border-soft);">
+                  <td>Heena P. (v-008)</td>
+                  <td style="text-align: right; font-weight: 600;">5 hrs</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-soft);">
+                  <td>Mohit Z. (v-070)</td>
+                  <td style="text-align: right; font-weight: 600;">5 hrs</td>
+                </tr>
+                <tr style="border-bottom: 1px solid var(--border-soft);">
+                  <td>Divya H. (v-067)</td>
+                  <td style="text-align: right; font-weight: 600;">5 hrs</td>
+                </tr>
+                <tr>
+                  <td>Kabir Z. (v-011)</td>
+                  <td style="text-align: right; font-weight: 600; color: #b45309;">5 hrs</td>
+                </tr>
+              </tbody>
+            </table>
+            <div style="font-size: 11px; color: var(--ink-muted); margin-top: 12px; line-height: 1.4;">
+              Source: Local check-in ledger timestamped at Akbarpur community centre.
+            </div>
+          </div>
+        </div>
+
+        <!-- RIGHT: AI-DRAFTED CONTRIBUTION CARDS WITH RULE FLAGS -->
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <h2 style="font-size: 20px; font-weight: 600;">AI-Drafted Contribution Cards (4)</h2>
+            <span style="font-size: 13px; color: var(--ink-muted);">Fixed deterministic rules flag conflicts</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            
+            <!-- CARD 1: Heena P. -->
+            <div class="utility-card" style="padding: 24px; border-radius: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span class="card-label-small">Card ID: card-task-01-v-008-poster-team</span>
+                  <h3 style="font-size: 18px; font-weight: 600; margin-top: 2px;">
+                    Heena P. · <span style="font-weight: 400; color: var(--ink-secondary);">Poster team</span>
+                  </h3>
+                </div>
+                <span class="pill-badge pill-badge-blue">Status: Draft</span>
+              </div>
+
+              <div style="display: flex; gap: 32px; font-size: 14px; margin-bottom: 14px;">
+                <div>Claimed: <strong>5.0 hrs</strong></div>
+                <div>Attendance Recorded: <strong>5.0 hrs</strong></div>
+                <div style="color: var(--ink-muted);">Summary: Host notes mention Heena P.</div>
+              </div>
+
+              <!-- Rule flag (Info) -->
+              <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e40af; margin-bottom: 16px;">
+                <strong>Rule Flag [round_number_inflation]:</strong> 5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection.
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 14px;">
+                <span class="hash-mono" style="font-size: 11px;">Refs: host_note & attendance verified</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-dark-utility" style="font-size: 12px;">Correct</button>
+                  <button class="btn-primary" style="font-size: 12px; padding: 6px 14px;">Confirm Card ✓</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 2: Mohit Z. -->
+            <div class="utility-card" style="padding: 24px; border-radius: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span class="card-label-small">Card ID: card-task-01-v-070-first-aid-support</span>
+                  <h3 style="font-size: 18px; font-weight: 600; margin-top: 2px;">
+                    Mohit Z. · <span style="font-weight: 400; color: var(--ink-secondary);">First-aid support</span>
+                  </h3>
+                </div>
+                <span class="pill-badge pill-badge-blue">Status: Draft</span>
+              </div>
+
+              <div style="display: flex; gap: 32px; font-size: 14px; margin-bottom: 14px;">
+                <div>Claimed: <strong>5.0 hrs</strong></div>
+                <div>Attendance Recorded: <strong>5.0 hrs</strong></div>
+                <div style="color: var(--ink-muted);">Summary: Host notes mention Mohit Z.</div>
+              </div>
+
+              <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e40af; margin-bottom: 16px;">
+                <strong>Rule Flag [round_number_inflation]:</strong> 5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check.
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 14px;">
+                <span class="hash-mono" style="font-size: 11px;">Refs: host_note & attendance verified</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-dark-utility" style="font-size: 12px;">Correct</button>
+                  <button class="btn-primary" style="font-size: 12px; padding: 6px 14px;">Confirm Card ✓</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 3: Divya H. -->
+            <div class="utility-card" style="padding: 24px; border-radius: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span class="card-label-small">Card ID: card-task-01-v-067-supplies-and-site-setup</span>
+                  <h3 style="font-size: 18px; font-weight: 600; margin-top: 2px;">
+                    Divya H. · <span style="font-weight: 400; color: var(--ink-secondary);">Supplies and site setup</span>
+                  </h3>
+                </div>
+                <span class="pill-badge pill-badge-blue">Status: Draft</span>
+              </div>
+
+              <div style="display: flex; gap: 32px; font-size: 14px; margin-bottom: 14px;">
+                <div>Claimed: <strong>5.0 hrs</strong></div>
+                <div>Attendance Recorded: <strong>5.0 hrs</strong></div>
+                <div style="color: var(--ink-muted);">Summary: Host notes mention Divya H.</div>
+              </div>
+
+              <div style="background: #eff6ff; border-left: 3px solid #3b82f6; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: #1e40af; margin-bottom: 16px;">
+                <strong>Rule Flag [round_number_inflation]:</strong> 5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check.
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 14px;">
+                <span class="hash-mono" style="font-size: 11px;">Refs: host_note & attendance verified</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-dark-utility" style="font-size: 12px;">Correct</button>
+                  <button class="btn-primary" style="font-size: 12px; padding: 6px 14px;">Confirm Card ✓</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- CARD 4: Kabir Z. (FLAGGED / CONFLICT) -->
+            <div class="utility-card" style="padding: 24px; border-radius: 14px; border: 1.5px solid var(--status-warning-border); background: #fffdf5;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <span class="card-label-small" style="color: #b45309;">Card ID: card-task-01-v-011-local-language-liaison</span>
+                  <h3 style="font-size: 18px; font-weight: 600; color: #92400e; margin-top: 2px;">
+                    Kabir Z. · <span style="font-weight: 400; color: var(--ink-secondary);">Local-language liaison</span>
+                  </h3>
+                </div>
+                <span class="pill-badge pill-badge-amber">Status: Flagged</span>
+              </div>
+
+              <div style="display: flex; gap: 32px; font-size: 14px; margin-bottom: 14px;">
+                <div>Claimed: <strong style="color: #b45309;">8.0 hrs</strong></div>
+                <div>Attendance Recorded: <strong>5.0 hrs</strong></div>
+                <div style="color: var(--ink-muted);">Summary: Host notes mention Kabir Z.</div>
+              </div>
+
+              <!-- Rule flag (Warn) -->
+              <div style="background: #fffbeb; border-left: 3px solid #f59e0b; padding: 10px 14px; border-radius: 0 6px 6px 0; font-size: 12px; color: #92400e; margin-bottom: 16px;">
+                <strong>Warning Flag [hours_exceed_recorded]:</strong> Claims 8 hours but attendance records at most 5; ask the host to check the difference.
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 14px;">
+                <span style="font-size: 12px; color: var(--ink-muted);">Resolution Required</span>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn-secondary-pill" style="font-size: 12px; padding: 6px 12px;">Send Back to Host</button>
+                  <button class="btn-primary" style="font-size: 12px; padding: 6px 14px; background: #b45309;" onclick="alert('Card corrected to 5.0 hours (matching check-in record). Status updated to Confirmed.');">
+                    Correct to 5.0h & Confirm ✓
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Flow</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Rule Conflict Highlighting</span></li>
+          <li><span style="color: var(--ink-muted);">Evidence Traceability</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle — Volunteer Portal (Heena P.)</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .volunteer-header-banner {
+      background: linear-gradient(135deg, #FFF0F3 0%, #FFFFFF 100%);
+      border: 1px solid var(--rausch-border);
+      border-radius: var(--radius-card-lg);
+      padding: 36px 40px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .vol-profile-left {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .volunteer-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Skills Grid */
+    .skills-section-box {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+      margin-bottom: 32px;
+    }
+
+    .skill-badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .skill-card-chip {
+      background: var(--surface-soft);
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 14px;
+      flex: 1 1 calc(50% - 10px);
+    }
+
+    .skill-card-chip.checked {
+      background: #F4FAF6;
+      border-color: #B6ECC9;
+    }
+
+    .skill-card-chip.self {
+      background: #FFFDF9;
+      border-color: #FFE6B0;
+    }
+
+    /* Contributions List */
+    .contributions-box {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-subtle);
+    }
+
+    .contribution-item {
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 20px;
+      margin-top: 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.15s ease;
+    }
+
+    .contribution-item:hover {
+      box-shadow: var(--shadow-subtle);
+      border-color: var(--rausch);
+    }
+
+    /* Sidebar cards */
+    .volunteer-stats-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link">Story</a>
+      <a href="02-console-task.html" class="nav-link">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link active">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm av-coral">HP</div>
+        <div>
+          <div class="user-role-label">Heena P.</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-container">
+    
+    <!-- VOLUNTEER PROFILE HERO BANNER -->
+    <div class="volunteer-header-banner">
+      <div class="vol-profile-left">
+        <div class="avatar avatar-lg av-coral">HP</div>
+        <div>
+          <div class="page-badge-row" style="margin-bottom: 6px;">
+            <span class="badge-pill badge-coral">Youth Volunteer Profile</span>
+            <span class="badge-pill badge-green">3 Past Drives Completed</span>
+            <span class="code-chip">ID: v-008</span>
+          </div>
+          <h1 style="font-size: 26px; font-weight: 800; color: var(--ink);">
+            नमस्ते Heena P.
+          </h1>
+          <p style="font-size: 14px; color: var(--muted); margin-top: 2px;">
+            27 yrs, Female • Sarvankheda block, Kanpur Dehat • Active Volunteer
+          </p>
+        </div>
+      </div>
+
+      <div style="display: flex; gap: 14px;">
+        <div style="background: white; padding: 12px 20px; border-radius: 14px; border: 1px solid var(--hairline); text-align: center; box-shadow: var(--shadow-subtle);">
+          <div style="font-size: 22px; font-weight: 800; color: var(--ink);">15.0 hrs</div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase;">Verified Hours</div>
+        </div>
+        <div style="background: white; padding: 12px 20px; border-radius: 14px; border: 1px solid var(--hairline); text-align: center; box-shadow: var(--shadow-subtle);">
+          <div style="font-size: 22px; font-weight: 800; color: var(--ready-green);">100%</div>
+          <div style="font-size: 11px; font-weight: 700; color: var(--muted); text-transform: uppercase;">Reliability</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="volunteer-layout">
+      
+      <!-- LEFT: SKILLS & CONTRIBUTIONS -->
+      <div>
+        
+        <!-- SECTION 1: CHECKED VS SELF-DECLARED SKILLS -->
+        <div class="skills-section-box">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <h3 style="font-size: 18px; font-weight: 700; color: var(--ink);">My Skills & Qualifications</h3>
+              <p style="font-size: 13px; color: var(--muted); margin-top: 2px;">
+                Safety roles (first aid, driving, disaster rescue) require verified host confirmation.
+              </p>
+            </div>
+            <span class="badge-pill badge-green">6 Host Verified</span>
+          </div>
+
+          <!-- Host Checked Skills (from sample-data.json v-008 skills dict) -->
+          <h4 style="font-size: 13px; font-weight: 700; color: var(--ready-green); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 20px;">
+            ✓ Host-Checked Skills (Eligible for safety & primary roles)
+          </h4>
+
+          <div class="skill-badge-row">
+            
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Graphic Design & Posters</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 2 • Verified by Sarvankheda Club</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 2</span>
+            </div>
+
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">First Aid Support (Safety Critical)</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 2 • Verified by CHC Akbarpur</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 2</span>
+            </div>
+
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Awadhi Speaker (Local Dialect)</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 3 • Native Fluency</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 3</span>
+            </div>
+
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Driving & Transport (Safety Critical)</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 1 • Driver's License Verified</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 1</span>
+            </div>
+
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Photography & Video</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 2 • Event Documentation</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 2</span>
+            </div>
+
+            <div class="skill-card-chip checked">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Hindi Language Fluency</div>
+                <div style="font-size: 11px; color: var(--muted);">Level 2 • Fluent Speaking & Reading</div>
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Level 2</span>
+            </div>
+
+          </div>
+
+          <!-- Self-Declared Skills Section -->
+          <h4 style="font-size: 13px; font-weight: 700; color: #B25E00; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 24px;">
+            ⚠️ Self-Declared Skills (Awaiting Host Sign-off)
+          </h4>
+
+          <div class="skill-badge-row">
+            <div class="skill-card-chip self">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Social Media Outreach</div>
+                <div style="font-size: 11px; color: var(--muted);">Declared by Volunteer • Unverified</div>
+              </div>
+              <span class="badge-pill badge-amber" style="font-size: 11px;">Pending Host Review</span>
+            </div>
+
+            <div class="skill-card-chip self">
+              <div>
+                <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Event Coordination</div>
+                <div style="font-size: 11px; color: var(--muted);">Declared by Volunteer • Unverified</div>
+              </div>
+              <span class="badge-pill badge-amber" style="font-size: 11px;">Pending Host Review</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SECTION 2: DRIVES CHOSEN & ASSIGNMENTS -->
+        <div class="contributions-box">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h3 style="font-size: 18px; font-weight: 700; color: var(--ink);">My Drives & Contributions</h3>
+            <span style="font-size: 12px; color: var(--muted);">Past and active opt-ins</span>
+          </div>
+
+          <!-- Active Drive Assignment -->
+          <div class="contribution-item" style="border-left: 4px solid var(--ready-green); background: #FDFEFE;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-pill badge-green" style="font-size: 10px;">Assigned Primary</span>
+                <span class="code-chip">task-01</span>
+              </div>
+              <h4 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 6px 0 2px;">
+                Water and hygiene camp
+              </h4>
+              <div style="font-size: 12px; color: var(--muted);">
+                Akbarpur, Kanpur Dehat • Sat Morning • Role: <strong>Poster team</strong>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: var(--ready-green);">5.0 Hours</div>
+              <div style="font-size: 11px; color: var(--muted);">Confirmed on Ledger</div>
+            </div>
+          </div>
+
+          <!-- Past Drive 2 -->
+          <div class="contribution-item">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-pill" style="background: #F1F3F5; color: #484848; font-size: 10px;">Completed</span>
+                <span class="code-chip">task-08</span>
+              </div>
+              <h4 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 6px 0 2px;">
+                Cleanliness drive (Swachhata)
+              </h4>
+              <div style="font-size: 12px; color: var(--muted);">
+                Maitha, Kanpur Dehat • Role: <strong>Logistics support</strong>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: var(--ink);">5.0 Hours</div>
+              <div style="font-size: 11px; color: var(--muted);">Block #02 Verified</div>
+            </div>
+          </div>
+
+          <!-- Past Drive 3 -->
+          <div class="contribution-item">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span class="badge-pill" style="background: #F1F3F5; color: #484848; font-size: 10px;">Completed</span>
+                <span class="code-chip">task-10</span>
+              </div>
+              <h4 style="font-size: 16px; font-weight: 800; color: var(--ink); margin: 6px 0 2px;">
+                Elderly care visits
+              </h4>
+              <div style="font-size: 12px; color: var(--muted);">
+                Rasulabad, Kanpur Dehat • Role: <strong>Local language liaison</strong>
+              </div>
+            </div>
+
+            <div style="text-align: right;">
+              <div style="font-size: 16px; font-weight: 800; color: var(--ink);">5.0 Hours</div>
+              <div style="font-size: 11px; color: var(--muted);">Block #04 Verified</div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT SIDEBAR: VOLUNTEER BADGES & CERTIFICATES -->
+      <aside class="volunteer-stats-sidebar">
+        
+        <div class="card" style="padding: 24px;">
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 14px;">
+            Community Recognition
+          </h4>
+
+          <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--rausch-soft); color: var(--rausch); display: flex; align-items: center; justify-content: center; font-size: 20px;">
+              🏅
+            </div>
+            <div>
+              <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Active Ready Contributor</div>
+              <div style="font-size: 11px; color: var(--muted);">3 drives completed without dropout</div>
+            </div>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--ready-green-soft); color: var(--ready-green); display: flex; align-items: center; justify-content: center; font-size: 20px;">
+              🛡️
+            </div>
+            <div>
+              <div style="font-size: 14px; font-weight: 700; color: var(--ink);">Host-Verified First Aider</div>
+              <div style="font-size: 11px; color: var(--muted);">Eligible for safety critical duties</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card" style="padding: 24px;">
+          <h4 style="font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 12px;">
+            Verifiable Credentials
+          </h4>
+          <p style="font-size: 12px; color: var(--body); line-height: 1.5; margin-bottom: 16px;">
+            Your contribution hours are secured on the SewaCircle tamper-evident cryptographic ledger (Entry #4, Hash 1cb234ca...).
+          </p>
+          <button class="btn btn-secondary btn-pill btn-sm" style="width: 100%;">
+            Download Digital Certificate (PDF)
+          </button>
+        </div>
+
+        <div class="card-soft" style="font-size: 12px; color: var(--muted); line-height: 1.5;">
+          <strong>Privacy Notice:</strong> Your personal contact details (phone, email, house address) are never shared with AI models or external platforms.
+        </div>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

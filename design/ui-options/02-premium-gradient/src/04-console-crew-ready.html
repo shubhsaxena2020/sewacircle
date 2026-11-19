@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Crew Board: READY Verdict</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Disclaimer Bar -->
+  <div class="disclaimer-strip">
+    <span>Not affiliated with MY Bharat or any government body. Demonstrating synthetic youth volunteering operations for Uttar Pradesh districts.</span>
+  </div>
+
+  <!-- Global Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="01-landing.html" class="brand-group">
+        <div class="brand-logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 9 9"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-edition">Ready Crew • Console</span>
+        </div>
+      </a>
+
+      <nav class="site-nav">
+        <a href="01-landing.html" class="nav-link">Overview</a>
+        <a href="02-console-task.html" class="nav-link">Brief</a>
+        <a href="03-console-roles.html" class="nav-link">Roles</a>
+        <a href="04-console-crew-ready.html" class="nav-link active">Crew (Ready)</a>
+        <a href="05-console-crew-not-ready.html" class="nav-link">Crew (Gap)</a>
+        <a href="06-console-evidence.html" class="nav-link">Evidence</a>
+        <a href="07-console-ledger.html" class="nav-link">Ledger</a>
+        <a href="08-console-evaluation.html" class="nav-link">Evaluation</a>
+        <a href="09-volunteer.html" class="nav-link">Volunteers</a>
+        <a href="10-districts.html" class="nav-link">Districts</a>
+        <a href="11-method.html" class="nav-link">Method</a>
+      </nav>
+
+      <div class="header-actions">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle" role="group" aria-label="Language selector">
+          <button class="lang-btn active" type="button">EN</button>
+          <button class="lang-btn devanagari" type="button">हिंदी</button>
+        </div>
+        <a href="06-console-evidence.html" class="btn btn-primary btn-sm">Next: Evidence →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Stage Header -->
+  <div style="background: var(--canvas-soft); border-bottom: 1px solid var(--hairline); padding: 18px 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span class="tag tag-indigo">Stage 3 of 4: Roster Solver</span>
+          <span style="color: var(--ink-muted); font-size: 13px;">Drive: <strong>Water and hygiene camp (task-01)</strong></span>
+          <span class="tag tag-green">Solver: OR-Tools CP-SAT</span>
+        </div>
+        <div style="font-size: 13px; color: var(--ink-muted);">
+          Compare state: <a href="05-console-crew-not-ready.html" style="color: var(--primary); text-decoration: none; font-weight: 500;">View NOT READY Example (task-02) →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main style="padding: 40px 0;">
+    <div class="container">
+
+      <!-- Hero Verdict Banner -->
+      <div class="verdict-hero verdict-hero-ready">
+        <div>
+          <div class="verdict-badge ready">
+            <span class="verdict-dot"></span>
+            VERDICT: READY
+          </div>
+          <h1 class="verdict-title">The drive is safe to run.</h1>
+          <p class="verdict-subline">
+            "READY: every essential role is filled and any one person can drop out without leaving a gap."
+          </p>
+        </div>
+        <div style="text-align: right;">
+          <div style="font-size: 12px; font-weight: 600; text-transform: uppercase; color: var(--ready-text); letter-spacing: 0.05em;">Status</div>
+          <div class="metric-value num" style="color: var(--ready-text); font-size: 36px; font-weight: 700;">OPTIMAL</div>
+          <div class="metric-sub" style="color: var(--ready-text);">Solved in 15 ms</div>
+        </div>
+      </div>
+
+      <!-- Metrics Strip (CP-SAT on task-01) -->
+      <div class="metrics-strip">
+        <div class="metric-card">
+          <div class="metric-label">Role Coverage</div>
+          <div class="metric-value num" style="color: var(--ready-text);">100%</div>
+          <div class="metric-sub">4 of 4 essential roles</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Slots Filled</div>
+          <div class="metric-value num">4 / 4</div>
+          <div class="metric-sub">Zero unfilled gaps</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Dropout Robustness</div>
+          <div class="metric-value num" style="color: var(--ready-text);">100%</div>
+          <div class="metric-sub">Any 1 drop survivable</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Novice Volunteers</div>
+          <div class="metric-value num">2</div>
+          <div class="metric-sub">Mohit Z. &amp; Kabir Z.</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Solver Runtime</div>
+          <div class="metric-value num">15 ms</div>
+          <div class="metric-sub">Status: OPTIMAL</div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-label">Repeat-Pick Share</div>
+          <div class="metric-value num">0.0%</div>
+          <div class="metric-sub">Fair candidate spread</div>
+        </div>
+      </div>
+
+      <!-- Main Layout: Assigned Crew + Standby Rail -->
+      <div style="display: grid; grid-template-columns: 1fr 380px; gap: 32px; align-items: start; margin-bottom: 48px;">
+        
+        <!-- Left: Crew Board (4 Cards by Role) -->
+        <section>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="font-size: 22px; margin: 0; color: var(--ink);">Assigned Primary Crew (4 Roles)</h2>
+            <span style="font-size: 13px; color: var(--ink-muted);">Calculated by constraint optimization</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 16px;">
+            
+            <!-- Assignment 1: Poster team -> Heena P. -->
+            <div class="card" style="padding: 20px; border-left: 4px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; color: var(--primary-deep); text-transform: uppercase;">
+                    ROLE 01 • POSTER TEAM
+                  </div>
+                  <div style="font-size: 18px; font-weight: 600; color: var(--ink); margin-top: 2px;">
+                    Heena P. <span style="font-size: 13px; font-weight: 400; color: var(--ink-muted);">(v-008)</span>
+                  </div>
+                </div>
+
+                <div style="text-align: right;">
+                  <span class="code-inline tabular num">Fit Score: 74.0</span>
+                  <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;" class="tabular num">Distance: 7.4 km</div>
+                </div>
+              </div>
+
+              <div style="background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted); margin-bottom: 6px; text-transform: uppercase;">Selection Justification:</div>
+                <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  <li>Has posters and graphic design (level 2)</li>
+                  <li>Free sat morning; 7 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Assignment 2: First-aid support -> Mohit Z. -->
+            <div class="card" style="padding: 20px; border-left: 4px solid var(--ready-dot);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; color: var(--ready-text); text-transform: uppercase;">
+                    ROLE 02 • FIRST-AID SUPPORT (SAFETY CRITICAL)
+                  </div>
+                  <div style="font-size: 18px; font-weight: 600; color: var(--ink); margin-top: 2px;">
+                    Mohit Z. <span style="font-size: 13px; font-weight: 400; color: var(--ink-muted);">(v-070)</span>
+                    <span class="tag tag-amber" style="font-size: 12px; margin-left: 6px;">Novice</span>
+                  </div>
+                </div>
+
+                <div style="text-align: right;">
+                  <span class="code-inline tabular num">Fit Score: 113.0</span>
+                  <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;" class="tabular num">Distance: 1.7 km</div>
+                </div>
+              </div>
+
+              <div style="background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted); margin-bottom: 6px; text-transform: uppercase;">Selection Justification:</div>
+                <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  <li>Has first aid / basic medical support (level 3) - Host Checked</li>
+                  <li>Free sat morning; 2 km from the site</li>
+                  <li>Newcomer (0 past drives)</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Assignment 3: Supplies and site setup -> Divya H. -->
+            <div class="card" style="padding: 20px; border-left: 4px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; color: var(--primary-deep); text-transform: uppercase;">
+                    ROLE 03 • SUPPLIES AND SITE SETUP
+                  </div>
+                  <div style="font-size: 18px; font-weight: 600; color: var(--ink); margin-top: 2px;">
+                    Divya H. <span style="font-size: 13px; font-weight: 400; color: var(--ink-muted);">(v-067)</span>
+                  </div>
+                </div>
+
+                <div style="text-align: right;">
+                  <span class="code-inline tabular num">Fit Score: 89.0</span>
+                  <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;" class="tabular num">Distance: 16.3 km</div>
+                </div>
+              </div>
+
+              <div style="background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted); margin-bottom: 6px; text-transform: uppercase;">Selection Justification:</div>
+                <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  <li>Has logistics, supplies and site setup (level 3)</li>
+                  <li>Free sat morning; 16 km from the site</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Assignment 4: Local-language liaison -> Kabir Z. -->
+            <div class="card" style="padding: 20px; border-left: 4px solid var(--primary);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px;">
+                <div>
+                  <div style="font-size: 12px; font-weight: 700; color: var(--primary-deep); text-transform: uppercase;">
+                    ROLE 04 • LOCAL-LANGUAGE LIAISON
+                  </div>
+                  <div style="font-size: 18px; font-weight: 600; color: var(--ink); margin-top: 2px;">
+                    Kabir Z. <span style="font-size: 13px; font-weight: 400; color: var(--ink-muted);">(v-011)</span>
+                    <span class="tag tag-amber" style="font-size: 12px; margin-left: 6px;">Novice</span>
+                  </div>
+                </div>
+
+                <div style="text-align: right;">
+                  <span class="code-inline tabular num">Fit Score: 118.0</span>
+                  <div style="font-size: 12px; color: var(--ink-muted); margin-top: 4px;" class="tabular num">Distance: 5.3 km</div>
+                </div>
+              </div>
+
+              <div style="background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light);">
+                <div style="font-size: 12px; font-weight: 600; color: var(--ink-muted); margin-bottom: 6px; text-transform: uppercase;">Selection Justification:</div>
+                <ul style="margin: 0; padding-left: 18px; font-size: 13px; color: var(--ink-secondary); line-height: 1.6;">
+                  <li>Has awadhi speaker (local-language liaison) (level 3)</li>
+                  <li>Free sat morning; 5 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                  <li>Newcomer (0 past drives)</li>
+                </ul>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Right: Standby Redundancy Rail -->
+        <aside>
+          <div class="card" style="border-top: 4px solid var(--primary); margin-bottom: 24px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h2 style="font-size: 16px; margin: 0; color: var(--ink);">Standby Rail (2 Pairs)</h2>
+              <span class="tag tag-green">Robustness 100%</span>
+            </div>
+            <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 18px;">
+              Certified backups assigned by the solver to protect against single-volunteer dropouts without leaving any role vacant.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 14px;">
+              
+              <!-- Standby 1 -->
+              <div style="padding: 16px; background: var(--canvas-soft); border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-weight: 700; font-size: 14px; color: var(--ink);">Imran B.</span>
+                  <code class="code-inline tabular">v-068</code>
+                </div>
+                <div style="font-size: 12px; color: var(--primary-deep); font-weight: 600; margin-bottom: 4px;">
+                  Covers: Poster team + Local-language liaison
+                </div>
+                <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">
+                  "Can step in for: Poster team, Local-language liaison. Raises dropout robustness to 75%."
+                </div>
+              </div>
+
+              <!-- Standby 2 -->
+              <div style="padding: 16px; background: var(--canvas-soft); border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                  <span style="font-weight: 700; font-size: 14px; color: var(--ink);">Kavya L.</span>
+                  <code class="code-inline tabular">v-069</code>
+                </div>
+                <div style="font-size: 12px; color: var(--primary-deep); font-weight: 600; margin-bottom: 4px;">
+                  Covers: Supplies and site setup
+                </div>
+                <div style="font-size: 12px; color: var(--ink-muted); line-height: 1.4;">
+                  "Can step in for: Supplies and site setup. Raises dropout robustness to 100%."
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Standby Guarantees Card -->
+          <div class="card card-cream" style="padding: 18px;">
+            <div style="font-weight: 600; font-size: 13px; color: var(--ink); margin-bottom: 6px;">
+              Invariance Guarantee
+            </div>
+            <p style="font-size: 12px; color: var(--ink-secondary); line-height: 1.5; margin: 0;">
+              Every essential role on this drive has a designated, verified replacement residing within 25 km who has confirmed availability on Saturday morning.
+            </p>
+          </div>
+        </aside>
+
+      </div>
+
+      <!-- Four Methods Compared on THIS Task -->
+      <section style="margin-bottom: 48px;">
+        <div style="margin-bottom: 20px;">
+          <h2 style="font-size: 22px; margin-bottom: 6px; color: var(--ink);">Four Methods Compared on task-01</h2>
+          <p style="color: var(--ink-secondary); font-size: 14px; margin: 0;">
+            The solver is the only one that also protects against a drop-out without picking the same faces again.
+          </p>
+        </div>
+
+        <div class="data-table-wrap">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Planning Method</th>
+                <th>Role Coverage</th>
+                <th>Dropout Robustness</th>
+                <th>Repeat-Pick Share</th>
+                <th>Roster Verdict</th>
+                <th>Operational Behavior</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: #f8faff;">
+                <td><strong style="color: var(--primary);">OR-Tools CP-SAT (Active)</strong></td>
+                <td class="tabular num"><strong>100%</strong></td>
+                <td class="tabular num" style="color: var(--ready-text); font-weight: 700;">100%</td>
+                <td class="tabular num" style="color: var(--ready-text); font-weight: 700;">0.0%</td>
+                <td><span class="tag tag-green">READY</span></td>
+                <td>Guarantees 1-dropout standby protection while prioritizing newcomers and zero repeat picks.</td>
+              </tr>
+              <tr>
+                <td><strong>Nearest-Skill Baseline</strong></td>
+                <td class="tabular num">100%</td>
+                <td class="tabular num" style="color: var(--danger-text);">0%</td>
+                <td class="tabular num">25.0%</td>
+                <td><span class="tag tag-amber">NOT READY</span></td>
+                <td>Picks highest local score blindly; assigns zero standbys, leaving the drive vulnerable.</td>
+              </tr>
+              <tr>
+                <td><strong>Random Feasible</strong></td>
+                <td class="tabular num">100%</td>
+                <td class="tabular num" style="color: var(--danger-text);">0%</td>
+                <td class="tabular num">25.0%</td>
+                <td><span class="tag tag-amber">NOT READY</span></td>
+                <td>Fills slots arbitrarily without standby redundancy or distance optimization.</td>
+              </tr>
+              <tr>
+                <td><strong>Manual Greedy</strong></td>
+                <td class="tabular num">100%</td>
+                <td class="tabular num">100%</td>
+                <td class="tabular num" style="color: var(--notready-text);">25.0%</td>
+                <td><span class="tag tag-green">READY</span></td>
+                <td>Finds coverage but repeatedly defaults to familiar volunteers, causing burnout.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Interactive Inspector Tools (Why-Not & Drop-Out Simulator) -->
+      <section style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+        
+        <!-- Tool 1: Why-Not Inspector -->
+        <div class="card" style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+              <h2 style="font-size: 16px; margin: 0; color: var(--ink);">Why-Not Tool: Aarav C. (v-001)</h2>
+            </div>
+            <span class="tag tag-indigo">Feasible Candidate</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 16px;">
+            Why was eligible volunteer <strong>Aarav C.</strong> not placed on the primary crew roster for this drive?
+          </p>
+
+          <div style="background: var(--canvas-soft); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline); font-size: 13px; color: var(--ink); line-height: 1.6; margin-bottom: 14px;">
+            "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -&gt; 100%; dropout robustness 100% -&gt; 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-muted);">
+            <span>Displaced: <code class="code-inline">v-011 (Kabir Z.)</code></span>
+            <span>Delta Robustness: <span class="num">0.0%</span></span>
+            <span>Score Comparison: <strong class="num">118 vs 98</strong></span>
+          </div>
+        </div>
+
+        <!-- Tool 2: Drop-Out Simulator -->
+        <div class="card" style="padding: 24px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><line x1="18" y1="8" x2="23" y2="13"></line><line x1="23" y1="8" x2="18" y2="13"></line></svg>
+              <h2 style="font-size: 16px; margin: 0; color: var(--ink);">Drop-Out Simulator: Drop Heena P.</h2>
+            </div>
+            <span class="tag tag-green">Auto-Healed</span>
+          </div>
+
+          <p style="font-size: 13px; color: var(--ink-secondary); line-height: 1.5; margin-bottom: 16px;">
+            Simulate a last-minute cancellation by primary volunteer <strong>Heena P. (v-008)</strong>:
+          </p>
+
+          <div style="background: var(--ready-bg); padding: 16px; border-radius: var(--radius-md); border: 1px solid var(--ready-border); font-size: 13px; color: var(--ready-text); line-height: 1.6; margin-bottom: 14px;">
+            <strong>Healed with Standby:</strong> Imran B. (v-068) is immediately promoted from standby to Poster team (score 44.0, 13.1 km). All 4 roles remain 100% covered. Zero uncovered roles.
+          </div>
+
+          <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-muted);">
+            <span>Dropped: <code class="code-inline">v-008</code></span>
+            <span>Replacement: <strong style="color: var(--ready-text);">Imran B. (v-068)</strong></span>
+            <span>Uncovered Roles: <span class="num">0</span></span>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <div class="brand-logo-mark" style="width: 26px; height: 26px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle></svg>
+            </div>
+            <span style="font-weight: 700; font-size: 16px; color: var(--ink);">SewaCircle Ready Crew</span>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 16px;">
+            Crew Formation Engine • Mathematical guarantee of volunteer operational readiness.
+          </p>
+          <div style="font-size: 12px; color: var(--ink-light);">
+            Solver: OR-Tools CP-SAT • 15 ms solve time
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Console Workflow</div>
+          <ul class="footer-links">
+            <li><a href="02-console-task.html">02 Drive Brief Input</a></li>
+            <li><a href="03-console-roles.html">03 AI Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">04 Ready Crew Board</a></li>
+            <li><a href="05-console-crew-not-ready.html">05 Gap Analysis &amp; Recruits</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Post-Drive Audit</div>
+          <ul class="footer-links">
+            <li><a href="06-console-evidence.html">06 Host Notes &amp; Evidence</a></li>
+            <li><a href="07-console-ledger.html">07 SHA-256 Ledger</a></li>
+            <li><a href="08-console-evaluation.html">08 Model Benchmark</a></li>
+            <li><a href="09-volunteer.html">09 Youth Volunteer View</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">District Architecture</div>
+          <ul class="footer-links">
+            <li><a href="10-districts.html">10 UP 20 Districts Map</a></li>
+            <li><a href="11-method.html">11 Solver Methodology</a></li>
+            <li><a href="01-landing.html">Landing Overview</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Not affiliated with MY Bharat or any government body. Synthetic data (seed 7) for evaluation purposes only.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <span>PIB Ref: 05 July 2026</span>
+          <span>OR-Tools CP-SAT</span>
+          <span>Open Admin Data CC-BY-4.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

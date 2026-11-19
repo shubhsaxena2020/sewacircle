@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>चरण 03: दल तत्पर (Ready Crew) — सेवामंडल तत्पर दल (08-mitti-original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Block-print decorative runner ribbon -->
+  <div class="blockprint-ribbon"></div>
+
+  <!-- Shared Site Header -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        
+        <a href="01-landing.html" class="brand-lockup">
+          <div class="brand-seal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18"/>
+              <path d="M3 12h18"/>
+              <path d="M5.6 5.6l12.8 12.8"/>
+              <circle cx="12" cy="12" r="3" fill="var(--terracotta)"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">सेवामंडल · SewaCircle</span>
+            <span class="brand-sub">तत्पर दल · READY CREW</span>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="01-landing.html" class="nav-item">
+            <span class="nav-devanagari-prefix">परिचय</span> Story
+          </a>
+          <a href="02-console-task.html" class="nav-item active">
+            <span class="nav-devanagari-prefix">कंसोल</span> Organiser Console
+          </a>
+          <a href="09-volunteer.html" class="nav-item">
+            <span class="nav-devanagari-prefix">युवा पोर्टल</span> Volunteer
+          </a>
+          <a href="10-districts.html" class="nav-item">
+            <span class="nav-devanagari-prefix">20 जिले</span> Districts
+          </a>
+          <a href="11-method.html" class="nav-item">
+            <span class="nav-devanagari-prefix">कार्यप्रणाली</span> Method
+          </a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="badge-synthetic">
+            <span class="badge-synthetic-dot"></span>
+            Synthetic Data
+          </span>
+          <div class="lang-toggle">
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn active">हिन्दी</button>
+          </div>
+          <div class="district-badge">
+            <span class="district-badge-dot"></span>
+            <span>अकबरपुर, कानपुर देहात</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Workflow Progress Strip -->
+  <div class="console-workflow-bar">
+    <div class="site-container">
+      <div class="workflow-steps">
+        <a href="02-console-task.html" class="workflow-step">
+          <span class="workflow-step-num">1</span>
+          <span>कार्य विवरण (Brief)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="03-console-roles.html" class="workflow-step">
+          <span class="workflow-step-num">2</span>
+          <span>भूमिकाएं (Roles)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="04-console-crew-ready.html" class="workflow-step active">
+          <span class="workflow-step-num">3</span>
+          <span>दल: तैयार (Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="05-console-crew-not-ready.html" class="workflow-step">
+          <span class="workflow-step-num">4</span>
+          <span>दल: अपूर्ण (Not Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="06-console-evidence.html" class="workflow-step">
+          <span class="workflow-step-num">5</span>
+          <span>साक्ष्य (Evidence)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="07-console-ledger.html" class="workflow-step">
+          <span class="workflow-step-num">6</span>
+          <span>बहीखाता (Ledger)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="08-console-evaluation.html" class="workflow-step">
+          <span class="workflow-step-num">7</span>
+          <span>मूल्यांकन (Eval)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    <div class="site-container">
+
+      <!-- HERO VERDICT: READY TO RUN (Hero of the screen) -->
+      <section class="verdict-plaque ready">
+        <div class="verdict-plaque-left">
+          <div class="verdict-seal">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">निर्णय</span>
+            <span style="font-size: 16px; font-weight: 800;">तत्पर</span>
+          </div>
+          <div class="verdict-heading-group">
+            <span class="verdict-deva-lead">निर्णय: दल तत्पर एवं पूर्णतः तैयार</span>
+            <span class="verdict-eng-sub">VERDICT: READY TO RUN · ALL MUST ROLES COVERED WITH STANDBY</span>
+            <p class="verdict-explanation">
+              <strong>READY:</strong> every essential role is filled and any one person can drop out without leaving a gap.
+              (प्रत्येक आवश्यक भूमिका भरी गई है तथा किसी एक व्यक्ति के हटने पर भी दल सुरक्षित रूप से कार्य करेगा।)
+            </p>
+          </div>
+        </div>
+
+        <div class="verdict-metrics-cluster">
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--ready-green);">100%</div>
+            <div class="verdict-metric-lbl">भूमिका पूर्ति (Coverage)</div>
+          </div>
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--ready-green);">100%</div>
+            <div class="verdict-metric-lbl">ड्रॉपआउट सुरक्षा (Robustness)</div>
+          </div>
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--indigo);">15 ms</div>
+            <div class="verdict-metric-lbl">CP-SAT OPTIMAL</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task Context Strip -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 12px 20px; border-radius: 4px; margin-bottom: 24px;">
+        <div style="display: flex; gap: 16px; align-items: center; font-size: 13.5px;">
+          <strong style="color: var(--indigo-deep);">task-01: Water and hygiene camp</strong>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>अकबरपुर, कानपुर देहात</span>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>शनिवार सुबह (sat_morning)</span>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>आवेदक: 24 युवा</span>
+        </div>
+        <div style="display: flex; gap: 8px;">
+          <span class="badge-pill badge-novice">2 नए स्वयंसेवक (Novices)</span>
+          <span class="badge-pill badge-safety-check">1 सुरक्षा प्रमाणित (First-Aid)</span>
+        </div>
+      </div>
+
+      <!-- CREW BOARD: 4 PRIMARY ROLES -->
+      <div class="section-heading-mitti">
+        <div class="section-heading-deva">प्राथमिक दल बोर्ड (Primary Crew Assignments)</div>
+        <div class="section-heading-eng">Role Coverage: 4 / 4 Slots Filled with Exact Solver Reasons</div>
+      </div>
+
+      <div class="crew-grid">
+        
+        <!-- Slot 01: Poster team -> Heena P. -->
+        <div class="crew-slot-card">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge">भूमिका 01 · Must</span>
+            <h4 class="crew-role-name">पोस्टर दल (Poster team)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Heena P. (हिना पी.)</span>
+              <span class="volunteer-id-chip">v-008</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>27 वर्ष · महिला</span>
+              <span>•</span>
+              <span>सर्वंखेड़ा ब्लॉक (7.4 किमी)</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase; margin-bottom: 4px;">
+              सॉल्वर द्वारा चयन के कारण:
+            </div>
+            <ul class="solver-reasons-list">
+              <li>Has posters and graphic design (level 2)</li>
+              <li>Free sat morning; 7 km from the site</li>
+              <li>Not picked in the last 90 days</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 10px;">
+            <span style="font-size: 11px; color: var(--ink-muted);">योग्यता स्कोर:</span>
+            <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--indigo-deep);">74.0</strong>
+          </div>
+        </div>
+
+        <!-- Slot 02: First-aid support -> Mohit Z. (SAFETY CRITICAL) -->
+        <div class="crew-slot-card safety-critical">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge" style="background: var(--terracotta-light); color: var(--terracotta); border-color: var(--terracotta-border);">
+              भूमिका 02 · सुरक्षा महत्वपूर्ण
+            </span>
+            <h4 class="crew-role-name">प्राथमिक उपचार (First-aid support)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Mohit Z. (मोहित ज़ेड)</span>
+              <span class="volunteer-id-chip">v-070</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>19 वर्ष · पुरुष</span>
+              <span>•</span>
+              <span>अकबरपुर ब्लॉक (1.7 किमी)</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase; margin-bottom: 4px;">
+              सॉल्वर द्वारा चयन के कारण:
+            </div>
+            <ul class="solver-reasons-list">
+              <li>Has first aid / basic medical support (level 3)</li>
+              <li>Free sat morning; 2 km from the site</li>
+              <li>Newcomer (0 past drives)</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 10px;">
+            <span class="badge-pill badge-novice">नया युवा (Novice)</span>
+            <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--indigo-deep);">113.0</strong>
+          </div>
+        </div>
+
+        <!-- Slot 03: Supplies & site setup -> Divya H. -->
+        <div class="crew-slot-card">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge">भूमिका 03 · Must</span>
+            <h4 class="crew-role-name">सामग्री व्यवस्था (Supplies Setup)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Divya H. (दिव्या एच.)</span>
+              <span class="volunteer-id-chip">v-067</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>24 वर्ष · महिला</span>
+              <span>•</span>
+              <span>मैथा ब्लॉक (16.3 किमी)</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase; margin-bottom: 4px;">
+              सॉल्वर द्वारा चयन के कारण:
+            </div>
+            <ul class="solver-reasons-list">
+              <li>Has logistics, supplies and site setup (level 3)</li>
+              <li>Free sat morning; 16 km from the site</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 10px;">
+            <span style="font-size: 11px; color: var(--ink-muted);">योग्यता स्कोर:</span>
+            <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--indigo-deep);">89.0</strong>
+          </div>
+        </div>
+
+        <!-- Slot 04: Local-language liaison -> Kabir Z. -->
+        <div class="crew-slot-card">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge">भूमिका 04 · Must</span>
+            <h4 class="crew-role-name">स्थानीय बोली संपर्क (Awadhi)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Kabir Z. (कबीर ज़ेड)</span>
+              <span class="volunteer-id-chip">v-011</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>21 वर्ष · पुरुष</span>
+              <span>•</span>
+              <span>झिंझक ब्लॉक (5.3 किमी)</span>
+            </div>
+          </div>
+
+          <div>
+            <div style="font-size: 11px; font-weight: 700; color: var(--terracotta); text-transform: uppercase; margin-bottom: 4px;">
+              सॉल्वर द्वारा चयन के कारण:
+            </div>
+            <ul class="solver-reasons-list">
+              <li>Has awadhi speaker (local-language liaison) (level 3)</li>
+              <li>Free sat morning; 5 km from the site</li>
+              <li>Not picked in the last 90 days</li>
+              <li>Newcomer (0 past drives)</li>
+            </ul>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 10px;">
+            <span class="badge-pill badge-novice">नया युवा (Novice)</span>
+            <strong style="font-family: var(--font-mono); font-size: 13px; color: var(--indigo-deep);">118.0</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- STANDBY REDUNDANCY STRIP -->
+      <section class="standby-strip">
+        <div class="standby-header">
+          <div>
+            <h4 style="font-family: var(--font-display); font-size: 17px; font-weight: 700; color: var(--indigo-deep);">
+              बैकअप स्टैंडबाय दल (Standby Redundancy Roster)
+            </h4>
+            <div style="font-size: 12.5px; color: var(--ink-secondary);">
+              ड्रॉपआउट सुरक्षा: 100% · किसी भी एक स्वयंसेवक की अनुपस्थिति पर यह बैकअप तुरंत स्थान लेगा
+            </div>
+          </div>
+          <span class="badge-pill" style="background: var(--paper-card); border: 1px solid var(--border-blockprint); color: var(--ink);">
+            2 स्टैंडबाय नियुक्त
+          </span>
+        </div>
+
+        <div class="standby-cards-row">
+          
+          <!-- Standby 1: Imran B. -->
+          <div class="standby-unit-card">
+            <div style="width: 36px; height: 36px; border-radius: 4px; background: var(--paper-inset); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--indigo); font-family: var(--font-mono);">
+              IB
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 14px; color: var(--ink);">Imran B. (इमरान बी.)</strong>
+                <span class="volunteer-id-chip">v-068</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--ink-secondary); margin-top: 4px;">
+                Can step in for: <strong>Poster team</strong>, <strong>Local-language liaison</strong>. Raises dropout robustness to 75%.
+              </p>
+              <div style="font-size: 11.5px; color: var(--ink-muted); margin-top: 4px;">
+                17 वर्ष (अभिभावक सहमति पत्र दर्ज) • 13.1 किमी
+              </div>
+            </div>
+          </div>
+
+          <!-- Standby 2: Kavya L. -->
+          <div class="standby-unit-card">
+            <div style="width: 36px; height: 36px; border-radius: 4px; background: var(--paper-inset); display: flex; align-items: center; justify-content: center; font-weight: 800; color: var(--indigo); font-family: var(--font-mono);">
+              KL
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <strong style="font-size: 14px; color: var(--ink);">Kavya L. (काव्या एल.)</strong>
+                <span class="volunteer-id-chip">v-069</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--ink-secondary); margin-top: 4px;">
+                Can step in for: <strong>Supplies and site setup</strong>. Raises dropout robustness to 100%.
+              </p>
+              <div style="font-size: 11.5px; color: var(--ink-muted); margin-top: 4px;">
+                22 वर्ष • लॉजिस्टिक्स स्तर 2 • 11.4 किमी
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- INTERACTIVE TOOLS: WHY-NOT EXPLORER & DROPOUT SIMULATOR -->
+      <section style="margin-bottom: 32px;">
+        <div class="grid-2col">
+          
+          <!-- Tool 1: Why-Not Explorer (Counterfactual Analysis) -->
+          <div class="card-mitti">
+            <div class="card-mitti-header">
+              <div class="card-title-group">
+                <span class="card-title-devanagari">"इन्हें क्यों नहीं चुना गया?" (Why-Not Tool)</span>
+                <span class="card-subtitle-english">Counterfactual Re-solve Explanation</span>
+              </div>
+              <span class="badge-pill" style="background: var(--indigo-light); color: var(--indigo);">v-001 आरव सी.</span>
+            </div>
+
+            <p style="font-size: 13px; color: var(--ink-secondary); margin-bottom: 12px;">
+              यदि आयोजक पूछें कि <strong>आरव सी. (Aarav C. - v-001)</strong> को क्यों नहीं चुना गया, तो सॉल्वर वास्तविक पुनर्गणना करके जवाब देता है:
+            </p>
+
+            <div style="background: var(--paper-canvas); border-left: 3px solid var(--indigo); padding: 12px 16px; border-radius: 3px; font-size: 13px; line-height: 1.5; color: var(--ink); margin-bottom: 14px;">
+              "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -> 100%; dropout robustness 100% -> 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+            </div>
+
+            <div style="display: flex; justify-content: space-between; font-size: 12px; color: var(--ink-muted);">
+              <span>कवर में बदलाव: <strong>0.0</strong></span>
+              <span>रोबस्टनेस में बदलाव: <strong>0.0</strong></span>
+              <span>विस्थापित स्वयंसेवक: <strong>v-011 (कबीर ज़ेड)</strong></span>
+            </div>
+          </div>
+
+          <!-- Tool 2: Drop-out Simulator (Live Healing) -->
+          <div class="card-mitti">
+            <div class="card-mitti-header">
+              <div class="card-title-group">
+                <span class="card-title-devanagari">ड्रॉपआउट सिमुलेशन (Drop-out Healing)</span>
+                <span class="card-subtitle-english">Simulate Live Absence &amp; Auto-heal</span>
+              </div>
+              <span class="badge-pill" style="background: var(--turmeric-light); color: var(--turmeric-dark);">लाइव टेस्ट</span>
+            </div>
+
+            <p style="font-size: 13px; color: var(--ink-secondary); margin-bottom: 12px;">
+              यदि <strong>हिना पी. (Heena P. - v-008)</strong> अंतिम क्षण में अनुपस्थित होती हैं:
+            </p>
+
+            <div style="background: var(--paper-canvas); border-left: 3px solid var(--turmeric); padding: 12px 16px; border-radius: 3px; font-size: 13px; line-height: 1.5; color: var(--ink); margin-bottom: 14px;">
+              <strong>स्वतः समाधान:</strong> इमरान बी. (Imran B. - v-068) स्टैंडबाय से स्वतः पोस्टर दल में पदोन्नत हो जाते हैं। रोबस्टनेस 75% हो जाती है और प्रणाली 1 अतिरिक्त स्टैंडबाय की मांग उत्पन्न करती है।
+            </div>
+
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+              <span style="font-size: 12px; color: var(--ready-green); font-weight: 700;">✓ अभियान रद्द नहीं होगा</span>
+              <a href="05-console-crew-not-ready.html" class="btn-outline-mitti" style="font-size: 12px;">
+                अपूर्ण अभियान (NOT READY) उदाहरण देखें →
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- COMPARISON OF 4 ALLOCATION METHODS TABLE -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">चार आवंटन विधियों की तुलना</span>
+            <span class="card-subtitle-english">4 Methods Compared on Task-01</span>
+          </div>
+          <span class="badge-pill badge-safety-check">CP-SAT विजय</span>
+        </div>
+
+        <table class="table-mitti">
+          <thead>
+            <tr>
+              <th>आवंटन विधि (Method)</th>
+              <th>निर्णय (Verdict)</th>
+              <th>भूमिका पूर्ति (Coverage)</th>
+              <th>ड्रॉपआउट सुरक्षा (Robustness)</th>
+              <th>दोहराव हिस्सा (Repeat Picks)</th>
+              <th>गिनी असमानता (Exposure Gini)</th>
+              <th>सॉल्व समय</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="background: var(--ready-green-light); font-weight: 700;">
+              <td><strong>CP-SAT (सेवामंडल ऑप्टिमाइज़र)</strong></td>
+              <td><span class="badge-pill badge-safety-check">READY (तैयार)</span></td>
+              <td>100.0% (4/4)</td>
+              <td>100.0%</td>
+              <td>0.0% (0/4)</td>
+              <td>0.606</td>
+              <td class="mono-cell">15 ms</td>
+            </tr>
+            <tr>
+              <td>Nearest Skill (निकटतम कौशल बेसलाइन)</td>
+              <td><span class="badge-pill" style="background: var(--alert-madder-light); color: var(--alert-madder);">NOT READY</span></td>
+              <td>100.0% (4/4)</td>
+              <td>0.0% (कोई बैकअप नहीं)</td>
+              <td>25.0% (1/4)</td>
+              <td>0.626</td>
+              <td class="mono-cell">0 ms</td>
+            </tr>
+            <tr>
+              <td>Random Feasible (यादृच्छिक सुसंगत)</td>
+              <td><span class="badge-pill" style="background: var(--alert-madder-light); color: var(--alert-madder);">NOT READY</span></td>
+              <td>100.0% (4/4)</td>
+              <td>0.0% (कोई बैकअप नहीं)</td>
+              <td>25.0% (1/4)</td>
+              <td>0.667</td>
+              <td class="mono-cell">0 ms</td>
+            </tr>
+            <tr>
+              <td>Manual Greedy (सतर्क मानव आयोजक)</td>
+              <td><span class="badge-pill badge-safety-check">READY (तैयार)</span></td>
+              <td>100.0% (4/4)</td>
+              <td>100.0%</td>
+              <td>25.0% (1/4 दोहराव)</td>
+              <td>0.566</td>
+              <td class="mono-cell">0 ms</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="font-size: 12px; color: var(--ink-muted); margin-top: 10px;">
+          * नोट: यद्यपि मैन्युअल आयोजक ने भी 100% बैकअप बनाया, लेकिन उसने पुराने स्वयंसेवकों को दोहराया (25% repeat pick share), जबकि CP-SAT ने 0% दोहराव के साथ नए युवाओं को मौका दिया।
+        </div>
+      </section>
+
+      <!-- Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 18px 24px; border-radius: 5px;">
+        <a href="03-console-roles.html" class="btn-outline-mitti">
+          ← भूमिका संपादन पर वापस जाएं
+        </a>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <a href="05-console-crew-not-ready.html" class="btn-outline-mitti">
+            अपूर्ण अभियान (NOT READY) स्थिति देखें
+          </a>
+          <a href="06-console-evidence.html" class="btn-terracotta" style="font-size: 15px; padding: 10px 24px;">
+            <span>अभियान पश्चात साक्ष्य समीक्षा (Evidence)</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-disclaimer-box">
+        <div>
+          <strong>वैधानिक स्पष्टीकरण:</strong> यह वेबसाइट एक प्रोटोटाइप प्रदर्शन है। समस्त आंकड़े व स्वयंसेवक रिकॉर्ड काल्पनिक (Synthetic) हैं। Not affiliated with MY Bharat or any government body.
+        </div>
+        <span class="badge-synthetic">Synthetic Data Only</span>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 सेवामंडल तत्पर दल (SewaCircle Ready Crew) · Direction 08: Mitti Original</div>
+        <div style="display: flex; gap: 18px;">
+          <a href="02-console-task.html" style="color: var(--ink-muted); text-decoration: none;">चरण 01: विवरण</a>
+          <span>•</span>
+          <a href="06-console-evidence.html" style="color: var(--ink-muted); text-decoration: none;">चरण 05: साक्ष्य समीक्षा</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

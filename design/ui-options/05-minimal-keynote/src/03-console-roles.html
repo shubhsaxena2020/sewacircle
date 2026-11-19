@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — AI Role Extraction & Decisions (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item active"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">02 · Roles Extracted</span>
+        <div class="sub-nav-step-crumbs">
+          <a href="02-console-task.html">Brief Input</a>
+          <span>&rsaquo;</span>
+          <span style="font-weight: 600; color: var(--primary);">Roles Extraction</span>
+          <span>&rsaquo;</span>
+          <a href="04-console-crew-ready.html">Crew Solver</a>
+        </div>
+      </div>
+      <div class="sub-nav-right">
+        <span class="pill-badge pill-badge-amber">4 Decisions Needed</span>
+        <a href="04-console-crew-ready.html" class="btn-primary">Confirm & Solve Crew →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONSOLE -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 56px;">
+    <div class="container">
+
+      <div class="keynote-header-left">
+        <div class="keynote-header-eyebrow">Task-01 · Akbarpur Water Camp</div>
+        <h1 class="keynote-header-title">4 Roles Proposed. 4 Decisions Needed.</h1>
+        <p class="keynote-header-sub">
+          Extracted from Hindi brief: <span class="hindi-title" style="color: var(--ink);">"गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर..."</span> The AI identified the following essential duties and flagged points requiring host confirmation.
+        </p>
+      </div>
+
+      <!-- PRODUCT SHOT: Framed Roles Studio Table -->
+      <div class="product-stage" style="margin-bottom: 48px;">
+        <div class="product-frame">
+          <div class="product-frame-bar">
+            <div class="product-frame-dots">
+              <span class="frame-dot" style="background:#ff5f56;"></span>
+              <span class="frame-dot" style="background:#ffbd2e;"></span>
+              <span class="frame-dot" style="background:#27c93f;"></span>
+            </div>
+            <div class="product-frame-title">AI Role Proposals — Model: Claude / Qwen2.5-7B Masked</div>
+            <div style="font-size: 11px; color: var(--ink-muted);">Cached Response · 0 Redactions</div>
+          </div>
+
+          <div class="product-frame-content" style="padding: 0;">
+            <table class="keynote-table">
+              <thead>
+                <tr>
+                  <th style="padding-left: 32px;">Role Name</th>
+                  <th>Source Phrase</th>
+                  <th>Required Skills</th>
+                  <th>Headcount</th>
+                  <th>Confidence</th>
+                  <th>Safety Tier</th>
+                  <th style="padding-right: 32px;">AI Reason</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!-- Role 1 -->
+                <tr>
+                  <td style="padding-left: 32px;">
+                    <strong style="font-size: 15px; color: var(--ink);">Poster team</strong>
+                    <div style="font-size: 12px; color: var(--ink-muted);">ID: role-01</div>
+                  </td>
+                  <td>
+                    <span class="hindi-title" style="background: #eef2ff; color: #3730a3; padding: 3px 8px; border-radius: 6px; font-size: 14px;">
+                      "पोस्टर"
+                    </span>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-neutral">graphic_design</span>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">-</button>
+                      <strong style="font-size: 14px;">1</strong>
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-blue">medium</span>
+                  </td>
+                  <td>
+                    <span style="font-size: 12px; color: var(--ink-muted);">Standard</span>
+                  </td>
+                  <td style="padding-right: 32px; font-size: 13px; color: var(--ink-secondary);">
+                    Posters are requested but no number is given.
+                  </td>
+                </tr>
+
+                <!-- Role 2 -->
+                <tr style="background: #fafafc;">
+                  <td style="padding-left: 32px;">
+                    <strong style="font-size: 15px; color: var(--ink);">First-aid support</strong>
+                    <div style="font-size: 12px; color: var(--ink-muted);">ID: role-02</div>
+                  </td>
+                  <td>
+                    <span class="hindi-title" style="background: #fef2f2; color: #991b1b; padding: 3px 8px; border-radius: 6px; font-size: 14px;">
+                      "प्राथमिक उपचार"
+                    </span>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-neutral">first_aid</span>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">-</button>
+                      <strong style="font-size: 14px;">1</strong>
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-blue">medium</span>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-amber" style="font-size: 11px; font-weight: 600;">
+                      Safety Critical
+                    </span>
+                  </td>
+                  <td style="padding-right: 32px; font-size: 13px; color: var(--ink-secondary);">
+                    First aid is requested but no number is given. Only accepts host-checked skills.
+                  </td>
+                </tr>
+
+                <!-- Role 3 -->
+                <tr>
+                  <td style="padding-left: 32px;">
+                    <strong style="font-size: 15px; color: var(--ink);">Supplies and site setup</strong>
+                    <div style="font-size: 12px; color: var(--ink-muted);">ID: role-03</div>
+                  </td>
+                  <td>
+                    <span class="hindi-title" style="background: #f0fdf4; color: #166534; padding: 3px 8px; border-radius: 6px; font-size: 14px;">
+                      "सामान"
+                    </span>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-neutral">logistics_supplies</span>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">-</button>
+                      <strong style="font-size: 14px;">1</strong>
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-blue">medium</span>
+                  </td>
+                  <td>
+                    <span style="font-size: 12px; color: var(--ink-muted);">Standard</span>
+                  </td>
+                  <td style="padding-right: 32px; font-size: 13px; color: var(--ink-secondary);">
+                    Supplies handling is requested but no number is given.
+                  </td>
+                </tr>
+
+                <!-- Role 4 -->
+                <tr style="background: #fafafc;">
+                  <td style="padding-left: 32px;">
+                    <strong style="font-size: 15px; color: var(--ink);">Local-language liaison</strong>
+                    <div style="font-size: 12px; color: var(--ink-muted);">ID: role-04</div>
+                  </td>
+                  <td>
+                    <span class="hindi-title" style="background: #fdf4ff; color: #86198f; padding: 3px 8px; border-radius: 6px; font-size: 14px;">
+                      "स्थानीय बोली में बात करने वाले"
+                    </span>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-neutral">dialect_awadhi</span>
+                    <span class="pill-badge pill-badge-neutral">dialect_bhojpuri</span>
+                  </td>
+                  <td>
+                    <div style="display: flex; align-items: center; gap: 8px;">
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">-</button>
+                      <strong style="font-size: 14px;">1</strong>
+                      <button style="width: 22px; height: 22px; border: 1px solid var(--hairline); background: white; border-radius: 4px; cursor: pointer;">+</button>
+                    </div>
+                  </td>
+                  <td>
+                    <span class="pill-badge pill-badge-amber">low</span>
+                  </td>
+                  <td>
+                    <span style="font-size: 12px; color: var(--ink-muted);">Standard</span>
+                  </td>
+                  <td style="padding-right: 32px; font-size: 13px; color: var(--ink-secondary);">
+                    Local dialect speakers are requested but dialect and count are not stated.
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <!-- KEYNOTE CALLOUT: Needs Your Decision (Verbatim from data) -->
+      <div style="background: #ffffff; border: 1px solid var(--hairline); border-radius: 18px; padding: 36px; box-shadow: 0 4px 20px rgba(0,0,0,0.03); margin-bottom: 40px;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px; border-bottom: 1px solid var(--border-soft); padding-bottom: 16px;">
+          <div>
+            <span class="card-label-small" style="color: var(--primary);">Human-in-the-Loop Review</span>
+            <h2 style="font-size: 24px; font-weight: 600; letter-spacing: -0.015em; margin-top: 4px;">
+              Needs Your Decision (4 Items)
+            </h2>
+          </div>
+          <span class="pill-badge pill-badge-green" style="font-size: 12px; padding: 4px 12px;">4 of 4 Resolved</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          
+          <!-- Decision 1 -->
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; background: var(--canvas-parchment); border-radius: 12px;">
+            <div style="max-width: 720px;">
+              <strong style="font-size: 15px; color: var(--ink);">
+                1. Which local dialect is needed (Awadhi or Bhojpuri)?
+              </strong>
+              <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 4px;">
+                Akbarpur is in Kanpur Dehat district, situated in the Central Awadh linguistic corridor.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <button class="btn-primary" style="padding: 6px 14px; font-size: 13px;">Awadhi (Selected)</button>
+              <button class="btn-secondary-pill" style="padding: 6px 14px; font-size: 13px;">Bhojpuri</button>
+            </div>
+          </div>
+
+          <!-- Decision 2 -->
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; background: var(--canvas-parchment); border-radius: 12px;">
+            <div style="max-width: 720px;">
+              <strong style="font-size: 15px; color: var(--ink);">
+                2. How many people are needed for each role (posters, first aid, supplies, local-language speakers)?
+              </strong>
+              <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 4px;">
+                Brief indicates approximately 120 villagers attending. Solver target: 1 lead per station (total 4 primary + 2 standbys).
+              </p>
+            </div>
+            <span class="pill-badge pill-badge-neutral" style="font-size: 13px; font-weight: 600;">Confirmed: 1 Each (4 Total)</span>
+          </div>
+
+          <!-- Decision 3 -->
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; background: var(--canvas-parchment); border-radius: 12px;">
+            <div style="max-width: 720px;">
+              <strong style="font-size: 15px; color: var(--ink);">
+                3. Is a hygiene or health educator needed to run the handwashing and safe drinking water sessions?
+              </strong>
+              <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 4px;">
+                Brief emphasizes hygiene awareness. Marked as optional 'should' role for follow-up session.
+              </p>
+            </div>
+            <span class="pill-badge pill-badge-neutral" style="font-size: 13px;">Deferred to Follow-up</span>
+          </div>
+
+          <!-- Decision 4 -->
+          <div style="display: flex; align-items: flex-start; justify-content: space-between; padding: 16px 20px; background: var(--canvas-parchment); border-radius: 12px;">
+            <div style="max-width: 720px;">
+              <strong style="font-size: 15px; color: var(--ink);">
+                4. Please check the role 'Local-language liaison' (the AI was not sure).
+              </strong>
+              <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 4px;">
+                Confidence was Low because the dialect was omitted in the brief. Verified as essential for village elder communication.
+              </p>
+            </div>
+            <span class="pill-badge pill-badge-green" style="font-size: 13px; font-weight: 600;">Verified & Locked</span>
+          </div>
+
+        </div>
+
+        <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--border-soft); display: flex; align-items: center; justify-content: space-between;">
+          <a href="02-console-task.html" class="btn-secondary-pill">← Edit Drive Brief</a>
+          <div style="display: flex; align-items: center; gap: 16px;">
+            <span style="font-size: 13px; color: var(--ink-muted);">Ready to run CP-SAT sequential tiers</span>
+            <a href="04-console-crew-ready.html" class="btn-primary" style="font-size: 16px; padding: 11px 26px;">
+              Confirm & Solve Crew Allocation →
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Navigation</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Negative Letter-Spacing</span></li>
+          <li><span style="color: var(--ink-muted);">Studio Frame Depth</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Cryptographic Audit Ledger</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Disclaimer Bar -->
+  <div class="disclaimer-strip">
+    <span>Not affiliated with MY Bharat or any government body. Demonstrating synthetic youth volunteering operations for Uttar Pradesh districts.</span>
+  </div>
+
+  <!-- Global Header -->
+  <header class="site-header">
+    <div class="header-inner">
+      <a href="01-landing.html" class="brand-group">
+        <div class="brand-logo-mark">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle><path d="M12 3a9 9 0 0 1 9 9"></path><circle cx="12" cy="12" r="3"></circle></svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-edition">Ready Crew • Console</span>
+        </div>
+      </a>
+
+      <nav class="site-nav">
+        <a href="01-landing.html" class="nav-link">Overview</a>
+        <a href="02-console-task.html" class="nav-link">Brief</a>
+        <a href="03-console-roles.html" class="nav-link">Roles</a>
+        <a href="04-console-crew-ready.html" class="nav-link">Crew (Ready)</a>
+        <a href="05-console-crew-not-ready.html" class="nav-link">Crew (Gap)</a>
+        <a href="06-console-evidence.html" class="nav-link">Evidence</a>
+        <a href="07-console-ledger.html" class="nav-link active">Ledger</a>
+        <a href="08-console-evaluation.html" class="nav-link">Evaluation</a>
+        <a href="09-volunteer.html" class="nav-link">Volunteers</a>
+        <a href="10-districts.html" class="nav-link">Districts</a>
+        <a href="11-method.html" class="nav-link">Method</a>
+      </nav>
+
+      <div class="header-actions">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle" role="group" aria-label="Language selector">
+          <button class="lang-btn active" type="button">EN</button>
+          <button class="lang-btn devanagari" type="button">हिंदी</button>
+        </div>
+        <a href="08-console-evaluation.html" class="btn btn-primary btn-sm">Next: Evaluation →</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Stage Header -->
+  <div style="background: var(--canvas-soft); border-bottom: 1px solid var(--hairline); padding: 18px 0;">
+    <div class="container">
+      <div style="display: flex; justify-content: space-between; align-items: center;">
+        <div style="display: flex; align-items: center; gap: 12px;">
+          <span class="tag tag-indigo">Audit &amp; Integrity</span>
+          <span style="color: var(--ink-muted); font-size: 13px;">SHA-256 Merkle-Linked Chain • <strong>9 Blocks Active</strong></span>
+          <span class="tag tag-green">Integrity: OK</span>
+        </div>
+        <div style="font-size: 13px; color: var(--ink-muted);">
+          Task Context: <code class="code-inline tabular">task-01</code> (Water and hygiene camp)
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main style="padding: 40px 0;">
+    <div class="container">
+
+      <!-- Header Title & Export Actions -->
+      <div style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 32px;">
+        <div>
+          <span class="eyebrow">Cryptographic Tamper-Evidence</span>
+          <h1 style="font-size: 34px; margin-bottom: 8px;">Tamper-Evident Contribution Log</h1>
+          <p style="color: var(--ink-secondary); font-size: 15px; margin: 0;">
+            Immutable sequence of credential transitions. Each entry seals previous state with a forward cryptographic hash.
+          </p>
+        </div>
+        <div style="display: flex; gap: 12px;">
+          <button class="btn btn-secondary btn-sm" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="23 4 23 10 17 10"></polyline><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path></svg>
+            Verify again
+          </button>
+          <button class="btn btn-primary btn-sm" type="button">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+            Export JSON Credentials
+          </button>
+        </div>
+      </div>
+
+      <!-- Verification Status Hero Card -->
+      <div class="card" style="border-left: 4px solid var(--ready-dot); background: #f0fdf4; padding: 24px; margin-bottom: 36px; border: 1px solid var(--ready-border);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <div style="width: 40px; height: 40px; border-radius: 50%; background: #d1fae5; display: flex; align-items: center; justify-content: center; color: var(--ready-text);">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <div>
+              <div style="font-size: 16px; font-weight: 700; color: var(--ready-text);">
+                Verification Result: ok, 9 entries, first_bad_index null
+              </div>
+              <div style="font-size: 13px; color: var(--ready-text); margin-top: 2px;">
+                "Hash chain shows edits, not truth; truth comes from host confirmation."
+              </div>
+            </div>
+          </div>
+          <div style="text-align: right;">
+            <span class="tag tag-green" style="font-size: 13px; font-weight: 600;">Status: VERIFIED VALID</span>
+            <div style="font-size: 12px; color: var(--ready-text); margin-top: 4px;">Zero broken linkages</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Linked Blocks Visualizer -->
+      <section style="margin-bottom: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+          <h2 style="font-size: 20px; margin: 0; color: var(--ink);">Cryptographic Block Sequence (Indices 0 to 8)</h2>
+          <span style="font-size: 13px; color: var(--ink-muted);">Genesis hash: 64 zeros</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          
+          <!-- Block 0 (Genesis) -->
+          <div class="card" style="padding: 20px; border-left: 4px solid var(--primary);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #0 (GENESIS)</span>
+                <span class="tag tag-green">Action: draft</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T00:22:57.218007Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-068-poster-team</code>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">0000000000000000000000000000000000000000000000000000000000000000</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 1 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #1</span>
+                <span class="tag tag-amber">Action: flag</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T00:22:57.237232Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-070-first-aid-support</code>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 2 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #2</span>
+                <span class="tag tag-amber">Action: flag</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T00:22:57.256350Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-067-supplies-and-site-setup</code>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 3 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #3</span>
+                <span class="tag tag-amber">Action: flag</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T00:22:57.280274Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-011-local-language-liaison</code>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 4: Confirm by Host -->
+          <div class="card" style="padding: 20px; border-left: 4px solid var(--ready-dot); background: #fafdfb;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-green" style="font-weight: 700;">BLOCK #4 (CONFIRMED)</span>
+                <span class="tag tag-green">Action: confirm</span>
+                <span class="tag tag-indigo" style="font-weight: 600;">Actor: host</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T00:22:58.071297Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-068-poster-team</code> • Confirmed by District Organiser
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--ready-text); font-weight: 600;">8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 5 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #5</span>
+                <span class="tag tag-green">Action: draft</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T01:50:44.651269Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-008-poster-team</code> (Heena P.)
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 6 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #6</span>
+                <span class="tag tag-green">Action: draft</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T01:50:44.686854Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-070-first-aid-support</code> (Mohit Z.)
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 7 -->
+          <div class="card" style="padding: 20px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #7</span>
+                <span class="tag tag-green">Action: draft</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T01:50:44.715232Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-067-supplies-and-site-setup</code> (Divya H.)
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Link Arrow -->
+          <div style="text-align: center; color: var(--primary-soft); font-size: 18px; margin: -6px 0;">↓</div>
+
+          <!-- Block 8 -->
+          <div class="card" style="padding: 20px; border-left: 4px solid var(--notready-dot);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="tag tag-indigo" style="font-weight: 700;">BLOCK #8</span>
+                <span class="tag tag-amber">Action: flag</span>
+                <span class="tag">Actor: system</span>
+              </div>
+              <span class="tabular num" style="font-size: 12px; color: var(--ink-muted);">2026-11-19T01:50:44.748592Z</span>
+            </div>
+            <div style="font-size: 13px; color: var(--ink); margin-bottom: 12px;">
+              Target Card: <code class="code-inline tabular">card-task-01-v-011-local-language-liaison</code> (Kabir Z.)
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; background: var(--canvas-soft); padding: 12px 16px; border-radius: var(--radius-md); border: 1px solid var(--hairline-light); font-size: 12px;">
+              <div>
+                <span style="color: var(--ink-muted);">prev_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px;">34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05</div>
+              </div>
+              <div>
+                <span style="color: var(--ink-muted);">entry_hash:</span>
+                <div class="code-inline hash-code" style="display: block; margin-top: 4px; color: var(--primary-deep); font-weight: 600;">24b43390134c48a14bb638907a1dff5d6b1163e4324cc98b0f9686416ee564a9</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Tampering Explanation Card -->
+      <div class="card card-cream" style="padding: 28px; border-radius: var(--radius-lg);">
+        <h2 style="font-size: 18px; margin: 0 0 8px; color: var(--ink);">What Would Cryptographic Tampering Look Like?</h2>
+        <p style="font-size: 14px; color: var(--ink-secondary); line-height: 1.6; margin: 0 0 12px;">
+          If an adversary or database administrator altered Kabir Z.'s claimed hours from 8.0 to 5.0 directly in the backend storage, the computed payload hash for Block #8 would instantly mismatch. When re-verified against the previous entry hash (<code>34ded9cd...</code>), the verification algorithm returns <code>ok: false</code> and isolates <code>first_bad_index: 8</code>.
+        </p>
+        <p style="font-size: 13px; color: var(--ink-muted); margin: 0;">
+          The log contains only legitimate state actions (<code>draft</code>, <code>flag</code>, <code>confirm</code>). No "revoke" or "delete" operations exist, guaranteeing a full audit trail.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 12px;">
+            <div class="brand-logo-mark" style="width: 26px; height: 26px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="9"></circle></svg>
+            </div>
+            <span style="font-weight: 700; font-size: 16px; color: var(--ink);">SewaCircle Ready Crew</span>
+          </div>
+          <p style="font-size: 13px; color: var(--ink-muted); line-height: 1.6; margin-bottom: 16px;">
+            Cryptographic Integrity Engine • SHA-256 forward-linked audit logs for youth volunteering credentials.
+          </p>
+          <div style="font-size: 12px; color: var(--ink-light);">
+            Blockchain Alternative • Lightweight local hash-chain verification
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Console Workflow</div>
+          <ul class="footer-links">
+            <li><a href="02-console-task.html">02 Drive Brief Input</a></li>
+            <li><a href="03-console-roles.html">03 AI Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">04 Ready Crew Board</a></li>
+            <li><a href="05-console-crew-not-ready.html">05 Gap Analysis &amp; Recruits</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">Post-Drive Audit</div>
+          <ul class="footer-links">
+            <li><a href="06-console-evidence.html">06 Host Notes &amp; Evidence</a></li>
+            <li><a href="07-console-ledger.html">07 SHA-256 Ledger</a></li>
+            <li><a href="08-console-evaluation.html">08 Model Benchmark</a></li>
+            <li><a href="09-volunteer.html">09 Youth Volunteer View</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-col-title">District Architecture</div>
+          <ul class="footer-links">
+            <li><a href="10-districts.html">10 UP 20 Districts Map</a></li>
+            <li><a href="11-method.html">11 Solver Methodology</a></li>
+            <li><a href="01-landing.html">Landing Overview</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          Not affiliated with MY Bharat or any government body. Synthetic data (seed 7) for evaluation purposes only.
+        </div>
+        <div style="display: flex; gap: 16px;">
+          <span>PIB Ref: 05 July 2026</span>
+          <span>OR-Tools CP-SAT</span>
+          <span>Open Admin Data CC-BY-4.0</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

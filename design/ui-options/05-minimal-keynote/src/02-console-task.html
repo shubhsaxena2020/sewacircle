@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — Task Setup & Brief Input (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item active"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">01 · Task Setup</span>
+        <div class="sub-nav-step-crumbs">
+          <span style="font-weight: 600; color: var(--primary);">Brief Input</span>
+          <span>&rsaquo;</span>
+          <a href="03-console-roles.html">Roles Extraction</a>
+          <span>&rsaquo;</span>
+          <a href="04-console-crew-ready.html">Crew Solver</a>
+        </div>
+      </div>
+      <div class="sub-nav-right">
+        <span style="font-size: 13px; color: var(--ink-muted);">Language: Hindi (hi) detected</span>
+        <a href="03-console-roles.html" class="btn-primary">Extract Roles →</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN CONSOLE CONTAINER -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 56px;">
+    <div class="container">
+      
+      <div class="keynote-header-left">
+        <div class="keynote-header-eyebrow">Organiser Console</div>
+        <h1 class="keynote-header-title">Paste the brief. Propose the crew.</h1>
+        <p class="keynote-header-sub">
+          The district organiser receives informal community requests in Hindi, English, or Hinglish. Paste the raw message below to generate safety-verified role criteria.
+        </p>
+      </div>
+
+      <!-- PRODUCT SHOT: Studio Framed Editor -->
+      <div class="product-stage">
+        <div class="product-frame">
+          <div class="product-frame-bar">
+            <div class="product-frame-dots">
+              <span class="frame-dot" style="background:#ff5f56;"></span>
+              <span class="frame-dot" style="background:#ffbd2e;"></span>
+              <span class="frame-dot" style="background:#27c93f;"></span>
+            </div>
+            <div class="product-frame-title">Drive Brief Editor — Task ID: task-01 (Kanpur Dehat)</div>
+            <div style="font-size: 11px; color: var(--ink-muted);">Local Qwen2.5-7B (4-bit on T4) Active</div>
+          </div>
+
+          <div class="product-frame-content">
+            
+            <!-- Sample Selector Buttons -->
+            <div style="margin-bottom: 24px;">
+              <div class="card-label-small" style="margin-bottom: 10px;">Select Verified Sample Drive</div>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                <button class="btn-primary" style="padding: 6px 14px; font-size: 13px;">Task 01: Water Camp (Hindi)</button>
+                <a href="05-console-crew-not-ready.html" class="btn-secondary-pill" style="padding: 6px 14px; font-size: 13px;">Task 02: Blood Donation (English)</a>
+                <button class="btn-secondary-pill" style="padding: 6px 14px; font-size: 13px;">Task 03: Tree Plantation (Hinglish)</button>
+                <button class="btn-secondary-pill" style="padding: 6px 14px; font-size: 13px;">Task 04: Literacy Class (Hindi)</button>
+                <button class="btn-secondary-pill" style="padding: 6px 14px; font-size: 13px;">Task 05: Flood Relief (English)</button>
+              </div>
+            </div>
+
+            <!-- Brief Input Box (Natural Devanagari) -->
+            <div style="margin-bottom: 32px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+                <label class="card-label-small">Drive Brief Message (Hindi)</label>
+                <span style="font-size: 12px; color: var(--ink-muted);">138 characters · Raw WhatsApp / SMS Input</span>
+              </div>
+              <div style="border: 1px solid var(--hairline); border-radius: 12px; padding: 24px; background: #fafafc;">
+                <p class="hindi-title" style="font-size: 22px; line-height: 1.6; color: var(--ink);">
+                  गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर। लगभग 120 लोग आएँगे। पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।
+                </p>
+              </div>
+            </div>
+
+            <!-- Drive Operational Parameters Grid -->
+            <div class="cards-grid-4" style="margin-bottom: 32px;">
+              <div class="utility-card" style="padding: 18px; border-radius: 12px;">
+                <span class="card-label-small">Location</span>
+                <strong style="font-size: 16px; margin: 4px 0;">Akbarpur, Kanpur Dehat</strong>
+                <span class="hash-mono" style="font-size: 11px;">Lat: 26.4797 · Lon: 79.8981</span>
+              </div>
+
+              <div class="utility-card" style="padding: 18px; border-radius: 12px;">
+                <span class="card-label-small">Time Window</span>
+                <strong style="font-size: 16px; margin: 4px 0;">Saturday Morning</strong>
+                <span style="font-size: 12px; color: var(--ink-muted);">Slot: sat_morning</span>
+              </div>
+
+              <div class="utility-card" style="padding: 18px; border-radius: 12px;">
+                <span class="card-label-small">Team Parameters</span>
+                <strong style="font-size: 16px; margin: 4px 0;">Target Size: 6 Youth</strong>
+                <span style="font-size: 12px; color: var(--ink-muted);">Travel radius: &le; 25.0 km</span>
+              </div>
+
+              <div class="utility-card" style="padding: 18px; border-radius: 12px;">
+                <span class="card-label-small">Youth Eligibility</span>
+                <strong style="font-size: 16px; margin: 4px 0; color: #1e7e34;">Minors Permitted</strong>
+                <span style="font-size: 12px; color: var(--ink-muted);">Requires guardian consent</span>
+              </div>
+            </div>
+
+            <!-- Privacy & Local Processing Notice -->
+            <div style="background: var(--canvas-parchment); border-radius: 12px; padding: 18px 24px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 32px;">
+              <div style="display: flex; align-items: center; gap: 14px;">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0066cc" stroke-width="2">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <div>
+                  <div style="font-size: 13px; font-weight: 600; color: var(--ink);">Local Privacy Guard Active</div>
+                  <div style="font-size: 12px; color: var(--ink-secondary);">
+                    61,000-name Indian gazetteer mask active. Local model role recall: 0.932. Zero PII leaves your local workstation.
+                  </div>
+                </div>
+              </div>
+              <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Offline T4 Inference</span>
+            </div>
+
+            <!-- Action Bar -->
+            <div style="display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border-soft); padding-top: 24px;">
+              <div style="font-size: 13px; color: var(--ink-muted);">
+                Seed 7 · 80 eligible volunteers indexed in Kanpur Dehat pool
+              </div>
+              <div style="display: flex; gap: 12px;">
+                <a href="01-landing.html" class="btn-secondary-pill">Back to Overview</a>
+                <a href="03-console-roles.html" class="btn-primary" style="font-size: 16px; padding: 10px 24px;">
+                  Extract Roles with Local AI →
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Flow</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Single Accent (#0066cc)</span></li>
+          <li><span style="color: var(--ink-muted);">Product Framing</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Methodology &amp; Mathematical Formulation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Reference System</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Methodology &amp; Limits</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item active"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">📐</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>Mathematical Method &amp; Honest System Boundaries</h1>
+              <p class="doc-subtitle">
+                How volunteer crews are decided: constraint satisfaction via OR-Tools CP-SAT, formal metric definitions, benchmark scale, and honest operational limitations.
+              </p>
+            </div>
+            <div style="display: flex; gap: 8px;">
+              <span class="tag green" style="padding: 6px 12px; font-size: 13px;">OR-Tools CP-SAT Solver</span>
+            </div>
+          </div>
+        </header>
+
+        <!-- HOW A CREW IS DECIDED (PLAIN WORDS) -->
+        <section style="margin-bottom: 36px;">
+          <h2 style="font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>⚙️</span> How a Crew is Decided: The Three-Tier Formulation
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px;">
+            <!-- Tier 1: Hard Rules -->
+            <div class="doc-card" style="margin-bottom: 0; border-top: 3px solid var(--tint-red-ink);">
+              <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">STAGE 1</div>
+              <h3 style="font-size: 16px; margin-bottom: 8px;">Hard Feasibility Filter</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                Before solving, candidate volunteers must satisfy non-negotiable hard constraints:
+              </p>
+              <ul style="font-size: 12.5px; color: var(--text-muted); margin-top: 8px; padding-left: 14px; line-height: 1.55;">
+                <li>Must hold required skill at/above minimum tier.</li>
+                <li>Free during the exact drive time slot.</li>
+                <li>Distance from site ≤ max travel radius (25.0 km).</li>
+                <li>Minors (under 18) allowed only if drive permits AND signed guardian consent is on file.</li>
+                <li>Safety roles (first aid, driving) accept <strong>host-checked skills only</strong>.</li>
+              </ul>
+            </div>
+
+            <!-- Tier 2: Solver Slot Assignment -->
+            <div class="doc-card" style="margin-bottom: 0; border-top: 3px solid var(--tint-blue-ink);">
+              <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">STAGE 2</div>
+              <h3 style="font-size: 16px; margin-bottom: 8px;">Constraint Optimization</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                Google OR-Tools CP-SAT searches the assignment space across multi-objective hierarchical tiers:
+              </p>
+              <ul style="font-size: 12.5px; color: var(--text-muted); margin-top: 8px; padding-left: 14px; line-height: 1.55;">
+                <li>Tier 1: Maximize filled must-have role slots.</li>
+                <li>Tier 2: Assign dedicated standby volunteers for every essential role.</li>
+                <li>Tier 3: Pair novices with experienced mentors.</li>
+                <li>Tier 4: Minimize repeat picks in the last 90 days and minimize travel distance.</li>
+              </ul>
+            </div>
+
+            <!-- Tier 3: Dropout Verification -->
+            <div class="doc-card" style="margin-bottom: 0; border-top: 3px solid var(--tint-green-ink);">
+              <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">STAGE 3</div>
+              <h3 style="font-size: 16px; margin-bottom: 8px;">Dropout Survivability Check</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The solver simulates the sudden absence of each primary volunteer:
+              </p>
+              <ul style="font-size: 12.5px; color: var(--text-muted); margin-top: 8px; padding-left: 14px; line-height: 1.55;">
+                <li>Can the drive run if volunteer A no-shows?</li>
+                <li>Does an eligible standby exist without leaving another role uncovered?</li>
+                <li>Status: <strong>OPTIMAL</strong> (15 ms on task-01) certifies 100% single-dropout resilience.</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- METRIC DEFINITIONS IN PLAIN WORDS -->
+        <section style="margin-bottom: 36px;">
+          <h2 style="font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>📖</span> Metric Definitions in Plain Words
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--text-ink); margin-bottom: 6px;">1. Role Coverage</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The percentage of required essential roles staffed with qualified volunteers. If a drive requires 4 distinct roles and 4 are filled, coverage is 100%. If only 3 are filled, coverage is 75%.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--text-ink); margin-bottom: 6px;">2. Dropout Robustness</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The probability that if any single crew member drops out on the morning of the drive, a pre-qualified standby is already in place to step in immediately without creating a secondary vacancy.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--text-ink); margin-bottom: 6px;">3. Ready Rate</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The proportion of district drives that achieve a definitive READY verdict (100% must-role coverage AND 100% standby protection). If either condition fails, the verdict is NOT READY.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--text-ink); margin-bottom: 6px;">4. Repeat-Pick Share</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The fraction of assigned roster slots given to volunteers who have already been mobilized in the preceding 90 days. Lower values indicate broader opportunity distribution across new youth.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- DATA SOURCES & PERFORMANCE BENCHMARKS -->
+        <section style="margin-bottom: 36px;">
+          <h2 style="font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>📊</span> Data Sources &amp; Computational Scale
+          </h2>
+
+          <div class="properties-table" style="font-size: 13px; margin-bottom: 16px;">
+            <div class="prop-label"><span>🌱</span> Synthetic Data</div>
+            <div class="prop-value">Synthetic cohort seed 7 (80 volunteers, 10 tasks across Uttar Pradesh)</div>
+
+            <div class="prop-label"><span>🗺️</span> Real Geography</div>
+            <div class="prop-value">Open Admin Data (CC-BY-4.0), 20 UP district centroid coordinates</div>
+
+            <div class="prop-label"><span>🏛️</span> National Data</div>
+            <div class="prop-value">2.22+ crore youth, 1.52+ lakh opportunities (Source: PIB backgrounder, 05 July 2026)</div>
+
+            <div class="prop-label"><span>⚡</span> Local LLM Line</div>
+            <div class="prop-value mono" style="color: var(--tint-blue-ink);">
+              Qwen2.5-7B 4-bit on one T4: role recall 0.932
+            </div>
+
+            <div class="prop-label"><span>📈</span> Solver Scale</div>
+            <div class="prop-value mono" style="color: var(--tint-green-ink);">
+              80/80 optimal up to 500 volunteers, max 0.327 s
+            </div>
+          </div>
+        </section>
+
+        <!-- HONEST SCIENTIFIC BOUNDARIES -->
+        <section style="margin-bottom: 24px;">
+          <h2 style="font-size: 20px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>⚖️</span> Honest Limitations &amp; Boundaries
+          </h2>
+
+          <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--tint-amber-ink); margin-bottom: 6px;">Sample &amp; Regional Scope</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                Currently benchmarked on 10 synthetic tasks and 80 volunteers within one Indian state (Uttar Pradesh). Wider field conditions with multi-day transit remain out of scope.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--tint-blue-ink); margin-bottom: 6px;">Language &amp; Extraction Recall</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                AI extraction models demonstrate a role recall of 0.932 (not 1.000). Ambiguous dialect mentions require human confirmation, as shown in the decision checklist.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--tint-green-ink); margin-bottom: 6px;">Endorsement vs Certification</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                Skills are host-checked endorsements from previous community drives, not state medical licenses or academic diplomas.
+              </p>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 0;">
+              <h3 style="font-size: 15px; color: var(--text-ink); margin-bottom: 6px;">Ledger Integrity vs Ground Truth</h3>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6;">
+                The cryptographic hash chain guarantees tamper-evident provenance of logged actions. Truth and physical reality originate solely from human host verification.
+              </p>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

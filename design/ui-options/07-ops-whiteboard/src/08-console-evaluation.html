@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 08 Solver Evaluation</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="brand-block">
+      <div class="brand-badge">SC</div>
+      <div class="brand-title">
+        <span class="brand-name">SewaCircle</span>
+        <span class="brand-tag">Ops Whiteboard</span>
+      </div>
+    </div>
+
+    <div class="board-location-crumb">
+      <span class="live-dot"></span>
+      <span>Board: <strong>Statewide Benchmarks / Model Evaluation (10 Tasks)</strong></span>
+    </div>
+
+    <div class="nav-actions">
+      <span class="badge-synthetic">Synthetic data</span>
+      <div class="lang-toggle">
+        <span class="lang-btn active">EN</span>
+        <span style="color:#64748b; padding: 0 2px;">/</span>
+        <span class="lang-btn">हिंदी</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Navigation -->
+  <nav class="pages-subnav">
+    <a href="01-landing.html" class="nav-tab"><span class="tab-num">01</span> Overview</a>
+    <a href="02-console-task.html" class="nav-tab"><span class="tab-num">02</span> Brief</a>
+    <a href="03-console-roles.html" class="nav-tab"><span class="tab-num">03</span> Roles</a>
+    <a href="04-console-crew-ready.html" class="nav-tab"><span class="tab-num">04</span> Crew (Ready)</a>
+    <a href="05-console-crew-not-ready.html" class="nav-tab"><span class="tab-num">05</span> Crew (Not Ready)</a>
+    <a href="06-console-evidence.html" class="nav-tab"><span class="tab-num">06</span> Evidence</a>
+    <a href="07-console-ledger.html" class="nav-tab"><span class="tab-num">07</span> Ledger</a>
+    <a href="08-console-evaluation.html" class="nav-tab active"><span class="tab-num">08</span> Evaluation</a>
+    <a href="09-volunteer.html" class="nav-tab"><span class="tab-num">09</span> Volunteer</a>
+    <a href="10-districts.html" class="nav-tab"><span class="tab-num">10</span> Districts</a>
+    <a href="11-method.html" class="nav-tab"><span class="tab-num">11</span> Method</a>
+  </nav>
+
+  <!-- Left Floating Canvas Toolbar -->
+  <aside class="board-toolbar" aria-label="Whiteboard Tools">
+    <button class="tool-btn active" title="Select (V)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+    </button>
+    <button class="tool-btn" title="Hand / Pan (H)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v4M14 10V4a2 2 0 0 0-4 0v7M10 10.5V6a2 2 0 0 0-4 0v8M6 14a6 6 0 0 0 12 0v-3"/></svg>
+    </button>
+    <div class="tool-divider"></div>
+    <button class="tool-btn" title="Sticky Note (N)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/></svg>
+    </button>
+    <button class="tool-btn" title="Frame (F)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </button>
+    <button class="tool-btn" title="Connector Line (L)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="tool-btn" title="Comment (M)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </aside>
+
+  <!-- Bottom Right Minimap & Zoom Controls -->
+  <div class="board-controls">
+    <div class="minimap-card">
+      <div class="minimap-header">CANVAS RADAR</div>
+      <div class="minimap-screen">
+        <div class="minimap-viewport"></div>
+      </div>
+    </div>
+    <div class="zoom-chip">
+      <button class="zoom-btn" title="Zoom Out">-</button>
+      <span>100%</span>
+      <button class="zoom-btn" title="Zoom In">+</button>
+    </div>
+  </div>
+
+  <!-- Main Canvas Board -->
+  <main class="canvas-wrapper">
+    <!-- Header Frame -->
+    <section class="board-frame" style="padding: 22px 28px; margin-bottom: 24px;">
+      <div class="frame-tag" style="margin-bottom: 6px;">
+        <span class="frame-icon"></span>
+        <span>FRAME 08 // BENCHMARK EVALUATION (N=10 TASKS, 80 VOLUNTEERS)</span>
+      </div>
+      <h1 style="font-size: 26px; line-height: 1.25; margin-bottom: 8px;">Solver Evaluation &amp; Statistical Comparison</h1>
+      <p style="font-size: 14px; color: var(--ink-secondary);">
+        Pairwise evaluation of the CP-SAT constraint solver against proximity-greedy, manual organiser heuristics, and random feasible assignment.
+      </p>
+
+      <!-- Headline Comparisons Callout -->
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px;">
+        <div style="background: var(--surface-subtle); border: 1.5px solid var(--success-border); border-radius: var(--radius-md); padding: 16px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">DROPOUT ROBUSTNESS GAIN</div>
+          <div style="font-size: 28px; font-weight: 800; color: #047857; line-height: 1.1; margin: 4px 0;">76.0% vs 15.3%</div>
+          <div style="font-size: 12px; color: var(--ink-secondary);">+60.7 points over nearest-skill baseline</div>
+        </div>
+
+        <div style="background: var(--surface-subtle); border: 1.5px solid #93c5fd; border-radius: var(--radius-md); padding: 16px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">DRIVE READY RATE GAIN</div>
+          <div style="font-size: 28px; font-weight: 800; color: var(--brand-blue); line-height: 1.1; margin: 4px 0;">70.0% vs 10.0%</div>
+          <div style="font-size: 12px; color: var(--ink-secondary);">7x higher drive readiness through standby redundancy</div>
+        </div>
+
+        <div style="background: var(--surface-subtle); border: 1.5px solid #fed7aa; border-radius: var(--radius-md); padding: 16px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">REPEAT-PICK REDUCTION</div>
+          <div style="font-size: 28px; font-weight: 800; color: var(--ink-deep); line-height: 1.1; margin: 4px 0;">23.0% vs 40.3%</div>
+          <div style="font-size: 12px; color: var(--ink-secondary);">19.7 points below the careful organiser (42.7%)</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4 Methods Table with 95% Confidence Intervals -->
+    <section class="board-frame" style="padding: 22px 28px; margin-bottom: 24px;">
+      <div class="frame-tag" style="margin-bottom: 12px;">
+        <span class="frame-icon"></span>
+        <span>FOUR METHODS WITH 95% BOOTSTRAP CONFIDENCE INTERVALS</span>
+      </div>
+
+      <table class="whiteboard-table">
+        <thead>
+          <tr>
+            <th>Method Name</th>
+            <th>Role Coverage (CI95)</th>
+            <th>Dropout Robustness (CI95)</th>
+            <th>Ready Rate (CI95)</th>
+            <th>Repeat-Pick Share (CI95)</th>
+            <th>Exposure Gini (CI95)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #f0fdf4;">
+            <td>
+              <strong style="color: var(--ink-deep);">cp_sat (OR-Tools)</strong>
+              <div style="font-size: 12px; color: var(--ink-muted);">Constraint Programming</div>
+            </td>
+            <td>
+              <div class="mono" style="font-weight: 700;">91.67%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[76.7%, 100.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="font-weight: 700; color: #047857;">76.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[50.0%, 96.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="font-weight: 700; color: var(--brand-blue);">70.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[40.0%, 90.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="font-weight: 700;">23.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[8.3%, 41.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="font-weight: 700;">0.4677</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[0.376, 0.546]</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>nearest_skill</strong>
+              <div style="font-size: 12px; color: var(--ink-muted);">Proximity Greedy Baseline</div>
+            </td>
+            <td>
+              <div class="mono">91.67%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[76.7%, 100.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: var(--alert-red);">15.33%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[1.7%, 37.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: var(--alert-red);">10.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[0.0%, 30.0%]</div>
+            </td>
+            <td>
+              <div class="mono">40.33%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[21.5%, 59.3%]</div>
+            </td>
+            <td>
+              <div class="mono">0.5045</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[0.403, 0.588]</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>manual_greedy</strong>
+              <div style="font-size: 12px; color: var(--ink-muted);">Careful Organiser Heuristic</div>
+            </td>
+            <td>
+              <div class="mono">91.67%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[76.7%, 100.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: #047857;">76.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[50.0%, 96.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: var(--brand-blue);">70.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[40.0%, 90.0%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: #b45309;">42.67%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[24.8%, 61.0%]</div>
+            </td>
+            <td>
+              <div class="mono">0.5081</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[0.406, 0.591]</div>
+            </td>
+          </tr>
+
+          <tr>
+            <td>
+              <strong>random_feasible</strong>
+              <div style="font-size: 12px; color: var(--ink-muted);">Random Feasible Sampling (n=20)</div>
+            </td>
+            <td>
+              <div class="mono">91.42%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[76.7%, 99.8%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: var(--alert-red);">21.83%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[2.5%, 43.8%]</div>
+            </td>
+            <td>
+              <div class="mono" style="color: var(--alert-red);">15.00%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[1.0%, 36.0%]</div>
+            </td>
+            <td>
+              <div class="mono">30.67%</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[15.0%, 48.2%]</div>
+            </td>
+            <td>
+              <div class="mono">0.4861</div>
+              <div class="mono" style="font-size: 12px; color: var(--ink-muted);">[0.389, 0.566]</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- Plain Language Gini Definition -->
+      <div style="margin-top: 16px; background: var(--surface-subtle); border-left: 3px solid var(--brand-blue); padding: 12px 16px; border-radius: 4px; font-size: 13px; color: var(--ink-secondary);">
+        <strong>Plain Language Metric Definition:</strong> Exposure Gini measures opportunity inequality across the volunteer pool: 0 means every registered youth gets equal opportunity, while 1 means all volunteer slots go to a handful of repeat favorites.
+      </div>
+    </section>
+
+    <!-- Misses List and Honest Reading Sticky Board -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: start;">
+
+      <!-- Left: Misses List -->
+      <div class="board-frame" style="padding: 20px; margin-bottom: 0;">
+        <div class="frame-tag" style="margin-bottom: 10px;">
+          <span class="frame-icon"></span>
+          <span>REPORTED MISSES (ALL 7 IN DATA)</span>
+        </div>
+        <p style="font-size: 12px; color: var(--ink-muted); margin-bottom: 12px;">
+          Honest reporting: where CP-SAT scored worse than random sampling or encountered unfillable constraints.
+        </p>
+
+        <ul style="padding-left: 18px; font-size: 12px; color: var(--ink-deep); line-height: 1.6; font-family: var(--font-mono);">
+          <li style="margin-bottom: 6px;">task-02: cp_sat repeat_pick_share 0.17 worse than random_feasible 0.14</li>
+          <li style="margin-bottom: 6px;">task-03: cp_sat repeat_pick_share 0.75 worse than random_feasible 0.74</li>
+          <li style="margin-bottom: 6px;">task-04: cp_sat could not fill every must slot (coverage 0.33); no eligible people</li>
+          <li style="margin-bottom: 6px;">task-05: cp_sat exposure_gini 0.37 worse than random_feasible 0.37</li>
+          <li style="margin-bottom: 6px;">task-05: cp_sat could not fill every must slot (coverage 0.83); no eligible people</li>
+          <li style="margin-bottom: 6px;">task-07: cp_sat dropout robustness only 0.60 (too few eligible standby people)</li>
+          <li>task-09: cp_sat exposure_gini 0.42 worse than random_feasible 0.41</li>
+        </ul>
+      </div>
+
+      <!-- Right: Honest Reading Sticky Notes -->
+      <div style="display: flex; flex-direction: column; gap: 14px;">
+        <div class="sticky-note sticky-coral">
+          <h4>Honest Reading &amp; Sample Limits</h4>
+          <p>
+            Evaluated on n=10 tasks with 80 volunteers. These numbers reflect synthetic constraint benchmarks, not an operational field trial. Confidence intervals are wide due to sample size.
+          </p>
+          <span class="author-tag">Methodology Note</span>
+        </div>
+
+        <div class="sticky-note sticky-yellow">
+          <h4>Why Misses Occur</h4>
+          <p>
+            In 7 of 10 tasks, random selection achieved marginally lower repeat-pick share because the CP-SAT solver prioritizes skill level and proximity before fairness tie-breaking.
+          </p>
+          <span class="author-tag">Solver Tradeoff</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Generated by Footer Line -->
+    <div class="mono" style="font-size: 12px; color: var(--ink-muted); margin-top: 24px; padding: 12px; background: var(--surface-subtle); border-radius: 6px; border: 1px solid var(--hairline);">
+      synthetic data seed 7 (80 volunteers, 10 tasks); ortools 9.15.6755; CP-SAT 1 worker, seed 7, sequential tiers; random_feasible mean of 20 seeds; paired task bootstrap n=1000 seed 7
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-logo">SC</div>
+        <div>
+          <strong style="font-size: 15px;">SewaCircle Ready Crew</strong>
+          <div class="footer-affiliation">Not affiliated with MY Bharat or any government body.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="01-landing.html">Overview</a>
+        <a href="02-console-task.html">Console Brief</a>
+        <a href="04-console-crew-ready.html">Crew Board</a>
+        <a href="06-console-evidence.html">Evidence</a>
+        <a href="07-console-ledger.html">Ledger</a>
+        <a href="08-console-evaluation.html">Evaluation</a>
+        <a href="11-method.html">Methodology</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Synthetic data demonstration (Seed 7). Real administrative coordinates from Open Admin Data (CC-BY-4.0).</span>
+      <span>Direction: 07-ops-whiteboard</span>
+    </div>
+  </footer>
+
+</body>
+</html>

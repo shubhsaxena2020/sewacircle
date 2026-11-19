@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Confirm Roles Notebook</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Kanpur Dehat</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Task-01 Role Extraction</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item active"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">🏷️</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>AI proposed 4 roles. You confirm them.</h1>
+              <p class="doc-subtitle">
+                The extraction model scanned the brief text for operational duties. Review each role, adjust slot counts, verify required skills, and resolve flagged questions before sending this to the solver.
+              </p>
+            </div>
+            <div style="display: flex; gap: 12px; align-items: center;">
+              <span class="tag green" style="padding: 6px 12px; font-size: 13px;">4 Roles Proposed</span>
+              <span class="tag amber" style="padding: 6px 12px; font-size: 13px;">1 Low Confidence</span>
+            </div>
+          </div>
+
+          <!-- Document Properties Grid -->
+          <div class="properties-table">
+            <div class="prop-label"><span>📋</span> Task Reference</div>
+            <div class="prop-value">task-01: Water and hygiene camp (Akbarpur, Kanpur Dehat)</div>
+
+            <div class="prop-label"><span>🔍</span> Evidence Span</div>
+            <div class="prop-value devanagari">
+              "पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।"
+            </div>
+
+            <div class="prop-label"><span>🛡️</span> Safety Check</div>
+            <div class="prop-value">
+              <span class="tag amber">First-aid support is safety-critical</span> (requires host-checked endorsement)
+            </div>
+          </div>
+        </header>
+
+        <!-- Main Layout: 4 Proposed Role Cards (Left/Center) + Needs Your Decision Rail (Right) -->
+        <div style="display: grid; grid-template-columns: 1fr 380px; gap: 28px;">
+          
+          <!-- Left: The 4 Proposed Roles with Full Edit Controls -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h2 style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                <span>📋</span> Extracted Roles &amp; Allocation Controls
+              </h2>
+              <button class="btn btn-secondary" style="font-size: 12.5px;">+ Add Custom Role</button>
+            </div>
+
+            <!-- Role 01: Poster team -->
+            <div class="doc-card" style="padding: 18px 20px; border-left: 3px solid var(--tint-blue-ink);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <h3 style="font-size: 16px;">Poster team</h3>
+                    <span class="tag blue">Confidence: Medium</span>
+                    <span class="tag">Priority: Must</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                    Reason: <em>"Posters are requested but no number is given."</em>
+                  </div>
+                </div>
+                <!-- Edit Controls -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="stepper">
+                    <button class="stepper-btn">-</button>
+                    <span class="stepper-val">1</span>
+                    <button class="stepper-btn">+</button>
+                  </div>
+                  <button class="btn btn-quiet" style="font-size: 12px; color: var(--tint-red-ink);">Remove</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 16px; font-size: 12.5px; background: var(--bg-surface-soft); padding: 8px 12px; border-radius: 4px;">
+                <div><strong>Evidence in text:</strong> <span class="devanagari" style="font-weight: 600; color: var(--text-ink);">"पोस्टर"</span></div>
+                <div><strong>Required Skill:</strong> <span class="tag">graphic_design (lvl 1+)</span></div>
+              </div>
+            </div>
+
+            <!-- Role 02: First-aid support (Safety Critical) -->
+            <div class="doc-card" style="padding: 18px 20px; border-left: 3px solid var(--tint-amber-ink);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <h3 style="font-size: 16px;">First-aid support</h3>
+                    <span class="tag blue">Confidence: Medium</span>
+                    <span class="tag amber">Safety Critical</span>
+                    <span class="tag">Priority: Must</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                    Reason: <em>"First aid is requested but no number is given."</em>
+                  </div>
+                </div>
+                <!-- Edit Controls -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="stepper">
+                    <button class="stepper-btn">-</button>
+                    <span class="stepper-val">1</span>
+                    <button class="stepper-btn">+</button>
+                  </div>
+                  <button class="btn btn-quiet" style="font-size: 12px; color: var(--tint-red-ink);">Remove</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 16px; font-size: 12.5px; background: var(--bg-surface-soft); padding: 8px 12px; border-radius: 4px;">
+                <div><strong>Evidence in text:</strong> <span class="devanagari" style="font-weight: 600; color: var(--text-ink);">"प्राथमिक उपचार"</span></div>
+                <div><strong>Required Skill:</strong> <span class="tag amber">first_aid (host-checked only)</span></div>
+                <div><strong>Min Level:</strong> <span class="mono">1</span></div>
+              </div>
+            </div>
+
+            <!-- Role 03: Supplies and site setup -->
+            <div class="doc-card" style="padding: 18px 20px; border-left: 3px solid var(--tint-blue-ink);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <h3 style="font-size: 16px;">Supplies and site setup</h3>
+                    <span class="tag blue">Confidence: Medium</span>
+                    <span class="tag">Priority: Must</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--text-muted); margin-top: 4px;">
+                    Reason: <em>"Supplies handling is requested but no number is given."</em>
+                  </div>
+                </div>
+                <!-- Edit Controls -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="stepper">
+                    <button class="stepper-btn">-</button>
+                    <span class="stepper-val">1</span>
+                    <button class="stepper-btn">+</button>
+                  </div>
+                  <button class="btn btn-quiet" style="font-size: 12px; color: var(--tint-red-ink);">Remove</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 16px; font-size: 12.5px; background: var(--bg-surface-soft); padding: 8px 12px; border-radius: 4px;">
+                <div><strong>Evidence in text:</strong> <span class="devanagari" style="font-weight: 600; color: var(--text-ink);">"सामान"</span></div>
+                <div><strong>Required Skill:</strong> <span class="tag">logistics_supplies</span></div>
+              </div>
+            </div>
+
+            <!-- Role 04: Local-language liaison (Low Confidence) -->
+            <div class="doc-card" style="padding: 18px 20px; border-left: 3px solid var(--tint-amber-border); background: var(--tint-amber-bg);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <h3 style="font-size: 16px; color: var(--tint-amber-ink);">Local-language liaison</h3>
+                    <span class="tag amber">Confidence: Low</span>
+                    <span class="tag">Priority: Must</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--tint-amber-ink); margin-top: 4px;">
+                    Reason: <em>"Local dialect speakers are requested but the dialect and number are not stated."</em>
+                  </div>
+                </div>
+                <!-- Edit Controls -->
+                <div style="display: flex; align-items: center; gap: 10px;">
+                  <div class="stepper">
+                    <button class="stepper-btn">-</button>
+                    <span class="stepper-val">1</span>
+                    <button class="stepper-btn">+</button>
+                  </div>
+                  <button class="btn btn-quiet" style="font-size: 12px; color: var(--tint-red-ink);">Remove</button>
+                </div>
+              </div>
+
+              <div style="display: flex; align-items: center; gap: 16px; font-size: 12.5px; background: #ffffff; padding: 8px 12px; border-radius: 4px; border: 1px solid var(--tint-amber-border);">
+                <div><strong>Evidence in text:</strong> <span class="devanagari" style="font-weight: 600; color: var(--text-ink);">"स्थानीय बोली में बात करने वाले"</span></div>
+                <div><strong>Skills Considered:</strong> <span class="tag">dialect_awadhi</span> <span class="tag">dialect_bhojpuri</span></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Rail: Needs Your Decision (Verbatim from extraction.needs_decision) -->
+          <div>
+            <div style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 10px;">
+              Needs Your Decision (4 Items)
+            </div>
+
+            <div class="callout warning" style="margin-top: 0; margin-bottom: 16px;">
+              <div class="callout-icon">⚠️</div>
+              <div class="callout-content">
+                <div class="callout-title">Clarifications Needed Before Solver Runs</div>
+                <div style="font-size: 12.5px; line-height: 1.55;">
+                  The model detected ambiguities in the raw text. Please confirm the following four points:
+                </div>
+              </div>
+            </div>
+
+            <!-- All 4 verbatim items from extraction.needs_decision -->
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div class="doc-card" style="margin-bottom: 0; padding: 14px 16px; background: var(--bg-surface-soft);">
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">DECISION 01</div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">
+                  Which local dialect is needed (Awadhi or Bhojpuri)?
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px; background: var(--bg-document);">Awadhi (Selected)</button>
+                  <button class="btn btn-quiet" style="font-size: 12px; padding: 4px 10px;">Bhojpuri</button>
+                </div>
+              </div>
+
+              <div class="doc-card" style="margin-bottom: 0; padding: 14px 16px; background: var(--bg-surface-soft);">
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">DECISION 02</div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">
+                  How many people are needed for each role (posters, first aid, supplies, local-language speakers)?
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted);">
+                  Currently allocated: 1 per role (4 total essential slots).
+                </div>
+              </div>
+
+              <div class="doc-card" style="margin-bottom: 0; padding: 14px 16px; background: var(--bg-surface-soft);">
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">DECISION 03</div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">
+                  Is a hygiene or health educator needed to run the handwashing and safe drinking water sessions?
+                </div>
+                <div style="display: flex; gap: 8px;">
+                  <button class="btn btn-quiet" style="font-size: 12px; padding: 4px 10px;">Add Hygiene Educator</button>
+                  <button class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px; background: var(--bg-document);">Omit for now</button>
+                </div>
+              </div>
+
+              <div class="doc-card" style="margin-bottom: 0; padding: 14px 16px; background: var(--bg-surface-soft);">
+                <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-subtle); margin-bottom: 4px;">DECISION 04</div>
+                <div style="font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 6px;">
+                  Please check the role 'Local-language liaison' (the AI was not sure).
+                </div>
+                <div style="font-size: 12px; color: var(--tint-green-ink);">
+                  ✓ Confirmed: Awadhi liaison kept at priority must.
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Footer Action Strip -->
+        <div style="margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border-hairline); display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="04-console-crew-ready.html" class="btn btn-primary" style="padding: 10px 24px; font-size: 14px;">
+              Confirm 4 roles and build the crew
+              <span>→</span>
+            </a>
+            <a href="02-console-task.html" class="btn btn-quiet">Re-extract</a>
+          </div>
+
+          <div style="display: flex; align-items: center; gap: 12px; font-size: 12.5px; color: var(--text-muted);">
+            <span><strong>Summary:</strong> 4 roles</span>
+            <span>•</span>
+            <span>4 slots</span>
+            <span>•</span>
+            <span>1 low confidence</span>
+            <span>•</span>
+            <span>2 safety-linked roles (first aid)</span>
+          </div>
+        </div>
+
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

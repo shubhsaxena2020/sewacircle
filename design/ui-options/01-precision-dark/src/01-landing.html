@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Precision Dark</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-subtitle">Ready Crew</span>
+        </div>
+      </div>
+
+      <div class="command-bar">
+        <svg class="command-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Type a command or search drives...</span>
+        <span class="command-bar-shortcut">Ctrl+K</span>
+      </div>
+
+      <div class="header-controls">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+        <span class="kbd-help">?</span>
+      </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item active"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Section -->
+      <section style="padding: 48px 0 36px 0; border-bottom: 1px solid var(--border-hairline); margin-bottom: 36px;">
+        <div style="max-width: 980px;">
+          <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 16px;">
+            <span class="code-chip">SEWACIRCLE READY CREW</span>
+            <span style="color: var(--text-subtle); font-size: 13px;">•</span>
+            <span style="color: var(--accent-text); font-size: 13px; font-weight: 500;">District Youth Operations Engine</span>
+          </div>
+          
+          <h1 style="font-size: 44px; font-weight: 700; line-height: 1.15; margin-bottom: 16px; letter-spacing: -0.03em;">
+            The step after Interested.
+          </h1>
+
+          <div class="devanagari" style="font-size: 20px; color: var(--accent-text); font-weight: 500; margin-bottom: 16px; line-height: 1.75;">
+            युवाओं ने रुचि दिखाई — अब ज़मीनी टीम तैयार करने और जोखिम मुक्त सेवा सुनिश्चित करने का वक्त।
+          </div>
+
+          <p style="font-size: 16px; color: var(--text-muted); line-height: 1.6; margin-bottom: 24px; max-width: 860px;">
+            SewaCircle Ready Crew is a desktop tool for a district youth organiser in Uttar Pradesh. Young people have already shown interest in a volunteering drive. The organiser pastes the drive brief, AI proposes the roles needed, a constraint solver builds a crew with standby redundancy for every essential slot, and the tool answers one question: <strong style="color: var(--text-ink);">can this drive run safely?</strong>
+          </p>
+
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <a href="02-console-task.html" class="btn btn-primary" style="padding: 10px 20px; font-size: 14px;">
+              Open Console (task-01)
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="5" y1="12" x2="19" y2="12"></line>
+                <polyline points="12 5 19 12 12 19"></polyline>
+              </svg>
+            </a>
+            <a href="11-method.html" class="btn btn-secondary" style="padding: 10px 20px; font-size: 14px;">
+              Explore Method &amp; Constraints
+            </a>
+            <span style="margin-left: 12px; color: var(--text-subtle); font-size: 12px; font-family: var(--font-mono);">
+              Press <kbd style="background: var(--bg-surface-2); border: 1px solid var(--border-subtle); padding: 2px 6px; border-radius: 3px; color: var(--text-muted);">C</kbd> to launch console
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Context Numbers -->
+      <section style="margin-bottom: 40px;">
+        <div class="section-header">
+          <div class="section-eyebrow">National Youth Ecosystem Scale</div>
+          <h2 class="section-title">Complementing the National Volunteer Foundation</h2>
+          <p class="section-subtitle">
+            MY Bharat mobilises registration across India. SewaCircle steps in right after a youth taps "Interested" to ensure safe staffing, skill checks, and standby readiness in Uttar Pradesh.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div class="card" style="background-color: var(--bg-surface-1);">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 8px;">
+              Registered Youth
+            </div>
+            <div style="font-size: 32px; font-weight: 700; color: var(--text-ink); font-family: var(--font-mono); margin-bottom: 6px;">
+              2.22+ crore
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">
+              Youth registered nationally on MY Bharat platform.
+            </div>
+            <div style="margin-top: 12px; font-size: 12px; font-family: var(--font-mono); color: var(--accent-text);">
+              Source: PIB backgrounder, 05 July 2026
+            </div>
+          </div>
+
+          <div class="card" style="background-color: var(--bg-surface-1);">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 8px;">
+              Volunteer Opportunities
+            </div>
+            <div style="font-size: 32px; font-weight: 700; color: var(--text-ink); font-family: var(--font-mono); margin-bottom: 6px;">
+              1.52+ lakh
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">
+              Opportunities posted across districts nationwide.
+            </div>
+            <div style="margin-top: 12px; font-size: 12px; font-family: var(--font-mono); color: var(--accent-text);">
+              Source: PIB backgrounder, 05 July 2026
+            </div>
+          </div>
+
+          <div class="card" style="background-color: var(--bg-surface-1);">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 8px;">
+              SewaCircle District Role
+            </div>
+            <div style="font-size: 32px; font-weight: 700; color: var(--success-green); font-family: var(--font-mono); margin-bottom: 6px;">
+              Zero Drop-out Gap
+            </div>
+            <div style="font-size: 13px; color: var(--text-muted);">
+              Guarantees a verified standby person for every essential safety slot.
+            </div>
+            <div style="margin-top: 12px; font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle);">
+              Automated constraint satisfaction (CP-SAT)
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- How It Works (6 Steps) -->
+      <section style="margin-bottom: 40px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Operational Flow</div>
+          <h2 class="section-title">How SewaCircle Builds a Ready Crew</h2>
+          <p class="section-subtitle">
+            Six disciplined steps from unstructured WhatsApp drive briefs to immutable cryptographic logs.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px;">
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">01 • BRIEF</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Natural Text</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Paste Drive Brief</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              The district organiser pastes the drive announcement in natural Hindi, English, or Hinglish with location, time, and crowd estimates.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">02 • ROLES</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">AI Extraction</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Propose &amp; Confirm</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              AI proposes required roles with exact evidence spans and confidence scores. The organiser reviews dialect, counts, and safety constraints.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">03 • SOLVER</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">CP-SAT Optimization</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Crew + Standby Pairing</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              The solver assigns qualified volunteers within the travel radius and pairs verified standby coverage for every safety-critical role.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">04 • VERDICT</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Binary Gate</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">READY or NOT READY</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              An unequivocal verdict. If NOT READY, the tool generates precise recruit requests with exact skills and travel radiuses to share on WhatsApp.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">05 • EVIDENCE</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Deterministic Rules</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Cards &amp; Conflict Flags</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              After the drive, AI drafts contribution cards from host notes. Fixed rules flag discrepancies against attendance records; the host confirms.
+            </p>
+          </div>
+
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <span class="code-chip">06 • LEDGER</span>
+              <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">SHA-256 Chain</span>
+            </div>
+            <h3 style="margin-bottom: 8px;">Tamper-Evident History</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              Every action is recorded in a cryptographically linked ledger. Proves audit integrity and editing history without trusting central claims.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Live Verdict Preview Section -->
+      <section style="margin-bottom: 40px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Verdict Preview • task-01</div>
+          <h2 class="section-title">Water and Hygiene Camp (Kanpur Dehat / Akbarpur)</h2>
+          <p class="section-subtitle">
+            A live look at an active drive evaluation: 4 primary slots filled, 2 verified standby backups, 100% dropout protected.
+          </p>
+        </div>
+
+        <div class="verdict-hero ready">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+            <div style="display: flex; align-items: center; gap: 12px;">
+              <span class="verdict-badge ready">● READY</span>
+              <span style="font-size: 15px; font-weight: 500; color: var(--text-ink);">
+                Every essential role is filled and any one person can drop out without leaving a gap.
+              </span>
+            </div>
+            <a href="04-console-crew-ready.html" class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px;">
+              View Full Crew Board →
+            </a>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 20px;">
+            <!-- Primary Crew -->
+            <div>
+              <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 8px;">
+                Assigned Primary Crew (4 roles / 4 slots)
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Poster team</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Heena P. (v-008)</div>
+                  <div style="font-size: 12px; color: var(--accent-text);">Score 74.0 • 7.4 km</div>
+                </div>
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">First-aid support [Safety]</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Mohit Z. (v-070)</div>
+                  <div style="font-size: 12px; color: var(--success-green);">Score 113.0 • 1.7 km • Novice</div>
+                </div>
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Supplies &amp; site setup</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Divya H. (v-067)</div>
+                  <div style="font-size: 12px; color: var(--accent-text);">Score 89.0 • 16.3 km</div>
+                </div>
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Local-language liaison</div>
+                  <div style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Kabir Z. (v-011)</div>
+                  <div style="font-size: 12px; color: var(--success-green);">Score 118.0 • 5.3 km • Novice</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Standby Crew -->
+            <div>
+              <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 8px;">
+                Verified Standby Redundancy
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px;">
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 13px; font-weight: 600; color: var(--text-ink);">Imran B. (v-068)</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Covers: Poster team &amp; Local liaison</div>
+                  <div style="font-size: 12px; color: var(--accent-text); font-family: var(--font-mono);">Raises robustness to 75%</div>
+                </div>
+                <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 14px;">
+                  <div style="font-size: 13px; font-weight: 600; color: var(--text-ink);">Kavya L. (v-069)</div>
+                  <div style="font-size: 12px; color: var(--text-muted);">Covers: Supplies and site setup</div>
+                  <div style="font-size: 12px; color: var(--success-green); font-family: var(--font-mono);">Raises robustness to 100%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Measured Results Section -->
+      <section style="margin-bottom: 40px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Empirical Benchmark</div>
+          <h2 class="section-title">Measured Results: CP-SAT vs Nearest-Skill Baseline</h2>
+          <p class="section-subtitle">
+            Evaluated across 10 synthetic tasks and 80 volunteers. 95% bootstrap confidence intervals indicate performance bounds.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 0; overflow: hidden; margin-bottom: 16px;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>METRIC</th>
+                <th>CP-SAT SOLVER</th>
+                <th>NEAREST-SKILL BASELINE</th>
+                <th>DELTA (IMPROVEMENT)</th>
+                <th>95% CONFIDENCE INTERVAL (CP-SAT)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Role Coverage</strong></td>
+                <td class="mono" style="color: var(--text-ink);">91.67%</td>
+                <td class="mono">91.67%</td>
+                <td class="mono" style="color: var(--text-subtle);">+0.00%</td>
+                <td class="mono" style="color: var(--text-muted);">[76.67%, 100.00%]</td>
+              </tr>
+              <tr>
+                <td><strong>Dropout Robustness</strong></td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">76.00%</td>
+                <td class="mono" style="color: var(--danger-red);">15.33%</td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">+60.67%</td>
+                <td class="mono" style="color: var(--text-muted);">[50.00%, 96.00%]</td>
+              </tr>
+              <tr>
+                <td><strong>Ready Rate</strong></td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">70.00%</td>
+                <td class="mono" style="color: var(--danger-red);">10.00%</td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">+60.00%</td>
+                <td class="mono" style="color: var(--text-muted);">[40.00%, 90.00%]</td>
+              </tr>
+              <tr>
+                <td><strong>Repeat-Pick Share</strong></td>
+                <td class="mono" style="color: var(--accent-text); font-weight: 600;">23.00%</td>
+                <td class="mono" style="color: var(--warning-amber);">40.33%</td>
+                <td class="mono" style="color: var(--accent-text); font-weight: 600;">-17.33% (Fairer)</td>
+                <td class="mono" style="color: var(--text-muted);">[8.33%, 41.00%]</td>
+              </tr>
+              <tr>
+                <td><strong>Exposure Gini</strong></td>
+                <td class="mono">0.4677</td>
+                <td class="mono">0.5045</td>
+                <td class="mono" style="color: var(--accent-text);">-0.0368 (More equal)</td>
+                <td class="mono" style="color: var(--text-muted);">[0.3764, 0.5463]</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        
+        <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle);">
+          * Note: Benchmark conducted on 10 synthetic tasks with 80 volunteers; this represents an algorithmic evaluation, not a field trial.
+        </div>
+      </section>
+
+      <!-- Transparent Limits Section -->
+      <section style="margin-bottom: 24px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Design Transparency</div>
+          <h2 class="section-title">Operational Limits &amp; Boundaries</h2>
+          <p class="section-subtitle">
+            What SewaCircle can and cannot do. We state system boundaries clearly to avoid ungrounded assumptions.
+          </p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+          <div class="card">
+            <h3 style="margin-bottom: 6px; color: var(--warning-amber);">Sample Size &amp; Synthetic Scope</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              Current evaluation is run on 10 synthetic tasks and 80 volunteers across Uttar Pradesh (seed 7). Wide confidence intervals reflect this cohort size.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom: 6px; color: var(--accent-text);">Language Coverage</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              Role extraction is currently optimized for Hindi, English, and Hinglish drive briefs. Regional dialects like Awadhi and Bhojpuri are flagged for organiser disambiguation.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom: 6px; color: var(--success-green);">Host-Checked Endorsements</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              Safety-critical roles (first aid, transport) require host-checked claims from prior drives, not official government degrees or medical licenses.
+            </p>
+          </div>
+
+          <div class="card">
+            <h3 style="margin-bottom: 6px; color: var(--text-ink);">Audit Trail vs. Ground Truth</h3>
+            <p style="font-size: 13px; color: var(--text-muted);">
+              The SHA-256 cryptographic ledger proves tamper-evident edit history and attribution. It does not certify physical reality; ground truth originates from human host confirmation.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-text">
+          <span class="affiliation-indicator"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 01-precision-dark • Desktop 1440px Specification</span>
+        </div>
+        <div class="footer-shortcuts">
+          <span><kbd>Ctrl+K</kbd> Command Bar</span>
+          <span><kbd>1-9</kbd> Switch Console Views</span>
+          <span><kbd>?</kbd> Shortcut Guide</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

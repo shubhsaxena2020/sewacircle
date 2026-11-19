@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SewaCircle — Volunteer Portal: Heena P. (Minimal Keynote)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- GLOBAL NAV -->
+  <header class="global-nav">
+    <div class="global-nav-container">
+      <a href="01-landing.html" class="nav-brand">
+        <svg class="nav-brand-mark" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="9" stroke="#0066cc" stroke-width="2.5"/>
+          <path d="M12 7v10M7 12h10" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span class="nav-brand-title">SewaCircle Ready Crew</span>
+      </a>
+      <ul class="nav-links">
+        <li class="nav-link-item"><a href="01-landing.html">Overview</a></li>
+        <li class="nav-link-item"><a href="02-console-task.html">Task Brief</a></li>
+        <li class="nav-link-item"><a href="03-console-roles.html">Roles</a></li>
+        <li class="nav-link-item"><a href="04-console-crew-ready.html">Crew Board</a></li>
+        <li class="nav-link-item"><a href="05-console-crew-not-ready.html">Gaps & Recruits</a></li>
+        <li class="nav-link-item"><a href="06-console-evidence.html">Evidence</a></li>
+        <li class="nav-link-item"><a href="07-console-ledger.html">Ledger</a></li>
+        <li class="nav-link-item"><a href="08-console-evaluation.html">Evaluation</a></li>
+        <li class="nav-link-item active"><a href="09-volunteer.html">Volunteer Portal</a></li>
+        <li class="nav-link-item"><a href="10-districts.html">20 Districts</a></li>
+        <li class="nav-link-item"><a href="11-method.html">Method</a></li>
+      </ul>
+      <div class="nav-meta-controls">
+        <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>Synthetic Data</span>
+        <div class="lang-toggle">
+          <button class="lang-btn active">EN</button>
+          <button class="lang-btn">हिन्दी</button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- SUB NAV FROSTED -->
+  <div class="sub-nav-frosted">
+    <div class="sub-nav-container">
+      <div class="sub-nav-left">
+        <span class="sub-nav-category">Youth Portal · Heena P.</span>
+        <span class="sub-nav-chip">Sarvankheda, Kanpur Dehat</span>
+      </div>
+      <div class="sub-nav-right">
+        <a href="04-console-crew-ready.html" class="text-link" style="font-size: 14px; margin-right: 8px;">View Active Drive</a>
+        <button class="btn-primary" onclick="alert('Credential added to mobile wallet!');">Add to Digital Wallet</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAIN VOLUNTEER VIEW -->
+  <main class="keynote-slide slide-canvas" style="padding-top: 48px;">
+    <div class="container">
+
+      <!-- VOLUNTEER PROFILE HEADER (Minimal Keynote Card) -->
+      <div style="background: #ffffff; border: 1px solid var(--hairline); border-radius: 18px; padding: 40px; box-shadow: var(--shadow-product); margin-bottom: 48px;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+          <div style="display: flex; gap: 24px; align-items: center;">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: #0066cc; color: white; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600;">
+              HP
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <h1 style="font-size: 32px; font-weight: 600; letter-spacing: -0.02em;">Heena P.</h1>
+                <span class="pill-badge pill-badge-blue">ID: v-008</span>
+                <span class="pill-badge pill-badge-green">Verified Volunteer</span>
+              </div>
+              <div style="font-size: 15px; color: var(--ink-secondary); margin-top: 6px;">
+                Age: 27 · Sarvankheda, Kanpur Dehat · Vehicle Owner (Two-Wheeler) · 3 Past Drives Completed
+              </div>
+            </div>
+          </div>
+
+          <div style="text-align: right;">
+            <div style="font-size: 28px; font-weight: 600; color: #1e7e34;">3 Completed</div>
+            <div style="font-size: 12px; color: var(--ink-muted);">0 in last 90 days (Resting)</div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 40px; margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--border-soft); font-size: 13px; color: var(--ink-secondary);">
+          <div><strong>Availability:</strong> Sat morning, Sat afternoon, Wed evening</div>
+          <div><strong>Languages:</strong> Hindi (Fluent), Awadhi (Native L3)</div>
+          <div><strong>Transport:</strong> Personal Vehicle (Radius: 25 km)</div>
+        </div>
+      </div>
+
+      <!-- SECTION 1: CHECKED vs SELF-DECLARED SKILLS -->
+      <div style="margin-bottom: 56px;">
+        <div style="margin-bottom: 20px;">
+          <span class="card-label-small" style="color: var(--primary);">Skills Architecture</span>
+          <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em;">
+            Host-Checked vs. Self-Declared Skills
+          </h2>
+          <p style="font-size: 14px; color: var(--ink-secondary); margin-top: 4px;">
+            SewaCircle Ready Crew enforces a strict safety boundary: critical roles accept only skills signed off by a community host.
+          </p>
+        </div>
+
+        <div class="cards-grid-2">
+          
+          <!-- Checked Skills Card -->
+          <div class="utility-card" style="padding: 32px; border-left: 4px solid #1e7e34;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="font-size: 18px; font-weight: 600; color: #1e7e34;">
+                Host-Checked Skills (6 Verified)
+              </h3>
+              <span class="pill-badge pill-badge-green">Safety Certified</span>
+            </div>
+            
+            <p style="font-size: 13px; color: var(--ink-secondary); margin-bottom: 20px;">
+              Confirmed by field hosts during past drives or physical certificate verification:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>First Aid & Basic Medical</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Red Cross community training (Akbarpur)</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 2</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>Driving & Transport</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Valid DL & personal vehicle verified</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 1</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>Graphic Design & Posters</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Field campaigns verified in Kanpur Dehat</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 2</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>Photography & Reporting</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Past documentation contribution</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 2</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>Dialect: Awadhi</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Native local speaker (Sarvankheda)</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 3</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #f0fdf4; border-radius: 8px;">
+                <div>
+                  <strong>Hindi Fluency</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Oral and written communication</div>
+                </div>
+                <span class="pill-badge pill-badge-green">Level 2</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Self-Declared Skills Card -->
+          <div class="utility-card" style="padding: 32px; border-left: 4px solid var(--ink-muted);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <h3 style="font-size: 18px; font-weight: 600; color: var(--ink);">
+                Self-Declared Skills (2 Pending Verification)
+              </h3>
+              <span class="pill-badge pill-badge-neutral">Awaiting Sign-off</span>
+            </div>
+
+            <p style="font-size: 13px; color: var(--ink-secondary); margin-bottom: 20px;">
+              Declared on MY Bharat profile; eligible for standard roles, awaiting field supervisor confirmation:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #fafafc; border: 1px dashed var(--hairline); border-radius: 8px;">
+                <div>
+                  <strong>Community Mobilisation</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">Self-reported interest in door-to-door visits</div>
+                </div>
+                <span class="pill-badge pill-badge-neutral">Self-Declared</span>
+              </div>
+
+              <div style="display: flex; justify-content: space-between; align-items: center; padding: 10px 14px; background: #fafafc; border: 1px dashed var(--hairline); border-radius: 8px;">
+                <div>
+                  <strong>Event Coordination</strong>
+                  <div style="font-size: 11px; color: var(--ink-muted);">College youth festival volunteer</div>
+                </div>
+                <span class="pill-badge pill-badge-neutral">Self-Declared</span>
+              </div>
+            </div>
+
+            <div style="background: var(--canvas-parchment); border-radius: 8px; padding: 14px; font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+              <strong>Safety Boundary Notice:</strong> Self-declared skills cannot be used to qualify for First Aid, Disaster Relief, or Transport driving. Complete one supervised drive with a host to upgrade a skill to Host-Checked status.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- SECTION 2: DRIVES YOU CHOSE (Opted-in tasks) -->
+      <div style="margin-bottom: 56px;">
+        <div style="margin-bottom: 20px;">
+          <span class="card-label-small" style="color: var(--primary);">Upcoming Schedule</span>
+          <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em;">
+            Drives You Chose
+          </h2>
+        </div>
+
+        <div class="utility-card" style="padding: 32px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 16px;">
+            <div>
+              <span class="pill-badge pill-badge-green" style="margin-bottom: 8px;">ASSIGNED AS POSTER TEAM LEAD</span>
+              <h3 style="font-size: 22px; font-weight: 600;">Water and hygiene camp (Task-01)</h3>
+              <p style="font-size: 14px; color: var(--ink-secondary); margin-top: 4px;">
+                Akbarpur, Kanpur Dehat · Saturday Morning (sat_morning) · 7.4 km from your home in Sarvankheda
+              </p>
+            </div>
+            <div style="text-align: right;">
+              <span class="pill-badge pill-badge-blue">Crew Status: Ready</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 40px; font-size: 13px; color: var(--ink-secondary); padding: 16px 0; border-top: 1px solid var(--border-soft); border-bottom: 1px solid var(--border-soft); margin-bottom: 16px;">
+            <div><strong>Role:</strong> Poster team (Visual hygiene guides)</div>
+            <div><strong>Estimated Time:</strong> 5.0 hours</div>
+            <div><strong>Backup Standby:</strong> Imran B. (Pre-arranged)</div>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <span style="font-size: 12px; color: var(--ink-muted);">Check-in code will activate on Saturday at 08:30 AM</span>
+            <a href="04-console-crew-ready.html" class="btn-secondary-pill" style="font-size: 13px;">View Full Team Roster</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- SECTION 3: VERIFIED CONTRIBUTIONS (From Ledger) -->
+      <div style="margin-bottom: 48px;">
+        <div style="margin-bottom: 20px;">
+          <span class="card-label-small" style="color: var(--primary);">Service Record</span>
+          <h2 style="font-size: 26px; font-weight: 600; letter-spacing: -0.015em;">
+            Verified Contribution Credentials
+          </h2>
+        </div>
+
+        <div class="utility-card" style="padding: 28px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div>
+              <span class="card-label-small">Ledger Block #5</span>
+              <h3 style="font-size: 18px; font-weight: 600; margin-top: 2px;">
+                Water and Hygiene Camp — 5.0 Recorded Hours
+              </h3>
+            </div>
+            <span class="pill-badge pill-badge-green">Cryptographically Sealed</span>
+          </div>
+
+          <div style="font-size: 13px; line-height: 1.6; color: var(--ink-secondary); margin-bottom: 16px;">
+            • <strong>Card ID:</strong> <span class="hash-mono">card-task-01-v-008-poster-team</span><br>
+            • <strong>Host Confirmation:</strong> Confirmed by Akbarpur field host on 2026-11-19.<br>
+            • <strong>Entry Hash:</strong> <span class="hash-mono">df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f</span>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-soft); padding-top: 14px;">
+            <a href="07-console-ledger.html" class="text-link" style="font-size: 13px;">Inspect on Audit Ledger →</a>
+            <button class="btn-dark-utility" onclick="alert('Digital certificate downloaded!');">Download PDF Badge</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- APPLE FOOTER -->
+  <footer class="apple-footer">
+    <div class="footer-top-disclaimer">
+      1. All volunteer records, names, locations, and tasks presented are synthetic data generated for research and interface demonstration (seed 7).<br>
+      2. External reference data: MY Bharat registrations (2.22+ crore youth, 1.52+ lakh opportunities) sourced from <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank">PIB Backgrounder, 05 July 2026</a>.<br>
+      3. <strong>Not affiliated with MY Bharat or any government body.</strong>
+    </div>
+
+    <div class="footer-directory">
+      <div>
+        <h4 class="footer-col-title">Console Flow</h4>
+        <ul class="footer-col-list">
+          <li><a href="02-console-task.html">01. Task Brief Input</a></li>
+          <li><a href="03-console-roles.html">02. AI Role Extraction</a></li>
+          <li><a href="04-console-crew-ready.html">03. Crew Board (Ready)</a></li>
+          <li><a href="05-console-crew-not-ready.html">04. Crew Gaps (Not Ready)</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Post-Drive & Ledger</h4>
+        <ul class="footer-col-list">
+          <li><a href="06-console-evidence.html">05. Evidence Review</a></li>
+          <li><a href="07-console-ledger.html">06. Tamper-Evident Ledger</a></li>
+          <li><a href="08-console-evaluation.html">Solver Evaluation</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Field Operations</h4>
+        <ul class="footer-col-list">
+          <li><a href="09-volunteer.html">Volunteer Portal</a></li>
+          <li><a href="10-districts.html">20 UP Districts</a></li>
+          <li><a href="11-method.html">Methodology & Limits</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="footer-col-title">Direction 05</h4>
+        <ul class="footer-col-list">
+          <li><span style="color: var(--ink);">Minimal Keynote</span></li>
+          <li><span style="color: var(--ink-muted);">Safety-Checked Verification</span></li>
+          <li><span style="color: var(--ink-muted);">Portable Credentials</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-legal-bar">
+      <div>Copyright &copy; 2026 SewaCircle Ready Crew. Synthetic Demonstration Environment.</div>
+      <div class="footer-legal-links">
+        <a href="11-method.html#limits">Privacy Policy</a>
+        <a href="11-method.html">Method Documentation</a>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

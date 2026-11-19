@@ -1,0 +1,5 @@
+Read C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/BRIEF.md and C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/DIRECTIONS.md fully (they are short). You build exactly ONE UI option: 08-mitti-original.
+Your folder is C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original . Create all 11 pages in C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original/src exactly as the brief lists, using only the real data in
+C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/sample-data.json. Then run: python C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/capture.py C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original
+Open every screenshot in C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original/screens, fix anything that looks wrong, capture again, and write C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original/README.md.
+Work only inside C:/Users/shubh/Projects/sewacircle/design/ui-options/08-mitti-original . Do not commit. Finish with a one-paragraph summary of what you built.

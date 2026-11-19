@@ -1,0 +1,2970 @@
+{
+ "_note": "Real responses from the SewaCircle API (synthetic data, seed 7), captured 2026-11-19. Use these values verbatim; do not invent numbers.",
+ "tasks": [
+  {
+   "id": "task-01",
+   "title": "Water and hygiene camp",
+   "brief_text": "गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर। लगभग 120 लोग आएँगे। पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।",
+   "language": "hi",
+   "slot": "sat_morning",
+   "district": "Kanpur Dehat",
+   "block": "Akbarpur",
+   "lat": 26.4797,
+   "lon": 79.8981,
+   "team_size": 6,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Team lead",
+     "count": 1,
+     "required_skills": [
+      "team_leadership",
+      "event_coordination"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Local-language liaison",
+     "count": 1,
+     "required_skills": [
+      "dialect_awadhi"
+     ],
+     "min_level": 2,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "First-aid support",
+     "count": 1,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": true,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-04",
+     "role": "Logistics and supplies",
+     "count": 1,
+     "required_skills": [
+      "logistics_supplies",
+      "driving_transport"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-05",
+     "role": "Hygiene educator",
+     "count": 1,
+     "required_skills": [
+      "hygiene_promotion",
+      "health_education"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-06",
+     "role": "Documentation",
+     "count": 1,
+     "required_skills": [
+      "documentation_reporting",
+      "photography_video"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-02",
+   "title": "Blood donation camp",
+   "brief_text": "Sunday morning blood donation camp in Chinhat. Need trained first aid, people to register donors and mobilise the neighbourhood, and someone to manage supplies.",
+   "language": "en",
+   "slot": "sun_morning",
+   "district": "Lucknow",
+   "block": "Chinhat",
+   "lat": 26.8543,
+   "lon": 80.9534,
+   "team_size": 6,
+   "max_travel_km": 25.0,
+   "allow_minors": false,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "First-aid support",
+     "count": 2,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": true,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Donor registration",
+     "count": 1,
+     "required_skills": [
+      "documentation_reporting",
+      "tech_digital_support"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Community mobiliser",
+     "count": 2,
+     "required_skills": [
+      "community_mobilisation"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-04",
+     "role": "Supplies",
+     "count": 1,
+     "required_skills": [
+      "logistics_supplies"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-03",
+   "title": "Tree plantation drive",
+   "brief_text": "Sunday ko Pipraich mein tree plantation drive hai, 200 paudhe lagane hain. Planting team, saplings ki logistics aur photos chahiye.",
+   "language": "hinglish",
+   "slot": "sun_morning",
+   "district": "Gorakhpur",
+   "block": "Pipraich",
+   "lat": 26.709,
+   "lon": 83.4032,
+   "team_size": 4,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Planting team",
+     "count": 2,
+     "required_skills": [
+      "tree_plantation"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Sapling logistics",
+     "count": 1,
+     "required_skills": [
+      "logistics_supplies",
+      "driving_transport"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Photos and report",
+     "count": 1,
+     "required_skills": [
+      "photography_video",
+      "documentation_reporting"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-04",
+   "title": "Evening literacy class",
+   "brief_text": "शनिवार दोपहर चोलापुर में बच्चों के लिए पढ़ाई की कक्षा। दो पढ़ाने वाले और भोजपुरी में अभिभावकों से बात करने वाला चाहिए।",
+   "language": "hi",
+   "slot": "sat_afternoon",
+   "district": "Varanasi",
+   "block": "Cholapur",
+   "lat": 25.355,
+   "lon": 82.9481,
+   "team_size": 4,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Teacher",
+     "count": 2,
+     "required_skills": [
+      "teaching_literacy"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Parent liaison (Bhojpuri)",
+     "count": 1,
+     "required_skills": [
+      "dialect_bhojpuri"
+     ],
+     "min_level": 2,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Attendance and records",
+     "count": 1,
+     "required_skills": [
+      "documentation_reporting"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-05",
+   "title": "Flood relief distribution",
+   "brief_text": "Flood relief distribution in Gola on Saturday morning. Adults only. Need disaster-response trained volunteers, first aid, a driver with supplies and food distribution, and a Bhojpuri speaker.",
+   "language": "en",
+   "slot": "sat_morning",
+   "district": "Gorakhpur",
+   "block": "Gola",
+   "lat": 26.6961,
+   "lon": 83.373,
+   "team_size": 6,
+   "max_travel_km": 30.0,
+   "allow_minors": false,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Relief lead",
+     "count": 1,
+     "required_skills": [
+      "disaster_response"
+     ],
+     "min_level": 2,
+     "priority": "must",
+     "needs_experienced": true,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "First-aid support",
+     "count": 1,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Driver and supplies",
+     "count": 1,
+     "required_skills": [
+      "driving_transport"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-04",
+     "role": "Food distribution",
+     "count": 2,
+     "required_skills": [
+      "food_distribution"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-05",
+     "role": "Local liaison (Bhojpuri)",
+     "count": 1,
+     "required_skills": [
+      "dialect_bhojpuri"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-06",
+   "title": "Block sports day",
+   "brief_text": "Kakori block sports day Sunday afternoon. Do coaches, ek first aid volunteer aur event coordinator chahiye.",
+   "language": "hinglish",
+   "slot": "sun_afternoon",
+   "district": "Lucknow",
+   "block": "Kakori",
+   "lat": 26.8366,
+   "lon": 80.881,
+   "team_size": 4,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Coach",
+     "count": 2,
+     "required_skills": [
+      "sports_coaching"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "First-aid support",
+     "count": 1,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Event coordinator",
+     "count": 1,
+     "required_skills": [
+      "event_coordination",
+      "team_leadership"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-07",
+   "title": "Health awareness camp",
+   "brief_text": "रविवार सुबह स्वास्थ्य जागरूकता शिविर। स्वास्थ्य शिक्षा, प्राथमिक उपचार, भोजपुरी में बात करने वाला और रिपोर्ट लिखने वाला चाहिए। परामर्श हो सके तो अच्छा।",
+   "language": "hi",
+   "slot": "sun_morning",
+   "district": "Varanasi",
+   "block": "Kashi Vidyapeeth",
+   "lat": 25.4362,
+   "lon": 82.8349,
+   "team_size": 5,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Health educator",
+     "count": 1,
+     "required_skills": [
+      "health_education"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "First-aid support",
+     "count": 1,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Local liaison (Bhojpuri)",
+     "count": 1,
+     "required_skills": [
+      "dialect_bhojpuri"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-04",
+     "role": "Report writer",
+     "count": 1,
+     "required_skills": [
+      "documentation_reporting"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-05",
+     "role": "Counsellor",
+     "count": 1,
+     "required_skills": [
+      "counselling_support"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-08",
+   "title": "Cleanliness drive",
+   "brief_text": "Sunday morning cleanliness drive in Maitha market. Anyone can help; one person should lead the group.",
+   "language": "en",
+   "slot": "sun_morning",
+   "district": "Kanpur Dehat",
+   "block": "Maitha",
+   "lat": 26.4294,
+   "lon": 79.8246,
+   "team_size": 5,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Group lead",
+     "count": 1,
+     "required_skills": [
+      "team_leadership",
+      "event_coordination"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Cleaning volunteer",
+     "count": 4,
+     "required_skills": [],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-09",
+   "title": "Digital literacy for elders",
+   "brief_text": "Saturday afternoon digital literacy session: help elders use UPI and DigiLocker. Need two tech helpers and one teacher.",
+   "language": "en",
+   "slot": "sat_afternoon",
+   "district": "Lucknow",
+   "block": "Mohanlalganj",
+   "lat": 26.894,
+   "lon": 80.9551,
+   "team_size": 3,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Tech helper",
+     "count": 2,
+     "required_skills": [
+      "tech_digital_support"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Session teacher",
+     "count": 1,
+     "required_skills": [
+      "teaching_literacy"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "task-10",
+   "title": "Elderly care visits",
+   "brief_text": "शनिवार सुबह रसूलाबाद में बुज़ुर्गों से मिलने जाना है। परामर्श या स्वास्थ्य जानकारी वाला, अवधी बोलने वाला और गाड़ी वाला चाहिए।",
+   "language": "hi",
+   "slot": "sat_morning",
+   "district": "Kanpur Dehat",
+   "block": "Rasulabad",
+   "lat": 26.3915,
+   "lon": 79.9121,
+   "team_size": 3,
+   "max_travel_km": 25.0,
+   "allow_minors": true,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "Care volunteer",
+     "count": 1,
+     "required_skills": [
+      "counselling_support",
+      "health_education"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Local-language liaison",
+     "count": 1,
+     "required_skills": [
+      "dialect_awadhi"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Driver",
+     "count": 1,
+     "required_skills": [
+      "driving_transport"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  }
+ ],
+ "volunteers_sample": [
+  {
+   "id": "v-001",
+   "display_name": "Aarav C.",
+   "age": 28,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Jhinjhak",
+   "lat": 26.3947,
+   "lon": 79.7782,
+   "skills": {
+    "hindi_fluent": 1,
+    "teaching_literacy": 3,
+    "event_coordination": 1,
+    "dialect_awadhi": 3,
+    "first_aid": 1
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 5,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01",
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-002",
+   "display_name": "Asha S.",
+   "age": 18,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Jhinjhak",
+   "lat": 26.4684,
+   "lon": 79.8819,
+   "skills": {
+    "health_education": 2,
+    "hindi_fluent": 1,
+    "logistics_supplies": 3,
+    "teaching_literacy": 1,
+    "community_mobilisation": 3,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning",
+    "sun_afternoon"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 2,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-003",
+   "display_name": "Bhavna X.",
+   "age": 23,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Sandalpur",
+   "lat": 26.4803,
+   "lon": 79.8446,
+   "skills": {
+    "health_education": 1,
+    "photography_video": 1,
+    "documentation_reporting": 3,
+    "sports_coaching": 2,
+    "first_aid": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 4,
+   "times_picked_last_90d": 1,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01",
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-004",
+   "display_name": "Chirag P.",
+   "age": 16,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Maitha",
+   "lat": 26.3535,
+   "lon": 79.8594,
+   "skills": {
+    "hindi_fluent": 2,
+    "teaching_literacy": 3,
+    "sports_coaching": 2,
+    "tech_digital_support": 3,
+    "documentation_reporting": 2,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sun_afternoon",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 3,
+   "times_picked_last_90d": 2,
+   "guardian_consent": true,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  },
+  {
+   "id": "v-005",
+   "display_name": "Deepika F.",
+   "age": 18,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Sandalpur",
+   "lat": 26.4096,
+   "lon": 79.9025,
+   "skills": {
+    "event_coordination": 2,
+    "health_education": 1,
+    "graphic_design": 1,
+    "logistics_supplies": 2,
+    "dialect_awadhi": 3,
+    "first_aid": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_evening",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 1,
+   "guardian_consent": null,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  },
+  {
+   "id": "v-006",
+   "display_name": "Faiz E.",
+   "age": 28,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Malasa",
+   "lat": 26.4865,
+   "lon": 79.9788,
+   "skills": {
+    "urdu_fluent": 1,
+    "community_mobilisation": 2,
+    "logistics_supplies": 3,
+    "dialect_awadhi": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi",
+    "ur"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sun_afternoon",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-08"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-007",
+   "display_name": "Gaurav A.",
+   "age": 28,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Sarvankheda",
+   "lat": 26.4266,
+   "lon": 79.951,
+   "skills": {
+    "event_coordination": 1,
+    "team_leadership": 1,
+    "hindi_fluent": 1,
+    "hygiene_promotion": 1,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_evening",
+    "sat_morning",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01",
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-008",
+   "display_name": "Heena P.",
+   "age": 27,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Sarvankheda",
+   "lat": 26.4693,
+   "lon": 79.9713,
+   "skills": {
+    "photography_video": 2,
+    "hindi_fluent": 2,
+    "graphic_design": 2,
+    "driving_transport": 1,
+    "dialect_awadhi": 3,
+    "first_aid": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": true,
+   "past_drives": 3,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-009",
+   "display_name": "Ishaan K.",
+   "age": 28,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Jhinjhak",
+   "lat": 26.499,
+   "lon": 79.8135,
+   "skills": {
+    "food_distribution": 1,
+    "logistics_supplies": 2,
+    "event_coordination": 1,
+    "disaster_response": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 8,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  },
+  {
+   "id": "v-010",
+   "display_name": "Jyoti C.",
+   "age": 29,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Jhinjhak",
+   "lat": 26.365,
+   "lon": 79.8603,
+   "skills": {
+    "driving_transport": 1,
+    "sports_coaching": 3,
+    "photography_video": 2,
+    "dialect_awadhi": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_morning"
+   ],
+   "has_vehicle": true,
+   "past_drives": 4,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-011",
+   "display_name": "Kabir Z.",
+   "age": 28,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Malasa",
+   "lat": 26.4321,
+   "lon": 79.8987,
+   "skills": {
+    "tech_digital_support": 1,
+    "hindi_fluent": 2,
+    "event_coordination": 1,
+    "dialect_awadhi": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_morning",
+    "sun_afternoon",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01",
+    "task-08"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-012",
+   "display_name": "Lata Q.",
+   "age": 17,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Sarvankheda",
+   "lat": 26.3236,
+   "lon": 79.8838,
+   "skills": {
+    "community_mobilisation": 3,
+    "tech_digital_support": 3,
+    "driving_transport": 1,
+    "hygiene_promotion": 1,
+    "event_coordination": 1
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "sat_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": true,
+   "past_drives": 0,
+   "times_picked_last_90d": 0,
+   "guardian_consent": true,
+   "opted_in_task_ids": [
+    "task-01"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-013",
+   "display_name": "Manav Q.",
+   "age": 22,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Akbarpur",
+   "lat": 26.3747,
+   "lon": 79.8827,
+   "skills": {
+    "team_leadership": 3,
+    "community_mobilisation": 3,
+    "counselling_support": 2,
+    "event_coordination": 3,
+    "photography_video": 1,
+    "first_aid": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_evening",
+    "sat_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 8,
+   "times_picked_last_90d": 7,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-014",
+   "display_name": "Naina A.",
+   "age": 23,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Maitha",
+   "lat": 26.491,
+   "lon": 79.8756,
+   "skills": {
+    "graphic_design": 1,
+    "teaching_literacy": 1,
+    "sports_coaching": 2,
+    "hindi_fluent": 1
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 8,
+   "times_picked_last_90d": 7,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-08",
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-015",
+   "display_name": "Om V.",
+   "age": 21,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Jhinjhak",
+   "lat": 26.445,
+   "lon": 79.8567,
+   "skills": {
+    "teaching_literacy": 1,
+    "english_fluent": 1,
+    "fundraising_outreach": 1,
+    "counselling_support": 2,
+    "dialect_awadhi": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi",
+    "en"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "sat_morning",
+    "sun_afternoon",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 0,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-01",
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-016",
+   "display_name": "Pooja W.",
+   "age": 23,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Malasa",
+   "lat": 26.5425,
+   "lon": 79.8964,
+   "skills": {
+    "logistics_supplies": 1,
+    "community_mobilisation": 2,
+    "photography_video": 2,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_morning",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 1,
+   "times_picked_last_90d": 1,
+   "guardian_consent": null,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  },
+  {
+   "id": "v-017",
+   "display_name": "Rahul Y.",
+   "age": 18,
+   "gender": "M",
+   "district": "Kanpur Dehat",
+   "block": "Sarvankheda",
+   "lat": 26.45,
+   "lon": 79.8477,
+   "skills": {
+    "documentation_reporting": 1,
+    "hygiene_promotion": 1,
+    "graphic_design": 1,
+    "hindi_fluent": 2,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "sun_afternoon",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 3,
+   "times_picked_last_90d": 2,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-08"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-018",
+   "display_name": "Ritika A.",
+   "age": 18,
+   "gender": "F",
+   "district": "Kanpur Dehat",
+   "block": "Amraudha",
+   "lat": 26.4851,
+   "lon": 79.7635,
+   "skills": {
+    "community_mobilisation": 2,
+    "english_fluent": 1,
+    "logistics_supplies": 3,
+    "hindi_fluent": 1,
+    "dialect_awadhi": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi",
+    "en"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_morning",
+    "sun_afternoon",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 6,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-10"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-019",
+   "display_name": "Sahil P.",
+   "age": 22,
+   "gender": "M",
+   "district": "Lucknow",
+   "block": "Gosaiganj",
+   "lat": 26.7859,
+   "lon": 80.8305,
+   "skills": {
+    "documentation_reporting": 2,
+    "sports_coaching": 1,
+    "graphic_design": 1,
+    "community_mobilisation": 1,
+    "dialect_awadhi": 2,
+    "tech_digital_support": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_evening",
+    "sat_morning",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 8,
+   "times_picked_last_90d": 2,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-02",
+    "task-09"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-020",
+   "display_name": "Sana A.",
+   "age": 16,
+   "gender": "F",
+   "district": "Lucknow",
+   "block": "Chinhat",
+   "lat": 26.9559,
+   "lon": 80.8609,
+   "skills": {
+    "event_coordination": 1,
+    "tech_digital_support": 2,
+    "food_distribution": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "sat_morning",
+    "sun_afternoon",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 1,
+   "times_picked_last_90d": 1,
+   "guardian_consent": true,
+   "opted_in_task_ids": [
+    "task-02"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-021",
+   "display_name": "Tanvi L.",
+   "age": 20,
+   "gender": "F",
+   "district": "Lucknow",
+   "block": "Gosaiganj",
+   "lat": 26.8892,
+   "lon": 80.7979,
+   "skills": {
+    "logistics_supplies": 2,
+    "hindi_fluent": 3,
+    "event_coordination": 2,
+    "dialect_awadhi": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_morning",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 2,
+   "times_picked_last_90d": 0,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-02"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-022",
+   "display_name": "Uday Y.",
+   "age": 19,
+   "gender": "M",
+   "district": "Lucknow",
+   "block": "Gosaiganj",
+   "lat": 26.7826,
+   "lon": 80.9733,
+   "skills": {
+    "tech_digital_support": 2,
+    "community_mobilisation": 2,
+    "health_education": 1,
+    "team_leadership": 1,
+    "first_aid": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_afternoon",
+    "sat_evening",
+    "sun_afternoon",
+    "sun_morning",
+    "wed_evening"
+   ],
+   "has_vehicle": false,
+   "past_drives": 8,
+   "times_picked_last_90d": 5,
+   "guardian_consent": null,
+   "opted_in_task_ids": [
+    "task-02",
+    "task-06"
+   ],
+   "synthetic": true
+  },
+  {
+   "id": "v-023",
+   "display_name": "Vani C.",
+   "age": 18,
+   "gender": "F",
+   "district": "Lucknow",
+   "block": "Chinhat",
+   "lat": 26.8968,
+   "lon": 80.9414,
+   "skills": {
+    "english_fluent": 3,
+    "hygiene_promotion": 3,
+    "tree_plantation": 3,
+    "tech_digital_support": 1,
+    "community_mobilisation": 3
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi",
+    "en"
+   ],
+   "available_slots": [
+    "sat_morning",
+    "sun_morning"
+   ],
+   "has_vehicle": false,
+   "past_drives": 2,
+   "times_picked_last_90d": 2,
+   "guardian_consent": null,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  },
+  {
+   "id": "v-024",
+   "display_name": "Yash I.",
+   "age": 28,
+   "gender": "M",
+   "district": "Lucknow",
+   "block": "Sarojini Nagar",
+   "lat": 26.857,
+   "lon": 80.9377,
+   "skills": {
+    "food_distribution": 3,
+    "graphic_design": 3,
+    "hindi_fluent": 1,
+    "tech_digital_support": 3,
+    "tree_plantation": 1,
+    "sports_coaching": 2
+   },
+   "self_declared_skills": [],
+   "languages": [
+    "hi"
+   ],
+   "available_slots": [
+    "sat_evening",
+    "sat_morning",
+    "sun_afternoon"
+   ],
+   "has_vehicle": false,
+   "past_drives": 6,
+   "times_picked_last_90d": 7,
+   "guardian_consent": null,
+   "opted_in_task_ids": [],
+   "synthetic": true
+  }
+ ],
+ "volunteer_count": 80,
+ "extraction": {
+  "roles": [
+   {
+    "unresolved": false,
+    "role": "Poster team",
+    "count": 1,
+    "required_skills": [
+     "graphic_design"
+    ],
+    "evidence_span": "पोस्टर",
+    "confidence": "medium",
+    "reason": "Posters are requested but no number is given."
+   },
+   {
+    "unresolved": false,
+    "role": "First-aid support",
+    "count": 1,
+    "required_skills": [
+     "first_aid"
+    ],
+    "evidence_span": "प्राथमिक उपचार",
+    "confidence": "medium",
+    "reason": "First aid is requested but no number is given."
+   },
+   {
+    "unresolved": false,
+    "role": "Supplies and site setup",
+    "count": 1,
+    "required_skills": [
+     "logistics_supplies"
+    ],
+    "evidence_span": "सामान",
+    "confidence": "medium",
+    "reason": "Supplies handling is requested but no number is given."
+   },
+   {
+    "unresolved": false,
+    "role": "Local-language liaison",
+    "count": 1,
+    "required_skills": [
+     "dialect_awadhi",
+     "dialect_bhojpuri"
+    ],
+    "evidence_span": "स्थानीय बोली में बात करने वाले",
+    "confidence": "low",
+    "reason": "Local dialect speakers are requested but the dialect and number are not stated."
+   }
+  ],
+  "needs_decision": [
+   "Which local dialect is needed (Awadhi or Bhojpuri)?",
+   "How many people are needed for each role (posters, first aid, supplies, local-language speakers)?",
+   "Is a hygiene or health educator needed to run the handwashing and safe drinking water sessions?",
+   "Please check the role 'Local-language liaison' (the AI was not sure)."
+  ],
+  "language_detected": "hi",
+  "model": "cc/claude-sonnet-5-5",
+  "cached": true,
+  "redactions": 0,
+  "notes": []
+ },
+ "task_with_roles": {
+  "id": "task-01",
+  "title": "Water and hygiene camp",
+  "brief_text": "गाँव स्तर पर शनिवार सुबह स्वच्छ पेयजल और हाथ धोने की जागरूकता शिविर। लगभग 120 लोग आएँगे। पोस्टर, प्राथमिक उपचार, सामान और स्थानीय बोली में बात करने वाले चाहिए।",
+  "language": "hi",
+  "slot": "sat_morning",
+  "district": "Kanpur Dehat",
+  "block": "Akbarpur",
+  "lat": 26.4797,
+  "lon": 79.8981,
+  "team_size": 6,
+  "max_travel_km": 25.0,
+  "allow_minors": true,
+  "roles": [
+   {
+    "id": "role-01",
+    "role": "Poster team",
+    "count": 1,
+    "required_skills": [
+     "graphic_design"
+    ],
+    "evidence_span": "पोस्टर",
+    "confidence": "medium",
+    "unresolved": false
+   },
+   {
+    "id": "role-02",
+    "role": "First-aid support",
+    "count": 1,
+    "required_skills": [
+     "first_aid"
+    ],
+    "evidence_span": "प्राथमिक उपचार",
+    "confidence": "medium",
+    "unresolved": false
+   },
+   {
+    "id": "role-03",
+    "role": "Supplies and site setup",
+    "count": 1,
+    "required_skills": [
+     "logistics_supplies"
+    ],
+    "evidence_span": "सामान",
+    "confidence": "medium",
+    "unresolved": false
+   },
+   {
+    "id": "role-04",
+    "role": "Local-language liaison",
+    "count": 1,
+    "required_skills": [
+     "dialect_awadhi",
+     "dialect_bhojpuri"
+    ],
+    "evidence_span": "स्थानीय बोली में बात करने वाले",
+    "confidence": "low",
+    "unresolved": false
+   }
+  ],
+  "synthetic": true
+ },
+ "roster_all_methods": {
+  "cp_sat": {
+   "task_id": "task-01",
+   "method": "cp_sat",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-008",
+     "volunteer_name": "Heena P.",
+     "score": 74.0,
+     "distance_km": 7.4,
+     "reasons": [
+      "Has posters and graphic design (level 2)",
+      "Free sat morning; 7 km from the site",
+      "Not picked in the last 90 days"
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-070",
+     "volunteer_name": "Mohit Z.",
+     "score": 113.0,
+     "distance_km": 1.7,
+     "reasons": [
+      "Has first aid / basic medical support (level 3)",
+      "Free sat morning; 2 km from the site",
+      "Newcomer (0 past drives)"
+     ],
+     "flags": [
+      "novice"
+     ]
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 0,
+     "volunteer_id": "v-067",
+     "volunteer_name": "Divya H.",
+     "score": 89.0,
+     "distance_km": 16.3,
+     "reasons": [
+      "Has logistics, supplies and site setup (level 3)",
+      "Free sat morning; 16 km from the site"
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-011",
+     "volunteer_name": "Kabir Z.",
+     "score": 118.0,
+     "distance_km": 5.3,
+     "reasons": [
+      "Has awadhi speaker (local-language liaison) (level 3)",
+      "Free sat morning; 5 km from the site",
+      "Not picked in the last 90 days",
+      "Newcomer (0 past drives)"
+     ],
+     "flags": [
+      "novice"
+     ]
+    }
+   ],
+   "standby": [
+    {
+     "volunteer_id": "v-068",
+     "volunteer_name": "Imran B.",
+     "covers_role_ids": [
+      "role-01",
+      "role-04"
+     ],
+     "reason": "Can step in for: Poster team, Local-language liaison. Raises dropout robustness to 75%."
+    },
+    {
+     "volunteer_id": "v-069",
+     "volunteer_name": "Kavya L.",
+     "covers_role_ids": [
+      "role-03"
+     ],
+     "reason": "Can step in for: Supplies and site setup. Raises dropout robustness to 100%."
+    }
+   ],
+   "unfilled_role_ids": [],
+   "unfilled_slots": [],
+   "metrics": {
+    "role_coverage": 1.0,
+    "slots_filled": 4,
+    "slots_required": 4,
+    "robustness": 1.0,
+    "repeat_pick_share": 0.0,
+    "exposure_gini": 0.6060606060606062,
+    "district_spread": 3,
+    "should_coverage": null,
+    "novices": 2,
+    "mentor_pairs": 0,
+    "solve_ms": 15,
+    "solver_status": "OPTIMAL"
+   },
+   "explanations": [
+    "READY: every essential role is filled and any one person can drop out without leaving a gap."
+   ],
+   "recruit_requests": [],
+   "ready": true,
+   "synthetic": true
+  },
+  "nearest_skill": {
+   "task_id": "task-01",
+   "method": "nearest_skill",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-008",
+     "volunteer_name": "Heena P.",
+     "score": -7.377,
+     "distance_km": 7.377,
+     "reasons": [
+      "Poster team: qualifies for required skills (graphic_design) at level 1+.",
+      "Available in sat_morning and 7.4 km from the site (limit 25.0 km).",
+      "Selected by nearest_skill (distance first): 3 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-070",
+     "volunteer_name": "Mohit Z.",
+     "score": -1.684,
+     "distance_km": 1.684,
+     "reasons": [
+      "First-aid support: qualifies for required skills (first_aid) at level 1+.",
+      "Available in sat_morning and 1.7 km from the site (limit 25.0 km).",
+      "Selected by nearest_skill (distance first): 0 past drives, 2 picks in the last 90 days."
+     ],
+     "flags": [
+      "novice"
+     ]
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 0,
+     "volunteer_id": "v-069",
+     "volunteer_name": "Kavya L.",
+     "score": -3.469,
+     "distance_km": 3.469,
+     "reasons": [
+      "Supplies and site setup: qualifies for required skills (logistics_supplies) at level 1+.",
+      "Available in sat_morning and 3.5 km from the site (limit 25.0 km).",
+      "Selected by nearest_skill (distance first): 11 past drives, 7 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-011",
+     "volunteer_name": "Kabir Z.",
+     "score": -5.293,
+     "distance_km": 5.293,
+     "reasons": [
+      "Local-language liaison: qualifies for required skills (dialect_awadhi, dialect_bhojpuri) at level 1+.",
+      "Available in sat_morning and 5.3 km from the site (limit 25.0 km).",
+      "Selected by nearest_skill (distance first): 0 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": [
+      "novice"
+     ]
+    }
+   ],
+   "standby": [],
+   "unfilled_role_ids": [],
+   "unfilled_slots": [],
+   "metrics": {
+    "role_coverage": 1.0,
+    "slots_filled": 4,
+    "slots_required": 4,
+    "robustness": 0.0,
+    "repeat_pick_share": 0.25,
+    "exposure_gini": 0.6262626262626263,
+    "district_spread": 4,
+    "should_coverage": null,
+    "novices": 2,
+    "mentor_pairs": 0,
+    "solve_ms": 0,
+    "solver_status": "baseline_complete"
+   },
+   "explanations": [
+    "Method nearest_skill: roles in task order, nearest qualified unassigned volunteer each time; no fairness objective.",
+    "NOT READY: 4 action(s) needed before this drive is safe to run."
+   ],
+   "recruit_requests": [
+    {
+     "role_id": "role-01",
+     "role": "Poster team",
+     "needed": 1,
+     "skills": [
+      "graphic_design"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Heena P. cannot come, nobody qualified can step in as Poster team. Recruit one standby."
+    },
+    {
+     "role_id": "role-02",
+     "role": "First-aid support",
+     "needed": 1,
+     "skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "checked_skill_required": true,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Mohit Z. cannot come, nobody qualified can step in as First-aid support. Recruit one standby."
+    },
+    {
+     "role_id": "role-03",
+     "role": "Supplies and site setup",
+     "needed": 1,
+     "skills": [
+      "logistics_supplies"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Kavya L. cannot come, nobody qualified can step in as Supplies and site setup. Recruit one standby."
+    },
+    {
+     "role_id": "role-04",
+     "role": "Local-language liaison",
+     "needed": 1,
+     "skills": [
+      "dialect_awadhi",
+      "dialect_bhojpuri"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Kabir Z. cannot come, nobody qualified can step in as Local-language liaison. Recruit one standby."
+    }
+   ],
+   "ready": false,
+   "synthetic": true
+  },
+  "random_feasible": {
+   "task_id": "task-01",
+   "method": "random_feasible",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-068",
+     "volunteer_name": "Imran B.",
+     "score": 0.9478653606090632,
+     "distance_km": 13.07,
+     "reasons": [
+      "Poster team: qualifies for required skills (graphic_design) at level 1+.",
+      "Available in sat_morning and 13.1 km from the site (limit 25.0 km).",
+      "Selected by seeded random draw (seed=7): 0 past drives, 2 picks in the last 90 days."
+     ],
+     "flags": [
+      "novice",
+      "minor_guardian_consent"
+     ]
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-067",
+     "volunteer_name": "Divya H.",
+     "score": 0.6509344730398537,
+     "distance_km": 16.278,
+     "reasons": [
+      "First-aid support: qualifies for required skills (first_aid) at level 1+.",
+      "Available in sat_morning and 16.3 km from the site (limit 25.0 km).",
+      "Selected by seeded random draw (seed=7): 5 past drives, 2 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 0,
+     "volunteer_id": "v-069",
+     "volunteer_name": "Kavya L.",
+     "score": 0.8212742919913083,
+     "distance_km": 3.469,
+     "reasons": [
+      "Supplies and site setup: qualifies for required skills (logistics_supplies) at level 1+.",
+      "Available in sat_morning and 3.5 km from the site (limit 25.0 km).",
+      "Selected by seeded random draw (seed=7): 11 past drives, 7 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-001",
+     "volunteer_name": "Aarav C.",
+     "score": 0.36568891691258554,
+     "distance_km": 15.227,
+     "reasons": [
+      "Local-language liaison: qualifies for required skills (dialect_awadhi, dialect_bhojpuri) at level 1+.",
+      "Available in sat_morning and 15.2 km from the site (limit 25.0 km).",
+      "Selected by seeded random draw (seed=7): 5 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": []
+    }
+   ],
+   "standby": [],
+   "unfilled_role_ids": [],
+   "unfilled_slots": [],
+   "metrics": {
+    "role_coverage": 1.0,
+    "slots_filled": 4,
+    "slots_required": 4,
+    "robustness": 0.0,
+    "repeat_pick_share": 0.25,
+    "exposure_gini": 0.6666666666666667,
+    "district_spread": 3,
+    "should_coverage": null,
+    "novices": 1,
+    "mentor_pairs": 0,
+    "solve_ms": 0,
+    "solver_status": "baseline_complete"
+   },
+   "explanations": [
+    "Method random_feasible: seeded random pick (seed=7) among eligible unassigned volunteers; no fairness objective.",
+    "NOT READY: 4 action(s) needed before this drive is safe to run."
+   ],
+   "recruit_requests": [
+    {
+     "role_id": "role-01",
+     "role": "Poster team",
+     "needed": 1,
+     "skills": [
+      "graphic_design"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Imran B. cannot come, nobody qualified can step in as Poster team. Recruit one standby."
+    },
+    {
+     "role_id": "role-02",
+     "role": "First-aid support",
+     "needed": 1,
+     "skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "checked_skill_required": true,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Divya H. cannot come, nobody qualified can step in as First-aid support. Recruit one standby."
+    },
+    {
+     "role_id": "role-03",
+     "role": "Supplies and site setup",
+     "needed": 1,
+     "skills": [
+      "logistics_supplies"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Kavya L. cannot come, nobody qualified can step in as Supplies and site setup. Recruit one standby."
+    },
+    {
+     "role_id": "role-04",
+     "role": "Local-language liaison",
+     "needed": 1,
+     "skills": [
+      "dialect_awadhi",
+      "dialect_bhojpuri"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Aarav C. cannot come, nobody qualified can step in as Local-language liaison. Recruit one standby."
+    }
+   ],
+   "ready": false,
+   "synthetic": true
+  },
+  "manual_greedy": {
+   "task_id": "task-01",
+   "method": "manual_greedy",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-008",
+     "volunteer_name": "Heena P.",
+     "score": 3.0,
+     "distance_km": 7.377,
+     "reasons": [
+      "Poster team: qualifies for required skills (graphic_design) at level 1+.",
+      "Available in sat_morning and 7.4 km from the site (limit 25.0 km).",
+      "Selected by manual_greedy (most experienced first): 3 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-073",
+     "volunteer_name": "Ruchi Z.",
+     "score": 8.0,
+     "distance_km": 5.546,
+     "reasons": [
+      "First-aid support: qualifies for required skills (first_aid) at level 1+.",
+      "Available in sat_morning and 5.5 km from the site (limit 25.0 km).",
+      "Selected by manual_greedy (most experienced first): 8 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 0,
+     "volunteer_id": "v-069",
+     "volunteer_name": "Kavya L.",
+     "score": 11.0,
+     "distance_km": 3.469,
+     "reasons": [
+      "Supplies and site setup: qualifies for required skills (logistics_supplies) at level 1+.",
+      "Available in sat_morning and 3.5 km from the site (limit 25.0 km).",
+      "Selected by manual_greedy (most experienced first): 11 past drives, 7 picks in the last 90 days."
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-001",
+     "volunteer_name": "Aarav C.",
+     "score": 5.0,
+     "distance_km": 15.227,
+     "reasons": [
+      "Local-language liaison: qualifies for required skills (dialect_awadhi, dialect_bhojpuri) at level 1+.",
+      "Available in sat_morning and 15.2 km from the site (limit 25.0 km).",
+      "Selected by manual_greedy (most experienced first): 5 past drives, 0 picks in the last 90 days."
+     ],
+     "flags": []
+    }
+   ],
+   "standby": [
+    {
+     "volunteer_id": "v-068",
+     "volunteer_name": "Imran B.",
+     "covers_role_ids": [
+      "role-01"
+     ],
+     "reason": "Next-best backup for Poster team: 0 past drives, 13.1 km away, available sat_morning; not used in the primary roster."
+    },
+    {
+     "volunteer_id": "v-067",
+     "volunteer_name": "Divya H.",
+     "covers_role_ids": [
+      "role-02"
+     ],
+     "reason": "Next-best backup for First-aid support: 5 past drives, 16.3 km away, available sat_morning; not used in the primary roster."
+    },
+    {
+     "volunteer_id": "v-011",
+     "volunteer_name": "Kabir Z.",
+     "covers_role_ids": [
+      "role-04"
+     ],
+     "reason": "Next-best backup for Local-language liaison: 0 past drives, 5.3 km away, available sat_morning; not used in the primary roster."
+    }
+   ],
+   "unfilled_role_ids": [],
+   "unfilled_slots": [],
+   "metrics": {
+    "role_coverage": 1.0,
+    "slots_filled": 4,
+    "slots_required": 4,
+    "robustness": 1.0,
+    "repeat_pick_share": 0.25,
+    "exposure_gini": 0.5656565656565657,
+    "district_spread": 4,
+    "should_coverage": null,
+    "novices": 0,
+    "mentor_pairs": 0,
+    "solve_ms": 0,
+    "solver_status": "baseline_complete"
+   },
+   "explanations": [
+    "Method manual_greedy: roles in task order, most-experienced eligible volunteer per slot, one next-best backup per role.",
+    "READY: every essential role is filled and any one person can drop out without leaving a gap."
+   ],
+   "recruit_requests": [],
+   "ready": true,
+   "synthetic": true
+  }
+ },
+ "not_ready_example": {
+  "task": {
+   "id": "task-02",
+   "title": "Blood donation camp",
+   "brief_text": "Sunday morning blood donation camp in Chinhat. Need trained first aid, people to register donors and mobilise the neighbourhood, and someone to manage supplies.",
+   "language": "en",
+   "slot": "sun_morning",
+   "district": "Lucknow",
+   "block": "Chinhat",
+   "lat": 26.8543,
+   "lon": 80.9534,
+   "team_size": 6,
+   "max_travel_km": 25.0,
+   "allow_minors": false,
+   "roles": [
+    {
+     "id": "role-01",
+     "role": "First-aid support",
+     "count": 2,
+     "required_skills": [
+      "first_aid"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": true,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": true,
+     "unresolved": false
+    },
+    {
+     "id": "role-02",
+     "role": "Donor registration",
+     "count": 1,
+     "required_skills": [
+      "documentation_reporting",
+      "tech_digital_support"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-03",
+     "role": "Community mobiliser",
+     "count": 2,
+     "required_skills": [
+      "community_mobilisation"
+     ],
+     "min_level": 1,
+     "priority": "must",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    },
+    {
+     "id": "role-04",
+     "role": "Supplies",
+     "count": 1,
+     "required_skills": [
+      "logistics_supplies"
+     ],
+     "min_level": 1,
+     "priority": "should",
+     "needs_experienced": false,
+     "evidence_span": "",
+     "confidence": "high",
+     "safety_critical": false,
+     "unresolved": false
+    }
+   ],
+   "synthetic": true
+  },
+  "roster": {
+   "task_id": "task-02",
+   "method": "cp_sat",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-022",
+     "volunteer_name": "Uday Y.",
+     "score": 58.0,
+     "distance_km": 8.2,
+     "reasons": [
+      "Has first aid / basic medical support (level 3)",
+      "Free sun morning; 8 km from the site",
+      "Picked 5 times in 90 days; chosen because no less-used qualified person fitted better",
+      "Experienced (8 drives): can guide newcomers"
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-01",
+     "slot_index": 1,
+     "volunteer_id": "v-033",
+     "volunteer_name": "Ruchi Z.",
+     "score": 80.0,
+     "distance_km": 15.5,
+     "reasons": [
+      "Has first aid / basic medical support (level 2)",
+      "Free sun morning; 16 km from the site",
+      "Not picked in the last 90 days",
+      "Newcomer (0 past drives), paired with Uday Y."
+     ],
+     "flags": [
+      "novice"
+     ]
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-019",
+     "volunteer_name": "Sahil P.",
+     "score": 61.0,
+     "distance_km": 14.4,
+     "reasons": [
+      "Has documentation, attendance and reporting (level 2)",
+      "Free sun morning; 14 km from the site"
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-021",
+     "volunteer_name": "Tanvi L.",
+     "score": 79.0,
+     "distance_km": 15.9,
+     "reasons": [
+      "Has logistics, supplies and site setup (level 2)",
+      "Free sun morning; 16 km from the site",
+      "Not picked in the last 90 days",
+      "Newcomer (2 past drives)"
+     ],
+     "flags": [
+      "novice"
+     ]
+    }
+   ],
+   "standby": [],
+   "unfilled_role_ids": [
+    "role-03"
+   ],
+   "unfilled_slots": [
+    {
+     "role_id": "role-03",
+     "slot_index": 0
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 1
+    }
+   ],
+   "metrics": {
+    "role_coverage": 0.6,
+    "slots_filled": 3,
+    "slots_required": 5,
+    "robustness": 0.0,
+    "repeat_pick_share": 0.25,
+    "exposure_gini": 0.509090909090909,
+    "district_spread": 1,
+    "should_coverage": 1.0,
+    "novices": 2,
+    "mentor_pairs": 1,
+    "solve_ms": 21,
+    "solver_status": "OPTIMAL"
+   },
+   "explanations": [
+    "Unfilled: Community mobiliser #1, Community mobiliser #2. No eligible volunteer was available; reported, not hidden.",
+    "Dropout robustness is 0%: not enough eligible standby people for every role.",
+    "NOT READY: 1 action(s) needed before this drive is safe to run."
+   ],
+   "recruit_requests": [
+    {
+     "role_id": "role-03",
+     "role": "Community mobiliser",
+     "needed": 2,
+     "skills": [
+      "community_mobilisation"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sun_morning",
+     "area": "Chinhat, Lucknow",
+     "max_travel_km": 25.0,
+     "reason": "No eligible volunteer for 2 slot(s): needs community mobilisation / door-to-door outreach, free sun morning, within 25 km."
+    }
+   ],
+   "ready": false,
+   "synthetic": true
+  }
+ },
+ "why_not": {
+  "volunteer_id": "v-001",
+  "volunteer_name": "Aarav C.",
+  "feasible": true,
+  "narrative": "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -> 100%; dropout robustness 100% -> 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98).",
+  "delta_role_coverage": 0.0,
+  "delta_robustness": 0.0,
+  "displaced_volunteer_ids": [
+   "v-011"
+  ],
+  "blocking_reasons": []
+ },
+ "dropout": {
+  "task_id": "task-01",
+  "dropped_volunteer_id": "v-008",
+  "healed_with_standby": true,
+  "replacement_volunteer_id": "v-068",
+  "uncovered_role_ids": [],
+  "roster_after": {
+   "task_id": "task-01",
+   "method": "cp_sat",
+   "assignments": [
+    {
+     "role_id": "role-01",
+     "slot_index": 0,
+     "volunteer_id": "v-068",
+     "volunteer_name": "Imran B.",
+     "score": 44.0,
+     "distance_km": 13.1,
+     "reasons": [
+      "Promoted from standby",
+      "Has posters and graphic design (level 1)",
+      "Free sat morning; 13 km from the site",
+      "Newcomer (0 past drives)",
+      "Under 18: guardian consent on file"
+     ],
+     "flags": [
+      "novice",
+      "minor_guardian_consent"
+     ]
+    },
+    {
+     "role_id": "role-02",
+     "slot_index": 0,
+     "volunteer_id": "v-070",
+     "volunteer_name": "Mohit Z.",
+     "score": 113.0,
+     "distance_km": 1.7,
+     "reasons": [
+      "Has first aid / basic medical support (level 3)",
+      "Free sat morning; 2 km from the site",
+      "Newcomer (0 past drives)"
+     ],
+     "flags": [
+      "novice"
+     ]
+    },
+    {
+     "role_id": "role-03",
+     "slot_index": 0,
+     "volunteer_id": "v-067",
+     "volunteer_name": "Divya H.",
+     "score": 89.0,
+     "distance_km": 16.3,
+     "reasons": [
+      "Has logistics, supplies and site setup (level 3)",
+      "Free sat morning; 16 km from the site"
+     ],
+     "flags": []
+    },
+    {
+     "role_id": "role-04",
+     "slot_index": 0,
+     "volunteer_id": "v-011",
+     "volunteer_name": "Kabir Z.",
+     "score": 118.0,
+     "distance_km": 5.3,
+     "reasons": [
+      "Has awadhi speaker (local-language liaison) (level 3)",
+      "Free sat morning; 5 km from the site",
+      "Not picked in the last 90 days",
+      "Newcomer (0 past drives)"
+     ],
+     "flags": [
+      "novice"
+     ]
+    }
+   ],
+   "standby": [
+    {
+     "volunteer_id": "v-069",
+     "volunteer_name": "Kavya L.",
+     "covers_role_ids": [
+      "role-03"
+     ],
+     "reason": "Can step in for: Supplies and site setup. Raises dropout robustness to 100%."
+    }
+   ],
+   "unfilled_role_ids": [],
+   "unfilled_slots": [],
+   "metrics": {
+    "role_coverage": 1.0,
+    "slots_filled": 4,
+    "slots_required": 4,
+    "robustness": 0.75,
+    "repeat_pick_share": 0.0,
+    "exposure_gini": 0.6363636363636365,
+    "district_spread": 3,
+    "should_coverage": null,
+    "novices": 3,
+    "mentor_pairs": 0,
+    "solve_ms": 0,
+    "solver_status": "HEALED_WITH_STANDBY"
+   },
+   "explanations": [
+    "Heena P. dropped out; Imran B. stepped in from standby for Poster team.",
+    "NOT READY: 1 action(s) needed before this drive is safe to run."
+   ],
+   "recruit_requests": [
+    {
+     "role_id": "role-01",
+     "role": "Poster team",
+     "needed": 1,
+     "skills": [
+      "graphic_design"
+     ],
+     "min_level": 1,
+     "checked_skill_required": false,
+     "slot": "sat_morning",
+     "area": "Akbarpur, Kanpur Dehat",
+     "max_travel_km": 25.0,
+     "reason": "Single point of failure: if Imran B. cannot come, nobody qualified can step in as Poster team. Recruit one standby."
+    }
+   ],
+   "ready": false,
+   "synthetic": true
+  }
+ },
+ "host_notes": "Heena P. worked about 5 hours.\nMohit Z. worked about 5 hours.\nDivya H. worked about 5 hours.\nKabir Z. worked about 8 hours.",
+ "attendance": [
+  {
+   "task_id": "task-01",
+   "volunteer_id": "v-008",
+   "hours": 5
+  },
+  {
+   "task_id": "task-01",
+   "volunteer_id": "v-070",
+   "hours": 5
+  },
+  {
+   "task_id": "task-01",
+   "volunteer_id": "v-067",
+   "hours": 5
+  },
+  {
+   "task_id": "task-01",
+   "volunteer_id": "v-011",
+   "hours": 5
+  }
+ ],
+ "cards": [
+  {
+   "id": "card-task-01-v-008-poster-team",
+   "task_id": "task-01",
+   "volunteer_id": "v-008",
+   "role": "Poster team",
+   "claimed_hours": 5.0,
+   "recorded_hours": 5.0,
+   "summary": "Host notes mention Heena P.",
+   "evidence_refs": [
+    "host_note:task-01:v-008:cf512e004c",
+    "attendance:task-01:v-008"
+   ],
+   "status": "draft",
+   "flags": [
+    {
+     "code": "round_number_inflation",
+     "severity": "info",
+     "message": "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+    }
+   ],
+   "drafted_by": "human",
+   "confirmed_by": null,
+   "created_at": "2026-11-19T01:50:44.648400",
+   "synthetic": true
+  },
+  {
+   "id": "card-task-01-v-070-first-aid-support",
+   "task_id": "task-01",
+   "volunteer_id": "v-070",
+   "role": "First-aid support",
+   "claimed_hours": 5.0,
+   "recorded_hours": 5.0,
+   "summary": "Host notes mention Mohit Z.",
+   "evidence_refs": [
+    "host_note:task-01:v-070:694f58fbad",
+    "attendance:task-01:v-070"
+   ],
+   "status": "draft",
+   "flags": [
+    {
+     "code": "round_number_inflation",
+     "severity": "info",
+     "message": "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+    }
+   ],
+   "drafted_by": "human",
+   "confirmed_by": null,
+   "created_at": "2026-11-19T01:50:44.648459",
+   "synthetic": true
+  },
+  {
+   "id": "card-task-01-v-067-supplies-and-site-setup",
+   "task_id": "task-01",
+   "volunteer_id": "v-067",
+   "role": "Supplies and site setup",
+   "claimed_hours": 5.0,
+   "recorded_hours": 5.0,
+   "summary": "Host notes mention Divya H.",
+   "evidence_refs": [
+    "host_note:task-01:v-067:4d67074db6",
+    "attendance:task-01:v-067"
+   ],
+   "status": "draft",
+   "flags": [
+    {
+     "code": "round_number_inflation",
+     "severity": "info",
+     "message": "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+    }
+   ],
+   "drafted_by": "human",
+   "confirmed_by": null,
+   "created_at": "2026-11-19T01:50:44.648495",
+   "synthetic": true
+  },
+  {
+   "id": "card-task-01-v-011-local-language-liaison",
+   "task_id": "task-01",
+   "volunteer_id": "v-011",
+   "role": "Local-language liaison",
+   "claimed_hours": 8.0,
+   "recorded_hours": 5.0,
+   "summary": "Host notes mention Kabir Z.",
+   "evidence_refs": [
+    "host_note:task-01:v-011:0aa6529147",
+    "attendance:task-01:v-011"
+   ],
+   "status": "flagged",
+   "flags": [
+    {
+     "code": "hours_exceed_recorded",
+     "severity": "warn",
+     "message": "Claims 8 hours but attendance records at most 5; ask the host to check the difference."
+    }
+   ],
+   "drafted_by": "human",
+   "confirmed_by": null,
+   "created_at": "2026-11-19T01:50:44.648527",
+   "synthetic": true
+  }
+ ],
+ "ledger": [
+  {
+   "index": 0,
+   "ts": "2026-11-19T00:22:57.218007Z",
+   "action": "draft",
+   "card_id": "card-task-01-v-068-poster-team",
+   "actor": "system",
+   "payload_hash": "77b3817e082b0f7fa4034140ae806834d6f0f15e0313b43ab7cdd067382bc861",
+   "prev_hash": "0000000000000000000000000000000000000000000000000000000000000000",
+   "entry_hash": "5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01"
+  },
+  {
+   "index": 1,
+   "ts": "2026-11-19T00:22:57.237232Z",
+   "action": "flag",
+   "card_id": "card-task-01-v-070-first-aid-support",
+   "actor": "system",
+   "payload_hash": "0d1c1e0480a5e92685526a710e339314db36a507549e2e4de4df769e431d8253",
+   "prev_hash": "5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01",
+   "entry_hash": "cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e"
+  },
+  {
+   "index": 2,
+   "ts": "2026-11-19T00:22:57.256350Z",
+   "action": "flag",
+   "card_id": "card-task-01-v-067-supplies-and-site-setup",
+   "actor": "system",
+   "payload_hash": "ec31a918450bbcd2088e7dc6f77772a0723b4e16c47c253d8963dab19c901ebb",
+   "prev_hash": "cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e",
+   "entry_hash": "b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d"
+  },
+  {
+   "index": 3,
+   "ts": "2026-11-19T00:22:57.280274Z",
+   "action": "flag",
+   "card_id": "card-task-01-v-011-local-language-liaison",
+   "actor": "system",
+   "payload_hash": "ddbc80be481465cb064d1f016ba80daef8d8c61e928a860391727f716cf93c52",
+   "prev_hash": "b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d",
+   "entry_hash": "568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6"
+  },
+  {
+   "index": 4,
+   "ts": "2026-11-19T00:22:58.071297Z",
+   "action": "confirm",
+   "card_id": "card-task-01-v-068-poster-team",
+   "actor": "host",
+   "payload_hash": "a326b66796e08fcf779a5ae8103db0580dffa3f80a00092529d93cd27c84621d",
+   "prev_hash": "568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6",
+   "entry_hash": "8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0"
+  },
+  {
+   "index": 5,
+   "ts": "2026-11-19T01:50:44.651269Z",
+   "action": "draft",
+   "card_id": "card-task-01-v-008-poster-team",
+   "actor": "system",
+   "payload_hash": "dfb29d708c69dc9880e714b70ef6c360cb44e2d3c7e50170830247340acac4e9",
+   "prev_hash": "8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0",
+   "entry_hash": "df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f"
+  },
+  {
+   "index": 6,
+   "ts": "2026-11-19T01:50:44.686854Z",
+   "action": "draft",
+   "card_id": "card-task-01-v-070-first-aid-support",
+   "actor": "system",
+   "payload_hash": "ed5dc93e3d9eb725df4f88561faa3c6b182490b2f7b9d8989d30ab97e204c5bf",
+   "prev_hash": "df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f",
+   "entry_hash": "f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f"
+  },
+  {
+   "index": 7,
+   "ts": "2026-11-19T01:50:44.715232Z",
+   "action": "draft",
+   "card_id": "card-task-01-v-067-supplies-and-site-setup",
+   "actor": "system",
+   "payload_hash": "d421926456327dc51ccdc10eb1ac09aa291f92db7258825ec46c3fbeecf157c1",
+   "prev_hash": "f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f",
+   "entry_hash": "34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05"
+  },
+  {
+   "index": 8,
+   "ts": "2026-11-19T01:50:44.748592Z",
+   "action": "flag",
+   "card_id": "card-task-01-v-011-local-language-liaison",
+   "actor": "system",
+   "payload_hash": "932e97dc171d4c4eb6cf22dd1e759a599a3f92f196f0b4eefb944ba89e6750d1",
+   "prev_hash": "34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05",
+   "entry_hash": "24b43390134c48a14bb638907a1dff5d6b1163e4324cc98b0f9686416ee564a9"
+  }
+ ],
+ "ledger_verify": {
+  "ok": true,
+  "entries": 9,
+  "first_bad_index": null,
+  "note": "Hash chain shows edits, not truth; truth comes from host confirmation."
+ },
+ "eval": {
+  "n_tasks": 10,
+  "n_volunteers": 80,
+  "summary": {
+   "cp_sat": {
+    "role_coverage": 0.9167,
+    "robustness": 0.76,
+    "repeat_pick_share": 0.23,
+    "exposure_gini": 0.4677,
+    "ready": 0.7
+   },
+   "nearest_skill": {
+    "role_coverage": 0.9167,
+    "robustness": 0.1533,
+    "repeat_pick_share": 0.4033,
+    "exposure_gini": 0.5045,
+    "ready": 0.1
+   },
+   "manual_greedy": {
+    "role_coverage": 0.9167,
+    "robustness": 0.76,
+    "repeat_pick_share": 0.4267,
+    "exposure_gini": 0.5081,
+    "ready": 0.7
+   },
+   "random_feasible": {
+    "role_coverage": 0.9142,
+    "robustness": 0.2183,
+    "repeat_pick_share": 0.3067,
+    "exposure_gini": 0.4861,
+    "ready": 0.15
+   },
+   "delta_vs_nearest_skill": {
+    "role_coverage": 0.0,
+    "robustness": 0.6067,
+    "repeat_pick_share": -0.1733,
+    "exposure_gini": -0.0368,
+    "ready": 0.6
+   },
+   "delta_vs_manual_greedy": {
+    "role_coverage": 0.0,
+    "robustness": 0.0,
+    "repeat_pick_share": -0.1967,
+    "exposure_gini": -0.0404,
+    "ready": 0.0
+   },
+   "delta_vs_random_feasible": {
+    "role_coverage": 0.0025,
+    "robustness": 0.5417,
+    "repeat_pick_share": -0.0768,
+    "exposure_gini": -0.0184,
+    "ready": 0.55
+   }
+  },
+  "ci95": {
+   "cp_sat": {
+    "role_coverage": [
+     0.7667,
+     1.0
+    ],
+    "robustness": [
+     0.5,
+     0.96
+    ],
+    "repeat_pick_share": [
+     0.0833,
+     0.41
+    ],
+    "exposure_gini": [
+     0.3764,
+     0.5463
+    ],
+    "ready": [
+     0.4,
+     0.9
+    ]
+   },
+   "nearest_skill": {
+    "role_coverage": [
+     0.7667,
+     1.0
+    ],
+    "robustness": [
+     0.0167,
+     0.37
+    ],
+    "repeat_pick_share": [
+     0.215,
+     0.5933
+    ],
+    "exposure_gini": [
+     0.4029,
+     0.5875
+    ],
+    "ready": [
+     0.0,
+     0.3
+    ]
+   },
+   "manual_greedy": {
+    "role_coverage": [
+     0.7667,
+     1.0
+    ],
+    "robustness": [
+     0.5,
+     0.96
+    ],
+    "repeat_pick_share": [
+     0.2483,
+     0.61
+    ],
+    "exposure_gini": [
+     0.4062,
+     0.5906
+    ],
+    "ready": [
+     0.4,
+     0.9
+    ]
+   },
+   "random_feasible": {
+    "role_coverage": [
+     0.7667,
+     0.9975
+    ],
+    "robustness": [
+     0.025,
+     0.4383
+    ],
+    "repeat_pick_share": [
+     0.1503,
+     0.4816
+    ],
+    "exposure_gini": [
+     0.3894,
+     0.5655
+    ],
+    "ready": [
+     0.01,
+     0.36
+    ]
+   },
+   "delta_vs_nearest_skill": {
+    "role_coverage": [
+     0.0,
+     0.0
+    ],
+    "robustness": [
+     0.3233,
+     0.8667
+    ],
+    "repeat_pick_share": [
+     -0.2733,
+     -0.07
+    ],
+    "exposure_gini": [
+     -0.0615,
+     -0.0174
+    ],
+    "ready": [
+     0.3,
+     0.9
+    ]
+   },
+   "delta_vs_manual_greedy": {
+    "role_coverage": [
+     0.0,
+     0.0
+    ],
+    "robustness": [
+     0.0,
+     0.0
+    ],
+    "repeat_pick_share": [
+     -0.31,
+     -0.0933
+    ],
+    "exposure_gini": [
+     -0.0711,
+     -0.0173
+    ],
+    "ready": [
+     0.0,
+     0.0
+    ]
+   },
+   "delta_vs_random_feasible": {
+    "role_coverage": [
+     0.0,
+     0.0075
+    ],
+    "robustness": [
+     0.2817,
+     0.81
+    ],
+    "repeat_pick_share": [
+     -0.1151,
+     -0.0361
+    ],
+    "exposure_gini": [
+     -0.0361,
+     -0.0046
+    ],
+    "ready": [
+     0.28,
+     0.84
+    ]
+   }
+  },
+  "misses": [
+   "task-02: cp_sat repeat_pick_share 0.17 worse than random_feasible 0.14",
+   "task-03: cp_sat repeat_pick_share 0.75 worse than random_feasible 0.74",
+   "task-04: cp_sat could not fill every must slot (coverage 0.33); no eligible people",
+   "task-05: cp_sat exposure_gini 0.37 worse than random_feasible 0.37",
+   "task-05: cp_sat could not fill every must slot (coverage 0.83); no eligible people",
+   "task-07: cp_sat dropout robustness only 0.60 (too few eligible standby people)",
+   "task-09: cp_sat exposure_gini 0.42 worse than random_feasible 0.41"
+  ],
+  "generated_by": "synthetic data seed 7 (80 volunteers, 10 tasks); ortools 9.15.6755; CP-SAT 1 worker, seed 7, sequential tiers; random_feasible mean of 20 seeds; paired task bootstrap n=1000 seed 7",
+  "synthetic": true
+ },
+ "allowed_external_numbers": {
+  "mybharat_youth_registered": "2.22+ crore (PIB backgrounder, 05 July 2026)",
+  "mybharat_volunteer_opportunities": "1.52+ lakh (same source)",
+  "source_url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf",
+  "solver_scale": "80/80 optimal up to 500 volunteers, max 0.327 s",
+  "local_model": "Qwen2.5-7B 4-bit on one T4: role recall 0.932"
+ }
+}

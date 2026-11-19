@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>कार्यप्रणाली एवं सीमाएं · Methodology &amp; Limits — सेवामंडल तत्पर दल (08-mitti-original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Block-print decorative runner ribbon -->
+  <div class="blockprint-ribbon"></div>
+
+  <!-- Shared Site Header -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        
+        <a href="01-landing.html" class="brand-lockup">
+          <div class="brand-seal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18"/>
+              <path d="M3 12h18"/>
+              <path d="M5.6 5.6l12.8 12.8"/>
+              <circle cx="12" cy="12" r="3" fill="var(--terracotta)"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">सेवामंडल · SewaCircle</span>
+            <span class="brand-sub">तत्पर दल · READY CREW</span>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="01-landing.html" class="nav-item">
+            <span class="nav-devanagari-prefix">परिचय</span> Story
+          </a>
+          <a href="02-console-task.html" class="nav-item">
+            <span class="nav-devanagari-prefix">कंसोल</span> Organiser Console
+          </a>
+          <a href="09-volunteer.html" class="nav-item">
+            <span class="nav-devanagari-prefix">युवा पोर्टल</span> Volunteer
+          </a>
+          <a href="10-districts.html" class="nav-item">
+            <span class="nav-devanagari-prefix">20 जिले</span> Districts
+          </a>
+          <a href="11-method.html" class="nav-item active">
+            <span class="nav-devanagari-prefix">कार्यप्रणाली</span> Method
+          </a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="badge-synthetic">
+            <span class="badge-synthetic-dot"></span>
+            Synthetic Data
+          </span>
+          <div class="lang-toggle">
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn active">हिन्दी</button>
+          </div>
+          <div class="district-badge">
+            <span class="district-badge-dot"></span>
+            <span>विधि एवं सीमाएं</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    <div class="site-container">
+
+      <!-- Page Title -->
+      <div class="page-title-block">
+        <h1 class="page-title-deva">कार्यप्रणाली, गणितीय मॉडल एवं ईमानदार सीमाएं</h1>
+        <div class="page-title-eng">Methodology: CP-SAT Formulation, Plain-Language Metrics &amp; Ethical Limits</div>
+        <p class="page-subtitle-lead">
+          AI केवल अव्यवस्थित पाठ्य पढ़ता है; एक नियतात्मक सॉल्वर (Deterministic Solver) निष्पक्ष व संतुलित निर्णय लेता है; और केवल मेजबान हस्ताक्षर से साक्ष्य पुष्ट होता है।
+        </p>
+      </div>
+
+      <!-- CORE ARCHITECTURE PHILOSOPHY -->
+      <section class="card-mitti" style="background: var(--paper-canvas); margin-bottom: 32px;">
+        <h3 style="font-family: var(--font-display); font-size: 21px; font-weight: 800; color: var(--indigo-deep); margin-bottom: 8px;">
+          मूल वास्तुशिल्प सिद्धांत (Core Architecture Axiom)
+        </h3>
+        <p style="font-size: 16px; color: var(--ink-secondary); line-height: 1.6; margin-bottom: 16px;">
+          <strong>"AI reads messy text; a deterministic solver decides; a human approves; nothing is called verified without a host."</strong>
+        </p>
+        <p style="font-size: 13.5px; color: var(--ink-secondary); line-height: 1.55;">
+          अधिकांश एआई प्रणालियां सीधे एलएलएम से निर्णय लेने को कहती हैं, जिससे मतिभ्रम (Hallucination) और मनमानी प्राथमिकताएं उत्पन्न होती हैं। सेवामंडल में एआई की भूमिका केवल असंरचित हिन्दी/अंग्रेजी पाठ्य से भूमिकाएं पहचानने तक सीमित है। लोगों का चयन गणितीय बाधा संतुष्टि सॉल्वर (OR-Tools CP-SAT) द्वारा शून्य मतिभ्रम के साथ किया जाता है।
+        </p>
+      </section>
+
+      <!-- CP-SAT MATHEMATICAL FORMULATION -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">गणितीय बाधाएं (Mathematical Constraints in CP-SAT)</span>
+            <span class="card-subtitle-english">OR-Tools Constraint Programming Formulation</span>
+          </div>
+          <span class="badge-pill badge-safety-check">0.327 s अधिकतम समय</span>
+        </div>
+
+        <div class="grid-2col" style="gap: 20px; font-size: 13px; line-height: 1.55;">
+          
+          <div style="background: var(--paper-canvas); padding: 16px; border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--indigo-deep); font-size: 14px; display: block; margin-bottom: 4px;">
+              1. भूमिका पूर्ति बाधा (Role Coverage):
+            </strong>
+            प्रत्येक अनिवार्य भूमिका (Must Role) के लिए ठीक आवश्यक संख्या में पात्र स्वयंसेवक नियुक्त होने चाहिए। यदि किसी पद के लिए कोई पात्र युवा नहीं है, तो प्रणाली 'तैयार नहीं' घोषित करती है।
+          </div>
+
+          <div style="background: var(--paper-canvas); padding: 16px; border-radius: 4px; border: 1.5px solid var(--terracotta);">
+            <strong style="color: var(--terracotta); font-size: 14px; display: block; margin-bottom: 4px;">
+              2. सुरक्षा भूमिका अपरिवर्तनीय नियम (Safety Invariant):
+            </strong>
+            प्राथमिक उपचार, वाहन चालन और आपदा बचाव जैसे कार्यों में केवल मेजबान-सत्यापित (Host-Checked) कौशल वाले युवाओं को ही स्वीकार किया जाता है। स्व-घोषित दावे पूरी तरह वर्जित हैं।
+          </div>
+
+          <div style="background: var(--paper-canvas); padding: 16px; border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--indigo-deep); font-size: 14px; display: block; margin-bottom: 4px;">
+              3. स्टैंडबाय अतिरेकता बाधा (Standby Redundancy):
+            </strong>
+            सॉल्वर मुख्य सदस्यों के साथ-साथ स्टैंडबाय युवाओं को इस प्रकार चुनता है कि किसी भी एक व्यक्ति के अनुपस्थित होने पर स्टैंडबाय व्यक्ति उस भूमिका को बिना किसी व्यवधान के संभाल सके।
+          </div>
+
+          <div style="background: var(--paper-canvas); padding: 16px; border-radius: 4px; border: 1px solid var(--hairline-strong);">
+            <strong style="color: var(--indigo-deep); font-size: 14px; display: block; margin-bottom: 4px;">
+              4. नाबालिग सहमति एवं यात्रा सीमा (Minors &amp; Travel):
+            </strong>
+            16-17 वर्ष के युवाओं को केवल तभी चुना जाता है जब अभिभावक की लिखित सहमति दर्ज हो। कोई भी स्वयंसेवक निर्दिष्ट अधिकतम यात्रा दूरी (जैसे 25 किमी) से अधिक यात्रा नहीं करेगा।
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PLAIN-LANGUAGE METRIC DEFINITIONS -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">सरल शब्दों में मापदंड परिभाषाएं (Metrics Defined)</span>
+            <span class="card-subtitle-english">Plain-Language Explanations for District Youth Organisers</span>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+          
+          <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); border-top: 3px solid var(--ready-green); border-radius: 4px; padding: 16px;">
+            <h5 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--ready-green-dark); margin-bottom: 6px;">
+              भूमिका पूर्ति (Role Coverage)
+            </h5>
+            <p style="font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45;">
+              अभियान के सभी आवश्यक स्लॉट भरे होने का अनुपात। 1.0 (100%) का अर्थ है कि हर आवश्यक पद पर योग्य व्यक्ति मिल चुका है।
+            </p>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); border-top: 3px solid var(--indigo); border-radius: 4px; padding: 16px;">
+            <h5 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--indigo); margin-bottom: 6px;">
+              ड्रॉपआउट रोबस्टनेस (Robustness)
+            </h5>
+            <p style="font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45;">
+              यदि कोई एक स्वयंसेवक अनुपस्थित हो जाए, तो दल के चालू रहने की संभावना। 100% का अर्थ है कोई एकल विफलता बिंदु नहीं है।
+            </p>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); border-top: 3px solid var(--terracotta); border-radius: 4px; padding: 16px;">
+            <h5 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--terracotta); margin-bottom: 6px;">
+              दोहराव दर (Repeat Pick Share)
+            </h5>
+            <p style="font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45;">
+              पिछले 90 दिनों में पहले से चुने गए युवाओं को दोबारा चुनने का प्रतिशत। हमारा लक्ष्य इसे न्यूनतम रखना है ताकि नए युवाओं को मौका मिले।
+            </p>
+          </div>
+
+          <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); border-top: 3px solid var(--turmeric-dark); border-radius: 4px; padding: 16px;">
+            <h5 style="font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--turmeric-dark); margin-bottom: 6px;">
+              अवसर गिनी (Exposure Gini)
+            </h5>
+            <p style="font-size: 12.5px; color: var(--ink-secondary); line-height: 1.45;">
+              युवाओं के बीच स्वयंसेवा अवसरों की समानता। 0 का अर्थ है सभी को बराबर मौके; 1 का अर्थ है सब काम एक ही व्यक्ति को मिला।
+            </p>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- VERIFIED EXTERNAL SOURCES & BENCHMARKS -->
+      <section class="card-mitti" style="margin-bottom: 32px;">
+        <div class="card-mitti-header">
+          <div class="card-title-group">
+            <span class="card-title-devanagari">डेटा स्रोत एवं स्वीकृत बाहरी आंकड़े</span>
+            <span class="card-subtitle-english">External Data Sources with Full Citations</span>
+          </div>
+          <span class="badge-pill badge-safety-check">पीआईबी सत्यापित</span>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13px;">
+          
+          <div style="padding: 12px 16px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>MY Bharat युवा पंजीकरण:</strong> 2.22+ करोड़ युवा पंजीकृत (PIB backgrounder, 05 July 2026)
+              <div style="font-size: 11.5px; color: var(--ink-muted); margin-top: 2px;">
+                स्रोत लिंक: <a href="https://static.pib.gov.in/WriteReadData/specificdocs/documents/2026/jul/doc202675911701.pdf" target="_blank" style="color: var(--terracotta);">PIB Backgrounder PDF (05 July 2026)</a>
+              </div>
+            </div>
+            <span class="badge-pill badge-safety-check">आधिकारिक</span>
+          </div>
+
+          <div style="padding: 12px 16px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>MY Bharat स्वयंसेवा अवसर:</strong> 1.52+ लाख अवसर उपलब्ध (समान स्रोत, जुलाई 2026)
+            </div>
+            <span class="badge-pill badge-safety-check">आधिकारिक</span>
+          </div>
+
+          <div style="padding: 12px 16px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>सॉल्वर पैमाना (Solver Scale):</strong> 80/80 ऑप्टिमल समाधान 500 स्वयंसेवकों तक, अधिकतम समय मात्र 0.327 सेकंड (Kaggle CPU Notebook)
+            </div>
+            <span class="badge-pill" style="background: var(--indigo-light); color: var(--indigo);">सत्यापित बेंचमार्क</span>
+          </div>
+
+          <div style="padding: 12px 16px; background: var(--paper-canvas); border-radius: 4px; border: 1px solid var(--hairline-strong); display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <strong>स्थानीय भाषा मॉडल (Local Model):</strong> Qwen2.5-7B 4-bit एकल T4 GPU पर 0.932 भूमिका रिकॉल (इंटरनेट रहित ऑफलाइन उपयोग हेतु उपयुक्त)
+            </div>
+            <span class="badge-pill" style="background: var(--indigo-light); color: var(--indigo);">ऑफ़लाइन सक्षम</span>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- HONEST ETHICAL BOUNDARIES & LIMITS -->
+      <section class="card-mitti" style="border-left: 5px solid var(--terracotta); margin-bottom: 32px;">
+        <div class="card-mitti-header" style="border-bottom-color: var(--hairline-subtle);">
+          <div class="card-title-group">
+            <span class="card-title-devanagari" style="color: var(--terracotta-dark);">
+              ईमानदार नैतिक सीमाएं एवं वैधानिक मर्यादाएं
+            </span>
+            <span class="card-subtitle-english">Honest Ethical Limits &amp; Boundaries</span>
+          </div>
+          <span class="badge-pill badge-safety-check">स्पष्ट घोषणा</span>
+        </div>
+
+        <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px; font-size: 13px; color: var(--ink-secondary); line-height: 1.55;">
+          <li>
+            <strong style="color: var(--ink);">• काल्पनिक डेटा:</strong> यह प्रोटोटाइप पूरी तरह से सिंथेटिक डेटा पर आधारित है। किसी भी वास्तविक नागरिक या युवा का व्यक्तिगत रिकॉर्ड इसमें शामिल नहीं है।
+          </li>
+          <li>
+            <strong style="color: var(--ink);">• सरकारी असंबद्धता:</strong> यह सॉफ्टवेयर MY Bharat, उत्तर प्रदेश सरकार, अथवा किसी भी आधिकारिक संस्था से संबद्ध नहीं है।
+          </li>
+          <li>
+            <strong style="color: var(--ink);">• कोई स्वचालित निर्णय नहीं:</strong> सॉल्वर केवल सुझाव देता है। अभियान शुरू करने या रद्द करने का अंतिम अधिकार जिला आयोजक के पास सुरक्षित है।
+          </li>
+          <li>
+            <strong style="color: var(--ink);">• हैश-चेन सीमा:</strong> क्रिप्टोग्राफिक बहीखाता संपादन के इतिहास को सिद्ध करता है, भौतिक सत्य को नहीं। सत्य केवल स्थानीय मेजबान के भौतिक सत्यापन से ही निर्धारित होता है।
+          </li>
+        </ul>
+      </section>
+
+      <!-- Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 18px 24px; border-radius: 5px;">
+        <a href="10-districts.html" class="btn-outline-mitti">
+          ← 20 जिलों के नक्शे पर वापस जाएं
+        </a>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <a href="02-console-task.html" class="btn-terracotta" style="font-size: 15px; padding: 10px 24px;">
+            <span>जिला आयोजक कंसोल शुरू करें (Launch Console)</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-disclaimer-box">
+        <div>
+          <strong>वैधानिक स्पष्टीकरण:</strong> यह वेबसाइट एक प्रोटोटाइप प्रदर्शन है। समस्त आंकड़े व स्वयंसेवक रिकॉर्ड काल्पनिक (Synthetic) हैं। Not affiliated with MY Bharat or any government body.
+        </div>
+        <span class="badge-synthetic">Synthetic Data Only</span>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 सेवामंडल तत्पर दल (SewaCircle Ready Crew) · Direction 08: Mitti Original</div>
+        <div style="display: flex; gap: 18px;">
+          <a href="01-landing.html" style="color: var(--ink-muted); text-decoration: none;">होम पेज</a>
+          <span>•</span>
+          <a href="02-console-task.html" style="color: var(--ink-muted); text-decoration: none;">कंसोल</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

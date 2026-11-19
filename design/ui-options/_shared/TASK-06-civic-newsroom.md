@@ -1,0 +1,5 @@
+Read C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/BRIEF.md and C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/DIRECTIONS.md fully (they are short). You build exactly ONE UI option: 06-civic-newsroom.
+Your folder is C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom . Create all 11 pages in C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom/src exactly as the brief lists, using only the real data in
+C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/sample-data.json. Then run: python C:/Users/shubh/Projects/sewacircle/design/ui-options/_shared/capture.py C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom
+Open every screenshot in C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom/screens, fix anything that looks wrong, capture again, and write C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom/README.md.
+Work only inside C:/Users/shubh/Projects/sewacircle/design/ui-options/06-civic-newsroom . Do not commit. Finish with a one-paragraph summary of what you built.

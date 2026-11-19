@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Crew Roster (Not Ready)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Lucknow</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Task-02 Crew Roster (Not Ready)</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item active"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">⚠️</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>Roster Decision: task-02 Blood donation camp</h1>
+              <p class="doc-subtitle">
+                District: Lucknow • Block: Chinhat • Slot: Sunday morning • Team Size Target: 6 • Constraint solver run complete.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <a href="04-console-crew-ready.html" class="btn btn-secondary" style="font-size: 12.5px;">
+                ← Back to Ready Roster (task-01)
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <!-- VERDICT HERO: NOT READY (The Hero of Screen) -->
+        <section class="verdict-hero not-ready">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="tag red" style="font-weight: 600;">SOLVER STATUS: INFEASIBLE_MUST_GAPS</span>
+              <span class="tag">1 Action Required</span>
+            </div>
+            <div class="verdict-title">VERDICT: NOT READY</div>
+            <div class="verdict-explanation">
+              NOT READY: 1 action(s) needed before this drive is safe to run.
+            </div>
+          </div>
+          <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+            <span class="tag red" style="font-size: 13px; padding: 6px 14px;">3 of 5 Essential Slots Filled</span>
+            <span style="font-size: 12px; color: var(--tint-red-ink);">Role Coverage: 60% • Robustness: 0%</span>
+          </div>
+        </section>
+
+        <!-- VERBATIM EXPLANATIONS BLOCK -->
+        <section class="callout not-ready" style="margin-bottom: 24px;">
+          <div class="callout-icon">🚨</div>
+          <div class="callout-content">
+            <div class="callout-title">Solver Explanations (Verbatim from Engine)</div>
+            <ul style="list-style: none; margin-top: 6px;">
+              <li style="margin-bottom: 4px;">• "Unfilled: Community mobiliser #1, Community mobiliser #2. No eligible volunteer was available; reported, not hidden."</li>
+              <li style="margin-bottom: 4px;">• "Dropout robustness is 0%: not enough eligible standby people for every role."</li>
+              <li>• "NOT READY: 1 action(s) needed before this drive is safe to run."</li>
+            </ul>
+          </div>
+        </section>
+
+        <!-- TWO COLUMN LAYOUT: FILLED ROSTER WITH GAP SLOTS (Left) + RECRUIT REQUEST ACTION (Right) -->
+        <div style="display: grid; grid-template-columns: 1fr 380px; gap: 28px; margin-bottom: 36px;">
+          
+          <!-- Roster Board showing honest filled roles and clear gap slots -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h2 style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                <span>📋</span> Roster Status by Role Slot
+              </h2>
+              <span class="mono" style="font-size: 12px; color: var(--text-muted);">4 Assigned • 2 Unfilled Gaps</span>
+            </div>
+
+            <!-- Role 01 Slot 0: Uday Y. (Filled) -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag amber" style="width: fit-content; margin-bottom: 4px;">role-01 • Slot 1</span>
+                <div class="crew-role-name">First-aid support</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Lead safety role</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Uday Y.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-022</span>
+                  <span class="tag">Experienced (8 drives)</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has first aid / basic medical support (level 3)</li>
+                  <li>Free sun morning; 8 km from the site</li>
+                  <li>Picked 5 times in 90 days; chosen because no less-used qualified person fitted better</li>
+                  <li>Experienced (8 drives): can guide newcomers</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 58</div>
+                <div class="metric-sub">Distance: 8.2 km</div>
+              </div>
+            </div>
+
+            <!-- Role 01 Slot 1: Ruchi Z. (Filled, Novice paired with Uday) -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag amber" style="width: fit-content; margin-bottom: 4px;">role-01 • Slot 2</span>
+                <div class="crew-role-name">First-aid support</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Paired newcomer slot</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Ruchi Z.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-033</span>
+                  <span class="tag amber">Novice</span>
+                  <span class="tag green">Mentor Paired</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has first aid / basic medical support (level 2)</li>
+                  <li>Free sun morning; 15 km from the site</li>
+                  <li>Newcomer (0 past drives); paired with experienced peer Uday Y.</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 84</div>
+                <div class="metric-sub">Distance: 15.5 km</div>
+              </div>
+            </div>
+
+            <!-- Role 02 Slot 0: Sahil P. (Donor registration) -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag" style="width: fit-content; margin-bottom: 4px;">role-02 • Slot 1</span>
+                <div class="crew-role-name">Donor registration</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Documentation support</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Sahil P.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-045</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has documentation &amp; reporting skills (level 2)</li>
+                  <li>Free sun morning; 14 km from the site</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 72</div>
+                <div class="metric-sub">Distance: 14.4 km</div>
+              </div>
+            </div>
+
+            <!-- Role 04 Slot 0: Tanvi L. (Supplies) -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag" style="width: fit-content; margin-bottom: 4px;">role-04 • Slot 1</span>
+                <div class="crew-role-name">Supplies management</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Site logistics</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Tanvi L.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-058</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has logistics &amp; site setup (level 2)</li>
+                  <li>Free sun morning; 16 km from the site</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 69</div>
+                <div class="metric-sub">Distance: 15.9 km</div>
+              </div>
+            </div>
+
+            <!-- Role 03 Slot 0: UNFILLED GAP SLOT 1 -->
+            <div class="crew-role-row gap-slot">
+              <div class="crew-role-info">
+                <span class="tag red" style="width: fit-content; margin-bottom: 4px;">role-03 • GAP #1</span>
+                <div class="crew-role-name" style="color: var(--tint-red-ink);">Community mobiliser</div>
+                <div style="font-size: 12px; color: var(--tint-red-ink);">Priority: Must (Empty)</div>
+              </div>
+              <div class="crew-assignee">
+                <div style="font-weight: 600; color: var(--tint-red-ink); font-size: 14px; margin-bottom: 4px;">
+                  ⚠️ Slot Unfilled: No Eligible Volunteer Available
+                </div>
+                <div style="font-size: 12.5px; color: var(--tint-red-ink); line-height: 1.5;">
+                  Requires community mobilisation / door-to-door outreach (level 1+), available Sunday morning, within 25 km of Chinhat. Reported honestly, not concealed.
+                </div>
+              </div>
+              <div class="crew-score-box">
+                <span class="tag red" style="font-size: 12px;">GAP</span>
+              </div>
+            </div>
+
+            <!-- Role 03 Slot 1: UNFILLED GAP SLOT 2 -->
+            <div class="crew-role-row gap-slot">
+              <div class="crew-role-info">
+                <span class="tag red" style="width: fit-content; margin-bottom: 4px;">role-03 • GAP #2</span>
+                <div class="crew-role-name" style="color: var(--tint-red-ink);">Community mobiliser</div>
+                <div style="font-size: 12px; color: var(--tint-red-ink);">Priority: Must (Empty)</div>
+              </div>
+              <div class="crew-assignee">
+                <div style="font-weight: 600; color: var(--tint-red-ink); font-size: 14px; margin-bottom: 4px;">
+                  ⚠️ Slot Unfilled: No Eligible Volunteer Available
+                </div>
+                <div style="font-size: 12.5px; color: var(--tint-red-ink); line-height: 1.5;">
+                  Second mobilisation slot required for neighbourhood donor turnout.
+                </div>
+              </div>
+              <div class="crew-score-box">
+                <span class="tag red" style="font-size: 12px;">GAP</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Rail: Exact Recruit Request Card & Copy/Share Action -->
+          <div>
+            <div style="font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-bottom: 10px;">
+              Actionable Mobilisation Request
+            </div>
+
+            <div class="doc-card" style="border: 2px solid var(--tint-red-border); background: var(--tint-red-bg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                <span class="tag red" style="font-weight: 600;">URGENT RECRUIT REQUEST</span>
+                <span class="mono" style="font-size: 12px; color: var(--tint-red-ink);">task-02</span>
+              </div>
+
+              <h3 style="font-size: 17px; color: var(--tint-red-ink); margin-bottom: 8px;">
+                Community mobiliser x2
+              </h3>
+
+              <div style="font-size: 13px; color: var(--text-ink); line-height: 1.6; margin-bottom: 14px;">
+                <strong>Reason:</strong> "No eligible volunteer for 2 slot(s): needs community mobilisation / door-to-door outreach, free sun morning, within 25 km."
+              </div>
+
+              <div style="background: #ffffff; border: 1px solid var(--tint-red-border); border-radius: 4px; padding: 12px; font-size: 12px; line-height: 1.6; margin-bottom: 16px;">
+                <div style="font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">WhatsApp Mobilisation Dispatch:</div>
+                <div class="mono" style="color: var(--text-body); white-space: pre-wrap;">🚨 Urgent Need: Lucknow / Chinhat
+Volunteers needed for Blood Donation Camp!
+• Role: Community Mobiliser (2 slots)
+• Time: Sunday morning
+• Skills: Community mobilisation / door-to-door
+• Location: Chinhat, Lucknow (within 25 km)
+Reply here or ping district desk.</div>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 8px;">
+                <button class="btn btn-primary" style="background: var(--tint-red-ink); border-color: var(--tint-red-ink); width: 100%;">
+                  Copy Text for District WhatsApp Group
+                </button>
+                <button class="btn btn-secondary" style="width: 100%;">
+                  Widen Travel Radius (35 km) &amp; Re-Solve
+                </button>
+              </div>
+            </div>
+
+            <!-- Honest Design Callout -->
+            <div class="callout warning" style="margin-top: 16px; font-size: 12.5px;">
+              <div class="callout-icon">💡</div>
+              <div class="callout-content">
+                <strong>A NOT READY answer is the tool doing its job.</strong>
+                <p style="margin-top: 4px; color: var(--text-body);">
+                  Generic tools pretend a drive is ready by assigning unqualified people or silently omitting roles. SewaCircle halts the operation, highlights the exact deficits, and gives the organizer precise copy for instant recruitment.
+                </p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

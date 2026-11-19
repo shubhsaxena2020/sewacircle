@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 04 Crew Roster (Ready)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-subtitle">Ready Crew</span>
+        </div>
+      </div>
+
+      <div class="command-bar">
+        <svg class="command-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Type a command or search drives...</span>
+        <span class="command-bar-shortcut">Ctrl+K</span>
+      </div>
+
+      <div class="header-controls">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+        <span class="kbd-help">?</span>
+      </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item active"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <!-- Hero Verdict Banner -->
+      <section class="verdict-hero ready">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="verdict-badge ready">● READY</span>
+            <span style="font-size: 13px; font-family: var(--font-mono); color: var(--text-subtle);">
+              TASK-01 • WATER AND HYGIENE CAMP (AKBARPUR, KANPUR DEHAT)
+            </span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <a href="05-console-crew-not-ready.html" class="btn btn-secondary" style="font-size: 12px; padding: 4px 10px;">
+              See NOT READY example (task-02) →
+            </a>
+          </div>
+        </div>
+
+        <h1 style="font-size: 26px; font-weight: 700; color: var(--text-ink); margin-bottom: 8px;">
+          READY: every essential role is filled and any one person can drop out without leaving a gap.
+        </h1>
+        <p style="font-size: 14px; color: var(--text-muted); max-width: 900px;">
+          The CP-SAT optimizer solved all constraints in 15 ms. 4 primary roles staffed with verified youth, 2 standbys assigned with full single-point-of-failure coverage, and zero repeat-pick fatigue.
+        </p>
+
+        <!-- Metrics Strip (cp_sat) -->
+        <div class="metrics-strip">
+          <div class="metric-item">
+            <div class="metric-label">Role Coverage</div>
+            <div class="metric-val" style="color: var(--success-green);">100%</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">4 of 4 slots filled</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Dropout Robustness</div>
+            <div class="metric-val" style="color: var(--success-green);">100%</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">2 verified standbys</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Repeat-Pick Share</div>
+            <div class="metric-val" style="color: var(--text-ink);">0.0%</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">No recent fatigue</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Novice Pairing</div>
+            <div class="metric-val" style="color: var(--accent-text);">2</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">Mohit Z. &amp; Kabir Z.</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Solve Time</div>
+            <div class="metric-val mono" style="color: var(--text-ink);">15 ms</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">OR-Tools CP-SAT</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Solver Status</div>
+            <div class="metric-val mono" style="color: var(--success-green);">OPTIMAL</div>
+            <div style="font-size: 11.5px; color: var(--text-subtle); margin-top: 2px;">All tiers satisfied</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Main Crew Grid & Standby Rail -->
+      <div style="display: grid; grid-template-columns: 1fr 360px; gap: 24px; margin-bottom: 32px;">
+        
+        <!-- Left: Crew Board by Role -->
+        <div>
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase;">
+              ASSIGNED CREW BOARD BY ROLE (4 ASSIGNMENTS)
+            </div>
+            <span style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono);">Saturday Morning • Akbarpur Site</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Role 1: Poster team -> Heena P. -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="code-chip">ROLE-01</span>
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Poster team</span>
+                    <span class="tag">Design &amp; Collateral</span>
+                  </div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;">
+                    <span style="font-size: 15px; font-weight: 600; color: var(--text-ink);">Heena P.</span>
+                    <span class="mono" style="font-size: 12px; color: var(--text-subtle);">(v-008)</span>
+                    <span style="font-size: 13px; color: var(--accent-text); font-family: var(--font-mono); font-weight: 500;">Score: 74.0</span>
+                    <span style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);">• 7.4 km away</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="tag tag-verified">Slot 0/0 Filled</span>
+                </div>
+              </div>
+
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 12px; margin-top: 8px;">
+                <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 4px;">PICK REASONS:</div>
+                <ul style="font-size: 12px; color: var(--text-muted); list-style-position: inside; display: flex; flex-direction: column; gap: 2px;">
+                  <li>Has posters and graphic design (level 2)</li>
+                  <li>Free sat morning; 7 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Role 2: First-aid support -> Mohit Z. -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="code-chip">ROLE-02</span>
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">First-aid support</span>
+                    <span class="tag tag-warn">Safety Critical</span>
+                    <span class="tag tag-novice">Novice</span>
+                  </div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;">
+                    <span style="font-size: 15px; font-weight: 600; color: var(--text-ink);">Mohit Z.</span>
+                    <span class="mono" style="font-size: 12px; color: var(--text-subtle);">(v-070)</span>
+                    <span style="font-size: 13px; color: var(--accent-text); font-family: var(--font-mono); font-weight: 500;">Score: 113.0</span>
+                    <span style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);">• 1.7 km away</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="tag tag-verified">Host-Checked Skill</span>
+                </div>
+              </div>
+
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 12px; margin-top: 8px;">
+                <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 4px;">PICK REASONS:</div>
+                <ul style="font-size: 12px; color: var(--text-muted); list-style-position: inside; display: flex; flex-direction: column; gap: 2px;">
+                  <li>Has first aid / basic medical support (level 3)</li>
+                  <li>Free sat morning; 2 km from the site</li>
+                  <li>Newcomer (0 past drives) — welcome onboard</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Role 3: Supplies and site setup -> Divya H. -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="code-chip">ROLE-03</span>
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Supplies and site setup</span>
+                    <span class="tag tag-warn">Safety Critical</span>
+                  </div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;">
+                    <span style="font-size: 15px; font-weight: 600; color: var(--text-ink);">Divya H.</span>
+                    <span class="mono" style="font-size: 12px; color: var(--text-subtle);">(v-067)</span>
+                    <span style="font-size: 13px; color: var(--accent-text); font-family: var(--font-mono); font-weight: 500;">Score: 89.0</span>
+                    <span style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);">• 16.3 km away</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="tag tag-verified">Slot 0/0 Filled</span>
+                </div>
+              </div>
+
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 12px; margin-top: 8px;">
+                <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 4px;">PICK REASONS:</div>
+                <ul style="font-size: 12px; color: var(--text-muted); list-style-position: inside; display: flex; flex-direction: column; gap: 2px;">
+                  <li>Has logistics, supplies and site setup (level 3)</li>
+                  <li>Free sat morning; 16 km from the site</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Role 4: Local-language liaison -> Kabir Z. -->
+            <div class="card" style="padding: 16px;">
+              <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                <div>
+                  <div style="display: flex; align-items: center; gap: 8px;">
+                    <span class="code-chip">ROLE-04</span>
+                    <span style="font-size: 16px; font-weight: 600; color: var(--text-ink);">Local-language liaison</span>
+                    <span class="tag">Awadhi Dialect</span>
+                    <span class="tag tag-novice">Novice</span>
+                  </div>
+                  <div style="display: flex; align-items: baseline; gap: 8px; margin-top: 6px;">
+                    <span style="font-size: 15px; font-weight: 600; color: var(--text-ink);">Kabir Z.</span>
+                    <span class="mono" style="font-size: 12px; color: var(--text-subtle);">(v-011)</span>
+                    <span style="font-size: 13px; color: var(--accent-text); font-family: var(--font-mono); font-weight: 500;">Score: 118.0</span>
+                    <span style="font-size: 13px; color: var(--text-muted); font-family: var(--font-mono);">• 5.3 km away</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span class="tag tag-verified">Slot 0/0 Filled</span>
+                </div>
+              </div>
+
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 10px 12px; margin-top: 8px;">
+                <div style="font-size: 12px; color: var(--text-subtle); font-family: var(--font-mono); margin-bottom: 4px;">PICK REASONS:</div>
+                <ul style="font-size: 12px; color: var(--text-muted); list-style-position: inside; display: flex; flex-direction: column; gap: 2px;">
+                  <li>Has awadhi speaker (local-language liaison) (level 3)</li>
+                  <li>Free sat morning; 5 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                  <li>Newcomer (0 past drives)</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Standby Rail & Why-Not & Drop-Out Tools -->
+        <div style="display: flex; flex-direction: column; gap: 16px;">
+          <!-- Standby Rail -->
+          <div class="card" style="padding: 16px; border-color: var(--border-subtle);">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 12px;">
+              STANDBY REDUNDANCY RAIL
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <!-- Standby 1 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                  <span style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Imran B.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--accent-text);">v-068</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">
+                  Can step in for: <strong style="color: var(--text-ink);">Poster team, Local-language liaison</strong>
+                </div>
+                <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--success-green);">
+                  Raises dropout robustness to 75%
+                </div>
+              </div>
+
+              <!-- Standby 2 -->
+              <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); border-radius: 6px; padding: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px;">
+                  <span style="font-size: 14px; font-weight: 600; color: var(--text-ink);">Kavya L.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--accent-text);">v-069</span>
+                </div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-bottom: 4px;">
+                  Can step in for: <strong style="color: var(--text-ink);">Supplies and site setup</strong>
+                </div>
+                <div style="font-size: 11.5px; font-family: var(--font-mono); color: var(--success-green);">
+                  Raises dropout robustness to 100%
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Why-Not Tool -->
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--accent-text); text-transform: uppercase; margin-bottom: 8px;">
+              WHY-NOT INSPECTION TOOL
+            </div>
+            <div style="font-size: 13px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+              Candidate: Aarav C. (v-001)
+            </div>
+            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.45; background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 10px; border-radius: 6px; margin-top: 6px;">
+              "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -> 100%; dropout robustness 100% -> 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+            </div>
+          </div>
+
+          <!-- Drop-Out Simulation Tool -->
+          <div class="card" style="padding: 16px;">
+            <div style="font-size: 12px; font-family: var(--font-mono); color: var(--warning-amber); text-transform: uppercase; margin-bottom: 8px;">
+              DROP-OUT RESILIENCE SIMULATION
+            </div>
+            <div style="font-size: 13px; color: var(--text-ink); margin-bottom: 8px;">
+              Simulate: <strong style="color: var(--text-ink);">Drop Heena P. (Poster team)</strong>
+            </div>
+            <div style="background-color: var(--bg-surface-2); border: 1px solid var(--border-hairline); padding: 10px; border-radius: 6px; font-size: 12px; color: var(--text-muted); line-height: 1.45;">
+              <span style="color: var(--success-green); font-weight: 600;">Healed with Standby:</span>
+              Imran B. (v-068) steps into Poster team. 0 uncovered roles remaining. Single-dropout protection successfully preserved.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Four Methods Compared on THIS Task -->
+      <section style="margin-bottom: 24px;">
+        <div class="section-header">
+          <div class="section-eyebrow">Method Comparison On Task-01</div>
+          <h2 class="section-title">Four Crew-Building Algorithms Evaluated</h2>
+          <p class="section-subtitle">
+            The CP-SAT solver is the only method that protects against a drop-out without picking the same faces again.
+          </p>
+        </div>
+
+        <div class="card" style="padding: 0; overflow: hidden;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>ALGORITHM / METHOD</th>
+                <th>ROLE COVERAGE</th>
+                <th>DROPOUT ROBUSTNESS</th>
+                <th>REPEAT-PICK SHARE</th>
+                <th>VERDICT</th>
+                <th>REASONING &amp; TRADE-OFF</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background-color: var(--bg-surface-2);">
+                <td style="font-weight: 600; color: var(--text-ink);">
+                  <span class="mono" style="color: var(--accent-text);">cp_sat (Optimal)</span>
+                </td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">100%</td>
+                <td class="mono" style="color: var(--success-green); font-weight: 600;">100%</td>
+                <td class="mono" style="color: var(--text-ink); font-weight: 600;">0.0%</td>
+                <td><span class="verdict-badge ready" style="font-size: 11.5px; padding: 2px 8px;">READY</span></td>
+                <td style="font-size: 12px; color: var(--text-muted);">
+                  Optimal standby pairing guarantees single-dropout invariance while rotating new volunteers.
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-muted);">
+                  <span class="mono">nearest_skill</span>
+                </td>
+                <td class="mono">100%</td>
+                <td class="mono" style="color: var(--danger-red);">0%</td>
+                <td class="mono" style="color: var(--warning-amber);">25%</td>
+                <td><span class="verdict-badge not-ready" style="font-size: 11.5px; padding: 2px 8px;">NOT READY</span></td>
+                <td style="font-size: 12px; color: var(--text-subtle);">
+                  Greedily grabs closest volunteers with no standby backup planning; leaves drive fragile.
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-muted);">
+                  <span class="mono">random_feasible</span>
+                </td>
+                <td class="mono">100%</td>
+                <td class="mono" style="color: var(--danger-red);">0%</td>
+                <td class="mono" style="color: var(--warning-amber);">25%</td>
+                <td><span class="verdict-badge not-ready" style="font-size: 11.5px; padding: 2px 8px;">NOT READY</span></td>
+                <td style="font-size: 12px; color: var(--text-subtle);">
+                  Randomly picks candidates meeting hard constraints; zero redundancy consideration.
+                </td>
+              </tr>
+              <tr>
+                <td style="font-weight: 500; color: var(--text-muted);">
+                  <span class="mono">manual_greedy</span>
+                </td>
+                <td class="mono">100%</td>
+                <td class="mono" style="color: var(--success-green);">100%</td>
+                <td class="mono" style="color: var(--warning-amber);">25%</td>
+                <td><span class="verdict-badge ready" style="font-size: 11.5px; padding: 2px 8px;">READY</span></td>
+                <td style="font-size: 12px; color: var(--text-subtle);">
+                  Finds standbys, but defaults to habitual past volunteers (repeat pick 25%), risking burnout.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-text">
+          <span class="affiliation-indicator"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 01-precision-dark • Desktop 1440px Specification</span>
+        </div>
+        <div class="footer-shortcuts">
+          <span><kbd>Ctrl+K</kbd> Command Bar</span>
+          <span><kbd>E</kbd> Export Roster</span>
+          <span><kbd>1-9</kbd> Switch Views</span>
+          <span><kbd>?</kbd> Help</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

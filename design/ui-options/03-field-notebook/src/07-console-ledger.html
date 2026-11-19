@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Tamper-Evident Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Kanpur Dehat</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Tamper-Evident Ledger</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item active"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">⛓️</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>Tamper-Evident Ledger Audit Trail</h1>
+              <p class="doc-subtitle">
+                A sequential SHA-256 cryptographic chain recording every action taken on volunteer cards: drafts, heuristic flags, and human host confirmations.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <button class="btn btn-secondary" style="font-size: 12.5px;">Download Credential Export (JSON)</button>
+              <button class="btn btn-primary" style="font-size: 12.5px;">Verify Chain Integrity</button>
+            </div>
+          </div>
+
+          <!-- Cryptographic Verification Result Banner -->
+          <div class="callout ready" style="margin-top: 16px;">
+            <div class="callout-icon">🛡️</div>
+            <div class="callout-content">
+              <div class="callout-title">Verification Status: ok, 9 entries, first_bad_index null</div>
+              <div style="font-size: 13px; line-height: 1.6; margin-top: 4px;">
+                <em>"Hash chain shows edits, not truth; truth comes from host confirmation."</em>
+                <br>
+                All 9 cryptographic blocks correctly link to their parent hash. Genesis block starts from all-zeros root. Zero broken links or retroactive modifications detected.
+              </div>
+            </div>
+          </div>
+        </header>
+
+        <!-- What Tampering Looks Like Callout -->
+        <section style="margin-bottom: 28px;">
+          <div class="callout warning" style="font-size: 13px;">
+            <div class="callout-icon">💡</div>
+            <div class="callout-content">
+              <strong>What Tampering Would Look Like:</strong> If an operator attempted to retroactively inflate Kabir Z.'s hours from 5 to 8 or delete the heuristic flag after the drive closed, the recalculated payload hash would invalidate the subsequent entry's <span class="mono">prev_hash</span>. Verification would instantly report <span class="mono">first_bad_index: 8</span>, and the entire downstream credential batch would be marked compromised.
+            </div>
+          </div>
+        </section>
+
+        <!-- LEDGER CHAIN: 9 LINKED BLOCKS -->
+        <section style="margin-bottom: 36px;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+            <h2 style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+              <span>🔗</span> Cryptographic Blocks (Indices 0 through 8)
+            </h2>
+            <span class="mono" style="font-size: 12px; color: var(--text-muted);">9 Confirmed Entries • Algorithm: SHA-256</span>
+          </div>
+
+          <div class="ledger-chain">
+            
+            <!-- Block 0: Genesis Draft -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#00</span>
+                <span class="tag" style="display: block; margin-top: 4px;">Genesis</span>
+              </div>
+              <div>
+                <span class="tag green">draft</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-068-poster-team
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: 00000000...0000</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: 5376047a...7d01</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T00:22:57Z</span>
+              </div>
+            </div>
+
+            <!-- Block 1: Flag -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#01</span>
+              </div>
+              <div>
+                <span class="tag amber">flag</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-070-first-aid-support
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: 5376047a...7d01</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: cc415443...327e</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T00:22:57Z</span>
+              </div>
+            </div>
+
+            <!-- Block 2: Flag -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#02</span>
+              </div>
+              <div>
+                <span class="tag amber">flag</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-067-supplies-and-site-setup
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: cc415443...327e</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: b72f44b4...7b3d</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T00:22:57Z</span>
+              </div>
+            </div>
+
+            <!-- Block 3: Flag -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#03</span>
+              </div>
+              <div>
+                <span class="tag amber">flag</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-011-local-language-liaison
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: b72f44b4...7b3d</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: 568c1553...dcb6</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T00:22:57Z</span>
+              </div>
+            </div>
+
+            <!-- Block 4: Confirm by Host -->
+            <div class="ledger-block" style="border: 1px solid var(--tint-green-border); background: var(--tint-green-bg);">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--tint-green-ink);">#04</span>
+                <span class="tag green" style="display: block; margin-top: 4px;">Host Auth</span>
+              </div>
+              <div>
+                <span class="tag green">confirm</span>
+                <div style="font-size: 12px; color: var(--tint-green-ink); margin-top: 4px;">Actor: <strong>host</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--tint-green-ink); margin-bottom: 4px;">
+                  card-task-01-v-068-poster-team (Imran B.)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: 568c1553...dcb6</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: 8943719e...cbd0</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--tint-green-ink);">
+                <span class="mono">2026-11-19T00:22:58Z</span>
+              </div>
+            </div>
+
+            <!-- Block 5: Draft -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#05</span>
+              </div>
+              <div>
+                <span class="tag green">draft</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-008-poster-team (Heena P.)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: 8943719e...cbd0</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: df7005a6...7b2f</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T01:50:44Z</span>
+              </div>
+            </div>
+
+            <!-- Block 6: Draft -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#06</span>
+              </div>
+              <div>
+                <span class="tag green">draft</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-070-first-aid-support (Mohit Z.)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: df7005a6...7b2f</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: f964d4b1...390f</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T01:50:44Z</span>
+              </div>
+            </div>
+
+            <!-- Block 7: Draft -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#07</span>
+              </div>
+              <div>
+                <span class="tag green">draft</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-067-supplies-and-site-setup (Divya H.)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: f964d4b1...390f</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: 34ded9cd...0505</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T01:50:44Z</span>
+              </div>
+            </div>
+
+            <!-- Block 8: Flag -->
+            <div class="ledger-block">
+              <div>
+                <span class="mono" style="font-weight: 700; color: var(--text-ink);">#08</span>
+              </div>
+              <div>
+                <span class="tag amber">flag</span>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 4px;">Actor: <strong>system</strong></div>
+              </div>
+              <div>
+                <div style="font-size: 13.5px; font-weight: 600; color: var(--text-ink); margin-bottom: 4px;">
+                  card-task-01-v-011-local-language-liaison (Kabir Z.)
+                </div>
+                <div style="display: flex; gap: 12px; align-items: center; font-size: 12px;">
+                  <span class="hash-cell">prev: 34ded9cd...0505</span>
+                  <span>→</span>
+                  <span class="hash-cell">entry: 24b43390...54a9</span>
+                  <button class="copy-btn">Copy Hash</button>
+                </div>
+              </div>
+              <div style="text-align: right; font-size: 12px; color: var(--text-subtle);">
+                <span class="mono">2026-11-19T01:50:44Z</span>
+              </div>
+            </div>
+
+          </div>
+        </section>
+
+        <!-- Technical Specification Note -->
+        <div class="callout" style="background: var(--bg-surface-soft); border-color: var(--border-hairline); font-size: 12.5px;">
+          <div class="callout-icon">ℹ️</div>
+          <div class="callout-content">
+            <strong>Immutable Data Model:</strong> Entries strictly reflect the actions present in data (<span class="mono">draft</span>, <span class="mono">flag</span>, <span class="mono">confirm</span>). No fictional revoke or delete operations are introduced.
+          </div>
+        </div>
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

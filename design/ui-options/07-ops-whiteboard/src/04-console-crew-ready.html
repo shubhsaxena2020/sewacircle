@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 04 Crew Ready Board</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="brand-block">
+      <div class="brand-badge">SC</div>
+      <div class="brand-title">
+        <span class="brand-name">SewaCircle</span>
+        <span class="brand-tag">Ops Whiteboard</span>
+      </div>
+    </div>
+
+    <div class="board-location-crumb">
+      <span class="live-dot"></span>
+      <span>Board: <strong>Akbarpur Youth Circle / Crew Roster Solver (task-01)</strong></span>
+    </div>
+
+    <div class="nav-actions">
+      <span class="badge-synthetic">Synthetic data</span>
+      <div class="lang-toggle">
+        <span class="lang-btn active">EN</span>
+        <span style="color:#64748b; padding: 0 2px;">/</span>
+        <span class="lang-btn">हिंदी</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Navigation -->
+  <nav class="pages-subnav">
+    <a href="01-landing.html" class="nav-tab"><span class="tab-num">01</span> Overview</a>
+    <a href="02-console-task.html" class="nav-tab"><span class="tab-num">02</span> Brief</a>
+    <a href="03-console-roles.html" class="nav-tab"><span class="tab-num">03</span> Roles</a>
+    <a href="04-console-crew-ready.html" class="nav-tab active"><span class="tab-num">04</span> Crew (Ready)</a>
+    <a href="05-console-crew-not-ready.html" class="nav-tab"><span class="tab-num">05</span> Crew (Not Ready)</a>
+    <a href="06-console-evidence.html" class="nav-tab"><span class="tab-num">06</span> Evidence</a>
+    <a href="07-console-ledger.html" class="nav-tab"><span class="tab-num">07</span> Ledger</a>
+    <a href="08-console-evaluation.html" class="nav-tab"><span class="tab-num">08</span> Evaluation</a>
+    <a href="09-volunteer.html" class="nav-tab"><span class="tab-num">09</span> Volunteer</a>
+    <a href="10-districts.html" class="nav-tab"><span class="tab-num">10</span> Districts</a>
+    <a href="11-method.html" class="nav-tab"><span class="tab-num">11</span> Method</a>
+  </nav>
+
+  <!-- Left Floating Canvas Toolbar -->
+  <aside class="board-toolbar" aria-label="Whiteboard Tools">
+    <button class="tool-btn active" title="Select (V)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+    </button>
+    <button class="tool-btn" title="Hand / Pan (H)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v4M14 10V4a2 2 0 0 0-4 0v7M10 10.5V6a2 2 0 0 0-4 0v8M6 14a6 6 0 0 0 12 0v-3"/></svg>
+    </button>
+    <div class="tool-divider"></div>
+    <button class="tool-btn" title="Sticky Note (N)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/></svg>
+    </button>
+    <button class="tool-btn" title="Frame (F)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </button>
+    <button class="tool-btn" title="Connector Line (L)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="tool-btn" title="Comment (M)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </aside>
+
+  <!-- Bottom Right Minimap & Zoom Controls -->
+  <div class="board-controls">
+    <div class="minimap-card">
+      <div class="minimap-header">CANVAS RADAR</div>
+      <div class="minimap-screen">
+        <div class="minimap-viewport"></div>
+      </div>
+    </div>
+    <div class="zoom-chip">
+      <button class="zoom-btn" title="Zoom Out">-</button>
+      <span>100%</span>
+      <button class="zoom-btn" title="Zoom In">+</button>
+    </div>
+  </div>
+
+  <!-- Main Canvas Board -->
+  <main class="canvas-wrapper">
+
+    <!-- HERO OF THE SCREEN: VERDICT READY -->
+    <section class="board-frame" style="background: #ffffff; border: 2px solid var(--success-border); padding: 24px 28px; margin-bottom: 24px; box-shadow: 0 6px 20px rgba(0, 180, 115, 0.08);">
+      <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 24px;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+            <span class="status-chip status-ready" style="font-size: 14px; padding: 6px 16px; font-weight: 800;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              VERDICT: READY
+            </span>
+            <span class="mono" style="font-size: 13px; color: var(--ink-muted);">task-01 · Water and hygiene camp · Akbarpur, Kanpur Dehat</span>
+          </div>
+
+          <h1 style="font-size: 28px; line-height: 1.25; margin-bottom: 8px; color: var(--ink-deep);">
+            READY: every essential role is filled and any one person can drop out without leaving a gap.
+          </h1>
+
+          <p style="font-size: 14px; color: var(--ink-secondary);">
+            The OR-Tools CP-SAT solver matched 4 qualified volunteers to essential roles and assigned 2 standby youth to guarantee 100% single-dropout resilience.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 10px; align-items: center; flex-shrink: 0;">
+          <a href="06-console-evidence.html" class="btn btn-primary" style="padding: 10px 22px;">
+            Post-Drive Evidence
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Metrics Strip (CP-SAT Invariants) -->
+      <div style="display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--hairline);">
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">ROLE COVERAGE</div>
+          <div style="font-size: 20px; font-weight: 800; color: #047857;">100%</div>
+        </div>
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">ESSENTIAL SLOTS</div>
+          <div style="font-size: 20px; font-weight: 800; color: var(--ink-deep);">4 / 4</div>
+        </div>
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">DROPOUT ROBUSTNESS</div>
+          <div style="font-size: 20px; font-weight: 800; color: #047857;">100%</div>
+        </div>
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">NOVICES PAIRED</div>
+          <div style="font-size: 20px; font-weight: 800; color: var(--brand-blue);">2</div>
+        </div>
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">SOLVER TIMING</div>
+          <div class="mono" style="font-size: 20px; font-weight: 800; color: var(--ink-deep);">15 ms</div>
+        </div>
+        <div style="background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); border: 1px solid var(--hairline);">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted);">OPTIMALITY STATUS</div>
+          <div class="mono" style="font-size: 20px; font-weight: 800; color: #047857;">OPTIMAL</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Canvas Layout: Crew Board + Standby Bench -->
+    <div style="display: grid; grid-template-columns: 1fr 340px; gap: 24px; margin-bottom: 24px; align-items: start;">
+
+      <!-- Left Column: The 4 Crew Role Columns -->
+      <section>
+        <div class="frame-tag" style="margin-bottom: 12px;">
+          <span class="frame-icon"></span>
+          <span>CREW ROSTER BY ROLE (4 ESSENTIAL ASSIGNMENTS)</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+
+          <!-- Role 1: Poster team -> Heena P. -->
+          <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <span class="slot-index">role-01 · ESSENTIAL</span>
+                <h3 style="font-size: 16px; color: var(--ink-deep);">Poster team</h3>
+              </div>
+              <span class="status-chip status-ready" style="font-size: 12px;">Filled</span>
+            </div>
+
+            <!-- Volunteer Card -->
+            <div class="volunteer-slot-card" style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="font-size: 16px; color: var(--ink-deep);">Heena P.</strong>
+                <div class="mono" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                  Score: 74 · 7.4 km
+                </div>
+              </div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 8px;">Age 27 · Sarvankheda, Kanpur Dehat</div>
+              
+              <ul style="padding-left: 16px; font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+                <li>Has posters and graphic design (level 2).</li>
+                <li>Free sat morning; 7 km from the site.</li>
+                <li>Not picked in the last 90 days.</li>
+              </ul>
+            </div>
+
+            <!-- Standby link -->
+            <div style="font-size: 12px; background: #fffbeb; border: 1px dashed #d97706; padding: 8px 12px; border-radius: var(--radius-sm); color: #92400e;">
+              <strong>Standby:</strong> Imran B. (covers Poster team + Awadhi liaison)
+            </div>
+          </div>
+
+          <!-- Role 2: First-aid support -> Mohit Z. -->
+          <div class="board-frame" style="padding: 18px; margin-bottom: 0; border-top: 4px solid #e11d48;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <span class="slot-index" style="color: #e11d48;">role-02 · SAFETY CRITICAL</span>
+                <h3 style="font-size: 16px; color: var(--ink-deep);">First-aid support</h3>
+              </div>
+              <span class="status-chip status-ready" style="font-size: 12px;">Filled</span>
+            </div>
+
+            <div class="volunteer-slot-card" style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="font-size: 16px; color: var(--ink-deep);">Mohit Z.</strong>
+                <div class="mono" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                  Score: 113 · 1.7 km
+                </div>
+              </div>
+              <div style="font-size: 12px; color: #991b1b; font-weight: 600; margin-bottom: 8px;">First aid level 3 (Host-Checked)</div>
+
+              <ul style="padding-left: 16px; font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+                <li>Free sat morning; within 2 km of Akbarpur site.</li>
+                <li>Newcomer (0 past drives, flag novice).</li>
+              </ul>
+            </div>
+
+            <div style="font-size: 12px; background: #f8fafc; border: 1px dashed #cbd5e1; padding: 8px 12px; border-radius: var(--radius-sm); color: var(--ink-muted);">
+              <strong>Redundancy Note:</strong> Single point of failure if dropped without standby.
+            </div>
+          </div>
+
+          <!-- Role 3: Supplies & site setup -> Divya H. -->
+          <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <span class="slot-index">role-03 · ESSENTIAL</span>
+                <h3 style="font-size: 16px; color: var(--ink-deep);">Supplies and site setup</h3>
+              </div>
+              <span class="status-chip status-ready" style="font-size: 12px;">Filled</span>
+            </div>
+
+            <div class="volunteer-slot-card" style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="font-size: 16px; color: var(--ink-deep);">Divya H.</strong>
+                <div class="mono" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                  Score: 89 · 16.3 km
+                </div>
+              </div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 8px;">Logistics level 3 · Akbarpur district radius</div>
+
+              <ul style="padding-left: 16px; font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+                <li>Logistics level 3 qualification.</li>
+                <li>Free sat morning; 16.3 km from site (&lt; 25 km max limit).</li>
+              </ul>
+            </div>
+
+            <div style="font-size: 12px; background: #fffbeb; border: 1px dashed #d97706; padding: 8px 12px; border-radius: var(--radius-sm); color: #92400e;">
+              <strong>Standby:</strong> Kavya L. (raises robustness to 100%)
+            </div>
+          </div>
+
+          <!-- Role 4: Local-language liaison -> Kabir Z. -->
+          <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <div>
+                <span class="slot-index">role-04 · ESSENTIAL</span>
+                <h3 style="font-size: 16px; color: var(--ink-deep);">Local-language liaison</h3>
+              </div>
+              <span class="status-chip status-ready" style="font-size: 12px;">Filled</span>
+            </div>
+
+            <div class="volunteer-slot-card" style="margin-bottom: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="font-size: 16px; color: var(--ink-deep);">Kabir Z.</strong>
+                <div class="mono" style="font-size: 12px; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-weight: 700;">
+                  Score: 118 · 5.3 km
+                </div>
+              </div>
+              <div style="font-size: 12px; color: var(--ink-muted); margin-bottom: 8px;">Awadhi level 3 (Host-Checked) · Akbarpur</div>
+
+              <ul style="padding-left: 16px; font-size: 12px; color: var(--ink-secondary); line-height: 1.5;">
+                <li>Awadhi level 3; novel volunteer (0 past drives).</li>
+                <li>Flagged novice (paired with experienced crew).</li>
+              </ul>
+            </div>
+
+            <div style="font-size: 12px; background: #fffbeb; border: 1px dashed #d97706; padding: 8px 12px; border-radius: var(--radius-sm); color: #92400e;">
+              <strong>Standby:</strong> Imran B. (raises robustness to 75%)
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- Right Column: Standby Deck & Simulation Tools -->
+      <section style="display: flex; flex-direction: column; gap: 16px;">
+
+        <!-- Standby Deck Frame -->
+        <div class="board-frame" style="padding: 20px; margin-bottom: 0;">
+          <div class="frame-tag" style="margin-bottom: 10px;">
+            <span class="frame-icon"></span>
+            <span>STANDBY BENCH (REDUNDANCY POOL)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 12px;">
+            <!-- Standby 1 -->
+            <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="font-size: 14px; color: #92400e;">Imran B.</strong>
+                <span class="mono" style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 1px 6px; border-radius: 4px;">Standby</span>
+              </div>
+              <div style="font-size: 12px; color: #78350f; margin-bottom: 4px;">
+                Covers: <strong>Poster team</strong> &amp; <strong>Local-language liaison</strong>
+              </div>
+              <div style="font-size: 12px; color: #92400e; font-style: italic;">
+                "Raises dropout robustness to 75%"
+              </div>
+            </div>
+
+            <!-- Standby 2 -->
+            <div style="background: #fffbeb; border: 1.5px solid #fde68a; border-radius: var(--radius-md); padding: 12px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                <strong style="font-size: 14px; color: #92400e;">Kavya L.</strong>
+                <span class="mono" style="font-size: 12px; background: #fef3c7; color: #b45309; padding: 1px 6px; border-radius: 4px;">Standby</span>
+              </div>
+              <div style="font-size: 12px; color: #78350f; margin-bottom: 4px;">
+                Covers: <strong>Supplies and site setup</strong>
+              </div>
+              <div style="font-size: 12px; color: #92400e; font-style: italic;">
+                "Raises dropout robustness to 100%"
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sticky Note: Dropout Test -->
+        <div class="sticky-note sticky-coral">
+          <h4>Drop-Out Simulation Tool</h4>
+          <p style="margin-bottom: 6px;">
+            Simulating: <strong>Drop Heena P. (Poster team)</strong>
+          </p>
+          <p>
+            ➔ Automatically healed with standby <strong>Imran B.</strong>, leaving no essential role uncovered. Dropout robustness drops from 100% to 75% because Imran cannot cover two drops simultaneously.
+          </p>
+          <span class="author-tag">Fault-Tolerant Solver</span>
+        </div>
+
+        <!-- Sticky Note: Why-Not Tool -->
+        <div class="sticky-note sticky-yellow">
+          <h4>Why Not Aarav C. (v-001)?</h4>
+          <p>
+            "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -&gt; 100%; dropout robustness 100% -&gt; 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+          </p>
+          <span class="author-tag">Explainability API</span>
+        </div>
+
+      </section>
+    </div>
+
+    <!-- Frame: Four Methods Compared on THIS Task -->
+    <section class="board-frame">
+      <div class="frame-tag">
+        <span class="frame-icon"></span>
+        <span>FRAME 04 // METHOD COMPARISON ON TASK-01</span>
+      </div>
+
+      <div class="frame-title-row">
+        <div>
+          <h2>Four Crew Allocation Methods Compared (task-01)</h2>
+          <p>The solver is the only one that also protects against a drop-out without picking the same faces again.</p>
+        </div>
+      </div>
+
+      <table class="whiteboard-table">
+        <thead>
+          <tr>
+            <th>Method</th>
+            <th>Role Coverage</th>
+            <th>Dropout Robustness</th>
+            <th>Repeat-Pick Share</th>
+            <th>Drive Verdict</th>
+            <th>Solver Quality</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background: #f0fdf4;">
+            <td><strong>cp_sat (Constraint Programming)</strong></td>
+            <td class="mono">100%</td>
+            <td class="mono" style="color: #047857; font-weight: 700;">100%</td>
+            <td class="mono" style="color: var(--brand-blue); font-weight: 700;">0%</td>
+            <td><span class="status-chip status-ready">READY</span></td>
+            <td>Full standby redundancy; balanced novelty</td>
+          </tr>
+          <tr>
+            <td><strong>nearest_skill (Proximity greedy)</strong></td>
+            <td class="mono">100%</td>
+            <td class="mono" style="color: var(--alert-red);">0%</td>
+            <td class="mono">25%</td>
+            <td><span class="status-chip status-not-ready">NOT READY</span></td>
+            <td>Fails standby resilience; repeat bias</td>
+          </tr>
+          <tr>
+            <td><strong>random_feasible</strong></td>
+            <td class="mono">100%</td>
+            <td class="mono" style="color: var(--alert-red);">0%</td>
+            <td class="mono">25%</td>
+            <td><span class="status-chip status-not-ready">NOT READY</span></td>
+            <td>Unreliable redundancy; higher transit</td>
+          </tr>
+          <tr>
+            <td><strong>manual_greedy</strong></td>
+            <td class="mono">100%</td>
+            <td class="mono" style="color: #047857;">100%</td>
+            <td class="mono" style="color: var(--alert-red);">25%</td>
+            <td><span class="status-chip status-ready">READY</span></td>
+            <td>Heavier reliance on repeat volunteers</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-logo">SC</div>
+        <div>
+          <strong style="font-size: 15px;">SewaCircle Ready Crew</strong>
+          <div class="footer-affiliation">Not affiliated with MY Bharat or any government body.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="01-landing.html">Overview</a>
+        <a href="02-console-task.html">Console Brief</a>
+        <a href="03-console-roles.html">Roles Extraction</a>
+        <a href="04-console-crew-ready.html">Crew Board</a>
+        <a href="05-console-crew-not-ready.html">Crew Not Ready</a>
+        <a href="07-console-ledger.html">Ledger</a>
+        <a href="08-console-evaluation.html">Evaluation</a>
+        <a href="11-method.html">Methodology</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Synthetic data demonstration (Seed 7). Real administrative coordinates from Open Admin Data (CC-BY-4.0).</span>
+      <span>Direction: 07-ops-whiteboard</span>
+    </div>
+  </footer>
+
+</body>
+</html>

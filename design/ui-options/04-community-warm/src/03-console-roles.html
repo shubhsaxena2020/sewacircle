@@ -1,0 +1,586 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Console — AI-Proposed Roles & Decisions</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .roles-layout {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 32px;
+      align-items: start;
+    }
+
+    /* Decision banner */
+    .decision-banner {
+      background: #FFF9F5;
+      border: 1.5px solid #FFD9C7;
+      border-radius: var(--radius-card-lg);
+      padding: 24px 28px;
+      margin-bottom: 28px;
+    }
+
+    .decision-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .decision-item {
+      background: white;
+      border: 1px solid #FFE4D6;
+      border-radius: var(--radius-card);
+      padding: 14px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .decision-text {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.4;
+    }
+
+    /* Roles grid */
+    .roles-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .role-row-card {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card);
+      padding: 22px 24px;
+      box-shadow: var(--shadow-subtle);
+      transition: all 0.15s ease;
+      display: grid;
+      grid-template-columns: 240px 1fr 140px;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .role-row-card:hover {
+      border-color: #D2D2D2;
+      box-shadow: var(--shadow-card);
+    }
+
+    .role-title-box {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .role-name-text {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--ink);
+    }
+
+    .evidence-quote-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #F8F9FA;
+      border: 1px dashed #CBD5E1;
+      padding: 3px 10px;
+      border-radius: var(--radius-pill);
+      font-size: 12px;
+      color: var(--body);
+      margin-top: 4px;
+    }
+
+    .role-controls-col {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 12px;
+    }
+
+    .count-stepper {
+      display: flex;
+      align-items: center;
+      border: 1px solid var(--hairline-strong);
+      border-radius: var(--radius-pill);
+      padding: 2px 4px;
+      background: white;
+    }
+
+    .stepper-btn {
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      border: none;
+      background: var(--surface-soft);
+      color: var(--ink);
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stepper-val {
+      font-size: 14px;
+      font-weight: 700;
+      width: 28px;
+      text-align: center;
+    }
+
+    /* Sidebar summary */
+    .solver-summary-panel {
+      background: white;
+      border: 1px solid var(--hairline);
+      border-radius: var(--radius-card-lg);
+      padding: 28px;
+      box-shadow: var(--shadow-card);
+      position: sticky;
+      top: 96px;
+    }
+
+    .summary-metric-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--hairline);
+      font-size: 13px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- SHARED HEADER -->
+  <header class="site-header">
+    <div class="brand-wrap">
+      <div class="brand-logo-mark">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+          <circle cx="9" cy="7" r="4"></circle>
+          <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+          <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+        </svg>
+      </div>
+      <div class="brand-text-col">
+        <span class="brand-title">SewaCircle <span style="font-size: 12px; font-weight: 600; color: #717171; border: 1px solid #EBEBEB; padding: 2px 8px; border-radius: 9999px;">04 Community Warm</span></span>
+        <span class="brand-sub">Ready Crew</span>
+      </div>
+    </div>
+
+    <nav class="nav-links">
+      <a href="01-landing.html" class="nav-link">Story</a>
+      <a href="02-console-task.html" class="nav-link active">Organiser Console</a>
+      <a href="09-volunteer.html" class="nav-link">Volunteer View</a>
+      <a href="10-districts.html" class="nav-link">20 Districts</a>
+      <a href="11-method.html" class="nav-link">Method</a>
+    </nav>
+
+    <div class="header-right">
+      <span class="badge-synthetic">
+        <span class="badge-synthetic-dot"></span>
+        Synthetic data
+      </span>
+      <div class="lang-toggle" title="Switch UI Language">
+        <span class="lang-opt active">EN</span>
+        <span class="lang-opt devanagari">हिन्दी</span>
+      </div>
+      <div class="user-profile-pill">
+        <div class="user-avatar-sm">RK</div>
+        <div>
+          <div class="user-role-label">Rajesh Kumar</div>
+          <div class="user-role-sub">Kanpur Dehat</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ORGANISER CONSOLE SUBNAV -->
+  <div class="console-subnav-bar">
+    <div class="console-step-tabs">
+      <a href="02-console-task.html" class="step-tab">
+        <span class="step-number">1</span>
+        <span>Brief & Task</span>
+      </a>
+      <a href="03-console-roles.html" class="step-tab active">
+        <span class="step-number">2</span>
+        <span>Roles</span>
+      </a>
+      <a href="04-console-crew-ready.html" class="step-tab">
+        <span class="step-number">3</span>
+        <span>Crew (Ready)</span>
+      </a>
+      <a href="05-console-crew-not-ready.html" class="step-tab">
+        <span class="step-number">4</span>
+        <span>Crew (Not Ready)</span>
+      </a>
+      <a href="06-console-evidence.html" class="step-tab">
+        <span class="step-number">5</span>
+        <span>Evidence</span>
+      </a>
+      <a href="07-console-ledger.html" class="step-tab">
+        <span class="step-number">6</span>
+        <span>Ledger</span>
+      </a>
+      <a href="08-console-evaluation.html" class="step-tab">
+        <span class="step-number">7</span>
+        <span>Evaluation</span>
+      </a>
+    </div>
+
+    <div class="console-drive-chip">
+      <span class="drive-chip-dot"></span>
+      <span>Task-01: Water and hygiene camp</span>
+      <span style="color: var(--muted); font-weight: normal;">• Akbarpur</span>
+    </div>
+  </div>
+
+  <!-- MAIN PAGE CONTENT -->
+  <main class="page-container">
+    
+    <div class="page-header">
+      <div class="page-badge-row">
+        <span class="badge-pill badge-coral">Step 2 of 7: Role Extraction</span>
+        <span class="badge-pill badge-green">4 Roles Detected</span>
+        <span class="badge-amber">4 Decisions Needed</span>
+      </div>
+      <h1 class="page-title">AI-Proposed Roles & Organiser Decisions</h1>
+      <p class="page-desc">
+        The language model extracted 4 volunteer roles from the Hindi brief with exact source phrases. Review the flagged decisions below before feeding constraints into the CP-SAT crew solver.
+      </p>
+    </div>
+
+    <div class="roles-layout">
+      
+      <!-- LEFT: DECISION BOX & ROLES LIST -->
+      <div>
+        
+        <!-- NEEDS DECISION ALERT BOX (from sample-data.json) -->
+        <div class="decision-banner">
+          <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: #FF5A1F; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold;">!</div>
+              <h3 style="font-size: 16px; font-weight: 700; color: #8A2C0D;">Needs Your Decision (4 Items)</h3>
+            </div>
+            <span style="font-size: 12px; font-weight: 600; color: #8A2C0D;">Organiser Review Required</span>
+          </div>
+
+          <div class="decision-list">
+            
+            <!-- Decision 1 -->
+            <div class="decision-item">
+              <div class="decision-text">
+                1. Which local dialect is needed (Awadhi or Bhojpuri)?
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn btn-sm btn-primary btn-pill" style="padding: 4px 12px; font-size: 12px;">Awadhi (Kanpur Dehat)</button>
+                <button class="btn btn-sm btn-secondary btn-pill" style="padding: 4px 12px; font-size: 12px;">Bhojpuri</button>
+              </div>
+            </div>
+
+            <!-- Decision 2 -->
+            <div class="decision-item">
+              <div class="decision-text">
+                2. How many people are needed for each role (posters, first aid, supplies, local-language speakers)?
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">1 per role confirmed</span>
+            </div>
+
+            <!-- Decision 3 -->
+            <div class="decision-item">
+              <div class="decision-text">
+                3. Is a hygiene or health educator needed to run the handwashing and safe drinking water sessions?
+              </div>
+              <div style="display: flex; gap: 6px;">
+                <button class="btn btn-sm btn-secondary btn-pill" style="padding: 4px 12px; font-size: 12px;">+ Add Educator Role</button>
+                <button class="btn btn-sm btn-subtle btn-pill" style="padding: 4px 12px; font-size: 12px;">Skip for now</button>
+              </div>
+            </div>
+
+            <!-- Decision 4 -->
+            <div class="decision-item">
+              <div class="decision-text">
+                4. Please check the role 'Local-language liaison' (the AI was not sure).
+              </div>
+              <span class="badge-pill badge-green" style="font-size: 11px;">Approved as Must</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- EXTRACTED ROLES CARDS (4 roles from sample-data.json) -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+          <h3 style="font-size: 16px; font-weight: 700; color: var(--ink);">Extracted Roles (4 Active)</h3>
+          <button class="btn btn-secondary btn-sm btn-pill">+ Add Custom Role</button>
+        </div>
+
+        <div class="roles-grid">
+          
+          <!-- Role 1: Poster team -->
+          <div class="role-row-card">
+            <div class="role-title-box">
+              <div class="role-name-text">Poster team</div>
+              <div class="evidence-quote-pill">
+                <span>Phrase:</span>
+                <strong class="devanagari">"पोस्टर"</strong>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--ink);">Skills:</span>
+                <span class="code-chip">graphic_design (Level 1)</span>
+              </div>
+              <div style="display: flex; gap: 8px; font-size: 12px; color: var(--muted);">
+                <span>Priority: <strong>Must</strong></span>
+                <span>•</span>
+                <span>Confidence: <strong style="color: var(--ready-green);">High (92%)</strong></span>
+                <span>•</span>
+                <span>Safety: General</span>
+              </div>
+            </div>
+
+            <div class="role-controls-col">
+              <div class="count-stepper">
+                <button class="stepper-btn">-</button>
+                <span class="stepper-val">1</span>
+                <button class="stepper-btn">+</button>
+              </div>
+              <button class="btn btn-sm btn-subtle" style="padding: 6px 10px;">Edit</button>
+            </div>
+          </div>
+
+          <!-- Role 2: First-aid support (SAFETY CRITICAL) -->
+          <div class="role-row-card" style="border-left: 4px solid var(--alert-coral);">
+            <div class="role-title-box">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <div class="role-name-text">First-aid support</div>
+                <span class="badge-pill badge-alert" style="font-size: 10px; padding: 2px 6px;">Safety Critical</span>
+              </div>
+              <div class="evidence-quote-pill">
+                <span>Phrase:</span>
+                <strong class="devanagari">"प्राथमिक उपचार"</strong>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--ink);">Skills:</span>
+                <span class="code-chip">first_aid (Level 1)</span>
+                <span style="font-size: 11px; background: #FFF2EF; color: var(--alert-coral); padding: 2px 6px; border-radius: 4px; font-weight: 700;">Host Checked Only</span>
+              </div>
+              <div style="display: flex; gap: 8px; font-size: 12px; color: var(--muted);">
+                <span>Priority: <strong>Must</strong></span>
+                <span>•</span>
+                <span>Needs Experienced: <strong>Yes</strong></span>
+                <span>•</span>
+                <span>Confidence: <strong style="color: var(--ready-green);">High (95%)</strong></span>
+              </div>
+            </div>
+
+            <div class="role-controls-col">
+              <div class="count-stepper">
+                <button class="stepper-btn">-</button>
+                <span class="stepper-val">1</span>
+                <button class="stepper-btn">+</button>
+              </div>
+              <button class="btn btn-sm btn-subtle" style="padding: 6px 10px;">Edit</button>
+            </div>
+          </div>
+
+          <!-- Role 3: Supplies and site setup -->
+          <div class="role-row-card">
+            <div class="role-title-box">
+              <div class="role-name-text">Supplies & site setup</div>
+              <div class="evidence-quote-pill">
+                <span>Phrase:</span>
+                <strong class="devanagari">"सामान"</strong>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--ink);">Skills:</span>
+                <span class="code-chip">logistics_supplies (Level 1)</span>
+              </div>
+              <div style="display: flex; gap: 8px; font-size: 12px; color: var(--muted);">
+                <span>Priority: <strong>Must</strong></span>
+                <span>•</span>
+                <span>Confidence: <strong style="color: var(--ready-green);">High (88%)</strong></span>
+                <span>•</span>
+                <span>Safety: General</span>
+              </div>
+            </div>
+
+            <div class="role-controls-col">
+              <div class="count-stepper">
+                <button class="stepper-btn">-</button>
+                <span class="stepper-val">1</span>
+                <button class="stepper-btn">+</button>
+              </div>
+              <button class="btn btn-sm btn-subtle" style="padding: 6px 10px;">Edit</button>
+            </div>
+          </div>
+
+          <!-- Role 4: Local-language liaison -->
+          <div class="role-row-card">
+            <div class="role-title-box">
+              <div class="role-name-text">Local-language liaison</div>
+              <div class="evidence-quote-pill">
+                <span>Phrase:</span>
+                <strong class="devanagari">"स्थानीय बोली में बात करने वाले"</strong>
+              </div>
+            </div>
+
+            <div>
+              <div style="display: flex; gap: 8px; align-items: center; margin-bottom: 6px;">
+                <span style="font-size: 12px; font-weight: 700; color: var(--ink);">Skills:</span>
+                <span class="code-chip">dialect_awadhi (Level 2)</span>
+              </div>
+              <div style="display: flex; gap: 8px; font-size: 12px; color: var(--muted);">
+                <span>Priority: <strong>Must</strong></span>
+                <span>•</span>
+                <span>Confidence: <strong style="color: var(--ready-green);">High (89%)</strong></span>
+                <span>•</span>
+                <span>Flag: Decision Confirmed</span>
+              </div>
+            </div>
+
+            <div class="role-controls-col">
+              <div class="count-stepper">
+                <button class="stepper-btn">-</button>
+                <span class="stepper-val">1</span>
+                <button class="stepper-btn">+</button>
+              </div>
+              <button class="btn btn-sm btn-subtle" style="padding: 6px 10px;">Edit</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- RIGHT: SOLVER PREVIEW PANEL -->
+      <aside class="solver-summary-panel">
+        <h3 style="font-size: 16px; font-weight: 700; color: var(--ink); margin-bottom: 16px;">Solver Input Specs</h3>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Detected Language</span>
+          <span style="font-weight: 700;">Hindi (hi)</span>
+        </div>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Inference Model</span>
+          <span class="code-chip">qwen2.5-7b-instruct</span>
+        </div>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Total Required Slots</span>
+          <span style="font-weight: 700; color: var(--ink);">4 Slots</span>
+        </div>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Standby Goal</span>
+          <span style="font-weight: 700; color: var(--ready-green);">100% (Every critical slot)</span>
+        </div>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Eligible Volunteers</span>
+          <span style="font-weight: 700;">80 in pool</span>
+        </div>
+
+        <div class="summary-metric-row">
+          <span style="color: var(--muted);">Safety Gate</span>
+          <span style="font-weight: 700; color: var(--alert-coral);">Host-checked check strictly enforced</span>
+        </div>
+
+        <div style="margin-top: 24px;">
+          <a href="04-console-crew-ready.html" class="btn btn-primary btn-pill" style="width: 100%; padding: 14px 20px; font-size: 14px;">
+            Confirm Roles & Run Solver
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+          <div style="text-align: center; margin-top: 10px;">
+            <a href="02-console-task.html" style="font-size: 12px; color: var(--muted);">← Back to Brief text</a>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+  </main>
+
+  <!-- SHARED FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-col-brand">
+        <div class="brand-wrap" style="margin-bottom: 12px;">
+          <div class="brand-logo-mark" style="width: 32px; height: 32px; border-radius: 8px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle></svg>
+          </div>
+          <span style="font-size: 16px; font-weight: 800;">SewaCircle Ready Crew</span>
+        </div>
+        <p class="footer-brand-desc">
+          A desktop planning tool for district youth organisers in Uttar Pradesh to turn interested volunteers into role-complete, safe, and dropout-resilient crews.
+        </p>
+        <div style="margin-top: 14px;">
+          <span class="badge-synthetic"><span class="badge-synthetic-dot"></span>All data is synthetic (Seed 7)</span>
+        </div>
+      </div>
+
+      <div class="footer-nav-cols">
+        <div class="footer-col">
+          <h4>Organiser Console</h4>
+          <ul>
+            <li><a href="02-console-task.html">1. Task Brief Input</a></li>
+            <li><a href="03-console-roles.html">2. Role Extraction</a></li>
+            <li><a href="04-console-crew-ready.html">3. Crew Board (Ready)</a></li>
+            <li><a href="05-console-crew-not-ready.html">4. Recruit Request (Not Ready)</a></li>
+            <li><a href="06-console-evidence.html">5. Evidence & Cards</a></li>
+            <li><a href="07-console-ledger.html">6. Tamper-Evident Ledger</a></li>
+            <li><a href="08-console-evaluation.html">7. Benchmark Evaluation</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Community & Exploration</h4>
+          <ul>
+            <li><a href="01-landing.html">Story & Concept</a></li>
+            <li><a href="09-volunteer.html">Volunteer Portal View</a></li>
+            <li><a href="10-districts.html">20 UP Districts Map</a></li>
+            <li><a href="11-method.html">CP-SAT Method & Limits</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Safety & Standards</h4>
+          <ul>
+            <li><a href="11-method.html#safety">Host Skill Verification</a></li>
+            <li><a href="11-method.html#minors">Minor Guardian Consent</a></li>
+            <li><a href="11-method.html#privacy">61k Gazetteer Redaction</a></li>
+            <li><a href="11-method.html#pib">PIB July 2026 Source</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>
+        © 2026 SewaCircle Ready Crew. Direction: 04 Community Warm (Airbnb inspired).
+      </div>
+      <div class="disclaimer-banner">
+        <strong>Notice:</strong> Not affiliated with MY Bharat or any government body.
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

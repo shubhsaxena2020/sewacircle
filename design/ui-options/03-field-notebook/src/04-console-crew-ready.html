@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | Crew Roster (Ready)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <a href="01-landing.html" class="brand-section">
+        <div class="brand-mark">SC</div>
+        <div class="brand-info">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-tagline">District Youth Operations</span>
+        </div>
+      </a>
+
+      <div class="notebook-path">
+        <span class="notebook-path-icon">📓</span>
+        <span>Kanpur Dehat</span>
+        <span class="notebook-path-separator">/</span>
+        <span class="notebook-path-current">Task-01 Crew Roster (Ready)</span>
+      </div>
+
+      <div class="header-meta">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+      </div>
+    </header>
+
+    <!-- Navigation Tabs -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item active"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <article class="document-sheet">
+        <!-- Header -->
+        <header class="doc-header">
+          <div class="doc-icon-badge">👥</div>
+          <div class="doc-title-row">
+            <div class="doc-title-main">
+              <h1>Roster Decision: task-01 Water and hygiene camp</h1>
+              <p class="doc-subtitle">
+                District: Kanpur Dehat • Block: Akbarpur • Slot: Saturday morning • Roster formulation solved via OR-Tools CP-SAT.
+              </p>
+            </div>
+            <div style="display: flex; gap: 10px; align-items: center;">
+              <a href="05-console-crew-not-ready.html" class="btn btn-secondary" style="font-size: 12.5px;">
+                Inspect Not Ready State (task-02) →
+              </a>
+            </div>
+          </div>
+        </header>
+
+        <!-- VERDICT HERO (Visual Hero of Screen) -->
+        <section class="verdict-hero ready">
+          <div>
+            <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 8px;">
+              <span class="tag green" style="font-weight: 600;">SOLVER STATUS: OPTIMAL</span>
+              <span class="tag">Solve Time: 15 ms</span>
+            </div>
+            <div class="verdict-title">VERDICT: READY</div>
+            <div class="verdict-explanation">
+              READY: every essential role is filled and any one person can drop out without leaving a gap.
+            </div>
+          </div>
+          <div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 8px;">
+            <span class="tag green" style="font-size: 13px; padding: 6px 14px;">100% Robustness</span>
+            <span style="font-size: 12px; color: var(--tint-green-ink);">Zero Single Points of Failure</span>
+          </div>
+        </section>
+
+        <!-- METRICS STRIP (cp_sat parameters) -->
+        <section class="metrics-strip">
+          <div class="metric-item">
+            <div class="metric-label">Role Coverage</div>
+            <div class="metric-value">100%</div>
+            <div class="metric-sub">4 of 4 must-roles</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Slots Filled</div>
+            <div class="metric-value">4 / 4</div>
+            <div class="metric-sub">All slots staffed</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Dropout Robustness</div>
+            <div class="metric-value">100%</div>
+            <div class="metric-sub">Full standby cover</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Novice Volunteers</div>
+            <div class="metric-value">2</div>
+            <div class="metric-sub">Mohit Z., Kabir Z.</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Solve Duration</div>
+            <div class="metric-value">15 ms</div>
+            <div class="metric-sub">CP-SAT solver</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">Solver Status</div>
+            <div class="metric-value" style="font-size: 18px; color: var(--tint-green-ink);">OPTIMAL</div>
+            <div class="metric-sub">Tier 1-4 satisfaction</div>
+          </div>
+        </section>
+
+        <!-- CREW BOARD (Left 1fr) + STANDBY RAIL (Right 360px) -->
+        <div style="display: grid; grid-template-columns: 1fr 360px; gap: 28px; margin-bottom: 36px;">
+          
+          <!-- Primary Assigned Crew (4 Rows) -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h2 style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                <span>📋</span> Assigned Primary Crew (4 Roles)
+              </h2>
+              <span class="mono" style="font-size: 12px; color: var(--text-muted);">Akbarpur Site • Max Radius 25 km</span>
+            </div>
+
+            <!-- Role 01: Poster team -> Heena P. -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag" style="width: fit-content; margin-bottom: 4px;">role-01</span>
+                <div class="crew-role-name">Poster team</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Required: graphic_design (lvl 1)</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Heena P.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-008</span>
+                  <span class="tag">Age 27 • F</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has posters and graphic design (level 2)</li>
+                  <li>Free sat morning; 7 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 74</div>
+                <div class="metric-sub">Distance: 7.4 km</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Sarvankheda Block</div>
+              </div>
+            </div>
+
+            <!-- Role 02: First-aid support -> Mohit Z. -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag amber" style="width: fit-content; margin-bottom: 4px;">role-02 • Safety</span>
+                <div class="crew-role-name">First-aid support</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Required: first_aid (host-checked)</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Mohit Z.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-070</span>
+                  <span class="tag amber">Novice</span>
+                  <span class="tag">Age 22 • M</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has first aid / basic medical support (level 3)</li>
+                  <li>Free sat morning; 2 km from the site</li>
+                  <li>Newcomer (0 past drives)</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 113</div>
+                <div class="metric-sub">Distance: 1.7 km</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Akbarpur Local</div>
+              </div>
+            </div>
+
+            <!-- Role 03: Supplies and site setup -> Divya H. -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag" style="width: fit-content; margin-bottom: 4px;">role-03</span>
+                <div class="crew-role-name">Supplies &amp; site setup</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Required: logistics_supplies</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Divya H.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-067</span>
+                  <span class="tag">Age 24 • F</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has logistics, supplies and site setup (level 3)</li>
+                  <li>Free sat morning; 16 km from the site</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 89</div>
+                <div class="metric-sub">Distance: 16.3 km</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Kanpur Dehat</div>
+              </div>
+            </div>
+
+            <!-- Role 04: Local-language liaison -> Kabir Z. -->
+            <div class="crew-role-row">
+              <div class="crew-role-info">
+                <span class="tag" style="width: fit-content; margin-bottom: 4px;">role-04</span>
+                <div class="crew-role-name">Local-language liaison</div>
+                <div style="font-size: 12px; color: var(--text-muted);">Required: dialect_awadhi (lvl 2)</div>
+              </div>
+              <div class="crew-assignee">
+                <div class="crew-person-name">
+                  <span>Kabir Z.</span>
+                  <span class="mono" style="font-size: 12px; color: var(--text-subtle);">v-011</span>
+                  <span class="tag amber">Novice</span>
+                  <span class="tag">Age 23 • M</span>
+                </div>
+                <ul class="crew-reasons-list">
+                  <li>Has awadhi speaker (local-language liaison) (level 3)</li>
+                  <li>Free sat morning; 5 km from the site</li>
+                  <li>Not picked in the last 90 days</li>
+                  <li>Newcomer (0 past drives)</li>
+                </ul>
+              </div>
+              <div class="crew-score-box">
+                <div class="mono" style="font-size: 18px; font-weight: 700; color: var(--text-ink);">Score: 118</div>
+                <div class="metric-sub">Distance: 5.3 km</div>
+                <div style="font-size: 12px; color: var(--text-muted); margin-top: 2px;">Akbarpur Outskirts</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Standby Safety Rail -->
+          <div>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+              <h2 style="font-size: 18px; display: flex; align-items: center; gap: 8px;">
+                <span>🛡️</span> Standby Roster
+              </h2>
+              <span class="tag green">Robustness 100%</span>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 14px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="color: var(--text-ink); font-size: 14px;">Imran B. (v-068)</strong>
+                <span class="tag amber">Minor (17)</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+                Can step in for: <strong>Poster team</strong>, <strong>Local-language liaison</strong>. Raises dropout robustness to 75%. Guardian consent on file.
+              </p>
+              <div class="mono" style="font-size: 12px; color: var(--text-subtle);">
+                Score: 44.0 • Distance: 13.1 km • Newcomer
+              </div>
+            </div>
+
+            <div class="doc-card" style="margin-bottom: 16px;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                <strong style="color: var(--text-ink); font-size: 14px;">Kavya L. (v-069)</strong>
+                <span class="tag blue">Standby</span>
+              </div>
+              <p style="font-size: 12.5px; color: var(--text-muted); margin-bottom: 8px;">
+                Can step in for: <strong>Supplies and site setup</strong>. Raises dropout robustness to 100%.
+              </p>
+              <div class="mono" style="font-size: 12px; color: var(--text-subtle);">
+                Available Sat Morning • Akbarpur
+              </div>
+            </div>
+
+            <div class="callout ready" style="font-size: 12.5px; margin-bottom: 0;">
+              <div class="callout-icon">💡</div>
+              <div class="callout-content">
+                <strong>Why Standbys Matter:</strong> Heuristics pick volunteers until slots are full. SewaCircle solves for primary crew and independent standby paths simultaneously.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- FOUR METHODS COMPARED ON THIS TASK -->
+        <section style="margin-bottom: 36px;">
+          <h2 style="font-size: 18px; margin-bottom: 10px; display: flex; align-items: center; gap: 8px;">
+            <span>⚖️</span> Four Allocation Methods Compared on Task-01
+          </h2>
+          <p style="font-size: 13.5px; color: var(--text-muted); margin-bottom: 14px;">
+            The solver is the only one that also protects against a drop-out without picking the same faces again.
+          </p>
+
+          <table class="doc-table">
+            <thead>
+              <tr>
+                <th>Method</th>
+                <th>Role Coverage</th>
+                <th>Dropout Robustness</th>
+                <th>Repeat-Pick Share</th>
+                <th>Task Verdict</th>
+                <th>Operational Consequence</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="background: var(--tint-green-bg);">
+                <td><strong style="color: var(--tint-green-ink);">cp_sat (SewaCircle)</strong></td>
+                <td><span class="mono">100%</span> (4/4)</td>
+                <td><strong class="mono" style="color: var(--tint-green-ink);">100%</strong></td>
+                <td><span class="mono">0%</span> (0 repeat)</td>
+                <td><span class="tag green">READY</span></td>
+                <td>Guaranteed standby for all 4 roles; fresh volunteers engaged.</td>
+              </tr>
+              <tr>
+                <td><strong>nearest_skill</strong></td>
+                <td><span class="mono">100%</span> (4/4)</td>
+                <td><span class="mono">0%</span> (no standby)</td>
+                <td><span class="mono">25%</span> (1 repeat)</td>
+                <td><span class="tag red">NOT READY</span></td>
+                <td>One morning dropout breaks the camp; repeats past volunteers.</td>
+              </tr>
+              <tr>
+                <td><strong>random_feasible</strong></td>
+                <td><span class="mono">100%</span> (4/4)</td>
+                <td><span class="mono">0%</span> (no standby)</td>
+                <td><span class="mono">25%</span> (1 repeat)</td>
+                <td><span class="tag red">NOT READY</span></td>
+                <td>Lacks any redundancy guarantee; vulnerable to no-shows.</td>
+              </tr>
+              <tr>
+                <td><strong>manual_greedy</strong></td>
+                <td><span class="mono">100%</span> (4/4)</td>
+                <td><span class="mono">100%</span></td>
+                <td><span class="mono">25%</span> (1 repeat)</td>
+                <td><span class="tag green">READY</span></td>
+                <td>Achieves standby but over-indexes on familiar repeat names.</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <!-- WHY-NOT TOOL & DROPOUT SIMULATOR -->
+        <section style="margin-bottom: 24px;">
+          <h2 style="font-size: 18px; margin-bottom: 14px; display: flex; align-items: center; gap: 8px;">
+            <span>🔬</span> Interactive Organiser Inspection Tools
+          </h2>
+
+          <div class="grid-2">
+            <!-- Why-Not Tool -->
+            <div class="doc-card" style="margin-bottom: 0;">
+              <div class="doc-card-header">
+                <h3 style="font-size: 15px;">Why-Not Tool: Aarav C. (v-001)</h3>
+                <span class="tag blue">Feasible Alternative</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+                "Aarav C. could take Local-language liaison. That would take Kabir Z. off the roster. Role coverage 100% -&gt; 100%; dropout robustness 100% -&gt; 100%. The planner preferred the current pick on fit, distance and fairness (score 118 vs 98)."
+              </p>
+              <div style="background: var(--bg-surface-soft); padding: 10px 14px; border-radius: 4px; font-size: 12px; color: var(--text-subtle);">
+                <strong>Planner Insight:</strong> Kabir Z. is a local newcomer with 0 past drives living 5.3 km away; selecting Kabir preserves Aarav C.'s availability for higher-tier drives while promoting grassroots volunteer equity.
+              </div>
+            </div>
+
+            <!-- Drop-out Tool -->
+            <div class="doc-card" style="margin-bottom: 0;">
+              <div class="doc-card-header">
+                <h3 style="font-size: 15px;">Simulate Drop-Out: Heena P.</h3>
+                <span class="tag green">Auto-Healed with Standby</span>
+              </div>
+              <p style="font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 12px;">
+                If Heena P. calls in sick 2 hours before the camp:
+              </p>
+              <div class="callout ready" style="margin: 0 0 12px 0; padding: 10px 14px;">
+                <div class="callout-icon">✓</div>
+                <div class="callout-content" style="font-size: 12.5px;">
+                  <strong>Healed with standby:</strong> Imran B. (v-068) steps in automatically for Poster team. Zero roles left uncovered.
+                </div>
+              </div>
+              <div style="font-size: 12px; color: var(--text-subtle);">
+                Solver status post-dropout: <span class="mono">HEALED_WITH_STANDBY</span>. Dropout robustness drops to 75% until replacement standby is recruited, but the drive runs safely.
+              </div>
+            </div>
+          </div>
+        </section>
+
+      </article>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-notice">
+          <span class="affiliation-dot"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta-info">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 03-field-notebook • 1440px Desktop Operations Dossier</span>
+        </div>
+        <div class="footer-doc-links">
+          <a href="01-landing.html">Overview</a>
+          <a href="02-console-task.html">Console</a>
+          <a href="08-console-evaluation.html">Evaluation</a>
+          <a href="10-districts.html">Districts</a>
+          <a href="11-method.html">Method</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

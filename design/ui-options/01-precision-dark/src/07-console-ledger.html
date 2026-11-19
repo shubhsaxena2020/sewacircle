@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 07 Cryptographic Ledger</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Devanagari:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-container">
+    <!-- Global Header -->
+    <header class="global-header">
+      <div class="brand-section">
+        <div class="brand-logo">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="9"></circle>
+            <path d="M12 3v6l4 2"></path>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span class="brand-name">SewaCircle</span>
+          <span class="brand-subtitle">Ready Crew</span>
+        </div>
+      </div>
+
+      <div class="command-bar">
+        <svg class="command-bar-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <span>Type a command or search drives...</span>
+        <span class="command-bar-shortcut">Ctrl+K</span>
+      </div>
+
+      <div class="header-controls">
+        <span class="badge-synthetic">Synthetic data</span>
+        <div class="lang-toggle">
+          <span class="lang-btn active">EN</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-btn">हिंदी</span>
+        </div>
+        <span class="kbd-help">?</span>
+      </div>
+    </header>
+
+    <!-- Sub Navigation -->
+    <nav class="console-nav">
+      <a href="01-landing.html" class="nav-item"><span class="nav-num">01</span> Overview</a>
+      <a href="02-console-task.html" class="nav-item"><span class="nav-num">02</span> Brief</a>
+      <a href="03-console-roles.html" class="nav-item"><span class="nav-num">03</span> Roles</a>
+      <a href="04-console-crew-ready.html" class="nav-item"><span class="nav-num">04</span> Crew (Ready)</a>
+      <a href="05-console-crew-not-ready.html" class="nav-item"><span class="nav-num">05</span> Crew (Not Ready)</a>
+      <a href="06-console-evidence.html" class="nav-item"><span class="nav-num">06</span> Evidence</a>
+      <a href="07-console-ledger.html" class="nav-item active"><span class="nav-num">07</span> Ledger</a>
+      <a href="08-console-evaluation.html" class="nav-item"><span class="nav-num">08</span> Evaluation</a>
+      <a href="09-volunteer.html" class="nav-item"><span class="nav-num">09</span> Volunteer</a>
+      <a href="10-districts.html" class="nav-item"><span class="nav-num">10</span> Districts</a>
+      <a href="11-method.html" class="nav-item"><span class="nav-num">11</span> Method</a>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 24px;">
+        <div>
+          <div class="section-eyebrow">AUDIT &amp; INTEGRITY • SHA-256 CHAIN</div>
+          <h1>Tamper-Evident Contribution Ledger</h1>
+          <p style="margin-top: 4px; font-size: 14px; color: var(--text-muted);">
+            Cryptographically linked action blocks. Hash chain shows edits, not truth; truth comes from host confirmation.
+          </p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" style="font-size: 13px; padding: 6px 14px;">
+            Export Credential (JSON Download)
+          </button>
+          <button class="btn btn-secondary" style="font-size: 13px; padding: 6px 14px;">
+            Verify Chain Again
+          </button>
+        </div>
+      </div>
+
+      <!-- Verification Result Banner -->
+      <div class="card" style="margin-bottom: 24px; border-color: var(--success-border); background: linear-gradient(180deg, rgba(52, 211, 153, 0.06) 0%, rgba(15, 16, 17, 0.95) 100%);">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+          <div style="display: flex; align-items: center; gap: 14px;">
+            <span class="tag tag-verified" style="font-size: 13px; padding: 4px 10px;">
+              ● Hash Chain Verified: OK
+            </span>
+            <span class="mono" style="font-size: 13px; color: var(--text-ink);">
+              9 entries verified • first_bad_index: null • Algorithm: SHA-256
+            </span>
+          </div>
+          <span class="code-chip">INTEGRITY 100%</span>
+        </div>
+        
+        <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--border-hairline); display: flex; justify-content: space-between; align-items: center; font-size: 12px; color: var(--text-muted);">
+          <div>
+            Note: <strong style="color: var(--text-ink);">"Hash chain shows edits, not truth; truth comes from host confirmation."</strong>
+          </div>
+          <div style="color: var(--text-subtle);">
+            What tampering looks like: Altering any past payload breaks subsequent entry hashes immediately, exposing the exact index of alteration.
+          </div>
+        </div>
+      </div>
+
+      <!-- The 9 Linked Blocks (Index 0 to 8) -->
+      <div style="margin-bottom: 32px;">
+        <div style="font-size: 12px; font-family: var(--font-mono); color: var(--text-subtle); text-transform: uppercase; margin-bottom: 14px;">
+          CRYPTOGRAPHIC BLOCK CHAIN (INDEX 0..8)
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          
+          <!-- Block 0 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#0 • GENESIS</span>
+                <span class="tag">action: draft</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-068-poster-team</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T00:22:57.218Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-subtle);">0000000000000000000000000000000000000000000000000000000000000000</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">5376047aad2fdfd2576d23bd03d1d03749b954ed0c126437658b22dc4a097d01</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 1 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#1</span>
+                <span class="tag tag-warn">action: flag</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-070-first-aid-support</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T00:22:57.237Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">5376047aad2fdfd2576d23bd03d1d03749b954ed...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">cc415443fba0839abe4db4c5d6401b78a0f8515140053bce205530d3bd49327e</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 2 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#2</span>
+                <span class="tag tag-warn">action: flag</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-067-supplies-and-site-setup</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T00:22:57.256Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">cc415443fba0839abe4db4c5d6401b78a0f85151...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">b72f44b439732f3767bf9aa779c6457448a5c50fb121a834bfa66b00b0c37b3d</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 3 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#3</span>
+                <span class="tag tag-warn">action: flag</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-011-local-language-liaison</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T00:22:57.280Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">b72f44b439732f3767bf9aa779c6457448a5c50f...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">568c155337bc55bee4ad9d18f24e8af765d32d1de427f95cd979099063c7dcb6</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 4 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1); border-color: var(--success-border);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#4</span>
+                <span class="tag tag-verified">action: confirm</span>
+                <span class="tag" style="background: rgba(94, 106, 210, 0.2); color: var(--accent-text);">actor: host</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-068-poster-team</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T00:22:58.071Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">568c155337bc55bee4ad9d18f24e8af765d32d1d...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">8943719eccc0ffad5c940159a7bae84b5182247da5f9513251b69489ce6bcbd0</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 5 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#5</span>
+                <span class="tag">action: draft</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-008-poster-team</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T01:50:44.651Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">8943719eccc0ffad5c940159a7bae84b5182247d...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">df7005a6630826d1fd048860975bad290dfdca70ac449a0a9c61e9f5e0707b2f</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 6 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#6</span>
+                <span class="tag">action: draft</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-070-first-aid-support</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T01:50:44.686Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">df7005a6630826d1fd048860975bad290dfdca70...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">f964d4b135503b6328e90db3a33ea9868ce988275801d0c7921a9593adad390f</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 7 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#7</span>
+                <span class="tag">action: draft</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-067-supplies-and-site-setup</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T01:50:44.715Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">f964d4b135503b6328e90db3a33ea9868ce98827...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">34ded9cd6913361dc8b4c0b3ae3a69a8b50969c18a20c18bd9c31bb0eac05d05</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Block 8 -->
+          <div class="card" style="padding: 14px 18px; background-color: var(--bg-surface-1);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span class="code-chip" style="font-weight: 700; color: var(--text-ink);">#8</span>
+                <span class="tag tag-warn">action: flag</span>
+                <span class="tag tag-novice">actor: system</span>
+                <span class="mono" style="font-size: 12px; color: var(--accent-text);">card-task-01-v-011-local-language-liaison</span>
+              </div>
+              <span class="mono" style="font-size: 12px; color: var(--text-subtle);">2026-11-19T01:50:44.748Z</span>
+            </div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 12px; font-family: var(--font-mono); background-color: var(--bg-surface-2); padding: 8px 12px; border-radius: 4px; border: 1px solid var(--border-hairline);">
+              <div>
+                <span style="color: var(--text-subtle);">prev_hash:</span>
+                <span style="color: var(--text-muted);">34ded9cd6913361dc8b4c0b3ae3a69a8b50969c1...</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <div>
+                  <span style="color: var(--text-subtle);">entry_hash:</span>
+                  <span style="color: var(--success-green);">24b43390134c48a14bb638907a1dff5d6b1163e4324cc98b0f9686416ee564a9</span>
+                </div>
+                <button class="btn btn-secondary" style="font-size: 11.5px; padding: 1px 6px;">Copy</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <!-- Global Footer -->
+    <footer class="global-footer">
+      <div class="footer-top">
+        <div class="affiliation-text">
+          <span class="affiliation-indicator"></span>
+          <span>Not affiliated with MY Bharat or any government body.</span>
+        </div>
+        <div class="footer-meta">
+          <span>Synthetic data • Seed 7 • 80 volunteers • 10 tasks</span>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <span>SewaCircle Ready Crew • 01-precision-dark • Desktop 1440px Specification</span>
+        </div>
+        <div class="footer-shortcuts">
+          <span><kbd>Ctrl+K</kbd> Command Bar</span>
+          <span><kbd>V</kbd> Verify Cryptographic Proof</span>
+          <span><kbd>1-9</kbd> Switch Views</span>
+          <span><kbd>?</kbd> Help</span>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>

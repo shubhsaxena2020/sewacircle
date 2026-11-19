@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>चरण 04: दल अपूर्ण · Crew Not Ready — सेवामंडल तत्पर दल (08-mitti-original)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Block-print decorative runner ribbon -->
+  <div class="blockprint-ribbon"></div>
+
+  <!-- Shared Site Header -->
+  <header class="site-header">
+    <div class="site-container">
+      <div class="header-inner">
+        
+        <a href="01-landing.html" class="brand-lockup">
+          <div class="brand-seal">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <circle cx="12" cy="12" r="9"/>
+              <path d="M12 3v18"/>
+              <path d="M3 12h18"/>
+              <path d="M5.6 5.6l12.8 12.8"/>
+              <circle cx="12" cy="12" r="3" fill="var(--terracotta)"/>
+            </svg>
+          </div>
+          <div class="brand-text">
+            <span class="brand-title">सेवामंडल · SewaCircle</span>
+            <span class="brand-sub">तत्पर दल · READY CREW</span>
+          </div>
+        </a>
+
+        <nav class="main-nav">
+          <a href="01-landing.html" class="nav-item">
+            <span class="nav-devanagari-prefix">परिचय</span> Story
+          </a>
+          <a href="02-console-task.html" class="nav-item active">
+            <span class="nav-devanagari-prefix">कंसोल</span> Organiser Console
+          </a>
+          <a href="09-volunteer.html" class="nav-item">
+            <span class="nav-devanagari-prefix">युवा पोर्टल</span> Volunteer
+          </a>
+          <a href="10-districts.html" class="nav-item">
+            <span class="nav-devanagari-prefix">20 जिले</span> Districts
+          </a>
+          <a href="11-method.html" class="nav-item">
+            <span class="nav-devanagari-prefix">कार्यप्रणाली</span> Method
+          </a>
+        </nav>
+
+        <div class="header-meta">
+          <span class="badge-synthetic">
+            <span class="badge-synthetic-dot"></span>
+            Synthetic Data
+          </span>
+          <div class="lang-toggle">
+            <button class="lang-btn">EN</button>
+            <button class="lang-btn active">हिन्दी</button>
+          </div>
+          <div class="district-badge">
+            <span class="district-badge-dot" style="background: var(--alert-madder);"></span>
+            <span>चिनहट, लखनऊ</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </header>
+
+  <!-- Console Workflow Progress Strip -->
+  <div class="console-workflow-bar">
+    <div class="site-container">
+      <div class="workflow-steps">
+        <a href="02-console-task.html" class="workflow-step">
+          <span class="workflow-step-num">1</span>
+          <span>कार्य विवरण (Brief)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="03-console-roles.html" class="workflow-step">
+          <span class="workflow-step-num">2</span>
+          <span>भूमिकाएं (Roles)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="04-console-crew-ready.html" class="workflow-step">
+          <span class="workflow-step-num">3</span>
+          <span>दल: तैयार (Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="05-console-crew-not-ready.html" class="workflow-step active">
+          <span class="workflow-step-num">4</span>
+          <span>दल: अपूर्ण (Not Ready)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="06-console-evidence.html" class="workflow-step">
+          <span class="workflow-step-num">5</span>
+          <span>साक्ष्य (Evidence)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="07-console-ledger.html" class="workflow-step">
+          <span class="workflow-step-num">6</span>
+          <span>बहीखाता (Ledger)</span>
+        </a>
+        <span class="workflow-step-divider">›</span>
+        <a href="08-console-evaluation.html" class="workflow-step">
+          <span class="workflow-step-num">7</span>
+          <span>मूल्यांकन (Eval)</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Main Content -->
+  <main class="page-main">
+    <div class="site-container">
+
+      <!-- HERO VERDICT: NOT READY (Hero of the screen) -->
+      <section class="verdict-plaque not-ready">
+        <div class="verdict-plaque-left">
+          <div class="verdict-seal">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px;">निर्णय</span>
+            <span style="font-size: 16px; font-weight: 800;">अपूर्ण</span>
+          </div>
+          <div class="verdict-heading-group">
+            <span class="verdict-deva-lead">निर्णय: दल अपूर्ण — अभियान चलाने योग्य नहीं</span>
+            <span class="verdict-eng-sub">VERDICT: NOT READY · 2 UNFILLED MUST ROLES · RECRUIT REQUEST GENERATED</span>
+            <p class="verdict-explanation">
+              <strong>NOT READY:</strong> 1 role(s) cannot be covered with current opt-in volunteers. 
+              सॉल्वर अस्पष्ट अस्वीकार नहीं करता, बल्कि सटीक मांग उत्पन्न करता है ताकि आयोजक तुरंत लक्षित युवाओं तक पहुंच सकें।
+            </p>
+          </div>
+        </div>
+
+        <div class="verdict-metrics-cluster">
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--alert-madder);">66.7%</div>
+            <div class="verdict-metric-lbl">भूमिका पूर्ति (4/6 Slots)</div>
+          </div>
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--alert-madder);">0%</div>
+            <div class="verdict-metric-lbl">बैकअप रोबस्टनेस</div>
+          </div>
+          <div class="verdict-metric-pill">
+            <div class="verdict-metric-val" style="color: var(--turmeric-dark);">2 रिक्तियां</div>
+            <div class="verdict-metric-lbl">तत्काल मांग</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Task Context Strip -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 12px 20px; border-radius: 4px; margin-bottom: 24px;">
+        <div style="display: flex; gap: 16px; align-items: center; font-size: 13.5px;">
+          <strong style="color: var(--alert-madder);">task-02: Blood donation camp (रक्तदान शिविर)</strong>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>चिनहट ब्लॉक, लखनऊ</span>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>रविवार सुबह (sun_morning)</span>
+          <span style="color: var(--hairline-strong);">|</span>
+          <span>दायरा: 25.0 किमी</span>
+        </div>
+        <div>
+          <span class="badge-pill" style="background: var(--alert-madder-light); color: var(--alert-madder); border: 1px solid var(--alert-madder-border);">
+            नाबालिग वर्जित (18+ केवल)
+          </span>
+        </div>
+      </div>
+
+      <!-- EXACT RECRUIT REQUEST SPOTLIGHT CARD -->
+      <section class="card-mitti" style="border: 2px solid var(--alert-madder); background: #FFFBFA; margin-bottom: 32px;">
+        <div class="card-mitti-header" style="border-bottom-color: var(--alert-madder-border);">
+          <div class="card-title-group">
+            <span class="card-title-devanagari" style="color: var(--alert-madder);">सटीक स्वयंसेवक भर्ती मांग (Recruit Request)</span>
+            <span class="card-subtitle-english">Derived Deterministically by CP-SAT Solver</span>
+          </div>
+          <span class="badge-pill" style="background: var(--alert-madder); color: #FFFFFF;">आवश्यकता: 2 युवा</span>
+        </div>
+
+        <div class="grid-main-aside">
+          
+          <div>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+              <span style="font-size: 28px;">📢</span>
+              <div>
+                <h4 style="font-family: var(--font-display); font-size: 20px; font-weight: 800; color: var(--alert-madder);">
+                  सामुदायिक प्रचारक (Community mobiliser) — 2 पद रिक्त
+                </h4>
+                <div style="font-size: 12px; color: var(--ink-muted);">भूमिका आईडी: role-03 · अनिवार्यता: Must</div>
+              </div>
+            </div>
+
+            <!-- Solver reason verbatim -->
+            <div style="background: var(--paper-canvas); border-left: 4px solid var(--alert-madder); padding: 12px 16px; border-radius: 4px; font-size: 13.5px; line-height: 1.5; color: var(--ink); margin-bottom: 16px;">
+              <strong>सॉल्वर विश्लेषण (Solver Reason):</strong><br>
+              "No eligible volunteer for 2 slot(s): needs community mobilisation / door-to-door outreach, free sun morning, within 25 km."
+            </div>
+
+            <!-- Parameters Grid -->
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; font-size: 12.5px;">
+              <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); padding: 8px 12px; border-radius: 3px;">
+                <span style="color: var(--ink-muted); display: block; font-size: 11px;">आवश्यक कौशल:</span>
+                <strong>community_mobilisation (स्तर 1+)</strong>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); padding: 8px 12px; border-radius: 3px;">
+                <span style="color: var(--ink-muted); display: block; font-size: 11px;">समय स्लॉट:</span>
+                <strong>रविवार सुबह (sun_morning)</strong>
+              </div>
+              <div style="background: #FFFFFF; border: 1px solid var(--hairline-strong); padding: 8px 12px; border-radius: 3px;">
+                <span style="color: var(--ink-muted); display: block; font-size: 11px;">भौगोलिक क्षेत्र:</span>
+                <strong>चिनहट, लखनऊ (25 किमी के भीतर)</strong>
+              </div>
+            </div>
+          </div>
+
+          <!-- Share Box with WhatsApp Action -->
+          <div class="share-broadcast-box">
+            <div style="font-weight: 700; font-size: 13px; color: var(--indigo-deep); margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+              <span>📱</span>
+              <span>व्हाट्सएप प्रसारण संदेश (One-Click Copy)</span>
+            </div>
+            
+            <div class="share-broadcast-text">
+              🚨 *सेवामंडल आवश्यकता सूचना*<br>
+              स्थान: चिनहट, लखनऊ<br>
+              अभियान: रक्तदान शिविर (रविवार सुबह)<br>
+              आवश्यकता: *2 सामुदायिक प्रचारक (Community Mobilisers)*<br>
+              दूरी: चिनहट से 25 किमी के युवा<br>
+              कृपया जिला युवा समन्वयक से संपर्क करें।
+            </div>
+
+            <div style="display: flex; gap: 8px;">
+              <button type="button" class="btn-terracotta" style="font-size: 12.5px; padding: 7px 12px; width: 100%; justify-content: center;">
+                <span>संदेश कॉपी करें (Copy)</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- PARTIAL CREW ASSIGNED (4 of 6 Slots) -->
+      <div class="section-heading-mitti">
+        <div class="section-heading-deva">वर्तमान आंशिक रोस्टर (Partial Crew: 4 of 6 Filled)</div>
+        <div class="section-heading-eng">Assigned Slots vs Empty Gaps in Chinhat Drive</div>
+      </div>
+
+      <div class="crew-grid">
+        
+        <!-- Slot 01: First-aid support (Mentor) -> Uday Y. -->
+        <div class="crew-slot-card safety-critical">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge" style="background: var(--terracotta-light); color: var(--terracotta);">
+              भूमिका 01 · प्राथमिक उपचार (स्लॉट 1)
+            </span>
+            <h4 class="crew-role-name">First-aid support (वरिष्ठ)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Uday Y. (उदय वाई.)</span>
+              <span class="volunteer-id-chip">v-022</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>अनुभवी (8 अभियान)</span>
+              <span>•</span>
+              <span>लखनऊ (8.2 किमी)</span>
+            </div>
+          </div>
+
+          <ul class="solver-reasons-list">
+            <li>Has first aid / basic medical support (level 3)</li>
+            <li>Free sun morning; 8 km from the site</li>
+            <li>Picked 5 times in 90 days; chosen because no less-used qualified person fitted better</li>
+            <li>Experienced (8 drives): can guide newcomers</li>
+          </ul>
+
+          <div style="border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 8px; font-size: 12px; color: var(--ready-green);">
+            ✓ संरक्षक स्वयंसेवक (Mentor)
+          </div>
+        </div>
+
+        <!-- Slot 02: First-aid support (Novice) -> Ruchi Z. -->
+        <div class="crew-slot-card safety-critical">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge" style="background: var(--terracotta-light); color: var(--terracotta);">
+              भूमिका 01 · प्राथमिक उपचार (स्लॉट 2)
+            </span>
+            <h4 class="crew-role-name">First-aid support (प्रशिक्षु)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Ruchi Z. (रुचि ज़ेड)</span>
+              <span class="volunteer-id-chip">v-033</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>नया युवा (0 अभियान)</span>
+              <span>•</span>
+              <span>लखनऊ (15.5 किमी)</span>
+            </div>
+          </div>
+
+          <ul class="solver-reasons-list">
+            <li>Has first aid / basic medical support (level 2)</li>
+            <li>Free sun morning; 16 km from the site</li>
+            <li>Not picked in the last 90 days</li>
+            <li>Newcomer (0 past drives), paired with Uday Y.</li>
+          </ul>
+
+          <div style="border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 8px; display: flex; justify-content: space-between;">
+            <span class="badge-pill badge-novice">नया युवा (Novice)</span>
+            <span style="font-size: 11px; color: var(--indigo);">उदय वाई. के साथ जोड़ीदार</span>
+          </div>
+        </div>
+
+        <!-- Slot 03: Donor registration -> Sahil P. -->
+        <div class="crew-slot-card">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge">भूमिका 02 · Must</span>
+            <h4 class="crew-role-name">दाता पंजीकरण (Registration)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Sahil P. (साहिल पी.)</span>
+              <span class="volunteer-id-chip">v-019</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>23 वर्ष</span>
+              <span>•</span>
+              <span>लखनऊ (14.4 किमी)</span>
+            </div>
+          </div>
+
+          <ul class="solver-reasons-list">
+            <li>Has documentation, attendance and reporting (level 2)</li>
+            <li>Free sun morning; 14 km from the site</li>
+          </ul>
+
+          <div style="border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 8px; font-size: 12px; color: var(--ink-muted);">
+            स्कोर: <strong>61.0</strong>
+          </div>
+        </div>
+
+        <!-- Slot 04: Supplies -> Tanvi L. -->
+        <div class="crew-slot-card">
+          <div class="crew-slot-header">
+            <span class="crew-role-badge">भूमिका 04 · Should</span>
+            <h4 class="crew-role-name">सामग्री प्रबंधन (Supplies)</h4>
+          </div>
+
+          <div class="volunteer-person-block">
+            <div class="volunteer-name-row">
+              <span class="volunteer-name">Tanvi L. (तन्वी एल.)</span>
+              <span class="volunteer-id-chip">v-021</span>
+            </div>
+            <div class="volunteer-meta-line">
+              <span>2 past drives</span>
+              <span>•</span>
+              <span>लखनऊ (15.9 किमी)</span>
+            </div>
+          </div>
+
+          <ul class="solver-reasons-list">
+            <li>Has logistics, supplies and site setup (level 2)</li>
+            <li>Free sun morning; 16 km from the site</li>
+            <li>Not picked in the last 90 days</li>
+            <li>Newcomer (2 past drives)</li>
+          </ul>
+
+          <div style="border-top: 1px solid var(--hairline-subtle); padding-top: 8px; margin-top: 8px; font-size: 12px; color: var(--ink-muted);">
+            स्कोर: <strong>79.0</strong>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- EMPTY GAPS NOTICE -->
+      <div style="background: var(--paper-canvas); border: 2px dashed var(--alert-madder-border); border-radius: 6px; padding: 20px; text-align: center; margin-bottom: 32px;">
+        <div style="font-size: 16px; font-weight: 700; color: var(--alert-madder); margin-bottom: 4px;">
+          ❌ 2 रिक्त स्लॉट: सामुदायिक प्रचारक (Community Mobiliser Slots 0 &amp; 1)
+        </div>
+        <p style="font-size: 13px; color: var(--ink-secondary); max-width: 650px; margin: 0 auto;">
+          चिनहट ब्लॉक में कोई भी ऐसा स्वयंसेवक उपलब्ध नहीं मिला जिसके पास सामुदायिक प्रचार का कौशल हो और जो रविवार सुबह 25 किमी के दायरे में उपलब्ध हो। जब तक ये 2 पद नहीं भरते, यह अभियान <strong>NOT READY</strong> रहेगा।
+        </p>
+      </div>
+
+      <!-- Action Footer -->
+      <div style="display: flex; justify-content: space-between; align-items: center; background: var(--paper-card); border: 1px solid var(--hairline-strong); padding: 18px 24px; border-radius: 5px;">
+        <a href="04-console-crew-ready.html" class="btn-outline-mitti">
+          ← तैयार अभियान (READY) स्थिति देखें
+        </a>
+        <div style="display: flex; gap: 14px; align-items: center;">
+          <a href="02-console-task.html" class="btn-outline-mitti">अन्य अभियान चुनें</a>
+          <a href="06-console-evidence.html" class="btn-terracotta" style="font-size: 15px; padding: 10px 24px;">
+            <span>साक्ष्य बहीखाता की ओर (Evidence)</span>
+            <span>→</span>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Shared Site Footer -->
+  <footer class="site-footer">
+    <div class="site-container">
+      <div class="footer-disclaimer-box">
+        <div>
+          <strong>वैधानिक स्पष्टीकरण:</strong> यह वेबसाइट एक प्रोटोटाइप प्रदर्शन है। समस्त आंकड़े व स्वयंसेवक रिकॉर्ड काल्पनिक (Synthetic) हैं। Not affiliated with MY Bharat or any government body.
+        </div>
+        <span class="badge-synthetic">Synthetic Data Only</span>
+      </div>
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 सेवामंडल तत्पर दल (SewaCircle Ready Crew) · Direction 08: Mitti Original</div>
+        <div style="display: flex; gap: 18px;">
+          <a href="04-console-crew-ready.html" style="color: var(--ink-muted); text-decoration: none;">चरण 03: दल तत्पर</a>
+          <span>•</span>
+          <a href="06-console-evidence.html" style="color: var(--ink-muted); text-decoration: none;">चरण 05: साक्ष्य समीक्षा</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+</html>

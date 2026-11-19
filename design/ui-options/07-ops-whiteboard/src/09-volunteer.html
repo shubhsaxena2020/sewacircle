@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 09 Volunteer Portal</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="brand-block">
+      <div class="brand-badge">SC</div>
+      <div class="brand-title">
+        <span class="brand-name">SewaCircle</span>
+        <span class="brand-tag">Ops Whiteboard</span>
+      </div>
+    </div>
+
+    <div class="board-location-crumb">
+      <span class="live-dot"></span>
+      <span>Board: <strong>Volunteer Portal / Youth Perspective (Heena P., v-008)</strong></span>
+    </div>
+
+    <div class="nav-actions">
+      <span class="badge-synthetic">Synthetic data</span>
+      <div class="lang-toggle">
+        <span class="lang-btn active">EN</span>
+        <span style="color:#64748b; padding: 0 2px;">/</span>
+        <span class="lang-btn">हिंदी</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Navigation -->
+  <nav class="pages-subnav">
+    <a href="01-landing.html" class="nav-tab"><span class="tab-num">01</span> Overview</a>
+    <a href="02-console-task.html" class="nav-tab"><span class="tab-num">02</span> Brief</a>
+    <a href="03-console-roles.html" class="nav-tab"><span class="tab-num">03</span> Roles</a>
+    <a href="04-console-crew-ready.html" class="nav-tab"><span class="tab-num">04</span> Crew (Ready)</a>
+    <a href="05-console-crew-not-ready.html" class="nav-tab"><span class="tab-num">05</span> Crew (Not Ready)</a>
+    <a href="06-console-evidence.html" class="nav-tab"><span class="tab-num">06</span> Evidence</a>
+    <a href="07-console-ledger.html" class="nav-tab"><span class="tab-num">07</span> Ledger</a>
+    <a href="08-console-evaluation.html" class="nav-tab"><span class="tab-num">08</span> Evaluation</a>
+    <a href="09-volunteer.html" class="nav-tab active"><span class="tab-num">09</span> Volunteer</a>
+    <a href="10-districts.html" class="nav-tab"><span class="tab-num">10</span> Districts</a>
+    <a href="11-method.html" class="nav-tab"><span class="tab-num">11</span> Method</a>
+  </nav>
+
+  <!-- Left Floating Canvas Toolbar -->
+  <aside class="board-toolbar" aria-label="Whiteboard Tools">
+    <button class="tool-btn active" title="Select (V)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+    </button>
+    <button class="tool-btn" title="Hand / Pan (H)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v4M14 10V4a2 2 0 0 0-4 0v7M10 10.5V6a2 2 0 0 0-4 0v8M6 14a6 6 0 0 0 12 0v-3"/></svg>
+    </button>
+    <div class="tool-divider"></div>
+    <button class="tool-btn" title="Sticky Note (N)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/></svg>
+    </button>
+    <button class="tool-btn" title="Frame (F)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </button>
+    <button class="tool-btn" title="Connector Line (L)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="tool-btn" title="Comment (M)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </aside>
+
+  <!-- Bottom Right Minimap & Zoom Controls -->
+  <div class="board-controls">
+    <div class="minimap-card">
+      <div class="minimap-header">CANVAS RADAR</div>
+      <div class="minimap-screen">
+        <div class="minimap-viewport"></div>
+      </div>
+    </div>
+    <div class="zoom-chip">
+      <button class="zoom-btn" title="Zoom Out">-</button>
+      <span>100%</span>
+      <button class="zoom-btn" title="Zoom In">+</button>
+    </div>
+  </div>
+
+  <!-- Main Canvas Board -->
+  <main class="canvas-wrapper">
+    <!-- Header Board Frame -->
+    <section class="board-frame" style="padding: 20px 28px; margin-bottom: 24px;">
+      <div class="frame-tag" style="margin-bottom: 6px;">
+        <span class="frame-icon"></span>
+        <span>FRAME 09 // VOLUNTEER PERSPECTIVE</span>
+      </div>
+      <h1 style="font-size: 26px; line-height: 1.25; margin-bottom: 6px;">What a Volunteer Sees on Mobile</h1>
+      <p style="font-size: 14px; color: var(--ink-secondary);">
+        Simulated mobile viewpoint for Heena P. (v-008), age 27, Sarvankheda, Kanpur Dehat.
+      </p>
+    </section>
+
+    <!-- Canvas Layout: Mobile Frame Mockup Centered on Whiteboard Canvas -->
+    <div style="display: grid; grid-template-columns: 420px 1fr; gap: 36px; align-items: start;">
+
+      <!-- Phone-Sized Frame Mockup -->
+      <section style="background: #ffffff; border: 2.5px solid var(--ink-primary); border-radius: 36px; padding: 24px 20px; box-shadow: var(--shadow-floating); position: relative;">
+        <!-- Phone Camera Notch / Header Pill -->
+        <div style="width: 120px; height: 18px; background: var(--ink-primary); border-radius: 10px; margin: 0 auto 16px auto;"></div>
+
+        <!-- Mobile Header -->
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid var(--hairline);">
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <div style="width: 28px; height: 28px; background: var(--brand-yellow); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 14px;">SC</div>
+            <strong style="font-size: 14px; color: var(--ink-deep);">SewaCircle Portal</strong>
+          </div>
+          <span class="mono" style="font-size: 12px; background: var(--surface-subtle); padding: 2px 6px; border-radius: 4px;">v-008</span>
+        </div>
+
+        <!-- Devanagari Greeting -->
+        <div class="devanagari" style="font-size: 15px; color: var(--ink-deep); line-height: 1.8; font-weight: 600; margin-bottom: 16px; background: #fdfbf7; border-left: 3px solid var(--brand-yellow); padding: 10px 12px; border-radius: 4px;">
+          नमस्ते हीना, सेवामंडल में आपका स्वागत है। आपकी आगामी सेवा और कौशल विवरण यहाँ है:
+        </div>
+
+        <!-- Profile Details Strip -->
+        <div style="background: var(--surface-subtle); border: 1px solid var(--hairline); border-radius: var(--radius-md); padding: 12px; margin-bottom: 16px; font-size: 12px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <strong style="font-size: 14px; color: var(--ink-deep);">Heena P. (Age 27)</strong>
+            <span style="color: #047857; font-weight: 700;">Active Volunteer</span>
+          </div>
+          <div style="color: var(--ink-muted);">Sarvankheda, Kanpur Dehat · Vehicle: Yes</div>
+          <div style="color: var(--ink-secondary); margin-top: 4px;">Past Drives Completed: <strong>3</strong> · Last 90d picks: <strong>0</strong></div>
+        </div>
+
+        <!-- Drives Opted In -->
+        <div style="margin-bottom: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; margin-bottom: 8px;">
+            DRIVES YOU CHOSE
+          </div>
+          <div style="background: #ffffff; border: 1.5px solid var(--brand-blue); border-radius: var(--radius-md); padding: 12px; box-shadow: var(--shadow-sm);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <strong style="font-size: 13px; color: var(--ink-deep);">Water and hygiene camp</strong>
+              <span class="status-chip status-ready" style="font-size: 12px; padding: 2px 6px;">READY</span>
+            </div>
+            <div style="font-size: 12px; color: var(--ink-muted);">Akbarpur, Kanpur Dehat · Sat Morning (8-12)</div>
+            <div style="margin-top: 8px; font-size: 12px; color: var(--brand-blue); font-weight: 600;">
+              Assigned Role: Poster team
+            </div>
+          </div>
+        </div>
+
+        <!-- Contribution Card & Flags -->
+        <div style="margin-bottom: 18px;">
+          <div style="font-size: 12px; font-weight: 700; color: var(--ink-muted); text-transform: uppercase; margin-bottom: 8px;">
+            POST-DRIVE CONTRIBUTION CARD
+          </div>
+          <div style="background: var(--surface-subtle); border: 1px solid var(--hairline); border-radius: var(--radius-md); padding: 12px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 4px; font-size: 12px;">
+              <span>Role: <strong>Poster team</strong></span>
+              <span class="status-chip status-neutral" style="font-size: 12px;">Status: Draft</span>
+            </div>
+            <div style="font-size: 12px; color: var(--ink-secondary); margin-bottom: 8px;">
+              Claimed: <strong>5.0 hours</strong> · Recorded: <strong>5.0 hours</strong>
+            </div>
+
+            <!-- Flag Notice -->
+            <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 4px; padding: 8px; font-size: 12px; color: #92400e; line-height: 1.4; margin-bottom: 8px;">
+              <strong>Note:</strong> "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+            </div>
+
+            <div style="font-size: 12px; color: var(--ink-muted); font-style: italic;">
+              Status: Awaiting host confirmation · Standby redundancy: If a crew member drops out, Imran B. covers Poster team.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Right Column: Skills Verification Board & Whiteboard Notes -->
+      <section style="display: flex; flex-direction: column; gap: 20px;">
+
+        <!-- Frame: Checked vs Self-Declared Skills -->
+        <div class="board-frame" style="padding: 22px; margin-bottom: 0;">
+          <div class="frame-tag" style="margin-bottom: 10px;">
+            <span class="frame-icon"></span>
+            <span>SKILLS AUDIT // HOST-CHECKED VS SELF-DECLARED</span>
+          </div>
+
+          <table class="whiteboard-table">
+            <thead>
+              <tr>
+                <th>Skill Category</th>
+                <th>Host-Checked Skills (5)</th>
+                <th>Self-Declared Skills (0)</th>
+                <th>Verification Authority</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Graphic Design</strong></td>
+                <td><span class="status-chip status-ready">Level 2 (Proficient)</span></td>
+                <td style="color: var(--ink-muted); font-style: italic;">None declared</td>
+                <td>Past Drive Host Endorsement</td>
+              </tr>
+              <tr>
+                <td><strong>Photography / Video</strong></td>
+                <td><span class="status-chip status-ready">Level 2 (Proficient)</span></td>
+                <td style="color: var(--ink-muted); font-style: italic;">None declared</td>
+                <td>Past Drive Host Endorsement</td>
+              </tr>
+              <tr>
+                <td><strong>Awadhi Dialect</strong></td>
+                <td><span class="status-chip status-ready">Level 3 (Fluent Native)</span></td>
+                <td style="color: var(--ink-muted); font-style: italic;">None declared</td>
+                <td>District Coordinator Verified</td>
+              </tr>
+              <tr>
+                <td><strong>First Aid</strong></td>
+                <td><span class="status-chip status-ready">Level 2 (Basic Certified)</span></td>
+                <td style="color: var(--ink-muted); font-style: italic;">None declared</td>
+                <td>Red Cross District Workshop</td>
+              </tr>
+              <tr>
+                <td><strong>Driving / Transport</strong></td>
+                <td><span class="status-chip status-ready">Level 1 (Two-Wheeler)</span></td>
+                <td style="color: var(--ink-muted); font-style: italic;">None declared</td>
+                <td>Valid License Checked</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="margin-top: 14px; background: var(--surface-subtle); border-left: 3px solid var(--brand-blue); padding: 10px 14px; border-radius: 4px; font-size: 12px; color: var(--ink-secondary);">
+            <strong>What "Checked" Means:</strong> A host confirmed it; it is an operational endorsement based on observed community service, not an accredited government certificate.
+          </div>
+        </div>
+
+        <!-- Sticky Notes on Standby and Trust -->
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+          <div class="sticky-note sticky-yellow">
+            <h4>Standby Protection for Heena</h4>
+            <p>
+              "If a crew member drops out, Imran B. covers Poster team."
+            </p>
+            <p style="margin-top: 6px;">
+              Volunteers know before arriving on site that their role has redundancy, so unexpected illness or travel delays do not cancel the drive.
+            </p>
+            <span class="author-tag">Roster Guarantee</span>
+          </div>
+
+          <div class="sticky-note sticky-teal">
+            <h4>Decentralized Credentialing</h4>
+            <p>
+              Once confirmed by the host, Heena's contribution card is committed to the SHA-256 block ledger, accessible for her volunteer portfolio without government affiliation claims.
+            </p>
+            <span class="author-tag">Youth Autonomy</span>
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-logo">SC</div>
+        <div>
+          <strong style="font-size: 15px;">SewaCircle Ready Crew</strong>
+          <div class="footer-affiliation">Not affiliated with MY Bharat or any government body.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="01-landing.html">Overview</a>
+        <a href="02-console-task.html">Console Brief</a>
+        <a href="04-console-crew-ready.html">Crew Board</a>
+        <a href="06-console-evidence.html">Evidence</a>
+        <a href="07-console-ledger.html">Ledger</a>
+        <a href="08-console-evaluation.html">Evaluation</a>
+        <a href="11-method.html">Methodology</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Synthetic data demonstration (Seed 7). Real administrative coordinates from Open Admin Data (CC-BY-4.0).</span>
+      <span>Direction: 07-ops-whiteboard</span>
+    </div>
+  </footer>
+
+</body>
+</html>

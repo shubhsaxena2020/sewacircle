@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1440, initial-scale=1.0">
+  <title>SewaCircle Ready Crew | 06 Post-Drive Evidence &amp; Contribution Cards</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="top-nav">
+    <div class="brand-block">
+      <div class="brand-badge">SC</div>
+      <div class="brand-title">
+        <span class="brand-name">SewaCircle</span>
+        <span class="brand-tag">Ops Whiteboard</span>
+      </div>
+    </div>
+
+    <div class="board-location-crumb">
+      <span class="live-dot"></span>
+      <span>Board: <strong>Akbarpur Youth Circle / Evidence Verification (task-01)</strong></span>
+    </div>
+
+    <div class="nav-actions">
+      <span class="badge-synthetic">Synthetic data</span>
+      <div class="lang-toggle">
+        <span class="lang-btn active">EN</span>
+        <span style="color:#64748b; padding: 0 2px;">/</span>
+        <span class="lang-btn">हिंदी</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Sub Navigation -->
+  <nav class="pages-subnav">
+    <a href="01-landing.html" class="nav-tab"><span class="tab-num">01</span> Overview</a>
+    <a href="02-console-task.html" class="nav-tab"><span class="tab-num">02</span> Brief</a>
+    <a href="03-console-roles.html" class="nav-tab"><span class="tab-num">03</span> Roles</a>
+    <a href="04-console-crew-ready.html" class="nav-tab"><span class="tab-num">04</span> Crew (Ready)</a>
+    <a href="05-console-crew-not-ready.html" class="nav-tab"><span class="tab-num">05</span> Crew (Not Ready)</a>
+    <a href="06-console-evidence.html" class="nav-tab active"><span class="tab-num">06</span> Evidence</a>
+    <a href="07-console-ledger.html" class="nav-tab"><span class="tab-num">07</span> Ledger</a>
+    <a href="08-console-evaluation.html" class="nav-tab"><span class="tab-num">08</span> Evaluation</a>
+    <a href="09-volunteer.html" class="nav-tab"><span class="tab-num">09</span> Volunteer</a>
+    <a href="10-districts.html" class="nav-tab"><span class="tab-num">10</span> Districts</a>
+    <a href="11-method.html" class="nav-tab"><span class="tab-num">11</span> Method</a>
+  </nav>
+
+  <!-- Left Floating Canvas Toolbar -->
+  <aside class="board-toolbar" aria-label="Whiteboard Tools">
+    <button class="tool-btn active" title="Select (V)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 3l7 18 3-7 7-3L3 3z"/></svg>
+    </button>
+    <button class="tool-btn" title="Hand / Pan (H)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 11V6a2 2 0 0 0-4 0v4M14 10V4a2 2 0 0 0-4 0v7M10 10.5V6a2 2 0 0 0-4 0v8M6 14a6 6 0 0 0 12 0v-3"/></svg>
+    </button>
+    <div class="tool-divider"></div>
+    <button class="tool-btn" title="Sticky Note (N)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15.5 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V8.5L15.5 3z"/><path d="M15 3v6h6"/></svg>
+    </button>
+    <button class="tool-btn" title="Frame (F)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+    </button>
+    <button class="tool-btn" title="Connector Line (L)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </button>
+    <button class="tool-btn" title="Comment (M)">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+    </button>
+  </aside>
+
+  <!-- Bottom Right Minimap & Zoom Controls -->
+  <div class="board-controls">
+    <div class="minimap-card">
+      <div class="minimap-header">CANVAS RADAR</div>
+      <div class="minimap-screen">
+        <div class="minimap-viewport"></div>
+      </div>
+    </div>
+    <div class="zoom-chip">
+      <button class="zoom-btn" title="Zoom Out">-</button>
+      <span>100%</span>
+      <button class="zoom-btn" title="Zoom In">+</button>
+    </div>
+  </div>
+
+  <!-- Main Canvas Board -->
+  <main class="canvas-wrapper">
+    <!-- Header Board Frame -->
+    <section class="board-frame" style="padding: 20px 24px; margin-bottom: 24px;">
+      <div style="display: flex; align-items: center; justify-content: space-between;">
+        <div>
+          <div class="frame-tag" style="margin-bottom: 6px;">
+            <span class="frame-icon"></span>
+            <span>FRAME 06 // POST-DRIVE RECONCILIATION</span>
+          </div>
+          <h1 style="font-size: 26px; line-height: 1.25;">Host Notes, Attendance &amp; AI Contribution Cards</h1>
+          <p style="font-size: 13px; color: var(--ink-secondary); margin-top: 4px;">
+            Reconciling ground-truth attendance logs against unstructured host notes. Fixed rules flag anomalies; the human host confirms.
+          </p>
+        </div>
+
+        <div style="display: flex; gap: 10px;">
+          <button class="btn btn-primary" onclick="alert('Confirmed 3 clean cards and adjusted Kabir Z. hours to 5.');">
+            Confirm 3 Clean Cards &amp; Reconcile Kabir
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2-Column Board: Evidence Ingestion (Left) + 4 Contribution Cards (Right) -->
+    <div style="display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start;">
+
+      <!-- Left Column: Source Evidence Frames -->
+      <section style="display: flex; flex-direction: column; gap: 18px;">
+
+        <!-- Frame: Host Raw Notes -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+          <div class="frame-tag" style="margin-bottom: 10px;">
+            <span class="frame-icon"></span>
+            <span>RAW HOST NOTES (VERBATIM)</span>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div class="sticky-note sticky-yellow" style="padding: 12px 14px; box-shadow: var(--shadow-sm);">
+              "Heena P. worked about 5 hours."
+              <span class="author-tag">Akbarpur Site Host</span>
+            </div>
+            <div class="sticky-note sticky-yellow" style="padding: 12px 14px; box-shadow: var(--shadow-sm);">
+              "Mohit Z. worked about 5 hours."
+              <span class="author-tag">Akbarpur Site Host</span>
+            </div>
+            <div class="sticky-note sticky-yellow" style="padding: 12px 14px; box-shadow: var(--shadow-sm);">
+              "Divya H. worked about 5 hours."
+              <span class="author-tag">Akbarpur Site Host</span>
+            </div>
+            <div class="sticky-note sticky-coral" style="padding: 12px 14px; box-shadow: var(--shadow-sm); border-color: #f87171;">
+              <strong>"Kabir Z. worked about 8 hours."</strong>
+              <div style="font-size: 12px; margin-top: 4px; color: #991b1b;">
+                ⚠️ Note discrepancy: attendance records at most 5 hours.
+              </div>
+              <span class="author-tag">Akbarpur Site Host</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Frame: Physical Attendance Log -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+          <div class="frame-tag" style="margin-bottom: 10px;">
+            <span class="frame-icon"></span>
+            <span>PHYSICAL ATTENDANCE REGISTER (task-01)</span>
+          </div>
+
+          <table class="whiteboard-table" style="font-size: 12px;">
+            <thead>
+              <tr>
+                <th>Volunteer</th>
+                <th>Vol ID</th>
+                <th>Log Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Heena P.</strong></td>
+                <td class="mono">v-008</td>
+                <td class="mono">5.0 h</td>
+              </tr>
+              <tr>
+                <td><strong>Mohit Z.</strong></td>
+                <td class="mono">v-070</td>
+                <td class="mono">5.0 h</td>
+              </tr>
+              <tr>
+                <td><strong>Divya H.</strong></td>
+                <td class="mono">v-067</td>
+                <td class="mono">5.0 h</td>
+              </tr>
+              <tr style="background: #fff1f2;">
+                <td><strong>Kabir Z.</strong></td>
+                <td class="mono">v-011</td>
+                <td class="mono" style="color: #991b1b; font-weight: 700;">5.0 h</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Sticky Framing Note -->
+        <div class="sticky-note sticky-teal">
+          <h4>Fixed-Rule Framing</h4>
+          <p>
+            Rules flag anomalies; the human host decides. Algorithmic rules never reject credentials automatically without human sign-off.
+          </p>
+          <span class="author-tag">Integrity Rule</span>
+        </div>
+
+      </section>
+
+      <!-- Right Column: 4 AI-Drafted Contribution Cards -->
+      <section style="display: flex; flex-direction: column; gap: 16px;">
+        <div class="frame-tag" style="margin-bottom: 4px;">
+          <span class="frame-icon"></span>
+          <span>DRAFT CONTRIBUTION CARDS (4 IN BATCH)</span>
+        </div>
+
+        <!-- Card 1: Heena P. -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="mono" style="font-size: 12px; font-weight: 700; color: var(--brand-blue);">card-task-01-v-008-poster-team</span>
+                <span class="status-chip status-neutral" style="font-size: 12px;">Status: Draft</span>
+                <span class="status-chip status-neutral" style="font-size: 12px;">Drafted by Human</span>
+              </div>
+              <h3 style="font-size: 17px; color: var(--ink-deep);">Heena P. · Poster team</h3>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-sm btn-primary">Confirm</button>
+              <button class="btn btn-sm btn-secondary">Correct</button>
+              <button class="btn btn-sm btn-secondary">Send Back</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); font-size: 12px; margin-bottom: 12px;">
+            <div><strong>Hours Claimed:</strong> 5.0 hrs</div>
+            <div><strong>Hours Recorded:</strong> 5.0 hrs</div>
+            <div><strong>Summary:</strong> Host notes mention Heena P.</div>
+          </div>
+
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12px; color: #92400e; margin-bottom: 8px;">
+            <strong>Flag [round_number_inflation]:</strong> "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+          </div>
+
+          <div class="mono" style="font-size: 12px; color: var(--ink-muted);">
+            Refs: host_note:task-01:v-008:cf512e004c · attendance:task-01:v-008
+          </div>
+        </div>
+
+        <!-- Card 2: Mohit Z. -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="mono" style="font-size: 12px; font-weight: 700; color: var(--brand-blue);">card-task-01-v-070-first-aid-support</span>
+                <span class="status-chip status-neutral" style="font-size: 12px;">Status: Draft</span>
+                <span class="status-chip status-safety">Safety Role</span>
+              </div>
+              <h3 style="font-size: 17px; color: var(--ink-deep);">Mohit Z. · First-aid support</h3>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-sm btn-primary">Confirm</button>
+              <button class="btn btn-sm btn-secondary">Correct</button>
+              <button class="btn btn-sm btn-secondary">Send Back</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); font-size: 12px; margin-bottom: 12px;">
+            <div><strong>Hours Claimed:</strong> 5.0 hrs</div>
+            <div><strong>Hours Recorded:</strong> 5.0 hrs</div>
+            <div><strong>Summary:</strong> Host notes mention Mohit Z.</div>
+          </div>
+
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12px; color: #92400e; margin-bottom: 8px;">
+            <strong>Flag [round_number_inflation]:</strong> "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+          </div>
+
+          <div class="mono" style="font-size: 12px; color: var(--ink-muted);">
+            Refs: host_note:task-01:v-070:694f58fbad · attendance:task-01:v-070
+          </div>
+        </div>
+
+        <!-- Card 3: Divya H. -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="mono" style="font-size: 12px; font-weight: 700; color: var(--brand-blue);">card-task-01-v-067-supplies-and-site-setup</span>
+                <span class="status-chip status-neutral" style="font-size: 12px;">Status: Draft</span>
+                <span class="status-chip status-neutral" style="font-size: 12px;">Drafted by Human</span>
+              </div>
+              <h3 style="font-size: 17px; color: var(--ink-deep);">Divya H. · Supplies and site setup</h3>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-sm btn-primary">Confirm</button>
+              <button class="btn btn-sm btn-secondary">Correct</button>
+              <button class="btn btn-sm btn-secondary">Send Back</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: var(--surface-subtle); padding: 10px 14px; border-radius: var(--radius-md); font-size: 12px; margin-bottom: 12px;">
+            <div><strong>Hours Claimed:</strong> 5.0 hrs</div>
+            <div><strong>Hours Recorded:</strong> 5.0 hrs</div>
+            <div><strong>Summary:</strong> Host notes mention Divya H.</div>
+          </div>
+
+          <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12px; color: #92400e; margin-bottom: 8px;">
+            <strong>Flag [round_number_inflation]:</strong> "5 hours is a round number shared by at least 3 cards in this batch; worth a quick spot-check, but round shifts are normal and this is not a rejection."
+          </div>
+
+          <div class="mono" style="font-size: 12px; color: var(--ink-muted);">
+            Refs: host_note:task-01:v-067:4d67074db6 · attendance:task-01:v-067
+          </div>
+        </div>
+
+        <!-- Card 4: Kabir Z. (Real Discrepancy Conflict) -->
+        <div class="board-frame" style="padding: 18px; margin-bottom: 0; border: 2px solid #fda4af;">
+          <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px;">
+                <span class="mono" style="font-size: 12px; font-weight: 700; color: #e11d48;">card-task-01-v-011-local-language-liaison</span>
+                <span class="status-chip status-not-ready" style="font-size: 12px;">Status: Flagged</span>
+                <span class="status-chip" style="background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; font-size: 12px;">Real Conflict</span>
+              </div>
+              <h3 style="font-size: 17px; color: var(--ink-deep);">Kabir Z. · Local-language liaison</h3>
+            </div>
+            <div style="display: flex; gap: 6px;">
+              <button class="btn btn-sm btn-yellow" onclick="alert('Host resolved conflict: adjusted Kabir Z. hours to 5.0 per attendance register.');">
+                Correct Hours to 5.0
+              </button>
+              <button class="btn btn-sm btn-secondary">Send Back</button>
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; background: #fff1f2; padding: 10px 14px; border-radius: var(--radius-md); font-size: 12px; margin-bottom: 12px;">
+            <div><strong>Hours Claimed:</strong> <span style="color:#991b1b; font-weight: 700;">8.0 hrs</span></div>
+            <div><strong>Hours Recorded:</strong> <span style="color:#047857; font-weight: 700;">5.0 hrs</span></div>
+            <div><strong>Summary:</strong> Host notes mention Kabir Z.</div>
+          </div>
+
+          <div style="background: #fee2e2; border: 1px solid #fca5a5; border-radius: var(--radius-sm); padding: 10px 12px; font-size: 12px; color: #991b1b; margin-bottom: 8px;">
+            <strong>Flag [hours_exceed_recorded]:</strong> "Claims 8 hours but attendance records at most 5; ask the host to check the difference."
+          </div>
+
+          <div class="mono" style="font-size: 12px; color: var(--ink-muted);">
+            Refs: host_note:task-01:v-011:0aa6529147 · attendance:task-01:v-011
+          </div>
+        </div>
+
+      </section>
+
+    </div>
+  </main>
+
+  <!-- Global Footer -->
+  <footer class="global-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="brand-logo">SC</div>
+        <div>
+          <strong style="font-size: 15px;">SewaCircle Ready Crew</strong>
+          <div class="footer-affiliation">Not affiliated with MY Bharat or any government body.</div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <a href="01-landing.html">Overview</a>
+        <a href="02-console-task.html">Console Brief</a>
+        <a href="04-console-crew-ready.html">Crew Board</a>
+        <a href="06-console-evidence.html">Evidence</a>
+        <a href="07-console-ledger.html">Ledger</a>
+        <a href="08-console-evaluation.html">Evaluation</a>
+        <a href="11-method.html">Methodology</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Synthetic data demonstration (Seed 7). Real administrative coordinates from Open Admin Data (CC-BY-4.0).</span>
+      <span>Direction: 07-ops-whiteboard</span>
+    </div>
+  </footer>
+
+</body>
+</html>
