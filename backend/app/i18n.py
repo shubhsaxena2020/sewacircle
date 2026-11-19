@@ -18,6 +18,13 @@ languages drift, so the Hindi rendering is built from the SAME fields. That is w
 makes the contract test possible: ids, counts and decisions are identical in both
 languages because they come from one object, and only the words change.
 
+Per-pick reasons go one step further: ``solver/cp_sat.py`` writes
+``Assignment.reason_codes`` (code + params) and the English sentences are rendered from
+them with :func:`reason_text`; the Hindi sentences are the same function with ``"hi"``.
+So the skill level, the distance in whole km, the "not picked in N days" window, the
+newcomer count and the mentor's name are the same facts in both languages, not a
+summary of a sentence.
+
 Fallback rule
 -------------
 A role name or title this module does not know (for example a role the organiser
