@@ -11,8 +11,8 @@ after a youth clicks "Interested"); it is not affiliated with MY Bharat or any g
 
 | Branch | What is on it | State |
 |---|---|---|
-| `main` | Backend (FastAPI + OR-Tools CP-SAT solver + LLM layer), docs, idea answers | **Stable.** 948 backend tests pass |
-| `frontend-v3` | **New website**: scroll-driven 3D paper-village story (three.js) + organiser console + all media | **Working, polishing** (round 2 done: paper look, day cycle, film) |
+| `main` | Everything: backend (FastAPI + OR-Tools CP-SAT solver + LLM layer), the new website (merged from `frontend-v3`), docs, idea answers | **Stable.** 948 backend tests pass; site verified (axe 0, Lighthouse story 91 / console 99) |
+| `frontend-v3` | Where the new website was built (film-layer story + live 3D + console) | Merged into `main` on 19 Nov |
 | `frontend-v2` | Previous website (kept as a template) + the **8 UI design options** in `design/ui-options/` | Reference |
 | `backend-ideas` | Backend feature branch | Already merged into `main` |
 
@@ -30,7 +30,6 @@ Most useful files:
 
 ```powershell
 git clone https://github.com/shubhsaxena2020/sewacircle ; cd sewacircle
-git checkout frontend-v3                         # newest site; use main for backend-only work
 python -m venv .venv ; .venv\Scripts\python -m pip install -r backend\requirements.txt
 cd backend
 $env:SEWA_LLM_MODE="replay"                      # offline: AI answers come from the committed cache
@@ -61,11 +60,11 @@ cd frontend ; npm ci ; npm run dev               # open http://127.0.0.1:5173
 
 ## Done since the first handoff, and still to do
 
-- **Website round 2 is done and pushed** (`frontend-v3`): warm paper-craft village, camera path from the notice board to a
-  night view of many villages, visible dawn-to-night cycle, the 58.8 s film as six skippable full-screen transitions, exact
-  counters. Story page Lighthouse performance 97 (was 78), console 100; accessibility 0 violations in English and Hindi.
-1. Remaining polish: the village is still a simplified procedural diorama; prop detail and organic paper edges do not yet match
-   the film. Then merge `frontend-v3` into `main`, rebuild the submission zip and a demo video.
+- **The new website is finished and merged into `main`** (19 Nov). The story uses layers cut from our own paper-craft film, so it
+  looks like the film, and the live parts sit on top of it: the film's ring shows the real crew picked by the solver (names and
+  roles from the API), the drop-a-volunteer moment re-plans live and honestly shows NOT READY, plus share links, districts,
+  numbers. Checked: build, lint, unit tests, full browser run, accessibility 0 violations in English and Hindi, Lighthouse story 91.
+1. Remaining: rebuild the submission zip and record a demo video from the real site.
 2. Team lead: team details on the form, ask the organisers about the age rule (one member is 17), **submit the idea form by 20 Nov**.
 
 ## Rules we keep (please keep them too)
