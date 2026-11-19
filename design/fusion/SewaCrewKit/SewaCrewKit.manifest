@@ -1,0 +1,10 @@
+{
+  "autodeskProduct": "Fusion360",
+  "type": "addin",
+  "id": "b5e74824-19ae-4a12-8e0f-179193cb0f61",
+  "author": "SewaCircle",
+  "description": { "": "Build and export the original SewaCrew 3D kit" },
+  "version": "1.0.0",
+  "runOnStartup": false,
+  "supportedOS": "windows"
+}
