@@ -436,3 +436,60 @@ Full Lighthouse output: [home](../screens/v5/round4/after/lighthouse-home.json) 
 - The ring and seated figures are original procedural paper geometry and remain simpler than the film's miniature set. The film frame behind the live ring can show a second ring at a different depth.
 - Lighthouse is desktop lab data. Sustained 60 fps on a mid-range device was not measured.
 - The map remains illustrative and not an accurate district-boundary map. Demo roles remain interface simulation, not authentication; all records remain synthetic.
+
+
+## Round 5 ? one ring, live paper anchors
+
+### Changes
+
+- Removed the 3D turmeric ring and procedural seated figures. Chapters 03?06 now show the owner-film ring once; HTML overlays place live roster names and roles on its sockets/seated-figure anchors. Normalized anchor coordinates are recorded in [`film-anchors.ts`](../../frontend/src/film-anchors.ts) from the reviewed `turmeric-ring`, `crew-backups`, and `ready-seal` 1280?720 source frames, expressed in the 1440?900 capture viewport. The overlay follows the shared film-layer parallax transform. Hover titles expose assignment reasons; the crew buttons and live screen-reader list expose the same names, roles, reasons, standby and host-check state to keyboard and assistive-technology users.
+- Backdrop planes share one transform, eliminating the offset silhouettes caused by differential parallax. Backdrops that both show the ring no longer cross-fade into one another, avoiding duplicate rings and seated figures at chapter handoffs.
+- Crew and bench show amber socket glows, paper name tags, standby details and host-check labels. Dropout dims the departed anchor and labels it ?Left?; the promoted standby slides into the ring. The API?s NOT READY result and exact live recruit request are shown. If there is no standby, the amber ?No standby yet? signal remains.
+- The verdict scroll trigger now requests a live plan before rendering its seal; an explicit plan button remains visible if the request has not completed. The paper READY / NOT READY stamp stays in the chapter card, so it does not cover film figures.
+- Remaining Three.js evidence cards, ledger block and map markers use matte textured paper materials and warm colours. Evidence cards enter at the evidence chapter. The 3D code stays split from `/console`.
+
+### Visual evidence
+
+All chapter anchors and three in-between scroll frames were captured at 1440?900 in [`round5/`](../screens/v5/round5/). I inspected the complete chapter contact sheet, the three mid-scroll captures, the final dropout capture and the route/Lighthouse outputs. The ring appears once in the crew, bench, verdict and dropout chapters; the after-drop frame visibly marks the left seat and promoted standby. The full-story recording is [`story-scroll.webm`](../screens/v5/round5/story-scroll.webm). Contact sheets: [`review-chapters.jpg`](../screens/v5/round5/review-chapters.jpg) and [`review-mid-scroll.jpg`](../screens/v5/round5/review-mid-scroll.jpg).
+
+### Verification
+
+Commands ran from `frontend/`; the API at :8000 and Vite at :5180 were left running. Production preview used :4179.
+
+```text
+npm run lint
+No warnings or errors.
+
+npm test
+Test Files 1 passed (1)
+Tests 4 passed (4)
+
+npm run build
+3057 modules transformed; build succeeded.
+VillageScene 3.33 kB (1.45 kB gzip); three-core 742.89 kB (187.53 kB gzip).
+Vite retains its >500 kB vendor-chunk advisory for the Three.js vendor.
+
+BASE_URL=http://127.0.0.1:4179 SCREENSHOT_DIR=../docs/screens/v5/round5 npm run verify:v3
+Live plan, two dropouts, standby promotion, and NOT READY with 1 Logistics and supplies request: passed.
+Share, evidence draft/revision/redraft/confirm/correct and ledger verification: passed.
+Host/volunteer/viewer role switch and viewer HTTP 403: passed.
+Districts (20 markers), volunteer, mock (zero API calls), six illustrative film cuts: passed.
+Evaluation counters: 70%, 10%, 23%, 40%.
+Reduced motion: canvas=0, video=0, still=1. No WebGL: canvas=0, still=1.
+Axe: 0 violations across story, console, volunteer, districts, method and share in both English and Hindi (12 scans).
+Browser page errors: 0.
+
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4179/ --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round5/lighthouse-home.json
+npx --yes lighthouse@12.8.2 http://127.0.0.1:4179/console --preset=desktop --quiet --output=json --output-path=../docs/screens/v5/round5/lighthouse-console.json
+```
+
+| Route | Performance | Accessibility | Best practices | SEO |
+|---|---:|---:|---:|---:|
+| `/` | 91 | 100 | 100 | 83 |
+| `/console` | 99 | 100 | 100 | 82 |
+
+### Remaining limits
+
+- Anchor coordinates are authored and visually checked at 1440?900. The CSS scales them with the viewport; alignment was not separately checked on small screens or physical devices.
+- Axe is automated; no manual screen-reader session or device frame-rate test was run. Lighthouse results are desktop lab scores, not evidence of sustained 60 fps.
+- The Three.js vendor chunk still triggers Vite?s general 500 kB advisory. All roster, verdict and evaluation values remain synthetic API data; no backend files were changed.
