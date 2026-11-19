@@ -1,9 +1,24 @@
 """FastAPI app. OWNED BY HEAD. Wires lane modules; any unimplemented lane function returns HTTP 501 until its lane lands.
-LLM failures map to 502 (the UI then offers manual entry). Local demo only: unauthenticated, 'actor' is a label, not an identity."""
+LLM failures map to 502 (the UI then offers manual entry). Local demo only: unauthenticated, 'actor' is a label, not an identity.
+
+Concurrency, stated honestly
+----------------------------
+This prototype is a SINGLE-PROCESS server: one uvicorn worker, one Python process, one in-memory card store. A
+card decision (lookup -> transition -> ledger append -> store -> card-file write) runs under one process-wide
+``threading.RLock``, and the card file is replaced atomically, so two hosts clicking "confirm" and "reject" on
+the same card at the same moment get exactly one 200 and one 409 - never two decisions for one card.
+
+The lock does NOT survive multiple processes: two uvicorn workers (or gunicorn -w 2) would each have their own
+lock, their own in-memory store, and the ledger's own RLock is process-local too, so two writers on one journal
+would fork the hash chain. Running more than one worker needs a shared store and a cross-process lock (a database
+transaction, or a file lock around the append), which is explicitly out of scope for this prototype.
+"""
 from __future__ import annotations
 
 import json
 import os
+import tempfile
+import threading
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable, Literal, Optional
@@ -72,9 +87,15 @@ class _State:
     cards: dict[str, ContributionCard] | None = None
     ledger: Optional[ledger_mod.Ledger] = None
     share_snapshots: dict[str, DriveShareSummary] | None = None
+    latest_plan: dict[str, str] | None = None
+    attendance_rows: dict[str, list[AttendanceRow]] | None = None
 
 
 S = _State()
+
+#: ONE process-wide lock for every mutation of the card store, the ledger and the card file.
+#: A re-entrant lock because a route may call a helper that takes it again in the same thread.
+CARD_LOCK = threading.RLock()
 
 
 def volunteers() -> list[Volunteer]:
@@ -102,6 +123,30 @@ def share_snapshots() -> dict[str, DriveShareSummary]:
     return S.share_snapshots
 
 
+def latest_plan() -> dict[str, str]:
+    """Plan version of the most recent plan (roster or dropout result) computed for each task id.
+
+    The public snapshot keeps the version of the plan a viewer was given; comparing the two is
+    what lets ``GET /api/drive/{key}`` say ``stale: true`` instead of serving an older crew.
+    """
+    if S.latest_plan is None:
+        S.latest_plan = {}
+    return S.latest_plan
+
+
+def attendance_rows() -> dict[str, list[AttendanceRow]]:
+    """The attendance sheet rows the last draft for each task was given (in memory, this process only).
+
+    ``correct`` re-runs the deterministic rules, and rules that compare a claim with the recorded
+    hours need the sheet. A restart loses this cache; the rules then fall back to each card's
+    ``recorded_hours`` (persisted with the card) and say so with a ``no_attendance_record`` warning
+    on cards that have neither.
+    """
+    if S.attendance_rows is None:
+        S.attendance_rows = {}
+    return S.attendance_rows
+
+
 def ledger() -> ledger_mod.Ledger:
     if S.ledger is None:
         DATA_DIR.mkdir(parents=True, exist_ok=True)
@@ -121,8 +166,23 @@ def cards() -> dict[str, ContributionCard]:
 
 
 def _save_cards() -> None:
+    """Replace the card file atomically: write a temp file in the same directory, fsync, then os.replace.
+
+    A reader (or a crash) can therefore never observe a half-written cards.json: the rename is atomic on
+    the same filesystem. Callers hold :data:`CARD_LOCK`, so two writers cannot interleave.
+    """
     DATA_DIR.mkdir(parents=True, exist_ok=True)
-    CARDS_PATH.write_text(json.dumps([c.model_dump(mode="json") for c in cards().values()], ensure_ascii=False), encoding="utf-8")
+    payload = json.dumps([c.model_dump(mode="json") for c in cards().values()], ensure_ascii=False)
+    fd, tmp_path = tempfile.mkstemp(prefix=".cards-", suffix=".tmp", dir=str(DATA_DIR))
+    try:
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            handle.write(payload)
+            handle.flush()
+            os.fsync(handle.fileno())
+        os.replace(tmp_path, CARDS_PATH)
+    finally:
+        if os.path.exists(tmp_path):     # only on failure; os.replace already consumed it otherwise
+            os.unlink(tmp_path)
 
 
 @app.get("/api/health")
@@ -357,38 +417,55 @@ def draft(req: DraftReq, demo_role: str = Depends(_require_demo("draft_cards")))
     moved someone to another role) are superseded: removed from the card store so they cannot trigger false
     duplicate-evidence flags. Their earlier 'draft' entries stay in the ledger history. Host-decided cards are kept.
 
-    Revision back-edge: a card the host sent back with request_revision is re-drafted. The table's target for
-    revision_requested -> draft is applied as-is (the back-edge always returns the card to draft), the stale
-    reason is cleared, any rule flags raised by the new text stay on the card for the host to see, and the
-    ledger records a 'draft' entry whose reason names the revision request. A revision_requested card whose
-    volunteer is no longer in the new draft is superseded like an undecided draft card (removed, history
-    kept), so no card can be stranded in a state with no outgoing edge."""
+    Revision back-edge: a card the host sent back with request_revision is re-drafted. The table decides the target:
+    ``revision_requested --redraft--> draft`` when the new text is clean, and ``revision_requested --redraft_flagged-->
+    flagged`` when the new text raises a warn/block rule flag, so a redraft cannot quietly return a card to the
+    undecided pool without the flag the host needs to see. The stale revision reason is cleared either way and the
+    ledger records a 'draft' or 'flag' entry whose reason names the revision request.
+
+    Empty drafting is non-destructive: if the drafting step produces no card at all - the model returned an empty
+    list, or the caller posted no assignments - the route returns HTTP 502 (assignments were sent) or an empty list
+    (nothing was sent) and touches neither the card store nor the ledger. A failed draft must never wipe the cards a
+    host is still reviewing.
+    """
     def run() -> list[ContributionCard]:
-        store = cards()
-        out: list[ContributionCard] = []
-        drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
-        new_ids = {c.id for c in drafted}
-        for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
-                      and x.status in ("draft", "flagged", "revision_requested")]:
-            del store[stale.id]
-        for c in drafted:
-            existing = store.get(c.id)
-            if existing is not None and existing.status not in ("draft", "flagged", "revision_requested"):
-                out.append(existing)
-                continue
-            redrafted = existing is not None and existing.status == "revision_requested"
-            c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
-            if redrafted:
-                c.status = transitions.next_state(existing.status, "redraft")   # the table decides: "draft"
-            else:
-                c.status = "flagged" if any(f.severity in ("warn", "block") for f in c.flags) else "draft"
-            c.revision_reason = None
-            ledger().append("flag" if c.status == "flagged" else "draft", c, "system",
-                            "re-drafted after a host revision request" if redrafted else "")
-            store[c.id] = c
-            out.append(c)
-        _save_cards()
-        return out
+        with CARD_LOCK:
+            store = cards()
+            drafted = llm_extract.draft_cards(req.task, req.host_notes, req.attendance_rows, req.assignments)
+            if not drafted:                       # checked BEFORE anything is removed or written
+                if req.assignments:
+                    raise HTTPException(502, "the drafting step returned no cards for "
+                                             f"{len(req.assignments)} assignment(s); nothing was changed. "
+                                             "Retry, or enter the cards manually.")
+                return []
+            attendance_rows()[req.task.id] = list(req.attendance_rows)
+            out: list[ContributionCard] = []
+            new_ids = {c.id for c in drafted}
+            for stale in [x for x in store.values() if x.task_id == req.task.id and x.id not in new_ids
+                          and x.status in ("draft", "flagged", "revision_requested")]:
+                del store[stale.id]
+            for c in drafted:
+                existing = store.get(c.id)
+                if existing is not None and existing.status not in ("draft", "flagged", "revision_requested"):
+                    out.append(existing)
+                    continue
+                redrafted = existing is not None and existing.status == "revision_requested"
+                c.flags = rules.check_card(c, [x for x in store.values() if x.id != c.id] + out, req.attendance_rows)
+                flagged = any(f.severity in ("warn", "block") for f in c.flags)
+                if redrafted:                     # the table decides where a redraft may land
+                    c.status = transitions.next_state(existing.status, "redraft_flagged" if flagged else "redraft")
+                else:
+                    c.status = "flagged" if flagged else "draft"
+                c.revision_reason = None
+                reason = ""
+                if redrafted:
+                    reason = ("re-drafted after a host revision request; the new text raised a rule flag"
+                              if flagged else "re-drafted after a host revision request")
+                ledger().append("flag" if c.status == "flagged" else "draft", c, "system", reason)
+                store[c.id] = c
+                out.append(c)
+            _save_cards()
+            return out
     return _guard(run)
 
 
@@ -421,36 +498,64 @@ class DecisionReq(BaseModel):
     reason: Optional[str] = Field(default=None, max_length=500)        # required for request_revision
 
 
+def _rule_rows(card: ContributionCard) -> list[AttendanceRow]:
+    """Attendance rows for the deterministic rules when re-checking an already drafted card.
+
+    The draft route caches the sheet it was handed; if this process never saw one (a restart, or a card
+    written by an older build) the card's own ``recorded_hours`` - which IS the recorded sheet value - is
+    turned back into one row, so ``hours_exceed_recorded`` can still compare claim with record.
+    """
+    cached = attendance_rows().get(card.task_id)
+    if cached:
+        return list(cached)
+    return [AttendanceRow(volunteer_id=c.volunteer_id, task_id=c.task_id, hours=c.recorded_hours)
+            for c in cards().values()
+            if c.task_id == card.task_id and c.recorded_hours is not None]
+
+
 def _decide(card_id: str, action: str, req: DecisionReq) -> ContributionCard:
     """Move one card along its state machine; the target state comes from the table, never from here.
 
     Illegal moves are HTTP 409 with the legal actions named. ``request_revision`` needs a non-blank
     reason, which is stored on the card and folded into the ledger entry's hash.
+
+    The whole sequence - lookup, transition, ledger append, store and atomic card-file write - runs under
+    ONE process-wide lock, and the ledger append comes before the store commit. So a simultaneous confirm and
+    reject on one card produce exactly one decision and one 409, and a failed append leaves both the card and
+    the journal exactly as they were. See the module docstring: this is single-process only.
+
+    ``correct`` re-runs the deterministic rules on the corrected card and stores the new flags, so a host who
+    raises or lowers the hours sees the rule verdict for the number they are about to confirm (the status stays
+    ``corrected``: the decision is theirs, the flags are evidence).
     """
-    c = cards().get(card_id)
-    if c is None:
-        raise HTTPException(404, "card not found")
-    try:
-        status = transitions.next_state(c.status, action)
-    except transitions.IllegalTransition as exc:
-        raise HTTPException(409, str(exc)) from exc
-    reason = (req.reason or "").strip()
-    if action == "request_revision" and not reason:
-        raise HTTPException(422, "reason is required to request a revision")
-    updates: dict[str, Any] = {"status": status, "revision_reason": reason if action == "request_revision" else None}
-    if action == "correct":
-        if req.claimed_hours is None:
-            raise HTTPException(422, "claimed_hours is required to correct a card")
-        updates["claimed_hours"] = req.claimed_hours
-    if status in ("confirmed", "corrected"):
-        updates["confirmed_by"] = req.actor
-    # Append FIRST, then commit: the ledger commits to the post-transition card, and a failed append
-    # (for example a corrupt journal) must not leave a decided card that no entry exists for.
-    updated = c.model_copy(update=updates)
-    ledger().append(action, updated, req.actor, reason)
-    cards()[card_id] = updated
-    _save_cards()
-    return updated
+    with CARD_LOCK:
+        c = cards().get(card_id)
+        if c is None:
+            raise HTTPException(404, "card not found")
+        try:
+            status = transitions.next_state(c.status, action)
+        except transitions.IllegalTransition as exc:
+            raise HTTPException(409, str(exc)) from exc
+        reason = (req.reason or "").strip()
+        if action == "request_revision" and not reason:
+            raise HTTPException(422, "reason is required to request a revision")
+        updates: dict[str, Any] = {"status": status, "revision_reason": reason if action == "request_revision" else None}
+        if action == "correct":
+            if req.claimed_hours is None:
+                raise HTTPException(422, "claimed_hours is required to correct a card")
+            updates["claimed_hours"] = req.claimed_hours
+        if status in ("confirmed", "corrected"):
+            updates["confirmed_by"] = req.actor
+        updated = c.model_copy(update=updates)
+        if action == "correct":
+            others = [x for x in cards().values() if x.id != updated.id]
+            updated.flags = rules.check_card(updated, others, _rule_rows(updated))
+        # Append FIRST, then commit: the ledger commits to the post-transition card, and a failed append
+        # (for example a corrupt journal) must not leave a decided card that no entry exists for.
+        ledger().append(action, updated, req.actor, reason)
+        cards()[card_id] = updated
+        _save_cards()
+        return updated
 
 
 @app.post("/api/evidence/{card_id}/confirm", response_model=ContributionCard)

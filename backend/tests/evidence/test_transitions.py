@@ -23,8 +23,8 @@ ILLEGAL_EDGES = sorted(
 
 
 def test_table_covers_the_expected_number_of_edges():
-    assert len(LEGAL_EDGES) == 9
-    assert len(ILLEGAL_EDGES) == len(transitions.CARD_STATES) * len(transitions.KNOWN_ACTIONS) - 9
+    assert len(LEGAL_EDGES) == 10
+    assert len(ILLEGAL_EDGES) == len(transitions.CARD_STATES) * len(transitions.KNOWN_ACTIONS) - 10
 
 
 def test_every_key_and_target_is_a_declared_state():
@@ -67,10 +67,17 @@ def test_a_state_with_no_outgoing_edge_is_declared_terminal():
     assert exhausted == set(transitions.TERMINAL_STATES)
 
 
-def test_revision_requested_has_exactly_one_back_edge():
-    assert transitions.allowed_actions("revision_requested") == ("redraft",)
+def test_revision_requested_has_exactly_two_back_edges():
+    """A clean redraft returns to draft; a redraft that trips a rule lands in flagged, never silently in draft."""
+    assert transitions.allowed_actions("revision_requested") == ("redraft", "redraft_flagged")
     assert transitions.next_state("revision_requested", "redraft") == "draft"
+    assert transitions.next_state("revision_requested", "redraft_flagged") == "flagged"
     assert transitions.is_terminal("revision_requested") is False
+
+
+def test_no_other_state_has_a_redraft_edge():
+    redrafts = {(state, action) for (state, action) in transitions.TRANSITIONS if action.startswith("redraft")}
+    assert redrafts == {("revision_requested", "redraft"), ("revision_requested", "redraft_flagged")}
 
 
 def test_undecided_states_offer_the_same_four_host_actions():

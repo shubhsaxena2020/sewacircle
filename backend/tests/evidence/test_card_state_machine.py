@@ -173,16 +173,31 @@ def test_revision_requested_card_is_superseded_when_the_volunteer_leaves_the_dra
     assert all(c["status"] != "revision_requested" for c in cards)
 
 
-def test_redraft_that_trips_a_rule_still_returns_to_draft(client):
-    """The table's target for the back-edge is draft; flags are attached to the card, not turned into a state."""
+def test_redraft_that_trips_a_rule_lands_in_flagged_not_draft(client):
+    """The table has two exits from revision_requested; the drafting route picks the one the flags demand."""
     card = _draft(client)[0]
     assert client.post(f"/api/evidence/{card['id']}/request_revision",
                        json={"reason": "hours look wrong"}).status_code == 200
 
     again = _draft(client, claimed=11.0)[0]          # 11 h claimed vs 5 h recorded -> a warn flag
-    assert again["status"] == "draft"                # exactly the declared target of the redraft edge
+    assert again["status"] == "flagged"              # NOT draft: the new text still trips a rule
     assert "hours_exceed_recorded" in [f["code"] for f in again["flags"]]
     assert again["revision_reason"] is None
+    assert client.get("/api/ledger").json()[-1]["action"] == "flag"
+    assert client.get("/api/ledger/verify").json()["ok"] is True
+
+
+def test_redraft_with_clean_text_returns_to_draft(client):
+    """The clean half of the same choice: no warn/block flag -> the redraft edge back to draft."""
+    card = _draft(client, claimed=9.0)[0]            # flagged first
+    assert card["status"] == "flagged"
+    assert client.post(f"/api/evidence/{card['id']}/request_revision",
+                       json={"reason": "re-check the sheet"}).status_code == 200
+
+    again = _draft(client, claimed=5.0)[0]
+    assert again["status"] == "draft"
+    assert "hours_exceed_recorded" not in [f["code"] for f in again["flags"]]
+    assert client.get("/api/ledger").json()[-1]["action"] == "draft"
 
 
 def test_legacy_journal_written_before_the_reason_field_still_verifies(client, tmp_path):

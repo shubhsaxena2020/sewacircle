@@ -24,14 +24,17 @@ States and edges
 ``draft`` and ``flagged`` are the undecided pool produced by the drafting step
 (``flagged`` means the deterministic rules raised a warn/block flag; a host
 still decides). From either one a host may confirm, correct, reject, or ask for
-a revision. ``revision_requested`` has exactly one outgoing edge: ``redraft``,
-which puts the card back into the undecided pool so the next draft can replace
-it. ``confirmed``, ``corrected`` and ``rejected`` are terminal - a decision is
-final in this prototype, and the ledger keeps the history instead.
+a revision. ``revision_requested`` has exactly two outgoing edges, both internal:
+``redraft`` back into ``draft`` when the new text is clean, and
+``redraft_flagged`` into ``flagged`` when the new text still (or newly) raises a
+warn/block rule flag. The choice is made by the drafting route from the flags, so
+a redraft can never present a suspicious card as if it were unremarkable.
+``confirmed``, ``corrected`` and ``rejected`` are terminal - a decision is final
+in this prototype, and the ledger keeps the history instead.
 
-``redraft`` is an internal action name, not an API verb: the drafting route
-performs it and records the ledger action ``draft`` (the ledger keeps its
-original six action names plus ``request_revision``).
+``redraft`` and ``redraft_flagged`` are internal action names, not API verbs: the
+drafting route performs them and records the ledger action ``draft`` or ``flag``
+(the ledger keeps its original six action names plus ``request_revision``).
 """
 from __future__ import annotations
 
@@ -55,6 +58,7 @@ TRANSITIONS: dict[tuple[str, str], str] = {
     ("flagged", "reject"): "rejected",
     ("flagged", "request_revision"): "revision_requested",
     ("revision_requested", "redraft"): "draft",
+    ("revision_requested", "redraft_flagged"): "flagged",
 }
 
 #: A host decision that ends the card's life; nothing leaves these states.
@@ -67,6 +71,7 @@ KNOWN_ACTIONS: tuple[str, ...] = (
     "reject",
     "request_revision",
     "redraft",
+    "redraft_flagged",
 )
 
 
