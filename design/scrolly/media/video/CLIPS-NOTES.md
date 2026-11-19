@@ -7,3 +7,5 @@
 - c4.mp4 (10.0 s): Gemini compressed the whole 1-minute prompt into 10 s - every beat present (~1 s each), too fast.
   Problems: the jumping figures have drawn smiling faces (not faceless); the map has fake text labels. c4-half-speed.mp4
   (20 s, setpts 2x) reads better as stop-motion. Replacement in progress: three 10 s prompts c4a/c4b/c4c.
+- c4a.mp4 (10.0 s): first ~1.2 s is the map (wrong start image uploaded) - trim it; then figures with tool symbols settle into the
+  ring and dark backup pins dock; one lit socket stays empty. Good.
