@@ -1,0 +1,190 @@
+{
+  "viewport": "1440x900",
+  "e2e": [
+    {
+      "demoReset": "HTTP 200 before the verification workflow"
+    },
+    {
+      "evaluationCounters": [
+        "70%",
+        "10%",
+        "23%",
+        "40%"
+      ]
+    },
+    {
+      "storyDropout": "Dropout recorded. Standby promoted. Current verdict: NOT READY. 1 Logistics and supplies",
+      "apiCalls": [
+        "POST /api/roster",
+        "POST /api/roster",
+        "POST /api/roster/dropout",
+        "POST /api/roster/dropout"
+      ]
+    },
+    {
+      "story": "all 11 anchors captured; Hindi title rendered in Devanagari"
+    },
+    {
+      "samples": "Hindi and Hinglish text loaded; English selected for extraction",
+      "hindiConsoleHeading": "रुचि को टीम के निर्णय में बदलें।",
+      "console": "English sample -> live role extraction -> crew planner -> READY/NOT READY view -> real public share",
+      "extractedRoleCount": 6,
+      "readyText": true,
+      "sharePath": "/drive/5LSMDAWESWLD7HFX"
+    },
+    {
+      "evidence": "drafted cards, requested revision with reason, redrafted card, confirmed and corrected records, verified ledger, opened evaluation",
+      "draftedCardCount": 5,
+      "initialFlagCount": 4
+    },
+    {
+      "roleSwitch": "capabilities loaded for host, volunteer and viewer; viewer volunteer request returned HTTP 403; UI surfaced the error; organiser restored",
+      "roleActions": {
+        "host": "not authentication · 9 API actions",
+        "volunteer": "not authentication · 1 API actions",
+        "viewer": "not authentication · 1 API actions"
+      },
+      "viewerActions": "not authentication · 1 API actions",
+      "forbiddenUrl": "http://127.0.0.1:4179/api/volunteers"
+    },
+    {
+      "districts": "loaded 20 read-only map markers; selected Kanpur Dehat",
+      "volunteer": "A volunteer’s view"
+    },
+    {
+      "mock": "fixture task/extraction/planner completed (MOCK · not live); zero API network calls"
+    },
+    {
+      "filmCuts": [
+        "Dawn at the notice board. Illustrative film, 0 to 10 seconds.",
+        "Young volunteers gather. Illustrative film, 10 to 20 seconds.",
+        "The turmeric ring forms. Illustrative film, 20 to 30 seconds.",
+        "Crew and backups settle into the ring. Illustrative film, 30 to 38.8 seconds.",
+        "The last gap closes and the seal lands. Illustrative film, 38.8 to 48.8 seconds.",
+        "Drive, evidence and the village map. Illustrative film, 48.8 to 58.8 seconds."
+      ]
+    }
+  ],
+  "axe": [
+    {
+      "lang": "en",
+      "page": "story",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "console",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "volunteer",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "districts",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "method",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "en",
+      "page": "share",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "story",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "console",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "volunteer",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "districts",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "method",
+      "violations": [],
+      "blocking": []
+    },
+    {
+      "lang": "hi",
+      "page": "share",
+      "violations": [],
+      "blocking": []
+    }
+  ],
+  "api403": [
+    "http://127.0.0.1:4179/api/volunteers",
+    "http://127.0.0.1:4179/api/evidence/cards",
+    "http://127.0.0.1:4179/api/evidence/cards"
+  ],
+  "apiRequests": [
+    "POST /api/roster",
+    "POST /api/roster",
+    "POST /api/roster/dropout",
+    "POST /api/roster/dropout",
+    "POST /api/roster",
+    "POST /api/roster"
+  ],
+  "reducedMotion": {
+    "canvas": 0,
+    "video": 0,
+    "still": 1
+  },
+  "noWebgl": {
+    "canvas": 0,
+    "still": 1
+  },
+  "pageErrors": [],
+  "screenshots": [
+    "page-story.png",
+    "page-story-hi.png",
+    "story-dropout-not-ready.png",
+    "mid-scroll-01.png",
+    "mid-scroll-02.png",
+    "mid-scroll-03.png",
+    "chapter-00-intro.png",
+    "chapter-01-interest.png",
+    "chapter-02-brief.png",
+    "chapter-03-crew.png",
+    "chapter-04-bench.png",
+    "chapter-05-verdict.png",
+    "chapter-06-dropout.png",
+    "chapter-07-evidence.png",
+    "chapter-08-districts.png",
+    "chapter-09-numbers.png",
+    "chapter-10-try.png",
+    "page-console.png",
+    "page-volunteer.png",
+    "page-districts.png",
+    "page-method.png",
+    "page-share.png"
+  ],
+  "video": "story-scroll.webm"
+}

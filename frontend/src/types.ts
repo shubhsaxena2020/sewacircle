@@ -1,7 +1,7 @@
 // Mirrors backend/app/schemas.py. Keep in sync by hand (the head owns both).
 export type Language = 'hi' | 'en' | 'hinglish'
 export type Method = 'cp_sat' | 'nearest_skill' | 'random_feasible' | 'manual_greedy'
-export type CardStatus = 'draft' | 'flagged' | 'confirmed' | 'corrected' | 'rejected'
+export type CardStatus = 'draft' | 'flagged' | 'revision_requested' | 'confirmed' | 'corrected' | 'rejected'
 
 export interface Volunteer {
   id: string; display_name: string; age: number; gender: string
@@ -44,14 +44,15 @@ export interface StandbyPick { volunteer_id: string; volunteer_name: string; cov
 export interface RosterMetrics {
   role_coverage: number; slots_filled: number; slots_required: number; robustness: number
   repeat_pick_share: number; exposure_gini: number; district_spread: number
-  novices: number; mentor_pairs: number; solve_ms: number; solver_status: string
+  novices: number; mentor_pairs: number; solve_ms: number; solver_status: string; should_coverage?: number | null
 }
 export interface RosterResult {
   task_id: string; method: Method; assignments: Assignment[]; standby: StandbyPick[]
   unfilled_role_ids: string[]; metrics: RosterMetrics; explanations: string[]
+  unfilled_slots?: { role_id: string; slot_index: number }[]
   recruit_requests?: RecruitRequest[]; ready?: boolean | null; synthetic: boolean
 }
-export interface RosterBoth { cp_sat: RosterResult; nearest_skill: RosterResult }
+export interface RosterBoth { cp_sat: RosterResult; nearest_skill: RosterResult; manual_greedy: RosterResult; random_feasible: RosterResult }
 export interface Counterfactual {
   volunteer_id: string; volunteer_name: string; feasible: boolean; narrative: string
   delta_role_coverage: number; delta_robustness: number
@@ -66,10 +67,12 @@ export interface ContributionCard {
   id: string; task_id: string; volunteer_id: string; role: string; claimed_hours: number
   recorded_hours: number | null; summary: string; evidence_refs: string[]; status: CardStatus
   flags: Flag[]; drafted_by: 'ai' | 'human'; confirmed_by: string | null; created_at: string; synthetic: boolean
+  revision_reason?: string | null
 }
 export interface LedgerEntry {
   index: number; ts: string; action: string; card_id: string; actor: string
   payload_hash: string; prev_hash: string; entry_hash: string
+  reason?: string
 }
 export interface LedgerVerification { ok: boolean; entries: number; first_bad_index: number | null; note: string }
 export interface EvalRow {

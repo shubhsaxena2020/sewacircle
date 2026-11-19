@@ -1,0 +1,230 @@
+{
+ "_note": "The 20 Uttar Pradesh districts used by the SewaCircle synthetic dataset (docs/research/up_districts.json, real district names and approximate locator points from Open Admin Data, CC-BY-4.0). Only 4 districts have drives in this synthetic sample; the other 16 have none. Never invent drive counts, volunteers or verdicts for the 16.",
+ "coordinate_source": "Open Admin Data - India Administrative Divisions (all-district.json), approximate district locator points, WGS84",
+ "districts": [
+  {
+   "name": "Lucknow",
+   "lat": 26.843,
+   "lon": 80.907,
+   "drives": [
+    {
+     "id": "task-02",
+     "title": "Blood donation camp",
+     "slot": "sun_morning",
+     "block": "Chinhat",
+     "team_size": 6,
+     "verdict": "NOT READY"
+    },
+    {
+     "id": "task-06",
+     "title": "Block sports day",
+     "slot": "sun_afternoon",
+     "block": "Kakori",
+     "team_size": 4,
+     "verdict": "not solved in this sample"
+    },
+    {
+     "id": "task-09",
+     "title": "Digital literacy for elders",
+     "slot": "sat_afternoon",
+     "block": "Mohanlalganj",
+     "team_size": 3,
+     "verdict": "not solved in this sample"
+    }
+   ],
+   "in_sample": true
+  },
+  {
+   "name": "Kanpur Dehat",
+   "lat": 26.437,
+   "lon": 79.862,
+   "drives": [
+    {
+     "id": "task-01",
+     "title": "Water and hygiene camp",
+     "slot": "sat_morning",
+     "block": "Akbarpur",
+     "team_size": 6,
+     "verdict": "READY"
+    },
+    {
+     "id": "task-08",
+     "title": "Cleanliness drive",
+     "slot": "sun_morning",
+     "block": "Maitha",
+     "team_size": 5,
+     "verdict": "not solved in this sample"
+    },
+    {
+     "id": "task-10",
+     "title": "Elderly care visits",
+     "slot": "sat_morning",
+     "block": "Rasulabad",
+     "team_size": 3,
+     "verdict": "not solved in this sample"
+    }
+   ],
+   "in_sample": true
+  },
+  {
+   "name": "Kanpur Nagar",
+   "lat": 26.298,
+   "lon": 80.325,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Varanasi",
+   "lat": 25.388,
+   "lon": 82.891,
+   "drives": [
+    {
+     "id": "task-04",
+     "title": "Evening literacy class",
+     "slot": "sat_afternoon",
+     "block": "Cholapur",
+     "team_size": 4,
+     "verdict": "not solved in this sample"
+    },
+    {
+     "id": "task-07",
+     "title": "Health awareness camp",
+     "slot": "sun_morning",
+     "block": "Kashi Vidyapeeth",
+     "team_size": 5,
+     "verdict": "not solved in this sample"
+    }
+   ],
+   "in_sample": true
+  },
+  {
+   "name": "Gorakhpur",
+   "lat": 26.68,
+   "lon": 83.366,
+   "drives": [
+    {
+     "id": "task-03",
+     "title": "Tree plantation drive",
+     "slot": "sun_morning",
+     "block": "Pipraich",
+     "team_size": 4,
+     "verdict": "not solved in this sample"
+    },
+    {
+     "id": "task-05",
+     "title": "Flood relief distribution",
+     "slot": "sat_morning",
+     "block": "Gola",
+     "team_size": 6,
+     "verdict": "not solved in this sample"
+    }
+   ],
+   "in_sample": true
+  },
+  {
+   "name": "Agra",
+   "lat": 27.083,
+   "lon": 78.01,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Meerut",
+   "lat": 29.021,
+   "lon": 77.787,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Allahabad",
+   "lat": 25.342,
+   "lon": 82.021,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Azamgarh",
+   "lat": 26.003,
+   "lon": 83.077,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Ballia",
+   "lat": 25.904,
+   "lon": 84.033,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Basti",
+   "lat": 26.794,
+   "lon": 82.637,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Bareilly",
+   "lat": 28.44,
+   "lon": 79.422,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Gonda",
+   "lat": 27.08,
+   "lon": 81.988,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Jhansi",
+   "lat": 25.587,
+   "lon": 79.149,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Mirzapur",
+   "lat": 25.021,
+   "lon": 82.627,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Saharanpur",
+   "lat": 29.897,
+   "lon": 77.486,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Sonbhadra",
+   "lat": 24.385,
+   "lon": 83.061,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Sultanpur",
+   "lat": 26.274,
+   "lon": 82.02,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Unnao",
+   "lat": 26.636,
+   "lon": 80.51,
+   "drives": [],
+   "in_sample": false
+  },
+  {
+   "name": "Gautam Buddha Nagar",
+   "lat": 28.508,
+   "lon": 77.533,
+   "drives": [],
+   "in_sample": false
+  }
+ ]
+}
