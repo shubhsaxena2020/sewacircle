@@ -74,3 +74,14 @@ E. Quality: plain language for organisers; projector mode; Hindi/English toggle 
 Finished front end committed on `frontend-v3`; docs\v5\FRONTEND-V3-REPORT.md (what was built per chapter/page, research with
 URLs, libraries + versions + licences, Fusion pipeline, media pipeline and sizes, every test command with real output,
 Lighthouse, screenshots and video list, honest known gaps).
+
+## UPDATE FROM THE HEAD (before you start)
+- Antigravity's Gemini tools could not generate media (free-tier API key: image quota 0, Veo not available). See
+  design\scrolly\media\images\PROVENANCE.md and video\PROVENANCE.md.
+- So YOU generate the 5 images from STORYBOARD.md section Images with your own image-generation tool (desk-wood, paper, up-map,
+  hero-desk, og-share), save them to design\scrolly\media\images\ with exactly those names, and record each prompt in that
+  folder's PROVENANCE.md (replace the failed rows). Look at each image; regenerate any with readable fake text, logos, flags or
+  emblems.
+- Videos: the owner may drop Gemini/Veo clips into design\scrolly\media\video\ (v1-desk, v2-camp, v3-stamp, v4-phone) during your
+  run. Use any that exist. For missing ones, do not fake footage: either render a short code-made clip with Remotion from the 3D
+  scene (as last night in design\motion on frontend-v2) or leave that insert out. List what was used in the report.
