@@ -8,13 +8,35 @@ import { formatNumber } from './i18n'
 import type { Lang } from './i18n'
 import type { EvalReport, ExtractionResult, RosterResult, TaskSpec, Volunteer } from './types'
 import TransitionFilm from './TransitionFilm'
+import FilmLayers from './FilmLayers'
 
 const VillageScene = lazy(() => import('./VillageScene'))
+function supportsWebGL() {
+  try {
+    const canvas = document.createElement('canvas')
+    return Boolean(canvas.getContext('webgl2') || canvas.getContext('webgl'))
+  } catch {
+    return false
+  }
+}
 const nav = [{ id: 'intro', name: 'Intro' }, { id: 'brief', name: 'Brief' }, { id: 'crew', name: 'Crew' }, { id: 'verdict', name: 'Verdict' }, { id: 'evidence', name: 'Evidence' }, { id: 'numbers', name: 'Numbers' }, { id: 'try', name: 'Try it' }]
 const labels = { en: { overline: 'A crew is more than a list', title: 'Willing hands.<br/>A crew that can show up.', intro: 'Can this drive run?', brief: 'A brief becomes<br/>real roles.', crew: 'Make a circle<br/>that can hold.', verdict: 'Ready means<br/>every role has cover.', evidence: 'Work leaves<br/>a paper trail.', numbers: 'Measure what<br/>the plan can do.', try: 'One village.<br/>A hundred ways to help.', plan: 'Plan the crew', drop: 'Drop Heena P.', loading: 'A village is taking shape…', scroll: 'Scroll to continue', detail: 'AI proposed · you confirm', role: 'Role from the brief', synthetic: 'Synthetic data', share: 'Copy public summary link' }, hi: { overline: 'टीम केवल नामों की सूची नहीं', title: 'इच्छुक हाथ।<br/>एक तैयार टीम।', intro: 'क्या यह अभियान चल सकता है?', brief: 'विवरण से<br/>भूमिकाएँ बनती हैं।', crew: 'ऐसा घेरा<br/>जो साथ निभाए।', verdict: 'तैयार का अर्थ है<br/>हर भूमिका का सहारा।', evidence: 'काम का<br/>लिखित रिकॉर्ड।', numbers: 'योजना की<br/>क्षमता मापें।', try: 'एक गाँव।<br/>मदद के कई रास्ते।', plan: 'टीम बनाएँ', drop: 'हीना पी. को हटाएँ', loading: 'गाँव तैयार हो रहा है…', scroll: 'आगे पढ़ने के लिए स्क्रॉल करें', detail: 'AI का सुझाव · आपकी पुष्टि', role: 'विवरण से भूमिका', synthetic: 'सिंथेटिक डेटा', share: 'सार्वजनिक लिंक कॉपी करें' } }
 
 export default function Story({ lang }: { lang: Lang }) {
-  const text = labels[lang]; const root = useRef<HTMLDivElement>(null); const progressRef = useRef(0); const [task, setTask] = useState<TaskSpec | null>(null); const [volunteers, setVolunteers] = useState<Volunteer[]>([]); const [extraction, setExtraction] = useState<ExtractionResult | null>(null); const [evalReport, setEvalReport] = useState<EvalReport | null>(null); const [roster, setRoster] = useState<RosterResult | null>(null); const [dropResult, setDropResult] = useState<string>(''); const [selectedRole, setSelectedRole] = useState(''); const [error, setError] = useState(''); const [active, setActive] = useState('intro'); const [share, setShare] = useState('');
+  const text = labels[lang]; const root = useRef<HTMLDivElement>(null); const progressRef = useRef(0); const [webglAvailable] = useState(supportsWebGL); const [sceneReady, setSceneReady] = useState(() => !webglAvailable); const [task, setTask] = useState<TaskSpec | null>(null); const [volunteers, setVolunteers] = useState<Volunteer[]>([]); const [extraction, setExtraction] = useState<ExtractionResult | null>(null); const [evalReport, setEvalReport] = useState<EvalReport | null>(null); const [roster, setRoster] = useState<RosterResult | null>(null); const [dropResult, setDropResult] = useState<string>(''); const [selectedRole, setSelectedRole] = useState(''); const [error, setError] = useState(''); const [active, setActive] = useState('intro'); const [share, setShare] = useState('');
+  useEffect(() => {
+    if (!webglAvailable || matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    const crew = root.current?.querySelector('#crew')
+    if (!crew) return
+    const observer = new IntersectionObserver(entries => {
+      if (entries.some(entry => entry.isIntersecting)) {
+        setSceneReady(true)
+        observer.disconnect()
+      }
+    }, { rootMargin: '120% 0px' })
+    observer.observe(crew)
+    return () => observer.disconnect()
+  }, [webglAvailable])
   useEffect(() => { api.tasksLang(lang).then(rows => setTask(rows.find(x => x.id === 'task-01') ?? rows[0] ?? null)).catch(e => setError(e.message)); api.volunteers().then(setVolunteers).catch(() => undefined); api.evalReport().then(setEvalReport).catch(() => undefined) }, [lang])
   useEffect(() => { if (task?.brief_text) api.extract(task.brief_text).then(setExtraction).catch(() => undefined) }, [task?.id, task?.brief_text])
   useEffect(() => {
@@ -40,7 +62,7 @@ export default function Story({ lang }: { lang: Lang }) {
   const headline = (key: keyof typeof text) => text[key]
   const briefRoles = extraction ? extraction.roles.map((r, i) => ({ key: `extracted-${i}`, role: r.role, source: r.evidence_span || r.reason, confidence: r.confidence })) : (task?.roles ?? []).map(r => ({ key: r.id, role: r.role, source: r.evidence_span || r.required_skills.join(', '), confidence: r.confidence }))
   return <div className={`story ${reduce ? 'reduced' : ''}`} ref={root}>
-    <div className="world-canvas" aria-hidden="true">{reduce ? <img className="scene-still" src="/media/village-poster.jpg" alt="Illustrative paper village"/> : <Suspense fallback={<img className="scene-still" src="/media/village-poster.jpg" alt="Illustrative paper village"/>}><VillageScene progress={progressRef}/></Suspense>}</div>
+    <div className="world-canvas" aria-hidden="true"><FilmLayers progress={progressRef}/>{reduce || !webglAvailable ? <img className="scene-still" src="/media/layers/dawn-board-base.webp" alt="Illustrative paper village"/> : sceneReady && <Suspense fallback={null}><VillageScene progress={progressRef}/></Suspense>}<span className="scene-illustrative">Illustrative · film layers</span></div>
     <aside className="progress-rail" aria-label="Story progress">{nav.map(n => <a key={n.id} href={`#${n.id}`} className={active === n.id ? 'active' : ''} aria-label={n.name} title={n.name}><span>{n.name}</span></a>)}</aside>
     <div className="story-scroll-hint">↓ {text.scroll}</div>
     <section className="chapter chapter-intro" id="intro" data-id="intro"><TransitionFilm start={0} end={10} poster="/media/film-poster-01.jpg" label="Dawn at the notice board" immediate/><div className="chapter-copy"><p className="eyebrow">{text.overline} <span>· 01 / 10</span></p><h1><span lang={lang} dangerouslySetInnerHTML={{ __html: headline('title') }} /></h1><p className="lead">{text.intro}</p><p className="story-note">An interactive paper village · <span>Illustrative</span></p><a className="jump-link" href="#interest">Explore the village ↓</a></div></section>
