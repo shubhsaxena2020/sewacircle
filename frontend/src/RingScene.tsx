@@ -127,7 +127,7 @@ function Ring({ data, labelEls, motion }: { data: SceneData; labelEls: React.Ref
         tmp.v.project(camera)
         const x = (tmp.v.x * 0.5 + 0.5) * size.width, y = (-tmp.v.y * 0.5 + 0.5) * size.height
         el.style.transform = `translate(${x.toFixed(1)}px, ${y.toFixed(1)}px)`
-        el.dataset.side = x >= cx ? 'right' : 'left'
+        el.dataset.side = (x >= cx && x < size.width - 240) || x < 240 ? 'right' : 'left'
       })
     }
     if (drives.current) {

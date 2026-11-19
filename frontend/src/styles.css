@@ -57,10 +57,10 @@ button,select,input,textarea{font:inherit;color:inherit}
 .stage-fallback{position:absolute;inset:0;width:100%;height:100%;background:radial-gradient(ellipse at 68% 45%,#2a1a0c,#0a0807 62%)}
 .seat-labels{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:0;transition:opacity .5s ease}
 .seat-labels.on{opacity:1}
-.seat-label{position:absolute;left:0;top:0;will-change:transform;white-space:nowrap;font-size:13px;line-height:1.25;padding-left:18px}
-.seat-label[data-side=left]{padding:0 18px 0 0}
+.seat-label{position:absolute;left:0;top:0;will-change:transform;white-space:nowrap;font-size:13px;line-height:1.25;padding-left:34px;text-shadow:0 1px 8px #0a0807,0 0 2px #0a0807}
+.seat-label[data-side=left]{padding:0 34px 0 0}
 .seat-label[data-side=left]>*{transform:translateX(-100%)}
-.seat-label b,.seat-label small{display:block;position:relative;top:-14px}
+.seat-label b,.seat-label small{display:block;position:relative;top:-22px}
 .seat-label b{font-weight:600;color:var(--text)}
 .seat-label small{color:var(--text-muted);font-size:11.5px}
 .seat-label.s-empty{opacity:.55}
