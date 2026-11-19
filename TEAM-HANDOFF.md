@@ -66,7 +66,7 @@ cd frontend ; npm ci ; npm run dev               # open http://127.0.0.1:5173
   live from the solver (names, roles, host-check), then show READY · तैयार, an honest NOT READY drive with a recruit request,
   and a live dropout re-plan. Checked: build, lint, unit tests, full browser run (`npm run verify:v4`), accessibility
   0 violations in English and Hindi, Lighthouse story 100 / console 100. Report: `docs/v6/FRONTEND-V4-REPORT.md`.
-1. Remaining: re-record the demo video and screenshots from the v4 site for the submission pack (the current pack shows v3).
+1. Submission pack v5 (one-pager, architecture, 8 screens and a 2:19 demo video, all from the v4 site) is with the team lead.
 2. Team lead: team details on the form, ask the organisers about the age rule (one member is 17), **submit the idea form by 20 Nov**.
 
 ## Rules we keep (please keep them too)
