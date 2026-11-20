@@ -175,3 +175,47 @@ button,select,input,textarea{font:inherit;color:inherit}
 .backend-down b{color:var(--danger)}
 .backend-down code{font-family:var(--mono);font-size:12.5px;background:rgba(0,0,0,.3);padding:1px 6px;border-radius:4px}
 .backend-down a{color:var(--accent-2);font-weight:600}
+
+/* Youth side: profile -> top projects with explained % match */
+.youth-layout{display:grid;grid-template-columns:minmax(300px,420px) minmax(0,1fr);gap:28px;align-items:start;padding:0 clamp(20px,4.6vw,72px) 60px}
+.youth-form{position:sticky;top:90px;display:grid;gap:18px}
+.youth-form-head{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.youth-form-head h2{margin:0;font-size:22px;font-weight:500;letter-spacing:-.02em}
+.youth-row{display:grid;grid-template-columns:90px 1fr;gap:12px}
+.youth-row .field{display:grid;gap:6px;font-size:12px;color:var(--text-muted)}
+.youth-row input,.youth-row select{background:var(--surface-2);border:1px solid var(--hairline);border-radius:10px;padding:10px 12px;color:var(--text);font-size:14px}
+.chips{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:7px}
+.chips legend{font:400 11px var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--text-muted);margin-bottom:9px}
+.pick{border:1px solid var(--hairline);background:transparent;color:var(--text-muted);border-radius:999px;padding:7px 12px;font-size:12.5px;cursor:pointer;transition:background .2s,border-color .2s,color .2s}
+.pick:hover{border-color:rgba(242,169,59,.5);color:var(--text)}
+.pick.on{background:rgba(242,169,59,.16);border-color:var(--accent);color:var(--accent-2)}
+.youth-go{justify-self:start;background:var(--accent)!important;color:#140d05!important;border:0!important;border-radius:999px!important;padding:0 24px!important;min-height:48px!important;font-weight:620!important}
+.youth-results h2{margin:0 0 16px;font-size:clamp(28px,3vw,40px);font-weight:300;letter-spacing:-.03em}
+.match-list{display:grid;gap:14px}
+.match-card{display:grid;gap:12px;padding:20px 22px;border:1px solid var(--hairline);border-radius:16px;background:linear-gradient(180deg,rgba(29,24,21,.9),rgba(21,17,16,.9))}
+.match-card:first-child{border-color:rgba(242,169,59,.55);box-shadow:0 0 0 1px rgba(242,169,59,.12) inset}
+.match-head{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center}
+.match-rank{font:400 12px var(--mono);color:var(--text-muted)}
+.match-title h3{margin:0;font-size:18px;font-weight:550;letter-spacing:-.01em}
+.match-title p{margin:4px 0 0;font-size:13px;color:var(--text-muted)}
+.match-ring{--p:0;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:conic-gradient(var(--accent) calc(var(--p)*1%),var(--surface-3) 0)}
+.match-ring span{width:52px;height:52px;border-radius:50%;background:var(--surface);display:grid;place-items:center;font-size:18px;font-weight:600}
+.match-ring small{font-size:10px;color:var(--text-muted)}
+.match-bar{display:flex;height:6px;border-radius:99px;overflow:hidden;background:var(--surface-3)}
+.match-bar .seg{display:block}
+.seg-skills{background:#f2a93b}.seg-availability{background:#9fd38a}.seg-distance{background:#9cc3ff}.seg-interests{background:#e58fd0}
+.match-parts{display:flex;flex-wrap:wrap;gap:6px 16px;margin:0;padding:0;list-style:none;font:400 11.5px var(--mono);color:var(--text-muted)}
+.match-parts b{color:var(--text);font-weight:500}
+.match-parts .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.match-role{margin:0;font-size:14px}
+.match-role span{font:400 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--text-muted);margin-right:6px}
+.match-role em{color:var(--accent-2);font-style:normal}
+.match-reasons{margin:0;padding-left:18px;display:grid;gap:3px;font-size:13.5px;color:var(--text-muted)}
+.match-improve{margin:0;font-size:13px;color:var(--accent-2)}
+.match-improve span{color:var(--text-muted)}
+.match-card .btn{justify-self:start;min-height:38px;padding:0 16px;border-radius:999px;font-size:13px;background:var(--accent);color:#140d05;border:0;font-weight:600;cursor:pointer}
+.match-card .btn.ghost{background:transparent;color:var(--ok);border:1px solid var(--hairline)}
+.excluded{margin-top:22px;padding:16px 18px;border:1px dashed var(--hairline);border-radius:14px}
+.excluded h3{margin:0 0 8px;font-size:14px;color:var(--text-muted);font-weight:500}
+.excluded ul{margin:0;padding-left:18px;font-size:13px;color:var(--text-muted);display:grid;gap:3px}
+@media (max-width:900px){.youth-layout{grid-template-columns:1fr}.youth-form{position:static}}

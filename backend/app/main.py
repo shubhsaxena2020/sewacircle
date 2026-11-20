@@ -43,6 +43,7 @@ from .schemas import (Assignment, AttendanceRow, CapabilitySet, ContributionCard
                       DriveShareSummary, DriveStatus, DriveStatusRow, EvalReport, ExtractionResult, Flag, LedgerEntry,
                       LedgerVerification, RosterOptions, RosterResult, ShareLink, SharedRoleCount, TaskSpec, Volunteer)
 from . import capabilities, demo_mode, i18n, share
+from . import youth as youth_mod
 from .solver import api as solver
 from .taxonomy import DISCLAIMER, SKILLS
 
@@ -326,6 +327,20 @@ def list_tasks(lang: Literal["en", "hi"] = "en") -> Any:
     def run() -> list[TaskSpec]:
         return [t.model_copy(update={"display": i18n.task_display(t, lang)}) for t in tasks()]
     return _guard(run)
+
+
+class YouthReq(BaseModel):
+    profile: youth_mod.YouthProfile
+    lang: Literal["en", "hi"] = "en"
+
+
+@app.post("/api/youth/recommend", response_model=youth_mod.YouthResult)
+def youth_recommend(req: YouthReq) -> Any:
+    """Youth side: the top projects for one young person, eligibility first, then an explained % match.
+
+    Public on purpose (no demo-role gate): it reads only the person's own profile and the public project list.
+    """
+    return _guard(lambda: youth_mod.recommend(req.profile, tasks(), req.lang))
 
 
 class ShareReq(BaseModel):

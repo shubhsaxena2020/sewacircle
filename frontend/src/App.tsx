@@ -9,6 +9,7 @@ const Console = lazy(() => import('./Console'))
 const Volunteer = lazy(() => import('./Volunteer'))
 const District = lazy(() => import('./District'))
 const Method = lazy(() => import('./Method'))
+const Youth = lazy(() => import('./Youth'))
 
 function Frame() {
   const [lang, setLang] = useState<Lang>(() => localStorage.getItem('sewa-lang') === 'hi' ? 'hi' : 'en')
@@ -34,14 +35,14 @@ function Frame() {
   return <Context.Provider value={ctx}>
     <a className="skip" href="#main">Skip to content</a>
     <div className="notice"><span className="notice-dot" />{ctx.t('synthetic')}{MOCK && <b className="mock-notice">MOCK · not live</b>}<span className="notice-right">Not affiliated with MY Bharat or any government body.</span></div>
-    {backendDown && <div className="backend-down" role="alert"><b>The SewaCircle backend is not running or not reachable</b>, so drives, crews and numbers cannot load. Start it in a second terminal (see <code>TEAM-HANDOFF.md</code> or run <code>start.ps1</code> / <code>start.sh</code>), or <a href={`${location.pathname}?mock=1`}>open the site with built-in demo data</a>.</div>}
+    {backendDown && <div className="backend-down" role="alert"><b>The SevaSetu backend is not running or not reachable</b>, so drives, crews and numbers cannot load. Start it in a second terminal (see <code>TEAM-HANDOFF.md</code> or run <code>start.ps1</code> / <code>start.sh</code>), or <a href={`${location.pathname}?mock=1`}>open the site with built-in demo data</a>.</div>}
     <header className="site-header">
-      <Link to="/" className="logo"><span className="logo-mark">◉</span><span>Sewa<span className="logo-accent">Circle</span><small>READY CREW</small></span></Link>
-      <nav aria-label="Main navigation"><Link to="/">Story</Link><Link to="/console">Console</Link><Link to="/volunteer">Volunteer</Link><Link to="/districts">Districts</Link><Link to="/method">Method</Link></nav>
+      <Link to="/" className="logo"><span className="logo-mark">◉</span><span>Seva<span className="logo-accent">Setu</span><small>VOLUNTEER MATCHING</small></span></Link>
+      <nav aria-label="Main navigation"><Link to="/">Story</Link><Link to="/youth">Find projects</Link><Link to="/console">Console</Link><Link to="/volunteer">Volunteer</Link><Link to="/districts">Districts</Link><Link to="/method">Method</Link></nav>
       <div className="header-actions"><label className="role-switch"><span>Role simulation<br/><small>not authentication · {actions.length} API actions</small></span><select aria-label="Demo role (simulation, not authentication)" value={role} onChange={e => setRole(e.target.value)}><option value="organiser">Organiser</option><option value="host">Host</option><option value="volunteer">Volunteer</option><option value="viewer">Viewer</option></select></label><button className="text-button" aria-pressed={projector} onClick={() => setProjector(v => !v)}>{projector ? 'Standard' : 'Projector'}</button><button className="lang-button" onClick={ctx.toggleLang}>{lang === 'en' ? 'हिन्दी' : 'English'}</button></div>
     </header>
-    <main id="main"><Suspense fallback={<div className="loading-page">SewaCircle · Loading…</div>}><Routes><Route path="/" element={<Story lang={lang} />} /><Route path="/console" element={<Console />} /><Route path="/volunteer" element={<Volunteer />} /><Route path="/districts" element={<District />} /><Route path="/method" element={<Method />} /><Route path="/drive/:key" element={<SharePage />} /></Routes></Suspense></main>
-    <footer className="site-footer"><Link to="/">SewaCircle · Ready Crew</Link><span>Synthetic data · Not affiliated with MY Bharat or any government body.</span></footer>
+    <main id="main"><Suspense fallback={<div className="loading-page">SevaSetu · Loading…</div>}><Routes><Route path="/" element={<Story lang={lang} />} /><Route path="/youth" element={<Youth />} /><Route path="/console" element={<Console />} /><Route path="/volunteer" element={<Volunteer />} /><Route path="/districts" element={<District />} /><Route path="/method" element={<Method />} /><Route path="/drive/:key" element={<SharePage />} /></Routes></Suspense></main>
+    <footer className="site-footer"><Link to="/">SevaSetu</Link><span>Synthetic data · Not affiliated with MY Bharat or any government body.</span></footer>
   </Context.Provider>
 }
 
