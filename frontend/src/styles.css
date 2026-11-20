@@ -171,3 +171,7 @@ button,select,input,textarea{font:inherit;color:inherit}
 .verdict.ok{animation:none}
 @media (prefers-reduced-motion:reduce){.ch .w,.ch .k,.ch .lede,.ch .body,.ch .btn,.ch .meta,.ch .brief,.ch .role-chips,.ch .giant,.ch .giant-label,.ch .standby-line,.ch .verdict,.ch .recruit,.ch .drop-result,.ch .card-demo,.ch .nums,.ch .row,.ch .source{opacity:1!important;transform:none!important;filter:none!important}}
 .stage::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.07;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.backend-down{position:relative;z-index:25;padding:12px clamp(16px,3.4vw,48px);background:#3a1712;border-bottom:1px solid var(--danger);color:var(--text);font-size:14px;line-height:1.5}
+.backend-down b{color:var(--danger)}
+.backend-down code{font-family:var(--mono);font-size:12.5px;background:rgba(0,0,0,.3);padding:1px 6px;border-radius:4px}
+.backend-down a{color:var(--accent-2);font-weight:600}

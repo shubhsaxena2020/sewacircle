@@ -15,16 +15,26 @@ function Frame() {
   const [projector, setProjector] = useState(() => localStorage.getItem('sewa-projector') === 'true')
   const [role, setRole] = useState(() => localStorage.getItem('sewa-role') || 'organiser')
   const [actions, setActions] = useState<string[]>([])
+  const [backendDown, setBackendDown] = useState(false)
   const location = useLocation()
   useEffect(() => { localStorage.setItem('sewa-lang', lang); document.documentElement.lang = lang }, [lang])
   useEffect(() => { localStorage.setItem('sewa-projector', String(projector)); document.documentElement.classList.toggle('projector', projector) }, [projector])
   useEffect(() => { localStorage.setItem('sewa-role', role); setDemoRole(role) }, [role])
   useEffect(() => { let active = true; api.capabilities(role).then(data => { if (active) setActions(data.actions) }).catch(() => { if (active) setActions([]) }); return () => { active = false } }, [role])
   useEffect(() => { window.scrollTo(0, 0) }, [location.pathname])
+  // A missing backend used to show up only as an empty drive list. Say it plainly and offer the built-in demo data.
+  useEffect(() => {
+    if (MOCK) return
+    let active = true
+    const check = () => api.health().then(() => { if (active) setBackendDown(false) }).catch(() => { if (active) setBackendDown(true) })
+    check(); const id = setInterval(check, 15000)
+    return () => { active = false; clearInterval(id) }
+  }, [])
   const ctx: UiContext = { lang, role, actions, t: key => tr(lang, key), toggleLang: () => setLang(v => v === 'en' ? 'hi' : 'en') }
   return <Context.Provider value={ctx}>
     <a className="skip" href="#main">Skip to content</a>
     <div className="notice"><span className="notice-dot" />{ctx.t('synthetic')}{MOCK && <b className="mock-notice">MOCK · not live</b>}<span className="notice-right">Not affiliated with MY Bharat or any government body.</span></div>
+    {backendDown && <div className="backend-down" role="alert"><b>The SewaCircle backend is not running or not reachable</b>, so drives, crews and numbers cannot load. Start it in a second terminal (see <code>TEAM-HANDOFF.md</code> or run <code>start.ps1</code> / <code>start.sh</code>), or <a href={`${location.pathname}?mock=1`}>open the site with built-in demo data</a>.</div>}
     <header className="site-header">
       <Link to="/" className="logo"><span className="logo-mark">◉</span><span>Sewa<span className="logo-accent">Circle</span><small>READY CREW</small></span></Link>
       <nav aria-label="Main navigation"><Link to="/">Story</Link><Link to="/console">Console</Link><Link to="/volunteer">Volunteer</Link><Link to="/districts">Districts</Link><Link to="/method">Method</Link></nav>
