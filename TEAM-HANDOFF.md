@@ -27,22 +27,34 @@ Most useful files:
 - The 58.8 s paper-craft film: `design/scrolly/media/video/sewacircle-film-web.mp4` (on `frontend-v3`)
 - 8 design directions with 11 screens each, plus a side-by-side gallery: `design/ui-options/index.html` (on `frontend-v2`)
 
-## Run it locally (Windows; any OS works with the usual path changes)
+## Run it locally (you need BOTH the backend and the website running)
 
-```powershell
-git clone https://github.com/shubhsaxena2020/sewacircle ; cd sewacircle
-python -m venv .venv ; .venv\Scripts\python -m pip install -r backend\requirements.txt
-cd backend
-$env:SEWA_LLM_MODE="replay"                      # offline: AI answers come from the committed cache
-..\.venv\Scripts\python -m pytest -q             # backend tests
-..\.venv\Scripts\python -m uvicorn app.main:app --port 8000
-# second terminal
-cd frontend ; npm ci ; npm run dev               # open http://127.0.0.1:5173
+**Easiest: one command from the repo root.** The first run creates the Python environment and installs everything.
+
+```text
+Windows:       powershell -ExecutionPolicy Bypass -File .\start.ps1
+macOS / Linux: bash start.sh
 ```
 
-- **Offline is fine.** `SEWA_LLM_MODE=replay` serves cached AI answers for the sample briefs. A brand-new brief needs a live
-  OpenAI-compatible endpoint (`SEWA_LLM_BASE_URL`, `SEWA_LLM_API_KEY`, `SEWA_LLM_MODEL`); without one, type the roles by hand.
-- **No backend at all?** Open the site with `?mock=1` - it runs on built-in fixtures and labels itself "Mock data".
+Then open **http://localhost:5173**. Leave the window open; closing it stops the servers.
+
+- **"Drive is not selecting" / empty drive list** means the website cannot reach the backend. The site now shows a red
+  banner saying so. Usual causes: only `npm run dev` was started, or **port 8000 is already used by something else
+  (Docker often takes it)**. Fix: run the backend on another port:
+  `start.ps1 -ApiPort 8010` (Windows) or `SEWA_API_PORT=8010 bash start.sh` (macOS/Linux).
+- **No Python/backend at all?** Open `http://localhost:5173/?mock=1`: built-in demo data, clearly labelled "Mock".
+- **Manual steps** if you prefer (two terminals; use `.venv/bin/python` instead of `.venv\Scripts\python` on macOS/Linux):
+
+```powershell
+python -m venv .venv ; .venv\Scripts\python -m pip install -r backendequirements.txt
+cd backend ; $env:SEWA_LLM_MODE="replay" ; ..\.venv\Scripts\python -m uvicorn app.main:app --port 8000
+# second terminal
+cd frontend ; npm ci ; npm run dev                # if the backend is on another port: $env:SEWA_API_PORT="8010" first
+```
+
+- `SEWA_LLM_MODE=replay` serves cached AI answers for the sample briefs, so no AI key is needed. A brand-new brief needs a
+  live OpenAI-compatible endpoint (`SEWA_LLM_BASE_URL`, `SEWA_LLM_API_KEY`, `SEWA_LLM_MODEL`).
+- Share links (`/drive/<key>`) are created by your own running backend and only open on that machine.
 
 ## What works today (verified by running it)
 
