@@ -593,7 +593,8 @@ function TaskStep() {
       </div>
       <label className="field">
         <span>{t("chooseDrive")}</span>
-        <select value={taskId} onChange={(e) => chooseTask(e.target.value)}>
+        <select value={taskId} onChange={(e) => chooseTask(e.target.value)} disabled={!tasks.length}>
+          {!tasks.length && <option value="">{t("noDrives")}</option>}
           {tasks.map((x) => (
             <option key={x.id} value={x.id}>
               {x.title} · {x.block}, {x.district}
