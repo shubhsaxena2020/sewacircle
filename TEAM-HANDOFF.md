@@ -46,8 +46,7 @@ Then open **http://localhost:5173**. Leave the window open; closing it stops the
 - **Manual steps** if you prefer (two terminals; use `.venv/bin/python` instead of `.venv\Scripts\python` on macOS/Linux):
 
 ```powershell
-python -m venv .venv ; .venv\Scripts\python -m pip install -r backend
-equirements.txt
+python -m venv .venv ; .venv\Scripts\python -m pip install -r backend\requirements.txt
 cd backend ; $env:SEWA_LLM_MODE="replay" ; ..\.venv\Scripts\python -m uvicorn app.main:app --port 8000
 # second terminal
 cd frontend ; npm ci ; npm run dev                # if the backend is on another port: $env:SEWA_API_PORT="8010" first
