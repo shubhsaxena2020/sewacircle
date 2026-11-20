@@ -14,33 +14,33 @@ const RING_LABEL_CHAPTERS: Chapter[] = ['crew', 'bench', 'gap', 'dropout']
 
 const T = {
   en: {
-    kicker: 'Willing volunteers are here', h1: 'Can this\ndrive run?', sub: 'SewaCircle answers READY or NOT READY for a volunteer drive, and names exactly who is still needed.', start: 'Plan a crew',
+    kicker: 'Willing volunteers are here', h1: 'Can this\ndrive run?', sub: 'SevaSetu answers READY or NOT READY for a volunteer drive, and names exactly who is still needed.', start: 'Plan a crew',
     interestK: '02 · Interest', interestH: 'Many said yes.', interestP: 'National platforms bring interest at scale: 2.22+ crore youth are registered on MY Bharat (PIB backgrounder, 05 July 2026). An organiser still has to turn a list of willing people into a crew that actually shows up.', optedIn: 'people opted in to this drive',
     briefK: '03 · The brief', briefH: 'A brief becomes roles.', briefP: 'The organiser writes the drive in Hindi, English or Hinglish. AI proposes roles and shows the phrase each came from. Tap a phrase.', aiProposed: 'AI proposed · you confirm', confidence: 'confidence',
     crewK: '04 · The crew', crewH: 'Fill the ring.', crewP: 'Only people who opted in. A solver weighs skills, availability, travel, guardian consent for 16–17 year olds, and fairness — so the same few are not picked every time.', plan: 'Plan the crew', planning: 'Planning…', planned: 'Planned live from the API',
     benchK: '05 · The bench', benchH: 'Every seat needs\na second plan.', benchP: 'A standby with the right skills is ready for the essential roles. Safety roles accept host-checked skills only.', standby: 'Standby', covers: 'can cover',
     verdictK: '06 · The verdict', ready: 'READY', notReady: 'NOT READY', verdictP: 'Every essential role is filled and has cover.', verdictNo: 'Some roles have no cover yet.', share: 'Copy public summary link', copied: 'Link copied',
-    gapK: '07 · Honest gaps', gapH: 'Not every drive\ncan run.', gapP: 'A blood-donation camp in Chinhat, Lucknow. The solver will not pretend: it says what is missing and writes the recruit request.', copyReq: 'Copy recruit request',
+    gapK: '07 · Honest gaps', gapH: 'Not every drive\ncan run.', gapP: 'The solver will not pretend: it says what is missing and writes the recruit request.', copyReq: 'Copy recruit request',
     dropK: '08 · Someone drops out', dropH: 'A real exit.\nA real re-plan.', dropP: 'Drop a seated volunteer. The plan re-runs live: the standby steps in — and if that leaves a single point of failure, it says so.', drop: 'Drop', dropping: 'Re-planning…',
     evidenceK: '09 · After the drive', evidenceH: 'Work leaves a trail.', evidenceP: 'Host notes become draft contribution cards. Rules check them against attendance — one card claims 8 hours where 5 were recorded, so it is flagged. A host confirms, corrects or sends it back; every step goes into a hash-chained log.', verify: 'Verify the log', verified: 'Chain intact', broken: 'Chain broken at entry', empty: 'The log is empty after the demo reset. Confirm a card in the console to start it.',
-    numbersK: '10 · Measured', numbersH: 'On 10 synthetic drives', readyLbl: 'drives READY with SewaCircle', nearest: 'with nearest-skill matching', repeat: 'repeat picks', repeatVs: 'careful human organiser: 43%', speed: 'to plan a crew from 500 volunteers', recall: 'of roles found by a small open model on one free GPU',
+    numbersK: '10 · Measured', numbersH: 'On 10 synthetic drives', readyLbl: 'drives READY with SevaSetu', nearest: 'with nearest-skill matching', repeat: 'repeat picks', repeatVs: 'careful human organiser: 43%', speed: 'to plan a crew from 500 volunteers', recall: 'of roles found by a small open model on one free GPU',
     districtsK: '11 · Many places', districtsH: 'One plan.\nMany drives.', districtsP: 'Every drive keeps its own live status: ready, not ready, or not computed yet.', openDistricts: 'Open the district view',
-    tryK: '12 · Try it', tryH: 'Bring a real brief.', tryP: 'AI drafts. The solver decides. A person confirms. Nothing is auto-verified.', console: 'Open the organiser console', volunteer: 'Volunteer view', method: 'How it works',
+    tryK: '12 · Try it', tryH: 'Bring a real brief.', tryP: 'AI drafts. The solver decides. A person confirms. Nothing is auto-verified.', youth: 'Find a project for me', console: 'Open the organiser console', volunteer: 'Volunteer view', method: 'How it works',
     open: 'open seat', recruit: 'Recruit', hostCheck: 'host-checked', left: 'left the crew', synthetic: 'Synthetic data · not affiliated with MY Bharat or any government body',
   },
   hi: {
-    kicker: 'इच्छुक स्वयंसेवक मौजूद हैं', h1: 'क्या यह अभियान\nचल सकता है?', sub: 'सेवासर्कल बताता है — अभियान तैयार है या नहीं, और अभी ठीक किसकी ज़रूरत है।', start: 'टीम बनाएँ',
+    kicker: 'इच्छुक स्वयंसेवक मौजूद हैं', h1: 'क्या यह अभियान\nचल सकता है?', sub: 'सेवासेतु बताता है — अभियान तैयार है या नहीं, और अभी ठीक किसकी ज़रूरत है।', start: 'टीम बनाएँ',
     interestK: '02 · रुचि', interestH: 'बहुतों ने हाँ कहा।', interestP: 'राष्ट्रीय मंच बड़े स्तर पर रुचि लाते हैं: MY Bharat पर 2.22+ करोड़ युवा पंजीकृत हैं (PIB, 05 जुलाई 2026)। फिर भी आयोजक को इच्छुक लोगों की सूची से ऐसी टीम बनानी होती है जो सच में पहुँचे।', optedIn: 'लोगों ने इस अभियान में रुचि दिखाई',
     briefK: '03 · विवरण', briefH: 'विवरण से भूमिकाएँ।', briefP: 'आयोजक हिन्दी, अंग्रेज़ी या हिंग्लिश में अभियान लिखता है। AI भूमिकाएँ सुझाता है और बताता है कि हर भूमिका किस वाक्यांश से आई। किसी वाक्यांश पर टैप करें।', aiProposed: 'AI ने सुझाया · आप पुष्टि करें', confidence: 'विश्वास',
     crewK: '04 · टीम', crewH: 'घेरा भरें।', crewP: 'केवल वही लोग जिन्होंने रुचि दिखाई। सॉल्वर कौशल, उपलब्धता, दूरी, 16–17 वर्ष वालों के लिए अभिभावक अनुमति और निष्पक्षता देखता है।', plan: 'टीम बनाएँ', planning: 'योजना बन रही है…', planned: 'API से अभी बनी योजना',
     benchK: '05 · विकल्प', benchH: 'हर सीट का\nदूसरा विकल्प।', benchP: 'ज़रूरी भूमिकाओं के लिए सही कौशल वाला विकल्प तैयार है। सुरक्षा भूमिकाओं में केवल होस्ट द्वारा जाँचे गए कौशल मान्य हैं।', standby: 'विकल्प', covers: 'संभाल सकते हैं',
     verdictK: '06 · फैसला', ready: 'तैयार', notReady: 'तैयार नहीं', verdictP: 'हर ज़रूरी भूमिका भरी है और उसका विकल्प भी है।', verdictNo: 'कुछ भूमिकाओं का अभी विकल्प नहीं है।', share: 'सार्वजनिक सारांश लिंक कॉपी करें', copied: 'लिंक कॉपी हो गया',
-    gapK: '07 · ईमानदार कमी', gapH: 'हर अभियान\nनहीं चल सकता।', gapP: 'चिनहट, लखनऊ में रक्तदान शिविर। सॉल्वर दिखावा नहीं करता: वह बताता है क्या कम है और भर्ती अनुरोध लिखता है।', copyReq: 'भर्ती अनुरोध कॉपी करें',
+    gapK: '07 · ईमानदार कमी', gapH: 'हर अभियान\nनहीं चल सकता।', gapP: 'सॉल्वर दिखावा नहीं करता: वह बताता है क्या कम है और भर्ती अनुरोध लिखता है।', copyReq: 'भर्ती अनुरोध कॉपी करें',
     dropK: '08 · कोई हट जाए', dropH: 'असली बदलाव।\nअसली नई योजना।', dropP: 'किसी स्वयंसेवक को हटाएँ। योजना फिर से चलती है: विकल्प आगे आता है — और अगर इससे कोई कमज़ोर कड़ी बनती है, तो वह साफ़ बताता है।', drop: 'हटाएँ', dropping: 'नई योजना…',
     evidenceK: '09 · अभियान के बाद', evidenceH: 'काम का रिकॉर्ड।', evidenceP: 'होस्ट के नोट्स से योगदान कार्ड का मसौदा बनता है। नियम उपस्थिति से मिलान करते हैं — एक कार्ड में 8 घंटे का दावा है पर 5 दर्ज हैं, इसलिए उसे चिह्नित किया गया। होस्ट पुष्टि करता है, सुधारता है या लौटाता है; हर कदम हैश-शृंखला लॉग में जाता है।', verify: 'लॉग जाँचें', verified: 'शृंखला सही है', broken: 'शृंखला टूटी है, प्रविष्टि', empty: 'डेमो रीसेट के बाद लॉग खाली है। शुरू करने के लिए कंसोल में कोई कार्ड पक्का करें।',
-    numbersK: '10 · मापा गया', numbersH: '10 काल्पनिक अभियानों पर', readyLbl: 'अभियान सेवासर्कल से तैयार', nearest: 'निकटतम-कौशल मिलान से', repeat: 'बार-बार चयन', repeatVs: 'सावधान मानव आयोजक: 43%', speed: '500 स्वयंसेवकों से टीम बनाने में', recall: 'भूमिकाएँ एक मुफ़्त GPU पर छोटे ओपन मॉडल ने पहचानीं',
+    numbersK: '10 · मापा गया', numbersH: '10 काल्पनिक अभियानों पर', readyLbl: 'अभियान सेवासेतु से तैयार', nearest: 'निकटतम-कौशल मिलान से', repeat: 'बार-बार चयन', repeatVs: 'सावधान मानव आयोजक: 43%', speed: '500 स्वयंसेवकों से टीम बनाने में', recall: 'भूमिकाएँ एक मुफ़्त GPU पर छोटे ओपन मॉडल ने पहचानीं',
     districtsK: '11 · कई जगह', districtsH: 'एक योजना।\nकई अभियान।', districtsP: 'हर अभियान की अपनी स्थिति: तैयार, तैयार नहीं, या अभी गणना नहीं हुई।', openDistricts: 'ज़िला दृश्य खोलें',
-    tryK: '12 · आज़माएँ', tryH: 'असली विवरण लाएँ।', tryP: 'AI मसौदा बनाता है। सॉल्वर तय करता है। व्यक्ति पुष्टि करता है। कुछ भी अपने-आप सत्यापित नहीं।', console: 'आयोजक कंसोल खोलें', volunteer: 'स्वयंसेवक दृश्य', method: 'यह कैसे काम करता है',
+    tryK: '12 · आज़माएँ', tryH: 'असली विवरण लाएँ।', tryP: 'AI मसौदा बनाता है। सॉल्वर तय करता है। व्यक्ति पुष्टि करता है। कुछ भी अपने-आप सत्यापित नहीं।', youth: 'मेरे लिए परियोजना खोजें', console: 'आयोजक कंसोल खोलें', volunteer: 'स्वयंसेवक दृश्य', method: 'यह कैसे काम करता है',
     open: 'खाली सीट', recruit: 'भर्ती', hostCheck: 'होस्ट-जाँचा', left: 'टीम से हटे', synthetic: 'काल्पनिक डेटा · MY Bharat या किसी सरकारी संस्था से संबद्ध नहीं',
   },
 } as const
@@ -278,7 +278,7 @@ export default function Story({ lang }: { lang: Lang }) {
     <section id="gap" data-chapter="gap" className={`ch ${chapter === 'gap' ? 'on' : ''}`}>
       <p className="k">{t.gapK}</p>
       <h2><Split text={t.gapH} /></h2>
-      <p className="body">{t.gapP}</p>
+      <p className="body">{gapTask ? `${gapTask.title}, ${gapTask.block}, ${gapTask.district}. ` : ''}{t.gapP}</p>
       {gapRoster && <><p className={`verdict small ${gapRoster.ready ? 'ok' : 'no'}`}>{gapRoster.ready ? t.ready : t.notReady}</p>
         <ul className="recruit">{gapRoster.recruit_requests?.map((r, i) => <li key={i}><b>{r.needed} × {r.role}</b><small>{r.slot.replaceAll('_', ' ')} · {r.area} · ≤ {r.max_travel_km} km{r.checked_skill_required ? ` · ${t.hostCheck}` : ''}</small><small>{r.reason}</small></li>)}</ul>
         {recruitText && <button className="btn ghost" onClick={() => copy(recruitText)}>{t.copyReq}</button>}</>}
@@ -323,7 +323,7 @@ export default function Story({ lang }: { lang: Lang }) {
       <p className="k">{t.tryK}</p>
       <h2><Split text={t.tryH} /></h2>
       <p className="body">{t.tryP}</p>
-      <div className="row"><Link className="btn" to="/console">{t.console} →</Link><Link className="btn ghost" to="/volunteer">{t.volunteer}</Link><Link className="btn ghost" to="/method">{t.method}</Link></div>
+      <div className="row"><Link className="btn" to="/youth">{t.youth} →</Link><Link className="btn ghost" to="/console">{t.console} →</Link><Link className="btn ghost" to="/volunteer">{t.volunteer}</Link><Link className="btn ghost" to="/method">{t.method}</Link></div>
       <p className="source">{t.synthetic}</p>
     </section>
   </div>

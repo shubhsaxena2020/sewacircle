@@ -1,6 +1,10 @@
 import type { AttendanceRow, ContributionCard, Counterfactual, DropoutResult, EvalReport, ExtractionResult, LedgerEntry, LedgerVerification, RosterBoth, RosterOptions, RosterResult, TaskSpec, Volunteer } from './types'
 import { mockHandler } from './mock'
 
+export type YouthProfile = { age: number; lat: number; lon: number; district: string; skills: string[]; interests: string[]; available_slots: string[] }
+export type ProjectMatch = { task_id: string; title: string; district: string; block: string; slot: string; distance_km: number; percent: number; parts: Record<string, number>; best_role: string | null; host_check_needed: boolean; reasons: string[]; improve: string | null }
+export type YouthResult = { matches: ProjectMatch[]; excluded: { task_id: string; title: string; reason: string }[]; weights: Record<string, number>; synthetic: boolean }
+
 export const MOCK = ['true', '1'].includes(import.meta.env.VITE_MOCK ?? '') || new URLSearchParams(location.search).has('mock')
 let demoRole = localStorage.getItem('sewa-role') || 'organiser'
 export function setDemoRole(role: string) { demoRole = role }
@@ -37,5 +41,6 @@ export const api = {
   verify: () => call<LedgerVerification>('GET', '/ledger/verify'),
   credential: (id: string) => call<Record<string, unknown>>('GET', `/export/credential/${id}`),
   evalReport: () => call<EvalReport>('GET', '/eval'),
+  youthRecommend: (profile: YouthProfile, lang = 'en') => call<YouthResult>('POST', '/youth/recommend', { profile, lang }),
   reset: () => call<{ ok: boolean }>('POST', '/demo/reset'),
 }

@@ -1,7 +1,8 @@
 import { chromium } from 'playwright'
 const out = process.env.DEMO_OUT ?? '../docs/demo'
 const base = process.env.BASE_URL ?? 'http://127.0.0.1:5173'
-const b = await chromium.launch()
+const gpu = process.env.DEMO_GPU === '1'
+const b = await chromium.launch(gpu ? { headless: process.env.DEMO_HEADED !== '1', args: ['--use-angle=d3d11', '--enable-gpu', '--ignore-gpu-blocklist', '--enable-gpu-rasterization'] } : {})
 const ctx = await b.newContext({ viewport: { width: 1440, height: 900 }, recordVideo: { dir: out, size: { width: 1440, height: 900 } } })
 const page = await ctx.newPage()
 const wait = ms => page.waitForTimeout(ms)
@@ -16,10 +17,10 @@ const glide = async (id, ms = 2600) => {
   const start = await page.evaluate(() => scrollY); const steps = Math.max(1, Math.round(ms / 40))
   for (let i = 1; i <= steps; i++) { const t = i / steps; const e = t < .5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2; await page.evaluate(y => scrollTo(0, y), start + (target - start) * e); await wait(40) }
 }
-await page.request.post('http://127.0.0.1:8000/api/demo/reset', { headers: { 'X-Demo-Role': 'organiser' } })
+await page.request.post(`${base}/api/demo/reset`, { headers: { 'X-Demo-Role': 'organiser' } })
 await page.goto(base, { waitUntil: 'load' }); await page.getByRole('heading', { level: 1 }).waitFor(); await wait(1200)
 await page.mouse.move(700, 450); await wait(1800)
-await caption('SewaCircle Ready Crew - willing volunteers are here. Can this drive run?'); await wait(4200)
+await caption('SevaSetu - willing volunteers are here. Can this drive run?'); await wait(4200)
 await glide('interest'); await caption('Each light is a synthetic volunteer who opted in to this drive.'); await wait(4000)
 await glide('brief'); await caption('AI reads a Hindi brief and proposes roles, each tied to the phrase it came from.'); await wait(1200)
 const ph = page.locator('.phrase').first(); if (await ph.count()) await ph.click(); await wait(3200)
@@ -34,6 +35,16 @@ await glide('evidence'); await caption('After the drive: draft contribution card
 await glide('numbers'); await caption('Measured on 10 synthetic drives: READY on 7 of 10 vs 1 of 10 for nearest-skill matching.'); await wait(4500); await shot('screen6_story_numbers')
 await glide('districts'); await caption('Every drive keeps its own live status.'); await wait(3000)
 await glide('try', 1800); await caption(''); await wait(1200)
+// Youth side: profile -> top projects with an explained % match
+await page.goto(`${base}/youth`, { waitUntil: 'load' }); await wait(1500)
+await caption('The youth side: a young person tells SevaSetu what they can do and when they are free.'); await wait(2500)
+await page.getByRole('button', { name: 'Fill a sample profile' }).click(); await wait(2500)
+await page.getByRole('button', { name: 'Show my top projects' }).click(); await page.locator('.match-card').first().waitFor({ timeout: 20000 }); await wait(800)
+await page.evaluate(() => window.scrollTo({ top: 0, behavior: 'smooth' })); await wait(800)
+await caption('Eligibility first, then a % match with reasons: skills, time, distance and interests.'); await wait(4500); await shot('screen0_youth_matches')
+await page.evaluate(() => window.scrollBy({ top: 520, behavior: 'smooth' })); await wait(1500)
+await caption('Projects that are too far or 18+ only are listed with the reason, never silently hidden.'); await wait(3500)
+await page.locator('.match-card .btn').first().click().catch(() => {}); await wait(1200)
 await page.goto(`${base}/console`, { waitUntil: 'domcontentloaded' }); await wait(1200)
 await caption('The organiser console: the same steps, for real work.'); await wait(1500)
 await page.getByRole('button', { name: 'Hindi sample' }).click(); await wait(1200)
@@ -57,6 +68,6 @@ await nav.getByRole('button', { name: /Evaluation/ }).click(); await wait(1500)
 await caption('Every number comes from a reproducible evaluation on synthetic data.'); await wait(4000); await shot('screen6b_console_evaluation')
 await page.getByRole('button', { name: 'हिन्दी' }).click(); await wait(1200)
 await caption('Full Hindi interface.'); await wait(3000); await shot('screen7_console_hindi')
-await caption('SewaCircle Ready Crew - synthetic data, not affiliated with MY Bharat or any government body.'); await wait(3500)
+await caption('SevaSetu - synthetic data, not affiliated with MY Bharat or any government body.'); await wait(3500)
 console.log(JSON.stringify({ hindiExtraction: hindiOk }))
 await ctx.close(); await b.close()
